@@ -47,7 +47,7 @@ def create_app(test_config=None):
         # ---------------------------------------------
         # add project specific routes/dashapps here
         # for example,
-        from .subapp import routes as subapp_routes
+        from .simulatortool import routes as subapp_routes
         app.register_blueprint(subapp_routes.subapp_bp)
         # ---------------------------------------------
 

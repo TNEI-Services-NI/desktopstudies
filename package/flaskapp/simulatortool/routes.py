@@ -4,6 +4,8 @@ from flask import (
     Blueprint, flash, render_template, request, session, url_for, g, redirect
 )
 
+from .
+
 from package.flaskapp.db import get_db
 from package.flaskapp.auth.methods import check_cred
 
