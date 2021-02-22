@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+<head>
+  <title>Black Start Desktop Exercises</title>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
+  <meta name="description" content="">
+  <meta name="author" content="M. McFarlane">
+  
+  <!-- Custom styles for this template-->
+  <link href="./css/sb-admin.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="./css/mvpStyleSheet.css">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <script src="svg.js"></script><!--Path to the external svg.js library-->
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
+        crossorigin="anonymous">
+  </script>
+  <script src="js/jquery.csv.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <script src="js/plotly-latest.min.js"></script>
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+
+  <style>
+
+  </style>
+
+</head>
+<body style="background-color: #c5c5c5;">
+  
+  <div id="headerContainer">
+    <div id="header">
+      <img class="headerIcon headerObj" id="phoneIcon" src="images/phone-icon.png">
+      <div class="headerText headerObj" id="navPhoneNumber"></div>
+      <img class="headerIcon headerObj" id="emailIcon" src="images/email-icon.png" >
+      <div class="headerText headerObj" id="navEmail"></div>
+      <img class="headerIcon headerObj" id="twitterIcon" src="images/twitter.png" >
+      <img class="headerIcon headerObj" id="linkedInIcon" src="images/linked-in.png" >
+      <div class="headerHighlight headerObj">
+        <img class="headerIcon headerObj" id="newsIcon" src="images/news-icon.png" >
+        <div class="headerText headerObj" id="navPhoneNumber">Latest News</div>
+      </div>
+    </div>
+  </div>
+  <div id="navContainer" class="navbar">
+    <div id="nav">
+      <img class="navObj tneiLogo_nav" src="images/ESO - medium.png">
+      <a class="navObj" href="SLD.html">Single Line Diagram</a>
+      <a class="navObj"  href="restorationSteps.html">Restoration Steps</a>
+      <a class="navObj"  href="TabData.html">Tabular Data</a>
+    </div>
+  </div>
+  <div id="mySidepanel" class="sidepanel">
+    <div style="padding-left:30px;padding-bottom:15px;">
+      <label for="networks">Select a network:</label>
+      <select name="networks" id="networks">
+        <option value="1">Chapelcross</option>
+        <option value="2">Network 2</option>
+        <option value="3">Network 3</option>
+        <option value="4">Network 4</option>
+      </select>
+    </div>
+    
+    <!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> -->
+    <a href="#" style="padding-top:10px; background-color: #d7c100;">Option 1</a>
+    <a href="#" style="padding-top:10px">Option 2</a>
+    <a href="#" style="padding-top:10px">Option 3</a>
+    <a href="#" style="padding-top:10px">Option 4</a>
+  </div>
+  
+  <div class="row">
+    <div class="column" id="myDiv" style="padding-top:150px; padding-bottom:50px; padding-left:210px; text-align:center; background-color: #c5c5c5;">
+      <svg  style="background-color:#f2f2f2" class="drawing" id="drawing" width="1000px" height="57vh"  >
+        <div id="dataPopup" style="position: absolute;
+                                  width: 200px;
+                                  height: 100px;
+                                  z-index: 10;
+                                  background-color: #4b4b4b;
+                                  color: white;
+                                 border: solid 1px #fc0; visibility: hidden;" >
+        
+      </div>
+      <!-- Modal -->
+      
+    </svg>
+
+    </div>
+    
+    <div class="column" style="padding-top:185px; padding-left:30px; width:32%; ">
+      <p id="stateText" style="font-size:30px">Chapelcross GSP Restoration - Option 1</p>
+      
+      <div class="column" style="position: relative; width: 50px">
+        <div class="container" >
+          <div style="padding-bottom:20px;">
+          </div>
+          <div class="table-responsive" style="width:400px">
+           <div id="employee_table">
+           </div>
+          </div>
+         </div>
+        </div>
+        <div style="padding-left:15px; text-align: center;">
+          <button id="buttonB" style="float:left;">previous</button>
+          <button id="buttonA" style="float:left;">next</button>
+      </div>
+    </div>
+  </div> 
+  
+  <script >
+    // d3.csv("./data/scenaro1.csv", function(data) {
+    //   console.log(data[0]);
+    // });
+    // d3.csv("./data/scenaro1.csv", function(csv) {
+    //       csv = csv.filter(function(row) {
+    //           return row['Component'] == 'Transformer';
+    //       })
+    //       vis.datum(csv).call(chart);
+    //   });
+      $.ajax({
+      url:"data/Description.csv",
+      dataType:"text",
+      success:function(data)
+      {
+        var csv = data.split(/\r?\n|\r/);
+        var table_data = '<table class="table table-bordered table-striped">';
+        for(var count = 0; count<15; count++)
+        {
+        var cell_data = csv[count].split(",");
+          table_data += '<tr>';
+        for(var cell_count=0; cell_count<cell_data.length; cell_count++)
+        {
+          if(count === 0)
+          {
+          table_data += '<th>'+cell_data[cell_count]+'</th>';
+          }
+          else
+          {
+          table_data += '<td>'+cell_data[cell_count]+'</td>';
+          }
+        }
+        table_data += '</tr>';
+        }
+        table_data += '</table>';
+        $('#employee_table').html(table_data);
+      }
+      });
+  </script>
+    <!-- <div class="container" style="padding-top:150px;" id="myDiv">
+        <svg  class="drawing" id="drawing" width="1500px" height="50vh" >
+    </svg>
+    </div> -->
+    <!-- <div class="container">
+      <div class="table-responsive">
+       <div id="employee_table">
+       </div>
+      </div>
+     </div> -->
+    <script src="schematic.js"></script>
+    
+</body>

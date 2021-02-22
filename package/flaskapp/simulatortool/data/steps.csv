@@ -1,0 +1,19 @@
+1,DNO,Start anchor DER
+2,DNO,Cust switching.Energise SPD 33 kV busbar and earthing trfr + Load bank
+3,DNO,Energise 33kV cable to Chapelcross
+4,DNO,Energise Chapelcross 33 kV busbars
+5,DNO,Energise circuit and Minsca SPD 33 kV busbar
+6,DNO,Energise customer S/S 33 kV busbar
+7,DNO,Energise cable feeders. Restore aux supply to WTGs.
+8,DNO,No MWs from WTGs until instructed.  Option to switch WTGs from voltage control mode to power factor control mode
+9,DNO,Energise circuit to Ewe Hill WF via Middlebie SWS
+10,DNO,Energise customer S/S 33 kV busbar
+11,DNO,Energise cable feeders. Restore aux to WTGs.
+12,DNO,No MWs from WTGs until instructed. Option to switch WTGs from voltage control mode to power factor control mode
+13,DNO,Close Chapelcross Grid T1 breaker to energise 132/33kV transformer T1
+14,DNO,Close Chapelcross 132kV breaker 710 to energise 132kV Busbar 1
+15,DNO,Close bus section breaker to energise Busbar 2
+16,DNO,Close Chapelcross 132kV breaker 800 to energise Dumfries No.2
+17,DNO,Close Dumfries 132kV breaker Grid 1B to energise Dumfries 33kV bus bar
+18,DNO,Close Dumfries 33kV breaker to Dalswinton wind farm
+19,DNO,Close Dumfries 33kV breaker to energise Cargenbridge primary substation

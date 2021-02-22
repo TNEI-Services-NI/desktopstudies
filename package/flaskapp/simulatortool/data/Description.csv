@@ -1,0 +1,30 @@
+Step,Action
+0,Energise Stevens Croft anchor generator
+1.1,Close Stevens Croft incomer CB. Energise SPD 33 kV busbar along with earthing transformer and load bank
+1.2,Energise 33 kV cable to Chapelcross
+2,Energise Chapelcross 33 kV busbars
+3.1,Energise circuit and Minsca SPD 33 kV busbar
+3.2,Energise customer S/S 33 kV busbar
+3.3,Energise 33 kV feeder cable restoring auxiliary supply to WTGs. WF not permitted to export.
+4.1,Energise circuit to Ewe Hill WF via Middlebie SWS
+4.2,Energise customer S/S 33 kV busbar
+4.3,Energise 33 kV feeder cable restoring auxiliary supply to WTGs. WF not permitted to export
+5.1,Ensure CB 20 closed in pre-restoration
+5.2,Run 2x11 kV sections (only viable if no closed 11 kV rings)
+5.3,Energise feeder transformer T1 and pick up half block load
+5.4,Energise feeder transformer T2 and pick up half block load
+6,Restoration of power supply to Middlebie Primary substation
+6.1,Energise feeder transformer and pick up block load
+7,Restoration of power supply to Langholm Primary substation
+7.1,Instruct Minsca WF to generate 15MW
+7.2,Energise feeder transformer for T1 and pick up block load
+8,Restoration of power supply to Gretna Primary substation
+8.1,Energise feeder transformer for T2 and pick up block load
+9,Restoration of power supply to Newcastleton Primary substation
+9.1,Energise Newcastleton T1 and pick up block load
+10,Restoration of power supply to Lockerbie Primary substation Load 1 & 2
+10.1,Instruct Minsca WF to increase generation to 20MW
+10.2,Instruct Ewe WF to generate 5 MW
+10.3,Run 2 x 11 kV sections (only viable if no closed rings) [Bus section be OPEN already]
+10.4,Energise Lockerbie T1 & Lockerbie Load 1. Pick up half block load
+10.5,Energise Lockerbie T2 & Lockerbie Load 2. Pick up half block load

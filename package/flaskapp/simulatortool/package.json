@@ -1,0 +1,10 @@
+{
+    "name": "BS Desktop Exercises",
+    "version": "0.1.1",
+    "description": "",
+    "main": "schematix.js",
+    "license": "TNEI",
+    "dependencies": {
+        "d3": "^6.1.1"
+    }
+}

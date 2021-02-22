@@ -1,0 +1,4 @@
+pandas
+werkzeug
+flask
+flask_assets

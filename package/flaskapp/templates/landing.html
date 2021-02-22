@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Flask app</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/landing.css') }}">
+    </head>
+    <div class="login">
+
+      <h1>Login</h1>
+          {% for message in get_flashed_messages() %}
+            <div class="flash">{{ message }}</div>
+          {% endfor %}
+        <form method="post">
+          <input type="text" name="username" id="username" placeholder="Username" required="required" />
+            <input type="password" name="password" id="password" placeholder="Password" required="required" />
+            <button type="submit"
+                    value="Log In"
+                    class="btn btn-primary btn-block btn-large">Log In.</button>
+        </form>
+    </div>
+</html>
