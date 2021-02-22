@@ -7,26 +7,14 @@ from flask import (
 from package.flaskapp.db import get_db
 from package.flaskapp.auth.methods import check_cred
 
-subapp_bp = Blueprint('subapp', __name__, url_prefix='/subapp', template_folder='templates', static_folder='static')
+desksim_bp = Blueprint('desksim', __name__, url_prefix='/desksim', template_folder='templates', static_folder='static')
 
 
 # a simple page that says hello
-@subapp_bp.route('/subapplanding', methods=('GET', 'POST'))
-def subapplanding():
-    """Subapp landing page."""
+@desksim_bp.route('/restoration', methods=('GET', 'POST'))
+def restoration():
+    """desksim_bp restoration page."""
     return render_template('subapplanding.html')
-
-
-@subapp_bp.before_app_request
-def load_logged_in_user():
-    user_id = session.get('user_id')
-
-    if user_id is None:
-        g.user = None
-    else:
-        g.user = get_db().execute(
-            'SELECT * FROM user WHERE id = ?', (user_id,)
-        ).fetchone()
 
 
 def login_required(view):

@@ -11,29 +11,28 @@
   <meta name="author" content="M. McFarlane">
   
   <!-- Custom styles for this template-->
-  <link href="./css/sb-admin.css" rel="stylesheet">
-
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="./css/mvpStyleSheet.css">
-
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+
+  <link href="../static/css/sb-admin.css" rel="stylesheet">
+  <link href="../static/css/circle.css" rel="stylesheet">
+  <link rel="stylesheet" href="../static/css/mvpStyleSheet.css">
+
+  <script src="../static/js/svg.js"></script>
+  <script src="../static/js/jquery.csv.js"></script>
+  <script src="../static/js/plotly-latest.min.js"></script>
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-  <script src="svg.js"></script><!--Path to the external svg.js library-->
   <script src="https://code.jquery.com/jquery-1.12.4.min.js"
         integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
         crossorigin="anonymous">
   </script>
-  <script src="js/jquery.csv.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
-
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-  <script src="js/plotly-latest.min.js"></script>
-  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
 
   <style>
 
@@ -44,24 +43,24 @@
   
   <div id="headerContainer">
     <div id="header">
-      <img class="headerIcon headerObj" id="phoneIcon" src="images/phone-icon.png">
+      <img class="headerIcon headerObj" id="phoneIcon" src="../static/imgs/phone-icon.png">
       <div class="headerText headerObj" id="navPhoneNumber"></div>
-      <img class="headerIcon headerObj" id="emailIcon" src="images/email-icon.png" >
+      <img class="headerIcon headerObj" id="emailIcon" src="../static/imgs/email-icon.png" >
       <div class="headerText headerObj" id="navEmail"></div>
-      <img class="headerIcon headerObj" id="twitterIcon" src="images/twitter.png" >
-      <img class="headerIcon headerObj" id="linkedInIcon" src="images/linked-in.png" >
+      <img class="headerIcon headerObj" id="twitterIcon" src="../static/imgs/twitter.png" >
+      <img class="headerIcon headerObj" id="linkedInIcon" src="../static/imgs/linked-in.png" >
       <div class="headerHighlight headerObj">
-        <img class="headerIcon headerObj" id="newsIcon" src="images/news-icon.png" >
-        <div class="headerText headerObj" id="navPhoneNumber">Latest News</div>
+        <img class="headerIcon headerObj" id="newsIcon" src="../static/imgs/news-icon.png" >
+        <div class="headerText headerObj" id="navNews">Latest News</div>
       </div>
     </div>
   </div>
   <div id="navContainer" class="navbar">
     <div id="nav">
-      <img class="navObj tneiLogo_nav" src="images/ESO - medium.png">
-      <a class="navObj" href="SLD.html">Single Line Diagram</a>
-      <a class="navObj"  href="restorationSteps.html">Restoration Steps</a>
-      <a class="navObj"  href="TabData.html">Tabular Data</a>
+      <img class="navObj tneiLogo_nav" src="../static/imgs/ESO - medium.png">
+      <a class="navObj" href="./SLD.html">Single Line Diagram</a>
+      <a class="navObj"  href="./restorationSteps.html">Restoration Steps</a>
+      <a class="navObj"  href="./TabData.html">Tabular Data</a>
     </div>
   </div>
   <div id="mySidepanel" class="sidepanel">
@@ -74,8 +73,7 @@
         <option value="4">Network 4</option>
       </select>
     </div>
-    
-    <!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> -->
+
     <a href="#" style="padding-top:10px; background-color: #d7c100;">Option 1</a>
     <a href="#" style="padding-top:10px">Option 2</a>
     <a href="#" style="padding-top:10px">Option 3</a>
@@ -94,8 +92,6 @@
                                  border: solid 1px #fc0; visibility: hidden;" >
         
       </div>
-      <!-- Modal -->
-      
     </svg>
 
     </div>
@@ -121,17 +117,8 @@
   </div> 
   
   <script >
-    // d3.csv("./data/scenaro1.csv", function(data) {
-    //   console.log(data[0]);
-    // });
-    // d3.csv("./data/scenaro1.csv", function(csv) {
-    //       csv = csv.filter(function(row) {
-    //           return row['Component'] == 'Transformer';
-    //       })
-    //       vis.datum(csv).call(chart);
-    //   });
       $.ajax({
-      url:"data/Description.csv",
+      url:"../data/Description.csv",
       dataType:"text",
       success:function(data)
       {
@@ -159,16 +146,7 @@
       }
       });
   </script>
-    <!-- <div class="container" style="padding-top:150px;" id="myDiv">
-        <svg  class="drawing" id="drawing" width="1500px" height="50vh" >
-    </svg>
-    </div> -->
-    <!-- <div class="container">
-      <div class="table-responsive">
-       <div id="employee_table">
-       </div>
-      </div>
-     </div> -->
-    <script src="schematic.js"></script>
+
+    <script src="../static/js/schematic.js"></script>
     
 </body>
