@@ -4,8 +4,6 @@ from flask import (
     Blueprint, flash, render_template, request, session, url_for, g, redirect
 )
 
-from .
-
 from package.flaskapp.db import get_db
 from package.flaskapp.auth.methods import check_cred
 
@@ -16,7 +14,7 @@ desksim_bp = Blueprint('desksim', __name__, url_prefix='/desksim', template_fold
 @desksim_bp.route('/restoration', methods=('GET', 'POST'))
 def restoration():
     """desksim_bp restoration page."""
-    return render_template('subapplanding.html')
+    return render_template('SLD.html')
 
 
 def login_required(view):
