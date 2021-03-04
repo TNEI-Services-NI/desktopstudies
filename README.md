@@ -1,14 +1,14 @@
-TNEI Template Repository
+Blackstart Desktop Studies
 ========================
 
-This is a repository template for TNEI projects.
+This is a repository for the Blackstart Desktop Simulations project.
 
 Getting started 
 =============================
 
 
 - [Installation](#Installation)
-- [Running ...repo_name...](#Running...repo_name...)
+- [Running DesktopStudies](#RunningDesktopStudies)
 - [Directory](#Directory)
 - [Email](#Email)
 
@@ -27,7 +27,7 @@ Getting started
 
 ----------------------------------
 
-# Running...repo_name...
+# RunningDesktopStudies
 
 ----------------------------------
 
@@ -36,14 +36,14 @@ Getting started
  `docs`
  
 2. Production Code:\
- &nbsp;&nbsp;&nbsp;`...repo_name...`\
+ &nbsp;&nbsp;&nbsp;`DesktopStudies`\
  \
 2.1 User Interface:\
-&nbsp;&nbsp;&nbsp;`...repo_name...->app`\
+&nbsp;&nbsp;&nbsp;`DesktopStudies->app`\
 &nbsp;&nbsp;&nbsp;This will contain code used for operating the model through a user interface.\
  \
 2.2 Data I/O:\
-&nbsp;&nbsp;&nbsp;`...repo_name...->data`\
+&nbsp;&nbsp;&nbsp;`DesktopStudies->data`\
 &nbsp;&nbsp;&nbsp;This will be used to store and access input data.\
 
 3. Process Code:\
@@ -59,19 +59,12 @@ Getting started
 &nbsp;&nbsp;&nbsp;This subpackage contains code being used for research and testing.
 
 # Email
-Delete where appropriate...
-
-Gordon McFadzean - Principal Consultant\
-<gordon.mcfadzean@tneigroup.com>
 
 Dr. Diptargha Chakravorty - Principal Consultant\
 <diptargha.chakravorty@tneigroup.com>
 
-Dr. Gruffudd Edwards - Senior Consultant\
-<gruffudd.edwards@tneigroup.com>
-
-Sarah Sheehy - Technical Consultant\
+Max McFarlane - Technical Consultant\
 <max.mcfarlane@tneigroup.com>
 
-Max McFarlane - Technical Consultant\
+Obinna Unigwe - Graduate Consultant\
 <max.mcfarlane@tneigroup.com>
