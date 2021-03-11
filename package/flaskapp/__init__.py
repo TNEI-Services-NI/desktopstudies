@@ -40,6 +40,27 @@ def _init_assets(app):
     return app, assets
 
 
+def _load_auth_views(app):
+    # load authorisation views
+    from .auth import routes as auth_routes
+    app.register_blueprint(auth_routes.auth_bp)
+    return app
+
+
+def _load_raw_sim_tool(app):
+    # load simulation tool views
+    from .simulatortool import routes as simtool_routes
+    app.register_blueprint(simtool_routes.desksim_bp)
+    return app
+
+
+def _compile_assets(app):
+    # compile static assets - CSS
+    from .assets import compile_static_assets
+    compile_static_assets(assets)  # Execute logic
+    return app
+
+
 def create_app(test_config=None):
 
     # configure root app
@@ -57,16 +78,10 @@ def create_app(test_config=None):
         # load core views
         from . import routes
 
-        # load authorisation views
-        from .auth import routes as auth_routes
-        app.register_blueprint(auth_routes.auth_bp)
+        app = _load_auth_views(app)
 
-        # load simulation tool views
-        from .simulatortool import routes as simtool_routes
-        app.register_blueprint(simtool_routes.desksim_bp)
+        app = _load_raw_sim_tool(app)
 
-        # compile static assets - CSS
-        from .assets import compile_static_assets
-        compile_static_assets(assets)  # Execute logic
+        app = _compile_assets(app)
 
     return app
