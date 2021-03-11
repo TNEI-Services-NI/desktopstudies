@@ -4,7 +4,7 @@ from flask_assets import Environment
 import os
 
 
-def create_app(test_config=None):
+def _configure_app(test_config):
     # create and configure the app
     app = Flask(__name__,
                 template_folder='templates',
@@ -24,6 +24,10 @@ def create_app(test_config=None):
         # load the test config if passed in
         app.config.from_mapping(test_config)
 
+    return app
+
+
+def _init_assets(app):
     # ensure the instance folder exists
     try:
         os.makedirs(app.instance_path)
@@ -33,25 +37,36 @@ def create_app(test_config=None):
     assets = Environment()  # Create an assets environment
     assets.init_app(app)  # Initialize Flask-Assets
 
+    return app, assets
+
+
+def create_app(test_config=None):
+
+    # configure root app
+    app = _configure_app(test_config)
+
+    # initialise assets
+    app, assets = _init_assets(app)
+
+    # initialise user database
     from . import db
     db.init_app(app)
 
+    # Manage application level data
     with app.app_context():
-        # Import parts of our core Flask app
+        # load core views
         from . import routes
-        from .auth import routes as auth_routes
-        from .assets import compile_static_assets
 
+        # load authorisation views
+        from .auth import routes as auth_routes
         app.register_blueprint(auth_routes.auth_bp)
 
-        # ---------------------------------------------
-        # add project specific routes/dashapps here
-        # for example,
+        # load simulation tool views
         from .simulatortool import routes as simtool_routes
         app.register_blueprint(simtool_routes.desksim_bp)
-        # ---------------------------------------------
 
-        # Compile static assets
+        # compile static assets - CSS
+        from .assets import compile_static_assets
         compile_static_assets(assets)  # Execute logic
 
     return app
