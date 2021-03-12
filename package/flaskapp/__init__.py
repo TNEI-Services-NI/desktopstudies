@@ -52,7 +52,6 @@ def create_app(test_config=None):
     migrate.init_app(app, dbs)
 
     login_manager = LoginManager()
-    login_manager.login_view = 'auth_2.login'
     login_manager.init_app(app)
 
     from .models import User
@@ -80,7 +79,11 @@ def create_app(test_config=None):
         from .auth_2 import auth
         app.register_blueprint(auth.auth_2, url_prefix='/auth_2')
 
+        login_manager.login_view = 'auth_2.login'
+
         dbs.create_all()
+
+
 
         # Compile static assets
         compile_static_assets(assets)  # Execute logic
