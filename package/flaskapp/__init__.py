@@ -4,8 +4,10 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_assets import Environment
 import os
 from flask_login import LoginManager
+from flask_migrate import Migrate
 
-db = SQLAlchemy()
+dbs = SQLAlchemy()
+migrate = Migrate()
 
 
 def create_app(test_config=None):
@@ -15,9 +17,9 @@ def create_app(test_config=None):
                 static_folder='static',
                 instance_relative_config=True)
     app.config.from_mapping(
-        SECRET_KEY='dev',   # used by Flask and extensions to keep data safe.
-                            # It’s set to 'dev' to provide a convenient value during development,
-                            # but it should be overridden with a random value when deploying
+        SECRET_KEY='dev',  # used by Flask and extensions to keep data safe.
+        # It’s set to 'dev' to provide a convenient value during development,
+        # but it should be overridden with a random value when deploying
         DATABASE=os.path.join(app.instance_path, 'flaskapp.sqlite'),
     )
 
@@ -46,11 +48,11 @@ def create_app(test_config=None):
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'db.sqlite')  # 'sqlite:///db.sqlite'
     app.config['SQLALCHEMY_TRACK_MODIFIICATIONS'] = False
 
-    db.init_app(app)
-
+    dbs.init_app(app)
+    migrate.init_app(app, dbs)
 
     login_manager = LoginManager()
-    login_manager.login_view = 'auth.login'
+    login_manager.login_view = 'auth_2.login'
     login_manager.init_app(app)
 
     from .models import User
@@ -59,8 +61,6 @@ def create_app(test_config=None):
     def load_user(user_id):
         # since the user_id is just the primary key of our user table, use it in the query for the user
         return User.query.get(int(user_id))
-
-
 
     with app.app_context():
         # Import parts of our core Flask app
@@ -78,16 +78,9 @@ def create_app(test_config=None):
         # ---------------------------------------------
 
         from .auth_2 import auth
-        app.register_blueprint(auth.auth_2)
+        app.register_blueprint(auth.auth_2, url_prefix='/auth_2')
 
-        from .auth_2 import main
-        app.register_blueprint(main.main)
-
-        db.create_all()
-
-
-
-
+        dbs.create_all()
 
         # Compile static assets
         compile_static_assets(assets)  # Execute logic
