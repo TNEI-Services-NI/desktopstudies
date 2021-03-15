@@ -1,8 +1,8 @@
 """Initialize Flask app."""
+import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_assets import Environment
-import os
 from flask_login import LoginManager
 from flask_migrate import Migrate
 
@@ -42,10 +42,8 @@ def create_app(test_config=None):
     # from . import db
     # db.init_app(app)
 
-    basedir = os.path.abspath(os.path.dirname(__file__))
-
     app.config['SECRET_KEY'] = 'dev'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'db.sqlite')  # 'sqlite:///db.sqlite'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////instance/db.sqlite'
     app.config['SQLALCHEMY_TRACK_MODIFIICATIONS'] = False
 
     dbs.init_app(app)
