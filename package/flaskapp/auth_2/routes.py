@@ -1,23 +1,22 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import login_user, logout_user, login_required, current_user
-from package.flaskapp.models import User
-from package.flaskapp import dbs as db
+from flask_login import login_user, logout_user, login_required
+from package.flaskapp.auth_2.user import User
 
-auth_2 = Blueprint('auth_2', __name__, static_folder='static', template_folder='templates', url_prefix='/auth_2')
+auth_bp = Blueprint('auth_2', __name__, static_folder='static', template_folder='templates', url_prefix='/auth_2')
 
 
-@auth_2.route('/signup')
+@auth_bp.route('/signup')
 def signup():
     return render_template('signup.html')
 
 
-@auth_2.route('/login')
+@auth_bp.route('/login')
 def login():
     return render_template('login_2.html')
 
 
-@auth_2.route('/signup', methods=['POST'])
+@auth_bp.route('/signup', methods=['POST'])
 def signup_post():
     email = request.form.get('email')
     name = request.form.get('name')
@@ -41,7 +40,7 @@ def signup_post():
     return redirect(url_for('auth_2.login'))
 
 
-@auth_2.route('/login', methods=['POST'])
+@auth_bp.route('/login', methods=['POST'])
 def login_post():
     email = request.form.get('email')
     password = request.form.get('password')
@@ -61,19 +60,19 @@ def login_post():
     return redirect(url_for('desksim.restoration'))
 
 
-@auth_2.route('/logout')
+@auth_bp.route('/logout')
 @login_required
 def logout():
     logout_user()
     return redirect(url_for('auth_2.index'))
 
 
-@auth_2.route('/')
+@auth_bp.route('/')
 def index():
     return render_template('index.html')
 
 
-@auth_2.route('/profile')
+@auth_bp.route('/profile')
 @login_required
 def profile():
     return redirect(request.url)  #redirect('RestorationSteps.html')

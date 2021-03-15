@@ -3,12 +3,15 @@ import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_assets import Environment
-from flask_login import LoginManager
+
 from flask_migrate import Migrate
+
+import package as root
+from package.flaskapp.auth_2.user import User
+import package.flaskapp.auth_2.login_manager as login_manager
 
 dbs = SQLAlchemy()
 migrate = Migrate()
-
 
 def create_app(test_config=None):
     # create and configure the app
@@ -17,10 +20,9 @@ def create_app(test_config=None):
                 static_folder='static',
                 instance_relative_config=True)
     app.config.from_mapping(
-        SECRET_KEY='dev',  # used by Flask and extensions to keep data safe.
-        # It’s set to 'dev' to provide a convenient value during development,
-        # but it should be overridden with a random value when deploying
-        DATABASE=os.path.join(app.instance_path, 'flaskapp.sqlite'),
+        SECRET_KEY='dev',
+        SQLALCHEMY_DATABASE_URI='sqlite:///' + '{}/instance/db.sqlite'.format(root.BASE_DIR),
+        SQLALCHEMY_TRACK_MODIFIICATIONS=False
     )
 
     if test_config is None:
@@ -36,28 +38,13 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    assets = Environment()  # Create an assets environment
-    assets.init_app(app)  # Initialize Flask-Assets
-
-    # from . import db
-    # db.init_app(app)
-
-    app.config['SECRET_KEY'] = 'dev'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////instance/db.sqlite'
-    app.config['SQLALCHEMY_TRACK_MODIFIICATIONS'] = False
+    _assets = Environment()  # Create an assets environment
+    _assets.init_app(app)  # Initialize Flask-Assets
 
     dbs.init_app(app)
     migrate.init_app(app, dbs)
 
-    login_manager = LoginManager()
-    login_manager.init_app(app)
-
-    from .models import User
-
-    @login_manager.user_loader
-    def load_user(user_id):
-        # since the user_id is just the primary key of our user table, use it in the query for the user
-        return User.query.get(int(user_id))
+    app, _login_manager = login_manager.init_manager(app)
 
     with app.app_context():
         # Import parts of our core Flask app
@@ -74,16 +61,15 @@ def create_app(test_config=None):
         app.register_blueprint(simtool_routes.desksim_bp)
         # ---------------------------------------------
 
-        from .auth_2 import routes
-        app.register_blueprint(auth.auth_2, url_prefix='/auth_2')
+        from .auth_2 import routes as auth_routes_new
+        app.register_blueprint(auth_routes_new.auth_bp, url_prefix='/auth_2')
 
         login_manager.login_view = 'auth_2.login'
 
-        dbs.create_all()
-
-
 
         # Compile static assets
-        compile_static_assets(assets)  # Execute logic
+        compile_static_assets(_assets)  # Execute logic
+
+        dbs.create_all()
 
     return app
