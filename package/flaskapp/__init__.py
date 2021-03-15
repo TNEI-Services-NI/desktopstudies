@@ -54,6 +54,12 @@ def _load_raw_sim_tool(app):
     return app
 
 
+def _load_dash_sim_tool(app):
+    from .dashapp.dashboard import init_dashboard
+    app = init_dashboard(app)
+    return app
+
+
 def _compile_assets(app):
     # compile static assets - CSS
     from .assets import compile_static_assets
@@ -73,15 +79,20 @@ def create_app(test_config=None):
     from . import db
     db.init_app(app)
 
-    # Manage application level data
+    # manage application level data
     with app.app_context():
         # load core views
         from . import routes
 
+        # load auth views
         app = _load_auth_views(app)
 
+        # load raw simulation tool
         app = _load_raw_sim_tool(app)
 
+
+
+        # compile assets
         app = _compile_assets(app)
 
     return app
