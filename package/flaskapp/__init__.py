@@ -74,7 +74,7 @@ def create_app(test_config=None):
         app.register_blueprint(simtool_routes.desksim_bp)
         # ---------------------------------------------
 
-        from .auth_2 import auth
+        from .auth_2 import routes
         app.register_blueprint(auth.auth_2, url_prefix='/auth_2')
 
         login_manager.login_view = 'auth_2.login'
