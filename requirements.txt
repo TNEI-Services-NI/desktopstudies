@@ -5,3 +5,7 @@ flask_assets
 flask_sqlalchemy
 flask_login
 flask_migrate
+dash
+dash_html_components
+dash_bootstrap_components
+dash_core_components

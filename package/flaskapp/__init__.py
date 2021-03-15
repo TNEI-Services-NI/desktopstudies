@@ -13,7 +13,8 @@ import package.flaskapp.auth_2.login_manager as login_manager
 dbs = SQLAlchemy()
 migrate = Migrate()
 
-def create_app(test_config=None):
+
+def _configure_app(test_config):
     # create and configure the app
     app = Flask(__name__,
                 template_folder='templates',
@@ -40,6 +41,10 @@ def create_app(test_config=None):
         # load the test config if passed in
         app.config.from_mapping(test_config)
 
+    return app
+
+
+def _init_assets(app):
     # ensure the instance folder exists
     try:
         os.makedirs(app.instance_path)
@@ -49,35 +54,70 @@ def create_app(test_config=None):
     _assets = Environment()  # Create an assets environment
     _assets.init_app(app)  # Initialize Flask-Assets
 
+    return app, _assets
+
+
+def _load_auth_views(app, _login_manager):
+    # # load authorisation views
+    # from .auth import routes as auth_routes
+    # app.register_blueprint(auth_routes.auth_bp)
+    from .auth_2 import routes as auth_routes_new
+    app.register_blueprint(auth_routes_new.auth_bp, url_prefix='/auth_2')
+
+    _login_manager.login_view = 'auth_2.login'
+
+    return app, _login_manager
+
+
+def _load_raw_sim_tool(app):
+    # load simulation tool views
+    from .simulatortool import routes as simtool_routes
+    app.register_blueprint(simtool_routes.desksim_bp)
+    return app
+
+
+def _load_dash_sim_tool(app):
+    from .dash_simtool import init_dashboard
+    app = init_dashboard(app)
+    return app
+
+
+def _compile_assets(_assets):
+    # compile static assets - CSS
+    from .assets import compile_static_assets
+    compile_static_assets(_assets)  # Execute logic
+    return _assets
+
+
+def create_app(test_config=None):
+
+    # configure root app
+    app = _configure_app(test_config)
+
+    # initialise assets
+    app, _assets = _init_assets(app)
+
+    # # initialise user database
+    # from . import db
+    # db.init_app(app)
+
     dbs.init_app(app)
     migrate.init_app(app, dbs)
 
     app, _login_manager = login_manager.init_manager(app)
 
+    # manage application level data
     with app.app_context():
-        # Import parts of our core Flask app
+        # load core views
         from . import routes
-        # from .auth import routes as auth_routes
-        from .assets import compile_static_assets
 
-        # app.register_blueprint(auth_routes.auth_bp)
+        # load auth views
+        app, _login_manager = _load_auth_views(app, _login_manager)
 
-        # ---------------------------------------------
-        # add project specific routes/dashapps here
-        # for example,
-        from .simulatortool import routes as simtool_routes
-        app.register_blueprint(simtool_routes.desksim_bp)
-        # ---------------------------------------------
+        # # load raw simulation tool
+        # app = _load_raw_sim_tool(app)
 
-        from .auth_2 import routes as auth_routes_new
-        app.register_blueprint(auth_routes_new.auth_bp, url_prefix='/auth_2')
-
-        login_manager.login_view = 'auth_2.login'
-
-
-        # Compile static assets
-        compile_static_assets(_assets)  # Execute logic
-
-        dbs.create_all()
+        # compile assets
+        _assets = _compile_assets(_assets)
 
     return app
