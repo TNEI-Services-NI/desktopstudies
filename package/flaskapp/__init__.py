@@ -19,11 +19,19 @@ def create_app(test_config=None):
                 template_folder='templates',
                 static_folder='static',
                 instance_relative_config=True)
+
+    db_dir = os.path.join(root.BASE_DIR, 'instance', 'db.sqlite')
+
     app.config.from_mapping(
-        SECRET_KEY='dev',
-        SQLALCHEMY_DATABASE_URI='sqlite:///' + '{}/instance/db.sqlite'.format(root.BASE_DIR),
-        SQLALCHEMY_TRACK_MODIFIICATIONS=False
+        SECRET_KEY='dev',  # used by Flask and extensions to keep data safe.
+        # It’s set to 'dev' to provide a convenient value during development,
+        # but it should be overridden with a random value when deploying
+        DATABASE=db_dir,
     )
+
+    app.config['SECRET_KEY'] = 'dev'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + db_dir
+    app.config['SQLALCHEMY_TRACK_MODIFIICATIONS'] = False
 
     if test_config is None:
         # load the instance config, if it exists, when not testing
@@ -49,10 +57,10 @@ def create_app(test_config=None):
     with app.app_context():
         # Import parts of our core Flask app
         from . import routes
-        from .auth import routes as auth_routes
+        # from .auth import routes as auth_routes
         from .assets import compile_static_assets
 
-        app.register_blueprint(auth_routes.auth_bp)
+        # app.register_blueprint(auth_routes.auth_bp)
 
         # ---------------------------------------------
         # add project specific routes/dashapps here
