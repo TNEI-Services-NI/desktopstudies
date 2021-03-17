@@ -3,15 +3,28 @@ import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_assets import Environment
-
 from flask_migrate import Migrate
 
+from flask_socketio import SocketIO, send
+import eventlet
+from flask_jsglue import JSGlue
+
+
+
 import package as root
-from package.flaskapp.auth_2.user import User
+# from package.flaskapp.auth_2.user import User
 import package.flaskapp.auth_2.login_manager as login_manager
+
+
+eventlet.monkey_patch()
+socketio = SocketIO()
+jsglue = JSGlue()
+
 
 dbs = SQLAlchemy()
 migrate = Migrate()
+
+
 
 
 def _configure_app(test_config):
@@ -22,12 +35,14 @@ def _configure_app(test_config):
                 instance_relative_config=True)
 
     db_dir = os.path.join(root.BASE_DIR, 'instance', 'db.sqlite')
+    basedir = os.path.abspath(os.path.dirname(__file__))
 
     app.config.from_mapping(
         SECRET_KEY='dev',  # used by Flask and extensions to keep data safe.
         # It’s set to 'dev' to provide a convenient value during development,
         # but it should be overridden with a random value when deploying
         DATABASE=db_dir,
+        # DATABASE=os.path.join(app.instance_path, 'flaskapp.sqlite'),
     )
 
     app.config['SECRET_KEY'] = 'dev'
@@ -106,6 +121,12 @@ def create_app(test_config=None):
 
     app, _login_manager = login_manager.init_manager(app)
 
+    # Configure  socketio
+    socketio.init_app(app, cors_allowed_origins='*')
+
+    # Configure JSGlue : For using url_for in javascript
+    jsglue.init_app(app)
+
     # manage application level data
     with app.app_context():
         # load core views
@@ -115,7 +136,10 @@ def create_app(test_config=None):
         app, _login_manager = _load_auth_views(app, _login_manager)
 
         # # load raw simulation tool
-        # app = _load_raw_sim_tool(app)
+        app = _load_raw_sim_tool(app)
+
+        # Create database
+        dbs.create_all()
 
         # compile assets
         _assets = _compile_assets(_assets)
