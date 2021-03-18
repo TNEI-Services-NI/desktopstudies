@@ -20,7 +20,7 @@ def home():
                 session.clear()
                 session['user_id'] = user['id']
                 session['username'] = user['username']
-                return redirect(url_for('desksim.restoration'))
+                return redirect(url_for('/dash_simtool/'))
 
         flash(error)
 

@@ -5,92 +5,76 @@ import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 
 # INT IMPORTS
-from baseliningtool.flaskapp.dashapp.dashboard_components import hidden_divs, compile_body, navbar_controls
-from baseliningtool.flaskapp.dashapp.dashboard_callbacks import init_callbacks
-from baseliningtool.config import rolling_methods
+import package.flaskapp.dash_simtool.dashboard_components as components
+import package.flaskapp.dash_simtool.dashboard_callbacks as callbacks
+import package.flaskapp.dash_simtool.dashboard_styling as styling
+
 
 def init_dashboard(server=""):
     """Create a Plotly Dash dashboard."""
 
-    if server == "":
-        # Define encapsulating dash app
-        dash_app = dash.Dash(
-            routes_pathname_prefix='/baselining_app/',
-            external_stylesheets=[dbc.themes.GRID,
-                                  # can insert own css files here
-                                  # '/static/dist/css/styles.css'
-                                  dbc.themes.LUMEN])
-    else:
-        # Define encapsulating dash app
-        dash_app = dash.Dash(
-            server=server,
-            routes_pathname_prefix='/baselining_app/',
-            external_stylesheets=[dbc.themes.GRID,
-                                  # can insert own css files here
-                                  # '/static/dist/css/styles.css'
-                                  dbc.themes.LUMEN]
-        )
+    # Define encapsulating dash app
+    dash_app = dash.Dash(
+        server=server,
+        routes_pathname_prefix='/dash_simtool/',
+        assets_url_path='/assets',
+        external_stylesheets=[dbc.themes.GRID,
+                              # can insert own css files here
+                              # '/static/dist/css/styles.css'
+                              dbc.themes.LUMEN]
+    )
 
     # nav bar
-    _nav_bar = dbc.NavbarSimple(brand="Flexibility Baselining - Results", color="primary", dark=True,
+    _nav_bar = dbc.NavbarSimple(brand='Desktop Studies Communications Tool',
+                                color='#80361e',
+                                dark=True,
                                 id='nav_bar',
-                                children=navbar_controls()
+                                children=components.navbar_controls(),
+                                fixed="top",
+                                style=styling.NAVBAR_STYLE
                                 )
 
-    _method_bar = dbc.NavbarSimple(brand="\tMethodology:",
-                                   color='secondary', dark=False,
-                                   children=[
-                                       dbc.Row(
-                                           [
-                                               html.Div([
-                                                   dcc.RadioItems(
-                                                       options=[
-                                                           {'label': label, 'value': value}
-                                                           for value, label in rolling_methods.items()
-                                                       ],
-                                                       value=[x for x in rolling_methods.keys()][0],
-                                                       id='method-radio',
-                                                       labelStyle = {'cursor': 'pointer',
-                                                                     'margin-left': '20px',},
-                                                       inputStyle={"margin-right": "6px"}
-                                                   )
-                                               ],
-                                                   id='method_drop',
-
-                                               ),
-                                           ]
-                                       )
-                                   ])
-
-    _hidden_divs = hidden_divs()
+    # add sidebar
+    _sidebar = html.Div(
+        [
+            html.Button('<',
+                        id='toggle_button',
+                        style={
+                            'margin-left':'9rem',
+                            "background-color": "#ebc700",
+                        }),
+            html.H3("Sidebar"),
+            html.Hr(),
+            html.P("option 1", className="lead"),
+            html.P("option 2", className="lead"),
+            html.P("option 3", className="lead"),
+        ],
+        style=styling.SIDEBAR_STYLE,
+        id='sidebar'
+    )
 
     # compile body
-    _body = compile_body()
+    _body = components.compile_body(styling.CONTENT_STYLE)
 
     # graphical output
     _data_upload_output = dbc.Row([dbc.Col([html.Div(id='output-data-upload')], width=2)])
 
     # compile overall layout
-    dash_app.layout = html.Center([_hidden_divs[0],
-                                   _hidden_divs[1],
-                                   _hidden_divs[2],
+    dash_app.layout = html.Center([dcc.Location(id="home"),
+                                   dcc.Store(id='side_click'),
                                     html.Br(),
                                    _nav_bar,
-                                   _method_bar,
-
+                                   _sidebar,
                                    html.Br(),
                                    _body,
                                    html.Br(),
                                    _data_upload_output,
                                    html.Br(),
                                    ],
-                                  style={'width': '95vw', 'height': '90vh', 'margin-left': '2.5vw'}
                                   )
 
-    # dash_app.layout = html.Center([]
-    #                               )
 
-    dash_app = init_callbacks(dash_app)
+    dash_app = callbacks.init_callbacks(dash_app)
 
     return dash_app if server == "" else dash_app.server
 

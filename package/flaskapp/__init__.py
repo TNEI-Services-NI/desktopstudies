@@ -2,6 +2,7 @@
 from flask import Flask
 from flask_assets import Environment
 import os
+from flask import url_for
 
 
 def _configure_app(test_config):
@@ -55,16 +56,16 @@ def _load_raw_sim_tool(app):
 
 
 def _load_dash_sim_tool(app):
-    from .dashapp.dashboard import init_dashboard
+    from .dash_simtool import init_dashboard
     app = init_dashboard(app)
     return app
 
 
-def _compile_assets(app):
+def _compile_assets(assets):
     # compile static assets - CSS
     from .assets import compile_static_assets
     compile_static_assets(assets)  # Execute logic
-    return app
+    return assets
 
 
 def create_app(test_config=None):
@@ -87,12 +88,13 @@ def create_app(test_config=None):
         # load auth views
         app = _load_auth_views(app)
 
+        # # load raw simulation tool
+        # app = _load_raw_sim_tool(app)
+
         # load raw simulation tool
-        app = _load_raw_sim_tool(app)
-
-
+        app = _load_dash_sim_tool(app)
 
         # compile assets
-        app = _compile_assets(app)
+        assets = _compile_assets(assets)
 
     return app

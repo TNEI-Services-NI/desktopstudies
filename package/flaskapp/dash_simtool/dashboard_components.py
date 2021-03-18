@@ -1,10 +1,9 @@
-from baseliningtool.flaskapp.dashapp.micromethods import hex_to_rgb
+from package.flaskapp.dash_simtool.micromethods import hex_to_rgb
 
 import dash_core_components as dcc
 import dash_html_components as html
 import dash_bootstrap_components as dbc
 import dash_daq as daq
-from baseliningtool.config import rolling_methods
 
 import plotly.graph_objs as go
 
@@ -284,7 +283,7 @@ def _init_control_module():
     return control_module
 
 
-def compile_body():
+def compile_body(CONTENT_STYLE):
     # control module
     _control_module = _init_control_module()
 
@@ -305,7 +304,7 @@ def compile_body():
     # compile body
     _body = dbc.Col([_control_module, html.Br(), _interactive_data_compontents])
 
-    return _body
+    return html.Div(id='page_content', style=CONTENT_STYLE, children=[_body])
 
 
 def hidden_divs():
@@ -329,16 +328,15 @@ def hidden_divs():
 def navbar_controls():
     row = html.Div(
         [
-            dbc.Row(
+            dbc.Nav(
                 [
-                    dbc.Col(
-                        [
-                            html.Div(id='user_auth'),
-                        ]
-                    ),
-                    dbc.Col(html.Div(id='logout_button',
-                                     style={'padding-top': '8px'})),
-                ]
+                    dbc.NavLink("Home", href="/", active="exact", external_link=True),
+                    dbc.NavLink("SLDs", href="/SLDs", active="exact", external_link=True),
+                    dbc.NavLink("Scripts", href="/scripts", active="exact", external_link=True),
+                    dbc.NavLink("About", href="/about", active="exact", external_link=True),
+                ],
+                vertical=False,
+                pills=True,
             ),
 
         ]
