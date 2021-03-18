@@ -4,6 +4,7 @@ import dash_core_components as dcc
 import dash_html_components as html
 import dash_bootstrap_components as dbc
 import dash_daq as daq
+from dash_canvas import DashCanvas
 
 import plotly.graph_objs as go
 
@@ -284,22 +285,23 @@ def _init_control_module():
 
 
 def compile_body(CONTENT_STYLE):
-    # control module
-    _control_module = _init_control_module()
+    # # control module
+    # _control_module = _init_control_module()
+    #
+    # # Heatcalendar
+    # _calendar_div, _dict_cal = init_calendar()
+    #
+    # _heatcalendar = dbc.Col([dbc.Card([_calendar_div], body=True, id='heat-calendar-card')])
+    #
+    # # graphical output
+    # _graph_output = dbc.Card([dbc.Col([html.Div([dbc.Row([html.H4('Performance Assessment')], style={'margin-left': 5}),
+    #                                              dcc.Graph(id='individual_graph')],
+    #                                             className='pretty_container eight columns', )])],
+    #                          body=True)
+    #
+    # _interactive_data_compontents = dbc.Collapse(dbc.CardDeck([_heatcalendar, _graph_output]),
+    #                                              is_open=False, id='collapse')
 
-    # Heatcalendar
-    _calendar_div, _dict_cal = init_calendar()
-
-    _heatcalendar = dbc.Col([dbc.Card([_calendar_div], body=True, id='heat-calendar-card')])
-
-    # graphical output
-    _graph_output = dbc.Card([dbc.Col([html.Div([dbc.Row([html.H4('Performance Assessment')], style={'margin-left': 5}),
-                                                 dcc.Graph(id='individual_graph')],
-                                                className='pretty_container eight columns', )])],
-                             body=True)
-
-    _interactive_data_compontents = dbc.Collapse(dbc.CardDeck([_heatcalendar, _graph_output]),
-                                                 is_open=False, id='collapse')
 
     # compile body
     _body = dbc.Col([_control_module, html.Br(), _interactive_data_compontents])

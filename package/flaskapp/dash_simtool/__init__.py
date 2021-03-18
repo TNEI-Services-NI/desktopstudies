@@ -67,9 +67,6 @@ def init_dashboard(server=""):
                                    _sidebar,
                                    html.Br(),
                                    _body,
-                                   html.Br(),
-                                   _data_upload_output,
-                                   html.Br(),
                                    ],
                                   )
 
