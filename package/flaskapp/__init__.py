@@ -77,7 +77,7 @@ def _load_auth_views(app, _login_manager):
     # from .auth import routes as auth_routes
     # app.register_blueprint(auth_routes.auth_bp)
     from .auth_2 import routes as auth_routes_new
-    app.register_blueprint(auth_routes_new.auth_bp, url_prefix='/auth_2')
+    app.register_blueprint(auth_routes_new.auth_bp) #, url_prefix='/auth_2')
 
     _login_manager.login_view = 'auth_2.login'
 

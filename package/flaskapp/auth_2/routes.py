@@ -5,7 +5,7 @@ from package.flaskapp.auth_2.user import User
 from package.flaskapp import dbs as db
 from package.flaskapp import socketio
 
-auth_bp = Blueprint('auth_2', __name__, static_folder='static', template_folder='templates', url_prefix='/auth_2')
+auth_bp = Blueprint('auth_2', __name__, static_folder='static', template_folder='templates') #, url_prefix='/auth_2')
 
 
 @auth_bp.route('/signup')

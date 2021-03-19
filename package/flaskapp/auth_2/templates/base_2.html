@@ -19,12 +19,12 @@
 
                     <div id="navbarMenuHeroA" class="navbar-menu">
                         <div class="navbar-end">
-                            <a href="{{ url_for('auth_2.index') }}" class="navbar-item">
-                                Home
-                            </a>
+<!--                            <a href="{{ url_for('auth_2.index') }}" class="navbar-item">-->
+<!--                                Home-->
+<!--                            </a>-->
                             {% if current_user.is_authenticated %}
-                                <a href="{{ url_for('auth_2.index') }}" class="navbar-item">
-                                    Profile
+                                <a href="{{ url_for('auth_2.wait_room') }}" class="navbar-item">
+                                    Lobby/Go to Simulator
                                 </a>
                             {% endif %}
 
