@@ -3,5 +3,4 @@ import os
 import pandas as pd
 import numpy as np
 
-if __name__ == "__main__":
-    pass
+BASE_DIR = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))

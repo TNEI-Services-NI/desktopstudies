@@ -74,12 +74,12 @@ def init_dashboard(server=""):
     # graphical output
     _data_upload_output = dbc.Row([dbc.Col([html.Div(id='output-data-upload')], width=2)])
 
-    data = {'canvas': {}}
-    data['canvas']['x'] = 1200
-    with open(r'..\dash_simtool\data\json.txt', 'w') as outfile:
-        json.dump(data, outfile)
+    # data = {'canvas': {}}
+    # data['canvas']['x'] = 1200
+    # with open(r'..\dash_simtool\data\json.txt', 'w') as outfile:
+    #     json.dump(data, outfile)
 
-    with open(r'..\dash_simtool\templates\dash_sim_tool.html', "r") as dash_app_html_file:
+    with open(os.path.dirname(__file__)+r'\templates\dash_sim_tool.html', "r") as dash_app_html_file:
         dash_app_html = dash_app_html_file.read()
         dash_app_html = dash_app_html.replace('{% marginLeft %}', styling.CONTENT_STYLE['marginLeft'])
         dash_app_html = dash_app_html.replace('{% marginTop %}', styling.NAVBAR_STYLE['height'])

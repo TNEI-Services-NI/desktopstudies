@@ -7,7 +7,7 @@ from package.flaskapp.auth.methods import check_cred
 
 
 # a simple page that says hello
-@app.route('/', methods=('GET', 'POST'))
+@app.route('/old_login', methods=('GET', 'POST'))
 def home():
     """Landing page."""
     if request.method == 'POST':
