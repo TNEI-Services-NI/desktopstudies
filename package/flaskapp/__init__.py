@@ -9,22 +9,16 @@ from flask_socketio import SocketIO, send
 import eventlet
 from flask_jsglue import JSGlue
 
-
-
 import package as root
 # from package.flaskapp.auth_2.user import User
 import package.flaskapp.auth_2.login_manager as login_manager
-
 
 eventlet.monkey_patch()
 socketio = SocketIO()
 jsglue = JSGlue()
 
-
 dbs = SQLAlchemy()
 migrate = Migrate()
-
-
 
 
 def _configure_app(test_config):
@@ -47,7 +41,7 @@ def _configure_app(test_config):
 
     app.config['SECRET_KEY'] = 'dev'
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + db_dir
-    app.config['SQLALCHEMY_TRACK_MODIFIICATIONS'] = False
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     if test_config is None:
         # load the instance config, if it exists, when not testing
