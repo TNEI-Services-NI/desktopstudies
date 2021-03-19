@@ -3,6 +3,8 @@ import dash
 import dash_html_components as html
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc
+import os
+import json
 
 # INT IMPORTS
 import package.flaskapp.dash_simtool.dashboard_components as components
@@ -13,16 +15,29 @@ import package.flaskapp.dash_simtool.dashboard_styling as styling
 def init_dashboard(server=""):
     """Create a Plotly Dash dashboard."""
 
-    # Define encapsulating dash app
-    dash_app = dash.Dash(
-        server=server,
-        routes_pathname_prefix='/dash_simtool/',
-        assets_url_path='/assets',
-        external_stylesheets=[dbc.themes.GRID,
-                              # can insert own css files here
-                              # '/static/dist/css/styles.css'
-                              dbc.themes.LUMEN]
-    )
+    if server != '':
+        # Define encapsulating dash app
+        dash_app = dash.Dash(
+            server=server,
+            routes_pathname_prefix='/dash_simtool/',
+            assets_url_path='/assets',
+            update_title='Loading...',
+            external_stylesheets=[dbc.themes.GRID,
+                                  # can insert own css files here
+                                  # '/static/dist/css/styles.css'
+                                  dbc.themes.LUMEN],
+        )
+    else:
+        # Define encapsulating dash app
+        dash_app = dash.Dash(
+            routes_pathname_prefix='/dash_simtool/',
+            assets_url_path='/assets',
+            update_title='Loading...',
+            external_stylesheets=[dbc.themes.GRID,
+                                  # can insert own css files here
+                                  # '/static/dist/css/styles.css'
+                                  dbc.themes.LUMEN],
+        )
 
     # nav bar
     _nav_bar = dbc.NavbarSimple(brand='Desktop Studies Communications Tool',
@@ -33,15 +48,15 @@ def init_dashboard(server=""):
                                 fixed="top",
                                 style=styling.NAVBAR_STYLE
                                 )
-
+    #
     # add sidebar
     _sidebar = html.Div(
         [
             html.Button('<',
                         id='toggle_button',
                         style={
-                            'margin-left':'9rem',
-                            "background-color": "#ebc700",
+                            'marginLeft':'9rem',
+                            "backgroundColor": "#ebc700",
                         }),
             html.H3("Sidebar"),
             html.Hr(),
@@ -59,6 +74,21 @@ def init_dashboard(server=""):
     # graphical output
     _data_upload_output = dbc.Row([dbc.Col([html.Div(id='output-data-upload')], width=2)])
 
+    data = {'canvas': {}}
+    data['canvas']['x'] = 1200
+    with open(r'..\dash_simtool\data\json.txt', 'w') as outfile:
+        json.dump(data, outfile)
+
+    with open(r'..\dash_simtool\templates\dash_sim_tool.html', "r") as dash_app_html_file:
+        dash_app_html = dash_app_html_file.read()
+        dash_app_html = dash_app_html.replace('{% marginLeft %}', styling.CONTENT_STYLE['marginLeft'])
+        dash_app_html = dash_app_html.replace('{% marginTop %}', styling.NAVBAR_STYLE['height'])
+        dash_app.index_string = dash_app_html
+
+
+    # dash_app.layout = html.Div([_nav_bar])
+
+    #
     # compile overall layout
     dash_app.layout = html.Center([dcc.Location(id="home"),
                                    dcc.Store(id='side_click'),
@@ -69,9 +99,9 @@ def init_dashboard(server=""):
                                    _body,
                                    ],
                                   )
+    #
+    # dash_app = callbacks.init_callbacks(dash_app)
 
-
-    dash_app = callbacks.init_callbacks(dash_app)
 
     return dash_app if server == "" else dash_app.server
 

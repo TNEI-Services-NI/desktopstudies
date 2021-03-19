@@ -53,29 +53,29 @@ def _add_toggle_sidebar(dash_app):
     return dash_app
 
 
-def _add_render_page_content(dash_app):
-    @dash_app.callback(Output("page-content", "children"), [Input("url", "pathname")])
-    def render_page_content(pathname):
-        if pathname in ["/", "/page-1"]:
-            return html.P("This is the content of page 1!")
-        elif pathname == "/page-2":
-            return html.P("This is the content of page 2. Yay!")
-        elif pathname == "/page-3":
-            return html.P("Oh cool, this is page 3!")
-        # If the user tries to reach a different page, return a 404 message
-        return dbc.Jumbotron(
-            [
-                html.H1("404: Not found", className="text-danger"),
-                html.Hr(),
-                html.P(f"The pathname {pathname} was not recognised..."),
-            ]
-        )
-
-    return dash_app
+# def _add_render_page_content(dash_app):
+#     @dash_app.callback(Output("page-content", "children"), [Input("url", "pathname")])
+#     def render_page_content(pathname):
+#         if pathname in ["/", "/page-1"]:
+#             return html.P("This is the content of page 1!")
+#         elif pathname == "/page-2":
+#             return html.P("This is the content of page 2. Yay!")
+#         elif pathname == "/page-3":
+#             return html.P("Oh cool, this is page 3!")
+#         # If the user tries to reach a different page, return a 404 message
+#         return dbc.Jumbotron(
+#             [
+#                 html.H1("404: Not found", className="text-danger"),
+#                 html.Hr(),
+#                 html.P(f"The pathname {pathname} was not recognised..."),
+#             ]
+#         )
+#
+#     return dash_app
 
 
 def init_callbacks(dash_app):
     dash_app = _add_toggle_sidebar(dash_app)
-    dash_app = _add_render_page_content(dash_app)
+    # dash_app = _add_render_page_content(dash_app)
 
     return dash_app

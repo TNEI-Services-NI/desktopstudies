@@ -6,8 +6,8 @@ import numpy as np
 SIDEBAR_HIDE_OVERLAP = 2
 
 CONTENT_STYLE_SIDEBAR_HIDDEN = {
-    "margin-left": "2rem",
-    "margin-right": "2rem",
+    "marginLeft": "2rem",
+    "marginRight": "2rem",
     "padding": "2rem 1rem",
 }
 
@@ -22,7 +22,7 @@ SIDEBAR_STYLE = {
     "bottom": 0,
     "width": "12rem",
     "padding": "1rem 1rem",
-    "background-color": "#ffe600",
+    "backgroundColor": "#ffe600",
 }
 
 SIDEBAR_STYLE_HIDDEN = {
@@ -32,16 +32,16 @@ SIDEBAR_STYLE_HIDDEN = {
     "bottom": 0,
     "width": "12rem",
     "padding": "2rem 1rem",
-    "background-color": "#ffe600",
+    "backgroundColor": "#ffe600",
 }
 
 CONTENT_STYLE = {
-    "margin-left": str(int(SIDEBAR_STYLE['width'].split('rem')[0])+SIDEBAR_HIDE_OVERLAP)+'rem',
-    "margin-right": "2rem",
+    "marginLeft": str(int(SIDEBAR_STYLE['width'].split('rem')[0])+SIDEBAR_HIDE_OVERLAP)+'rem',
+    "marginRight": "2rem",
     "padding": "2rem 1rem",
 }
 
 TOGGLE_BUTTON = {
-    'margin-left': '9rem',
-    "background-color": "#ebc700",
+    'marginLeft': '9rem',
+    "backgroundColor": "#ebc700",
 }

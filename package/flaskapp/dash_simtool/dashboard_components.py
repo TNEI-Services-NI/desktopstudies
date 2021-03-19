@@ -182,7 +182,7 @@ def init_calendar(_d1=date(2020, 1, 1), _d2=date(2020, 12, 31), _z=[]):
 
     _fig = go.Figure(data=dict_fig['data'], layout=dict_fig['layout'])
 
-    div = html.Div([dbc.Row([html.H4('Event History')], style={'margin-left': 5}),
+    div = html.Div([dbc.Row([html.H4('Event History')], style={'marginLeft': 5}),
                     dcc.Graph(id='heatmap-cal-graph', figure=_fig,
                               config={
                                   'displayModeBar': False,
@@ -294,7 +294,7 @@ def compile_body(CONTENT_STYLE):
     # _heatcalendar = dbc.Col([dbc.Card([_calendar_div], body=True, id='heat-calendar-card')])
     #
     # # graphical output
-    # _graph_output = dbc.Card([dbc.Col([html.Div([dbc.Row([html.H4('Performance Assessment')], style={'margin-left': 5}),
+    # _graph_output = dbc.Card([dbc.Col([html.Div([dbc.Row([html.H4('Performance Assessment')], style={'marginLeft': 5}),
     #                                              dcc.Graph(id='individual_graph')],
     #                                             className='pretty_container eight columns', )])],
     #                          body=True)
@@ -304,7 +304,7 @@ def compile_body(CONTENT_STYLE):
 
 
     # compile body
-    _body = dbc.Col([_control_module, html.Br(), _interactive_data_compontents])
+    _body = dbc.Col([html.Div(id='test')])
 
     return html.Div(id='page_content', style=CONTENT_STYLE, children=[_body])
 
