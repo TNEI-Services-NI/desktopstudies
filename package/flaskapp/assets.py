@@ -9,17 +9,17 @@ def compile_static_assets(assets):
     # assets.debug = False
     bundles = {
 
-        'test_js' : Bundle(
-            'js/test.js',
-            output='gen/test.js'
+        'dash_js' : Bundle(
+            # 'dash_simtool_app/js/test.js',
+            # 'dash_simtool_app/js/ext/svg.js',
+            # 'dash_simtool_app/js/ext/jquery.csv.js',
+            # 'dash_simtool_app/js/ext/jquery.min.js',
+            # 'dash_simtool_app/js/ext/plotly-latest.min.js',
+            # 'dash_simtool_app/js/1_sldcomponents.js',
+            # 'dash_simtool_app/js/2_events.js',
+            # 'dash_simtool_app/js/3_chapelcross_ESO.js',
+            output='gen/dash_app.js'
         ),
-    # 'dashsim_js_bundle': Bundle(
-    #     'src/js/*.js',
-    #     'dash_simtool'
-    #     filters='jsmin',
-    #     output='dist/js/main.min.js'
-    # )
-
     }
     # auth_css_bundle = Bundle(
     #     'auth/css/auth.css',

@@ -23,6 +23,16 @@ def init_dashboard(server=""):
         dash_app = dash.Dash(
             server=server,
             routes_pathname_prefix=URL_BASE,
+            external_scripts=[
+                'https://cdnjs.cloudflare.com/ajax/libs/svg.js/3.0.5/svg.min.js',
+                'https://cdn.jsdelivr.net/npm/@svgdotjs/svg.filter.js@3.0.1/dist/svg.filter.min.js',
+                'https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js',
+                'https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js',
+                'https://cdn.jsdelivr.net/npm/@svgdotjs/svg.filter.js@3.0.1/dist/svg.filter.min.js',
+                {'src': "https://code.jquery.com/jquery-1.12.4.min.js",
+                 'integrity': "sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ",
+                 'crossorigin': "anonymous"}
+            ],
             assets_url_path='/assets',
             update_title='Loading...',
             external_stylesheets=[dbc.themes.GRID,
@@ -58,7 +68,7 @@ def init_dashboard(server=""):
             html.Button('<',
                         id='toggle_button',
                         style={
-                            'marginLeft':'9rem',
+                            'marginLeft': '9rem',
                             "backgroundColor": "#ebc700",
                         }),
             html.H3("Sidebar"),
@@ -82,12 +92,11 @@ def init_dashboard(server=""):
     # with open(r'..\dash_simtool\data\json.txt', 'w') as outfile:
     #     json.dump(data, outfile)
 
-    with open(dash_simtool.TEMPLATES_DIR+'dash_sim_tool.html', "r") as dash_app_html_file:
+    with open(dash_simtool.TEMPLATES_DIR + 'dash_sim_tool.html', "r") as dash_app_html_file:
         dash_app_html = dash_app_html_file.read()
         dash_app_html = dash_app_html.replace('{% marginLeft %}', styling.CONTENT_STYLE['marginLeft'])
-        dash_app_html = dash_app_html.replace('{% marginTop %}', styling.NAVBAR_STYLE['height'])
+        dash_app_html = dash_app_html.replace('{% marginTop %}', "0px")
         dash_app.index_string = dash_app_html
-
 
     # dash_app.layout = html.Div([_nav_bar])
 
@@ -95,16 +104,12 @@ def init_dashboard(server=""):
     # compile overall layout
     dash_app.layout = html.Center([dcc.Location(id="home"),
                                    dcc.Store(id='side_click'),
-                                    html.Br(),
                                    _nav_bar,
                                    _sidebar,
-                                   html.Br(),
                                    _body,
                                    ],
                                   )
     #
     # dash_app = callbacks.init_callbacks(dash_app)
 
-
     return dash_app if server == "" else dash_app.server
-

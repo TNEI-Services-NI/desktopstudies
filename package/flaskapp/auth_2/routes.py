@@ -111,4 +111,5 @@ def trigger_checks(data=None):
 
     if len(logged_users)>0:
         socketio.emit('users_complete', logged_users)
-        socketio.emit('redirect', '/dash_simtool/') # This url is dummy data for now - not used in front end
+        # socketio.emit('redirect', '/dash_simtool/') # This url is dummy data for now - not used in front end
+        socketio.emit('redirect', 'dash_simtool_app.home') # This url is dummy data for now - not used in front end

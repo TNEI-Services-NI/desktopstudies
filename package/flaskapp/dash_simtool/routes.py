@@ -4,7 +4,7 @@ from flask_login import login_required
 import package.flaskapp.dash_simtool.app as dash_app
 
 
-@simtool_bp.route('/blueprint_url')
+@simtool_bp.route('/home')
 @login_required
-def app1_template():
-    return render_template('app1.html', dash_url=dash_app.URL_BASE)
+def home():
+    return render_template('dash_wrapper.html', dash_url=dash_app.URL_BASE)
