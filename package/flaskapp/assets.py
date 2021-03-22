@@ -5,14 +5,20 @@ from flask_assets import Bundle
 
 def compile_static_assets(assets):
     """Create stylesheet bundles."""
-    assets.auto_build = True
-    assets.debug = False
+    # assets.auto_build = True
+    # assets.debug = False
     bundles = {
 
         'test_js' : Bundle(
             'js/test.js',
             output='gen/test.js'
-        )
+        ),
+    # 'dashsim_js_bundle': Bundle(
+    #     'src/js/*.js',
+    #     'dash_simtool'
+    #     filters='jsmin',
+    #     output='dist/js/main.min.js'
+    # )
 
     }
     # auth_css_bundle = Bundle(

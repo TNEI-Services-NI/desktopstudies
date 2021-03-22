@@ -6,9 +6,6 @@ from datetime import datetime, timedelta
 
 from flask import session
 
-from baseliningtool.models.main import baseline_calculation
-from baseliningtool.data import load_bank_holidays
-
 
 def _create_dataframe(decoded):
     """Create Pandas DataFrame from local CSV."""

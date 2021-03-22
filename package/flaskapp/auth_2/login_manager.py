@@ -1,10 +1,4 @@
-from flask_login import LoginManager
-
-
-
-def init_manager(app):
-
-    login_manager = LoginManager()
+def init_manager(app, login_manager):
     login_manager.init_app(app)
 
     from package.flaskapp.auth_2.user import User
@@ -15,5 +9,3 @@ def init_manager(app):
         return User.query.get(int(user_id))
 
     return app, login_manager
-
-    

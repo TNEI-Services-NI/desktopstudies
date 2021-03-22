@@ -1,4 +1,4 @@
-from package.flaskapp.dash_simtool.micromethods import hex_to_rgb
+from package.flaskapp.dash_simtool.app.micromethods import hex_to_rgb
 
 import dash_core_components as dcc
 import dash_html_components as html

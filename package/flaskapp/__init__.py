@@ -1,25 +1,14 @@
 """Initialize Flask app."""
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 from flask_assets import Environment
 import os
-from flask import url_for
-from flask_migrate import Migrate
-
-from flask_socketio import SocketIO, send
 import eventlet
-from flask_jsglue import JSGlue
 
 import package as root
-# from package.flaskapp.auth_2.user import User
-import package.flaskapp.auth_2.login_manager as login_manager
+from .extensions import login_manager, dbs, socketio, jsglue
+from .auth_2.login_manager import init_manager
 
 eventlet.monkey_patch()
-socketio = SocketIO()
-jsglue = JSGlue()
-
-dbs = SQLAlchemy()
-migrate = Migrate()
 
 
 def _configure_app(test_config):
@@ -64,16 +53,27 @@ def _init_assets(app):
     return app, _assets
 
 
-def _load_auth_views(app, _login_manager):
+def _register_extensions(app):
+    dbs.init_app(app)
+    init_manager(app, login_manager)
+    socketio.init_app(app, cors_allowed_origins='*')
+    jsglue.init_app(app)
+
+
+def __load_auth_views(app):
     # # load authorisation views
     # from .auth import routes as auth_routes
     # app.register_blueprint(auth_routes.auth_bp)
     from .auth_2 import routes as auth_routes_new
     app.register_blueprint(auth_routes_new.auth_bp)
 
-    _login_manager.login_view = 'auth_2.login'
+    login_manager.login_view = 'auth_2.login'
 
-    return app, _login_manager
+
+def __load_dash_views(app):
+    # load dash views
+    from .dash_simtool import routes as dash_route
+    app.register_blueprint(dash_route.simtool_bp)
 
 
 def _load_raw_sim_tool(app):
@@ -83,9 +83,37 @@ def _load_raw_sim_tool(app):
     return app
 
 
-def _load_dash_sim_tool(app):
-    from .dash_simtool import init_dashboard
+def _load_blueprints(app):
+    # load auth views
+    __load_auth_views(app)
+
+    # load dash simulation view
+    __load_dash_views(app)
+
+
+def _configure_database(app):
+    @app.before_first_request
+    def initialize_database():
+        dbs.create_all()
+        # admin_username = app.config['ADMIN']['username']
+        # user = User.query.filter_by(username=admin_username).first()
+        # if user: user.delete_from_db()
+        # User(**app.config['ADMIN']).add_to_db()
+
+    @app.teardown_request
+    def shutdown_session(exception=None):
+        dbs.session.remove()
+
+
+def __load_dash_sim_tool(app):
+    from .dash_simtool.app import init_dashboard
     app = init_dashboard(app)
+    return app
+
+
+def _load_dash_apps(app):
+    # load dash simulation tool
+    app = __load_dash_sim_tool(app)
     return app
 
 
@@ -93,7 +121,6 @@ def _compile_assets(_assets):
     # compile static assets - CSS
     from .assets import compile_static_assets
     compile_static_assets(_assets)  # Execute logic
-    return _assets
 
 
 def create_app(test_config=None):
@@ -104,40 +131,20 @@ def create_app(test_config=None):
     # initialise assets
     app, _assets = _init_assets(app)
 
-    # # initialise user database
-    # from . import db
-    # db.init_app(app)
-
-    dbs.init_app(app)
-    migrate.init_app(app, dbs)
-
-    app, _login_manager = login_manager.init_manager(app)
-
-    # Configure  socketio
-    socketio.init_app(app, cors_allowed_origins='*')
-
-    # Configure JSGlue : For using url_for in javascript
-    jsglue.init_app(app)
+    # initialise user database
+    _register_extensions(app)
 
     # manage application level data
     with app.app_context():
         # load core views
         from . import routes
 
-        # load raw simulation tool
-        app = _load_dash_sim_tool(app)
+        _load_blueprints(app)
 
-        # load auth views
-        app, _login_manager = _load_auth_views(app, _login_manager)
+        _configure_database(app)
 
-        # # load raw simulation tool
-        # app = _load_raw_sim_tool(app)
+        app = _load_dash_apps(app)
 
-
-        # Create database
-        dbs.create_all()
-
-        # compile assets
-        _assets = _compile_assets(_assets)
+        _compile_assets(_assets)
 
     return app

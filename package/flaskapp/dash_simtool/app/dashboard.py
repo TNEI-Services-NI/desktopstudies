@@ -1,6 +1,6 @@
 """Instantiate a Dash app."""
 # EXT IMPORTS
-from package.flaskapp.dash_simtool import init_dashboard
+from package.flaskapp.dash_simtool.app import init_dashboard
 
 if __name__ == "__main__":
     app = init_dashboard()
