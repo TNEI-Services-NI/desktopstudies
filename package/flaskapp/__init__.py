@@ -29,14 +29,12 @@ def _configure_app(test_config):
                 instance_relative_config=True)
 
     db_dir = os.path.join(root.BASE_DIR, 'instance', 'db.sqlite')
-    basedir = os.path.abspath(os.path.dirname(__file__))
 
     app.config.from_mapping(
         SECRET_KEY='dev',  # used by Flask and extensions to keep data safe.
         # It’s set to 'dev' to provide a convenient value during development,
         # but it should be overridden with a random value when deploying
         DATABASE=db_dir,
-        # DATABASE=os.path.join(app.instance_path, 'flaskapp.sqlite'),
     )
 
     app.config['SECRET_KEY'] = 'dev'
@@ -71,7 +69,7 @@ def _load_auth_views(app, _login_manager):
     # from .auth import routes as auth_routes
     # app.register_blueprint(auth_routes.auth_bp)
     from .auth_2 import routes as auth_routes_new
-    app.register_blueprint(auth_routes_new.auth_bp) #, url_prefix='/auth_2')
+    app.register_blueprint(auth_routes_new.auth_bp)
 
     _login_manager.login_view = 'auth_2.login'
 
