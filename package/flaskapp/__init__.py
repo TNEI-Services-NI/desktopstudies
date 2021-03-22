@@ -124,6 +124,11 @@ def _compile_assets(_assets):
 
 
 def create_app(test_config=None):
+    """Wrapper function - creates Flask application with embedded Dash app
+
+    :param test_config:
+    :return:
+    """
 
     # configure root app
     app = _configure_app(test_config)
