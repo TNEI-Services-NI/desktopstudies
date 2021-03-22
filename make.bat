@@ -5,5 +5,4 @@ CALL activate.bat
 cd ..
 cd ..
 pip install -r requirements.txt
-CALL initdb.bat
 PAUSE

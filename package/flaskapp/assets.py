@@ -8,19 +8,10 @@ def compile_static_assets(assets):
     assets.auto_build = True
     assets.debug = False
     bundles = {
-    'common_css' : Bundle(
-        'https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/litera/bootstrap.css',
-        filters='cssmin',
-        output='static/css/common.css'
-    ),
-    'landing_css' : Bundle(
-            'css/landing.css',
-            filters='cssmin',
-            output='dist/css/landing.css',
-            extra={'rel': 'stylesheet/less'}
-    ),
+
         'test_js' : Bundle(
-            ''
+            'js/test.js',
+            output='gen/test.js'
         )
 
     }
@@ -38,6 +29,6 @@ def compile_static_assets(assets):
 
     assets.register(bundles)
     # if app.config['FLASK_ENV'] == 'development':
-    #     for bundle in bundles.values():
-    #         bundle.build()
+    for bundle in bundles.values():
+        bundle.build()
     return assets

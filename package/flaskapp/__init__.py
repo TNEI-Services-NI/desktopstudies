@@ -26,7 +26,6 @@ def _configure_app(test_config):
     # create and configure the app
     app = Flask(__name__,
                 template_folder='templates',
-                static_folder='static',
                 instance_relative_config=True)
 
     db_dir = os.path.join(root.BASE_DIR, 'instance', 'db.sqlite')
@@ -127,14 +126,15 @@ def create_app(test_config=None):
         # load core views
         from . import routes
 
+        # load raw simulation tool
+        app = _load_dash_sim_tool(app)
+
         # load auth views
         app, _login_manager = _load_auth_views(app, _login_manager)
 
         # # load raw simulation tool
         # app = _load_raw_sim_tool(app)
 
-        # load raw simulation tool
-        app = _load_dash_sim_tool(app)
 
         # Create database
         dbs.create_all()

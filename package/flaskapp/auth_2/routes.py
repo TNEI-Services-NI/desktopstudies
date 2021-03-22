@@ -99,7 +99,6 @@ def new_connect():
 @socketio.on('disconnect')
 def new_disconnect():
     print('new disconnect')
-    logout()
 
 
 @socketio.on('trigger')
@@ -108,9 +107,8 @@ def trigger_checks(data=None):
     logged_users = [user.name for user in logged_users]
     print(f'Logged-in users are: {logged_users}')
     socketio.emit('update_logged_users', logged_users)
-    socketio.emit('redirect', [url_for('/dash_simtool/')]) # This url is dummy data for now - not used in front end
+    # socketio.emit('redirect', [url_for('/dash_simtool/')]) # This url is dummy data for now - not used in front end
 
-    # if len(logged_users)==3:
-        # socketio.emit('users_complete', logged_users)
-        # socketio.sleep(3)
-        # socketio.emit('redirect', [url_for('/dash_simtool/')]) # This url is dummy data for now - not used in front end
+    if len(logged_users)>0:
+        socketio.emit('users_complete', logged_users)
+        socketio.emit('redirect', '/dash_simtool/') # This url is dummy data for now - not used in front end
