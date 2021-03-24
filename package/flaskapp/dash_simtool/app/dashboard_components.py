@@ -332,10 +332,10 @@ def navbar_controls():
         [
             dbc.Nav(
                 [
-                    dbc.NavLink("Home", href="/", active="exact", external_link=True),
-                    dbc.NavLink("SLDs", href="/SLDs", active="exact", external_link=True),
-                    dbc.NavLink("Scripts", href="/scripts", active="exact", external_link=True),
-                    dbc.NavLink("About", href="/about", active="exact", external_link=True),
+                    dbc.NavLink("Home", href="/", active=True, external_link=True),
+                    dbc.NavLink("SLDs", href="/SLDs", external_link=True),
+                    dbc.NavLink("Scripts", href="/scripts", external_link=True),
+                    dbc.NavLink("About", href="/about", external_link=True),
                 ],
                 vertical=False,
                 pills=True,

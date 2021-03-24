@@ -67,4 +67,7 @@ Max McFarlane - Technical Consultant\
 <max.mcfarlane@tneigroup.com>
 
 Obinna Unigwe - Graduate Consultant\
-<max.mcfarlane@tneigroup.com>
+<obinna.unigwe@tneigroup.com>
+
+Owen Patrick - Intern\
+<owen.patrick@tneigroup.com>
