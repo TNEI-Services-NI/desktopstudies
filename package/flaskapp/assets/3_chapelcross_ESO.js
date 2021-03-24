@@ -742,17 +742,25 @@
 
   add_inductor(dict_steps_components['1_1'].lines[0], 0.9, 'SG');
   add_breaker(dict_steps_components['1_1'].lines[0], 0.61, 6, 'open', function(object){
+    object.on("breaker_clicked",function(event){post_breaker()})
+
     buttonA_fillObject(1, object)
   });
   add_breaker(dict_steps_components['1_1'].lines[0], 0.2, 6, 'open', function(object){
+      object.on("breaker_clicked",function(event){post_breaker()})
+
     buttonA_fillObject(1, object)
   });
   add_breaker(dict_steps_components['1_1'].lines[0], 0.1, 6, 'closed', function(object){
+      object.on("breaker_clicked",function(event){post_breaker()})
+
     return 0
   });
   add_earth(dict_steps_components['1_1'].lines[0], 1, true);
 
   add_breaker(dict_steps_components['1_1'].lines[3], 0.25, 6, 'open', function(object){
+      object.on("breaker_clicked",function(event){post_breaker()})
+
     return 0
   });
   add_resistor(dict_steps_components['1_1'].lines[3], 0.65, 12, 4);
@@ -763,18 +771,24 @@
 
   add_breaker(dict_steps_components['1_1'].lines[4], 0.10, 6, 'open', function(object){
     buttonA_fillObject(3, object)
+    object.on("breaker_clicked",function(event){post_breaker()})
 
   });
   add_breaker(dict_steps_components['1_1'].lines[4], 0.9, 6, 'open', function(object){
     buttonA_fillObject(2, object)
+        object.on("breaker_clicked",function(event){post_breaker()})
+
   });
 
 
   add_tx(dict_steps_components['1_1'].lines[5], 0.9, 'starDelta', function(dict_tx){
+
     dict_steps_components['1_1'].txs += [dict_tx]
   });
 
   add_breaker(dict_steps_components['1_1'].lines[6], 0.24, 6, 'closed', function(object){
+          object.on("breaker_clicked",function(event){post_breaker()})
+
     return 0
   });
   add_load(dict_steps_components['1_1'].lines[6], 1, true)
@@ -784,6 +798,8 @@
   add_load(dict_steps_components['1_1'].lines[8], 1, true)
 
   add_breaker(dict_steps_components['1_1'].lines[10], 0.24, 6, 'open', function(object){
+          object.on("breaker_clicked",function(event){post_breaker()})
+
     buttonA_fillObject(11, object);
   });
 
@@ -799,24 +815,32 @@
   });
 
   add_breaker(dict_steps_components['1_1'].lines[12], 0.5, 6, 'closed', function(object){
+          object.on("breaker_clicked",function(event){post_breaker()})
+
     return 0
   });
 
   add_breaker(dict_steps_components['1_1'].lines[13], 0.5, 6, 'open', function(object){
+          object.on("breaker_clicked",function(event){post_breaker()})
+
     return 0
   });
 
   add_breaker(dict_steps_components['1_1'].lines[14], 0.4, 6, 'closed', function(object){
+          object.on("breaker_clicked",function(event){post_breaker()})
+
     return 0
   });
   add_load(dict_steps_components['1_1'].lines[14], 1, true)
 
   add_breaker(dict_steps_components['1_1'].lines[15], 0.4, 6, 'closed', function(object){
+    object.on("breaker_clicked",function(event){post_breaker()})
     return 0
   });
   add_load(dict_steps_components['1_1'].lines[15], 1, true)
 
   add_breaker(dict_steps_components['1_1'].lines[16], 0.5, 6, 'closed', function(object){
+    object.on("breaker_clicked",function(event){post_breaker()})
     buttonA_fillObject(10, object)
   });
 
@@ -840,10 +864,12 @@
   });
 
   add_breaker(dict_steps_components['1_1'].lines[21], 0.9, 6, 'closed', function(object){
+
     return 0
   });
   add_breaker(dict_steps_components['1_1'].lines[70], 0.15, 6, 'open', function(object){
     return 0
+
   });
 
   add_breaker(dict_steps_components['1_1'].lines[23], 0.15, 6, 'closed', function(object){
@@ -918,6 +944,7 @@
 
 
   add_breaker(dict_steps_components['1_1'].lines[34], 0.5, 6, 'closed', function(object){
+
     return 0
   });
 
@@ -1047,4 +1074,6 @@
   });
 
   add_load(dict_steps_components['1_1'].lines[69], 0, true);
+
+
 

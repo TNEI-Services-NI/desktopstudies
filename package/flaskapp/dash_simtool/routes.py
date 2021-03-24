@@ -14,8 +14,8 @@ def home():
 @simtool_bp.route("/receive_breaker/", methods=['POST'])
 @login_required
 def receive_breaker():
-    print(request.form)
     data = request.form
     print("breaker ID: "+ data["breaker"])
     print("state: "+ data["state"])
     return jsonify("message received securely")
+

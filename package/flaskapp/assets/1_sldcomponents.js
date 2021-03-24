@@ -296,14 +296,15 @@
 
     rect1.click(function() {
       if (this.attr('fill') == dict_line.dict_styling.stroke.color){
-        alert(false)
-        post_breaker("b1",false)
         this.fill({ color: 'white' })
       } else {
-        alert(true)
-        post_breaker("b1",true)
         this.fill(dict_line.dict_styling.stroke)
       }
+      //document wide for now
+      document.dispatchEvent(breaker_clicked_event)
+
+      //this breaker graphic for when it works
+      this.fire(breaker_clicked_event)
     });
 
     dict_breaker.objects = [rect1];
@@ -573,6 +574,8 @@
   //URL must not be relative as it routes to dashly...
   //need to provide a global route
   function post_breaker(breaker,state){
+      if(breaker == null){breaker="b1"}
+      if(state == null){state=true}
       $.ajax({
       type: "POST",
       url: "http://127.0.0.1:5000/simtool/receive_breaker/",
@@ -582,3 +585,4 @@
         console.log(data);
       })
   }
+
