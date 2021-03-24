@@ -11,12 +11,11 @@ def home():
 
 
 ##testing javascript call
-@simtool_bp.route("/receive_breaker/", methods=["GET",'POST'])
-# @login_required
+@simtool_bp.route("/receive_breaker/", methods=['POST'])
+@login_required
 def receive_breaker():
-    if request.method == 'POST':
-        print("message received securely")
-        return jsonify("message received securely")
-    else:
-        print("message received in-securely")
-        return jsonify("message received in-securely")
+    print(request.form)
+    data = request.form
+    print("breaker ID: "+ data["breaker"])
+    print("state: "+ data["state"])
+    return jsonify("message received securely")

@@ -576,7 +576,8 @@
       $.ajax({
       type: "POST",
       url: "http://127.0.0.1:5000/simtool/receive_breaker/",
-      data: {"breaker": breaker, "state": state }
+      data: {"breaker": breaker, "state": state },
+//      dataType: 'application/json'
       }).done(function( data ) {
         console.log(data);
       })
