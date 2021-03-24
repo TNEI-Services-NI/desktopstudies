@@ -293,10 +293,15 @@
     if (state == 'closed'){
       rect1 = draw.rect(size, size).center(center[0], center[1]).fill(dict_line.dict_styling.fill).stroke(dict_line.dict_styling.stroke).stroke({width: 1})
     }
+
     rect1.click(function() {
       if (this.attr('fill') == dict_line.dict_styling.stroke.color){
+        alert(false)
+        post_breaker("b1",false)
         this.fill({ color: 'white' })
       } else {
+        alert(true)
+        post_breaker("b1",true)
         this.fill(dict_line.dict_styling.stroke)
       }
     });
@@ -563,4 +568,16 @@
         text2.y_coord = text2.y_coord+10
       }
     });
+  }
+
+  //URL must not be relative as it routes to dashly...
+  //need to provide a global route
+  function post_breaker(breaker,state){
+      $.ajax({
+      type: "POST",
+      url: "http://127.0.0.1:5000/simtool/receive_breaker/",
+      data: {"breaker": breaker, "state": state }
+      }).done(function( data ) {
+        console.log(data);
+      })
   }
