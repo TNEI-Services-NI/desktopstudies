@@ -10,7 +10,6 @@ def home():
     return render_template('dash_wrapper.html', dash_url=dash_app.URL_BASE)
 
 
-##testing javascript call
 @simtool_bp.route("/receive_breaker/", methods=['POST'])
 @login_required
 def receive_breaker():
