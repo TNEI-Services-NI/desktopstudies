@@ -173,14 +173,14 @@
 function Breaker_Callback(stages, holder){
         return function(object){
             //revamp post_breaker to a function that figures out its state instead
-            object.on("breaker_clicked",function(){post_breaker(object)})
+            object.on("breaker_clicked",function(){post_breaker()})
             for(stage in stages){
                 buttonA_fillObject(stage, object)
             }
             if(holder === []){
                 holder.append(object)
             }
-    }
+        }
     }
 
 //todo accommodate missing inputs
@@ -191,7 +191,7 @@ function Breaker(lineID, pos, size, state, stages){
     this.state = state
     this.stages = stages
     this.graphic = []
-    this.callback = Breaker_Callback(stages,graphic)
+    this.callback = Breaker_Callback(stages,this.graphic)
 }
 
 
@@ -580,9 +580,56 @@ function Breaker(lineID, pos, size, state, stages){
       txs: [
       ],
       breakers: [
-        Breaker(0, 0.61, 6, "open", [1]),
-        Breaker(0, 0.2, 6, "open", [1]),
-        Breaker(0,0.1,6,"closed", [])
+        new Breaker(0, 0.61, 6, "open", [1]),
+        new Breaker(0, 0.2, 6, "open", [1]),
+        new Breaker(0,0.1,6,"closed", []),
+        new Breaker(3,0.25,6,"open", []),
+        new Breaker(4,0.1,6,"open",[3]),
+        new Breaker(4,0.9,6,"open",[2]),
+        new Breaker(6,0.24,6,"closed",[]),
+        new Breaker(10,0.24,6,'open',[11]),
+        new Breaker(12,0.5,6,'closed',[]),
+        new Breaker(13,0.5,6,'open',[]),
+        new Breaker(14,0.4,6,'closed',[]),
+        new Breaker(16,0.5,6,'closed',[10]),
+        new Breaker(15,0.4,6,'closed',[]),
+        new Breaker(18,0.24,6,'open',[11]),
+        new Breaker(19,0.24,6,"open",[7]),
+        new Breaker(21,0.9,6,"closed",[]),
+        new Breaker(70,0.15,6,"open",[]),
+        new Breaker(23,0.15,6,"closed",[]),
+        new Breaker(23,0.85,6,"closed",[]),
+        new Breaker(25,0.1,6,"open",[8]),
+        new Breaker(25,0.3,6,"open",[9]),
+        new Breaker(25,0.8,6,"open",[9]),
+        new Breaker(26,0.15,6,"open",[]),
+        new Breaker(26,0.86,6,"closed",[]),
+        new Breaker(28,0.25,6,"closed",[]),
+        new Breaker(32,0.25,6,"closed",[]),
+        new Breaker(32,0.75,6,"closed",[]),
+        new Breaker(33,0.45,6,"closed",[]),
+        new Breaker(33,0.55,6,"closed",[]),
+        new Breaker(34,0.5,6,"closed",[]),
+        new Breaker(35,0.3,6,"closed",[]),
+        new Breaker(36,0.3,6,"closed",[]),
+        new Breaker(37,0.3,6,"open",[]),
+        new Breaker(37,0.7,6,"closed",[]),
+        new Breaker(39,0.4,6,"closed",[]),
+        new Breaker(39,0.6,6,"closed",[]),
+        new Breaker(41,0.5,6,"open",[]),
+        new Breaker(42,0.1,6,"open",[4]),
+        new Breaker(42,0.9,6,"closed",[0]),
+        new Breaker(44,0.10,6,"open",[5]),
+        new Breaker(44,0.25,6,"open",[6]),
+        new Breaker(44,0.8,6,"open",[6]),
+        new Breaker(52,0.1,6,"open",[]),
+        new Breaker(55,0.5,6,"closed",[]),
+        new Breaker(57,0.5,6,"closed",[]),
+        new Breaker(58,0.5,6,"open",[]),
+        new Breaker(59,0.5,6,"closed",[]),
+        new Breaker(60,0.5,6,"closed",[]),
+        new Breaker(61,0.5,6,"closed",[]),
+        new Breaker(68,0.15,6,"open",[]),
       ],
       labels: [
       ],
@@ -590,7 +637,6 @@ function Breaker(lineID, pos, size, state, stages){
       ],
     }
   }
-
 
 //  function Line(x1,y1,x2,y2, colour, id){
 //  this.x1 = x1
@@ -660,6 +706,18 @@ function Breaker(lineID, pos, size, state, stages){
   }
   dict_steps_components['1_1'].txs = []
 
+
+  for(i in dict_steps_components['1_1'].breakers){
+    let breaker = dict_steps_components['1_1'].breakers[i]
+    let line = dict_steps_components['1_1'].lines[breaker.lineID]
+    let size = breaker.size
+
+    let pos = breaker.pos
+    let state = breaker.state
+    let bcallback = breaker.callback
+    add_breaker(line,pos,size,state,bcallback)
+  }
+
   var stage1_1 = []
 
   var stage = 0
@@ -684,8 +742,6 @@ function Breaker(lineID, pos, size, state, stages){
   add_text(dict_steps_components['1_1'].lines[22].o_line, false, ["Middleby"], 50, -12, function(object){
     return 0
   });
-
-
   add_text(dict_steps_components['1_1'].lines[43].o_line, false, ["Minsca"], 20, -15, function(object){
     return 0
   });
@@ -794,27 +850,13 @@ function Breaker(lineID, pos, size, state, stages){
 
   add_earth(dict_steps_components['1_1'].lines[0], 1, true);
 
-  add_breaker(dict_steps_components['1_1'].lines[3], 0.25, 6, 'open', function(object){
-      object.on("breaker_clicked",function(event){post_breaker()})
 
-    return 0
-  });
   add_resistor(dict_steps_components['1_1'].lines[3], 0.65, 12, 4);
   add_earth(dict_steps_components['1_1'].lines[3], 1, true);
   add_text(dict_steps_components['1_1'].lines[3],  true, ["NOP"], -23, -10, function(object){
     return 0
   });
 
-  add_breaker(dict_steps_components['1_1'].lines[4], 0.10, 6, 'open', function(object){
-    buttonA_fillObject(3, object)
-    object.on("breaker_clicked",function(event){post_breaker()})
-
-  });
-  add_breaker(dict_steps_components['1_1'].lines[4], 0.9, 6, 'open', function(object){
-    buttonA_fillObject(2, object)
-        object.on("breaker_clicked",function(event){post_breaker()})
-
-  });
 
 
   add_tx(dict_steps_components['1_1'].lines[5], 0.9, 'starDelta', function(dict_tx){
@@ -822,22 +864,18 @@ function Breaker(lineID, pos, size, state, stages){
     dict_steps_components['1_1'].txs += [dict_tx]
   });
 
-  add_breaker(dict_steps_components['1_1'].lines[6], 0.24, 6, 'closed', function(object){
-          object.on("breaker_clicked",function(event){post_breaker()})
 
-    return 0
-  });
   add_load(dict_steps_components['1_1'].lines[6], 1, true)
 
   add_earth(dict_steps_components['1_1'].lines[7], 0, false)
 
   add_load(dict_steps_components['1_1'].lines[8], 1, true)
 
-  add_breaker(dict_steps_components['1_1'].lines[10], 0.24, 6, 'open', function(object){
-          object.on("breaker_clicked",function(event){post_breaker()})
+  add_load(dict_steps_components['1_1'].lines[35], 1, true)
 
-    buttonA_fillObject(11, object);
-  });
+  add_load(dict_steps_components['1_1'].lines[59], 1, true)
+
+  add_load(dict_steps_components['1_1'].lines[60], 1, true)
 
   add_tx(dict_steps_components['1_1'].lines[11], 1, 'deltaStar', function(c1, c2, c3, c4, group){
     buttonA_greenObject(12, c1)
@@ -850,34 +888,11 @@ function Breaker(lineID, pos, size, state, stages){
     eventMouse(group, "Transformer", "ANANT1_ANAN10_T1");
   });
 
-  add_breaker(dict_steps_components['1_1'].lines[12], 0.5, 6, 'closed', function(object){
-          object.on("breaker_clicked",function(event){post_breaker()})
-    return 0
-  });
-
-  add_breaker(dict_steps_components['1_1'].lines[13], 0.5, 6, 'open', function(object){
-          object.on("breaker_clicked",function(event){post_breaker()})
-
-    return 0
-  });
-
-  add_breaker(dict_steps_components['1_1'].lines[14], 0.4, 6, 'closed', function(object){
-          object.on("breaker_clicked",function(event){post_breaker()})
-
-    return 0
-  });
   add_load(dict_steps_components['1_1'].lines[14], 1, true)
 
-  add_breaker(dict_steps_components['1_1'].lines[15], 0.4, 6, 'closed', function(object){
-    object.on("breaker_clicked",function(event){post_breaker()})
-    return 0
-  });
-  add_load(dict_steps_components['1_1'].lines[15], 1, true)
+  add_load(dict_steps_components['1_1'].lines[36], 1, true)
 
-  add_breaker(dict_steps_components['1_1'].lines[16], 0.5, 6, 'closed', function(object){
-    object.on("breaker_clicked",function(event){post_breaker()})
-    buttonA_fillObject(10, object)
-  });
+  add_load(dict_steps_components['1_1'].lines[15], 1, true)
 
   add_tx(dict_steps_components['1_1'].lines[17], 1, 'deltaStar', function(c1, c2, c3, c4, group){
     buttonA_greenObject(13, c1)
@@ -890,36 +905,6 @@ function Breaker(lineID, pos, size, state, stages){
     eventMouse(group, "Transformer", "ANANT2_ANAN20_T2");
   });
 
-  add_breaker(dict_steps_components['1_1'].lines[18], 0.24, 6, 'open', function(object){
-    buttonA_fillObject(11, object);
-  });
-
-  add_breaker(dict_steps_components['1_1'].lines[19], 0.24, 6, 'open', function(object){
-    buttonA_fillObject(7, object);
-  });
-
-  add_breaker(dict_steps_components['1_1'].lines[21], 0.9, 6, 'closed', function(object){
-
-    return 0
-  });
-  add_breaker(dict_steps_components['1_1'].lines[70], 0.15, 6, 'open', function(object){
-    return 0
-
-  });
-
-  add_breaker(dict_steps_components['1_1'].lines[23], 0.15, 6, 'closed', function(object){
-    return 0
-  });
-  add_breaker(dict_steps_components['1_1'].lines[23], 0.85, 6, 'closed', function(object){
-    return 0
-  });
-
-  add_breaker(dict_steps_components['1_1'].lines[25], 0.1, 6, 'open', function(object){
-    buttonA_fillObject(8, object)
-  });
-  add_breaker(dict_steps_components['1_1'].lines[25], 0.3, 6, 'open', function(object){
-    buttonA_fillObject(9, object)
-  });
   add_tx(dict_steps_components['1_1'].lines[25], 0.55, 'deltaStar', function(c1, c2, c3, c4, group){
     buttonA_greenObject(9, c1)
     buttonA_greenObject(9, c2)
@@ -930,47 +915,25 @@ function Breaker(lineID, pos, size, state, stages){
     eventMouse(group, "Transformer", "EWHC3-_EWHC0G_1");
     // EWHC3-_EWHC0G_1
   });
-  add_breaker(dict_steps_components['1_1'].lines[25], 0.8, 6, 'open', function(object){
-    buttonA_fillObject(9, object)
-  });
+
   add_gen(dict_steps_components['1_1'].lines[25], 1, 'wind', function(circle1, group){
     add_text(group, false, ["Ewe Hill WF"], 0,30, function(group){
       return 0
     });
   });
 
-  add_breaker(dict_steps_components['1_1'].lines[26], 0.15, 6, 'open', function(object){
-    return 0
-  });
+
   add_tx(dict_steps_components['1_1'].lines[26], 0.5, 'deltaStar', function(dict_tx){
     dict_steps_components['1_1'].txs += [dict_tx]
   });
-  add_breaker(dict_steps_components['1_1'].lines[26], 0.86, 6, 'closed', function(object){
-    return 0
-  });
 
-  add_breaker(dict_steps_components['1_1'].lines[28], 0.25, 6, 'closed', function(object){
-    return 0
-  });
   add_load(dict_steps_components['1_1'].lines[28], 1, true)
 
   add_tx(dict_steps_components['1_1'].lines[31], 0.5, 'deltaStar', function(dict_tx){
     dict_steps_components['1_1'].txs += [dict_tx]
   });
 
-  add_breaker(dict_steps_components['1_1'].lines[32], 0.25, 6, 'closed', function(object){
-    return 0
-  });
-  add_breaker(dict_steps_components['1_1'].lines[32], 0.75, 6, 'closed', function(object){
-    return 0
-  });
 
-  add_breaker(dict_steps_components['1_1'].lines[33], 0.45, 6, 'closed', function(object){
-    return 0
-  });
-  add_breaker(dict_steps_components['1_1'].lines[33], 0.55, 6, 'closed', function(object){
-    return 0
-  });
   add_gen(dict_steps_components['1_1'].lines[33], 0, 'wind', function(circle1, group){
     add_text(group, false, ["Craig WF"], 0,30, function(group){
       return 0
@@ -978,34 +941,7 @@ function Breaker(lineID, pos, size, state, stages){
   });
 
 
-  add_breaker(dict_steps_components['1_1'].lines[34], 0.5, 6, 'closed', function(object){
 
-    return 0
-  });
-
-  add_breaker(dict_steps_components['1_1'].lines[35], 0.3, 6, 'closed', function(object){
-    return 0
-  });
-  add_load(dict_steps_components['1_1'].lines[35], 1, true)
-
-  add_breaker(dict_steps_components['1_1'].lines[36], 0.3, 6, 'closed', function(object){
-    return 0
-  });
-  add_load(dict_steps_components['1_1'].lines[36], 1, true)
-
-  add_breaker(dict_steps_components['1_1'].lines[37], 0.3, 6, 'open', function(object){
-    return 0
-  });
-  add_breaker(dict_steps_components['1_1'].lines[37], 0.7, 6, 'closed', function(object){
-    return 0
-  });
-
-  add_breaker(dict_steps_components['1_1'].lines[39], 0.4, 6, 'closed', function(object){
-    return 0
-  });
-  add_breaker(dict_steps_components['1_1'].lines[39], 0.6, 6, 'closed', function(object){
-    return 0
-  });
   add_gen(dict_steps_components['1_1'].lines[39], 1, 'wind', function(circle1, group){
     add_text(group, false, ["Craig II WF"], 0,30, function(group){
       return 0
@@ -1016,23 +952,6 @@ function Breaker(lineID, pos, size, state, stages){
     dict_steps_components['1_1'].txs += [dict_tx]
   });
 
-  add_breaker(dict_steps_components['1_1'].lines[41], 0.5, 6, 'open', function(object){
-    return 0
-  });
-
-  add_breaker(dict_steps_components['1_1'].lines[42], 0.1, 6, 'open', function(object){
-    buttonA_fillObject(4, object)
-  });
-  add_breaker(dict_steps_components['1_1'].lines[42], 0.9, 6, 'closed', function(object){
-    return 0
-  });
-
-  add_breaker(dict_steps_components['1_1'].lines[44], 0.10, 6, 'open', function(object){
-    buttonA_fillObject(5, object)
-  });
-  add_breaker(dict_steps_components['1_1'].lines[44], 0.25, 6, 'open', function(object){
-    buttonA_fillObject(6, object)
-  });
   add_tx(dict_steps_components['1_1'].lines[44], 0.55, 'deltaStar', function(c1, c2, c3, c4, group){
     buttonA_greenObject(6, c1)
     buttonA_greenObject(6, c2)
@@ -1044,9 +963,7 @@ function Breaker(lineID, pos, size, state, stages){
     // MINS3-_MINS0G_1
 
   });
-  add_breaker(dict_steps_components['1_1'].lines[44], 0.8, 6, 'open', function(object){
-    buttonA_fillObject(6, object)
-  });
+
   add_gen(dict_steps_components['1_1'].lines[44], 1, 'wind', function(circle1, group){
     add_text(group, false, ["MINSCA WF"], 0,30, function(group){
       return 0
@@ -1068,45 +985,17 @@ function Breaker(lineID, pos, size, state, stages){
   add_load(dict_steps_components['1_1'].lines[49], 0, false)
   add_resistor(dict_steps_components['1_1'].lines[49], 0.38, 12, 4)
 
-  add_breaker(dict_steps_components['1_1'].lines[52],  0.1, 6, 'open', function(object){
-    return 0
-  });
 
-  add_breaker(dict_steps_components['1_1'].lines[55],  0.5, 6, 'closed', function(object){
-    return 0
-  });
 
   add_tx(dict_steps_components['1_1'].lines[56], 0.5, 'deltaStar', function(dict_tx){
   });
 
-  add_breaker(dict_steps_components['1_1'].lines[57],  0.5, 6, 'closed', function(object){
-    return 0
-  });
 
-  add_breaker(dict_steps_components['1_1'].lines[58],  0.5, 6, 'open', function(object){
-    return 0
-  });
-
-  add_breaker(dict_steps_components['1_1'].lines[59],  0.5, 6, 'closed', function(object){
-    return 0
-  });
-  add_load(dict_steps_components['1_1'].lines[59], 1, true)
-
-  add_breaker(dict_steps_components['1_1'].lines[60],  0.5, 6, 'closed', function(object){
-    return 0
-  });
-  add_load(dict_steps_components['1_1'].lines[60], 1, true)
-
-  add_breaker(dict_steps_components['1_1'].lines[61],  0.5, 6, 'closed', function(object){
-    return 0
-  });
 
   add_tx(dict_steps_components['1_1'].lines[62], 1, 'starDelta', function(dict_tx){
   });
 
-  add_breaker(dict_steps_components['1_1'].lines[68],  0.15, 6, 'open', function(object){
-    return 0
-  });
+
 
   add_load(dict_steps_components['1_1'].lines[69], 0, true);
 

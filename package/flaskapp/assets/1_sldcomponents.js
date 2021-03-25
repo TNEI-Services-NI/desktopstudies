@@ -300,10 +300,7 @@
       } else {
         this.fill(dict_line.dict_styling.stroke)
       }
-      //document wide for now
-      document.dispatchEvent(breaker_clicked_event)
 
-      //this breaker graphic for when it works
       this.fire(breaker_clicked_event)
     });
 
