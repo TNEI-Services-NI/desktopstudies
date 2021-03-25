@@ -169,7 +169,34 @@
   // const x_const = 1170
   // const y_const = 662
 
-  const dict_steps_components = {
+//todo test if holder acts as it should
+function Breaker_Callback(stages, holder){
+        return function(object){
+            //revamp post_breaker to a function that figures out its state instead
+            object.on("breaker_clicked",function(){post_breaker(object)})
+            for(stage in stages){
+                buttonA_fillObject(stage, object)
+            }
+            if(holder === []){
+                holder.append(object)
+            }
+    }
+    }
+
+//todo accommodate missing inputs
+function Breaker(lineID, pos, size, state, stages){
+    this.lineID = lineID
+    this.pos = pos
+    this.size = size
+    this.state = state
+    this.stages = stages
+    this.graphic = []
+    this.callback = Breaker_Callback(stages,graphic)
+}
+
+
+    //this should be built from a csv of sorts
+  dict_steps_components = {
     '1_1': {
       lines: [
         // STEP 1
@@ -549,22 +576,42 @@
 
       ],
       loads: [
-
       ],
       txs: [
-
       ],
       breakers: [
-
+        Breaker(0, 0.61, 6, "open", [1]),
+        Breaker(0, 0.2, 6, "open", [1]),
+        Breaker(0,0.1,6,"closed", [])
       ],
       labels: [
-
       ],
       generators: [
-
       ],
-    },
+    }
   }
+
+
+//  function Line(x1,y1,x2,y2, colour, id){
+//  this.x1 = x1
+//  this.x2 = x2
+//  this.y1 = y1
+//  this.y2 = y2
+//  this.colour = colour
+//  this.id = id
+//  }
+
+
+
+
+//  //build Info
+//  function Text(text, line, offset, stages){
+//    this.text = text
+//    this.line = line
+//    this.offset = offset
+//    this.stages = stages
+//  }
+
 
   for (idx_line=0; idx_line<dict_steps_components['1_1'].lines.length; idx_line++){
     temp_dict = dict_steps_components['1_1'].lines[idx_line]
@@ -616,6 +663,7 @@
   var stage1_1 = []
 
   var stage = 0
+
 
 
   add_text(dict_steps_components['1_1'].lines[1].o_line, false, ["Steven's Croft"], 10, -15, function(object){
@@ -741,21 +789,9 @@
   });
 
   add_inductor(dict_steps_components['1_1'].lines[0], 0.9, 'SG');
-  add_breaker(dict_steps_components['1_1'].lines[0], 0.61, 6, 'open', function(object){
-    object.on("breaker_clicked",function(event){post_breaker()})
 
-    buttonA_fillObject(1, object)
-  });
-  add_breaker(dict_steps_components['1_1'].lines[0], 0.2, 6, 'open', function(object){
-      object.on("breaker_clicked",function(event){post_breaker()})
 
-    buttonA_fillObject(1, object)
-  });
-  add_breaker(dict_steps_components['1_1'].lines[0], 0.1, 6, 'closed', function(object){
-      object.on("breaker_clicked",function(event){post_breaker()})
 
-    return 0
-  });
   add_earth(dict_steps_components['1_1'].lines[0], 1, true);
 
   add_breaker(dict_steps_components['1_1'].lines[3], 0.25, 6, 'open', function(object){
@@ -816,7 +852,6 @@
 
   add_breaker(dict_steps_components['1_1'].lines[12], 0.5, 6, 'closed', function(object){
           object.on("breaker_clicked",function(event){post_breaker()})
-
     return 0
   });
 
