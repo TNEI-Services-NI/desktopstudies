@@ -570,13 +570,13 @@
 
   //URL must not be relative as it routes to dashly...
   //need to provide a global route
-  function post_breaker(breaker,state){
-      if(breaker == null){breaker="b1"}
+  function post_breaker(breakerID,state){
+      if(breakerID == null){breakerID="b1"}
       if(state == null){state=true}
       $.ajax({
       type: "POST",
       url: "http://127.0.0.1:5000/simtool/receive_breaker/",
-      data: {"breaker": breaker, "state": state },
+      data: {"breaker": breakerID, "state": state },
 //      dataType: 'application/json'
       }).done(function( data ) {
         console.log(data);

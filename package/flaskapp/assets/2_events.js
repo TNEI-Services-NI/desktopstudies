@@ -56,8 +56,3 @@
   }
 
 const breaker_clicked_event = new CustomEvent('breaker_clicked')
-
-//  document.addEventListener('breaker_clicked', function (event) {
-//    console.log("document event")
-//    post_breaker("b1",false)
-//  })

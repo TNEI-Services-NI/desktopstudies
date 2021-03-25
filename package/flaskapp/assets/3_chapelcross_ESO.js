@@ -173,12 +173,12 @@
 function Breaker_Callback(stages, holder){
         return function(object){
             //revamp post_breaker to a function that figures out its state instead
-            object.on("breaker_clicked",function(){post_breaker()})
+//            object.on("breaker_clicked",function(){post_breaker()})
             for(stage in stages){
                 buttonA_fillObject(stage, object)
             }
-            if(holder === []){
-                holder.append(object)
+            if(holder != undefined){
+                holder.push(object)
             }
         }
     }
@@ -638,6 +638,11 @@ function Breaker(lineID, pos, size, state, stages){
     }
   }
 
+
+  components = {
+    breakers: []
+  }
+
 //  function Line(x1,y1,x2,y2, colour, id){
 //  this.x1 = x1
 //  this.x2 = x2
@@ -707,6 +712,7 @@ function Breaker(lineID, pos, size, state, stages){
   dict_steps_components['1_1'].txs = []
 
 
+    //add breakers
   for(i in dict_steps_components['1_1'].breakers){
     let breaker = dict_steps_components['1_1'].breakers[i]
     let line = dict_steps_components['1_1'].lines[breaker.lineID]
@@ -716,8 +722,23 @@ function Breaker(lineID, pos, size, state, stages){
     let state = breaker.state
     let bcallback = breaker.callback
     add_breaker(line,pos,size,state,bcallback)
-  }
 
+    let id = "b"+(breaker.lineID+";")+(pos+"")
+    let closed = state == "closed"
+    let graphic = breaker.graphic[0]
+
+    //doing this means the inital data, and the SVG elements they make remain unchanged at all times. may be very useful should a redraw/reset be needed...
+    //define listener handles now since they have access to everything relevant
+    components.breakers[id]={initInfo:breaker, UIElement: graphic, closed: closed}
+    graphic.on("breaker_clicked",function(event){
+        let breaker = components.breakers[id]
+        breaker.closed=!breaker.closed
+        post_breaker(id,state)
+    })
+
+    }
+
+    console.log(components)
   var stage1_1 = []
 
   var stage = 0
@@ -835,7 +856,6 @@ function Breaker(lineID, pos, size, state, stages){
     eventMouse(group, "Transformer", "STCR3-_STCR5-_1");
   });
 
-
   add_gen(dict_steps_components['1_1'].lines[0], 0.73, 'SG', function(circle, group){
     buttonA_greenObject(0, circle)
     add_text(group, false, ["Stevens", "Croft"], -40, 0, function(object){
@@ -921,7 +941,6 @@ function Breaker(lineID, pos, size, state, stages){
       return 0
     });
   });
-
 
   add_tx(dict_steps_components['1_1'].lines[26], 0.5, 'deltaStar', function(dict_tx){
     dict_steps_components['1_1'].txs += [dict_tx]
