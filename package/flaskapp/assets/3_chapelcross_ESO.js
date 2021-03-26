@@ -28,7 +28,6 @@
   var x_scaling = x/1350
   var y_scaling = y/730
 
-//todo test if holder acts as it should
 function Breaker_Callback(stages, holder){
         return function(object){
             //revamp post_breaker to a function that figures out its state instead
@@ -43,7 +42,7 @@ function Breaker_Callback(stages, holder){
     }
 
 //todo accommodate missing inputs
-function Breaker(lineID, pos, size, state, stages){
+function Breaker(lineID, pos, size=6, state = false, stages = []){
     this.lineID = lineID
     this.pos = pos
     this.size = size
@@ -53,19 +52,21 @@ function Breaker(lineID, pos, size, state, stages){
     this.callback = Breaker_Callback(stages,this.graphic)
 }
 
-function line(x1, x2, y1, y2, voltage){
+function line(x1, x2, y1, y2, voltage, dash = false){
     this.x1 = x1
     this.x2 = x2
     this.y1 = y1
     this.y2 = y2
     this.voltage = voltage
     this.callback = 0
+    this.dash = dash
 }
 
-  dict_components = {
+dict_components = {
     lines : {
       0 : new line(72, 72, 256, 420, '132'),
         1 : {
+
           x1: 46, y1: 256,
           x2: 149, y2: 256,
           voltage: '132'
@@ -433,11 +434,61 @@ function line(x1, x2, y1, y2, voltage){
           x2: 168, y2: 487,
           voltage: '132'
         }
-    }
+    },
+
+    breakers:{
+        0: new Breaker(0, 0.61, 6, "open", [1]),
+        1: new Breaker(0, 0.2, 6, "open", [1]),
+        2: new Breaker(0,0.1,6,"closed", []),
+        3: new Breaker(3,0.25,6,"open", []),
+        4: new Breaker(4,0.1,6,"open",[3]),
+        5: new Breaker(4,0.9,6,"open",[2]),
+        6: new Breaker(6,0.24,6,"closed",[]),
+        7: new Breaker(10,0.24,6,'open',[11]),
+        8: new Breaker(12,0.5,6,'closed',[]),
+        9: new Breaker(13,0.5,6,'open',[]),
+        10: new Breaker(14,0.4,6,'closed',[]),
+        11: new Breaker(16,0.5,6,'closed',[10]),
+        12: new Breaker(15,0.4,6,'closed',[]),
+        13: new Breaker(18,0.24,6,'open',[11]),
+        14: new Breaker(19,0.24,6,"open",[7]),
+        15: new Breaker(21,0.9,6,"closed",[]),
+        16: new Breaker(70,0.15,6,"open",[]),
+        17: new Breaker(23,0.15,6,"closed",[]),
+        18: new Breaker(23,0.85,6,"closed",[]),
+        19: new Breaker(25,0.1,6,"open",[8]),
+        20: new Breaker(25,0.3,6,"open",[9]),
+        21: new Breaker(25,0.8,6,"open",[9]),
+        22: new Breaker(26,0.15,6,"open",[]),
+        23: new Breaker(26,0.86,6,"closed",[]),
+        24: new Breaker(28,0.25,6,"closed",[]),
+        25: new Breaker(32,0.25,6,"closed",[]),
+        26: new Breaker(32,0.75,6,"closed",[]),
+        27: new Breaker(33,0.45,6,"closed",[]),
+        28: new Breaker(33,0.55,6,"closed",[]),
+        29: new Breaker(34,0.5,6,"closed",[]),
+        30: new Breaker(35,0.3,6,"closed",[]),
+        31: new Breaker(36,0.3,6,"closed",[]),
+        32: new Breaker(37,0.3,6,"open",[]),
+        33: new Breaker(37,0.7,6,"closed",[]),
+        34: new Breaker(39,0.4,6,"closed",[]),
+        35: new Breaker(39,0.6,6,"closed",[]),
+        36: new Breaker(41,0.5,6,"open",[]),
+        37: new Breaker(42,0.1,6,"open",[4]),
+        38: new Breaker(42,0.9,6,"closed",[0]),
+        39: new Breaker(44,0.10,6,"open",[5]),
+        40: new Breaker(44,0.25,6,"open",[6]),
+        41: new Breaker(44,0.8,6,"open",[6]),
+        42: new Breaker(52,0.1,6,"open",[]),
+        43: new Breaker(55,0.5,6,"closed",[]),
+        44: new Breaker(57,0.5,6,"closed",[]),
+        45: new Breaker(58,0.5,6,"open",[]),
+        46: new Breaker(59,0.5,6,"closed",[]),
+        47: new Breaker(60,0.5,6,"closed",[]),
+        48: new Breaker(61,0.5,6,"closed",[]),
+        49: new Breaker(68,0.15,6,"open",[]),
+      },
   }
-
-
-    //this should be built from a csv of sorts
   dict_steps_components = {
     '1_1': {
       lines: [
@@ -881,42 +932,15 @@ function line(x1, x2, y1, y2, voltage){
   }
 
   components = {
-    breakers: []
-  }
-//  function Line(x1,y1,x2,y2, colour, id){
-//  this.x1 = x1
-//  this.x2 = x2
-//  this.y1 = y1
-//  this.y2 = y2
-//  this.colour = colour
-//  this.id = id
-//  }
-
-
-
-
-//  //build Info
-//  function Text(text, line, offset, stages){
-//    this.text = text
-//    this.line = line
-//    this.offset = offset
-//    this.stages = stages
-//  }
-
-
-  for (idx_line=0; idx_line<dict_steps_components['1_1'].lines.length; idx_line++){
-    temp_dict = dict_steps_components['1_1'].lines[idx_line]
-    temp_dict.x1 = temp_dict.x1 * x_scaling
-    temp_dict.x2 = temp_dict.x2 * x_scaling
-    temp_dict.y1 = temp_dict.y1 * y_scaling
-    temp_dict.y2 = temp_dict.y2 * y_scaling
+    breakers: [],
+    lines: []
   }
 
   var bNodes = false
 
   var idx_line, temp_dict
-  for (idx_line=0; idx_line<dict_steps_components['1_1'].lines.length; idx_line++){
-    temp_dict = dict_steps_components['1_1'].lines[idx_line]
+  for (idx_line in dict_components.lines){
+    temp_dict = dict_components.lines[idx_line]
     temp_dict.dict_styling = {fill: { width: 2}, stroke: { width: 2}}
     if (temp_dict.dash){
       temp_dict.dict_styling.stroke.dasharray = (5, 5)
@@ -949,15 +973,15 @@ function line(x1, x2, y1, y2, voltage){
       add_nodes(temp_dict, temp_dict.o_line)
     }
 
-    dict_steps_components['1_1'].lines[idx_line] = temp_dict
+    dict_components.lines[idx_line] = temp_dict
   }
-  dict_steps_components['1_1'].txs = []
+  dict_components.txs = []
 
 
     //add breakers
-  for(i in dict_steps_components['1_1'].breakers){
-    let breaker = dict_steps_components['1_1'].breakers[i]
-    let line = dict_steps_components['1_1'].lines[breaker.lineID]
+  for(i in dict_components.breakers){
+    let breaker = dict_components.breakers[i]
+    let line = dict_components.lines[breaker.lineID]
     let size = breaker.size
 
     let pos = breaker.pos
@@ -971,16 +995,15 @@ function line(x1, x2, y1, y2, voltage){
 
     //doing this means the inital data, and the SVG elements they make remain unchanged at all times. may be very useful should a redraw/reset be needed...
     //define listener handles now since they have access to everything relevant
-    components.breakers[id]={initInfo:breaker, UIElement: graphic, closed: closed}
+    components.breakers[i]={initInfo:breaker, UIElement: graphic, closed: closed}
     graphic.on("breaker_clicked",function(event){
-        let breaker = components.breakers[id]
+        let breaker = components.breakers[i]
         breaker.closed=!breaker.closed
-        post_breaker(id,state)
+        post_breaker(i,state)
     })
 
     }
 
-    console.log(components)
   var stage1_1 = []
 
   var stage = 0
