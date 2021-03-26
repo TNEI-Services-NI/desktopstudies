@@ -12,7 +12,7 @@ import package.flaskapp.dash_simtool.app.dashboard_components as components
 import package.flaskapp.dash_simtool.app.dashboard_callbacks as callbacks
 import package.flaskapp.dash_simtool.app.dashboard_styling as styling
 
-URL_BASE = '/dash_simtool/'
+URL_BASE = '/simtool/'
 
 
 def init_dashboard(server=""):

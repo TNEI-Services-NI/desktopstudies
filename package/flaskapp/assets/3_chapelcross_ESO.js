@@ -41,7 +41,6 @@ function Breaker_Callback(stages, holder){
         }
     }
 
-//todo accommodate missing inputs
 function Breaker(lineID, pos, size=6, state = false, stages = []){
     this.lineID = lineID
     this.pos = pos
@@ -65,7 +64,7 @@ function Line(x1, y1,x2, y2, voltage="132", dash = false, colour = "#ffffff"){
 
 dict_components = {
     lines:{
-0 : new Line(72, 256,72, 420, '132'),
+      0 : new Line(72, 256,72, 420, '132'),
       1 : new Line(46, 256, 149, 256, '132'),
       2 : new Line(40,301, 72,  301, '132'),
       3 : new Line(40,301,40,335, "132"),
@@ -942,6 +941,7 @@ dict_steps_components = {
     }
 
     dict_components.lines[idx_line] = temp_dict
+    components.lines[idx_line] = {initInfo:temp_dict, UIElement: temp_dict.o_line}
   }
   dict_components.txs = []
 
@@ -957,298 +957,308 @@ dict_steps_components = {
     let bcallback = breaker.callback
     add_breaker(line,pos,size,state,bcallback)
 
-    let id = "b"+(breaker.lineID+";")+(pos+"")
+    let InternalId = "b"+(breaker.lineID+";")+(pos+"")
+    let id = i
     let closed = state == "closed"
     let graphic = breaker.graphic[0]
 
     //doing this means the inital data, and the SVG elements they make remain unchanged at all times. may be very useful should a redraw/reset be needed...
     //define listener handles now since they have access to everything relevant
-    components.breakers[i]={initInfo:breaker, UIElement: graphic, closed: closed}
+    components.breakers[id]={initInfo:breaker, UIElement: graphic, closed: closed}
     graphic.on("breaker_clicked",function(event){
-        let breaker = components.breakers[i]
+        let breaker = components.breakers[id]
         breaker.closed=!breaker.closed
-        post_breaker(i,state)
+        post_breaker(id,breaker.closed)
     })
 
     }
-
-  var stage1_1 = []
-
-  var stage = 0
-
-
-
-  add_text(dict_steps_components['1_1'].lines[1].o_line, false, ["Steven's Croft"], 10, -15, function(object){
-    return 0
-  });
-
-  add_text(dict_steps_components['1_1'].lines[9].o_line, false, ["Chapelcross Grid", "33kV Busbar"], 0, -25, function(object){
-    return 0
-  });
-
-  add_text(dict_steps_components['1_1'].lines[41].o_line, false, ["Langholm"], 10, -15, function(object){
-    return 0
-  });
-
-  add_text(dict_steps_components['1_1'].lines[10].o_line, false, ["Annan","#1"], 30, -12, function(object){
-    return 0
-  });
-  add_text(dict_steps_components['1_1'].lines[22].o_line, false, ["Middleby"], 50, -12, function(object){
-    return 0
-  });
-  add_text(dict_steps_components['1_1'].lines[43].o_line, false, ["Minsca"], 20, -15, function(object){
-    return 0
-  });
-  add_text(dict_steps_components['1_1'].lines[52].o_line, false, ["Lockerbie","#1"], 42, -50, function(object){
-    return 0
-  });
-  add_text(dict_steps_components['1_1'].lines[68].o_line, false, ["Lockerbie","#2"], 42, -30, function(object){
-    return 0
-  });
-  add_text(dict_steps_components['1_1'].lines[18].o_line, false, ["Annan","#2"], 42, -10, function(object){
-    return 0
-  });
-  add_text(dict_steps_components['1_1'].lines[65].o_line, false, ["Lockerbie A"], -100, -13, function(object){
-    return 0
-  });
-  add_text(dict_steps_components['1_1'].lines[65].o_line, false, ["Lockerbie B"], 100, -13, function(object){
-    return 0
-  });
-
-  var powerColour = '#25b1f5'
-
-  // Stage Iterator
-  $('#buttonA').click(function(){
-    $.ajax({
-      url:"data/steps.csv",
-      dataType:"text",
-      success:function(data)
-      {
-        var csv = data.split(/\r?\n|\r/);
-        $('#buttonA').attr('stage', parseInt($('#buttonA').attr('stage'))+1)
-        var stage = parseInt($('#buttonA').attr('stage'));
-
-        $('table tr:nth-child(' + (stage + 1) + ')').css('background-color', '#baffb3');
-
-        var cell_data = csv[stage].split(",");
-        // $('#buttonA').text(cell_data[2])
-
-        if (stage == 2){
-          flashColour(dict_steps_components['1_1'].lines[0].o_line, powerColour)
-          flashColour(dict_steps_components['1_1'].lines[1].o_line, powerColour)
-          flashColour(dict_steps_components['1_1'].lines[2].o_line, powerColour)
-        } else if (stage == 3){
-          flashColour(dict_steps_components['1_1'].lines[4].o_line, powerColour)
-        } else if (stage == 4){
-          flashColour(dict_steps_components['1_1'].lines[9].o_line, powerColour)
-        } else if (stage == 5){
-          flashColour(dict_steps_components['1_1'].lines[42].o_line, powerColour)
-          flashColour(dict_steps_components['1_1'].lines[43].o_line, powerColour)
-
-        } else if (stage == 6){
-
-        } else if (stage == 7){
-          flashColour(dict_steps_components['1_1'].lines[44].o_line, powerColour)
-        } else if (stage == 8){
-          flashColour(dict_steps_components['1_1'].lines[19].o_line, powerColour)
-          flashColour(dict_steps_components['1_1'].lines[20].o_line, powerColour)
-          flashColour(dict_steps_components['1_1'].lines[21].o_line, powerColour)
-          flashColour(dict_steps_components['1_1'].lines[22].o_line, powerColour)
-          flashColour(dict_steps_components['1_1'].lines[23].o_line, powerColour)
-          flashColour(dict_steps_components['1_1'].lines[24].o_line, powerColour)
-        } else if (stage == 9){
-        } else if (stage == 10){
-          flashColour(dict_steps_components['1_1'].lines[25].o_line, powerColour)
-        } else if (stage == 12){
-          flashColour(dict_steps_components['1_1'].lines[18].o_line, powerColour)
-          flashColour(dict_steps_components['1_1'].lines[10].o_line, powerColour)
-          flashColour(dict_steps_components['1_1'].lines[11].o_line, powerColour)
-          flashColour(dict_steps_components['1_1'].lines[51].o_line, powerColour)
-        } else if (stage == 13){
-          flashColour(dict_steps_components['1_1'].lines[50].o_line, powerColour)
-          flashColour(dict_steps_components['1_1'].lines[12].o_line, powerColour)
-          flashColour(dict_steps_components['1_1'].lines[14].o_line, powerColour)
-        } else if (stage == 14){
-          flashColour(dict_steps_components['1_1'].lines[13].o_line, powerColour)
-          flashColour(dict_steps_components['1_1'].lines[15].o_line, powerColour)
-          flashColour(dict_steps_components['1_1'].lines[16].o_line, powerColour)
-          flashColour(dict_steps_components['1_1'].lines[17].o_line, powerColour)
-        }
-      }
-    });
-  });
-
-  add_tx(dict_steps_components['1_1'].lines[0], 0.45, 'starDelta', function(circle1,circle2,circle3,circle4,group){
-    // add_text(circle1, false, ["33/11kV"], 47, 15, function(object){
-    //   return 0
-    // });
-
-    // buttonA_greenObject(1, circle1);
-    // buttonA_greenObject(1, circle2);
-    // buttonA_greenObject(1, circle3);
-    // buttonA_greenObject(1, circle4);
-    // eventMouse(group, "Transformer", "STCR3-_STCR5-_1");
-  });
-
-  add_gen(dict_steps_components['1_1'].lines[0], 1, 'SG', function(circle, group){
-    buttonA_greenObject(0, circle)
-    add_text(group, false, ["Stevens", "Croft"], -40, 0, function(object){
-      return 0
-    });
-    eventMouse(group, "Generator", "STCR5-_1");
-  });
-
-  // add_inductor(dict_steps_components['1_1'].lines[0], 0.9, 'SG');
-
-  // add_earth(dict_steps_components['1_1'].lines[0], 1, true);
-
-
-  add_resistor(dict_steps_components['1_1'].lines[3], 0.65, 12, 4);
-  // add_earth(dict_steps_components['1_1'].lines[3], 1, true);
-  add_text(dict_steps_components['1_1'].lines[3],  true, ["NOP"], -23, -10, function(object){
-    return 0
-  });
-
-
-
-  add_tx(dict_steps_components['1_1'].lines[5], 0.9, 'starDelta', function(dict_tx){
-
-    dict_steps_components['1_1'].txs += [dict_tx]
-  });
-
-
-  add_load(dict_steps_components['1_1'].lines[6], 1, true)
-
-  // add_earth(dict_steps_components['1_1'].lines[7], 0, false)
-
-  add_load(dict_steps_components['1_1'].lines[8], 1, true)
-
-  add_load(dict_steps_components['1_1'].lines[35], 1, true)
-
-  add_load(dict_steps_components['1_1'].lines[59], 1, true)
-
-  add_load(dict_steps_components['1_1'].lines[60], 1, true)
-
-  add_tx(dict_steps_components['1_1'].lines[11], 1, 'deltaStar', function(c1, c2, c3, c4, group){
-    buttonA_greenObject(12, c1)
-    buttonA_greenObject(12, c2)
-    buttonA_greenObject(12, c3)
-    buttonA_greenObject(12, c4)
-    add_text(group, false, ["33/11.5kV"], 0, 30, function(object){
-      return 0
-    });
-    eventMouse(group, "Transformer", "ANANT1_ANAN10_T1");
-  });
-
-  add_load(dict_steps_components['1_1'].lines[14], 1, true)
-
-  add_load(dict_steps_components['1_1'].lines[36], 1, true)
-
-  add_load(dict_steps_components['1_1'].lines[15], 1, true)
-
-  add_tx(dict_steps_components['1_1'].lines[17], 1, 'deltaStar', function(c1, c2, c3, c4, group){
-    buttonA_greenObject(13, c1)
-    buttonA_greenObject(13, c2)
-    buttonA_greenObject(13, c3)
-    buttonA_greenObject(13, c4)
-    add_text(group, false, ["33/11.5kV"], 0, 30, function(object){
-      return 0
-    });
-    eventMouse(group, "Transformer", "ANANT2_ANAN20_T2");
-  });
-
-  add_tx(dict_steps_components['1_1'].lines[25], 0.55, 'deltaStar', function(c1, c2, c3, c4, group){
-    buttonA_greenObject(9, c1)
-    buttonA_greenObject(9, c2)
-    buttonA_greenObject(9, c3)
-    buttonA_greenObject(9, c4)
-    add_text(group, false, ["33/0.69kV"], -55, 0, function(object){
-    });
-    eventMouse(group, "Transformer", "EWHC3-_EWHC0G_1");
-    // EWHC3-_EWHC0G_1
-  });
-
-  add_gen(dict_steps_components['1_1'].lines[25], 1, 'wind', function(circle1, group){
-    add_text(group, false, ["Ewe Hill WF"], 0,30, function(group){
-      return 0
-    });
-  });
-
-  add_tx(dict_steps_components['1_1'].lines[26], 0.5, 'deltaStar', function(dict_tx){
-    dict_steps_components['1_1'].txs += [dict_tx]
-  });
-
-  add_load(dict_steps_components['1_1'].lines[28], 1, true)
-
-  add_tx(dict_steps_components['1_1'].lines[31], 0.5, 'deltaStar', function(dict_tx){
-    dict_steps_components['1_1'].txs += [dict_tx]
-  });
-
-
-  add_gen(dict_steps_components['1_1'].lines[33], 0, 'wind', function(circle1, group){
-    add_text(group, false, ["Craig WF"], 0,30, function(group){
-      return 0
-    });
-  });
-
-
-
-  add_gen(dict_steps_components['1_1'].lines[39], 1, 'wind', function(circle1, group){
-    add_text(group, false, ["Craig II WF"], 0,30, function(group){
-      return 0
-    });
-  });
-
-  add_tx(dict_steps_components['1_1'].lines[38], 0.75, 'deltaStar', function(dict_tx){
-    dict_steps_components['1_1'].txs += [dict_tx]
-  });
-
-  add_tx(dict_steps_components['1_1'].lines[44], 0.55, 'deltaStar', function(c1, c2, c3, c4, group){
-    buttonA_greenObject(6, c1)
-    buttonA_greenObject(6, c2)
-    buttonA_greenObject(6, c3)
-    buttonA_greenObject(6, c4)
-    add_text(group, false, ["33/0.69kV"], -55, 0, function(object){
-    });
-    eventMouse(group, "Transformer", "MINS3-_MINS0G_1");
-    // MINS3-_MINS0G_1
-
-  });
-
-  add_gen(dict_steps_components['1_1'].lines[44], 1, 'wind', function(circle1, group){
-    add_text(group, false, ["MINSCA WF"], 0,30, function(group){
-      return 0
-    });
-  });
-
-  add_tx(dict_steps_components['1_1'].lines[45], 0.51, '', function(dict_tx){
-  });
-  add_load(dict_steps_components['1_1'].lines[45], 0, false);
-
-  add_load(dict_steps_components['1_1'].lines[46], 0, true)
-
-  add_tx(dict_steps_components['1_1'].lines[47], 0.96, 'starStar', function(dict_tx){
-  });
-
-  add_load(dict_steps_components['1_1'].lines[48], 1, false)
-
-  add_load(dict_steps_components['1_1'].lines[49], 0, false)
-  add_load(dict_steps_components['1_1'].lines[49], 0, false)
-  add_resistor(dict_steps_components['1_1'].lines[49], 0.38, 12, 4)
-
-
-
-  add_tx(dict_steps_components['1_1'].lines[56], 0.5, 'deltaStar', function(dict_tx){
-  });
-
-
-
-  add_tx(dict_steps_components['1_1'].lines[62], 1, 'starDelta', function(dict_tx){
-  });
-
-
-
-  add_load(dict_steps_components['1_1'].lines[69], 0, true);
-
-
-
+//
+//  var stage1_1 = []
+//
+//  var stage = 0
+//
+//
+//
+//  add_text(dict_steps_components['1_1'].lines[1].o_line, false, ["Steven's Croft"], 10, -15, function(object){
+//    return 0
+//  });
+//
+//  add_text(dict_steps_components['1_1'].lines[9].o_line, false, ["Chapelcross Grid", "33kV Busbar"], 0, -25, function(object){
+//    return 0
+//  });
+//
+//  add_text(dict_steps_components['1_1'].lines[41].o_line, false, ["Langholm"], 10, -15, function(object){
+//    return 0
+//  });
+//
+//  add_text(dict_steps_components['1_1'].lines[10].o_line, false, ["Annan","#1"], 30, -12, function(object){
+//    return 0
+//  });
+//  add_text(dict_steps_components['1_1'].lines[22].o_line, false, ["Middleby"], 50, -12, function(object){
+//    return 0
+//  });
+//  add_text(dict_steps_components['1_1'].lines[43].o_line, false, ["Minsca"], 20, -15, function(object){
+//    return 0
+//  });
+//  add_text(dict_steps_components['1_1'].lines[52].o_line, false, ["Lockerbie","#1"], 42, -50, function(object){
+//    return 0
+//  });
+//  add_text(dict_steps_components['1_1'].lines[68].o_line, false, ["Lockerbie","#2"], 42, -30, function(object){
+//    return 0
+//  });
+//  add_text(dict_steps_components['1_1'].lines[18].o_line, false, ["Annan","#2"], 42, -10, function(object){
+//    return 0
+//  });
+//  add_text(dict_steps_components['1_1'].lines[65].o_line, false, ["Lockerbie A"], -100, -13, function(object){
+//    return 0
+//  });
+//  add_text(dict_steps_components['1_1'].lines[65].o_line, false, ["Lockerbie B"], 100, -13, function(object){
+//    return 0
+//  });
+//
+//  var powerColour = '#25b1f5'
+//
+//  // Stage Iterator
+//  $('#buttonA').click(function(){
+//    $.ajax({
+//      url:"data/steps.csv",
+//      dataType:"text",
+//      success:function(data)
+//      {
+//        var csv = data.split(/\r?\n|\r/);
+//        $('#buttonA').attr('stage', parseInt($('#buttonA').attr('stage'))+1)
+//        var stage = parseInt($('#buttonA').attr('stage'));
+//
+//        $('table tr:nth-child(' + (stage + 1) + ')').css('background-color', '#baffb3');
+//
+//        var cell_data = csv[stage].split(",");
+//        // $('#buttonA').text(cell_data[2])
+//
+//        if (stage == 2){
+//          flashColour(dict_steps_components['1_1'].lines[0].o_line, powerColour)
+//          flashColour(dict_steps_components['1_1'].lines[1].o_line, powerColour)
+//          flashColour(dict_steps_components['1_1'].lines[2].o_line, powerColour)
+//        } else if (stage == 3){
+//          flashColour(dict_steps_components['1_1'].lines[4].o_line, powerColour)
+//        } else if (stage == 4){
+//          flashColour(dict_steps_components['1_1'].lines[9].o_line, powerColour)
+//        } else if (stage == 5){
+//          flashColour(dict_steps_components['1_1'].lines[42].o_line, powerColour)
+//          flashColour(dict_steps_components['1_1'].lines[43].o_line, powerColour)
+//
+//        } else if (stage == 6){
+//
+//        } else if (stage == 7){
+//          flashColour(dict_steps_components['1_1'].lines[44].o_line, powerColour)
+//        } else if (stage == 8){
+//          flashColour(dict_steps_components['1_1'].lines[19].o_line, powerColour)
+//          flashColour(dict_steps_components['1_1'].lines[20].o_line, powerColour)
+//          flashColour(dict_steps_components['1_1'].lines[21].o_line, powerColour)
+//          flashColour(dict_steps_components['1_1'].lines[22].o_line, powerColour)
+//          flashColour(dict_steps_components['1_1'].lines[23].o_line, powerColour)
+//          flashColour(dict_steps_components['1_1'].lines[24].o_line, powerColour)
+//        } else if (stage == 9){
+//        } else if (stage == 10){
+//          flashColour(dict_steps_components['1_1'].lines[25].o_line, powerColour)
+//        } else if (stage == 12){
+//          flashColour(dict_steps_components['1_1'].lines[18].o_line, powerColour)
+//          flashColour(dict_steps_components['1_1'].lines[10].o_line, powerColour)
+//          flashColour(dict_steps_components['1_1'].lines[11].o_line, powerColour)
+//          flashColour(dict_steps_components['1_1'].lines[51].o_line, powerColour)
+//        } else if (stage == 13){
+//          flashColour(dict_steps_components['1_1'].lines[50].o_line, powerColour)
+//          flashColour(dict_steps_components['1_1'].lines[12].o_line, powerColour)
+//          flashColour(dict_steps_components['1_1'].lines[14].o_line, powerColour)
+//        } else if (stage == 14){
+//          flashColour(dict_steps_components['1_1'].lines[13].o_line, powerColour)
+//          flashColour(dict_steps_components['1_1'].lines[15].o_line, powerColour)
+//          flashColour(dict_steps_components['1_1'].lines[16].o_line, powerColour)
+//          flashColour(dict_steps_components['1_1'].lines[17].o_line, powerColour)
+//        }
+//      }
+//    });
+//  });
+//
+//  add_tx(dict_steps_components['1_1'].lines[0], 0.45, 'starDelta', function(circle1,circle2,circle3,circle4,group){
+//    // add_text(circle1, false, ["33/11kV"], 47, 15, function(object){
+//    //   return 0
+//    // });
+//
+//    // buttonA_greenObject(1, circle1);
+//    // buttonA_greenObject(1, circle2);
+//    // buttonA_greenObject(1, circle3);
+//    // buttonA_greenObject(1, circle4);
+//    // eventMouse(group, "Transformer", "STCR3-_STCR5-_1");
+//  });
+//
+//  add_gen(dict_steps_components['1_1'].lines[0], 1, 'SG', function(circle, group){
+//    buttonA_greenObject(0, circle)
+//    add_text(group, false, ["Stevens", "Croft"], -40, 0, function(object){
+//      return 0
+//    });
+//    eventMouse(group, "Generator", "STCR5-_1");
+//  });
+//
+//  // add_inductor(dict_steps_components['1_1'].lines[0], 0.9, 'SG');
+//
+//  // add_earth(dict_steps_components['1_1'].lines[0], 1, true);
+//
+//
+//  add_resistor(dict_steps_components['1_1'].lines[3], 0.65, 12, 4);
+//  // add_earth(dict_steps_components['1_1'].lines[3], 1, true);
+//  add_text(dict_steps_components['1_1'].lines[3],  true, ["NOP"], -23, -10, function(object){
+//    return 0
+//  });
+//
+//
+//
+//  add_tx(dict_steps_components['1_1'].lines[5], 0.9, 'starDelta', function(dict_tx){
+//
+//    dict_steps_components['1_1'].txs += [dict_tx]
+//  });
+//
+//
+//  add_load(dict_steps_components['1_1'].lines[6], 1, true)
+//
+//  // add_earth(dict_steps_components['1_1'].lines[7], 0, false)
+//
+//  add_load(dict_steps_components['1_1'].lines[8], 1, true)
+//
+//  add_load(dict_steps_components['1_1'].lines[35], 1, true)
+//
+//  add_load(dict_steps_components['1_1'].lines[59], 1, true)
+//
+//  add_load(dict_steps_components['1_1'].lines[60], 1, true)
+//
+//  add_tx(dict_steps_components['1_1'].lines[11], 1, 'deltaStar', function(c1, c2, c3, c4, group){
+//    buttonA_greenObject(12, c1)
+//    buttonA_greenObject(12, c2)
+//    buttonA_greenObject(12, c3)
+//    buttonA_greenObject(12, c4)
+//    add_text(group, false, ["33/11.5kV"], 0, 30, function(object){
+//      return 0
+//    });
+//    eventMouse(group, "Transformer", "ANANT1_ANAN10_T1");
+//  });
+//
+//  add_load(dict_steps_components['1_1'].lines[14], 1, true)
+//
+//  add_load(dict_steps_components['1_1'].lines[36], 1, true)
+//
+//  add_load(dict_steps_components['1_1'].lines[15], 1, true)
+//
+//  add_tx(dict_steps_components['1_1'].lines[17], 1, 'deltaStar', function(c1, c2, c3, c4, group){
+//    buttonA_greenObject(13, c1)
+//    buttonA_greenObject(13, c2)
+//    buttonA_greenObject(13, c3)
+//    buttonA_greenObject(13, c4)
+//    add_text(group, false, ["33/11.5kV"], 0, 30, function(object){
+//      return 0
+//    });
+//    eventMouse(group, "Transformer", "ANANT2_ANAN20_T2");
+//  });
+//
+//  add_tx(dict_steps_components['1_1'].lines[25], 0.55, 'deltaStar', function(c1, c2, c3, c4, group){
+//    buttonA_greenObject(9, c1)
+//    buttonA_greenObject(9, c2)
+//    buttonA_greenObject(9, c3)
+//    buttonA_greenObject(9, c4)
+//    add_text(group, false, ["33/0.69kV"], -55, 0, function(object){
+//    });
+//    eventMouse(group, "Transformer", "EWHC3-_EWHC0G_1");
+//    // EWHC3-_EWHC0G_1
+//  });
+//
+//  add_gen(dict_steps_components['1_1'].lines[25], 1, 'wind', function(circle1, group){
+//    add_text(group, false, ["Ewe Hill WF"], 0,30, function(group){
+//      return 0
+//    });
+//  });
+//
+//  add_tx(dict_steps_components['1_1'].lines[26], 0.5, 'deltaStar', function(dict_tx){
+//    dict_steps_components['1_1'].txs += [dict_tx]
+//  });
+//
+//  add_load(dict_steps_components['1_1'].lines[28], 1, true)
+//
+//  add_tx(dict_steps_components['1_1'].lines[31], 0.5, 'deltaStar', function(dict_tx){
+//    dict_steps_components['1_1'].txs += [dict_tx]
+//  });
+//
+//
+//  add_gen(dict_steps_components['1_1'].lines[33], 0, 'wind', function(circle1, group){
+//    add_text(group, false, ["Craig WF"], 0,30, function(group){
+//      return 0
+//    });
+//  });
+//
+//
+//
+//  add_gen(dict_steps_components['1_1'].lines[39], 1, 'wind', function(circle1, group){
+//    add_text(group, false, ["Craig II WF"], 0,30, function(group){
+//      return 0
+//    });
+//  });
+//
+//  add_tx(dict_steps_components['1_1'].lines[38], 0.75, 'deltaStar', function(dict_tx){
+//    dict_steps_components['1_1'].txs += [dict_tx]
+//  });
+//
+//  add_tx(dict_steps_components['1_1'].lines[44], 0.55, 'deltaStar', function(c1, c2, c3, c4, group){
+//    buttonA_greenObject(6, c1)
+//    buttonA_greenObject(6, c2)
+//    buttonA_greenObject(6, c3)
+//    buttonA_greenObject(6, c4)
+//    add_text(group, false, ["33/0.69kV"], -55, 0, function(object){
+//    });
+//    eventMouse(group, "Transformer", "MINS3-_MINS0G_1");
+//    // MINS3-_MINS0G_1
+//
+//  });
+//
+//  add_gen(dict_steps_components['1_1'].lines[44], 1, 'wind', function(circle1, group){
+//    add_text(group, false, ["MINSCA WF"], 0,30, function(group){
+//      return 0
+//    });
+//  });
+//
+//  add_tx(dict_steps_components['1_1'].lines[45], 0.51, '', function(dict_tx){
+//  });
+//  add_load(dict_steps_components['1_1'].lines[45], 0, false);
+//
+//  add_load(dict_steps_components['1_1'].lines[46], 0, true)
+//
+//  add_tx(dict_steps_components['1_1'].lines[47], 0.96, 'starStar', function(dict_tx){
+//  });
+//
+//  add_load(dict_steps_components['1_1'].lines[48], 1, false)
+//
+//  add_load(dict_steps_components['1_1'].lines[49], 0, false)
+//  add_load(dict_steps_components['1_1'].lines[49], 0, false)
+//  add_resistor(dict_steps_components['1_1'].lines[49], 0.38, 12, 4)
+//
+//
+//
+//  add_tx(dict_steps_components['1_1'].lines[56], 0.5, 'deltaStar', function(dict_tx){
+//  });
+//
+//
+//
+//  add_tx(dict_steps_components['1_1'].lines[62], 1, 'starDelta', function(dict_tx){
+//  });
+//
+//
+//
+//  add_load(dict_steps_components['1_1'].lines[69], 0, true);
+
+//$( document ).ready(function(){
+//function doStuff() {
+//    console.log("filling")
+//    console.log(components.lines[10].UIElement)
+//    console.log(components.lines[10].initInfo)
+//
+//   components.lines[10].UIElement.stroke("red")
+//   setTimeout(doStuff, 1000);
+//}
+//setTimeout(doStuff, 1000);
+//})
