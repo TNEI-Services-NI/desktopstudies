@@ -945,31 +945,66 @@ dict_steps_components = {
   }
   dict_components.txs = []
 
+/* CANT USE CLASSES DUE TO IE INCOMPATABILITY
+  class BreakerComponent{
+    var UIElement
+    var initInfo
+    var id
+    var closed
+    constructor(breaker, id){
+        this.initInfo = breaker
+        this.id = id
+        let breaker = dict_components.breakers[i]
+        let line = dict_components.lines[breaker.lineID]
+        let size = breaker.size
+        let pos = breaker.pos
+        let state = breaker.state
+        let bcallback = breaker.callback
+        add_breaker(line,pos,size,state,bcallback)
+        this.closed = state == "closed"
+        this.UIElement = breaker.graphic[0]
+        //temp
+        this.UIElement.on("breaker_clicked",function(event){
+            let breaker = components.breakers[id]
+            breaker.closed=!breaker.closed
+            post_breaker(id,breaker.closed)
+    })
+
+    }
+  }
+*/
 
     //add breakers
   for(i in dict_components.breakers){
+    //doing this means the inital data, and the SVG elements they make remain unchanged at all times. may be very useful should a redraw/reset be needed...
+    //define listener handles now since they have access to everything relevant
     let breaker = dict_components.breakers[i]
     let line = dict_components.lines[breaker.lineID]
     let size = breaker.size
-
     let pos = breaker.pos
     let state = breaker.state
     let bcallback = breaker.callback
     add_breaker(line,pos,size,state,bcallback)
-
-    let InternalId = "b"+(breaker.lineID+";")+(pos+"")
     let id = i
-    let closed = state == "closed"
-    let graphic = breaker.graphic[0]
 
-    //doing this means the inital data, and the SVG elements they make remain unchanged at all times. may be very useful should a redraw/reset be needed...
-    //define listener handles now since they have access to everything relevant
-    components.breakers[id]={initInfo:breaker, UIElement: graphic, closed: closed}
-    graphic.on("breaker_clicked",function(event){
+    let b = {initInfo:dict_components, UIElement: breaker.graphic[0], closed: closed, id : id}
+    b.setState = function(closed){
+        this.closed = closed
+        if (closed == false){
+            dict_line.dict_styling.fill.color = 'black'
+            dict_line.dict_styling.stroke.color = 'white'
+        } else if (closed == true){
+            dict_line.dict_styling.fill.color = 'white'
+            dict_line.dict_styling.stroke.color = 'white'
+      }
+    }
+    b.UIElement.on("breaker_clicked",function(event){
         let breaker = components.breakers[id]
         breaker.closed=!breaker.closed
         post_breaker(id,breaker.closed)
     })
+
+    components.breakers[id] = b
 
     }
 //
@@ -1262,3 +1297,10 @@ dict_steps_components = {
 //}
 //setTimeout(doStuff, 1000);
 //})
+
+
+function setBreakerState(breakerID, state){
+
+}
+
+function setLineVoltage(){LineID, voltage}{}
