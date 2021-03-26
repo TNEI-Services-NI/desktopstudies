@@ -52,7 +52,7 @@ function Breaker(lineID, pos, size=6, state = false, stages = []){
     this.callback = Breaker_Callback(stages,this.graphic)
 }
 
-function line(x1, x2, y1, y2, voltage, dash = false){
+function Line(x1, y1,x2, y2, voltage="132", dash = false, colour = "#ffffff"){
     this.x1 = x1
     this.x2 = x2
     this.y1 = y1
@@ -60,382 +60,349 @@ function line(x1, x2, y1, y2, voltage, dash = false){
     this.voltage = voltage
     this.callback = 0
     this.dash = dash
+    this.colour=colour
 }
 
 dict_components = {
-    lines : {
-      0 : new line(72, 72, 256, 420, '132'),
-        1 : {
-
-          x1: 46, y1: 256,
-          x2: 149, y2: 256,
-          voltage: '132'
-        },
-        2 : {
-          x1: 40, y1: 301,
-          x2: 72, y2: 301,
-          voltage: '132'
-        },
-        3 : {
-          x1: 40, y1: 301,
-          x2: 40, y2: 335,
-          voltage: '132'
-        },
-        4 : {
-          x1: 57, y1: 87,
-          x2: 57, y2: 256,
-          voltage: '132'
-        },
-        5 : {
-          x1: 118, y1: 256,
-          x2: 118, y2: 310,
-          dash: true,
-          color: '#a0a0a0'
-        },
-        6 : {
-          x1: 140, y1: 256,
-          x2: 140, y2: 310,
-          color: '#a0a0a0'
-        },
-        7 : {
-          x1: 95, y1: 297,
-          x2: 118, y2: 297,
-          color: '#a0a0a0'
-        },
-        8 : {
-          x1: 118, y1: 256,
-          x2: 118, y2: 270,
-          color: '#a0a0a0'
-        },
+    lines:{
+0 : new Line(72, 256,72, 420, '132'),
+      1 : new Line(46, 256, 149, 256, '132'),
+      2 : new Line(40,301, 72,  301, '132'),
+      3 : new Line(40,301,40,335, "132"),
+      4 : new Line(57,87,57,256, "132"),
+      5 : new Line(118, 256, 118, 310, dash= true, color= '#a0a0a0'),
+      6 : new Line(140, 256, 140, 310, color = '#a0a0a0'),
+      7 : new Line(95,297,118,297, color = "#a0a0a0"),
+      8 : new Line(118, 256, 118, 270, color= '#a0a0a0'),
         // STEP 2
-        9 : {
-          x1: 40, y1: 88,
-          x2: 1133, y2: 88,
-          voltage: '132'
-        },
-        10 : {
-          x1: 94, y1: 88,
-          x2: 94, y2: 158,
-          voltage: '132'
-        },
-        11 : {
-          x1: 94, y1: 158,
-          x2: 208, y2: 158,
-          voltage: '132'
-        },
+      9 : new Line(
+          x1= 40, y1= 88,
+          x2= 1133, y2= 88,
+          voltage= '132'
+        ),
+      10 : new Line(
+          x1= 94, y1= 88,
+          x2= 94, y2= 158,
+          voltage= '132'
+        ),
+      11: new Line(
+          x1= 94, y1= 158,
+          x2= 208, y2= 158,
+          voltage= '132'
+        ),
         // Step 5C B13 south, east, SOUTH
-        12 : {
-          x1: 302, y1: 158,
-          x2: 302, y2: 182,
-          color: '#a0a0a0'
-        },
-        13 : {
-          x1: 271, y1: 182,
-          x2: 412, y2: 182,
-          color: '#a0a0a0'
-        },
+      12 : new Line(
+          x1= 302, y1= 158,
+          x2= 302, y2= 182,
+          color= '#a0a0a0'
+        ),
+      13 : new Line(
+          x1= 271, y1= 182,
+          x2= 412, y2= 182,
+          color= '#a0a0a0'
+        ),
         // 10-15
-        14 : {
-          x1: 320, y1: 182,
-          x2: 320, y2: 223,
-          color: '#a0a0a0'
-        },
+      14 : new Line(
+          x1= 320, y1= 182,
+          x2= 320, y2= 223,
+          color= '#a0a0a0'
+        ),
         // 21-26
-        15 : {
-          x1: 372, y1: 182,
-          x2: 372, y2: 223,
-          color: '#a0a0a0'
-        },
+      15 : new Line(
+          x1= 372, y1= 182,
+          x2= 372, y2= 223,
+          color= '#a0a0a0'
+        ),
         // Step 5C B23 south, west, south
-        16 : {
-          x1: 387, y1: 158,
-          x2: 387, y2: 182,
-          color: '#a0a0a0'
-        },
+      16 : new Line(
+          x1= 387, y1= 158,
+          x2= 387, y2= 182,
+          color= '#a0a0a0'
+        ),
         // Step 5C B23 south, west
-        17 : {
-          x1: 387, y1: 158,
-          x2: 600, y2: 158,
-          color: '#a0a0a0'
-        },
+        17 : new Line(
+          x1= 387, y1= 158,
+          x2= 600, y2= 158,
+          color= '#a0a0a0'
+        ),
         // Step 5C B23 south
-        18 : {
-          x1: 822, y1: 88,
-          x2: 822, y2: 158,
-          voltage: '132'
-        },
+        18 : new Line(
+          x1= 822, y1= 88,
+          x2= 822, y2= 158,
+          voltage= '132'
+        ),
         // Step 4.1 B12 - south
-        19 : {
-          x1: 491, y1: 88,
-          x2: 491, y2: 138,
-          voltage: '132'
-        },
+        19 : new Line(
+          x1= 491, y1= 88,
+          x2= 491, y2= 138,
+          voltage= '132'
+        ),
         // Step 4.1 B12 - south, west
-        20 : {
-          x1: 168, y1: 138,
-          x2: 491, y2: 138,
-          voltage: '132'
-        },
+        20 : new Line(
+          x1= 168, y1= 138,
+          x2= 491, y2= 138,
+          voltage= '132'
+        ),
         // Step 4.1 B12 - south, west, south
-        21 : {
-          x1: 168, y1: 138,
-          x2: 168, y2: 350,
-          voltage: '132'
-        },
+        21 : new Line(
+          x1= 168, y1= 138,
+          x2= 168, y2= 350,
+          voltage= '132'
+        ),
         // BB780 - Middlebie
-        22 : {
-          x1: 98, y1: 350,
-          x2: 240, y2: 350,
-          voltage: '132'
-        },
-        23 : {
-          x1: 110, y1: 350,
-          x2: 110, y2: 500,
-          voltage: '132'
-        },
-        24 : {
-          x1: 95, y1: 500,
-          x2: 140, y2: 500,
-          voltage: '132'
-        },
-        25 : {
-          x1: 126, y1: 500,
-          x2: 126, y2: 600,
-          voltage: '132'
-        },
-        26 : {
-          x1: 188, y1: 350,
-          x2: 188, y2: 425,
-          voltage: '132'
-        },
-        27 : {
-          x1: 180, y1: 425,
-          x2: 235, y2: 425,
-          voltage: '132'
-        },
-        28 : {
-          x1: 225, y1: 425,
-          x2: 225, y2: 460,
-          voltage: '132'
-        },
-        29 : {
-          x1: 168, y1: 487,
-          x2: 225, y2: 487,
-          voltage: '132'
-        },
-        30 : {
-          x1: 225, y1: 487,
-          x2: 225, y2: 542,
-          voltage: '132'
-        },
-        31 : {
-          x1: 225, y1: 542,
-          x2: 389, y2: 542,
-          voltage: '132'
-        },
-        32 : {
-          x1: 389, y1: 542,
-          x2: 389, y2: 625,
-          voltage: '132'
-        },
-        33 : {
-          x1: 268, y1: 625,
-          x2: 389, y2: 625,
-          voltage: '132'
-        },
-        34 : {
-          x1: 370, y1: 582,
-          x2: 520, y2: 582,
-          voltage: '132'
-        },
-        35 : {
-          x1: 420, y1: 582,
-          x2: 420, y2: 620,
-          voltage: '132'
-        },
-        36 : {
-          x1: 470, y1: 582,
-          x2: 470, y2: 620,
-          voltage: '132'
-        },
-        37 : {
-          x1: 495, y1: 542,
-          x2: 495, y2: 625,
-          voltage: '132'
-        },
-        38 : {
-          x1: 495, y1: 542,
-          x2: 625, y2: 542,
-          voltage: '132'
-        },
-        39 : {
-          x1: 495, y1: 625,
-          x2: 625, y2: 625,
-          voltage: '132'
-        },
-        40 : {
-          x1: 625, y1: 505,
-          x2: 625, y2: 542,
-          voltage: '132'
-        },
-        41 : {
-          x1: 200, y1: 505,
-          x2: 650, y2: 505,
-          voltage: '132'
-        },
+        22 : new Line(
+          x1= 98, y1= 350,
+          x2= 240, y2= 350,
+          voltage= '132'
+        ),
+        23 : new Line(
+          x1= 110, y1= 350,
+          x2= 110, y2= 500,
+          voltage= '132'
+        ),
+        24 : new Line(
+          x1= 95, y1= 500,
+          x2= 140, y2= 500,
+          voltage= '132'
+        ),
+        25 : new Line(
+          x1= 126, y1= 500,
+          x2= 126, y2= 600,
+          voltage= '132'
+        ),
+        26 : new Line(
+          x1= 188, y1= 350,
+          x2= 188, y2= 425,
+          voltage= '132'
+        ),
+        27 : new Line(
+          x1= 180, y1= 425,
+          x2= 235, y2= 425,
+          voltage= '132'
+        ),
+        28 : new Line(
+          x1= 225, y1= 425,
+          x2= 225, y2= 460,
+          voltage= '132'
+        ),
+        29 : new Line(
+          x1= 168, y1= 487,
+          x2= 225, y2= 487,
+          voltage= '132'
+        ),
+        30 : new Line(
+          x1= 225, y1= 487,
+          x2= 225, y2= 542,
+          voltage= '132'
+        ),
+        31 : new Line(
+          x1= 225, y1= 542,
+          x2= 389, y2= 542,
+          voltage= '132'
+        ),
+        32 : new Line(
+          x1= 389, y1= 542,
+          x2= 389, y2= 625,
+          voltage= '132'
+        ),
+        33 : new Line(
+          x1= 268, y1= 625,
+          x2= 389, y2= 625,
+          voltage= '132'
+        ),
+        34 : new Line(
+          x1= 370, y1= 582,
+          x2= 520, y2= 582,
+          voltage= '132'
+        ),
+        35 : new Line(
+          x1= 420, y1= 582,
+          x2= 420, y2= 620,
+          voltage= '132'
+        ),
+        36 : new Line(
+          x1= 470, y1= 582,
+          x2= 470, y2= 620,
+          voltage= '132'
+        ),
+        37 : new Line(
+          x1= 495, y1= 542,
+          x2= 495, y2= 625,
+          voltage= '132'
+        ),
+        38 : new Line(
+          x1= 495, y1= 542,
+          x2= 625, y2= 542,
+          voltage= '132'
+        ),
+        39 : new Line(
+          x1= 495, y1= 625,
+          x2= 625, y2= 625,
+          voltage= '132'
+        ),
+        40 : new Line(
+          x1= 625, y1= 505,
+          x2= 625, y2= 542,
+          voltage= '132'
+        ),
+        41 : new Line(
+          x1= 200, y1= 505,
+          x2= 650, y2= 505,
+          voltage= '132'
+        ),
         // Step 3.1 B24
-        42 : {
-          x1: 1106, y1: 87,
-          x2: 1106, y2: 256,
-          voltage: '132'
-        },
-        43 : {
-          x1: 1080, y1: 256,
-          x2: 1150, y2: 256,
-          voltage: '132'
-        },
-        44 : {
-          x1: 1130, y1: 256,
-          x2: 1130, y2: 380,
-          voltage: '132'
-        },
+        42 : new Line(
+          x1= 1106, y1= 87,
+          x2= 1106, y2= 256,
+          voltage= '132'
+        ),
+        43 : new Line(
+          x1= 1080, y1= 256,
+          x2= 1150, y2= 256,
+          voltage= '132'
+        ),
+        44 : new Line(
+          x1= 1130, y1= 256,
+          x2= 1130, y2= 380,
+          voltage= '132'
+        ),
 
-        45 : {
-          x1: 356, y1: 20,
-          x2: 356, y2: 88,
-          color: '#a0a0a0'
-        },
-        46 : {
-          x1: 335, y1: 31,
-          x2: 356, y2: 31,
-          color: '#a0a0a0'
-        },
-        47 : {
-          x1: 356, y1: 75,
-          x2: 400, y2: 75,
-          dash: true,
-          color: '#a0a0a0'
-        },
-        48 : {
-          x1: 356, y1: 75,
-          x2: 370, y2: 75,
-          color: '#a0a0a0'
-        },
-        49 : {
-          x1: 391, y1: 40,
-          x2: 391, y2: 75,
-          color: '#a0a0a0'
-        },
-        50 : {
-          x1: 208, y1: 158,
-          x2: 302, y2: 158,
-          color: '#a0a0a0'
-        },
-        51 : {
-          x1: 600, y1: 158,
-          x2: 822, y2: 158,
-          voltage: '132'
-        },
+        45 : new Line(
+          x1= 356, y1= 20,
+          x2= 356, y2= 88,
+          color= '#a0a0a0'
+        ),
+        46 : new Line(
+          x1= 335, y1= 31,
+          x2= 356, y2= 31,
+          color= '#a0a0a0'
+        ),
+        47 : new Line(
+          x1= 356, y1= 75,
+          x2= 400, y2= 75,
+          dash= true,
+          color= '#a0a0a0'
+        ),
+        48 : new Line(
+          x1= 356, y1= 75,
+          x2= 370, y2= 75,
+          color= '#a0a0a0'
+        ),
+        49 : new Line(
+          x1= 391, y1= 40,
+          x2= 391, y2= 75,
+          color= '#a0a0a0'
+        ),
+        50 : new Line(
+          x1= 208, y1= 158,
+          x2= 302, y2= 158,
+          color= '#a0a0a0'
+        ),
+        51 : new Line(
+          x1= 600, y1= 158,
+          x2= 822, y2= 158,
+          voltage= '132'
+        ),
 
 
-        52 : {
-          x1: 153, y1: 87,
-          x2: 153, y2: 221,
-          voltage: '132'
-        },
-        54 : {
-          x1: 153, y1: 221,
-          x2: 288, y2: 221,
-          voltage: '132'
-        },
-        55 : {
-          x1: 288, y1: 221,
-          x2: 288, y2: 251,
-          voltage: '132'
-        },
-        56 : {
-          x1: 288, y1: 251,
-          x2: 288, y2: 278,
-          voltage: '132'
-        },
-        57 : {
-          x1: 288, y1: 278,
-          x2: 430, y2: 278,
-          color: '#a0a0a0'
-        },
-        58 : {
-          x1: 430, y1: 278,
-          x2: 430, y2: 301,
-          color: '#a0a0a0'
-        },
-        59 : {
-          x1: 399, y1: 301,
-          x2: 541, y2: 301,
-          color: '#a0a0a0'
-        },
-        60 : {
-          x1: 452, y1: 301,
-          x2: 452, y2: 343,
-          color: '#a0a0a0'
-        },
-        61 : {
-          x1: 495, y1: 301,
-          x2: 495, y2: 343,
-          color: '#a0a0a0'
-        },
-        62 : {
-          x1: 516, y1: 278,
-          x2: 516, y2: 301,
-          color: '#a0a0a0'
-        },
-        63 : {
-          x1: 516, y1: 278,
-          x2: 587, y2: 278,
-          color: '#a0a0a0'
-        },
-        64 : {
-          x1: 587, y1: 278,
-          x2: 641, y2: 278,
-          voltage: '132'
-        },
-        65 : {
-          x1: 641, y1: 251,
-          x2: 641, y2: 278,
-          voltage: '132'
-        },
-        66 : {
-          x1: 245, y1: 251,
-          x2: 704, y2: 251,
-          voltage: '132'
-        },
-        67 : {
-          x1: 641, y1: 186,
-          x2: 641, y2: 251,
-          voltage: '132'
-        },
-        68 : {
-          x1: 641, y1: 186,
-          x2: 723, y2: 186,
-          voltage: '132'
-        },
-        69 : {
-          x1: 723, y1: 87,
-          x2: 723, y2: 186,
-          voltage: '132'
-        },
-        70 : {
-          x1: 33, y1: 191,
-          x2: 153, y2: 191,
-          voltage: '132'
-        },
+        52 : new Line(
+          x1= 153, y1= 87,
+          x2= 153, y2= 221,
+          voltage= '132'
+        ),
+        53 : new Line(
+          x1= 153, y1= 221,
+          x2= 288, y2= 221,
+          voltage= '132'
+        ),
+        54 : new Line(
+          x1= 288, y1= 221,
+          x2= 288, y2= 251,
+          voltage= '132'
+        ),
+        55 : new Line(
+          x1= 288, y1= 251,
+          x2= 288, y2= 278,
+          voltage= '132'
+        ),
+        56 : new Line(
+          x1= 288, y1= 278,
+          x2= 430, y2= 278,
+          color= '#a0a0a0'
+        ),
+        57 : new Line(
+          x1= 430, y1= 278,
+          x2= 430, y2= 301,
+          color= '#a0a0a0'
+        ),
+        58 : new Line(
+          x1= 399, y1= 301,
+          x2= 541, y2= 301,
+          color= '#a0a0a0'
+        ),
+        59 : new Line(
+          x1= 452, y1= 301,
+          x2= 452, y2= 343,
+          color= '#a0a0a0'
+        ),
+        60 : new Line(
+          x1= 495, y1= 301,
+          x2= 495, y2= 343,
+          color= '#a0a0a0'
+        ),
+        61 : new Line(
+          x1= 516, y1= 278,
+          x2= 516, y2= 301,
+          color= '#a0a0a0'
+        ),
+        62 : new Line(
+          x1= 516, y1= 278,
+          x2= 587, y2= 278,
+          color= '#a0a0a0'
+        ),
+        63 : new Line(
+          x1= 587, y1= 278,
+          x2= 641, y2= 278,
+          voltage= '132'
+        ),
+        64 : new Line(
+          x1= 641, y1= 251,
+          x2= 641, y2= 278,
+          voltage= '132'
+        ),
+        65 : new Line(
+          x1= 245, y1= 251,
+          x2= 704, y2= 251,
+          voltage= '132'
+        ),
+        66 : new Line(
+          x1= 641, y1= 186,
+          x2= 641, y2= 251,
+          voltage= '132'
+        ),
+        67 : new Line(
+          x1= 641, y1= 186,
+          x2= 723, y2= 186,
+          voltage= '132'
+        ),
+        68 : new Line(
+          x1= 723, y1= 87,
+          x2= 723, y2= 186,
+          voltage= '132'
+        ),
+        69 : new Line(
+          x1= 33, y1= 191,
+          x2= 153, y2= 191,
+          voltage= '132'
+        ),
         // Step 4.1 B12 - south, west, south, south
-        71 : {
-          x1: 168, y1: 350,
-          x2: 168, y2: 487,
-          voltage: '132'
-        }
-    },
+        70 : new Line(
+          x1= 168, y1= 350,
+          x2= 168, y2= 487,
+          voltage= '132'
+        )
 
+    },
     breakers:{
         0: new Breaker(0, 0.61, 6, "open", [1]),
         1: new Breaker(0, 0.2, 6, "open", [1]),
@@ -489,7 +456,8 @@ dict_components = {
         49: new Breaker(68,0.15,6,"open",[]),
       },
   }
-  dict_steps_components = {
+
+dict_steps_components = {
     '1_1': {
       lines: [
         // STEP 1

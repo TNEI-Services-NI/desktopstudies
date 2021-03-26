@@ -205,8 +205,6 @@
 
     dict_gen.objects = [group]
 
-
-
     callback(circle1, group, inside_group)
   }
 
