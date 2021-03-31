@@ -295,11 +295,11 @@
     }
 
     rect1.click(function() {
-      if (this.attr('fill') === dict_line.dict_styling.stroke.color){
-        this.fill({ color: 'black' })
-      } else {
-        this.fill(dict_line.dict_styling.stroke)
-      }
+//      if (this.attr('fill') === dict_line.dict_styling.stroke.color){
+//        this.fill({ color: 'black' })
+//      } else {
+//        this.fill(dict_line.dict_styling.stroke)
+//      }
 
       this.fire(breaker_clicked_event)
     });
@@ -609,14 +609,13 @@
     callback(text1)
   }
 
-  //URL must not be relative as it routes to dashly...
-  //need to provide a global route
+
   function post_breaker(breakerID,state){
       if(breakerID === null){breakerID="b1"}
       if(state === null){state=true}
       $.ajax({
       type: "POST",
-      url: "http://127.0.0.1:5000/simtool/receive_breaker/",
+      url: "receive_breaker/",
       data: {"breaker": breakerID, "state": state },
 //      dataType: 'application/json'
       }).done(function( data ) {

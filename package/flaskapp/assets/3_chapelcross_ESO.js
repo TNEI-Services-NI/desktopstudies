@@ -110,7 +110,6 @@ function RelativeLine(line,pos,direction,length, voltage="132", dash = false, co
 
     xo = x1 + x2/pos
     yo = y1 + y2/pos
-
     return StraightLine([x0,y0],direction,length,voltage,dash,colour)
 
 }
@@ -123,12 +122,14 @@ function Text(lineID, text, offset){
     this.callback = Text_Callback(this.graphic)
 }
 
-function Tx(lineID,pos,name,type="starDelta"){
+function Tx(lineID,pos,name,type="starDelta", coil1 = "33KV",coil2 = "33KV"){
     this.lineID =lineID
     this.pos = pos
     this.name = name
     this.graphic = []
     this.type = type
+    this.coil1 = coil1
+    this.coil2 = coil2
     this.callback = Tx_Callback(this.name, this.graphic)
 }
 
@@ -290,27 +291,70 @@ test_network = {
 //scale of 1000 x 1000, readjust with math...
 chapelcross_GSP_33kV = {
 lines:{
-"Solway Bank": StraightLine([890,30],"right",130),
+"378": StraightLine([875,40],"right",130),
+"into 378 4":StraightLine([885,155],"right",75),
+"into 378 3":StraightLine([960,155],"down",90),
+"into 378 2":StraightLine([900,250],"right",60),
+"into 378 1":StraightLine([960,155],"down",95),
+
+"378 11": StraightLine([885,40],"down",115),
+"378 12": StraightLine([950, 40],"down",70),
+
+"698 01": StraightLine([25,175], "right",895),
+"698 16": StraightLine([33,175], "down",85),
+    "chapelcross dash": StraightLine([15,240],"right",35, dash=true),
+"698 15": StraightLine([85,175], "down",300),
+    "Chap": StraightLine([25,370],"right",90),
+    "generator dash": StraightLine([70,440],"right",35,dash=true),
+"698 14": StraightLine([145,175],"down",110),
+    "into ANNAN": StraightLine([145,285], "right",150),
+"698 13": StraightLine([250,175],"down",225),
+    "into DUMF": StraightLine([250,340],"left",90),
+"GRID 1": StraightLine([330,175],"up",120),
+    "into DAR tx":StraightLine([330,110],"left",40),
+"698 12": StraightLine([415,175],"down",75),
+"698 11": StraightLine([475,175],"down",75),
+"698 21": StraightLine([570,175],"down",205),
+    "698 right": StraightLine([570,380],"right",45),
+"698 22": StraightLine([625,175],"down",135),
+"GRID 2": StraightLine([670,175],"up",115),
+    "into GRID 2 tx": StraightLine([670,110],"left",40),
+"698 23": StraightLine([700,175],"down",110),
+"698 24": StraightLine([780,175],"down",110),
+"698 25": StraightLine([840,175],"down",60),
+"698 26": StraightLine([900,175],"down",75),
+"694": StraightLine([230,400],"right",350)
+
+},
+breakers:{
+    "698 16": new Breaker("698 16",0.25,6,"closed"),
+    "698 15": new Breaker("698 15",0.07,6,"closed"),
+    "CHAP": new Breaker("698 15",0.60,6,"closed"),
+    "SC generator Breaker": new Breaker("698 15",0.85,6,"open"),
+    "698 14": new Breaker("698 14",0.19,6,"closed"),
+    "698 13": new Breaker("698 13",0.1,6,"closed"),
+    "GRID 1": new Breaker("GRID 1",0.2,6,"closed"),
+    "698 12": new Breaker("698 12",0.3,6,"closed"),
+    "698 11": new Breaker("698 11",0.3,6,"closed"),
+    "698 01": new Breaker("698 01",0.555,6,"closed"),
+    "698 21": new Breaker("698 21",0.11,6,"closed"),
+    "698 22": new Breaker("698 22",0.16,6,"closed"),
+    "698 23": new Breaker("698 23",0.19,6,"closed"),
+    "698 24": new Breaker("698 24",0.19,6,"closed"),
+    "698 25": new Breaker("698 25",0.31,6,"closed"),
+    "698 26": new Breaker("698 26",0.26,6,"closed"),
+    "678 11": new Breaker("378 11",0.18,6,"closed"),
+    "678 12": new Breaker("378 12",0.3,6,"closed"),
+    "GRID 2": new Breaker("GRID 2",0.2,6,"closed"),
 
 
-0: StraightLine([20,175], "right",900),
-"698 16": StraightLine([35,175], "down",100),
-"698 15": StraightLine([85,175], "down",100),
-"698 14": StraightLine([145,175],"down",100),
-"698 13": StraightLine([250,175],"down",100),
-"698 12": StraightLine([330,175],"up",100),
-"698 11": StraightLine([415,175],"down",100),
-7: StraightLine([475,175],"down",100),
-8: StraightLine([570,175],"down",100),
-9: StraightLine([625,175],"down",100),
-10: StraightLine([670,175],"up",100),
-11: StraightLine([700,175],"down",100),
-12: StraightLine([780,175],"down",100),
-13: StraightLine([840,175],"down",100),
-14: StraightLine([900,175],"down",100),
-
-
-}
+    },
+tx:{
+    0: new Tx("into GRID 2 tx",1,"",type="starDelta"),
+    1: new Tx("GRID 2",1,"GRID T2",type="starDelta"),
+    2: new Tx("GRID 1",1,"GRID T1",type="starDelta"),
+    3: new Tx("into DAR tx",1,"",type="starDelta"),
+    }
 
 }
 
@@ -672,10 +716,11 @@ dict_steps_components = {
     let size = breaker.size
     let pos = breaker.pos
     let state = breaker.state
+    console.log(state)
     let bcallback = breaker.callback
     add_breaker(line,pos,size,state,bcallback)
     let id = i
-
+    closed = state==="closed"
     let b = {initInfo:breaker, UIElement: breaker.graphic[0], closed: closed, id : id}
     b.setState = function(closed){
         this.closed = closed
@@ -688,9 +733,10 @@ dict_steps_components = {
       }
     }
     b.UIElement.on("breaker_clicked",function(event){
-        let breaker = components.breakers[id]
-        breaker.closed=!breaker.closed
-        post_breaker(id,breaker.closed)
+//        let breaker = components.breakers[id]
+//        breaker.setState(!breaker.closed)
+////        breaker.closed=!breaker.closed
+//        post_breaker(id,breaker.closed)
     })
 
     components.breakers[id] = b
@@ -834,16 +880,16 @@ dict_steps_components = {
 //
 //  add_load(dict_steps_components['1_1'].lines[60], 1, true)
 //
-  add_tx(dict_components.lines[11], 1, 'deltaStar', function(c1, c2, c3, c4, group){
-    buttonA_greenObject(12, c1)
-    buttonA_greenObject(12, c2)
-    buttonA_greenObject(12, c3)
-    buttonA_greenObject(12, c4)
-    add_text(group, false, ["33/11.5kV"], 0, 30, function(object){
-      return 0
-    });
-    eventMouse(group, "Transformer", "ANANT1_ANAN10_T1");
-  });
+//  add_tx(dict_components.lines[11], 1, 'deltaStar', function(c1, c2, c3, c4, group){
+//    buttonA_greenObject(12, c1)
+//    buttonA_greenObject(12, c2)
+//    buttonA_greenObject(12, c3)
+//    buttonA_greenObject(12, c4)
+//    add_text(group, false, ["33/11.5kV"], 0, 30, function(object){
+//      return 0
+//    });
+//    eventMouse(group, "Transformer", "ANANT1_ANAN10_T1");
+//  });
 //
 //  add_load(dict_steps_components['1_1'].lines[14], 1, true)
 //
