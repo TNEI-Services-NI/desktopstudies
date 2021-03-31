@@ -306,8 +306,8 @@ lines:{
 "698 15": StraightLine([85,175], "down",300),
     "Chap": StraightLine([25,370],"right",90),
     "generator dash": StraightLine([70,440],"right",35,dash=true),
-"698 14": StraightLine([145,175],"down",110),
-    "into ANNAN": StraightLine([145,285], "right",150),
+"698 14": StraightLine([145,175],"down",105),
+    "698 14 into ANNAN": StraightLine([145,280], "right",150),
 "698 13": StraightLine([250,175],"down",225),
     "into DUMF": StraightLine([250,340],"left",90),
 "GRID 1": StraightLine([330,175],"up",120),
@@ -317,16 +317,26 @@ lines:{
     "into middlebie 2":StraightLine([200,250],"down",275),
     "into middlebie 3":StraightLine([95,525],"right",105),
 "698 11": StraightLine([475,175],"down",75),
+    "698 into Gretna 1":StraightLine([725,245],"left",254),
+     "698 into Gretna 2" :StraightLine([725,245],"down",70),
+     "698 into Gretna 3" :StraightLine([845,315],"left",120),
+     "698 into Gretna 4" :StraightLine([845,315],"down",70),
+
+
 "698 21": StraightLine([570,175],"down",205),
     "698 right": StraightLine([570,380],"right",45),
 "698 22": StraightLine([625,175],"down",135),
+    "into Lockerbie 1": StraightLine([530,310],"right",95),
+    "into Lockerbie 2":StraightLine([530,310],"down",90),
 "GRID 2": StraightLine([670,175],"up",115),
     "into GRID 2 tx": StraightLine([670,110],"left",40),
-"698 23": StraightLine([700,175],"down",110),
+"698 23": StraightLine([700,175],"down",105),
 "698 24": StraightLine([780,175],"down",110),
 "698 25": StraightLine([840,175],"down",60),
 "698 26": StraightLine([900,175],"down",75),
 "694": StraightLine([230,400],"right",350),
+
+"LOCKERBIE13":StraightLine([265,400],"down",245),
 
 //Middlebie
 "M12": StraightLine([95,525],"down",50),
@@ -362,7 +372,32 @@ lines:{
 "Langholm to gretna 2": StraightLine([525,680],"right",90),
 "Langholm to gretna 3": StraightLine([615,680],"up",300),
 
+"ANNAN10": StraightLine([340,280],"left",50),
+"into 662 1": StraightLine([340,280],"down",35),
+"662 01": StraightLine([310,315],"right",105),
+"into 662 2": StraightLine([385,280],"down",35),
+"ANNAN20": StraightLine([385,280],"right",50),
 
+"698 23 into Annan": StraightLine([435,280],"right",265),
+
+"698 21 into gretna 1": StraightLine([570,380],"right",45),
+
+"KIRKBANK T": StraightLine([265,550],"right",75),
+"MOFFAT T1": StraightLine([265,645],"right",75),
+
+"KIRKBANK10": StraightLine([390,550],"left",50),
+"KIRKBANK 1": StraightLine([390,550],"down",35),
+"KIRKBANK":StraightLine([360,585],"right",85),
+
+"MOFFAT10": StraightLine([390,640],"left",50),
+"MOFFAT 1": StraightLine([390,640],"down",35),
+"MOFFAT01": StraightLine([360,675],"right",100),
+"MOFFAT 2": StraightLine([440,640],"down",35),
+"MOFFAT20": StraightLine([440,640],"right",50),
+
+"GRETNA 1": StraightLine([615,535],"right",30),
+"GRETNA 2": StraightLine([645,535],"up",150),
+"GRETNA 691": StraightLine([630,385],"right",245),
 
  },
 breakers:{
@@ -403,17 +438,32 @@ breakers:{
     "LH10": new Breaker("Langholm10",0.3,6,"closed"),
     "LH01": new Breaker("Langholm01",0.55,6,"closed"),
     "LH20": new Breaker("Langholm20",0.4,6,"closed"),
+
+    "A10": new Breaker("ANNAN10",0.3,6,"closed"),
+    "662 01": new Breaker("662 01",0.55,6,"closed"),
+    "A20": new Breaker("ANNAN20",0.3,6,"closed"),
+
+    "L13": new Breaker("LOCKERBIE13",0.1,6,"closed"),
+
+    "KB10": new Breaker("KIRKBANK10",0.3,6,"closed"),
+
+    "683 10": new Breaker("MOFFAT10",0.3,6,"closed"),
+    "683 01": new Breaker("MOFFAT01", 0.55,6,"closed"),
+    "683 20": new Breaker("MOFFAT20", 0.3,6,"closed"),
     },
 tx:{
     0: new Tx("into GRID 2 tx",1,"",type="starDelta"),
     1: new Tx("GRID 2",1,"GRID T2",type="starDelta"),
     2: new Tx("GRID 1",1,"GRID T1",type="starDelta"),
     3: new Tx("into DAR tx",1,"",type="starDelta"),
-    4: new Tx("into ANNAN",1,"T1",type="starDelta"),
     5: new Tx("Middlebie Primary Transformer",1,"Middlebie Primary", type="starDelta"),
     6: new Tx("Langholm tx 33kV",1,"T1",type="starDelta"),
     7: new Tx("Langholm Tx2",1,"T2",type="starDelta"),
-
+    8: new Tx("698 14 into ANNAN",1,"T1",type="starDelta"),
+    9: new Tx("ANNAN20",1,"T2",type="starDelta"),
+    11: new Tx("KIRKBANK T",1,"T", type="starDelta"),
+    12: new Tx("MOFFAT T1",1,"T1",type="starDelta"),
+    13: new Tx("MOFFAT20",1,"T1",type="starDelta"),
     }
 
 }
