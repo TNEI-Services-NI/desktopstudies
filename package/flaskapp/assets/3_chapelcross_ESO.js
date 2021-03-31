@@ -286,7 +286,6 @@ test_network = {
 
     }
   }
-chapelcross_GSP_33kV = {lines:{}}
 //1550 x 1160 in mm
 //scale of 1000 x 1000, readjust with math...
 chapelcross_GSP_33kV = {
