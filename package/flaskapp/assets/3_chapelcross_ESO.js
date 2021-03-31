@@ -195,8 +195,7 @@ test_network = {
 
         45 : new Line(x1= 356, y1= 20, x2= 356, y2= 88, color= '#a0a0a0'),
         46 : new Line(x1= 335, y1= 31, x2= 356, y2= 31, color= '#a0a0a0'),
-        47 : new Line(x1= 356, y1= 75, x2= 400, y2= 75,
-          dash= true, color= '#a0a0a0'),
+        47 : new Line(x1= 356, y1= 75, x2= 400, y2= 75, dash= true, color= '#a0a0a0'),
         48 : new Line(x1= 356, y1= 75, x2= 370, y2= 75, color= '#a0a0a0'),
         49 : new Line(x1= 391, y1= 40, x2= 391, y2= 75, color= '#a0a0a0'),
         50 : new Line(x1= 208, y1= 158, x2= 302, y2= 158, color= '#a0a0a0'),
@@ -339,8 +338,7 @@ dict_steps_components = {
           x1: 57, y1: 87, x2: 57, y2: 256, voltage: '132'
         },
         {
-          x1: 118, y1: 256, x2: 118, y2: 310,
-          dash: true, color: '#a0a0a0'
+          x1: 118, y1: 256, x2: 118, y2: 310, dash: true, color: '#a0a0a0'
         },
         {
           x1: 140, y1: 256, x2: 140, y2: 310, color: '#a0a0a0'
@@ -479,8 +477,7 @@ dict_steps_components = {
           x1: 335, y1: 31, x2: 356, y2: 31, color: '#a0a0a0'
         },
         {
-          x1: 356, y1: 75, x2: 400, y2: 75,
-          dash: true, color: '#a0a0a0'
+          x1: 356, y1: 75, x2: 400, y2: 75, dash: true, color: '#a0a0a0'
         },
         {
           x1: 356, y1: 75, x2: 370, y2: 75, color: '#a0a0a0'
@@ -668,7 +665,7 @@ dict_steps_components = {
 //  dict_components.txs = []
 
     //add breakers
-  for(i in dict_components.breakers){
+  for(let i in dict_components.breakers){
     //doing this means the inital data, and the SVG elements they make remain unchanged at all times. may be very useful should a redraw/reset be needed...
     //define listener handles now since they have access to everything relevant
     let breaker = dict_components.breakers[i]
