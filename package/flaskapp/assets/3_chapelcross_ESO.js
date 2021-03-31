@@ -40,6 +40,29 @@ function Breaker_Callback(stages, holder){
             }
         }
     }
+function Text_Callback(holder){
+        return function(object){
+            //revamp post_breaker to a function that figures out its state instead
+//            object.on("breaker_clicked",function(){post_breaker()})
+            if(holder != undefined){
+                holder.push(object)
+            }
+        }
+    }
+function Tx_Callback(name, holder){
+        return function(circle1,circle2,circle3,circle4,group){
+            //revamp post_breaker to a function that figures out its state instead
+//            object.on("breaker_clicked",function(){post_breaker()})
+            if(holder != undefined){
+                holder.push(group)
+            }
+            add_text(circle1, false, [name], 47, 15, function(object){
+            return 0
+            });
+            eventMouse(group, "Transformer", "STCR3-_STCR5-_1");
+        }
+    }
+
 
 function Breaker(lineID, pos, size=6, state = false, stages = []){
     this.lineID = lineID
@@ -62,7 +85,55 @@ function Line(x1, y1,x2, y2, voltage="132", dash = false, colour = "#ffffff"){
     this.colour=colour
 }
 
-dict_components = {
+function StraightLine(origin, direction, length, voltage="132", dash = false, colour = "#ffffff"){
+    x1 = origin[0]
+    y1 = origin[1]
+    if(direction == "up"){
+    return new Line(x1,y1,x1,y1-length, voltage,dash,colour)
+    }
+    if(direction == "right"){
+    return new Line(x1,y1,x1+length,y1, voltage,dash,colour)
+    }
+    if(direction =="left"){
+        return new Line(x1,y1,x1-length,y1, voltage,dash,colour)
+        }
+    if(direction =="down"){
+    return new Line(x1,y1,x1,y1+length,voltage,dash,colour)
+    }
+}
+
+function RelativeLine(line,pos,direction,length, voltage="132", dash = false, colour = "#ffffff"){
+    x1 = line.x1,
+    y1 = line.y1,
+    x2 = line.x2,
+    y2 = line.y2,
+
+    xo = x1 + x2/pos
+    yo = y1 + y2/pos
+
+    return StraightLine([x0,y0],direction,length,voltage,dash,colour)
+
+}
+
+function Text(lineID, text, offset){
+    this.lineID = lineID
+    this.text_strings = text
+    this.offset = offset
+    this.graphic = []
+    this.callback = Text_Callback(this.graphic)
+}
+
+function Tx(lineID,pos,name,type="starDelta"){
+    this.lineID =lineID
+    this.pos = pos
+    this.name = name
+    this.graphic = []
+    this.type = type
+    this.callback = Tx_Callback(this.name, this.graphic)
+}
+
+
+test_network = {
     lines:{
       0 : new Line(72, 256,72, 420, '132'),
       1 : new Line(46, 256, 149, 256, '132'),
@@ -206,7 +277,47 @@ dict_components = {
         48: new Breaker(61,0.5,6,"closed",[]),
         49: new Breaker(68,0.15,6,"open",[]),
       },
+    text:{
+    0: new Text(1, ["Steven's Croft"], [10, -15]),
+    1: new Text(9, ["Chapelcross Grid", "33kV Busbar"],[ 0, -25]),
+    2: new Text(41,["Langholm"],[10,-15])
+    },
+    tx:{
+    0: new Tx(5,0.9,"test","starDelta")
+
+    }
   }
+chapelcross_GSP_33kV = {lines:{}}
+//1550 x 1160 in mm
+//scale of 1000 x 1000, readjust with math...
+chapelcross_GSP_33kV = {
+lines:{
+"Solway Bank": StraightLine([890,30],"right",130),
+
+
+0: StraightLine([20,175], "right",900),
+"698 16": StraightLine([35,175], "down",100),
+"698 15": StraightLine([85,175], "down",100),
+"698 14": StraightLine([145,175],"down",100),
+"698 13": StraightLine([250,175],"down",100),
+"698 12": StraightLine([330,175],"up",100),
+"698 11": StraightLine([415,175],"down",100),
+7: StraightLine([475,175],"down",100),
+8: StraightLine([570,175],"down",100),
+9: StraightLine([625,175],"down",100),
+10: StraightLine([670,175],"up",100),
+11: StraightLine([700,175],"down",100),
+12: StraightLine([780,175],"down",100),
+13: StraightLine([840,175],"down",100),
+14: StraightLine([900,175],"down",100),
+
+
+}
+
+}
+
+
+dict_components = chapelcross_GSP_33kV
 
 dict_steps_components = {
     '1_1': {
@@ -510,7 +621,8 @@ dict_steps_components = {
 
   components = {
     breakers: [],
-    lines: []
+    lines: [],
+    text:[]
   }
 
   var bNodes = false
@@ -553,36 +665,7 @@ dict_steps_components = {
     dict_components.lines[idx_line] = temp_dict
     components.lines[idx_line] = {initInfo:temp_dict, UIElement: temp_dict.o_line}
   }
-  dict_components.txs = []
-
-/* CANT USE CLASSES DUE TO IE INCOMPATABILITY
-  class BreakerComponent{
-    var UIElement
-    var initInfo
-    var id
-    var closed
-    constructor(breaker, id){
-        this.initInfo = breaker
-        this.id = id
-        let breaker = dict_components.breakers[i]
-        let line = dict_components.lines[breaker.lineID]
-        let size = breaker.size
-        let pos = breaker.pos
-        let state = breaker.state
-        let bcallback = breaker.callback
-        add_breaker(line,pos,size,state,bcallback)
-        this.closed = state == "closed"
-        this.UIElement = breaker.graphic[0]
-        //temp
-        this.UIElement.on("breaker_clicked",function(event){
-            let breaker = components.breakers[id]
-            breaker.closed=!breaker.closed
-            post_breaker(id,breaker.closed)
-    })
-
-    }
-  }
-*/
+//  dict_components.txs = []
 
     //add breakers
   for(i in dict_components.breakers){
@@ -597,7 +680,7 @@ dict_steps_components = {
     add_breaker(line,pos,size,state,bcallback)
     let id = i
 
-    let b = {initInfo:dict_components, UIElement: breaker.graphic[0], closed: closed, id : id}
+    let b = {initInfo:breaker, UIElement: breaker.graphic[0], closed: closed, id : id}
     b.setState = function(closed){
         this.closed = closed
         if (closed == false){
@@ -617,50 +700,36 @@ dict_steps_components = {
     components.breakers[id] = b
 
     }
-//
-//  var stage1_1 = []
-//
-//  var stage = 0
-//
-//
-//
-//  add_text(dict_steps_components['1_1'].lines[1].o_line, false, ["Steven's Croft"], 10, -15, function(object){
-//    return 0
-//  });
-//
-//  add_text(dict_steps_components['1_1'].lines[9].o_line, false, ["Chapelcross Grid", "33kV Busbar"], 0, -25, function(object){
-//    return 0
-//  });
-//
-//  add_text(dict_steps_components['1_1'].lines[41].o_line, false, ["Langholm"], 10, -15, function(object){
-//    return 0
-//  });
-//
-//  add_text(dict_steps_components['1_1'].lines[10].o_line, false, ["Annan","#1"], 30, -12, function(object){
-//    return 0
-//  });
-//  add_text(dict_steps_components['1_1'].lines[22].o_line, false, ["Middleby"], 50, -12, function(object){
-//    return 0
-//  });
-//  add_text(dict_steps_components['1_1'].lines[43].o_line, false, ["Minsca"], 20, -15, function(object){
-//    return 0
-//  });
-//  add_text(dict_steps_components['1_1'].lines[52].o_line, false, ["Lockerbie","#1"], 42, -50, function(object){
-//    return 0
-//  });
-//  add_text(dict_steps_components['1_1'].lines[68].o_line, false, ["Lockerbie","#2"], 42, -30, function(object){
-//    return 0
-//  });
-//  add_text(dict_steps_components['1_1'].lines[18].o_line, false, ["Annan","#2"], 42, -10, function(object){
-//    return 0
-//  });
-//  add_text(dict_steps_components['1_1'].lines[65].o_line, false, ["Lockerbie A"], -100, -13, function(object){
-//    return 0
-//  });
-//  add_text(dict_steps_components['1_1'].lines[65].o_line, false, ["Lockerbie B"], 100, -13, function(object){
-//    return 0
-//  });
-//
+
+  for(i in dict_components.text){
+    text = dict_components.text[i]
+    line_id = text.lineID
+    line = components.lines[line_id].UIElement
+    console.log(line)
+
+    texts = text.text_strings
+    offset = text.offset
+    add_text(line,false,texts, offset[0],offset[1],text.callback)
+    let id = i
+    let t = {initInfo:text, UIElement: text.graphic[0], id : id}
+    components.lines[id] = t
+    }
+
+  for(i in dict_components.tx){
+    tx = dict_components.tx[i]
+    line_id = tx.lineID
+    line = dict_components.lines[line_id]
+    name = tx.name
+    type = tx.type
+    pos = tx.pos
+    add_tx(line,pos,type,tx.callback)
+
+    let id = i
+    let t = {initInfo:tx, UIElement: tx.graphic[0], id : id}
+    components.lines[id] = t
+    }
+
+
 //  var powerColour = '#25b1f5'
 //
 //  // Stage Iterator
@@ -757,12 +826,6 @@ dict_steps_components = {
 //
 //
 //
-//  add_tx(dict_steps_components['1_1'].lines[5], 0.9, 'starDelta', function(dict_tx){
-//
-//    dict_steps_components['1_1'].txs += [dict_tx]
-//  });
-//
-//
 //  add_load(dict_steps_components['1_1'].lines[6], 1, true)
 //
 //  // add_earth(dict_steps_components['1_1'].lines[7], 0, false)
@@ -775,23 +838,23 @@ dict_steps_components = {
 //
 //  add_load(dict_steps_components['1_1'].lines[60], 1, true)
 //
-//  add_tx(dict_steps_components['1_1'].lines[11], 1, 'deltaStar', function(c1, c2, c3, c4, group){
-//    buttonA_greenObject(12, c1)
-//    buttonA_greenObject(12, c2)
-//    buttonA_greenObject(12, c3)
-//    buttonA_greenObject(12, c4)
-//    add_text(group, false, ["33/11.5kV"], 0, 30, function(object){
-//      return 0
-//    });
-//    eventMouse(group, "Transformer", "ANANT1_ANAN10_T1");
-//  });
+  add_tx(dict_components.lines[11], 1, 'deltaStar', function(c1, c2, c3, c4, group){
+    buttonA_greenObject(12, c1)
+    buttonA_greenObject(12, c2)
+    buttonA_greenObject(12, c3)
+    buttonA_greenObject(12, c4)
+    add_text(group, false, ["33/11.5kV"], 0, 30, function(object){
+      return 0
+    });
+    eventMouse(group, "Transformer", "ANANT1_ANAN10_T1");
+  });
 //
 //  add_load(dict_steps_components['1_1'].lines[14], 1, true)
 //
 //  add_load(dict_steps_components['1_1'].lines[36], 1, true)
 //
 //  add_load(dict_steps_components['1_1'].lines[15], 1, true)
-//
+////
 //  add_tx(dict_steps_components['1_1'].lines[17], 1, 'deltaStar', function(c1, c2, c3, c4, group){
 //    buttonA_greenObject(13, c1)
 //    buttonA_greenObject(13, c2)

@@ -5,7 +5,6 @@
 
     var bVertical = false
     var bHorizontal = false
-    var circle1, circle2, circle3, circle4
     var line1, line2, line3, line4
 
     var group = draw.group();
@@ -32,7 +31,6 @@
     circle2 = draw.circle(2*rad).center(toCenter[0], toCenter[1])
     circle3 = draw.circle(2*rad).center(fromCenter[0], fromCenter[1])
     circle4 = draw.circle(2*rad).center(toCenter[0], toCenter[1])
-
     circle1.fill('black')
     circle1.stroke({ color: 'white', width: circleWidth, linecap: 'white', linejoin: 'round' })
     circle2.fill('black')
@@ -53,8 +51,8 @@
 
     dict_tx.objects = [circle1, circle2, circle3, circle4]
     // alert(dict_tx.objects)
-
-    if (type === 'starDelta' | type === 'deltaStar'){
+    console.log(type)
+    if (type == 'starDelta' | type == 'deltaStar'){
 
       if (type === 'starDelta' & bVertical){
       starCenter = [fromCenter[0], fromCenter[1]-rad*0.1]
@@ -86,6 +84,8 @@
 
       starLine1 = draw.line(starCenterX, starCenterY,
                 starCenterX+stemLength, starCenterY).stroke({ width: 0.5})
+                console.log(starLine1)
+                console.log(starCenter)
       starLine2 = draw.line(starCenterX, starCenterY,
                 starCenterX, starTopY).stroke({ width: 1})
       starLine3 = draw.line(starCenterX, starCenterY,
