@@ -313,6 +313,9 @@ lines:{
 "GRID 1": StraightLine([330,175],"up",120),
     "into DAR tx":StraightLine([330,110],"left",40),
 "698 12": StraightLine([415,175],"down",75),
+    "into middlebie 1": StraightLine([200,250],"right",215),
+    "into middlebie 2":StraightLine([200,250],"down",275),
+    "into middlebie 3":StraightLine([95,525],"right",105),
 "698 11": StraightLine([475,175],"down",75),
 "698 21": StraightLine([570,175],"down",205),
     "698 right": StraightLine([570,380],"right",45),
@@ -323,9 +326,45 @@ lines:{
 "698 24": StraightLine([780,175],"down",110),
 "698 25": StraightLine([840,175],"down",60),
 "698 26": StraightLine([900,175],"down",75),
-"694": StraightLine([230,400],"right",350)
+"694": StraightLine([230,400],"right",350),
 
-},
+//Middlebie
+"M12": StraightLine([95,525],"down",50),
+"Middlebie": StraightLine([65,575],"right",175),
+"M13": StraightLine([80,575],"down",160),
+"M14": StraightLine([160,575],"down",190),
+"M11": StraightLine([205,575],"down",120),
+
+"into EWE HILL 1": StraightLine([80,735],"left",50),
+"into EWE HILL 2": StraightLine([30,735],"down",150),
+"into EWE HILL 3": StraightLine([30,885],"right",30),
+"EH12": StraightLine([60,885],"up",80),
+"EWE HILL": StraightLine([45,805],"right",85),
+"EH11": StraightLine([115,805],"down",90),
+
+"Middlebie Primary Transformer": StraightLine([205,695],"right",25),
+"MP10": StraightLine([230,695],"right",50),
+"intoMP": StraightLine([275,730],"up",35),
+"MP": StraightLine([260,730],"right",85),
+
+"into Langholm 1": StraightLine([160,765],"right",150),
+"Langholm 33kv": StraightLine([300,790],"right",310),
+"into Langholm 2": StraightLine([310,765],"down",90),
+"Langholm tx 33kV": StraightLine([310,855],"right",35),
+"Langholm10": StraightLine([395,855],"left",50),
+"Langholm 11kV 1": StraightLine([395,855],"down",35),
+"Langholm01": StraightLine([365,890],"right",100),
+"Langholm 11kV 2": StraightLine([445,855],"down",35),
+"Langholm20": StraightLine([445,855],"right",35),
+"Langholm Tx2": StraightLine([525,855],"left",35),
+
+"Langholm to gretna 1": StraightLine([525,855],"up",175),
+"Langholm to gretna 2": StraightLine([525,680],"right",90),
+"Langholm to gretna 3": StraightLine([615,680],"up",300),
+
+
+
+ },
 breakers:{
     "698 16": new Breaker("698 16",0.25,6,"closed"),
     "698 15": new Breaker("698 15",0.07,6,"closed"),
@@ -347,13 +386,34 @@ breakers:{
     "678 12": new Breaker("378 12",0.3,6,"closed"),
     "GRID 2": new Breaker("GRID 2",0.2,6,"closed"),
 
+    "694": new Breaker("694",0.5,6,"closed"),
 
+    //CB W/Arc
+
+    "M12": new Breaker("M12",0.5,6,"closed"),
+    "M13": new Breaker("M13",0.1,6,"closed"),
+    "M14": new Breaker("M14",0.08,6,"closed"),
+    "M11": new Breaker("M11",0.12,6,"closed"),
+
+    "EH12": new Breaker("EH12",0.65,6,"closed"),
+    "EH11": new Breaker("EH11",0.3,6,"closed"),
+
+    "MP10": new Breaker("MP10",0.6,6,"closed"),
+
+    "LH10": new Breaker("Langholm10",0.3,6,"closed"),
+    "LH01": new Breaker("Langholm01",0.55,6,"closed"),
+    "LH20": new Breaker("Langholm20",0.4,6,"closed"),
     },
 tx:{
     0: new Tx("into GRID 2 tx",1,"",type="starDelta"),
     1: new Tx("GRID 2",1,"GRID T2",type="starDelta"),
     2: new Tx("GRID 1",1,"GRID T1",type="starDelta"),
     3: new Tx("into DAR tx",1,"",type="starDelta"),
+    4: new Tx("into ANNAN",1,"T1",type="starDelta"),
+    5: new Tx("Middlebie Primary Transformer",1,"Middlebie Primary", type="starDelta"),
+    6: new Tx("Langholm tx 33kV",1,"T1",type="starDelta"),
+    7: new Tx("Langholm Tx2",1,"T2",type="starDelta"),
+
     }
 
 }
@@ -723,20 +783,21 @@ dict_steps_components = {
     closed = state==="closed"
     let b = {initInfo:breaker, UIElement: breaker.graphic[0], closed: closed, id : id}
     b.setState = function(closed){
+        rect = components.breakers[id].UIElement
         this.closed = closed
         if (closed == false){
-            dict_line.dict_styling.fill.color = 'black'
-            dict_line.dict_styling.stroke.color = 'white'
+            rect.fill({ color: 'black' })
+            rect.stroke({ color: 'white' })
         } else if (closed == true){
-            dict_line.dict_styling.fill.color = 'white'
-            dict_line.dict_styling.stroke.color = 'white'
+            rect.fill({ color: 'white' })
+            rect.stroke({ color: 'white' })
       }
     }
     b.UIElement.on("breaker_clicked",function(event){
-//        let breaker = components.breakers[id]
-//        breaker.setState(!breaker.closed)
-////        breaker.closed=!breaker.closed
-//        post_breaker(id,breaker.closed)
+        let breaker = components.breakers[id]
+        breaker.setState(!breaker.closed)
+//        breaker.closed=!breaker.closed
+        post_breaker(id,breaker.closed)
     })
 
     components.breakers[id] = b
