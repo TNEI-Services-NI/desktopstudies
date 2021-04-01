@@ -550,7 +550,7 @@ generators:{
     1: new Generator("698 15",1),
     2: new Generator("781 11",1),
     3: new Generator("785 22",1),
-    4: new Generator("761 GENERATOR", 1),
+    "MINSCA WF": new Generator("761 GENERATOR", 1),
     5: new Generator("378 12",1),
     }
 }
@@ -601,8 +601,8 @@ chapelcross_132kV={
 
     "716": StraightLine([240,370],"down",100,"132kV"),
     "714": StraightLine([240,470],"down",100,"132kV"),
-        "710": StraightLine([285,465],"down",225,"132kV"),
-        "710 A": StraightLine([285,465],"left",45,"132kV"),
+        "710": StraightLine([280,465],"down",225,"132kV"),
+        "710 A": StraightLine([280,465],"left",45,"132kV"),
 
     "916": StraightLine([150,370],"down",100,"132kV"),
     "914": StraightLine([150,470],"down",100,"132kV"),
@@ -1055,7 +1055,7 @@ for (idx_line in dict_components.lines){
     }
 
     dict_components.lines[idx_line] = temp_dict
-    components.lines[idx_line] = {initInfo:temp_dict, UIElement: temp_dict.o_line}
+    components.lines[idx_line] = {drawInfo:temp_dict, UIElement: temp_dict.o_line}
   }
 //  dict_components.txs = []
 
@@ -1072,17 +1072,21 @@ for (idx_line in dict_components.lines){
     let bcallback = breaker.callback
     add_breaker(line,pos,size,state,bcallback)
     let id = i
-    closed = state==="closed"
-    let b = {initInfo:breaker, UIElement: breaker.graphic[0], closed: closed, id : id}
+    let closed = state == 'closed'
+
+    let b = {drawInfo:breaker, UIElement: breaker.graphic[0], closed: closed, id : id, line : line}
     b.setState = function(closed){
+        breaker = components.breakers[id].line
         rect = components.breakers[id].UIElement
+
+        color = palette[line.voltage]
         this.closed = closed
         if (closed == false){
             rect.fill({ color: 'black' })
             rect.stroke({ color: 'white' })
         } else if (closed == true){
-            rect.fill({ color: 'white' })
-            rect.stroke({ color: 'white' })
+            rect.fill({ color: color })
+            rect.stroke({ color: "white" })
       }
     }
     b.UIElement.on("breaker_clicked",function(event){
