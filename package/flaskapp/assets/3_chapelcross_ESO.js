@@ -64,7 +64,7 @@ function Tx_Callback(name, holder){
     }
 
 
-function Breaker(lineID, pos, size=6, state = false, stages = []){
+function Breaker(lineID, pos, size=6, state = "closed", stages = []){
     this.lineID = lineID
     this.pos = pos
     this.size = size
@@ -74,7 +74,7 @@ function Breaker(lineID, pos, size=6, state = false, stages = []){
     this.callback = Breaker_Callback(stages,this.graphic)
 }
 
-function Line(x1, y1,x2, y2, voltage="132", dash = false, colour = "#ffffff"){
+function Line(x1, y1,x2, y2, voltage="32kV", dash = false, colour = "#ffffff"){
     this.x1 = x1
     this.x2 = x2
     this.y1 = y1
@@ -85,7 +85,7 @@ function Line(x1, y1,x2, y2, voltage="132", dash = false, colour = "#ffffff"){
     this.colour=colour
 }
 
-function StraightLine(origin, direction, length, voltage="132", dash = false, colour = "#ffffff"){
+function StraightLine(origin, direction, length, voltage="32kV", dash = false, colour = "#ffffff"){
     x1 = origin[0]
     y1 = origin[1]
     if(direction == "up"){
@@ -100,18 +100,6 @@ function StraightLine(origin, direction, length, voltage="132", dash = false, co
     if(direction =="down"){
     return new Line(x1,y1,x1,y1+length,voltage,dash,colour)
     }
-}
-
-function RelativeLine(line,pos,direction,length, voltage="132", dash = false, colour = "#ffffff"){
-    x1 = line.x1,
-    y1 = line.y1,
-    x2 = line.x2,
-    y2 = line.y2,
-
-    xo = x1 + x2/pos
-    yo = y1 + y2/pos
-    return StraightLine([x0,y0],direction,length,voltage,dash,colour)
-
 }
 
 function Text(lineID, text, offset){
@@ -317,8 +305,8 @@ lines:{
     "into middlebie 2":StraightLine([200,250],"down",275),
     "into middlebie 3":StraightLine([95,525],"right",105),
 "698 11": StraightLine([475,175],"down",75),
-    "698 into Gretna 1":StraightLine([725,245],"left",254),
-     "698 into Gretna 2" :StraightLine([725,245],"down",70),
+    "698 into Gretna 1":StraightLine([725,250],"left",250),
+     "698 into Gretna 2" :StraightLine([725,250],"down",65),
      "698 into Gretna 3" :StraightLine([845,315],"left",120),
      "698 into Gretna 4" :StraightLine([845,315],"down",70),
 
@@ -398,12 +386,63 @@ lines:{
 "GRETNA 1": StraightLine([615,535],"right",30),
 "GRETNA 2": StraightLine([645,535],"up",150),
 "GRETNA 691": StraightLine([630,385],"right",245),
+"GRETNA 3": StraightLine([655,460],"up",75),
+"GRETNA T1": StraightLine([655,460],"right",35),
+"GRETNA T2": StraightLine([865,460],"left",35),
+"GRETNA 6":StraightLine([865,460],"up",75),
+
+//GRETNA 33kV
+"673 10": StraightLine([735,460],"left",50),
+"GRETNA 4": StraightLine([735,460],"down",35),
+"673 01": StraightLine([705,496],"right",100),
+"GRETNA 5": StraightLine([785,460],"down",35),
+"673 20": StraightLine([785,460],"right",50),
+
+"694 12": StraightLine([305,455],"up",55),
+"694 22": StraightLine([515,455],"up",55),
+
+"LOCKERBIE T1": StraightLine([305,455],"right",35),
+"679 10": StraightLine([340,455],"right",50),
+"LOCKERBIE 1": StraightLine([390,455],"down",35),
+"679 01": StraightLine([360,490],"right",100),
+"LOCKERBIE 2": StraightLine([435,455],"down",35),
+"679 20": StraightLine([435,455],"right",50),
+"LOCKERBIE T2": StraightLine([485,455],"right",35),
+
+"MINSKA 1": StraightLine([905,285],"left",125),
+"MINSKA 2": StraightLine([905,285],"down",210),
+"MINSKA 3": StraightLine([850,495],"right",55),
+"MINSKA 4": StraightLine([850,670],"up",175),
+"MINSKA 5": StraightLine([850,670],"right",30),
+
+"761 CHAP": StraightLine([880,670],"up",60),
+"761": StraightLine([870,610],"right",105),
+"761 WINDFARM": StraightLine([940,610],"down",30),
+"761 CUSTOMER": StraightLine([940,690],"up",50),
+"761 GENERATOR": StraightLine([940,690],"down",60),
+"761 DASH": StraightLine([925,660],"right",30),
+
+"NEWCASTLETON 1": StraightLine([585,820],"up",30),
+"NEWCASTLETON 2": StraightLine([585,820],"right",50),
+"NEWCASTLETON 3": StraightLine([635,645],"down",175),
+"NEWCASTLETON T1": StraightLine([635,645],"right",30),
+
+"123 10":StraightLine([710,645],"left",50, "11kV"),
+"NEWCASTLETON 4": StraightLine([710,645],"down",35, "11kV"),
+"NEWCASTLETON 5": StraightLine([695,680],"right",85, "11kV"),
+"123 12": StraightLine([745,680],"down",55, "11kV"),
+
+"785 A": StraightLine([680,940],"left",155,"11kV"),
+"785 21": StraightLine([680,940],"up",160, "11kV"),
+"785 B": StraightLine([670,780],"right",90,"11kV"),
+"785 22": StraightLine([740,780],"down",145,"11kV"),
+"785 DASH": StraightLine([720,835],"right",45,dash=true),
 
  },
 breakers:{
     "698 16": new Breaker("698 16",0.25,6,"closed"),
     "698 15": new Breaker("698 15",0.07,6,"closed"),
-    "CHAP": new Breaker("698 15",0.60,6,"closed"),
+    "699 CHAP": new Breaker("698 15",0.60,6,"closed"),
     "SC generator Breaker": new Breaker("698 15",0.85,6,"open"),
     "698 14": new Breaker("698 14",0.19,6,"closed"),
     "698 13": new Breaker("698 13",0.1,6,"closed"),
@@ -421,7 +460,7 @@ breakers:{
     "678 12": new Breaker("378 12",0.3,6,"closed"),
     "GRID 2": new Breaker("GRID 2",0.2,6,"closed"),
 
-    "694": new Breaker("694",0.5,6,"closed"),
+    "694": new Breaker("694",0.53,6,"closed"),
 
     //CB W/Arc
 
@@ -450,6 +489,29 @@ breakers:{
     "683 10": new Breaker("MOFFAT10",0.3,6,"closed"),
     "683 01": new Breaker("MOFFAT01", 0.55,6,"closed"),
     "683 20": new Breaker("MOFFAT20", 0.3,6,"closed"),
+
+    "694 12": new Breaker("694 12", 0.5,6,"closed"),
+    "694 22": new Breaker("694 22", 0.5),
+
+    "679 10": new Breaker("679 10", 0.7),
+    "679 01": new Breaker("679 01",0.55),
+    "679 20": new Breaker("679 20",0.3),
+
+    "673 10": new Breaker("673 10",0.25),
+    "673 01": new Breaker("673 01",0.55),
+    "673 20": new Breaker("673 20",0.25),
+
+    "761 CHAP": new Breaker("761 CHAP",0.55),
+    "761 WINDFARM": new Breaker("761 WINDFARM",1),
+    "761 CUSTOMER": new Breaker("761 CUSTOMER",0),
+
+    "123 10": new Breaker("123 10",0.25),
+    "123 12": new Breaker("123 12",0.7),
+
+    "785 21": new Breaker("785 21",0.86),
+    "785 22": new Breaker("785 22",0.15),
+    "785 CUSTOMER BREAKER": new Breaker("785 22",0.5,6,"open"),
+
     },
 tx:{
     0: new Tx("into GRID 2 tx",1,"",type="starDelta"),
@@ -464,6 +526,13 @@ tx:{
     11: new Tx("KIRKBANK T",1,"T", type="starDelta"),
     12: new Tx("MOFFAT T1",1,"T1",type="starDelta"),
     13: new Tx("MOFFAT20",1,"T1",type="starDelta"),
+
+    14: new Tx("LOCKERBIE T1", 1, "T1"),
+    15: new Tx("LOCKERBIE T2",0,"T2"),
+
+    16: new Tx("GRETNA T1",1,"T1"),
+
+    17: new Tx("NEWCASTLETON T1",1,"T1"),
     }
 
 }
