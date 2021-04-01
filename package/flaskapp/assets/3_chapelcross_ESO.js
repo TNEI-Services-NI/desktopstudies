@@ -121,6 +121,15 @@ function Tx(lineID,pos,name,type="starDelta", coil1 = "33kV",coil2 = "33kV"){
     this.callback = Tx_Callback(this.name, this.graphic)
 }
 
+function Generator(line_id,pos, type= "wind"){
+    this.lineID = line_id
+    this.pos = pos
+    this.type = type
+    this.graphic=[]
+    //TEMP Breaker callback
+    this.callback = Breaker_Callback(this.graphic)
+}
+
 
 test_network = {
     lines:{
@@ -336,9 +345,9 @@ lines:{
 "into EWE HILL 1": StraightLine([80,735],"left",50),
 "into EWE HILL 2": StraightLine([30,735],"down",150),
 "into EWE HILL 3": StraightLine([30,885],"right",30),
-"EH12": StraightLine([60,885],"up",80),
+"781 12": StraightLine([60,885],"up",80),
 "EWE HILL": StraightLine([45,805],"right",85),
-"EH11": StraightLine([115,805],"down",90),
+"781 11": StraightLine([115,805],"down",90),
 
 "Middlebie Primary Transformer": StraightLine([205,695],"right",25),
 "MP10": StraightLine([230,695],"right",50,"11kV"),
@@ -462,15 +471,15 @@ breakers:{
 
     "694": new Breaker("694",0.53,"closed"),
 
-    //CB W/Arc
+    //some of these below are arc breakers
 
     "M12": new Breaker("M12",0.5,"closed"),
     "M13": new Breaker("M13",0.1,"closed"),
     "M14": new Breaker("M14",0.08,"closed"),
     "M11": new Breaker("M11",0.12,"closed"),
 
-    "EH12": new Breaker("EH12",0.65,"closed"),
-    "EH11": new Breaker("EH11",0.3,"closed"),
+    "781 12": new Breaker("781 12",0.65,"closed"),
+    "781 11": new Breaker("781 11",0.3,"closed"),
 
     "MP10": new Breaker("MP10",0.6,"closed"),
 
@@ -534,8 +543,15 @@ tx:{
     17: new Tx("GRETNA T2",1,"T2"),
 
     18: new Tx("NEWCASTLETON T1",1,"T1"),
-    }
 
+    },
+generators:{
+    1: new Generator("698 15",1),
+    2: new Generator("781 11",1),
+    3: new Generator("785 22",1),
+    4: new Generator("761 GENERATOR", 1),
+    5: new Generator("378 12",1),
+    }
 }
 
 chapelcross_132kV={
@@ -984,7 +1000,8 @@ dict_steps_components = {
   components = {
     breakers: [],
     lines: [],
-    text:[]
+    text:[],
+    generators: [],
   }
 var idx_line, temp_dict
 for (idx_line in dict_components.lines){
@@ -996,7 +1013,6 @@ for (idx_line in dict_components.lines){
   }
 
   var bNodes = false
-
 
   for (idx_line in dict_components.lines){
     temp_dict = dict_components.lines[idx_line]
@@ -1076,7 +1092,7 @@ for (idx_line in dict_components.lines){
     components.breakers[id] = b
 
     }
-
+    //add text
   for(i in dict_components.text){
     text = dict_components.text[i]
     line_id = text.lineID
@@ -1091,6 +1107,7 @@ for (idx_line in dict_components.lines){
     components.lines[id] = t
     }
 
+    //add transformers
   for(i in dict_components.tx){
     tx = dict_components.tx[i]
     line_id = tx.lineID
@@ -1105,6 +1122,20 @@ for (idx_line in dict_components.lines){
     components.lines[id] = t
     }
 
+    //add Generators
+   for(i in dict_components.generators){
+    gen = dict_components.generators[i]
+    line = dict_components.lines[gen.lineID]
+    pos = gen.pos
+    callback = gen.callback
+    type = gen.type
+
+    add_gen(line,pos,type, callback)
+    id = i
+    let g = {initInfo:gen, UIElement: gen.graphic[0], id : id}
+    components.generators[id] = g
+
+   }
 
 //  var powerColour = '#25b1f5'
 //
