@@ -600,8 +600,8 @@ chapelcross_132kV={
 
     "716": StraightLine([240,370],"down",100,"132kV"),
     "714": StraightLine([240,470],"down",100,"132kV"),
-        "710": StraightLine([285,465],"down",225,"132kV"),
-        "710 A": StraightLine([285,465],"left",45,"132kV"),
+        "710": StraightLine([280,465],"down",225,"132kV"),
+        "710 A": StraightLine([280,465],"left",45,"132kV"),
 
     "916": StraightLine([150,370],"down",100,"132kV"),
     "914": StraightLine([150,470],"down",100,"132kV"),
@@ -697,7 +697,7 @@ Gretna_400kV={
     }
 }
 
-dict_components = chapelcross_GSP_33kV
+dict_components = Gretna_400kV
 
 dict_steps_components = {
     '1_1': {
@@ -1069,18 +1069,21 @@ for (idx_line in dict_components.lines){
     let bcallback = breaker.callback
     add_breaker(line,pos,size,state,bcallback)
     let id = i
-    closed = (state === 'closed')
-    console.log(closed)
-    let b = {initInfo:breaker, UIElement: breaker.graphic[0], closed: closed, id : id}
+    let closed = state == 'closed'
+
+    let b = {drawInfo:breaker, UIElement: breaker.graphic[0], closed: closed, id : id, line : line}
     b.setState = function(closed){
+        breaker = components.breakers[id].line
         rect = components.breakers[id].UIElement
+
+        color = palette[line.voltage]
         this.closed = closed
         if (closed == false){
             rect.fill({ color: 'black' })
             rect.stroke({ color: 'white' })
         } else if (closed == true){
-            rect.fill({ color: "white" })
-            rect.stroke({ color: 'white' })
+            rect.fill({ color: color })
+            rect.stroke({ color: "white" })
       }
     }
     b.UIElement.on("breaker_clicked",function(event){
@@ -1135,7 +1138,6 @@ for (idx_line in dict_components.lines){
     id = i
     let g = {initInfo:gen, UIElement: gen.graphic[0], id : id}
     components.generators[id] = g
-
    }
 
 //  var powerColour = '#25b1f5'

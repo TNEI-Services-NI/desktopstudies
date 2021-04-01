@@ -270,41 +270,19 @@ let palette = {"400kV":"#0000bc", "132kV":"#00cbff", "33kV":"#00ff00", "11kV":"#
       bHorizontal = true;
       var center = [dict_line.x1+(dict_line.x2-dict_line.x1)*position, dict_line.y1];
     }
-    // alert(dict_line.dict_styling.fill)
-    // if(dict_line.dict_styling.stroke.color !== '#a0a0a0'){
     closed_color = dict_line.dict_styling.stroke.color
-
+    console.log(closed_color)
       if (state === 'open'){
-        dict_line.dict_styling.fill.color = 'black'
-        dict_line.dict_styling.stroke.color = 'white'
+        fill_color = "black"
+        stroke_color = "white"
       } else if (state === 'closed'){
-        dict_line.dict_styling.fill.color = closed_color
-        dict_line.dict_styling.stroke.color = 'white'
+        fill_color = closed_color
+        stroke_color = "white"
       }
-    // } else {
-    //   if (state === 'open'){
-    //     dict_line.dict_styling.fill.color = 'white'
-    //     dict_line.dict_styling.stroke.color = '#a0a0a0'
-    //   } else if (state === 'closed'){
-    //     dict_line.dict_styling.fill.color = '#a0a0a0'
-    //     dict_line.dict_styling.stroke.color = '#a0a0a0'
-    //   }
-    // }
 
-    if (state === 'open'){
-      rect1 = draw.rect(size, size).center(center[0], center[1]).fill(dict_line.dict_styling.fill).stroke(dict_line.dict_styling.stroke).stroke({width: 1})
-    }
-    if (state === 'closed'){
-      rect1 = draw.rect(size, size).center(center[0], center[1]).fill(dict_line.dict_styling.fill).stroke(dict_line.dict_styling.stroke).stroke({width: 1})
-    }
+      rect1 = draw.rect(size, size).center(center[0], center[1]).fill(closed_color).stroke(stroke_color).stroke({width: 1})
 
     rect1.click(function() {
-//      if (this.attr('fill') === dict_line.dict_styling.stroke.color){
-//        this.fill({ color: 'black' })
-//      } else {
-//        this.fill(dict_line.dict_styling.stroke)
-//      }
-
       this.fire(breaker_clicked_event)
     });
 
