@@ -2,6 +2,7 @@ from . import simtool_bp
 from flask import render_template, request, jsonify
 from flask_login import login_required
 import package.flaskapp.dash_simtool.app as dash_app
+import package.data as simtool_data
 
 
 @simtool_bp.route('/home')
@@ -19,10 +20,12 @@ def receive_breaker():
     return jsonify("message received securely")
 
 
-@simtool_bp.route("/init_breaker/", methods=['POST'])
+@simtool_bp.route("/init_breakers/", methods=['POST'])
 @login_required
-def init_breaker():
+def init_breakers():
     data = request.form
-    print("breaker ID: "+ data["breaker"])
-    print("state: "+ data["state"])
-    return jsonify("message received securely")
+    # print("breaker ID: " + data["breaker"])
+    df_breakerstates = simtool_data.read_breaker_states('chapelcross', '33kv')
+    # print(df_breakerstates.loc[df_breakerstates['breaker']==data["breaker"]])
+    # print(df_breakerstates)
+    return jsonify(df_breakerstates.to_dict())

@@ -53,7 +53,7 @@ let palette = {"400kV":"#0000bc", "132kV":"#00cbff", "33kV":"#00ff00", "11kV":"#
 
     dict_tx.objects = [circle1, circle2, circle3, circle4]
     // alert(dict_tx.objects)
-    console.log(type)
+    // console.log(type)
     if (type == 'starDelta' | type == 'deltaStar'){
 
       if (type === 'starDelta' & bVertical){
@@ -86,8 +86,8 @@ let palette = {"400kV":"#0000bc", "132kV":"#00cbff", "33kV":"#00ff00", "11kV":"#
 
       starLine1 = draw.line(starCenterX, starCenterY,
                 starCenterX+stemLength, starCenterY).stroke({ width: 0.5})
-                console.log(starLine1)
-                console.log(starCenter)
+                // console.log(starLine1)
+                // console.log(starCenter)
       starLine2 = draw.line(starCenterX, starCenterY,
                 starCenterX, starTopY).stroke({ width: 1})
       starLine3 = draw.line(starCenterX, starCenterY,
@@ -621,7 +621,34 @@ let palette = {"400kV":"#0000bc", "132kV":"#00cbff", "33kV":"#00ff00", "11kV":"#
       data: {"breaker": breakerID, "state": state },
 //      dataType: 'application/json'
       }).done(function( data ) {
-        console.log(data);
+        // console.log(data);
       })
   }
 
+    function init_breakers(network, voltage, breakers, callback){
+        $.ajax({
+        type: "POST",
+        url: "init_breakers/",
+        data: {"network": network, "voltage": voltage},
+  //      dataType: 'application/json'
+        }).done(function( breaker_states ) {
+          // console.log(breaker_states);
+          for (breaker in breakers){
+            breakers[breaker].state = breaker_states["state"][breaker]
+            // console.log(breaker_states["state"][breaker])
+            // console.log(breakers[breaker].state)
+          }
+          callback(breakers)
+        })
+    }
+
+    function init_breaker(breakerID){
+      $.ajax({
+      type: "POST",
+      url: "init_breaker/",
+      data: {"breaker": breakerID},
+//      dataType: 'application/json'
+      }).done(function( state ) {
+        console.log(state);
+      })
+  }

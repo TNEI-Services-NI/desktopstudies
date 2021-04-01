@@ -72,6 +72,7 @@ function Breaker(lineID, pos, state = "closed", stages = []){
     this.stages = stages
     this.graphic = []
     this.callback = Breaker_Callback(stages,this.graphic)
+
 }
 
 function Line(x1, y1,x2, y2, voltage="32kV", dash = false, colour = "#ffffff"){
@@ -699,6 +700,8 @@ Gretna_400kV={
 
 dict_components = chapelcross_GSP_33kV
 
+init_breakers("chapelcross", "33kv", dict_components.breakers);
+
 dict_steps_components = {
     '1_1': {
       lines: [
@@ -1065,7 +1068,7 @@ for (idx_line in dict_components.lines){
     let size = breaker.size
     let pos = breaker.pos
     let state = breaker.state
-    console.log(state)
+    // console.log(state)
     let bcallback = breaker.callback
     add_breaker(line,pos,size,state,bcallback)
     let id = i
@@ -1097,7 +1100,7 @@ for (idx_line in dict_components.lines){
     text = dict_components.text[i]
     line_id = text.lineID
     line = components.lines[line_id].UIElement
-    console.log(line)
+    // console.log(line)
 
     texts = text.text_strings
     offset = text.offset
