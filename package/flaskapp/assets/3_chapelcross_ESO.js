@@ -26,7 +26,7 @@
   var draw = SVG('#drawing').size(x, y)
 
   var x_scaling = x/1350
-  var y_scaling = y/730
+  var y_scaling = y/1100
 
 function Breaker_Callback(stages, holder){
         return function(object){
@@ -986,10 +986,18 @@ dict_steps_components = {
     lines: [],
     text:[]
   }
+var idx_line, temp_dict
+for (idx_line in dict_components.lines){
+    temp_dict = dict_components.lines[idx_line]
+    temp_dict.x1 = temp_dict.x1 * x_scaling
+    temp_dict.x2 = temp_dict.x2 * x_scaling
+    temp_dict.y1 = temp_dict.y1 * y_scaling
+    temp_dict.y2 = temp_dict.y2 * y_scaling
+  }
 
   var bNodes = false
 
-  var idx_line, temp_dict
+
   for (idx_line in dict_components.lines){
     temp_dict = dict_components.lines[idx_line]
     temp_dict.dict_styling = {fill: { width: 2}, stroke: { width: 2}}
@@ -1015,7 +1023,7 @@ dict_steps_components = {
     //     temp_dict.dict_styling.fill.color = "#ff0000"
     //   }
     // }
-    temp_dict.o_line = draw.line(temp_dict.x1, temp_dict.y1,
+    temp_dict.o_line = draw.line(temp_dict.x1 , temp_dict.y1,
                                   temp_dict.x2, temp_dict.y2).stroke(temp_dict.dict_styling.stroke)
 
     temp_dict.line_idx = idx_line
