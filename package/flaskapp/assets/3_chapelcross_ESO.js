@@ -549,7 +549,7 @@ generators:{
     1: new Generator("698 15",1),
     2: new Generator("781 11",1),
     3: new Generator("785 22",1),
-    4: new Generator("761 GENERATOR", 1),
+    "MINSCA WF": new Generator("761 GENERATOR", 1),
     5: new Generator("378 12",1),
     }
 }
@@ -1052,7 +1052,7 @@ for (idx_line in dict_components.lines){
     }
 
     dict_components.lines[idx_line] = temp_dict
-    components.lines[idx_line] = {initInfo:temp_dict, UIElement: temp_dict.o_line}
+    components.lines[idx_line] = {drawInfo:temp_dict, UIElement: temp_dict.o_line}
   }
 //  dict_components.txs = []
 
@@ -1069,7 +1069,8 @@ for (idx_line in dict_components.lines){
     let bcallback = breaker.callback
     add_breaker(line,pos,size,state,bcallback)
     let id = i
-    closed = state==="closed"
+    closed = (state === 'closed')
+    console.log(closed)
     let b = {initInfo:breaker, UIElement: breaker.graphic[0], closed: closed, id : id}
     b.setState = function(closed){
         rect = components.breakers[id].UIElement
@@ -1078,7 +1079,7 @@ for (idx_line in dict_components.lines){
             rect.fill({ color: 'black' })
             rect.stroke({ color: 'white' })
         } else if (closed == true){
-            rect.fill({ color: 'white' })
+            rect.fill({ color: "white" })
             rect.stroke({ color: 'white' })
       }
     }

@@ -272,11 +272,13 @@ let palette = {"400kV":"#0000bc", "132kV":"#00cbff", "33kV":"#00ff00", "11kV":"#
     }
     // alert(dict_line.dict_styling.fill)
     // if(dict_line.dict_styling.stroke.color !== '#a0a0a0'){
+    closed_color = dict_line.dict_styling.stroke.color
+
       if (state === 'open'){
         dict_line.dict_styling.fill.color = 'black'
         dict_line.dict_styling.stroke.color = 'white'
       } else if (state === 'closed'){
-        dict_line.dict_styling.fill.color = 'white'
+        dict_line.dict_styling.fill.color = closed_color
         dict_line.dict_styling.stroke.color = 'white'
       }
     // } else {
