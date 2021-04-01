@@ -68,7 +68,7 @@ function Breaker(lineID, pos, state = "closed", stages = []){
     this.lineID = lineID
     this.pos = pos
     this.state = state
-    this.size = 6
+    this.size = 12
     this.stages = stages
     this.graphic = []
     this.callback = Breaker_Callback(stages,this.graphic)
