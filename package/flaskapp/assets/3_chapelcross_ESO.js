@@ -64,11 +64,11 @@ function Tx_Callback(name, holder){
     }
 
 
-function Breaker(lineID, pos, size=6, state = "closed", stages = []){
+function Breaker(lineID, pos, state = "closed", stages = []){
     this.lineID = lineID
     this.pos = pos
-    this.size = size
     this.state = state
+    this.size = 6
     this.stages = stages
     this.graphic = []
     this.callback = Breaker_Callback(stages,this.graphic)
@@ -110,7 +110,7 @@ function Text(lineID, text, offset){
     this.callback = Text_Callback(this.graphic)
 }
 
-function Tx(lineID,pos,name,type="starDelta", coil1 = "33KV",coil2 = "33KV"){
+function Tx(lineID,pos,name,type="starDelta", coil1 = "33kV",coil2 = "33kV"){
     this.lineID =lineID
     this.pos = pos
     this.name = name
@@ -440,57 +440,57 @@ lines:{
 
  },
 breakers:{
-    "698 16": new Breaker("698 16",0.25,6,"closed"),
-    "698 15": new Breaker("698 15",0.07,6,"closed"),
-    "699 CHAP": new Breaker("698 15",0.60,6,"closed"),
-    "SC generator Breaker": new Breaker("698 15",0.85,6,"open"),
-    "698 14": new Breaker("698 14",0.19,6,"closed"),
-    "698 13": new Breaker("698 13",0.1,6,"closed"),
-    "GRID 1": new Breaker("GRID 1",0.2,6,"closed"),
-    "698 12": new Breaker("698 12",0.3,6,"closed"),
-    "698 11": new Breaker("698 11",0.3,6,"closed"),
-    "698 01": new Breaker("698 01",0.555,6,"closed"),
-    "698 21": new Breaker("698 21",0.11,6,"closed"),
-    "698 22": new Breaker("698 22",0.16,6,"closed"),
-    "698 23": new Breaker("698 23",0.19,6,"closed"),
-    "698 24": new Breaker("698 24",0.19,6,"closed"),
-    "698 25": new Breaker("698 25",0.31,6,"closed"),
-    "698 26": new Breaker("698 26",0.26,6,"closed"),
-    "678 11": new Breaker("378 11",0.18,6,"closed"),
-    "678 12": new Breaker("378 12",0.3,6,"closed"),
-    "GRID 2": new Breaker("GRID 2",0.2,6,"closed"),
+    "698 16": new Breaker("698 16",0.25,"closed"),
+    "698 15": new Breaker("698 15",0.07,"closed"),
+    "699 CHAP": new Breaker("698 15",0.60,"closed"),
+    "SC generator Breaker": new Breaker("698 15",0.85,"open"),
+    "698 14": new Breaker("698 14",0.19,"closed"),
+    "698 13": new Breaker("698 13",0.1,"closed"),
+    "GRID 1": new Breaker("GRID 1",0.2,"closed"),
+    "698 12": new Breaker("698 12",0.3,"closed"),
+    "698 11": new Breaker("698 11",0.3,"closed"),
+    "698 01": new Breaker("698 01",0.555,"closed"),
+    "698 21": new Breaker("698 21",0.11,"closed"),
+    "698 22": new Breaker("698 22",0.16,"closed"),
+    "698 23": new Breaker("698 23",0.19,"closed"),
+    "698 24": new Breaker("698 24",0.19,"closed"),
+    "698 25": new Breaker("698 25",0.31,"closed"),
+    "698 26": new Breaker("698 26",0.26,"closed"),
+    "678 11": new Breaker("378 11",0.18,"closed"),
+    "678 12": new Breaker("378 12",0.3,"closed"),
+    "GRID 2": new Breaker("GRID 2",0.2,"closed"),
 
-    "694": new Breaker("694",0.53,6,"closed"),
+    "694": new Breaker("694",0.53,"closed"),
 
     //CB W/Arc
 
-    "M12": new Breaker("M12",0.5,6,"closed"),
-    "M13": new Breaker("M13",0.1,6,"closed"),
-    "M14": new Breaker("M14",0.08,6,"closed"),
-    "M11": new Breaker("M11",0.12,6,"closed"),
+    "M12": new Breaker("M12",0.5,"closed"),
+    "M13": new Breaker("M13",0.1,"closed"),
+    "M14": new Breaker("M14",0.08,"closed"),
+    "M11": new Breaker("M11",0.12,"closed"),
 
-    "EH12": new Breaker("EH12",0.65,6,"closed"),
-    "EH11": new Breaker("EH11",0.3,6,"closed"),
+    "EH12": new Breaker("EH12",0.65,"closed"),
+    "EH11": new Breaker("EH11",0.3,"closed"),
 
-    "MP10": new Breaker("MP10",0.6,6,"closed"),
+    "MP10": new Breaker("MP10",0.6,"closed"),
 
-    "LH10": new Breaker("Langholm10",0.3,6,"closed"),
-    "LH01": new Breaker("Langholm01",0.55,6,"closed"),
-    "LH20": new Breaker("Langholm20",0.4,6,"closed"),
+    "LH10": new Breaker("Langholm10",0.3,"closed"),
+    "LH01": new Breaker("Langholm01",0.55,"closed"),
+    "LH20": new Breaker("Langholm20",0.4,"closed"),
 
-    "A10": new Breaker("ANNAN10",0.3,6,"closed"),
-    "662 01": new Breaker("662 01",0.55,6,"closed"),
-    "A20": new Breaker("ANNAN20",0.3,6,"closed"),
+    "A10": new Breaker("ANNAN10",0.3,"closed"),
+    "662 01": new Breaker("662 01",0.55,"closed"),
+    "A20": new Breaker("ANNAN20",0.3,"closed"),
 
-    "L13": new Breaker("LOCKERBIE13",0.1,6,"closed"),
+    "L13": new Breaker("LOCKERBIE13",0.1,"closed"),
 
-    "KB10": new Breaker("KIRKBANK10",0.3,6,"closed"),
+    "KB10": new Breaker("KIRKBANK10",0.3,"closed"),
 
-    "683 10": new Breaker("MOFFAT10",0.3,6,"closed"),
-    "683 01": new Breaker("MOFFAT01", 0.55,6,"closed"),
-    "683 20": new Breaker("MOFFAT20", 0.3,6,"closed"),
+    "683 10": new Breaker("MOFFAT10",0.3,"closed"),
+    "683 01": new Breaker("MOFFAT01", 0.55,"closed"),
+    "683 20": new Breaker("MOFFAT20", 0.3,"closed"),
 
-    "694 12": new Breaker("694 12", 0.5,6,"closed"),
+    "694 12": new Breaker("694 12", 0.5,"closed"),
     "694 22": new Breaker("694 22", 0.5),
 
     "679 10": new Breaker("679 10", 0.7),
@@ -510,7 +510,7 @@ breakers:{
 
     "785 21": new Breaker("785 21",0.86),
     "785 22": new Breaker("785 22",0.15),
-    "785 CUSTOMER BREAKER": new Breaker("785 22",0.5,6,"open"),
+    "785 CUSTOMER BREAKER": new Breaker("785 22",0.5,"open"),
 
     },
 tx:{
@@ -537,8 +537,99 @@ tx:{
 
 }
 
+chapelcross_132kV={
+    lines:{
+    "698 01": StraightLine([125,865],"right",700, "33kV"),
+    "GRID T1": StraightLine([280,865],"up",175, "33kV"),
+        "into GRID T1 tx": StraightLine([280,750],"left",40, "33kV"),
+    "GRID T2": StraightLine([665,865],"up",175,"33kV"),
+        "into GRID T2 tx": StraightLine([665,750],"left",40,"33kV"),
 
-dict_components = chapelcross_GSP_33kV
+    "M1": StraightLine([35,570],"right",905,"132kV"),
+    "R1": StraightLine([35,370],"right",905,"132kV"),
+
+    "1006": StraightLine([865,370],"down",100,"132kV"),
+    "1004": StraightLine([865,470],"down",100,"132kV"),
+        "HARK A":StraightLine([905,470],"left",40, "132kV"),
+        "HARK": StraightLine([905,470],"up",290, "132kV"),
+
+    "806": StraightLine([785,370],"down",100,"132kV"),
+    "804": StraightLine([785,470],"down",100,"132kV"),
+        "DUMF-2 A":StraightLine([825,470],"left",40, "132kV"),
+        "DUMF-2": StraightLine([825,470],"up",290, "132kV"),
+
+    "616": StraightLine([700,370],"down",100,"132kV"),
+    "614": StraightLine([700,470],"down",100,"132kV"),
+        "ECCF-2 A":StraightLine([740,470],"left",40, "132kV"),
+        "ECCF-2": StraightLine([740,470],"up",290, "132kV"),
+
+    "416": StraightLine([625,370],"down",100,"132kV"),
+    "414": StraightLine([625,470],"down",100,"132kV"),
+        "410": StraightLine([665,465],"down",225,"132kV"),
+        "410 A": StraightLine([665,465],"left",40,"132kV"),
+
+    "206": StraightLine([555,370],"down",100,"132kV"),
+    "204": StraightLine([555,470],"down",100,"132kV"),
+        "DUMF-1 A":StraightLine([595,470],"left",40, "132kV"),
+        "DUMF-1": StraightLine([595,470],"up",290, "132kV"),
+
+    "336 330 334": StraightLine([400,370],"down",200,"132kV"),
+
+    "506": StraightLine([320,370],"down",100,"132kV"),
+    "504": StraightLine([320,470],"down",100,"132kV"),
+        "GRNA-2 A":StraightLine([360,470],"left",40, "132kV"),
+        "GRNA-2": StraightLine([360,470],"up",290, "132kV"),
+
+
+    "716": StraightLine([240,370],"down",100,"132kV"),
+    "714": StraightLine([240,470],"down",100,"132kV"),
+        "710": StraightLine([285,465],"down",225,"132kV"),
+        "710 A": StraightLine([285,465],"left",45,"132kV"),
+
+    "916": StraightLine([150,370],"down",100,"132kV"),
+    "914": StraightLine([150,470],"down",100,"132kV"),
+        "ECCF-1 A":StraightLine([190,470],"left",40, "132kV"),
+        "ECCF-1": StraightLine([190,470],"up",290, "132kV"),
+
+    "1106": StraightLine([65,370],"down",100,"132kV"),
+    "1104": StraightLine([65,470],"down",100,"132kV"),
+        "GRNA-1 A":StraightLine([110,470],"left",45, "132kV"),
+        "GRNA-1": StraightLine([110,470],"up",290, "132kV"),
+
+
+
+
+
+    },
+    breakers:{
+        "698 01": new Breaker("698 01", 0.5,"closed"),
+        "GRID T1": new Breaker("GRID T1", 0.3,"open"),
+        "GRID T2": new Breaker("GRID T2",0.3,"open"),
+
+        "710":new Breaker("710",0.7,"open"),
+        "120": new Breaker("M1",0.5,"closed"),
+        "330": new Breaker("336 330 334",0.5,"closed"),
+        "500:":new Breaker("DUMF-1",0.5),
+        "205": new Breaker("GRNA-2",0.5),
+        "615": new Breaker("ECCF-2",0.5),
+        "1005": new Breaker("HARK",0.5),
+        "800": new Breaker("DUMF-2",0.5),
+        "915": new Breaker("ECCF-1",0.5),
+        "1105": new Breaker("GRNA-1",0.5),
+        "410": new Breaker("410",0.7,"open"),
+
+    },
+    tx:{1: new Tx("into GRID T1 tx",1,"",type="starDelta", coil1 = "LV", coil2 = "33kV"),
+        2: new Tx("GRID T1",1,"GRID T1",type="starDelta",coil1 = "132kV", coil2 = "33kV"),
+
+        3: new Tx("into GRID T2 tx",1,"",type="starDelta", coil1 = "LV", coil2 = "33kV"),
+        4: new Tx("GRID T2",1,"GRID T2",type= "starDelta",coil1 = "132kV",coil2 = "33kV"),
+
+        },
+
+}
+
+dict_components = chapelcross_132kV
 
 dict_steps_components = {
     '1_1': {
