@@ -18,3 +18,11 @@ def receive_breaker():
     print("state: "+ data["state"])
     return jsonify("message received securely")
 
+
+@simtool_bp.route("/init_breaker/", methods=['POST'])
+@login_required
+def init_breaker():
+    data = request.form
+    print("breaker ID: "+ data["breaker"])
+    print("state: "+ data["state"])
+    return jsonify("message received securely")
