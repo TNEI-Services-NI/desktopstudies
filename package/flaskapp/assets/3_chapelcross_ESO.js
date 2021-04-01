@@ -85,7 +85,7 @@ function Line(x1, y1,x2, y2, voltage="32kV", dash = false, colour = "#ffffff"){
     this.colour=colour
 }
 
-function StraightLine(origin, direction, length, voltage="32kV", dash = false, colour = "#ffffff"){
+function StraightLine(origin, direction, length, voltage="33kV", dash = false, colour = "#ffffff"){
     x1 = origin[0]
     y1 = origin[1]
     if(direction == "up"){
@@ -341,30 +341,30 @@ lines:{
 "EH11": StraightLine([115,805],"down",90),
 
 "Middlebie Primary Transformer": StraightLine([205,695],"right",25),
-"MP10": StraightLine([230,695],"right",50),
-"intoMP": StraightLine([275,730],"up",35),
-"MP": StraightLine([260,730],"right",85),
+"MP10": StraightLine([230,695],"right",50,"11kV"),
+"intoMP": StraightLine([275,730],"up",35,"11kV"),
+"MP": StraightLine([260,730],"right",85,"11kV"),
 
 "into Langholm 1": StraightLine([160,765],"right",150),
 "Langholm 33kv": StraightLine([300,790],"right",310),
 "into Langholm 2": StraightLine([310,765],"down",90),
 "Langholm tx 33kV": StraightLine([310,855],"right",35),
-"Langholm10": StraightLine([395,855],"left",50),
-"Langholm 11kV 1": StraightLine([395,855],"down",35),
-"Langholm01": StraightLine([365,890],"right",100),
-"Langholm 11kV 2": StraightLine([445,855],"down",35),
-"Langholm20": StraightLine([445,855],"right",35),
+"Langholm10": StraightLine([395,855],"left",50,"11kV"),
+"Langholm 11kV 1": StraightLine([395,855],"down",35,"11kV"),
+"Langholm01": StraightLine([365,890],"right",100,"11kV"),
+"Langholm 11kV 2": StraightLine([445,855],"down",35,"11kV"),
+"Langholm20": StraightLine([445,855],"right",35,"11kV"),
 "Langholm Tx2": StraightLine([525,855],"left",35),
 
 "Langholm to gretna 1": StraightLine([525,855],"up",175),
 "Langholm to gretna 2": StraightLine([525,680],"right",90),
 "Langholm to gretna 3": StraightLine([615,680],"up",300),
 
-"ANNAN10": StraightLine([340,280],"left",50),
-"into 662 1": StraightLine([340,280],"down",35),
-"662 01": StraightLine([310,315],"right",105),
-"into 662 2": StraightLine([385,280],"down",35),
-"ANNAN20": StraightLine([385,280],"right",50),
+"ANNAN10": StraightLine([340,280],"left",50, "11kV"),
+"into 662 1": StraightLine([340,280],"down",35, "11kV"),
+"662 01": StraightLine([310,315],"right",105, "11kV"),
+"into 662 2": StraightLine([385,280],"down",35, "11kV"),
+"ANNAN20": StraightLine([385,280],"right",50, "11kV"),
 
 "698 23 into Annan": StraightLine([435,280],"right",265),
 
@@ -373,15 +373,15 @@ lines:{
 "KIRKBANK T": StraightLine([265,550],"right",75),
 "MOFFAT T1": StraightLine([265,645],"right",75),
 
-"KIRKBANK10": StraightLine([390,550],"left",50),
-"KIRKBANK 1": StraightLine([390,550],"down",35),
-"KIRKBANK":StraightLine([360,585],"right",85),
+"KIRKBANK10": StraightLine([390,550],"left",50,"11kV"),
+"KIRKBANK 1": StraightLine([390,550],"down",35,"11kV"),
+"KIRKBANK":StraightLine([360,585],"right",85,"11kV"),
 
-"MOFFAT10": StraightLine([390,640],"left",50),
-"MOFFAT 1": StraightLine([390,640],"down",35),
-"MOFFAT01": StraightLine([360,675],"right",100),
-"MOFFAT 2": StraightLine([440,640],"down",35),
-"MOFFAT20": StraightLine([440,640],"right",50),
+"MOFFAT10": StraightLine([390,640],"left",50, "11kV"),
+"MOFFAT 1": StraightLine([390,640],"down",35, "11kV"),
+"MOFFAT01": StraightLine([360,675],"right",100,"11kV"),
+"MOFFAT 2": StraightLine([440,640],"down",35,"11kV"),
+"MOFFAT20": StraightLine([440,640],"right",50,"11kV"),
 
 "GRETNA 1": StraightLine([615,535],"right",30),
 "GRETNA 2": StraightLine([645,535],"up",150),
@@ -391,22 +391,22 @@ lines:{
 "GRETNA T2": StraightLine([865,460],"left",35),
 "GRETNA 6":StraightLine([865,460],"up",75),
 
-//GRETNA 33kV
-"673 10": StraightLine([735,460],"left",50),
-"GRETNA 4": StraightLine([735,460],"down",35),
-"673 01": StraightLine([705,496],"right",100),
-"GRETNA 5": StraightLine([785,460],"down",35),
-"673 20": StraightLine([785,460],"right",50),
+//GRETNA 11kV
+"673 10": StraightLine([735,460],"left",50, "11kV"),
+"GRETNA 4": StraightLine([735,460],"down",35,"11kV"),
+"673 01": StraightLine([705,496],"right",100,"11kV"),
+"GRETNA 5": StraightLine([785,460],"down",35,"11kV"),
+"673 20": StraightLine([785,460],"right",50, "11kV"),
 
 "694 12": StraightLine([305,455],"up",55),
 "694 22": StraightLine([515,455],"up",55),
 
 "LOCKERBIE T1": StraightLine([305,455],"right",35),
-"679 10": StraightLine([340,455],"right",50),
-"LOCKERBIE 1": StraightLine([390,455],"down",35),
-"679 01": StraightLine([360,490],"right",100),
-"LOCKERBIE 2": StraightLine([435,455],"down",35),
-"679 20": StraightLine([435,455],"right",50),
+"679 10": StraightLine([340,455],"right",50, "11kV"),
+"LOCKERBIE 1": StraightLine([390,455],"down",35, "11kV"),
+"679 01": StraightLine([360,490],"right",100, "11kV"),
+"LOCKERBIE 2": StraightLine([435,455],"down",35, "11kV"),
+"679 20": StraightLine([435,455],"right",50, "11kV"),
 "LOCKERBIE T2": StraightLine([485,455],"right",35),
 
 "MINSKA 1": StraightLine([905,285],"left",125),
@@ -531,8 +531,9 @@ tx:{
     15: new Tx("LOCKERBIE T2",0,"T2"),
 
     16: new Tx("GRETNA T1",1,"T1"),
+    17: new Tx("GRETNA T2",1,"T2"),
 
-    17: new Tx("NEWCASTLETON T1",1,"T1"),
+    18: new Tx("NEWCASTLETON T1",1,"T1"),
     }
 
 }
@@ -646,12 +647,12 @@ Gretna_400kV={
 
 
     "X406 X404": StraightLine([485,430],"down",190,"400kV"),
-        "ELVA A": StraightLine([445,525],"right",40),
-        "ELVA": StraightLine([445,525],"up",440),
-        "x447": StraightLine([445,275],"right",135),
-        "x449": StraightLine([445,220],"right",135),
-        "SC1" : StraightLine([530,275],"up",55),
-        "X448": StraightLine([580,220],"down",55),
+        "ELVA A": StraightLine([445,525],"right",40, "400kV"),
+        "ELVA": StraightLine([445,525],"up",440, "400kV"),
+        "x447": StraightLine([445,275],"right",135,"400kV"),
+        "x449": StraightLine([445,220],"right",135,"400kV"),
+        "SC1" : StraightLine([530,275],"up",55,"400kV"),
+        "X448": StraightLine([580,220],"down",55,"400kV"),
 
     "X236 X230 X234": StraightLine([620,430],"down",190,"400kV"),
 
@@ -677,11 +678,10 @@ Gretna_400kV={
     tx:{
         "GRNA 780 tx": new Tx("GRNA 780 tx",1,"","deltaStar", "132kV","LV"),
         "GRNA 680 tx": new Tx("GRNA 680 tx",1,"","deltaStar", "132kV","LV"),
-
     }
 }
 
-dict_components = Gretna_400kV
+dict_components = chapelcross_GSP_33kV
 
 dict_steps_components = {
     '1_1': {
@@ -1011,6 +1011,9 @@ for (idx_line in dict_components.lines){
       temp_dict.dict_styling.stroke.color = "#ffffff"
       temp_dict.dict_styling.fill.color = "#ffffff"
     }
+
+    temp_dict.dict_styling.stroke.color = palette[temp_dict.voltage]
+
     // if (temp_dict.voltage){
     //   if (temp_dict.voltage == "132") {
     //     temp_dict.dict_styling.stroke.color = "#ffffff"

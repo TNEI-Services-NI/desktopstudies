@@ -1,3 +1,5 @@
+let palette = {"400kV":"#0000bc", "132kV":"#00cbff", "33kV":"#00ff00", "11kV":"#996633", "LV":"#ff3ae8"}
+
   function add_tx(dict_line, position, type, callback){
     var rad = 9
     var overlapFactor = 0.25
