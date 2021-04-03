@@ -618,7 +618,6 @@ let palette = {"400kV":"#0000bc", "132kV":"#00cbff", "33kV":"#00ff00", "11kV":"#
       var center = [dict_line.x1+(dict_line.x2-dict_line.x1)*position, dict_line.y1];
     }
     closed_color = dict_line.dict_styling.stroke.color
-      console.log(state)
 
     if (state === 'open'){
       circle1 = draw.circle(size, size).center(center[0], center[1]).fill("black").stroke("white").stroke({width: 1})
@@ -629,7 +628,7 @@ let palette = {"400kV":"#0000bc", "132kV":"#00cbff", "33kV":"#00ff00", "11kV":"#
 
     rect1.click(function() {
     });
-    rect1.horizontal = bHorizontal
+    circle1.horizontal = bHorizontal
     dict_breaker.objects = [circle1];
     callback(circle1);
   }

@@ -493,7 +493,7 @@ chapelcross_132kV={
         "GRID T2": new Breaker("GRID T2",0.3,"open"),
 
         "710":new Breaker("710",0.7,"open"),
-        "120": new Breaker("M1",0.5,"closed"),
+        "120": new Breaker("M1",0.49,"closed"),
         "330": new Breaker("336 330 334",0.5,"closed"),
         "500":new Breaker("DUMF-1",0.5),
         "205": new Breaker("GRNA-2",0.5),
@@ -544,6 +544,16 @@ chapelcross_132kV={
         "1003": new Isolator("HARK",0.7,"closed"),
         "1006": new Isolator("1006",0.5,"open"),
         "1004": new Isolator("1004",0.5,"closed"),
+
+        "124": new Isolator("M1", 0.44,"closed"),
+        "128": new Isolator("M1", 0.54,"closed"),
+
+        "126": new Isolator("R1", 0.44,"closed"),
+        "129": new Isolator("R1", 0.54,"closed"),
+
+        "336": new Isolator("336 330 334", 0.25, "closed"),
+        "334": new Isolator("336 330 334", 0.75, "closed"),
+
     },
 }
 
