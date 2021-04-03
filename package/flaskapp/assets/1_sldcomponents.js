@@ -602,6 +602,38 @@ let palette = {"400kV":"#0000bc", "132kV":"#00cbff", "33kV":"#00ff00", "11kV":"#
     callback(text1)
   }
 
+  function add_isolator(dict_line, position, size, state, callback){
+    console.log("isolator")
+    var bVertical = false;
+    var bHorizontal = false;
+
+    var dict_breaker = {}
+
+    if (dict_line.x1 === dict_line.x2){
+      bVertical = true;
+      var center = [dict_line.x1, dict_line.y1+(dict_line.y2-dict_line.y1)*position];
+    }
+    if (dict_line.y1 === dict_line.y2){
+      bHorizontal = true;
+      var center = [dict_line.x1+(dict_line.x2-dict_line.x1)*position, dict_line.y1];
+    }
+    closed_color = dict_line.dict_styling.stroke.color
+      console.log(state)
+
+    if (state === 'open'){
+      circle1 = draw.circle(size, size).center(center[0], center[1]).fill("black").stroke("white").stroke({width: 1})
+    }
+    if (state === 'closed'){
+      circle1 = draw.circle(size, size).center(center[0], center[1]).fill(closed_color).stroke("white").stroke({width: 1})
+    }
+
+    rect1.click(function() {
+    });
+    rect1.horizontal = bHorizontal
+    dict_breaker.objects = [circle1];
+    callback(circle1);
+  }
+
 
   function post_breaker(breakerID,state){
       if(breakerID === null){breakerID="b1"}

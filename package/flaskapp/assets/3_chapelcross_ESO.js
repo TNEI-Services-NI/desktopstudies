@@ -139,164 +139,14 @@ function Inductor(line_id,pos){
     this.callback=Breaker_Callback(this.graphic)
 }
 
-function Isolator(line_id,pos, state = "closed"){
+function Isolator(line_id,pos, state = "closed",name=false){
     this.lineID = line_id,
     this.pos = pos,
+    this.state=state
     this.graphic=[],
-    this.callback=Breaker_Callback(this.graphic)}
+    this.name = name,
+    this.callback=Breaker_Callback(this.graphic,name)}
 
-test_network = {
-    lines:{
-      0 : new Line(72, 256,72, 420, '132'),
-      1 : new Line(46, 256, 149, 256, '132'),
-      2 : new Line(40,301, 72,  301, '132'),
-      3 : new Line(40,301,40,335, "132"),
-      4 : new Line(57,87,57,256, "132"),
-      5 : new Line(118, 256, 118, 310, dash= true, color= '#a0a0a0'),
-      6 : new Line(140, 256, 140, 310, color = '#a0a0a0'),
-      7 : new Line(95,297,118,297, color = "#a0a0a0"),
-      8 : new Line(118, 256, 118, 270, color= '#a0a0a0'),
-        // STEP 2
-      9 : new Line(x1= 40, y1= 88, x2= 1133, y2= 88, voltage= '132'),
-      10 : new Line(x1= 94, y1= 88, x2= 94, y2= 158, voltage= '132'),
-      11: new Line(x1= 94, y1= 158, x2= 208, y2= 158, voltage= '132'),
-        // Step 5C B13 south, east, SOUTH
-      12 : new Line(x1= 302, y1= 158, x2= 302, y2= 182, color= '#a0a0a0'),
-      13 : new Line(x1= 271, y1= 182, x2= 412, y2= 182, color= '#a0a0a0'),
-        // 10-15
-      14 : new Line(x1= 320, y1= 182, x2= 320, y2= 223, color= '#a0a0a0'),
-        // 21-26
-      15 : new Line(x1= 372, y1= 182, x2= 372, y2= 223, color= '#a0a0a0'),
-        // Step 5C B23 south, west, south
-      16 : new Line(x1= 387, y1= 158, x2= 387, y2= 182, color= '#a0a0a0'),
-        // Step 5C B23 south, west
-        17 : new Line(x1= 387, y1= 158, x2= 600, y2= 158, color= '#a0a0a0'),
-        // Step 5C B23 south
-        18 : new Line(x1= 822, y1= 88, x2= 822, y2= 158, voltage= '132'),
-        // Step 4.1 B12 - south
-        19 : new Line(x1= 491, y1= 88, x2= 491, y2= 138, voltage= '132'),
-        // Step 4.1 B12 - south, west
-        20 : new Line(x1= 168, y1= 138, x2= 491, y2= 138, voltage= '132'),
-        // Step 4.1 B12 - south, west, south
-        21 : new Line(x1= 168, y1= 138, x2= 168, y2= 350, voltage= '132'),
-        // BB780 - Middlebie
-        22 : new Line(x1= 98, y1= 350, x2= 240, y2= 350, voltage= '132'),
-        23 : new Line(x1= 110, y1= 350, x2= 110, y2= 500, voltage= '132'),
-        24 : new Line(x1= 95, y1= 500, x2= 140, y2= 500, voltage= '132'),
-        25 : new Line(x1= 126, y1= 500, x2= 126, y2= 600, voltage= '132'),
-        26 : new Line(x1= 188, y1= 350, x2= 188, y2= 425, voltage= '132'),
-        27 : new Line(x1= 180, y1= 425, x2= 235, y2= 425, voltage= '132'),
-        28 : new Line(x1= 225, y1= 425, x2= 225, y2= 460, voltage= '132'),
-        29 : new Line(x1= 168, y1= 487, x2= 225, y2= 487, voltage= '132'),
-        30 : new Line(x1= 225, y1= 487, x2= 225, y2= 542, voltage= '132'),
-        31 : new Line(x1= 225, y1= 542, x2= 389, y2= 542, voltage= '132'),
-        32 : new Line(x1= 389, y1= 542, x2= 389, y2= 625, voltage= '132'),
-        33 : new Line(x1= 268, y1= 625, x2= 389, y2= 625, voltage= '132'),
-        34 : new Line(x1= 370, y1= 582, x2= 520, y2= 582, voltage= '132'),
-        35 : new Line(x1= 420, y1= 582, x2= 420, y2= 620, voltage= '132'),
-        36 : new Line(x1= 470, y1= 582, x2= 470, y2= 620, voltage= '132'),
-        37 : new Line(x1= 495, y1= 542, x2= 495, y2= 625, voltage= '132'),
-        38 : new Line(x1= 495, y1= 542, x2= 625, y2= 542, voltage= '132'),
-        39 : new Line(x1= 495, y1= 625, x2= 625, y2= 625, voltage= '132'),
-        40 : new Line(x1= 625, y1= 505, x2= 625, y2= 542, voltage= '132'),
-        41 : new Line(x1= 200, y1= 505, x2= 650, y2= 505, voltage= '132'),
-        // Step 3.1 B24
-        42 : new Line(x1= 1106, y1= 87, x2= 1106, y2= 256, voltage= '132'),
-        43 : new Line(x1= 1080, y1= 256, x2= 1150, y2= 256, voltage= '132'),
-        44 : new Line(x1= 1130, y1= 256, x2= 1130, y2= 380, voltage= '132'),
-
-        45 : new Line(x1= 356, y1= 20, x2= 356, y2= 88, color= '#a0a0a0'),
-        46 : new Line(x1= 335, y1= 31, x2= 356, y2= 31, color= '#a0a0a0'),
-        47 : new Line(x1= 356, y1= 75, x2= 400, y2= 75, dash= true, color= '#a0a0a0'),
-        48 : new Line(x1= 356, y1= 75, x2= 370, y2= 75, color= '#a0a0a0'),
-        49 : new Line(x1= 391, y1= 40, x2= 391, y2= 75, color= '#a0a0a0'),
-        50 : new Line(x1= 208, y1= 158, x2= 302, y2= 158, color= '#a0a0a0'),
-        51 : new Line(x1= 600, y1= 158, x2= 822, y2= 158, voltage= '132'),
-
-
-        52 : new Line(x1= 153, y1= 87, x2= 153, y2= 221, voltage= '132'),
-        53 : new Line(x1= 153, y1= 221, x2= 288, y2= 221, voltage= '132'),
-        54 : new Line(x1= 288, y1= 221, x2= 288, y2= 251, voltage= '132'),
-        55 : new Line(x1= 288, y1= 251, x2= 288, y2= 278, voltage= '132'),
-        56 : new Line(x1= 288, y1= 278, x2= 430, y2= 278, color= '#a0a0a0'),
-        57 : new Line(x1= 430, y1= 278, x2= 430, y2= 301, color= '#a0a0a0'),
-        58 : new Line(x1= 399, y1= 301, x2= 541, y2= 301, color= '#a0a0a0'),
-        59 : new Line(x1= 452, y1= 301, x2= 452, y2= 343, color= '#a0a0a0'),
-        60 : new Line(x1= 495, y1= 301, x2= 495, y2= 343, color= '#a0a0a0'),
-        61 : new Line(x1= 516, y1= 278, x2= 516, y2= 301, color= '#a0a0a0'),
-        62 : new Line(x1= 516, y1= 278, x2= 587, y2= 278, color= '#a0a0a0'),
-        63 : new Line(x1= 587, y1= 278, x2= 641, y2= 278, voltage= '132'),
-        64 : new Line(x1= 641, y1= 251, x2= 641, y2= 278, voltage= '132'),
-        65 : new Line(x1= 245, y1= 251, x2= 704, y2= 251, voltage= '132'),
-        66 : new Line(x1= 641, y1= 186, x2= 641, y2= 251, voltage= '132'),
-        67 : new Line(x1= 641, y1= 186, x2= 723, y2= 186, voltage= '132'),
-        68 : new Line(x1= 723, y1= 87, x2= 723, y2= 186, voltage= '132'),
-        69 : new Line(x1= 33, y1= 191, x2= 153, y2= 191, voltage= '132'),
-        // Step 4.1 B12 - south, west, south, south
-        70 : new Line(x1= 168, y1= 350, x2= 168, y2= 487, voltage= '132')
-
-    },
-    breakers:{
-        0: new Breaker(0, 0.61, 6, "open", [1]),
-        1: new Breaker(0, 0.2, 6, "open", [1]),
-        2: new Breaker(0,0.1,6,"closed", []),
-        3: new Breaker(3,0.25,6,"open", []),
-        4: new Breaker(4,0.1,6,"open",[3]),
-        5: new Breaker(4,0.9,6,"open",[2]),
-        6: new Breaker(6,0.24,6,"closed",[]),
-        7: new Breaker(10,0.24,6,'open',[11]),
-        8: new Breaker(12,0.5,6,'closed',[]),
-        9: new Breaker(13,0.5,6,'open',[]),
-        10: new Breaker(14,0.4,6,'closed',[]),
-        11: new Breaker(16,0.5,6,'closed',[10]),
-        12: new Breaker(15,0.4,6,'closed',[]),
-        13: new Breaker(18,0.24,6,'open',[11]),
-        14: new Breaker(19,0.24,6,"open",[7]),
-        15: new Breaker(21,0.9,6,"closed",[]),
-        16: new Breaker(70,0.15,6,"open",[]),
-        17: new Breaker(23,0.15,6,"closed",[]),
-        18: new Breaker(23,0.85,6,"closed",[]),
-        19: new Breaker(25,0.1,6,"open",[8]),
-        20: new Breaker(25,0.3,6,"open",[9]),
-        21: new Breaker(25,0.8,6,"open",[9]),
-        22: new Breaker(26,0.15,6,"open",[]),
-        23: new Breaker(26,0.86,6,"closed",[]),
-        24: new Breaker(28,0.25,6,"closed",[]),
-        25: new Breaker(32,0.25,6,"closed",[]),
-        26: new Breaker(32,0.75,6,"closed",[]),
-        27: new Breaker(33,0.45,6,"closed",[]),
-        28: new Breaker(33,0.55,6,"closed",[]),
-        29: new Breaker(34,0.5,6,"closed",[]),
-        30: new Breaker(35,0.3,6,"closed",[]),
-        31: new Breaker(36,0.3,6,"closed",[]),
-        32: new Breaker(37,0.3,6,"open",[]),
-        33: new Breaker(37,0.7,6,"closed",[]),
-        34: new Breaker(39,0.4,6,"closed",[]),
-        35: new Breaker(39,0.6,6,"closed",[]),
-        36: new Breaker(41,0.5,6,"open",[]),
-        37: new Breaker(42,0.1,6,"open",[4]),
-        38: new Breaker(42,0.9,6,"closed",[0]),
-        39: new Breaker(44,0.10,6,"open",[5]),
-        40: new Breaker(44,0.25,6,"open",[6]),
-        41: new Breaker(44,0.8,6,"open",[6]),
-        42: new Breaker(52,0.1,6,"open",[]),
-        43: new Breaker(55,0.5,6,"closed",[]),
-        44: new Breaker(57,0.5,6,"closed",[]),
-        45: new Breaker(58,0.5,6,"open",[]),
-        46: new Breaker(59,0.5,6,"closed",[]),
-        47: new Breaker(60,0.5,6,"closed",[]),
-        48: new Breaker(61,0.5,6,"closed",[]),
-        49: new Breaker(68,0.15,6,"open",[]),
-      },
-    text:{
-    0: new Text(1, ["Steven's Croft"], [10, -15]),
-    1: new Text(9, ["Chapelcross Grid", "33kV Busbar"],[ 0, -25]),
-    2: new Text(41,["Langholm"],[10,-15])
-    },
-    tx:{
-    0: new Tx(5,0.9,"test","starDelta")
-    }
-  }
 //1550 x 1160 in mm
 //scale of 1000 x 1000, readjust with math...
 chapelcross_GSP_33kV = {
@@ -606,15 +456,15 @@ chapelcross_132kV={
 
     "206": StraightLine([555,370],"down",100,"132kV"),
     "204": StraightLine([555,470],"down",100,"132kV"),
-        "DUMF-1 A":StraightLine([595,470],"left",40, "132kV"),
-        "DUMF-1": StraightLine([595,470],"up",290, "132kV"),
+        "GRNA-2 A":StraightLine([595,470],"left",40, "132kV"),
+        "GRNA-2": StraightLine([595,470],"up",290, "132kV"),
 
     "336 330 334": StraightLine([400,370],"down",200,"132kV"),
 
     "506": StraightLine([320,370],"down",100,"132kV"),
     "504": StraightLine([320,470],"down",100,"132kV"),
-        "GRNA-2 A":StraightLine([360,470],"left",40, "132kV"),
-        "GRNA-2": StraightLine([360,470],"up",290, "132kV"),
+        "DUMF-1 A":StraightLine([360,470],"left",40, "132kV"),
+        "DUMF-1": StraightLine([360,470],"up",290, "132kV"),
 
 
     "716": StraightLine([240,370],"down",100,"132kV"),
@@ -645,7 +495,7 @@ chapelcross_132kV={
         "710":new Breaker("710",0.7,"open"),
         "120": new Breaker("M1",0.5,"closed"),
         "330": new Breaker("336 330 334",0.5,"closed"),
-        "500:":new Breaker("DUMF-1",0.5),
+        "500":new Breaker("DUMF-1",0.5),
         "205": new Breaker("GRNA-2",0.5),
         "615": new Breaker("ECCF-2",0.5),
         "1005": new Breaker("HARK",0.5),
@@ -662,7 +512,39 @@ chapelcross_132kV={
         4: new Tx("GRID T2",1,"GRID T2",type= "starDelta",coil1 = "132kV",coil2 = "33kV"),
 
         },
+    isolators:{
+        "1103": new Isolator("GRNA-1",0.7,"closed"),
+        "1106": new Isolator("1106",0.5,"closed"),
+        "1104": new Isolator("1104",0.5,"open"),
+        "913": new Isolator("ECCF-1",0.7,"closed"),
+        "916": new Isolator("916",0.5,"open"),
+        "914": new Isolator("914",0.5,"closed"),
+        "716": new Isolator("716",0.5,"open"),
+        "714": new Isolator("714",0.5,"closed"),
 
+        "503": new Isolator("DUMF-1",0.7,"closed"),
+        "506": new Isolator("506",0.5,"open"),
+        "504": new Isolator("504",0.5,"open"),
+
+        "203": new Isolator("GRNA-2",0.7,"closed"),
+        "206": new Isolator("206",0.5,"closed"),
+        "204": new Isolator("204",0.5,"open"),
+//
+        "416": new Isolator("416",0.5,"open"),
+        "414": new Isolator("414",0.5,"closed"),
+
+        "613": new Isolator("ECCF-2",0.7,"closed"),
+        "616": new Isolator("616",0.5,"closed"),
+        "614": new Isolator("614",0.5,"open"),
+
+        "803": new Isolator("DUMF-2",0.7,"closed"),
+        "806": new Isolator("806",0.5,"open"),
+        "804": new Isolator("804",0.5,"closed"),
+
+        "1003": new Isolator("HARK",0.7,"closed"),
+        "1006": new Isolator("1006",0.5,"open"),
+        "1004": new Isolator("1004",0.5,"closed"),
+    },
 }
 
 Gretna_400kV={
@@ -719,314 +601,18 @@ Gretna_400kV={
     }
 }
 
-dict_components = chapelcross_GSP_33kV
+dict_components = chapelcross_132kV
 
 init_breakers("chapelcross", "33kv", dict_components.breakers);
-
-dict_steps_components = {
-    '1_1': {
-      lines: [
-        // STEP 1
-        {
-          x1: 72, y1: 256, x2: 72, y2: 420, voltage: '132'
-        },
-        {
-          x1: 46, y1: 256, x2: 149, y2: 256, voltage: '132'
-        },
-        {
-          x1: 40, y1: 301, x2: 72, y2: 301, voltage: '132'
-        },
-        {
-          x1: 40, y1: 301, x2: 40, y2: 335, voltage: '132'
-        },
-        {
-          x1: 57, y1: 87, x2: 57, y2: 256, voltage: '132'
-        },
-        {
-          x1: 118, y1: 256, x2: 118, y2: 310, dash: true, color: '#a0a0a0'
-        },
-        {
-          x1: 140, y1: 256, x2: 140, y2: 310, color: '#a0a0a0'
-        },
-        {
-          x1: 95, y1: 297, x2: 118, y2: 297, color: '#a0a0a0'
-        },
-        {
-          x1: 118, y1: 256, x2: 118, y2: 270, color: '#a0a0a0'
-        },
-        // STEP 2
-        {
-          x1: 40, y1: 88, x2: 1133, y2: 88, voltage: '132'
-        },
-        {
-          x1: 94, y1: 88, x2: 94, y2: 158, voltage: '132'
-        },
-        {
-          x1: 94, y1: 158, x2: 208, y2: 158, voltage: '132'
-        },
-        // Step 5C B13 south, east, SOUTH
-        {
-          x1: 302, y1: 158, x2: 302, y2: 182, color: '#a0a0a0'
-        },
-        {
-          x1: 271, y1: 182, x2: 412, y2: 182, color: '#a0a0a0'
-        },
-        // 10-15
-        {
-          x1: 320, y1: 182, x2: 320, y2: 223, color: '#a0a0a0'
-        },
-        // 21-26
-        {
-          x1: 372, y1: 182, x2: 372, y2: 223, color: '#a0a0a0'
-        },
-        // Step 5C B23 south, west, south
-        {
-          x1: 387, y1: 158, x2: 387, y2: 182, color: '#a0a0a0'
-        },
-        // Step 5C B23 south, west
-        {
-          x1: 387, y1: 158, x2: 600, y2: 158, color: '#a0a0a0'
-        },
-        // Step 5C B23 south
-        {
-          x1: 822, y1: 88, x2: 822, y2: 158, voltage: '132'
-        },
-        // Step 4.1 B12 - south
-        {
-          x1: 491, y1: 88, x2: 491, y2: 138, voltage: '132'
-        },
-        // Step 4.1 B12 - south, west
-        {
-          x1: 168, y1: 138, x2: 491, y2: 138, voltage: '132'
-        },
-        // Step 4.1 B12 - south, west, south
-        {
-          x1: 168, y1: 138, x2: 168, y2: 350, voltage: '132'
-        },
-        // BB780 - Middlebie
-        {
-          x1: 98, y1: 350, x2: 240, y2: 350, voltage: '132'
-        },
-        {
-          x1: 110, y1: 350, x2: 110, y2: 500, voltage: '132'
-        },
-        {
-          x1: 95, y1: 500, x2: 140, y2: 500, voltage: '132'
-        },
-        {
-          x1: 126, y1: 500, x2: 126, y2: 600, voltage: '132'
-        },
-        {
-          x1: 188, y1: 350, x2: 188, y2: 425, voltage: '132'
-        },
-        {
-          x1: 180, y1: 425, x2: 235, y2: 425, voltage: '132'
-        },
-        {
-          x1: 225, y1: 425, x2: 225, y2: 460, voltage: '132'
-        },
-        {
-          x1: 168, y1: 487, x2: 225, y2: 487, voltage: '132'
-        },
-        {
-          x1: 225, y1: 487, x2: 225, y2: 542, voltage: '132'
-        },
-        {
-          x1: 225, y1: 542, x2: 389, y2: 542, voltage: '132'
-        },
-        {
-          x1: 389, y1: 542, x2: 389, y2: 625, voltage: '132'
-        },
-        {
-          x1: 268, y1: 625, x2: 389, y2: 625, voltage: '132'
-        },
-        {
-          x1: 370, y1: 582, x2: 520, y2: 582, voltage: '132'
-        },
-        {
-          x1: 420, y1: 582, x2: 420, y2: 620, voltage: '132'
-        },
-        {
-          x1: 470, y1: 582, x2: 470, y2: 620, voltage: '132'
-        },
-        {
-          x1: 495, y1: 542, x2: 495, y2: 625, voltage: '132'
-        },
-        {
-          x1: 495, y1: 542, x2: 625, y2: 542, voltage: '132'
-        },
-        {
-          x1: 495, y1: 625, x2: 625, y2: 625, voltage: '132'
-        },
-        {
-          x1: 625, y1: 505, x2: 625, y2: 542, voltage: '132'
-        },
-        {
-          x1: 200, y1: 505, x2: 650, y2: 505, voltage: '132'
-        },
-        // Step 3.1 B24
-        {
-          x1: 1106, y1: 87, x2: 1106, y2: 256, voltage: '132'
-        },
-        {
-          x1: 1080, y1: 256, x2: 1150, y2: 256, voltage: '132'
-        },
-        {
-          x1: 1130, y1: 256, x2: 1130, y2: 380, voltage: '132'
-        },
-
-        {
-          x1: 356, y1: 20, x2: 356, y2: 88, color: '#a0a0a0'
-        },
-        {
-          x1: 335, y1: 31, x2: 356, y2: 31, color: '#a0a0a0'
-        },
-        {
-          x1: 356, y1: 75, x2: 400, y2: 75, dash: true, color: '#a0a0a0'
-        },
-        {
-          x1: 356, y1: 75, x2: 370, y2: 75, color: '#a0a0a0'
-        },
-        {
-          x1: 391, y1: 40, x2: 391, y2: 75, color: '#a0a0a0'
-        },
-        {
-          x1: 208, y1: 158, x2: 302, y2: 158, color: '#a0a0a0'
-        },
-        {
-          x1: 600, y1: 158, x2: 822, y2: 158, voltage: '132'
-        },
-
-
-        {
-          x1: 153, y1: 87, x2: 153, y2: 221, voltage: '132'
-        },
-        {
-          x1: 153, y1: 221, x2: 288, y2: 221, voltage: '132'
-        },
-        {
-          x1: 288, y1: 221, x2: 288, y2: 251, voltage: '132'
-        },
-        {
-          x1: 288, y1: 251, x2: 288, y2: 278, voltage: '132'
-        },
-        {
-          x1: 288, y1: 278, x2: 430, y2: 278, color: '#a0a0a0'
-        },
-        {
-          x1: 430, y1: 278, x2: 430, y2: 301, color: '#a0a0a0'
-        },
-        {
-          x1: 399, y1: 301, x2: 541, y2: 301, color: '#a0a0a0'
-        },
-        {
-          x1: 452, y1: 301, x2: 452, y2: 343, color: '#a0a0a0'
-        },
-        {
-          x1: 495, y1: 301, x2: 495, y2: 343, color: '#a0a0a0'
-        },
-        {
-          x1: 516, y1: 278, x2: 516, y2: 301, color: '#a0a0a0'
-        },
-        {
-          x1: 516, y1: 278, x2: 587, y2: 278, color: '#a0a0a0'
-        },
-        {
-          x1: 587, y1: 278, x2: 641, y2: 278, voltage: '132'
-        },
-        {
-          x1: 641, y1: 251, x2: 641, y2: 278, voltage: '132'
-        },
-        {
-          x1: 245, y1: 251, x2: 704, y2: 251, voltage: '132'
-        },
-        {
-          x1: 641, y1: 186, x2: 641, y2: 251, voltage: '132'
-        },
-        {
-          x1: 641, y1: 186, x2: 723, y2: 186, voltage: '132'
-        },
-        {
-          x1: 723, y1: 87, x2: 723, y2: 186, voltage: '132'
-        },
-        {
-          x1: 33, y1: 191, x2: 153, y2: 191, voltage: '132'
-        },
-        // Step 4.1 B12 - south, west, south, south
-        {
-          x1: 168, y1: 350, x2: 168, y2: 487, voltage: '132'
-        },
-
-      ],
-      loads: [
-      ],
-      txs: [
-      ],
-      breakers: [
-        new Breaker(0, 0.61, 6, "open", [1]),
-        new Breaker(0, 0.2, 6, "open", [1]),
-        new Breaker(0,0.1,6,"closed", []),
-        new Breaker(3,0.25,6,"open", []),
-        new Breaker(4,0.1,6,"open",[3]),
-        new Breaker(4,0.9,6,"open",[2]),
-        new Breaker(6,0.24,6,"closed",[]),
-        new Breaker(10,0.24,6,'open',[11]),
-        new Breaker(12,0.5,6,'closed',[]),
-        new Breaker(13,0.5,6,'open',[]),
-        new Breaker(14,0.4,6,'closed',[]),
-        new Breaker(16,0.5,6,'closed',[10]),
-        new Breaker(15,0.4,6,'closed',[]),
-        new Breaker(18,0.24,6,'open',[11]),
-        new Breaker(19,0.24,6,"open",[7]),
-        new Breaker(21,0.9,6,"closed",[]),
-        new Breaker(70,0.15,6,"open",[]),
-        new Breaker(23,0.15,6,"closed",[]),
-        new Breaker(23,0.85,6,"closed",[]),
-        new Breaker(25,0.1,6,"open",[8]),
-        new Breaker(25,0.3,6,"open",[9]),
-        new Breaker(25,0.8,6,"open",[9]),
-        new Breaker(26,0.15,6,"open",[]),
-        new Breaker(26,0.86,6,"closed",[]),
-        new Breaker(28,0.25,6,"closed",[]),
-        new Breaker(32,0.25,6,"closed",[]),
-        new Breaker(32,0.75,6,"closed",[]),
-        new Breaker(33,0.45,6,"closed",[]),
-        new Breaker(33,0.55,6,"closed",[]),
-        new Breaker(34,0.5,6,"closed",[]),
-        new Breaker(35,0.3,6,"closed",[]),
-        new Breaker(36,0.3,6,"closed",[]),
-        new Breaker(37,0.3,6,"open",[]),
-        new Breaker(37,0.7,6,"closed",[]),
-        new Breaker(39,0.4,6,"closed",[]),
-        new Breaker(39,0.6,6,"closed",[]),
-        new Breaker(41,0.5,6,"open",[]),
-        new Breaker(42,0.1,6,"open",[4]),
-        new Breaker(42,0.9,6,"closed",[0]),
-        new Breaker(44,0.10,6,"open",[5]),
-        new Breaker(44,0.25,6,"open",[6]),
-        new Breaker(44,0.8,6,"open",[6]),
-        new Breaker(52,0.1,6,"open",[]),
-        new Breaker(55,0.5,6,"closed",[]),
-        new Breaker(57,0.5,6,"closed",[]),
-        new Breaker(58,0.5,6,"open",[]),
-        new Breaker(59,0.5,6,"closed",[]),
-        new Breaker(60,0.5,6,"closed",[]),
-        new Breaker(61,0.5,6,"closed",[]),
-        new Breaker(68,0.15,6,"open",[]),
-      ],
-      labels: [
-      ],
-      generators: [
-      ],
-    }
-  }
 
   components = {
     breakers: [],
     lines: [],
     text:[],
     generators: [],
+    isolators:[],
   }
+
 var idx_line, temp_dict
 for (idx_line in dict_components.lines){
     temp_dict = dict_components.lines[idx_line]
@@ -1078,7 +664,6 @@ for (idx_line in dict_components.lines){
     dict_components.lines[idx_line] = temp_dict
     components.lines[idx_line] = {drawInfo:temp_dict, UIElement: temp_dict.o_line}
   }
-//  dict_components.txs = []
 
     //add breakers
   for(let i in dict_components.breakers){
@@ -1180,6 +765,23 @@ for (idx_line in dict_components.lines){
     id = i
     let ind = {initInfo:inductor, UIElement: inductor.graphic[0], id : id}
     components.generators[id] = inductor
+  }
+
+  for(i in dict_components.isolators){
+    isolator = dict_components.isolators[i]
+    line = dict_components.lines[isolator.lineID]
+    pos = isolator.pos
+    state = isolator.state
+    if(isolator.name === false){
+        isolator.name = i
+    }
+    isolator.callback = Breaker_Callback(isolator.graphic,isolator.name)
+    callback = isolator.callback
+    add_isolator(line,pos,12,state,callback)
+    let id = i
+    let closed = state == 'closed'
+    let iso = {drawInfo:isolator, UIElement: isolator.graphic[0], closed: closed, id : id, line : line}
+    components.isolators[id] = iso
   }
 
 //  var powerColour = '#25b1f5'
