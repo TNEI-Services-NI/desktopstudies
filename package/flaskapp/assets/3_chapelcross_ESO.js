@@ -28,15 +28,16 @@
   var x_scaling = x/1350
   var y_scaling = y/1100
 
-function Breaker_Callback(stages, holder){
+function Breaker_Callback(holder, name = false){
         return function(object){
-            //revamp post_breaker to a function that figures out its state instead
-//            object.on("breaker_clicked",function(){post_breaker()})
-            for(stage in stages){
-                buttonA_fillObject(stage, object)
-            }
             if(holder != undefined){
                 holder.push(object)
+            }
+            if(name !== false){
+                if(object.horizontal ==true){
+                add_text(object, false, [name], 0, -15, function(object){})
+                }
+                else{add_text(object, false, [name], 12+ name.length*5, 0, function(object){})}
             }
         }
     }
@@ -56,7 +57,7 @@ function Tx_Callback(name, holder){
             if(holder != undefined){
                 holder.push(group)
             }
-            add_text(circle1, false, [name], 47, 15, function(object){
+            add_text(circle1, false, [name], 7, 20, function(object){
             return 0
             });
             eventMouse(group, "Transformer", "STCR3-_STCR5-_1");
@@ -64,14 +65,14 @@ function Tx_Callback(name, holder){
     }
 
 
-function Breaker(lineID, pos, state = "closed", stages = []){
+function Breaker(lineID, pos, state = "closed", name=false){
     this.lineID = lineID
     this.pos = pos
     this.state = state
     this.size = 12
-    this.stages = stages
     this.graphic = []
-    this.callback = Breaker_Callback(stages,this.graphic)
+    this.name = name
+    this.callback = Breaker_Callback(this.graphic)
 
 }
 
@@ -131,6 +132,18 @@ function Generator(line_id,pos, type= "wind"){
     this.callback = Breaker_Callback(this.graphic)
 }
 
+function Inductor(line_id,pos){
+    this.lineID = line_id,
+    this.pos = pos,
+    this.graphic=[],
+    this.callback=Breaker_Callback(this.graphic)
+}
+
+function Isolator(line_id,pos, state = "closed"){
+    this.lineID = line_id,
+    this.pos = pos,
+    this.graphic=[],
+    this.callback=Breaker_Callback(this.graphic)}
 
 test_network = {
     lines:{
@@ -282,7 +295,6 @@ test_network = {
     },
     tx:{
     0: new Tx(5,0.9,"test","starDelta")
-
     }
   }
 //1550 x 1160 in mm
@@ -334,7 +346,7 @@ lines:{
 "698 26": StraightLine([900,175],"down",75),
 "694": StraightLine([230,400],"right",350),
 
-"LOCKERBIE13":StraightLine([265,400],"down",245),
+"LOCKERBIE13":StraightLine([265,400],"down",240),
 
 //Middlebie
 "M12": StraightLine([95,525],"down",50),
@@ -381,7 +393,10 @@ lines:{
 "698 21 into gretna 1": StraightLine([570,380],"right",45),
 
 "KIRKBANK T": StraightLine([265,550],"right",75),
-"MOFFAT T1": StraightLine([265,645],"right",75),
+"MOFFAT T1": StraightLine([265,640],"right",75),
+"MOFFAT T2": StraightLine([565,640],"left",80),
+
+"694 23": StraightLine([565,640],"up",240),
 
 "KIRKBANK10": StraightLine([390,550],"left",50,"11kV"),
 "KIRKBANK 1": StraightLine([390,550],"down",35,"11kV"),
@@ -392,6 +407,7 @@ lines:{
 "MOFFAT01": StraightLine([360,675],"right",100,"11kV"),
 "MOFFAT 2": StraightLine([440,640],"down",35,"11kV"),
 "MOFFAT20": StraightLine([440,640],"right",50,"11kV"),
+
 
 "GRETNA 1": StraightLine([615,535],"right",30),
 "GRETNA 2": StraightLine([645,535],"up",150),
@@ -409,7 +425,8 @@ lines:{
 "673 20": StraightLine([785,460],"right",50, "11kV"),
 
 "694 12": StraightLine([305,455],"up",55),
-"694 22": StraightLine([515,455],"up",55),
+"694 22": StraightLine([520,455],"up",55),
+
 
 "LOCKERBIE T1": StraightLine([305,455],"right",35),
 "679 10": StraightLine([340,455],"right",50, "11kV"),
@@ -452,8 +469,8 @@ lines:{
 breakers:{
     "698 16": new Breaker("698 16",0.25,"closed"),
     "698 15": new Breaker("698 15",0.07,"closed"),
-    "699 CHAP": new Breaker("698 15",0.60,"closed"),
-    "SC generator Breaker": new Breaker("698 15",0.85,"open"),
+    "699 CHAP": new Breaker("698 15",0.60,"closed", "CHAP"),
+    "699 generator ": new Breaker("698 15",0.85,"open",name = ""),
     "698 14": new Breaker("698 14",0.19,"closed"),
     "698 13": new Breaker("698 13",0.1,"closed"),
     "GRID 1": new Breaker("GRID 1",0.2,"closed"),
@@ -474,53 +491,54 @@ breakers:{
 
     //some of these below are arc breakers
 
-    "M12": new Breaker("M12",0.5,"closed"),
-    "M13": new Breaker("M13",0.1,"closed"),
-    "M14": new Breaker("M14",0.08,"closed"),
-    "M11": new Breaker("M11",0.12,"closed"),
+    "780 12": new Breaker("M12",0.5,"closed","12"),
+    "780 13": new Breaker("M13",0.1,"closed","13"),
+    "780 14": new Breaker("M14",0.08,"closed","14"),
+    "780 11": new Breaker("M11",0.12,"closed","11"),
 
-    "781 12": new Breaker("781 12",0.65,"closed"),
-    "781 11": new Breaker("781 11",0.3,"closed"),
+    "781 12": new Breaker("781 12",0.65,"closed","12"),
+    "781 11": new Breaker("781 11",0.3,"closed","11"),
 
-    "MP10": new Breaker("MP10",0.6,"closed"),
+    "682 10": new Breaker("MP10",0.6,"closed","10"),
 
-    "LH10": new Breaker("Langholm10",0.3,"closed"),
-    "LH01": new Breaker("Langholm01",0.55,"closed"),
-    "LH20": new Breaker("Langholm20",0.4,"closed"),
+    "676 10": new Breaker("Langholm10",0.3,"closed","10"),
+    "676 01": new Breaker("Langholm01",0.55,"closed","01"),
+    "676 20": new Breaker("Langholm20",0.4,"closed","20"),
 
-    "A10": new Breaker("ANNAN10",0.3,"closed"),
-    "662 01": new Breaker("662 01",0.55,"closed"),
-    "A20": new Breaker("ANNAN20",0.3,"closed"),
+    "662 10": new Breaker("ANNAN10",0.3,"closed","10"),
+    "662 01": new Breaker("662 01",0.55,"closed","01"),
+    "662 20": new Breaker("ANNAN20",0.3,"closed","20"),
 
-    "L13": new Breaker("LOCKERBIE13",0.1,"closed"),
+    "694 13": new Breaker("LOCKERBIE13",0.1,"closed","13"),
 
-    "KB10": new Breaker("KIRKBANK10",0.3,"closed"),
+    "675 10": new Breaker("KIRKBANK10",0.3,"closed","10"),
 
-    "683 10": new Breaker("MOFFAT10",0.3,"closed"),
-    "683 01": new Breaker("MOFFAT01", 0.55,"closed"),
-    "683 20": new Breaker("MOFFAT20", 0.3,"closed"),
+    "683 10": new Breaker("MOFFAT10",0.3,"closed","10"),
+    "683 01": new Breaker("MOFFAT01", 0.55,"closed","01"),
+    "683 20": new Breaker("MOFFAT20", 0.3,"closed","20"),
 
-    "694 12": new Breaker("694 12", 0.5,"closed"),
-    "694 22": new Breaker("694 22", 0.5),
+    "694 12": new Breaker("694 12", 0.5,"closed","12"),
+    "694 22": new Breaker("694 22", 0.5,"closed","22"),
+    "694 23": new Breaker("694 23", 0.89,"closed","13"),
 
-    "679 10": new Breaker("679 10", 0.7),
-    "679 01": new Breaker("679 01",0.55),
-    "679 20": new Breaker("679 20",0.3),
+    "679 10": new Breaker("679 10", 0.7,"closed","10"),
+    "679 01": new Breaker("679 01",0.55,"closed","01"),
+    "679 20": new Breaker("679 20",0.3,"closed","20"),
 
-    "673 10": new Breaker("673 10",0.25),
-    "673 01": new Breaker("673 01",0.55),
-    "673 20": new Breaker("673 20",0.25),
+    "673 10": new Breaker("673 10",0.25,"closed","10"),
+    "673 01": new Breaker("673 01",0.55,"closed","01"),
+    "673 20": new Breaker("673 20",0.25,"closed","20"),
 
-    "761 CHAP": new Breaker("761 CHAP",0.55),
-    "761 WINDFARM": new Breaker("761 WINDFARM",1),
-    "761 CUSTOMER": new Breaker("761 CUSTOMER",0),
+    "761 CHAP": new Breaker("761 CHAP",0.55,"closed","CHAP"),
+    "761 WINDFARM": new Breaker("761 WINDFARM",1,"closed","WINDFARM"),
+    "761 CUSTOMER": new Breaker("761 CUSTOMER",0,"closed","CUSTOMER"),
 
-    "123 10": new Breaker("123 10",0.25),
-    "123 12": new Breaker("123 12",0.7),
+    "123 10": new Breaker("123 10",0.25,"closed","10"),
+    "123 12": new Breaker("123 12",0.7,"closed","12"),
 
-    "785 21": new Breaker("785 21",0.86),
-    "785 22": new Breaker("785 22",0.15),
-    "785 CUSTOMER BREAKER": new Breaker("785 22",0.5,"open"),
+    "785 21": new Breaker("785 21",0.86,"closed","21"),
+    "785 22": new Breaker("785 22",0.15,"closed","22"),
+    "785 CUSTOMER": new Breaker("785 22",0.5,"open","CUSTOMER"),
 
     },
 tx:{
@@ -528,7 +546,7 @@ tx:{
     1: new Tx("GRID 2",1,"GRID T2",type="starDelta"),
     2: new Tx("GRID 1",1,"GRID T1",type="starDelta"),
     3: new Tx("into DAR tx",1,"",type="starDelta"),
-    5: new Tx("Middlebie Primary Transformer",1,"Middlebie Primary", type="starDelta"),
+    5: new Tx("Middlebie Primary Transformer",1,"", type="starDelta"),
     6: new Tx("Langholm tx 33kV",1,"T1",type="starDelta"),
     7: new Tx("Langholm Tx2",1,"T2",type="starDelta"),
     8: new Tx("698 14 into ANNAN",1,"T1",type="starDelta"),
@@ -674,7 +692,7 @@ Gretna_400kV={
     "X236 X230 X234": StraightLine([620,430],"down",190,"400kV"),
 
     "X116 X114": StraightLine([805,430],"down",190,"400kV"),
-        "GRNA 680 ": StraightLine([765,525],"right",40,"400kV"),
+        "GRNA 680 A": StraightLine([765,525],"right",40,"400kV"),
         "X110": StraightLine([765,525],"down",215,"400kV"),
         "GRNA 680": StraightLine([765,740],"down",190,"132kV"),
         "GRNA 680 tx": StraightLine([765,800],"left",40,"132kV"),
@@ -695,6 +713,9 @@ Gretna_400kV={
     tx:{
         "GRNA 780 tx": new Tx("GRNA 780 tx",1,"","deltaStar", "132kV","LV"),
         "GRNA 680 tx": new Tx("GRNA 680 tx",1,"","deltaStar", "132kV","LV"),
+    },
+
+    inductors:{
     }
 }
 
@@ -1068,12 +1089,18 @@ for (idx_line in dict_components.lines){
     let size = breaker.size
     let pos = breaker.pos
     let state = breaker.state
-    // console.log(state)
+
+    if(breaker.name === false){
+        breaker.name = i
+    }
+
+    breaker.callback = Breaker_Callback(breaker.graphic,breaker.name)
+
     let bcallback = breaker.callback
+
     add_breaker(line,pos,size,state,bcallback)
     let id = i
     let closed = state == 'closed'
-
     let b = {drawInfo:breaker, UIElement: breaker.graphic[0], closed: closed, id : id, line : line}
     b.setState = function(closed){
         breaker = components.breakers[id].line
@@ -1130,7 +1157,7 @@ for (idx_line in dict_components.lines){
     }
 
     //add Generators
-   for(i in dict_components.generators){
+  for(i in dict_components.generators){
     gen = dict_components.generators[i]
     line = dict_components.lines[gen.lineID]
     pos = gen.pos
@@ -1143,6 +1170,17 @@ for (idx_line in dict_components.lines){
     components.generators[id] = g
 
    }
+  for(i in dict_components.inductors){
+    inductor = dict_components.inductors[i]
+    line = dict_components.lines[inductor.lineID]
+    pos = inductor.pos
+    callback = inductor.callback
+
+    add_inductor(line,pos)
+    id = i
+    let ind = {initInfo:inductor, UIElement: inductor.graphic[0], id : id}
+    components.generators[id] = inductor
+  }
 
 //  var powerColour = '#25b1f5'
 //

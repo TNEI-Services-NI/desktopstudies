@@ -221,7 +221,6 @@ let palette = {"400kV":"#0000bc", "132kV":"#00cbff", "33kV":"#00ff00", "11kV":"#
     var rect1, rect2, rect3, rect4;
 
     var dict_inductor = {}
-
     if (dict_line.x1 === dict_line.x2){
       bVertical = true;
       var center = [dict_line.x1, dict_line.y1+(dict_line.y2-dict_line.y1)*position];
@@ -282,7 +281,7 @@ let palette = {"400kV":"#0000bc", "132kV":"#00cbff", "33kV":"#00ff00", "11kV":"#
     // }
 
     if (state === 'open'){
-      rect1 = draw.rect(size, size).center(center[0], center[1]).fill(dict_line.dict_styling.fill).stroke(dict_line.dict_styling.stroke).stroke({width: 1})
+      rect1 = draw.rect(size, size).center(center[0], center[1]).fill("black").stroke("white").stroke({width: 1})
     }
     if (state === 'closed'){
       rect1 = draw.rect(size, size).center(center[0], center[1]).fill(closed_color).stroke("white").stroke({width: 1})
@@ -297,7 +296,7 @@ let palette = {"400kV":"#0000bc", "132kV":"#00cbff", "33kV":"#00ff00", "11kV":"#
 
       this.fire(breaker_clicked_event)
     });
-
+    rect1.horizontal = bHorizontal
     dict_breaker.objects = [rect1];
     callback(rect1);
   }
