@@ -206,8 +206,7 @@ let palette = {"400kV":"#0000bc", "132kV":"#00cbff", "33kV":"#00ff00", "11kV":"#
     group.move(center[0]-rad, center[1]-rad);
 
     dict_gen.objects = [group]
-
-    callback(circle1, group, inside_group)
+    callback(group)
   }
 
   function add_inductor(dict_line, position, length){
@@ -221,7 +220,6 @@ let palette = {"400kV":"#0000bc", "132kV":"#00cbff", "33kV":"#00ff00", "11kV":"#
     var rect1, rect2, rect3, rect4;
 
     var dict_inductor = {}
-
     if (dict_line.x1 === dict_line.x2){
       bVertical = true;
       var center = [dict_line.x1, dict_line.y1+(dict_line.y2-dict_line.y1)*position];
@@ -270,15 +268,7 @@ let palette = {"400kV":"#0000bc", "132kV":"#00cbff", "33kV":"#00ff00", "11kV":"#
       bHorizontal = true;
       var center = [dict_line.x1+(dict_line.x2-dict_line.x1)*position, dict_line.y1];
     }
-    // alert(dict_line.dict_styling.fill)
-    // if(dict_line.dict_styling.stroke.color !== '#a0a0a0'){
-      if (state === 'open'){
-        dict_line.dict_styling.fill.color = 'black'
-        dict_line.dict_styling.stroke.color = 'white'
-      } else if (state === 'closed'){
-        dict_line.dict_styling.fill.color = 'white'
-        dict_line.dict_styling.stroke.color = 'white'
-      }
+    closed_color = dict_line.dict_styling.stroke.color
     // } else {
     //   if (state === 'open'){
     //     dict_line.dict_styling.fill.color = 'white'
@@ -290,10 +280,10 @@ let palette = {"400kV":"#0000bc", "132kV":"#00cbff", "33kV":"#00ff00", "11kV":"#
     // }
 
     if (state === 'open'){
-      rect1 = draw.rect(size, size).center(center[0], center[1]).fill(dict_line.dict_styling.fill).stroke(dict_line.dict_styling.stroke).stroke({width: 1})
+      rect1 = draw.rect(size, size).center(center[0], center[1]).fill("black").stroke("white").stroke({width: 1})
     }
     if (state === 'closed'){
-      rect1 = draw.rect(size, size).center(center[0], center[1]).fill(dict_line.dict_styling.fill).stroke(dict_line.dict_styling.stroke).stroke({width: 1})
+      rect1 = draw.rect(size, size).center(center[0], center[1]).fill(closed_color).stroke("white").stroke({width: 1})
     }
 
     rect1.click(function() {
@@ -305,7 +295,7 @@ let palette = {"400kV":"#0000bc", "132kV":"#00cbff", "33kV":"#00ff00", "11kV":"#
 
       this.fire(breaker_clicked_event)
     });
-
+    rect1.horizontal = bHorizontal
     dict_breaker.objects = [rect1];
     callback(rect1);
   }
@@ -611,6 +601,37 @@ let palette = {"400kV":"#0000bc", "132kV":"#00cbff", "33kV":"#00ff00", "11kV":"#
     callback(text1)
   }
 
+  function add_isolator(dict_line, position, size, state, callback){
+    console.log("isolator")
+    var bVertical = false;
+    var bHorizontal = false;
+
+    var dict_breaker = {}
+
+    if (dict_line.x1 === dict_line.x2){
+      bVertical = true;
+      var center = [dict_line.x1, dict_line.y1+(dict_line.y2-dict_line.y1)*position];
+    }
+    if (dict_line.y1 === dict_line.y2){
+      bHorizontal = true;
+      var center = [dict_line.x1+(dict_line.x2-dict_line.x1)*position, dict_line.y1];
+    }
+    closed_color = dict_line.dict_styling.stroke.color
+
+    if (state === 'open'){
+      circle1 = draw.circle(size, size).center(center[0], center[1]).fill("black").stroke("white").stroke({width: 1})
+    }
+    if (state === 'closed'){
+      circle1 = draw.circle(size, size).center(center[0], center[1]).fill(closed_color).stroke("white").stroke({width: 1})
+    }
+
+    rect1.click(function() {
+    });
+    circle1.horizontal = bHorizontal
+    dict_breaker.objects = [circle1];
+    callback(circle1);
+  }
+
 
   function post_breaker(breakerID,state){
       if(breakerID === null){breakerID="b1"}
@@ -638,7 +659,7 @@ let palette = {"400kV":"#0000bc", "132kV":"#00cbff", "33kV":"#00ff00", "11kV":"#
             // console.log(breaker_states["state"][breaker])
             // console.log(breakers[breaker].state)
           }
-          callback(breakers)
+//          callback(breakers)
         })
     }
 

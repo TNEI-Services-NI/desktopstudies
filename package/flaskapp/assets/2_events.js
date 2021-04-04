@@ -1,8 +1,21 @@
-  function eventMouse(group, type, name){
+  function eventMouse(component){
+  let type = component.info.component
+  let group = component.UIElement
     group.mouseenter(function(e){
       $("#dataPopup").css('visibility', 'visible');
-      $('#dataPopup').text(type+':')
-      $('<p>'+name+'</p>').appendTo('#dataPopup');
+      $('#dataPopup').text(type+':');
+
+      if(type ==="Breaker" || type === "Isolator"){
+            $('<p> closed = '+component.closed+'</p>').appendTo('#dataPopup');
+      }
+
+      if(type ==="Generator"){
+            $('<p> method = '+component.info.method+'</p>').appendTo('#dataPopup');
+      }
+
+
+
+//      $('<p>'+name+'</p>').appendTo('#dataPopup');
       // $('<p>Data:</p>').appendTo('#dataPopup');
       $.ajax({
         url:"data/scenario1.csv",
