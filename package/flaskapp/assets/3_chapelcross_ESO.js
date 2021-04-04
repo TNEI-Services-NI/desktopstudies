@@ -392,26 +392,26 @@ breakers:{
 
     },
 tx:{
-    0: new Tx("into GRID 2 tx",1,"",type="starDelta"),
-    1: new Tx("GRID 2",1,"GRID T2",type="starDelta"),
-    2: new Tx("GRID 1",1,"GRID T1",type="starDelta"),
-    3: new Tx("into DAR tx",1,"",type="starDelta"),
-    5: new Tx("Middlebie Primary Transformer",1,"", type="starDelta"),
-    6: new Tx("Langholm tx 33kV",1,"T1",type="starDelta"),
-    7: new Tx("Langholm Tx2",1,"T2",type="starDelta"),
-    8: new Tx("698 14 into ANNAN",1,"T1",type="starDelta"),
-    9: new Tx("ANNAN20",1,"T2",type="starDelta"),
-    11: new Tx("KIRKBANK T",1,"T", type="starDelta"),
-    12: new Tx("MOFFAT T1",1,"T1",type="starDelta"),
-    13: new Tx("MOFFAT20",1,"T1",type="starDelta"),
+    0: new Tx("into GRID 2 tx",1,"",type="starDelta","33kV","LV"),
+    1: new Tx("GRID 2",1,"GRID T2",type="starDelta","33kV","132kV"),
+    2: new Tx("GRID 1",1,"GRID T1",type="starDelta","33kV","132kV"),
+    3: new Tx("into DAR tx",1,"",type="starDelta","33kV","LV"),
+    5: new Tx("Middlebie Primary Transformer",1,"", type="starDelta","11kV","33kV"),
+    6: new Tx("Langholm tx 33kV",1,"T1",type="starDelta","11kV"),
+    7: new Tx("Langholm Tx2",1,"T2",type="starDelta","33kV","11kV"),
+    8: new Tx("698 14 into ANNAN",1,"T1",type="starDelta","11kV"),
+    9: new Tx("ANNAN20",1,"T2",type="starDelta","33kV","11kV"),
+    11: new Tx("KIRKBANK T",1,"T", type="starDelta","11kV"),
+    12: new Tx("MOFFAT T1",1,"T1",type="starDelta","11kV"),
+    13: new Tx("MOFFAT20",1,"T1",type="starDelta","33kV","11kV"),
 
-    14: new Tx("LOCKERBIE T1", 1, "T1"),
-    15: new Tx("LOCKERBIE T2",0,"T2"),
+    14: new Tx("LOCKERBIE T1", 1,"starDelta", "T1","11kV"),
+    15: new Tx("LOCKERBIE T2",0,"starDelta","T2","33kV","11kV"),
 
-    16: new Tx("GRETNA T1",1,"T1"),
-    17: new Tx("GRETNA T2",1,"T2"),
+    16: new Tx("GRETNA T1",1,"starDelta","T1","11kV","33kV"),
+    17: new Tx("GRETNA T2",1,"starDelta","T2","33kV","11kV"),
 
-    18: new Tx("NEWCASTLETON T1",1,"T1"),
+    18: new Tx("NEWCASTLETON T1",1,"starDelta","T1","11kV"),
 
     },
 generators:{
@@ -505,11 +505,11 @@ chapelcross_132kV={
         "410": new Breaker("410",0.7,"open"),
 
     },
-    tx:{1: new Tx("into GRID T1 tx",1,"",type="starDelta", coil1 = "LV", coil2 = "33kV"),
-        2: new Tx("GRID T1",1,"GRID T1",type="starDelta",coil1 = "132kV", coil2 = "33kV"),
+    tx:{1: new Tx("into GRID T1 tx",1,"",type="starDelta", coil1 = "33kV", coil2 = "LV"),
+        2: new Tx("GRID T1",1,"GRID T1",type="starDelta",coil1 = "33kV", coil2 = "132kV"),
 
-        3: new Tx("into GRID T2 tx",1,"",type="starDelta", coil1 = "LV", coil2 = "33kV"),
-        4: new Tx("GRID T2",1,"GRID T2",type= "starDelta",coil1 = "132kV",coil2 = "33kV"),
+        3: new Tx("into GRID T2 tx",1,"",type="starDelta", coil1 = "33kV", coil2 = "LV"),
+        4: new Tx("GRID T2",1,"GRID T2",type= "starDelta",coil1 = "33kV",coil2 = "132kV"),
 
         },
     isolators:{
@@ -634,7 +634,7 @@ Gretna_400kV={
     }
 }
 
-dict_components = Gretna_400kV
+dict_components = chapelcross_GSP_33kV
 
 init_breakers("chapelcross", "33kv", dict_components.breakers);
 
@@ -767,7 +767,9 @@ for (idx_line in dict_components.lines){
     name = tx.name
     type = tx.type
     pos = tx.pos
-    add_tx(line,pos,type,tx.callback)
+    coil1 = tx.coil1
+    coil2 = tx.coil2
+    add_tx(line,pos,type,[coil1,coil2],tx.callback)
 
     let id = i
     let t = {initInfo:tx, UIElement: tx.graphic[0], id : id}

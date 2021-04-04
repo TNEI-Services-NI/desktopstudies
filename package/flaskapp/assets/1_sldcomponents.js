@@ -1,6 +1,6 @@
 let palette = {"400kV":"#0000bc", "132kV":"#00cbff", "33kV":"#00ff00", "11kV":"#996633", "LV":"#ff3ae8"}
 
-  function add_tx(dict_line, position, type, callback){
+  function add_tx(dict_line, position, type, coils, callback){
     var rad = 9
     var overlapFactor = 0.25
     var circleWidth = 1
@@ -29,18 +29,27 @@ let palette = {"400kV":"#0000bc", "132kV":"#00cbff", "33kV":"#00ff00", "11kV":"#
       var toCenter = [rad*(1-overlapFactor)+dict_line.x1+(dict_line.x2-dict_line.x1)*position, dict_line.y1]
     }
 
+    if(coils != undefined){
+        secondaryCoil = palette[coils[1]]
+        primaryCoil = palette[coils[0]]
+    }
+    else{
+        primaryCoil = dict_line.dict_styling.stroke.color
+        secondaryCoil =dict_line.dict_styling.stroke.color
+    }
+
     circle1 = draw.circle(2*rad).center(fromCenter[0], fromCenter[1])
     circle2 = draw.circle(2*rad).center(toCenter[0], toCenter[1])
     circle3 = draw.circle(2*rad).center(fromCenter[0], fromCenter[1])
     circle4 = draw.circle(2*rad).center(toCenter[0], toCenter[1])
     circle1.fill('black')
-    circle1.stroke({ color: 'white', width: circleWidth, linecap: 'white', linejoin: 'round' })
+    circle1.stroke({ color: secondaryCoil, width: circleWidth, linecap: 'white', linejoin: 'round' })
     circle2.fill('black')
-    circle2.stroke({ color: 'white', width: circleWidth, linecap: 'white', linejoin: 'round' })
+    circle2.stroke({ color: primaryCoil, width: circleWidth, linecap: 'white', linejoin: 'round' })
     circle3.fill('none')
-    circle3.stroke({ color: 'white', width: circleWidth, linecap: 'white', linejoin: 'round' })
+    circle3.stroke({ color: secondaryCoil, width: circleWidth, linecap: 'white', linejoin: 'round' })
     circle4.fill('none')
-    circle4.stroke({ color: 'white', width: circleWidth, linecap: 'white', linejoin: 'round' })
+    circle4.stroke({ color: primaryCoil, width: circleWidth, linecap: 'white', linejoin: 'round' })
 
     dict_line.dict_styling.stroke.dasharray = []
     dict_line.dict_styling.stroke.width = circleWidth
