@@ -576,8 +576,8 @@ Gretna_400kV={
     "X406 X404": StraightLine([485,430],"down",190,"400kV"),
         "ELVA A": StraightLine([445,525],"right",40, "400kV"),
         "ELVA": StraightLine([445,525],"up",440, "400kV"),
-        "x447": StraightLine([445,275],"right",135,"400kV"),
-        "x449": StraightLine([445,220],"right",135,"400kV"),
+        "X447": StraightLine([445,275],"right",135,"400kV"),
+        "X449": StraightLine([445,220],"right",135,"400kV"),
         "SC1" : StraightLine([530,275],"up",55,"400kV"),
         "X448": StraightLine([580,220],"down",55,"400kV"),
 
@@ -608,10 +608,33 @@ Gretna_400kV={
     },
 
     inductors:{
+    },
+
+    isolators:{
+        "X603": new Isolator("HARK",0.5),
+
+        "X604": new Isolator("X606 X604",0.75),
+        "X606": new Isolator("X606 X604",0.25,"open"),
+
+        "X514": new Isolator("X516 X514",0.75),
+        "X516": new Isolator("X516 X514",0.25,"open"),
+
+        "X404": new Isolator("X406 X404",0.75),
+        "X406": new Isolator("X406 X404",0.25,"open"),
+
+        "X234": new Isolator("X236 X230 X234",0.75),
+        "X236": new Isolator("X236 X230 X234",0.25,),
+
+        "X114": new Isolator("X116 X114",0.75),
+        "X116": new Isolator("X116 X114",0.25,"open"),
+
+        "X405": new Isolator("ELVA",0.3),
+        "X447": new Isolator("X447",0.3),
+        "X449": new Isolator("X449",0.3),
     }
 }
 
-dict_components = chapelcross_132kV
+dict_components = Gretna_400kV
 
 init_breakers("chapelcross", "33kv", dict_components.breakers);
 
