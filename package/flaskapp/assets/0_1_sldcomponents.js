@@ -39,12 +39,20 @@ function add_text(object, bool_dict_obj, list_text, x_from_center, y_from_center
     callback(text1)
 }
 
-function Breaker_Callback(holder, name = false){
+/**
+ * Callback function for breaker object instances. Adds object to list of child objects associated with
+ * the breaker.
+ * @param  {list} graphic_objects List of child objects associated with each breaker object.
+ * @param  {string} name String object containing name/contents of child object
+ * @return {function} None Returns a function that adds passed object to breaker child objects, and adds text label.
+ */
+function Breaker_Callback(graphic_objects, name = ''){
     return function(object){
-        if(holder !== undefined){
-            holder.push(object)
+        // Add object defined in
+        if(graphic_objects !== undefined){
+            graphic_objects.push(object)
         }
-        if(name !== false){
+        if(name !== ''){
             if(object.horizontal === true){
                 add_text(object, false, [name], 0, -15, function(object){})
             }
@@ -53,21 +61,21 @@ function Breaker_Callback(holder, name = false){
         }
     }
 }
-function Text_Callback(holder){
+function Text_Callback(graphic_objects){
         return function(object){
             //revamp post_breaker to a function that figures out its state instead
 //            object.on("breaker_clicked",function(){post_breaker()})
-            if(holder != undefined){
-                holder.push(object)
+            if(graphic_objects != undefined){
+                graphic_objects.push(object)
             }
         }
     }
-function Tx_Callback(name, holder){
+function Tx_Callback(graphic_objects, name = false){
         return function(circle1,circle2,circle3,circle4,group){
             //revamp post_breaker to a function that figures out its state instead
 //            object.on("breaker_clicked",function(){post_breaker()})
-            if(holder != undefined){
-                holder.push(group)
+            if(graphic_objects != undefined){
+                graphic_objects.push(group)
             }
             add_text(circle1, false, [name], 7, 20, function(object){
             return 0
@@ -132,7 +140,7 @@ function Tx(lineID,pos,name,type="starDelta", coil1 = "33kV",coil2 = "33kV"){
     this.type = type
     this.coil1 = coil1
     this.coil2 = coil2
-    this.callback = Tx_Callback(this.name, this.graphic)
+    this.callback = Tx_Callback(this.graphic, this.name)
 }
 
 function Generator(line_id,pos, type= "wind"){

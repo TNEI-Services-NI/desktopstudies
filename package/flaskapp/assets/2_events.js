@@ -23,19 +23,12 @@ function init_breakers(network, voltage, breakers, callback){
           if (breaker_states["state"][breaker] === undefined){
             breakers_new[breaker].state = "undefined";
           } else {
-            // alert(JSON.stringify(breakers_new[breaker].state));
             breakers_new[breaker].state = breaker_states["state"][breaker];
-            // alert(JSON.stringify(breakers_new[breaker].state));
           }
-          // console.log(breaker_states["state"][breaker])
-          // console.log(breakers[breaker].state)
-          // alert(breakers_new[breaker].state);
         }
         callback(breakers_new);
       }
-//      dataType: 'application/json'
     });
-    // alert(JSON.stringify(breakers_new));
 
 }
 
