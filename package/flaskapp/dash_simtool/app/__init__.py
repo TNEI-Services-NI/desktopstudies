@@ -111,6 +111,6 @@ def init_dashboard(server=""):
                                    ],
                                   )
     #
-    # dash_app = callbacks.init_callbacks(dash_app)
+    dash_app = callbacks.init_callbacks(dash_app)
 
     return dash_app if server == "" else dash_app.server

@@ -3,7 +3,7 @@ import os
 import pandas as pd
 import numpy as np
 
-SIDEBAR_HIDE_OVERLAP = 2
+SIDEBAR_HIDE_OVERLAP = 0
 
 CONTENT_STYLE_SIDEBAR_HIDDEN = {
     "marginLeft": "2rem",
@@ -38,7 +38,7 @@ SIDEBAR_STYLE_HIDDEN = {
 CONTENT_STYLE = {
     "marginLeft": str(int(SIDEBAR_STYLE['width'].split('rem')[0])+SIDEBAR_HIDE_OVERLAP)+'rem',
     "marginRight": "2rem",
-    "padding": "2rem 1rem",
+    "marginTop": NAVBAR_STYLE['height'],
 }
 
 TOGGLE_BUTTON = {
