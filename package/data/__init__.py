@@ -17,5 +17,6 @@ def read_breaker_states(network, voltage):
     breaker_states = _fetch_breaker_state_files()
     filename = breaker_states[network + voltage]
     df_breakerstates = pd.read_csv('/'.join([dir_breaker_states, filename]))
+    df_breakerstates = df_breakerstates.convert_dtypes(convert_string=True)
     df_breakerstates = df_breakerstates.set_index('breaker')
     return df_breakerstates

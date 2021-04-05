@@ -24,8 +24,5 @@ def receive_breaker():
 @login_required
 def init_breakers():
     data = request.form
-    # print("breaker ID: " + data["breaker"])
     df_breakerstates = simtool_data.read_breaker_states('chapelcross', '33kv')
-    # print(df_breakerstates.loc[df_breakerstates['breaker']==data["breaker"]])
-    # print(df_breakerstates)
     return jsonify(df_breakerstates.to_dict())

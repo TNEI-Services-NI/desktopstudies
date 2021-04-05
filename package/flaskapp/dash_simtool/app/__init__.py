@@ -25,6 +25,7 @@ def init_dashboard(server=""):
             routes_pathname_prefix=URL_BASE,
             external_scripts=[
                 'https://cdnjs.cloudflare.com/ajax/libs/svg.js/3.0.5/svg.min.js',
+                'https://cdnjs.cloudflare.com/ajax/libs/svg.pan-zoom.js/2.7.0/svg.pan-zoom.min.js',
                 'https://cdn.jsdelivr.net/npm/@svgdotjs/svg.filter.js@3.0.1/dist/svg.filter.min.js',
                 'https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js',
                 'https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js',
