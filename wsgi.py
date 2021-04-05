@@ -6,6 +6,6 @@ if __name__ == "__main__":
     app = create_app()
     migrate.init_app(app, dbs)
     print("Running on http://127.0.0.1:5000/")
-    socketio.run(app)
-
+    # socketio.run(app)
+    app.run()
 

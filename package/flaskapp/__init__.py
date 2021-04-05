@@ -6,7 +6,7 @@ import eventlet
 
 import package as root
 from .extensions import login_manager, dbs, socketio, jsglue
-from .auth_2.login_manager import init_manager
+from .auth.login_manager import init_manager
 eventlet.monkey_patch()
 
 
@@ -63,23 +63,16 @@ def __load_auth_views(app):
     # # load authorisation views
     # from .auth import routes as auth_routes
     # app.register_blueprint(auth_routes.auth_bp)
-    from .auth_2 import routes as auth_routes_new
-    app.register_blueprint(auth_routes_new.auth_bp)
+    from .auth import routes as auth_routes
+    app.register_blueprint(auth_routes.auth_bp)
 
-    login_manager.login_view = 'auth_2.login'
+    login_manager.login_view = 'auth.login'
 
 
 def __load_dash_views(app):
     # load dash views
     from .dash_simtool import routes as dash_route
     app.register_blueprint(dash_route.simtool_bp)
-
-
-def _load_raw_sim_tool(app):
-    # load simulation tool views
-    from .simulatortool import routes as simtool_routes
-    app.register_blueprint(simtool_routes.desksim_bp)
-    return app
 
 
 def _load_blueprints(app):
@@ -141,7 +134,7 @@ def create_app(test_config=None):
     # manage application level data
     with app.app_context():
         # load core views
-        from . import routes
+        # from . import routes
 
         _load_blueprints(app)
 
