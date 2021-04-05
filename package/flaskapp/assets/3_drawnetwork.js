@@ -70,23 +70,30 @@ for (idx_line in dict_components.lines){
 }
 
 init_breakers("chapelcross", "33kv", dict_components.breakers, function(breakers){
-    for(let i in breakers){
+    for(let id in breakers){
         //doing this means the inital data, and the SVG elements they make remain unchanged at all times.
         // may be very useful should a redraw/reset be needed...
         // define listener handles now since they have access to everything relevant
-        let breaker = breakers[i]
+        let breaker = breakers[id]
 
         if(breaker.name === false){
-            breaker.name = i
+            breaker.name = id
         }
 
         breaker.callback = Breaker_Callback(breaker.graphic, breaker.name)
 
         draw_breaker(dict_components.lines[breaker.lineID] ,breaker.pos, breaker.size, breaker.state, breaker.callback)
 
-        let id = i
-        let closed = state == 'closed'
-        let b = {drawInfo:breaker, UIElement: breaker.graphic[0], closed: closed, id : id, line : line}
+        let closed = breaker.state === 'closed'
+        let b = {
+            drawInfo:breaker,
+            UIElement: breaker.graphic[0],
+            closed: closed,
+            id : id,
+            line : dict_components.lines[breaker.lineID]
+        }
+
+
         b.setState = function(closed){
             breaker = components.breakers[id].line
             rect = components.breakers[id].UIElement
