@@ -3,9 +3,11 @@ import os
 import pandas as pd
 
 dir_data = os.path.dirname(__file__)
-dir_simtool_data = '/'.join([dir_data, 'simtool'])
-dir_breaker_states = '/'.join([dir_simtool_data, 'breakerstates'])
 
+dir_simtool_data = '\\'.join([dir_data, 'simtool'])
+dir_breaker_states = '\\'.join([dir_simtool_data, 'breakerstates'])
+
+dir_auth_data = '\\'.join([dir_data, 'auth'])
 
 def _fetch_breaker_state_files():
     breaker_state_files = os.listdir(dir_breaker_states)

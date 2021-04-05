@@ -4,13 +4,16 @@ from flask_login import login_user, logout_user, login_required, current_user
 from package.flaskapp.auth.user import User
 from package.flaskapp import dbs as db
 from package.flaskapp import socketio
+import time
+import pandas as pd
+import package.data as data
 
 auth_bp = Blueprint('auth', __name__, static_folder='static', template_folder='templates')
 
 
 @auth_bp.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('login.html')
 
 
 @auth_bp.route('/signup')
@@ -29,6 +32,7 @@ def signup_post():
     email = request.form.get('email')
     name = request.form.get('name')
     password = request.form.get('password')
+    entity = request.form.get('entity')
 
     user = User.query.filter_by(
         email=email).first()  # if this returns a user, then the email already exists in database
@@ -38,7 +42,8 @@ def signup_post():
         return redirect(url_for('auth.signup'))
 
     # create a new user with the form data. Hash the password so the plaintext version isn't saved.
-    new_user = User(email=email, name=name, password=generate_password_hash(password, method='sha256'))
+    new_user = User(email=email, name=name, password=generate_password_hash(password, method='sha256'),
+                    entity=entity)
 
     # add the new user to the database
     db.session.add(new_user)
@@ -103,14 +108,30 @@ def new_disconnect():
 
 
 @socketio.on('trigger')
-def trigger_checks(data=None):
-    logged_users = User.query.filter_by(logged_in=1).all()
-    logged_users = [user.name for user in logged_users]
-    print(f'Logged-in users are: {logged_users}')
-    socketio.emit('update_logged_users', logged_users)
-    # socketio.emit('redirect', [url_for('/dash_simtool/')]) # This url is dummy data for now - not used in front end
+def trigger_checks(trig_data=None):
 
-    if len(logged_users)>0:
-        socketio.emit('users_complete', logged_users)
-        # socketio.emit('redirect', '/dash_simtool/') # This url is dummy data for now - not used in front end
+    required = pd.read_csv(data.dir_auth_data+'\\req_users.csv')
+    print(required)
+    print(required.groupby('entity')['name'].apply(lambda x: len(x)))
+
+    active_users = User.query.filter_by(logged_in=1).all()
+    logged_in = pd.DataFrame({'user': [user.name for user in active_users],
+                              'email': [user.email for user in active_users],
+                              'entity': [user.entity for user in active_users],
+                              'status': [1 for user in active_users]})
+
+    required.loc[required['email'].isin(logged_in['email']), 'status'] = True
+
+    required_entities = set(required.loc[required['required'], 'entity'].values.tolist())
+    entities_active = set(logged_in.loc[:, 'entity'].values.tolist())
+
+    print(f'Logged-in users are: {entities_active}')
+
+    socketio.emit('update_logged_users', required.loc[required['status'], 'name'].values.tolist())
+    socketio.emit('update_waiting_on', required.loc[~required['status'], 'name'].values.tolist())
+
+    if len(required_entities-entities_active) == 0:
+
+        socketio.emit('users_complete', logged_in['user'].values.tolist())
+        time.sleep(2)
         socketio.emit('redirect', 'dash_simtool_app.home') # This url is dummy data for now - not used in front end

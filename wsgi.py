@@ -2,7 +2,7 @@
 from package.flaskapp import create_app, socketio, dbs
 from package.flaskapp.extensions import migrate
 
-DEBUG = True
+DEBUG = False
 
 if __name__ == "__main__":
     app = create_app()
