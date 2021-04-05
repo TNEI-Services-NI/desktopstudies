@@ -7,7 +7,6 @@ import eventlet
 import package as root
 from .extensions import login_manager, dbs, socketio, jsglue
 from .auth_2.login_manager import init_manager
-
 eventlet.monkey_patch()
 
 
