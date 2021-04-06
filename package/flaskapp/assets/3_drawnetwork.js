@@ -1,6 +1,9 @@
   // Document Initialisation
   $(document).ready(function(){
+  $("#chap132").click(function(){
+    alert("button clicked.");
 
+  });
   });
 
 

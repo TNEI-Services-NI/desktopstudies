@@ -78,7 +78,7 @@ def init_dashboard(server=""):
             # html.P("Chapelcross 132KV", className="lead"),
             # html.P("Chapelcross 33KV", className="lead"),
             dbc.Button("reset", id="reset_draw"),
-            html.Hr(),            
+            html.Hr(),
             dbc.Button("Gretna 400KV", id="gret400"),
             html.Hr(),
             dbc.Button("Chapelcross 132KV", id="chap132"),
