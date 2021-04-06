@@ -1,4 +1,4 @@
-{% extends "base_2.html" %}
+{% extends "base.html" %}
 
 {% block content %}
 <div class="column is-4 is-offset-4">
@@ -7,13 +7,13 @@
         {% with messages = get_flashed_messages() %}
             {% if messages %}
                 <div class="notification is-danger">
-                    {{ messages[0] }}. Go to <a href="{{ url_for('auth_2.login') }}">login page</a>.
+                    {{ messages[0] }}. Go to <a href="{{ url_for('auth.login') }}">login page</a>.
                 </div>
             {% endif %}
         {% endwith %}
 
 
-        <form method="POST" action="{{ url_for('auth_2.signup') }}">
+        <form method="POST" action="{{ url_for('auth.signup') }}">
 <!--            action="/signup"> -->
             <div class="field">
                 <div class="control">
@@ -30,6 +30,19 @@
             <div class="field">
                 <div class="control">
                     <input class="input is-large" type="password" name="password" placeholder="Password">
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <select class="input is-large" name="entity" >
+                        <option value="" disabled selected>Select entity</option>
+                        <option value="ESO">ESO</option>
+                        <option value="TO">TO</option>
+                        <option value="DNO">DNO</option>
+                        <option value="DER">DER</option>
+                        <option value="Other">Other</option>
+                    </select>
                 </div>
             </div>
 

@@ -20,13 +20,13 @@ def compile_static_assets(assets):
             # 'dash_simtool_app/js/3_chapelcross_ESO.js',
             output='gen/dash_app.js'
         ),
+        # 'auth_css_bundle': Bundle(
+        #     'auth/css/auth.css',
+        #     filters='cssmin',
+        #     output='dist/css/home.css',
+        #     extra={'rel': 'stylesheet/less'}
+        # )
     }
-    # auth_css_bundle = Bundle(
-    #     'auth/css/auth.css',
-    #     filters='cssmin',
-    #     output='dist/css/home.css',
-    #     extra={'rel': 'stylesheet/less'}
-    # )
     # main_js_bundle = Bundle(
     #     'dash_simtool/static/src/js/test.js',
     #     filters='jsmin',
