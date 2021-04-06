@@ -80,7 +80,6 @@ function Tx_Callback(graphic_objects, name = false){
             add_text(circle1, false, [name], 7, 20, function(object){
             return 0
             });
-            component_modal(group, "Transformer", "STCR3-_STCR5-_1");
         }
     }
 

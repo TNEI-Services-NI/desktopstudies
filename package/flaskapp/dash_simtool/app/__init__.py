@@ -66,17 +66,22 @@ def init_dashboard(server=""):
     # add sidebar
     _sidebar = html.Div(
         [
-            html.Button('<',
-                        id='toggle_button',
-                        style={
-                            'marginLeft': '9rem',
-                            "backgroundColor": "#ebc700",
-                        }),
-            html.H3("Sidebar"),
+            # html.Button('<',
+            #             id='toggle_button',
+            #             style={
+            #                 'marginLeft': '9rem',
+            #                 "backgroundColor": "#ebc700",
+            #             }),
+            html.H3("Options"),
             html.Hr(),
-            html.P("option 1", className="lead"),
-            html.P("option 2", className="lead"),
-            html.P("option 3", className="lead"),
+            # html.P("Gretna 400KV", className="lead"),
+            # html.P("Chapelcross 132KV", className="lead"),
+            # html.P("Chapelcross 33KV", className="lead"),
+            dbc.Button("Gretna 400KV", id="gret400"),
+            html.Hr(),
+            dbc.Button("Chapelcross 132KV", id="chap132"),
+            html.Hr(),
+            dbc.Button("Chapelcross 33KV", id="chap33"),
         ],
         style=styling.SIDEBAR_STYLE,
         id='sidebar'
