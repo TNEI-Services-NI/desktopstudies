@@ -1,4 +1,6 @@
-  function eventMouse(component){
+function get_simvalues
+
+function eventMouse(component){
   let type = component.info.component
   let group = component.UIElement
     group.mouseenter(function(e){

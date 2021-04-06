@@ -751,7 +751,7 @@ for (idx_line in dict_components.lines){
         post_breaker(id,breaker.closed)
 
     })
-    eventMouse(b)
+    // eventMouse(b)
 
     components.breakers[id] = b
 
@@ -828,7 +828,7 @@ for (idx_line in dict_components.lines){
     let closed = state == 'closed'
     let iso = {info:isolator, UIElement: isolator.graphic[0], closed: closed, id : id, line : line}
     components.isolators[id] = iso
-    eventMouse(iso)
+    // eventMouse(iso)
   }
 
 //  var powerColour = '#25b1f5'
