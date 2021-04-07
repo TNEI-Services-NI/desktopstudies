@@ -38,7 +38,10 @@ def get_restoration_step():
     int(stage)
 
     # df_breakerstates = simtool_data.read_breaker_states(data['network'], data['voltage'])
-    stateDictionary = {}
-    stateDictionary = {"698 11": rand.random()}
 
-    return jsonify(stateDictionary)
+    stateDictionary = simtool_data.read_restoration_step(network, voltage, stage)
+    return stateDictionary.to_json()
+
+    # stateDictionary = {"698 11": rand.random()}
+    # return jsonify(stateDictionary.to_dict)
+

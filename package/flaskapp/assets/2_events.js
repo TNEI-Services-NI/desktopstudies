@@ -79,8 +79,9 @@ function update_state(stage,network,voltage,callbacks){
       data: {"stage": stage, "network": network,"voltage":voltage},
 //      dataType: 'application/json'
       }).done(function( state ) {
-        console.log(state);
+        state = JSON.parse(state)
         callbacks(stage,state);
+
       })
   }
 

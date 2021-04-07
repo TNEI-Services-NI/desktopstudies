@@ -42,7 +42,7 @@
                       isolators:[],
                   }
 
-  current_step = 0
+  current_step = 1
   steps = []
 
   /**
@@ -53,11 +53,7 @@
   **/
   function restoration_step_callback(step, step_data){
     steps[step] = step_data
-    for(id in step_data){
-        data = step_data[id]
-        console.log(data)
-        components.breakers[id].data = data
-    }
+    components.breakers["698 11"].data = step_data["comp1"]
   }
 
   /**
