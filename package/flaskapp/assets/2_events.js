@@ -54,19 +54,24 @@ function component_modal(component){
     group.mouseenter(function(e){
       $("#dataPopup").css('visibility', 'visible');
       $('#dataPopup').text(type+':');
+      $('<p>'+component.id+'</p>').appendTo('#dataPopup');
+
 
       if(type ==="Breaker" || type === "Isolator"){
             $('<p> closed = '+component.closed+'</p>').appendTo('#dataPopup');
       }
 
       if(type ==="Generator"){
-            $('<p> method = '+component.info.method+'</p>').appendTo('#dataPopup');
+            $('<p> method = '+component.info.type+'</p>').appendTo('#dataPopup');
+      }
+
+      if(type ==="Transformer"){
+            $('<p> type = '+component.info.type+'</p>').appendTo('#dataPopup');
       }
 
 
-
-//      $('<p>'+name+'</p>').appendTo('#dataPopup');
       // $('<p>Data:</p>').appendTo('#dataPopup');
+
       $.ajax({
         url:"data/scenario1.csv",
         dataType:"text",

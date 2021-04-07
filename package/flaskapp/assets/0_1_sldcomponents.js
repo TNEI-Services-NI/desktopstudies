@@ -85,6 +85,7 @@ function Tx_Callback(graphic_objects, name = false){
 
 
 function Breaker(lineID, pos, state = "closed", name=false){
+    this.component="Breaker"
     this.lineID = lineID
     this.pos = pos
     this.state = state
@@ -96,6 +97,7 @@ function Breaker(lineID, pos, state = "closed", name=false){
 }
 
 function Line(x1, y1,x2, y2, voltage="32kV", dash = false, colour = "#ffffff"){
+    this.component="Line"
     this.x1 = x1
     this.x2 = x2
     this.y1 = y1
@@ -124,6 +126,8 @@ function StraightLine(origin, direction, length, voltage="33kV", dash = false, c
 }
 
 function Text(lineID, text, offset){
+    this.component="Text"
+
     this.lineID = lineID
     this.text_strings = text
     this.offset = offset
@@ -132,6 +136,8 @@ function Text(lineID, text, offset){
 }
 
 function Tx(lineID,pos,name,type="starDelta", coil1 = "33kV",coil2 = "33kV"){
+    this.component="Transformer"
+
     this.lineID =lineID
     this.pos = pos
     this.name = name
@@ -143,6 +149,8 @@ function Tx(lineID,pos,name,type="starDelta", coil1 = "33kV",coil2 = "33kV"){
 }
 
 function Generator(line_id,pos, type= "wind"){
+    this.component="Generator"
+
     this.lineID = line_id
     this.pos = pos
     this.type = type
@@ -152,6 +160,8 @@ function Generator(line_id,pos, type= "wind"){
 }
 
 function Inductor(line_id,pos){
+    this.component="Inductor"
+
     this.lineID = line_id,
     this.pos = pos,
     this.graphic=[],
@@ -159,6 +169,7 @@ function Inductor(line_id,pos){
 }
 
 function Isolator(line_id,pos, state = "closed",name=false){
+    this.component="Isolator"
     this.lineID = line_id,
     this.pos = pos,
     this.state=state
