@@ -70,7 +70,6 @@ function init_breaker(breakerID){
  * @param  {integer} stage
  * @param  {String} Network of s
  * @param  {function} callback once data has been received
-
  * @return {None}
  */
 function update_state(stage,network,voltage,callbacks){

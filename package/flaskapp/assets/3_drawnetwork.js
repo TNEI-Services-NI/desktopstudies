@@ -151,6 +151,7 @@
               breaker.setState(!breaker.closed)
           //        breaker.closed=!breaker.closed
               post_breaker(id,breaker.closed)
+              inc_state()
           });
 
           components.breakers[id] = b
@@ -246,4 +247,8 @@
 
   draw_network(dict_components)
 
-  function inc_state(){current_step += 1;}
+  function inc_state(){
+      current_step += 1;
+      console.log(current_step)
+      update_state(current_step,network,voltage,restoration_step_callback);
+  }
