@@ -29,7 +29,7 @@
   } else if (network === "chapelcross" && voltage === "132kv") {
     dict_components = chapelcross_132kV
   } else if (network === "gretna" && voltage === "400kv") {
-    dict_components = chapelcross_132kV
+    dict_components = Gretna_400kV
   } else {
     dict_components = chapelcross_33kV
   }
@@ -87,8 +87,8 @@
           //doing this means the inital data, and the SVG elements they make remain unchanged at all times.
           // may be very useful should a redraw/reset be needed...
           // define listener handles now since they have access to everything relevant
-          let breaker = breakers[id]
 
+          let breaker = breakers[id]
           if(breaker.name === false){
               breaker.name = id
           }
@@ -96,10 +96,9 @@
           breaker.callback = Breaker_Callback(breaker.graphic, breaker.name)
 
           draw_breaker(dict_components.lines[breaker.lineID] ,breaker.pos, breaker.size, breaker.state, breaker.callback)
-
           let closed = breaker.state === 'closed'
           let b = {
-              drawInfo:breaker,
+              info:breaker,
               UIElement: breaker.graphic[0],
               closed: closed,
               id : id,
@@ -133,7 +132,6 @@
       }
   });
 
-
       //add text
   for(i in dict_components.text){
       text = dict_components.text[i]
@@ -146,7 +144,9 @@
       add_text(line,false,texts, offset[0],offset[1],text.callback)
       let id = i
       let t = {initInfo:text, UIElement: text.graphic[0], id : id}
+
       components.lines[id] = t
+
   }
 
       //add transformers
@@ -193,7 +193,7 @@
       draw_inductor(line,pos)
       id = i
       let ind = {initInfo:inductor, UIElement: inductor.graphic[0], id : id}
-      components.generators[id] = inductor
+      components.inductors[id] = inductor
   }
 
   for(i in dict_components.isolators){
@@ -212,10 +212,3 @@
       let iso = {drawInfo:isolator, UIElement: isolator.graphic[0], closed: closed, id : id, line : line}
       components.isolators[id] = iso
   }
-
-
-  function setBreakerState(breakerID, state){
-
-  }
-
-  function setLineVoltage(){LineID, voltage}{}

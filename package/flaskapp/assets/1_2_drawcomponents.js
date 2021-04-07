@@ -1,3 +1,12 @@
+/**
+ * draws a Transformer
+ * @param  {SVG Line} svg line which the transformer is drawn on
+ * @param  {double} position of transformer on line (between 0 and 1)
+ * @param  {String} type of transformer
+ * @param  {list} voltage levels of coils, [coil 1. coil 2]
+ * @return {callback} a callback which takes the created generator group as an argument
+ * @return {None}
+ */
 function draw_tx(dict_line, position, type, coils, callback){
 var rad = 12
 var overlapFactor = 0.25
@@ -133,6 +142,14 @@ group.add(circle4)
 callback(circle1, circle2, circle3, circle4, group);
 }
 
+/**
+ * draws a Generator
+ * @param  {SVG Line} svg line which the generator is drawn on
+ * @param  {double} position of generator on line (between 0 and 1)
+ * @param  {String} type of generator
+ * @return {callback} a callback which takes the created generator as an argument
+ * @return {None}
+ */
 function draw_gen(dict_line, position, type, callback){
 var rad = 15;
 var circleWidth = 1;
@@ -217,6 +234,15 @@ dict_gen.objects = [group]
 callback(circle1, group, inside_group)
 }
 
+/**
+ * draws a breaker
+ * @param  {SVG Line} svg line which the breaker is drawn on
+ * @param  {double} position of breaker on line (between 0 and 1)
+ * @param  {double} size of breaker
+ * @param  {String} state of breaker
+ * @return {callback} a callback which takes the created breaker as an argument
+ * @return {None}
+ */
 function draw_breaker(dict_line, position, size, state, callback){
   var bVertical = false;
   var bHorizontal = false;
@@ -270,6 +296,15 @@ function draw_breaker(dict_line, position, size, state, callback){
   callback(rect1);
 }
 
+/**
+ * draws an isolator
+ * @param  {SVG Line} svg line which the isolator is drawn on
+ * @param  {double} position of breaker on line (between 0 and 1)
+ * @param  {double} size of isolator
+ * @param  {String} state of isolator
+ * @return {callback} a callback which takes the created isolator as an argument
+ * @return {None}
+ */
 function draw_isolator(dict_line, position, size, state, callback){
 var bVertical = false;
 var bHorizontal = false;
@@ -293,13 +328,16 @@ if (state === 'closed'){
   circle1 = draw.circle(size, size).center(center[0], center[1]).fill(closed_color).stroke("white").stroke({width: 1})
 }
 
-rect1.click(function() {
-});
 circle1.horizontal = bHorizontal
 dict_breaker.objects = [circle1];
 callback(circle1);
 }
 
+/**
+ * draws an node
+ * @param  {SVG Line} svg line which the node is drawn on
+ * @return {None}
+ */
 function draw_nodes(dict_line, o_line){
 var rad = 3
 var txtSize = 9
@@ -423,6 +461,13 @@ text2.click(function() {
 });
 }
 
+/**
+ * draws an inductor
+ * @param  {SVG Line} svg line which the inductor is drawn on
+ * @param  {double} position of inductor on line (between 0 and 1)
+ * @param  {double} length of inductor
+ * @return {None}
+ */
 function draw_inductor(dict_line, position, length){
 var rad = 2;
 var circleWidth = 1
@@ -468,7 +513,14 @@ dict_inductor.objects = [ellipse1, ellipse2, ellipse3, ellipse4, rect1, rect2, r
 return dict_inductor
 }
 
-
+/**
+ * draws a resistor
+ * @param  {SVG Line} svg line which the resistor is drawn on
+ * @param  {double} position of resistor on line (between 0 and 1)
+ * @param  {double} length of resistor
+ * @param  {double} width of resistor
+ * @return {None}
+ */
 function draw_resistor(dict_line, position, length, width){
 var bVertical = false;
 var bHorizontal = false;
@@ -493,6 +545,13 @@ if (dict_line.y1 === dict_line.y2){
 dict_resistor.objects = [rect1]
 }
 
+/**
+ * draws a load
+ * @param  {SVG Line} svg line which the load is drawn on
+ * @param  {double} position of load on line (between 0 and 1)
+ * @param  {boolean} flipped
+ * @return {None}
+ */
 function draw_load(dict_line, position, flipped){
 var rad = 6;
 var bVertical = false;
@@ -547,6 +606,13 @@ if (bHorizontal){
 dict_load.objects = [poly1]
 }
 
+/**
+ * draws earth
+ * @param  {SVG Line} svg line which earth is drawn on
+ * @param  {double} position of load on line (between 0 and 1)
+ * @param  {boolean} flipped
+ * @return {None}
+ */
 function draw_earth(dict_line, position, flipped){
 var rad = 4;
 var bVertical = false;

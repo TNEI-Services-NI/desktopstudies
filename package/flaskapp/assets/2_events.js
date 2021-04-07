@@ -1,6 +1,14 @@
+
+/**
+ * sends breaker state to server as ajax request
+ * @param  {string} id of breaker
+ * @param  {boolean} position of load on line (between 0 and 1)
+ * @param  {boolean} state wether the breaker is closed (true) or not (false)
+ * @return {None}
+ */
 function post_breaker(breakerID,state){
   if(breakerID === null){breakerID="b1"}
-  if(state === null){state=true}
+  if(state === null){state=false}
   $.ajax({
   type: "POST",
   url: "receive_breaker/",
@@ -11,6 +19,14 @@ function post_breaker(breakerID,state){
   })
 }
 
+/**
+ * receives initial states of all breakers through ajax request
+ * @param  {string} network of sld
+ * @param  {string} voltage section of said network
+ * @param  {list} list of breaker prototypes to be drawn once data is received
+ * @param  {function} callback which interprets/draws a list of breakers.
+ * @return {None}
+ */
 function init_breakers(network, voltage, breakers, callback){
     var breakers_new = breakers
     $.ajax({
@@ -33,6 +49,11 @@ function init_breakers(network, voltage, breakers, callback){
 }
 
 
+/**
+ * retrieves state of one breaker
+ * @param  {string} breaker id
+ * @return {None}
+ */
 function init_breaker(breakerID){
       $.ajax({
       type: "POST",
@@ -47,7 +68,11 @@ function init_breaker(breakerID){
 
 const breaker_clicked_event = new CustomEvent('breaker_clicked')
 
-
+/**
+ * adds modal to a component which shows when the mouse hovers over it
+ * @param  {string} component
+ * @return {None}
+ */
 function component_modal(component){
   let type = component.info.component
   let group = component.UIElement

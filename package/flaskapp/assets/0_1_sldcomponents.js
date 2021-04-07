@@ -61,15 +61,14 @@ function Breaker_Callback(graphic_objects, name = ''){
         }
     }
 }
-function Text_Callback(graphic_objects){
-        return function(object){
-            //revamp post_breaker to a function that figures out its state instead
-//            object.on("breaker_clicked",function(){post_breaker()})
-            if(graphic_objects != undefined){
-                graphic_objects.push(object)
-            }
-        }
-    }
+
+/**
+ * Callback function for Transformer object instances. Adds object to list of child objects associated with
+ * the transformer.
+ * @param  {list} graphic_objects List of child objects associated with each transformer object.
+ * @param  {string} name String object containing name/contents of child objects
+ * @return {function} None Returns a function that adds passed object to breaker child objects, and adds text label.
+ */
 function Tx_Callback(graphic_objects, name = false){
         return function(circle1,circle2,circle3,circle4,group){
             //revamp post_breaker to a function that figures out its state instead
@@ -83,7 +82,15 @@ function Tx_Callback(graphic_objects, name = false){
         }
     }
 
-
+/**
+ * breaker prototype object. used to hold all information required to draw a breaker
+ * @param  {string} ID of line to draw breaker on
+ * @param  {double} pos of breaker on line (between 0 and 1)
+ * @param {string} initial state of the breaker, default "closed".
+ * @param {boolean/String} name of breaker for drawing labels. false value indicates no name set, default false
+ * @return None
+ * @usage instantiate as object i.e. new Breaker(...)
+ */
 function Breaker(lineID, pos, state = "closed", name=false){
     this.lineID = lineID
     this.pos = pos
@@ -95,7 +102,19 @@ function Breaker(lineID, pos, state = "closed", name=false){
 
 }
 
-function Line(x1, y1,x2, y2, voltage="32kV", dash = false, colour = "#ffffff"){
+/**
+ * line prototype object. used to hold all information required to draw a line
+ * @param  {double} x1 x origin point
+ * @param  {double} y1 y origin point
+ * @param  {double} x2 x end point
+ * @param  {double} y2 y end point
+ * @param  {String} voltage level of line. default "33kV"
+ * @param {boolean} dash if the line is a dashed line or not. default false
+ * @param {String} colour of line in hex format used to overwrite colour. default ""
+ * @return None
+ * @usage instantiate as object i.e. new Line(...)
+ */
+function Line(x1, y1,x2, y2, voltage="32kV", dash = false, colour = ""){
     this.x1 = x1
     this.x2 = x2
     this.y1 = y1
@@ -106,7 +125,16 @@ function Line(x1, y1,x2, y2, voltage="32kV", dash = false, colour = "#ffffff"){
     this.colour=colour
 }
 
-function StraightLine(origin, direction, length, voltage="33kV", dash = false, colour = "#ffffff"){
+/**
+ * helper which builds a Line object
+ * @param  {list} origin point of line [x,y]
+ * @param  {String} direction of line ("up","down","left","right")
+ * @param  {String} voltage of line. default "33kV"
+ * @param {boolean} dash if the line is a dashed line or not. default false
+ * @param {String} colour of line in hex format used to overwrite colour. default ""
+ * @return {Line} Returns a line object
+ */
+function StraightLine(origin, direction, length, voltage="33kV", dash = false, colour = ""){
     x1 = origin[0]
     y1 = origin[1]
     if(direction == "up"){
@@ -123,6 +151,14 @@ function StraightLine(origin, direction, length, voltage="33kV", dash = false, c
     }
 }
 
+/**
+ * Text Prototype object
+ * @param  {string} Line ID of which text is linked to
+ * @param  {list} list of text content, each member of list is a new line
+ * @param  {line} offset of text from line [x,y]
+ * @return {None}
+ * @usage instantiate as object i.e. new Line(...)
+ */
 function Text(lineID, text, offset){
     this.lineID = lineID
     this.text_strings = text
@@ -131,6 +167,16 @@ function Text(lineID, text, offset){
     this.callback = Text_Callback(this.graphic)
 }
 
+/**
+ * Transformer Prototype object
+ * @param  {string} Line ID of which Transformer is on
+ * @param  {double} pos of transformer on line (between 0 and 1)
+ * @param {string} type of transformer, default "starDelta"
+ * @param {String} coil 1 voltage
+ * @param {String} coil 2 voltage
+ * @return {None}
+ * @usage instantiate as object i.e. new Transformer(...)
+ */
 function Tx(lineID,pos,name,type="starDelta", coil1 = "33kV",coil2 = "33kV"){
     this.lineID =lineID
     this.pos = pos
@@ -142,6 +188,14 @@ function Tx(lineID,pos,name,type="starDelta", coil1 = "33kV",coil2 = "33kV"){
     this.callback = Tx_Callback(this.graphic, this.name)
 }
 
+/**
+ * Generator Prototype object
+ * @param  {string} Line ID of which Generator is on
+ * @param  {double} pos of generator on line (between 0 and 1)
+ * @param {string} type of Generator, default "wind"
+ * @return {None}
+ * @usage instantiate as object i.e. new Generator(...)
+ */
 function Generator(line_id,pos, type= "wind"){
     this.lineID = line_id
     this.pos = pos
@@ -151,6 +205,13 @@ function Generator(line_id,pos, type= "wind"){
     this.callback = Breaker_Callback(this.graphic)
 }
 
+/**
+ * Inductor Prototype object
+ * @param  {string} Line ID of which Generator is on
+ * @param  {double} pos of generator on line (between 0 and 1)
+ * @return {None}
+ * @usage instantiate as object i.e. new Inductor(...)
+ */
 function Inductor(line_id,pos){
     this.lineID = line_id,
     this.pos = pos,
@@ -158,7 +219,18 @@ function Inductor(line_id,pos){
     this.callback = Breaker_Callback(this.graphic)
 }
 
+/**
+ * Isolator Prototype object
+ * @param  {string} Line ID of which Generator is on
+ * @param  {double} pos of generator on line (between 0 and 1)
+ * @param {string} type of Generator, default "wind"
+ * @param {string} state of isolator
+ * @param {boolean/String} name of breaker for drawing labels. false value indicates no name set, default false
+ * @return {None}
+ * @usage instantiate as object i.e. new Isolator(...)
+ */
 function Isolator(line_id,pos, state = "closed",name=false){
+
     this.lineID = line_id,
     this.pos = pos,
     this.state=state
