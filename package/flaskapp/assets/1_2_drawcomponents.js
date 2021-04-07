@@ -245,9 +245,16 @@ function draw_breaker(dict_line, position, size, state, callback){
   if (state === 'open'){
     rect1 = draw.rect(size, size).center(center[0], center[1]).fill("black").stroke("white").stroke({width: 1})
   }
-  if (state === 'closed'){
+  else if (state === 'closed'){
     rect1 = draw.rect(size, size).center(center[0], center[1]).fill(closed_color).stroke("white").stroke({width: 1})
   }
+  else{
+      rect1 = draw.rect(size, size).center(center[0], center[1]).fill("grey").stroke("grey").stroke({width: 1})
+        rect1.horizontal = bHorizontal
+      dict_breaker.objects = [rect1];
+      callback(rect1);
+      return
+    }
 
   rect1.click(function() {
   //      if (this.attr('fill') === dict_line.dict_styling.stroke.color){
@@ -264,7 +271,6 @@ function draw_breaker(dict_line, position, size, state, callback){
 }
 
 function draw_isolator(dict_line, position, size, state, callback){
-console.log("isolator")
 var bVertical = false;
 var bHorizontal = false;
 
