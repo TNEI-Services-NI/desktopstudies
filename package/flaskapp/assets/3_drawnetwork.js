@@ -29,7 +29,7 @@
   } else if (network === "chapelcross" && voltage === "132kv") {
     dict_components = chapelcross_132kV
   } else if (network === "gretna" && voltage === "400kv") {
-    dict_components = chapelcross_132kV
+    dict_components = Gretna_400kV
   } else {
     dict_components = chapelcross_33kV
   }
@@ -41,6 +41,31 @@
                       generators: [],
                       isolators:[],
                   }
+
+  current_step = 0
+  steps = []
+
+  /**
+   * callback function for updating step data when it has been retrieved
+   * @param {integer} step number
+   * @param {dictionary} data retrieved from this state
+   * @return {None}
+  **/
+  function restoration_step_callback(step, step_data){
+    steps[step] = step_data
+    for(id in step_data){
+        data = step_data[id]
+        console.log(data)
+        components.breakers[id].data = data
+    }
+  }
+
+  /**
+   * draws components from dict_components object
+   * @param {Dictionary} dictionary of object prototypes used to build and draw components
+   * @return {None}
+  **/
+  function draw_network(dict_components){
 
   var idx_line, temp_dict
   for (idx_line in dict_components.lines){
@@ -99,7 +124,7 @@
 
           let closed = breaker.state === 'closed'
           let b = {
-              drawInfo:breaker,
+              info:breaker,
               UIElement: breaker.graphic[0],
               closed: closed,
               id : id,
@@ -129,7 +154,7 @@
           });
 
           components.breakers[id] = b
-
+          component_modal(b)
       }
   });
 
@@ -146,7 +171,9 @@
       add_text(line,false,texts, offset[0],offset[1],text.callback)
       let id = i
       let t = {initInfo:text, UIElement: text.graphic[0], id : id}
+
       components.lines[id] = t
+
   }
 
       //add transformers
@@ -193,7 +220,7 @@
       draw_inductor(line,pos)
       id = i
       let ind = {initInfo:inductor, UIElement: inductor.graphic[0], id : id}
-      components.generators[id] = inductor
+      components.inductors[id] = inductor
   }
 
   for(i in dict_components.isolators){
@@ -213,9 +240,10 @@
       components.isolators[id] = iso
   }
 
-
-  function setBreakerState(breakerID, state){
-
+  //get stage zero state
+  update_state(current_step,network,voltage,restoration_step_callback);
   }
 
-  function setLineVoltage(){LineID, voltage}{}
+  draw_network(dict_components)
+
+  function inc_state(){current_step += 1;}

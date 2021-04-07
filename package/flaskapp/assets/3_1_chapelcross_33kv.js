@@ -171,7 +171,7 @@ chapelcross_33kV = {
         "698 16": new Breaker("698 16",0.25,"closed"),
         "698 15": new Breaker("698 15",0.07,"closed"),
         "699 CHAP": new Breaker("698 15",0.60,"closed", "CHAP"),
-        "699 generator ": new Breaker("698 15",0.85,"open",name = ""),
+        "699 GENERATOR": new Breaker("698 15",0.85,"open",name = ""),
         "698 14": new Breaker("698 14",0.19,"closed"),
         "698 13": new Breaker("698 13",0.1,"closed"),
         "GRID 1": new Breaker("GRID 1",0.2,"closed"),
