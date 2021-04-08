@@ -1,43 +1,3 @@
-function add_text(object, bool_dict_obj, list_text, x_from_center, y_from_center, callback){
-    var rad = 3
-    var txtSize = 14
-
-    var bVertical = false;
-    var bHorizontal = false;
-
-    var text1 = draw.text(function(add) {
-      var text_idx
-      for(text_idx = 0; text_idx < list_text.length; text_idx++){
-        add.tspan(list_text[text_idx]).newLine()
-      }
-    })
-    .font({size: txtSize, family: 'Helvetica'}).fill({color: 'white'})
-
-    if(bool_dict_obj == true){
-      if (object.x1 == object.x2){
-        bVertical = true;
-      } else if (object.y1 == object.y2){
-        bHorizontal = true;
-      }
-
-      if(bVertical){
-        text1.x_coord = object.x1
-        text1.y_coord = object.y1+(object.y2 - object.y1)/2
-      }
-
-      if(bHorizontal){
-        text1.x_coord = object.x1+(object.x2 - object.x1)/2
-        text1.y_coord = dict_line.y1
-      }
-    } else {
-      text1.x_coord = object.cx()
-      text1.y_coord = object.cy()
-    }
-
-
-    text1.center(text1.x_coord+x_from_center, text1.y_coord+y_from_center);
-    callback(text1)
-}
 
 /**
  * Callback function for breaker object instances. Adds object to list of child objects associated with
@@ -63,24 +23,73 @@ function Breaker_Callback(graphic_objects, name = ''){
 }
 
 /**
+ * Callback function for text object instances. Adds object to list of child objects associated with
+ * the text.
+ * @param  {list} graphic_objects List of child objects associated with each breaker object.
+ * @return {function} None Returns a function that adds passed object to breaker child objects.
+ */
+function Text_Callback(graphic_objects){
+    return function(object){
+        // Add object defined in
+        if(graphic_objects !== undefined){
+            graphic_objects.push(object)
+        }
+    }
+}
+
+
+/**
  * Callback function for Transformer object instances. Adds object to list of child objects associated with
  * the transformer.
  * @param  {list} graphic_objects List of child objects associated with each transformer object.
  * @param  {string} name String object containing name/contents of child objects
  * @return {function} None Returns a function that adds passed object to breaker child objects, and adds text label.
  */
-function Tx_Callback(graphic_objects, name = false){
-        return function(circle1,circle2,circle3,circle4,group){
+function Tx_Callback(graphic_objects, name = false, mva = false){
+        return function(group){
             //revamp post_breaker to a function that figures out its state instead
 //            object.on("breaker_clicked",function(){post_breaker()})
             if(graphic_objects != undefined){
                 graphic_objects.push(group)
             }
-            add_text(circle1, false, [name], 7, 20, function(object){
-            return 0
-            });
+            if(name != false){
+            if(group.horizontal === true){
+                add_text(group, false, [name], 0, -25, function(group){})
+            }
+            else{
+                add_text(group, false, [name], 45,-10, function(group){})}
+            }
+
+            if(mva != false){
+            if(group.horizontal === true){
+                add_text(group, false, [mva], 0, 25, function(group){})
+            }
+            else{
+                add_text(group, false, [mva], 45,10, function(group){})}
+            }
         }
     }
+
+/**
+ * Callback function for Transformer object instances. Adds object to list of child objects associated with
+ * the transformer.
+ * @param  {list} graphic_objects List of child objects associated with each transformer object.
+ * @param  {string} name String object containing name/contents of child objects
+ * @return {function} None Returns a function that adds passed object to breaker child objects, and adds text label.
+ */
+function Gen_Callback(graphic_objects){
+        return function(group){
+            if(graphic_objects != undefined){
+                graphic_objects.push(group)
+            }
+            if(group.horizontal === true){
+                add_text(group, false, ["GENERATOR"], 0, -25, function(group){})
+            }
+            else{
+                add_text(group, false, ["GENERATOR"], 0,25, function(group){})}
+            }
+        }
+
 
 /**
  * breaker prototype object. used to hold all information required to draw a breaker
@@ -177,15 +186,16 @@ function Text(lineID, text, offset){
  * @return {None}
  * @usage instantiate as object i.e. new Transformer(...)
  */
-function Tx(lineID,pos,name,type="starDelta", coil1 = "33kV",coil2 = "33kV"){
+function Tx(lineID,pos,name,mva, coil1 = "33kV",coil2 = "33kV",type="starDelta"){
     this.lineID =lineID
     this.pos = pos
     this.name = name
+    this.mva = mva
     this.graphic = []
     this.type = type
     this.coil1 = coil1
     this.coil2 = coil2
-    this.callback = Tx_Callback(this.graphic, this.name)
+    this.callback = Tx_Callback(this.graphic, this.name,this.mva)
 }
 
 /**
@@ -202,7 +212,7 @@ function Generator(line_id,pos, type= "wind"){
     this.type = type
     this.graphic=[]
     //TEMP Breaker callback
-    this.callback = Breaker_Callback(this.graphic)
+    this.callback = Gen_Callback(this.graphic)
 }
 
 /**

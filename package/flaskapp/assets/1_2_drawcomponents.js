@@ -138,8 +138,8 @@ group.add(circle1)
 group.add(circle2)
 group.add(circle3)
 group.add(circle4)
-
-callback(circle1, circle2, circle3, circle4, group);
+group.horizontal = bHorizontal
+callback(group);
 }
 
 /**
@@ -170,12 +170,14 @@ if (dict_line.y1 === dict_line.y2){
   var center = [dict_line.x1+(dict_line.x2-dict_line.x1)*position, dict_line.y1];
 }
 
+stroke_color = dict_line.dict_styling.stroke.color
+
 var group = draw.group();
 var inside_group = draw.group();
 circle1 = group.circle(2*rad);
 group.add(circle1)
 circle1.fill('black');
-circle1.stroke({ color: 'white', width: circleWidth, linecap: 'black', linejoin: 'round' });
+circle1.stroke({ color: stroke_color, width: circleWidth, linecap: 'black', linejoin: 'round' });
 if (type !== 'wind'){
   var text = group.text(type)
                 .font({size: 15, family: 'Helvetica'})
@@ -231,7 +233,7 @@ group.move(center[0]-rad, center[1]-rad);
 
 dict_gen.objects = [group]
 
-callback(circle1, group, inside_group)
+callback(group)
 }
 
 /**
@@ -670,4 +672,54 @@ if (bVertical){
 dict_earth.objects = [line1, line2, line3]
 
 return dict_earth
+}
+
+/**
+ * draws Text
+ * @param  {SVG object} object which text is placed relative to
+ * @param  {list} list of text to show, each member of list is a new line
+ * @param  {double} x offset
+ * @param {double} y offset
+ * @param {function} callback which takes text object as argument
+ * @return {None}
+ */
+function add_text(object, bool_dict_obj, list_text, x_from_center, y_from_center, callback){
+    var rad = 3
+    var txtSize = 14
+
+    var bVertical = false;
+    var bHorizontal = false;
+
+    var text1 = draw.text(function(add) {
+      var text_idx
+      for(text_idx = 0; text_idx < list_text.length; text_idx++){
+        add.tspan(list_text[text_idx]).newLine()
+      }
+    })
+    .font({size: txtSize, family: 'Helvetica'}).fill({color: 'white'})
+
+    if(bool_dict_obj == true){
+      if (object.x1 == object.x2){
+        bVertical = true;
+      } else if (object.y1 == object.y2){
+        bHorizontal = true;
+      }
+
+      if(bVertical){
+        text1.x_coord = object.x1
+        text1.y_coord = object.y1+(object.y2 - object.y1)/2
+      }
+
+      if(bHorizontal){
+        text1.x_coord = object.x1+(object.x2 - object.x1)/2
+        text1.y_coord = dict_line.y1
+      }
+    } else {
+      text1.x_coord = object.cx()
+      text1.y_coord = object.cy()
+    }
+
+
+    text1.center(text1.x_coord+x_from_center, text1.y_coord+y_from_center);
+    callback(text1)
 }

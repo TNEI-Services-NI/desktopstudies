@@ -46,8 +46,8 @@ Gretna_400kV={
     },
 
     tx:{
-        "GRNA 780 tx": new Tx("GRNA 780 tx",1,"","deltaStar", "132kV","LV"),
-        "GRNA 680 tx": new Tx("GRNA 680 tx",1,"","deltaStar", "132kV","LV"),
+        "GRNA 780 tx": new Tx("GRNA 780 tx",1,"","", "132kV","LV"),
+        "GRNA 680 tx": new Tx("GRNA 680 tx",1,"","", "132kV","LV"),
     },
 
     inductors:{

@@ -16,7 +16,7 @@
   //Create canvas
   var draw = SVG('#drawing').size(x, y)
 
-  var x_scaling = x/1350
+  var x_scaling = x/1200
   var y_scaling = y/1100
 
   let network = "chapelcross"
@@ -34,14 +34,20 @@
     dict_components = chapelcross_33kV
   }
 
+
+  dict_components = chapelcross_33kV
+
+
   let components = {
                       breakers: [],
                       lines: [],
                       text:[],
                       generators: [],
                       isolators:[],
+                      text:[]
                   }
 
+  //scale lines
   var idx_line, temp_dict
   for (idx_line in dict_components.lines){
       temp_dict = dict_components.lines[idx_line]
@@ -49,6 +55,13 @@
       temp_dict.x2 = temp_dict.x2 * x_scaling
       temp_dict.y1 = temp_dict.y1 * y_scaling
       temp_dict.y2 = temp_dict.y2 * y_scaling
+  }
+
+  //scale text
+  for (idx in dict_components.text){
+      temp_dict = dict_components.text[idx]
+      temp_dict.offset[0] = temp_dict.offset[0] * x_scaling
+      temp_dict.offset[1] = temp_dict.offset[1] * y_scaling
   }
 
   var bNodes = false
@@ -137,7 +150,6 @@
       text = dict_components.text[i]
       line_id = text.lineID
       line = components.lines[line_id].UIElement
-      // console.log(line)
 
       texts = text.text_strings
       offset = text.offset
@@ -145,7 +157,7 @@
       let id = i
       let t = {initInfo:text, UIElement: text.graphic[0], id : id}
 
-      components.lines[id] = t
+      components.text[id] = t
 
   }
 

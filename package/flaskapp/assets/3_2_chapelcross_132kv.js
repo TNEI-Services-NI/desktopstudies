@@ -82,11 +82,11 @@ chapelcross_132kV={
         "410": new Breaker("410",0.7,"open"),
 
     },
-    tx:{1: new Tx("into GRID T1 tx",1,"",type="starDelta", coil1 = "33kV", coil2 = "LV"),
-        2: new Tx("GRID T1",1,"GRID T1",type="starDelta",coil1 = "33kV", coil2 = "132kV"),
+    tx:{1: new Tx("into GRID T1 tx",1,"","", coil1 = "33kV", coil2 = "LV"),
+        2: new Tx("GRID T1",1,"GRID T1","90MVA",coil1 = "33kV", coil2 = "132kV"),
 
-        3: new Tx("into GRID T2 tx",1,"",type="starDelta", coil1 = "33kV", coil2 = "LV"),
-        4: new Tx("GRID T2",1,"GRID T2",type= "starDelta",coil1 = "33kV",coil2 = "132kV"),
+        3: new Tx("into GRID T2 tx",1,"","", coil1 = "33kV", coil2 = "LV"),
+        4: new Tx("GRID T2",1,"GRID T2","90MVA",coil1 = "33kV",coil2 = "132kV"),
 
         },
     isolators:{
