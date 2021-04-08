@@ -268,8 +268,9 @@ function Isolator(line_id,pos, state = "closed",name=false){
 function DataView(x,y){
     this.x = x
     this.y = y
-    this.MW = new StaticText("0 MW",[x,y],"yellow")
-    this.kV = new StaticText("0 kV",[x,y+15],"yellow")
-    this.AMPS = new StaticText("0 AMPS",[x,y+30],"yellow")
-    this.MVAR = new StaticText("0 MVAR",[x,y+45],"yellow")
+    this.MVA = new StaticText("0 MW",[x,y],"yellow")
+    this.MW = new StaticText("0 MW",[x,y+15],"yellow")
+    this.MVAR = new StaticText("0 kV",[x,y+30],"yellow")
+    this.kV = new StaticText("0 AMPS",[x,y+45],"yellow")
+    this.AMPS = new StaticText("0 MVAR",[x,y+60],"yellow")
 }

@@ -35,7 +35,7 @@
   }
 
 
-  dict_components = chapelcross_132kV
+  dict_components = Gretna_400kV
 
 
   let components = {
@@ -228,6 +228,12 @@
       dv = dict_components.dataViews[i]
 
       pos = [dv.x,dv.y]
+
+      thisline = dv.MVA
+      pos = thisline.offset
+      text = thisline.text
+      add_static_text([text],pos[0]*x_scaling,pos[1]*y_scaling,"yellow",function(){})
+
 
       thisline = dv.MVAR
       pos = thisline.offset

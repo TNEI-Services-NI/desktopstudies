@@ -74,9 +74,14 @@ Gretna_400kV={
         "X405": new Isolator("ELVA",0.3),
         "X447": new Isolator("X447",0.3),
         "X449": new Isolator("X449",0.3),
-    }
+    },
 
     dataViews:{
-        "ELVA": new DataView(450,50),
+
+        "ELVA": new DataView(420,100),
+        "HARK": new DataView(90,900),
+        "GRNA 780": new DataView(260,900),
+        "GRNA 680": new DataView(740,900),
+
     },
 }
