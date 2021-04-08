@@ -11,7 +11,7 @@ function post_breaker(breakerID,state){
   if(state === null){state=false}
   $.ajax({
   type: "POST",
-  url: "receive_breaker/",
+  url: "/simtool_bp/receive_breaker/",
   data: {"breaker": breakerID, "state": state },
 //      dataType: 'application/json'
   }).done(function( data ) {
@@ -21,6 +21,7 @@ function post_breaker(breakerID,state){
 
 /**
  * receives initial states of all breakers through ajax request
+ * url parameter of ajax request must reference blueprint specific route to function
  * @param  {string} network of sld
  * @param  {string} voltage section of said network
  * @param  {list} list of breaker prototypes to be drawn once data is received
@@ -31,7 +32,7 @@ function init_breakers(network, voltage, breakers, callback){
     var breakers_new = breakers
     $.ajax({
       type: "POST",
-      url: "init_breakers/",
+      url: "/simtool_bp/init_breakers/",
       data: {"network": network, "voltage": voltage},
       success: function(breaker_states){
 
@@ -51,13 +52,14 @@ function init_breakers(network, voltage, breakers, callback){
 
 /**
  * retrieves state of one breaker
+ * url parameter of ajax request must reference blueprint specific route to function
  * @param  {string} breaker id
  * @return {None}
  */
 function init_breaker(breakerID){
       $.ajax({
       type: "POST",
-      url: "init_breaker/",
+      url: "/simtool_bp/init_breaker/",
       data: {"breaker": breakerID},
 //      dataType: 'application/json'
       }).done(function( state ) {
@@ -67,6 +69,7 @@ function init_breaker(breakerID){
 
 /**
  * retrieves state of network based on stage
+ * url parameter of ajax request must reference blueprint specific route to function
  * @param  {integer} stage
  * @param  {String} Network of s
  * @param  {function} callback once data has been received
@@ -75,7 +78,7 @@ function init_breaker(breakerID){
 function update_state(stage,network,voltage, callbacks){
       $.ajax({
       type: "POST",
-      url: "get_state/",
+      url: "/simtool_bp/get_state/",
       data: {"stage": stage, "network": network,"voltage":voltage},
 //      dataType: 'application/json'
       }).done(function( state ) {

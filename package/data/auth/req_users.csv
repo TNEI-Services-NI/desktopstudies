@@ -1,2 +1,2 @@
 name,entity,email,required,status
-max,Other,max@max,TRUE,FALSE
+max,Other,max@max,FALSE,FALSE

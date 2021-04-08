@@ -12,46 +12,37 @@ import package.flaskapp.dash_simtool.app.dashboard_components as components
 import package.flaskapp.dash_simtool.app.dashboard_callbacks as callbacks
 import package.flaskapp.dash_simtool.app.dashboard_styling as styling
 
-URL_BASE = '/simtool/'
+URL_BASE = '/simulator/'
+URL_HOME = URL_BASE + 'home/'
+URL_SLDS = URL_BASE + 'SLDs/'
+URL_SCRIPTS = URL_BASE + 'Scripts/'
+URL_ABOUT = URL_BASE + 'About/'
 
 
 def init_dashboard(server=""):
     """Create a Plotly Dash dashboard."""
-
-    if server != '':
-        # Define encapsulating dash app
-        dash_app = dash.Dash(
-            server=server,
-            routes_pathname_prefix=URL_BASE,
-            external_scripts=[
-                'https://cdnjs.cloudflare.com/ajax/libs/svg.js/3.0.5/svg.min.js',
-                'https://cdnjs.cloudflare.com/ajax/libs/svg.pan-zoom.js/2.7.0/svg.pan-zoom.min.js',
-                'https://cdn.jsdelivr.net/npm/@svgdotjs/svg.filter.js@3.0.1/dist/svg.filter.min.js',
-                'https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js',
-                'https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js',
-                'https://cdn.jsdelivr.net/npm/@svgdotjs/svg.filter.js@3.0.1/dist/svg.filter.min.js',
-                {'src': "https://code.jquery.com/jquery-1.12.4.min.js",
-                 'integrity': "sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ",
-                 'crossorigin': "anonymous"}
-            ],
-            assets_url_path='/assets',
-            update_title='Loading...',
-            external_stylesheets=[dbc.themes.GRID,
-                                  # can insert own css files here
-                                  # '/static/dist/css/styles.css'
-                                  dbc.themes.LUMEN],
-        )
-    else:
-        # Define encapsulating dash app
-        dash_app = dash.Dash(
-            routes_pathname_prefix=URL_BASE,
-            assets_url_path='/assets',
-            update_title='Loading...',
-            external_stylesheets=[dbc.themes.GRID,
-                                  # can insert own css files here
-                                  # '/static/dist/css/styles.css'
-                                  dbc.themes.LUMEN],
-        )
+    # Define encapsulating dash app
+    dash_app = dash.Dash(
+        server=server,
+        url_base_pathname=URL_HOME,
+        external_scripts=[
+            'https://cdnjs.cloudflare.com/ajax/libs/svg.js/3.0.5/svg.min.js',
+            'https://cdnjs.cloudflare.com/ajax/libs/svg.pan-zoom.js/2.7.0/svg.pan-zoom.min.js',
+            'https://cdn.jsdelivr.net/npm/@svgdotjs/svg.filter.js@3.0.1/dist/svg.filter.min.js',
+            'https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js',
+            'https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js',
+            'https://cdn.jsdelivr.net/npm/@svgdotjs/svg.filter.js@3.0.1/dist/svg.filter.min.js',
+            {'src': "https://code.jquery.com/jquery-1.12.4.min.js",
+             'integrity': "sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ",
+             'crossorigin': "anonymous"}
+        ],
+        assets_url_path='/assets',
+        update_title='Loading...',
+        external_stylesheets=[dbc.themes.GRID,
+                              # can insert own css files here
+                              # '/static/dist/css/styles.css'
+                              dbc.themes.LUMEN],
+    )
 
     # nav bar
     _nav_bar = dbc.NavbarSimple(brand='Desktop Studies Communications Tool',

@@ -1,10 +1,12 @@
 from flask import Blueprint
 import os
 
+URL_BASE_BP = '/simtool_bp'
+
 simtool_bp = Blueprint(
-    'dash_simtool_app',
+    'simtool_bp',
     __name__,
-    url_prefix='/simtool',
+    url_prefix=URL_BASE_BP,
     template_folder='templates',
     static_folder='static'
 )

@@ -6,6 +6,8 @@ import dash_bootstrap_components as dbc
 import dash_daq as daq
 from dash_canvas import DashCanvas
 
+import package.flaskapp.dash_simtool.app as dash_app
+
 import plotly.graph_objs as go
 
 import numpy as np
@@ -332,10 +334,10 @@ def navbar_controls():
         [
             dbc.Nav(
                 [
-                    dbc.NavLink("Home", href="/", active=True, external_link=True),
-                    dbc.NavLink("SLDs", href="/SLDs", external_link=True),
-                    dbc.NavLink("Scripts", href="/scripts", external_link=True),
-                    dbc.NavLink("About", href="/about", external_link=True),
+                    dbc.NavLink("Home", href=dash_app.URL_HOME, active=True, external_link=True),
+                    dbc.NavLink("SLDs", href=dash_app.URL_SLDS, external_link=True),
+                    dbc.NavLink("Scripts", href=dash_app.URL_SCRIPTS, external_link=True),
+                    dbc.NavLink("About", href=dash_app.URL_ABOUT, external_link=True),
                 ],
                 vertical=False,
                 pills=True,
