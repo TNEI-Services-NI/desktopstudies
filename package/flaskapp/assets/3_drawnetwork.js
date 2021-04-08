@@ -19,6 +19,8 @@
   var x_scaling = x/1150
   var y_scaling = y/1050
 
+  const font_size = 14 *  Math.min(x_scaling,y_scaling)
+
   let network = "chapelcross"
   let voltage = "33kv"
 
@@ -35,7 +37,7 @@
   }
 
 
-  dict_components = Gretna_400kV
+  dict_components = chapelcross_33kV
 
 
   let components = {

@@ -685,7 +685,7 @@ return dict_earth
  */
 function add_text(object, bool_dict_obj, list_text, x_from_center=0, y_from_center=-15, colour="#d3d3d3", callback){
     var rad = 3
-    var txtSize = 14
+    var txtSize = font_size
 
     var bVertical = false;
     var bHorizontal = false;
@@ -726,7 +726,7 @@ function add_text(object, bool_dict_obj, list_text, x_from_center=0, y_from_cent
 
 function add_static_text(list_text, x=100, y=100, colour="#d3d3d3", callback){
     var rad = 3
-    var txtSize = 14
+    var txtSize = font_size
 
     var bVertical = false;
     var bHorizontal = false;
