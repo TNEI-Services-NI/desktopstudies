@@ -23,6 +23,7 @@ def init_dashboard(server=""):
     """Create a Plotly Dash dashboard."""
     # Define encapsulating dash app
     dash_app = dash.Dash(
+        title="Black Start DeskSims",
         server=server,
         url_base_pathname=URL_HOME,
         external_scripts=[
