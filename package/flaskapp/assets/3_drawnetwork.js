@@ -16,8 +16,8 @@
   //Create canvas
   var draw = SVG('#drawing').size(x, y)
 
-  var x_scaling = x/1200
-  var y_scaling = y/1100
+  var x_scaling = x/1150
+  var y_scaling = y/1050
 
   let network = "chapelcross"
   let voltage = "33kv"
@@ -35,13 +35,13 @@
   }
 
 
-  dict_components = chapelcross_33kV
+  dict_components = chapelcross_132kV
 
 
   let components = {
                       breakers: [],
                       lines: [],
-                      text:[],
+                      labels:[],
                       generators: [],
                       isolators:[],
                       text:[]
@@ -58,8 +58,8 @@
   }
 
   //scale text
-  for (idx in dict_components.text){
-      temp_dict = dict_components.text[idx]
+  for (idx in dict_components.labels){
+      temp_dict = dict_components.labels[idx]
       temp_dict.offset[0] = temp_dict.offset[0] * x_scaling
       temp_dict.offset[1] = temp_dict.offset[1] * y_scaling
   }
@@ -146,18 +146,18 @@
   });
 
       //add text
-  for(i in dict_components.text){
-      text = dict_components.text[i]
+  for(i in dict_components.labels){
+      text = dict_components.labels[i]
       line_id = text.lineID
       line = components.lines[line_id].UIElement
-
       texts = text.text_strings
       offset = text.offset
-      add_text(line,false,texts, offset[0],offset[1],text.callback)
+      colour = text.colour
+      add_text(line,false,texts, offset[0],offset[1],colour,text.callback)
       let id = i
       let t = {initInfo:text, UIElement: text.graphic[0], id : id}
 
-      components.text[id] = t
+      components.labels[id] = t
 
   }
 
@@ -177,7 +177,6 @@
       let t = {info:tx, UIElement: tx.graphic[0], id : id}
       components.lines[id] = t
       component_modal(t)
-
       }
 
       //add Generators
@@ -224,3 +223,32 @@
       let iso = {drawInfo:isolator, UIElement: isolator.graphic[0], closed: closed, id : id, line : line}
       components.isolators[id] = iso
   }
+
+  for(i in dict_components.dataViews){
+      dv = dict_components.dataViews[i]
+
+      pos = [dv.x,dv.y]
+
+      thisline = dv.MVAR
+      pos = thisline.offset
+      text = thisline.text
+      add_static_text([text],pos[0]*x_scaling,pos[1]*y_scaling,"yellow",function(){})
+
+      thisline = dv.AMPS
+      pos = thisline.offset
+      text = thisline.text
+      add_static_text([text],pos[0]*x_scaling,pos[1]*y_scaling,"yellow",function(){})
+
+      thisline = dv.kV
+      pos = thisline.offset
+      text = thisline.text
+      add_static_text([text],pos[0]*x_scaling,pos[1]*y_scaling,"yellow",function(){})
+
+      thisline = dv.MW
+      pos = thisline.offset
+      text = thisline.text
+      add_static_text([text],pos[0]*x_scaling,pos[1]*y_scaling,"yellow",function(){})
+
+    //TODO handle data changes with functions that do all the hardwork
+  }
+

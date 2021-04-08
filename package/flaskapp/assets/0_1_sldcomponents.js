@@ -14,10 +14,10 @@ function Breaker_Callback(graphic_objects, name = ''){
         }
         if(name !== ''){
             if(object.horizontal === true){
-                add_text(object, false, [name], 0, -15, function(object){})
+                add_text(object, false, [name], 0, -15,"#d3d3d3", function(object){})
             }
             else{
-                add_text(object, false, [name], 9 + name.length*5, 0, function(object){})}
+                add_text(object, false, [name], 9 + name.length*5, 0,"#d3d3d3", function(object){})}
         }
     }
 }
@@ -54,18 +54,18 @@ function Tx_Callback(graphic_objects, name = false, mva = false){
             }
             if(name != false){
             if(group.horizontal === true){
-                add_text(group, false, [name], 0, -25, function(group){})
+                add_text(group, false, [name], 0, -25, "#d3d3d3", function(group){})
             }
             else{
-                add_text(group, false, [name], 45,-10, function(group){})}
+                add_text(group, false, [name], 45,-10,"#d3d3d3", function(group){})}
             }
 
             if(mva != false){
             if(group.horizontal === true){
-                add_text(group, false, [mva], 0, 25, function(group){})
+                add_text(group, false, [mva], 0, 25,"#d3d3d3", function(group){})
             }
             else{
-                add_text(group, false, [mva], 45,10, function(group){})}
+                add_text(group, false, [mva], 45,10,"#d3d3d3", function(group){})}
             }
         }
     }
@@ -83,10 +83,10 @@ function Gen_Callback(graphic_objects){
                 graphic_objects.push(group)
             }
             if(group.horizontal === true){
-                add_text(group, false, ["GENERATOR"], 0, -25, function(group){})
+                add_text(group, false, ["GENERATOR"], 0, -25, "#d3d3d3",function(group){})
             }
             else{
-                add_text(group, false, ["GENERATOR"], 0,25, function(group){})}
+                add_text(group, false, ["GENERATOR"], 0,25,"#d3d3d3",function(group){})}
             }
         }
 
@@ -165,14 +165,30 @@ function StraightLine(origin, direction, length, voltage="33kV", dash = false, c
  * @param  {string} Line ID of which text is linked to
  * @param  {list} list of text content, each member of list is a new line
  * @param  {line} offset of text from line [x,y]
+ * @param  {String} colour of text
+ * @param  {double} textsize
  * @return {None}
  * @usage instantiate as object i.e. new Line(...)
  */
-function Text(lineID, text, offset){
+function Text(lineID, text, offset, colour = "#d3d3d3", textSize=10){
     this.lineID = lineID
     this.text_strings = text
     this.offset = offset
+    this.colour = colour
     this.graphic = []
+    this.textSize=textSize
+    this.callback = Text_Callback(this.graphic)
+}
+
+/**
+ * Static Text Prototype object
+ */
+function StaticText(text,pos, colour = "#d3d3d3",textSize=10,){
+    this.offset = pos
+    this.text =text
+    this.colour = colour
+    this.graphic = []
+    this.textSize=textSize
     this.callback = Text_Callback(this.graphic)
 }
 
@@ -247,3 +263,13 @@ function Isolator(line_id,pos, state = "closed",name=false){
     this.graphic=[],
     this.name = name,
     this.callback = Breaker_Callback(this.graphic,name)}
+
+
+function DataView(x,y){
+    this.x = x
+    this.y = y
+    this.MW = new StaticText("0 MW",[x,y],"yellow")
+    this.kV = new StaticText("0 kV",[x,y+15],"yellow")
+    this.AMPS = new StaticText("0 AMPS",[x,y+30],"yellow")
+    this.MVAR = new StaticText("0 MVAR",[x,y+45],"yellow")
+}

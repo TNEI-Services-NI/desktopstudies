@@ -60,9 +60,6 @@ chapelcross_132kV={
         "GRNA-1": StraightLine([110,470],"up",290, "132kV"),
 
 
-
-
-
     },
     breakers:{
         "698 01": new Breaker("698 01", 0.5,"closed"),
@@ -130,6 +127,19 @@ chapelcross_132kV={
 
         "336": new Isolator("336 330 334", 0.25, "closed"),
         "334": new Isolator("336 330 334", 0.75, "closed"),
+
+    },
+    dataViews:{
+        "ECCF-1": new DataView(250,250),
+        "GRNA-1": new DataView(80,250),
+        "DUMF-1": new DataView(420,250),
+        "GRNA-2": new DataView(560,250),
+        "ECCF-2": new DataView(700,250),
+        "DUMF-2": new DataView(870,250),
+        "HARK": new DataView(950,250),
+
+        "GRID 1": new DataView(350,800),
+        "GRID 2": new DataView(750,800),
 
     },
 }

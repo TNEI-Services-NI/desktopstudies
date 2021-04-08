@@ -15,7 +15,7 @@ chapelcross_33kV = {
         "698 16": StraightLine([33,175], "down",85),
             "chapelcross dash": StraightLine([15,240],"right",35, dash=true),
         "698 15": StraightLine([85,175], "down",300),
-            "Chap": StraightLine([25,370],"right",90),
+            "699": StraightLine([25,370],"right",90),
             "generator dash": StraightLine([70,440],"right",35,dash=true),
         "698 14": StraightLine([145,175],"down",105),
             "698 14 into ANNAN": StraightLine([145,280], "right",150),
@@ -121,7 +121,7 @@ chapelcross_33kV = {
         //GRETNA 11kV
         "673 10": StraightLine([735,460],"left",50, "11kV"),
         "GRETNA 4": StraightLine([735,460],"down",35,"11kV"),
-        "673 01": StraightLine([705,496],"right",100,"11kV"),
+        "673 01": StraightLine([710,496],"right",100,"11kV"),
         "GRETNA 5": StraightLine([785,460],"down",35,"11kV"),
         "673 20": StraightLine([785,460],"right",50, "11kV"),
 
@@ -156,7 +156,7 @@ chapelcross_33kV = {
 
         "123 10":StraightLine([710,645],"left",50, "11kV"),
         "NEWCASTLETON 4": StraightLine([710,645],"down",35, "11kV"),
-        "NEWCASTLETON 5": StraightLine([695,680],"right",85, "11kV"),
+        "123": StraightLine([695,680],"right",85, "11kV"),
         "123 12": StraightLine([745,680],"down",55, "11kV"),
 
         "785 A": StraightLine([680,940],"left",155,"11kV"),
@@ -226,7 +226,7 @@ chapelcross_33kV = {
         "679 20": new Breaker("679 20",0.3,"closed","20"),
 
         "673 10": new Breaker("673 10",0.25,"closed","10"),
-        "673 01": new Breaker("673 01",0.55,"closed","01"),
+        "673 01": new Breaker("673 01",0.5,"closed","01"),
         "673 20": new Breaker("673 20",0.25,"closed","20"),
 
         "761 CHAP": new Breaker("761 CHAP",0.55,"closed","CHAP"),
@@ -271,7 +271,7 @@ chapelcross_33kV = {
         "MINSCA WF": new Generator("761 GENERATOR", 1),
         5: new Generator("378 12",1),
         },
-    text:{
+    labels:{
     1: new Text("698 01", ["CHAPELCROSS GSP"], [50,-70]),
     2: new Text("698 01", ["698"], [50,-50]),
     3: new Text("698 01",["CHAPELCROSS GSP 33kV"],[50,-160]),
@@ -296,25 +296,54 @@ chapelcross_33kV = {
     16: new Text("662 01", ["ANNAN"],[0,-45]),
     17: new Text("662 01", ["662"],[0,-30]),
 
-    17: new Text("679 01", ["LOCKERBIE"],[3,-45]),
-    18: new Text("679 01", ["679"],[3,-30]),
-
-    19: new Text("KIRKBANK", ["KIRKBANK"],[20,-30]),
-    20: new Text("KIRKBANK",["675"],[20,-15]),
+    18: new Text("679 01", ["LOCKERBIE"],[3,-45]),
+    19: new Text("679 01", ["679"],[3,-30]),
 
     20: new Text("KIRKBANK", ["KIRKBANK"],[20,-30]),
     21: new Text("KIRKBANK",["675"],[20,-15]),
 
-    22: new Text("MOFFAT01", ["MOFFAT"],[0,-45]),
-    23: new Text("MOFFAT01", ["683"],[0,-30]),
+    23: new Text("MOFFAT01", ["MOFFAT"],[0,-45]),
+    24: new Text("MOFFAT01", ["683"],[0,-30]),
 
-    24: new Text("Langholm 33kv", ["LANGHOLM 33KV"],[0,-30]),
-    25: new Text("Langholm 33kv", ["692"],[0,-15]),
+    25: new Text("Langholm 33kv", ["LANGHOLM 33KV"],[0,-30]),
+    26: new Text("Langholm 33kv", ["692"],[0,-15]),
 
-    26: new Text("Langholm 33kv", ["LANGHOLM 33KV"],[0,-30]),
-    27: new Text("Langholm 33kv", ["692"],[0,-15]),
+    27: new Text("Langholm 33kv", ["LANGHOLM 33KV"],[0,-30]),
+    28: new Text("Langholm 33kv", ["692"],[0,-15]),
 
-    26: new Text("Langholm01", ["LANGHOLM 33KV"],[0,-45]),
-    27: new Text("Langholm01", ["692"],[0,-30]),
-    }
+    29: new Text("Langholm01", ["LANGHOLM 33KV"],[0,-45]),
+    30: new Text("Langholm01", ["692"],[0,-30]),
+
+    31: new Text("699", ["STEVENS CROFT"],[-25,-45]),
+    32:new Text("699", ["33KV"],[-25,-30]),
+    33:new Text("699", ["699"],[-25,-15]),
+
+    34:new Text("into DUMF", ["CARRUTHERSTOWN"],[-55,-15]),
+    35:new Text("into DUMF", ["33 kV"],[-59,0]),
+    36:new Text("into DUMF", ["DUMF"],[-50,-30]),
+
+    37:new Text("GRETNA 691", ["GRETNA 33kV"],[0,-30]),
+    38:new Text("GRETNA 691", ["691"],[0,-15]),
+
+    39:new Text("673 01", ["GRETNA"],[0,-45]),
+    40:new Text("673 01", ["673"],[0,-30]),
+
+    41: new Text("123", ["NEWCASTLETON"],[20,-30]),
+    42: new Text("123",["123"],[20,-15]),
+
+    43: new Text("785 B", ["CRAIG II WINDFARM 11KV"],[20,-30]),
+    44: new Text("785 B",["785"],[20,-15]),
+
+    45: new Text("761",["MINSCA 33KV"],[0,-30]),
+    46: new Text("761",["761"],[0,-15]),
+    },
+    dataViews:{
+        "SOLWAYBANK": new DataView(850,100),
+        "GRID 2": new DataView(740,100),
+        "GRID 1": new DataView(400,100),
+        "STEVENSCROFT": new DataView(50,400),
+        "MINSCA": new DataView(950,450),
+        "MINSCA": new DataView(950,450),
+        "CRAIG II": new DataView(800,780),
+    },
 }

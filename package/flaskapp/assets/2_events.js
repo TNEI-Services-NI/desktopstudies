@@ -28,6 +28,8 @@ function post_breaker(breakerID,state){
  * @return {None}
  */
 function init_breakers(network, voltage, breakers, callback){
+        callback(breakers);
+        return
     var breakers_new = breakers
     $.ajax({
       type: "POST",

@@ -683,7 +683,7 @@ return dict_earth
  * @param {function} callback which takes text object as argument
  * @return {None}
  */
-function add_text(object, bool_dict_obj, list_text, x_from_center, y_from_center, callback){
+function add_text(object, bool_dict_obj, list_text, x_from_center=0, y_from_center=-15, colour="#d3d3d3", callback){
     var rad = 3
     var txtSize = 14
 
@@ -696,7 +696,7 @@ function add_text(object, bool_dict_obj, list_text, x_from_center, y_from_center
         add.tspan(list_text[text_idx]).newLine()
       }
     })
-    .font({size: txtSize, family: 'Helvetica'}).fill({color: 'white'})
+    .font({size: txtSize, family: 'Helvetica'}).fill({color: colour})
 
     if(bool_dict_obj == true){
       if (object.x1 == object.x2){
@@ -721,5 +721,27 @@ function add_text(object, bool_dict_obj, list_text, x_from_center, y_from_center
 
 
     text1.center(text1.x_coord+x_from_center, text1.y_coord+y_from_center);
+    callback(text1)
+}
+
+function add_static_text(list_text, x=100, y=100, colour="#d3d3d3", callback){
+    var rad = 3
+    var txtSize = 14
+
+    var bVertical = false;
+    var bHorizontal = false;
+
+    var text1 = draw.text(function(add) {
+      var text_idx
+      for(text_idx = 0; text_idx < list_text.length; text_idx++){
+        add.tspan(list_text[text_idx]).newLine()
+      }
+    })
+    .font({size: txtSize, family: 'Helvetica'}).fill({color: colour})
+
+
+    text1.x_coord = x
+    text1.y_coord = y
+        text1.center(text1.x_coord, text1.y_coord);
     callback(text1)
 }
