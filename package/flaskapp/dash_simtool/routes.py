@@ -28,6 +28,7 @@ def init_breakers():
     df_breakerstates = simtool_data.read_breaker_states(data['network'], data['voltage'])
     return jsonify(df_breakerstates.to_dict())
 
+
 @simtool_bp.route("/get_state/", methods=['POST'])
 # @login_required
 def get_restoration_step():

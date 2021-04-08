@@ -11,33 +11,27 @@ dir_restoration_steps = '\\'.join([dir_simtool_data, 'restorationsteps'])
 
 dir_auth_data = '\\'.join([dir_data, 'auth'])
 
-def _fetch_breaker_state_files():
-    breaker_state_files = os.listdir(dir_breaker_states)
-    breaker_states = {k.split('.csv')[0]: k for k in breaker_state_files}
-    return breaker_states
+
+def _fetch_files(directory: str, file_type: str = '.csv'):
+    list_files = os.listdir(directory)
+    dict_files = {k.split(file_type)[0]: k for k in list_files}
+    return dict_files
 
 
-def read_breaker_states(network, voltage):
-    breaker_states = _fetch_breaker_state_files()
+def read_breaker_states(network: str, voltage: str):
+    breaker_states = _fetch_files(dir_breaker_states)
     filename = breaker_states[network + voltage]
     df_breakerstates = pd.read_csv('/'.join([dir_breaker_states, filename]))
     df_breakerstates = df_breakerstates.convert_dtypes(convert_string=True)
     df_breakerstates = df_breakerstates.set_index('breaker')
     return df_breakerstates
 
-def _fetch_restoration_steps_files():
-    restoration_step_files = os.listdir(dir_restoration_steps)
-    restoration_steps = {k.split('.csv')[0]: k for k in restoration_step_files}
-    return restoration_steps
 
-def read_restoration_step(network, voltage, stage):
-    restoration_steps = _fetch_restoration_steps_files()
-    filename = restoration_steps[network + voltage+"scenario1"]
-    df_restoration = pd.read_csv('/'.join([dir_restoration_steps, filename]))
-    df_restoration = df_restoration.convert_dtypes(convert_string=True)
+def read_restoration_step(network: str, voltage: str, stage: int):
+    restoration_steps = _fetch_files(dir_restoration_steps)
+    filename = restoration_steps[network + voltage + "scenario1"]
+    df_restoration = pd.read_csv('/'.join([dir_restoration_steps, filename]),
+                                 dtype={'step': int})
     df_restoration = df_restoration.set_index("step")
-    df_restoration.head()
     df_restoration = df_restoration.loc[int(stage)]
     return df_restoration
-
-

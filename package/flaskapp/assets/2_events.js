@@ -72,7 +72,7 @@ function init_breaker(breakerID){
  * @param  {function} callback once data has been received
  * @return {None}
  */
-function update_state(stage,network,voltage,callbacks){
+function update_state(stage,network,voltage, callbacks){
       $.ajax({
       type: "POST",
       url: "get_state/",
@@ -80,7 +80,7 @@ function update_state(stage,network,voltage,callbacks){
 //      dataType: 'application/json'
       }).done(function( state ) {
         state = JSON.parse(state)
-        callbacks(stage,state);
+        callbacks(stage, state);
 
       })
   }
