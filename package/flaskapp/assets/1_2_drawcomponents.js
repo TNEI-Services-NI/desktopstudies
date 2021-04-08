@@ -279,6 +279,7 @@ function draw_breaker(dict_line, position, size, state, callback){
   else{
       rect1 = draw.rect(size, size).center(center[0], center[1]).fill("grey").stroke("grey").stroke({width: 1})
       rect1.horizontal = bHorizontal
+      rect1.closed_color = closed_color
       dict_breaker.objects = [rect1];
       callback(rect1);
       return

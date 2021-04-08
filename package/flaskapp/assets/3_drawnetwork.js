@@ -122,7 +122,7 @@
 
 
           b.setState = function(closed){
-              breaker = components.breakers[id].line
+              line = components.breakers[id].line
               rect = components.breakers[id].UIElement
 
               color = palette[line.voltage]

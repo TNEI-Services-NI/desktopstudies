@@ -74,7 +74,7 @@ chapelcross_33kV = {
         "Langholm tx 33kV": StraightLine([310,855],"right",35),
         "Langholm10": StraightLine([395,855],"left",50,"11kV"),
         "Langholm 11kV 1": StraightLine([395,855],"down",35,"11kV"),
-        "Langholm01": StraightLine([365,890],"right",105,"11kV"),
+        "Langholm01": StraightLine([365,890],"right",110,"11kV"),
         "Langholm 11kV 2": StraightLine([445,855],"down",35,"11kV"),
         "Langholm20": StraightLine([445,855],"right",35,"11kV"),
         "Langholm Tx2": StraightLine([525,855],"left",35),
@@ -202,7 +202,7 @@ chapelcross_33kV = {
         "682 10": new Breaker("MP10",0.6,"closed","10"),
 
         "676 10": new Breaker("Langholm10",0.3,"closed","10"),
-        "676 01": new Breaker("Langholm01",0.55,"closed","01"),
+        "676 01": new Breaker("Langholm01",0.5,"closed","01"),
         "676 20": new Breaker("Langholm20",0.4,"closed","20"),
 
         "662 10": new Breaker("ANNAN10",0.3,"closed","10"),
@@ -279,8 +279,8 @@ chapelcross_33kV = {
     4: new Text("698 16", ["CHAPELCROSS"],[0,50]),
     5: new Text("698 16", ["NO1"],[0,65]),
 
-    6: new Text("Middlebie", ["MIDDLEBIE"],[0,-30]),
-    7: new Text("Middlebie", ["33KV SW/STN"],[0,-20]),
+    6: new Text("Middlebie", ["MIDDLEBIE"],[0,-40]),
+    7: new Text("Middlebie", ["33KV SW/STN"],[0,-25]),
     8: new Text("Middlebie", ["780"],[0,-10]),
 
     9: new Text("EWE HILL", ["EWE HILL"],[0,-40]),
@@ -311,8 +311,8 @@ chapelcross_33kV = {
     27: new Text("Langholm 33kv", ["LANGHOLM 33KV"],[0,-30]),
     28: new Text("Langholm 33kv", ["692"],[0,-15]),
 
-    29: new Text("Langholm01", ["LANGHOLM 33KV"],[0,-45]),
-    30: new Text("Langholm01", ["692"],[0,-30]),
+    29: new Text("Langholm01", ["LANGHOLM 33KV"],[0,-65]),
+    30: new Text("Langholm01", ["692"],[0,-45]),
 
     31: new Text("699", ["STEVENS CROFT"],[-25,-45]),
     32:new Text("699", ["33KV"],[-25,-30]),
@@ -325,8 +325,8 @@ chapelcross_33kV = {
     37:new Text("GRETNA 691", ["GRETNA 33kV"],[0,-30]),
     38:new Text("GRETNA 691", ["691"],[0,-15]),
 
-    39:new Text("673 01", ["GRETNA"],[0,-45]),
-    40:new Text("673 01", ["673"],[0,-30]),
+    39:new Text("673 01", ["GRETNA"],[0,-60]),
+    40:new Text("673 01", ["673"],[0,-45]),
 
     41: new Text("123", ["NEWCASTLETON"],[20,-30]),
     42: new Text("123",["123"],[20,-15]),
@@ -336,6 +336,9 @@ chapelcross_33kV = {
 
     45: new Text("761",["MINSCA 33KV"],[0,-30]),
     46: new Text("761",["761"],[0,-15]),
+
+    47: new Text("698 25",["CHAPELCROSS"],[0,40]),
+    48: new Text("698 25",["NO2"],[0,55])
     },
     dataViews:{
         "SOLWAYBANK": new DataView(850,100),
