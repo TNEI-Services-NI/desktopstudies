@@ -29,15 +29,14 @@ function post_breaker(breakerID,state){
  * @return {None}
  */
 function init_breakers(network, voltage, breakers, callback){
-        callback(breakers);
-        return
+    callback(breakers);
     var breakers_new = breakers
     $.ajax({
       type: "POST",
       url: "/simtool_bp/init_breakers/",
       data: {"network": network, "voltage": voltage},
       success: function(breaker_states){
-
+        alert("test1)");
         for (let breaker in breakers){
           if (breaker_states["state"][breaker] === undefined){
             breakers_new[breaker].state = "undefined";
@@ -65,6 +64,7 @@ function init_breaker(breakerID){
       data: {"breaker": breakerID},
 //      dataType: 'application/json'
       }).done(function( state ) {
+        alert("test1)");
         console.log(state);
       })
   }
@@ -73,8 +73,9 @@ function init_breaker(breakerID){
  * retrieves state of network based on stage
  * url parameter of ajax request must reference blueprint specific route to function
  * @param  {integer} stage
- * @param  {String} Network of s
- * @param  {function} callback once data has been received
+ * @param network
+ * @param voltage
+ * @param callbacks
  * @return {None}
  */
 function update_state(stage,network,voltage, callbacks){
@@ -84,6 +85,7 @@ function update_state(stage,network,voltage, callbacks){
       data: {"stage": stage, "network": network,"voltage":voltage},
 //      dataType: 'application/json'
       }).done(function( state ) {
+
         state = JSON.parse(state)
         callbacks(stage, state);
 
