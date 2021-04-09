@@ -67,7 +67,6 @@
   const font_size = 14 *  Math.min(x_scaling,y_scaling)
 
 
-
   let dict_components = undefined
   let components = {
                       breakers: [],
@@ -92,7 +91,7 @@
   } else {
     dict_components = chapelcross_33kV
   }
-  dict_components = Gretna_400kV
+  dict_components = chapelcross_33kV
   draw_network(dict_components);
 
   init_network();

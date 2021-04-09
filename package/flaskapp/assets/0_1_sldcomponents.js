@@ -288,18 +288,19 @@ function DataView(x,y, data_labels = ["kV", "AMPS","MVAR","MW"]){
     offset = 0
     for(i in data_labels){
         type = data_labels[i]
-        this.data[type] = new StaticText("0" + type,[x,y + offset],"yellow")
+        this.data[type] = new StaticText("0 " + type,[x,y + offset],"yellow")
         offset += 15
     }
 
-    this.MVA = new StaticText("0 MW",[x,y],"yellow")
-    this.MW = new StaticText("0 MW",[x,y+15],"yellow")
-    this.MVAR = new StaticText("0 kV",[x,y+30],"yellow")
-    this.kV = new StaticText("0 AMPS",[x,y+45],"yellow")
-    this.AMPS = new StaticText("0 MVAR",[x,y+60],"yellow")
+//    this.MVA = new StaticText("0 MW",[x,y],"yellow")
+//    this.MW = new StaticText("0 MW",[x,y+15],"yellow")
+//    this.MVAR = new StaticText("0 kV",[x,y+30],"yellow")
+//    this.kV = new StaticText("0 AMPS",[x,y+45],"yellow")
+//    this.AMPS = new StaticText("0 MVAR",[x,y+60],"yellow")
 }
 
 function SGT(line_id,name){
+    this.component = "SGT"
     this.lineID = line_id,
     this.graphic=[],
     this.name = name,

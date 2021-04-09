@@ -238,9 +238,13 @@ chapelcross_33kV = {
 
         "785 21": new Breaker("785 21",0.86,"closed","21"),
         "785 22": new Breaker("785 22",0.15,"closed","22"),
-        "785 CUSTOMER": new Breaker("785 22",0.5,"open","CUSTOMER"),
+        "785 CUSTOMER": new Breaker("785 22",0.5,"open","CUSTOMER BREAKER"),
+
 
         },
+    isolators:{
+            "785 CUSTOMER": new Breaker("785 22",0.7,"closed","CUSTOMER ISOLATOR"),
+    },
     tx:{
         0: new Tx("into GRID 2 tx",1,"","","33kV","LV"),
         1: new Tx("GRID 2",1,"GRID T2","90 MVA", "33kV","132kV"),
@@ -338,15 +342,41 @@ chapelcross_33kV = {
     46: new Text("761",["761"],[0,-15]),
 
     47: new Text("698 25",["CHAPELCROSS"],[0,40]),
-    48: new Text("698 25",["NO2"],[0,55])
+    48: new Text("698 25",["NO2"],[0,55]),
+
+    49: new Text("378",["SOLWAY BANK 33KV"],[0,-30]),
+    50: new Text("378",["378"],[0,-15]),
+
     },
     dataViews:{
-        "SOLWAYBANK": new DataView(850,100),
-        "GRID 2": new DataView(740,100),
-        "GRID 1": new DataView(400,100),
-        "STEVENSCROFT": new DataView(50,400),
-        "MINSCA": new DataView(950,450),
-        "MINSCA": new DataView(950,450),
-        "CRAIG II": new DataView(800,780),
+        "SOLWAYBANK": new DataView(850,100, ["MW","MVAR","kV","AMPS"]),
+        "GRID 2": new DataView(740,100, ["MW","MVAR","kV","AMPS"]),
+        "GRID 1": new DataView(400,100 , ["MW","MVAR","kV","AMPS"]),
+        "STEVENSCROFT": new DataView(50,400, ["MW","MVAR","kV","AMPS"]),
+        "MINSCA": new DataView(950,450, ["MW","MVAR","kV","AMPS"]),
+
+        "CRAIG II": new DataView(800,770, ["MW","MVAR","kV","AMPS","Hz"]),
+
+        "MINSCA Hz": new DataView(970,600, ["Hz"]),
+        "SOLWAYBANK Hz": new DataView(990,30, ["Hz"]),
+
+        "398 26": new DataView(880,230, ["Amps"]),
+        "398 25": new DataView(820,230, ["Amps"]),
+        "398 24": new DataView(760,230, ["Amps"]),
+        "398 23": new DataView(680,230, ["Amps"]),
+        "398 22": new DataView(605,230, ["Amps"]),
+        "398 21": new DataView(550,230, ["Amps"]),
+
+        "398 11": new DataView(455,230, ["Amps"]),
+        "398 12": new DataView(390,230, ["Amps"]),
+        "398 13": new DataView(230,230, ["Amps"]),
+        "398 14": new DataView(125,230, ["Amps"]),
+        "398 15": new DataView(65,230, ["Amps"]),
+        "398 16": new DataView(15,230, ["Amps"]),
+
+
+
+
+
     },
 }
