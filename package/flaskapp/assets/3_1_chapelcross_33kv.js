@@ -15,7 +15,7 @@ chapelcross_33kV = {
         "698 16": StraightLine([33,175], "down",85),
             "chapelcross dash": StraightLine([15,240],"right",35, dash=true),
         "698 15": StraightLine([85,175], "down",300),
-            "Chap": StraightLine([25,370],"right",90),
+            "699": StraightLine([25,370],"right",90),
             "generator dash": StraightLine([70,440],"right",35,dash=true),
         "698 14": StraightLine([145,175],"down",105),
             "698 14 into ANNAN": StraightLine([145,280], "right",150),
@@ -74,7 +74,7 @@ chapelcross_33kV = {
         "Langholm tx 33kV": StraightLine([310,855],"right",35),
         "Langholm10": StraightLine([395,855],"left",50,"11kV"),
         "Langholm 11kV 1": StraightLine([395,855],"down",35,"11kV"),
-        "Langholm01": StraightLine([365,890],"right",100,"11kV"),
+        "Langholm01": StraightLine([365,890],"right",110,"11kV"),
         "Langholm 11kV 2": StraightLine([445,855],"down",35,"11kV"),
         "Langholm20": StraightLine([445,855],"right",35,"11kV"),
         "Langholm Tx2": StraightLine([525,855],"left",35),
@@ -105,7 +105,7 @@ chapelcross_33kV = {
 
         "MOFFAT10": StraightLine([390,640],"left",50, "11kV"),
         "MOFFAT 1": StraightLine([390,640],"down",35, "11kV"),
-        "MOFFAT01": StraightLine([360,675],"right",100,"11kV"),
+        "MOFFAT01": StraightLine([366,675],"right",95,"11kV"),
         "MOFFAT 2": StraightLine([440,640],"down",35,"11kV"),
         "MOFFAT20": StraightLine([440,640],"right",50,"11kV"),
 
@@ -121,13 +121,12 @@ chapelcross_33kV = {
         //GRETNA 11kV
         "673 10": StraightLine([735,460],"left",50, "11kV"),
         "GRETNA 4": StraightLine([735,460],"down",35,"11kV"),
-        "673 01": StraightLine([705,496],"right",100,"11kV"),
+        "673 01": StraightLine([710,496],"right",100,"11kV"),
         "GRETNA 5": StraightLine([785,460],"down",35,"11kV"),
         "673 20": StraightLine([785,460],"right",50, "11kV"),
 
         "694 12": StraightLine([305,455],"up",55),
         "694 22": StraightLine([520,455],"up",55),
-
 
         "LOCKERBIE T1": StraightLine([305,455],"right",35),
         "679 10": StraightLine([340,455],"right",50, "11kV"),
@@ -157,7 +156,7 @@ chapelcross_33kV = {
 
         "123 10":StraightLine([710,645],"left",50, "11kV"),
         "NEWCASTLETON 4": StraightLine([710,645],"down",35, "11kV"),
-        "NEWCASTLETON 5": StraightLine([695,680],"right",85, "11kV"),
+        "123": StraightLine([695,680],"right",85, "11kV"),
         "123 12": StraightLine([745,680],"down",55, "11kV"),
 
         "785 A": StraightLine([680,940],"left",155,"11kV"),
@@ -203,11 +202,11 @@ chapelcross_33kV = {
         "682 10": new Breaker("MP10",0.6,"closed","10"),
 
         "676 10": new Breaker("Langholm10",0.3,"closed","10"),
-        "676 01": new Breaker("Langholm01",0.55,"closed","01"),
+        "676 01": new Breaker("Langholm01",0.5,"closed","01"),
         "676 20": new Breaker("Langholm20",0.4,"closed","20"),
 
         "662 10": new Breaker("ANNAN10",0.3,"closed","10"),
-        "662 01": new Breaker("662 01",0.55,"closed","01"),
+        "662 01": new Breaker("662 01",0.5,"closed","01"),
         "662 20": new Breaker("ANNAN20",0.3,"closed","20"),
 
         "694 13": new Breaker("LOCKERBIE13",0.1,"closed","13"),
@@ -215,7 +214,7 @@ chapelcross_33kV = {
         "675 10": new Breaker("KIRKBANK10",0.3,"closed","10"),
 
         "683 10": new Breaker("MOFFAT10",0.3,"closed","10"),
-        "683 01": new Breaker("MOFFAT01", 0.55,"closed","01"),
+        "683 01": new Breaker("MOFFAT01", 0.5,"closed","01"),
         "683 20": new Breaker("MOFFAT20", 0.3,"closed","20"),
 
         "694 12": new Breaker("694 12", 0.5,"closed","12"),
@@ -223,11 +222,11 @@ chapelcross_33kV = {
         "694 23": new Breaker("694 23", 0.89,"closed","13"),
 
         "679 10": new Breaker("679 10", 0.7,"closed","10"),
-        "679 01": new Breaker("679 01",0.55,"closed","01"),
+        "679 01": new Breaker("679 01",0.53,"closed","01"),
         "679 20": new Breaker("679 20",0.3,"closed","20"),
 
         "673 10": new Breaker("673 10",0.25,"closed","10"),
-        "673 01": new Breaker("673 01",0.55,"closed","01"),
+        "673 01": new Breaker("673 01",0.5,"closed","01"),
         "673 20": new Breaker("673 20",0.25,"closed","20"),
 
         "761 CHAP": new Breaker("761 CHAP",0.55,"closed","CHAP"),
@@ -243,26 +242,26 @@ chapelcross_33kV = {
 
         },
     tx:{
-        0: new Tx("into GRID 2 tx",1,"",type="starDelta","33kV","LV"),
-        1: new Tx("GRID 2",1,"GRID T2",type="starDelta","33kV","132kV"),
-        2: new Tx("GRID 1",1,"GRID T1",type="starDelta","33kV","132kV"),
-        3: new Tx("into DAR tx",1,"",type="starDelta","33kV","LV"),
-        5: new Tx("Middlebie Primary Transformer",1,"", type="starDelta","11kV","33kV"),
-        6: new Tx("Langholm tx 33kV",1,"T1",type="starDelta","11kV"),
-        7: new Tx("Langholm Tx2",1,"T2",type="starDelta","33kV","11kV"),
-        8: new Tx("698 14 into ANNAN",1,"T1",type="starDelta","11kV"),
-        9: new Tx("ANNAN20",1,"T2",type="starDelta","33kV","11kV"),
-        11: new Tx("KIRKBANK T",1,"T", type="starDelta","11kV"),
-        12: new Tx("MOFFAT T1",1,"T1",type="starDelta","11kV"),
-        13: new Tx("MOFFAT20",1,"T1",type="starDelta","33kV","11kV"),
+        0: new Tx("into GRID 2 tx",1,"","","33kV","LV"),
+        1: new Tx("GRID 2",1,"GRID T2","90 MVA", "33kV","132kV"),
+        2: new Tx("GRID 1",1,"GRID T1", "90 MVA", "33kV","132kV"),
+        3: new Tx("into DAR tx",1,"","","33kV","LV"),
+        5: new Tx("Middlebie Primary Transformer",1,"","10 MVA","11kV","33kV"),
+        6: new Tx("Langholm tx 33kV",1,"T1","12 MVA","11kV"),
+        7: new Tx("Langholm Tx2",1,"T2","12 MVA","33kV","11kV"),
+        8: new Tx("698 14 into ANNAN",1,"T1","12 MVA","11kV"),
+        9: new Tx("ANNAN20",1,"T2","12 MVA","33kV","11kV"),
+        11: new Tx("KIRKBANK T",1,"","5VA","11kV"),
+        12: new Tx("MOFFAT T1",1,"T1","7.5 MVA","11kV"),
+        13: new Tx("MOFFAT20",1,"T2","7.5 MVA","33kV","11kV"),
 
-        14: new Tx("LOCKERBIE T1", 1,"starDelta", "T1","11kV"),
-        15: new Tx("LOCKERBIE T2",0,"starDelta","T2","33kV","11kV"),
+        14: new Tx("LOCKERBIE T1", 1, "T1", "24 MVA","11kV"),
+        15: new Tx("LOCKERBIE T2",0,"T2","24 MVA","33kV","11kV"),
 
-        16: new Tx("GRETNA T1",1,"starDelta","T1","11kV","33kV"),
-        17: new Tx("GRETNA T2",1,"starDelta","T2","33kV","11kV"),
+        16: new Tx("GRETNA T1",1,"T1","24 MVA","11kV","33kV"),
+        17: new Tx("GRETNA T2",1,"T2","24 MVA","33kV","11kV"),
 
-        18: new Tx("NEWCASTLETON T1",1,"starDelta","T1","11kV"),
+        18: new Tx("NEWCASTLETON T1",1,"T1","5 MVA","11kV"),
 
         },
     generators:{
@@ -271,5 +270,83 @@ chapelcross_33kV = {
         3: new Generator("785 22",1),
         "MINSCA WF": new Generator("761 GENERATOR", 1),
         5: new Generator("378 12",1),
-        }
+        },
+    labels:{
+    1: new Text("698 01", ["CHAPELCROSS GSP"], [50,-70]),
+    2: new Text("698 01", ["698"], [50,-50]),
+    3: new Text("698 01",["CHAPELCROSS GSP 33kV"],[50,-160]),
+
+    4: new Text("698 16", ["CHAPELCROSS"],[0,50]),
+    5: new Text("698 16", ["NO1"],[0,65]),
+
+    6: new Text("Middlebie", ["MIDDLEBIE"],[0,-40]),
+    7: new Text("Middlebie", ["33KV SW/STN"],[0,-25]),
+    8: new Text("Middlebie", ["780"],[0,-10]),
+
+    9: new Text("EWE HILL", ["EWE HILL"],[0,-40]),
+    10: new Text("EWE HILL", ["WINDFARM"],[0,-25]),
+    11: new Text("EWE HILL", ["781"],[0,-10]),
+
+    12: new Text("MP", ["MIDDLEBIE "],[5,-40]),
+    13: new Text("MP", ["PRIMARY"],[5,-25]),
+    14: new Text("MP", ["682"],[5,-10]),
+
+    15: new Text("694", ["LOCKERBIE 33KV"],[10,-40]),
+
+    16: new Text("662 01", ["ANNAN"],[0,-45]),
+    17: new Text("662 01", ["662"],[0,-30]),
+
+    18: new Text("679 01", ["LOCKERBIE"],[3,-45]),
+    19: new Text("679 01", ["679"],[3,-30]),
+
+    20: new Text("KIRKBANK", ["KIRKBANK"],[20,-30]),
+    21: new Text("KIRKBANK",["675"],[20,-15]),
+
+    23: new Text("MOFFAT01", ["MOFFAT"],[0,-45]),
+    24: new Text("MOFFAT01", ["683"],[0,-30]),
+
+    25: new Text("Langholm 33kv", ["LANGHOLM 33KV"],[0,-30]),
+    26: new Text("Langholm 33kv", ["692"],[0,-15]),
+
+    27: new Text("Langholm 33kv", ["LANGHOLM 33KV"],[0,-30]),
+    28: new Text("Langholm 33kv", ["692"],[0,-15]),
+
+    29: new Text("Langholm01", ["LANGHOLM 33KV"],[0,-65]),
+    30: new Text("Langholm01", ["692"],[0,-45]),
+
+    31: new Text("699", ["STEVENS CROFT"],[-25,-45]),
+    32:new Text("699", ["33KV"],[-25,-30]),
+    33:new Text("699", ["699"],[-25,-15]),
+
+    34:new Text("into DUMF", ["CARRUTHERSTOWN"],[-55,-15]),
+    35:new Text("into DUMF", ["33 kV"],[-59,0]),
+    36:new Text("into DUMF", ["DUMF"],[-50,-30]),
+
+    37:new Text("GRETNA 691", ["GRETNA 33kV"],[0,-30]),
+    38:new Text("GRETNA 691", ["691"],[0,-15]),
+
+    39:new Text("673 01", ["GRETNA"],[0,-60]),
+    40:new Text("673 01", ["673"],[0,-45]),
+
+    41: new Text("123", ["NEWCASTLETON"],[20,-30]),
+    42: new Text("123",["123"],[20,-15]),
+
+    43: new Text("785 B", ["CRAIG II WINDFARM 11KV"],[20,-30]),
+    44: new Text("785 B",["785"],[20,-15]),
+
+    45: new Text("761",["MINSCA 33KV"],[0,-30]),
+    46: new Text("761",["761"],[0,-15]),
+
+    47: new Text("698 25",["CHAPELCROSS"],[0,40]),
+    48: new Text("698 25",["NO2"],[0,55])
+    },
+    dataViews:{
+        "SOLWAYBANK": new DataView(850,100),
+        "GRID 2": new DataView(740,100),
+        "GRID 1": new DataView(400,100),
+        "STEVENSCROFT": new DataView(50,400),
+        "MINSCA": new DataView(950,450),
+        "MINSCA": new DataView(950,450),
+        "CRAIG II": new DataView(800,780),
+    },
 }

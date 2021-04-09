@@ -16,8 +16,10 @@
   //Create canvas
   var draw = SVG('#drawing').size(x, y)
 
-  var x_scaling = x/1350
-  var y_scaling = y/1100
+  var x_scaling = x/1150
+  var y_scaling = y/1050
+
+  const font_size = 14 *  Math.min(x_scaling,y_scaling)
 
   let network = "chapelcross"
   let voltage = "33kv"
@@ -34,12 +36,17 @@
     dict_components = chapelcross_33kV
   }
 
+
+  dict_components = chapelcross_33kV
+
+
   let components = {
                       breakers: [],
                       lines: [],
-                      text:[],
+                      labels:[],
                       generators: [],
                       isolators:[],
+                      text:[]
                   }
 
   current_step = 1
@@ -70,6 +77,13 @@
       temp_dict.x2 = temp_dict.x2 * x_scaling
       temp_dict.y1 = temp_dict.y1 * y_scaling
       temp_dict.y2 = temp_dict.y2 * y_scaling
+  }
+
+  //scale text
+  for (idx in dict_components.labels){
+      temp_dict = dict_components.labels[idx]
+      temp_dict.offset[0] = temp_dict.offset[0] * x_scaling
+      temp_dict.offset[1] = temp_dict.offset[1] * y_scaling
   }
 
   var bNodes = false
@@ -108,8 +122,8 @@
           //doing this means the inital data, and the SVG elements they make remain unchanged at all times.
           // may be very useful should a redraw/reset be needed...
           // define listener handles now since they have access to everything relevant
-          let breaker = breakers[id]
 
+          let breaker = breakers[id]
           if(breaker.name === false){
               breaker.name = id
           }
@@ -117,7 +131,6 @@
           breaker.callback = Breaker_Callback(breaker.graphic, breaker.name)
 
           draw_breaker(dict_components.lines[breaker.lineID] ,breaker.pos, breaker.size, breaker.state, breaker.callback)
-
           let closed = breaker.state === 'closed'
           let b = {
               info:breaker,
@@ -129,7 +142,7 @@
 
 
           b.setState = function(closed){
-              breaker = components.breakers[id].line
+              line = components.breakers[id].line
               rect = components.breakers[id].UIElement
 
               color = palette[line.voltage]
@@ -155,22 +168,19 @@
       }
   });
 
-
       //add text
-  for(i in dict_components.text){
-      text = dict_components.text[i]
+  for(i in dict_components.labels){
+      text = dict_components.labels[i]
       line_id = text.lineID
       line = components.lines[line_id].UIElement
-      // console.log(line)
-
       texts = text.text_strings
       offset = text.offset
-      add_text(line,false,texts, offset[0],offset[1],text.callback)
+      colour = text.colour
+      add_text(line,false,texts, offset[0],offset[1],colour,text.callback)
       let id = i
       let t = {initInfo:text, UIElement: text.graphic[0], id : id}
 
-      components.lines[id] = t
-
+      components.labels[id] = t
   }
 
       //add transformers
@@ -189,7 +199,6 @@
       let t = {info:tx, UIElement: tx.graphic[0], id : id}
       components.lines[id] = t
       component_modal(t)
-
       }
 
       //add Generators
@@ -237,6 +246,41 @@
       components.isolators[id] = iso
   }
 
+  for(i in dict_components.dataViews){
+      dv = dict_components.dataViews[i]
+
+      pos = [dv.x,dv.y]
+
+      thisline = dv.MVA
+      pos = thisline.offset
+      text = thisline.text
+      add_static_text([text],pos[0]*x_scaling,pos[1]*y_scaling,"yellow",function(){})
+
+
+      thisline = dv.MVAR
+      pos = thisline.offset
+      text = thisline.text
+      add_static_text([text],pos[0]*x_scaling,pos[1]*y_scaling,"yellow",function(){})
+
+      thisline = dv.AMPS
+      pos = thisline.offset
+      text = thisline.text
+      add_static_text([text],pos[0]*x_scaling,pos[1]*y_scaling,"yellow",function(){})
+
+      thisline = dv.kV
+      pos = thisline.offset
+      text = thisline.text
+      add_static_text([text],pos[0]*x_scaling,pos[1]*y_scaling,"yellow",function(){})
+
+      thisline = dv.MW
+      pos = thisline.offset
+      text = thisline.text
+      add_static_text([text],pos[0]*x_scaling,pos[1]*y_scaling,"yellow",function(){})
+
+    //TODO handle data changes with functions that do all the hardwork
+  }
+
+
   //get stage zero state
   update_state(current_step,network,voltage,restoration_step_callback);
   }
@@ -248,3 +292,4 @@
       console.log(current_step)
       update_state(current_step,network,voltage,restoration_step_callback);
   }
+

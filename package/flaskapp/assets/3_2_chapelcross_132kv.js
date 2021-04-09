@@ -60,9 +60,6 @@ chapelcross_132kV={
         "GRNA-1": StraightLine([110,470],"up",290, "132kV"),
 
 
-
-
-
     },
     breakers:{
         "698 01": new Breaker("698 01", 0.5,"closed"),
@@ -82,11 +79,11 @@ chapelcross_132kV={
         "410": new Breaker("410",0.7,"open"),
 
     },
-    tx:{1: new Tx("into GRID T1 tx",1,"",type="starDelta", coil1 = "33kV", coil2 = "LV"),
-        2: new Tx("GRID T1",1,"GRID T1",type="starDelta",coil1 = "33kV", coil2 = "132kV"),
+    tx:{1: new Tx("into GRID T1 tx",1,"","", coil1 = "33kV", coil2 = "LV"),
+        2: new Tx("GRID T1",1,"GRID T1","90MVA",coil1 = "33kV", coil2 = "132kV"),
 
-        3: new Tx("into GRID T2 tx",1,"",type="starDelta", coil1 = "33kV", coil2 = "LV"),
-        4: new Tx("GRID T2",1,"GRID T2",type= "starDelta",coil1 = "33kV",coil2 = "132kV"),
+        3: new Tx("into GRID T2 tx",1,"","", coil1 = "33kV", coil2 = "LV"),
+        4: new Tx("GRID T2",1,"GRID T2","90MVA",coil1 = "33kV",coil2 = "132kV"),
 
         },
     isolators:{
@@ -130,6 +127,19 @@ chapelcross_132kV={
 
         "336": new Isolator("336 330 334", 0.25, "closed"),
         "334": new Isolator("336 330 334", 0.75, "closed"),
+
+    },
+    dataViews:{
+        "ECCF-1": new DataView(250,250),
+        "GRNA-1": new DataView(80,250),
+        "DUMF-1": new DataView(420,250),
+        "GRNA-2": new DataView(560,250),
+        "ECCF-2": new DataView(700,250),
+        "DUMF-2": new DataView(870,250),
+        "HARK": new DataView(950,250),
+
+        "GRID 1": new DataView(350,800),
+        "GRID 2": new DataView(750,800),
 
     },
 }
