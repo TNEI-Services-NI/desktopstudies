@@ -65,10 +65,22 @@
 
   const font_size = 14 *  Math.min(x_scaling,y_scaling)
 
-  let network = "chapelcross"
-  let voltage = "33kv"
+
 
   let dict_components = undefined
+  let components = {
+                      breakers: [],
+                      lines: [],
+                      labels:[],
+                      generators: [],
+                      isolators:[],
+                      text:[]
+                  }
+  let current_step = 1
+  let steps = []
+
+  let network = "chapelcross"
+  let voltage = "33kv"
 
   if (network === "chapelcross" && voltage === "33kv"){
     dict_components = chapelcross_33kV
@@ -80,19 +92,6 @@
     dict_components = chapelcross_33kV
   }
 
-  dict_components = chapelcross_33kV
-
-  let components = {
-                      breakers: [],
-                      lines: [],
-                      labels:[],
-                      generators: [],
-                      isolators:[],
-                      text:[]
-                  }
-
-  current_step = 1
-  steps = []
 
   draw_network(dict_components)
 
