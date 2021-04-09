@@ -87,20 +87,13 @@ def init_dashboard(server=""):
     # graphical output
     _data_upload_output = dbc.Row([dbc.Col([html.Div(id='output-data-upload')], width=2)])
 
-    # data = {'canvas': {}}
-    # data['canvas']['x'] = 1200
-    # with open(r'..\dash_simtool\data\json.txt', 'w') as outfile:
-    #     json.dump(data, outfile)
-
     with open(dash_simtool.TEMPLATES_DIR + 'dash_sim_tool.html', "r") as dash_app_html_file:
         dash_app_html = dash_app_html_file.read()
         dash_app_html = dash_app_html.replace('{% marginLeft %}', styling.CONTENT_STYLE['marginLeft'])
         dash_app_html = dash_app_html.replace('{% marginTop %}', "0px")
         dash_app.index_string = dash_app_html
 
-    # dash_app.layout = html.Div([_nav_bar])
 
-    #
     # compile overall layout
     dash_app.layout = html.Center([dcc.Location(id="home"),
                                    dcc.Store(id='side_click'),
@@ -109,7 +102,7 @@ def init_dashboard(server=""):
                                    _body,
                                    ],
                                   )
-    #
+
     dash_app = callbacks.init_callbacks(dash_app)
 
     return dash_app if server == "" else dash_app.server

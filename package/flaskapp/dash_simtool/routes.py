@@ -9,13 +9,13 @@ import package.data as simtool_data
 # These routes are prefixed by the blueprint URL prefix
 
 @simtool_bp.route('/')
-# @login_required
+@login_required
 def index():
     return redirect(url_for(dash_app.URL_HOME))
 
 
 @simtool_bp.route("/receive_breaker/", methods=['POST'])
-# @login_required
+@login_required
 def receive_breaker():
     data = request.form
     print("breaker ID: "+ data["breaker"])
@@ -24,7 +24,7 @@ def receive_breaker():
 
 
 @simtool_bp.route("/init_breakers/", methods=['POST'])
-# @login_required
+@login_required
 def init_breakers():
     print("init breakers")
     data = request.form
@@ -33,7 +33,7 @@ def init_breakers():
 
 
 @simtool_bp.route("/get_state/", methods=['POST'])
-# @login_required
+@login_required
 def get_restoration_step():
     data = request.form
     network = data["network"]
