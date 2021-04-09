@@ -232,3 +232,19 @@
       //TODO handle data changes with functions that do all the hardwork
     }
   }
+
+  function construct_SGTs(dict_components){
+      for(let i in dict_components.SGTs){
+        let sgt = dict_components.SGTs[i]
+        let line_id = sgt.lineID
+        let line = dict_components.lines[line_id]
+        let name = sgt.name
+        let callback = sgt.callback
+        draw_SGT(line,callback)
+
+        let id = i
+        let s = {info:sgt, UIElement: sgt.graphic[0], id : id}
+        components.lines[id] = s
+        component_modal(s)
+        }
+  }

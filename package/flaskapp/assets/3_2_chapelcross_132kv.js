@@ -84,7 +84,6 @@ chapelcross_132kV={
 
         3: new Tx("into GRID T2 tx",1,"","", coil1 = "33kV", coil2 = "LV"),
         4: new Tx("GRID T2",1,"GRID T2","90MVA",coil1 = "33kV",coil2 = "132kV"),
-
         },
     isolators:{
         "1103": new Isolator("GRNA-1",0.7,"closed"),
@@ -130,16 +129,38 @@ chapelcross_132kV={
 
     },
     dataViews:{
-        "ECCF-1": new DataView(250,250),
-        "GRNA-1": new DataView(80,250),
-        "DUMF-1": new DataView(420,250),
-        "GRNA-2": new DataView(560,250),
-        "ECCF-2": new DataView(700,250),
-        "DUMF-2": new DataView(870,250),
-        "HARK": new DataView(950,250),
-
-        "GRID 1": new DataView(350,800),
-        "GRID 2": new DataView(750,800),
-
+        "ECCF-1": new DataView(250,250,["MVA", "MW","MVAR","kV","Amps"]),
+        "GRNA-1": new DataView(80,250, ["MVA", "MW","MVAR","kV","Amps"]),
+        "DUMF-1": new DataView(420,250,["MVA", "MW","MVAR","kV","Amps"]),
+        "GRNA-2": new DataView(560,250,["MVA", "MW","MVAR","kV","Amps"]),
+        "ECCF-2": new DataView(700,250,["MVA", "MW","MVAR","kV","Amps"]),
+        "DUMF-2": new DataView(870,250,["MVA", "MW","MVAR","kV","Amps"]),
+        "HARK": new DataView(950,250,  ["MVA", "MW","MVAR","kV","Amps"]),
+        "GRID 1": new DataView(350,770,["MVA", "MW","MVAR","kV","Amps"]),
+        "GRID 2": new DataView(750,770,["MVA", "MW","MVAR","kV","Amps"]),
     },
+    labels:{
+    1: new Text("698 01", ["CHAPELCROSS GSP"], [0,-70]),
+    2: new Text("698 01", ["SPD"], [0,-180]),
+    3: new Text("698 01", ["33kV"], [0,-195]),
+    4: new Text("M1",["M1"],[-465,0]),
+    5: new Text("R1",["R1"],[-465,0]),
+    6: new Text("R1",["132kV"],[-10,90]),
+    7: new Text("R1",["(SPD)"],[-10,105]),
+
+    8: new Text("GRNA-1",["GRNA-1"],[0,-170]),
+    9: new Text("ECCF-1",["ECCF-1"],[0,-170]),
+    10: new Text("GRNA-2",["GRNA-2"],[0,-170]),
+    11: new Text("ECCF-2",["ECCF-2"],[0,-170]),
+    12: new Text("DUMF-2",["DUMF-2"],[0,-170]),
+    13: new Text("HARK",["HARK"],[0,-170]),
+    14: new Text("DUMF-1",["DUMF-1"],[0,-170]),
+
+    15: new Text("R1",["R1"],[0,-350]),
+
+
+
+
+
+    }
 }

@@ -25,6 +25,7 @@
 
     construct_dataviews(dict_components);
 
+    construct_SGTs(dict_components);
     //get stage zero state
     update_state(current_step,network,voltage,restoration_step_callback);
   }
@@ -91,7 +92,7 @@
   } else {
     dict_components = chapelcross_33kV
   }
-
+  dict_components = Gretna_400kV
   draw_network(dict_components);
 
   init_network();
