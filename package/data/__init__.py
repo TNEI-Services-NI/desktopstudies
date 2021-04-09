@@ -5,9 +5,10 @@ import pandas as pd
 dir_data = os.path.dirname(__file__)
 
 dir_simtool_data = '\\'.join([dir_data, 'simtool'])
-dir_breaker_states = '\\'.join([dir_simtool_data, 'breakerstates'])
 
+dir_breaker_states = '\\'.join([dir_simtool_data, 'breakerstates'])
 dir_restoration_steps = '\\'.join([dir_simtool_data, 'restorationsteps'])
+dir_active_simulation = '\\'.join([dir_simtool_data, 'activesimulation'])
 
 dir_auth_data = '\\'.join([dir_data, 'auth'])
 
@@ -35,3 +36,11 @@ def read_restoration_step(network: str, voltage: str, stage: int):
     df_restoration = df_restoration.set_index("step")
     df_restoration = df_restoration.loc[int(stage)]
     return df_restoration
+
+
+def read_active_network():
+    active_sims = _fetch_files(dir_active_simulation)
+    filename = active_sims['activesimulation']
+    df_activesim = pd.read_csv('/'.join([dir_active_simulation, filename]))
+    df_activesim = df_activesim.convert_dtypes(convert_string=True)
+    return df_activesim

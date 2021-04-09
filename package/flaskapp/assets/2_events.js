@@ -90,6 +90,23 @@ function update_state(stage,network,voltage, callbacks){
       })
   }
 
+/**
+ * retrieves network/simulation
+ * url parameter of ajax request must reference blueprint specific route to function
+ * @return {None}
+ */
+function init_network(){
+      $.ajax({
+      type: "POST",
+      url: "/simtool_bp/init_network/",
+      // data: {},
+//      dataType: 'application/json'
+      }).done(function( state ) {
+        let network = JSON.parse(state)
+        console.log(network)
+
+      })
+  }
 
 const breaker_clicked_event = new CustomEvent('breaker_clicked')
 

@@ -7,7 +7,6 @@ import package.data as simtool_data
 
 
 # These routes are prefixed by the blueprint URL prefix
-
 @simtool_bp.route('/')
 @login_required
 def index():
@@ -48,4 +47,13 @@ def get_restoration_step():
 
     # stateDictionary = {"698 11": rand.random()}
     # return jsonify(stateDictionary.to_dict)
+
+
+@simtool_bp.route("/init_network/", methods=['POST'])
+@login_required
+def init_network():
+    print("init_network")
+    data = request.form
+    df_activesim = simtool_data.read_active_network()
+    return jsonify(df_activesim.to_dict())
 
