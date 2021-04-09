@@ -29,7 +29,6 @@ function post_breaker(breakerID,state){
  * @return {None}
  */
 function init_breakers(network, voltage, breakers, callback){
-    callback(breakers);
     var breakers_new = breakers
     $.ajax({
       type: "POST",
@@ -136,7 +135,7 @@ function component_modal(component){
             $('<p> type = '+component.info.type+'</p>').appendTo('#dataPopup');
       }
 
-      if(component.data != undefined){
+      if(component.data !== undefined){
             $('<p> restoration step based data = '+component.data+'</p>').appendTo('#dataPopup');
       }
       // $('<p>Data:</p>').appendTo('#dataPopup');
