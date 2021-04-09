@@ -92,8 +92,8 @@
     dict_components = chapelcross_33kV
   }
 
+  draw_network(dict_components);
 
-  draw_network(dict_components)
-
+  init_network();
 
 

@@ -99,11 +99,10 @@ function init_network(){
       $.ajax({
       type: "POST",
       url: "/simtool_bp/init_network/",
-      // data: {},
+      data: {'string': 'none'},
 //      dataType: 'application/json'
       }).done(function( state ) {
-        let network = JSON.parse(state)
-        console.log(network)
+        alert("test");
 
       })
   }
@@ -177,7 +176,6 @@ function component_modal(component){
               $('<p>Q: '+cell_data[4+parseInt($('#buttonA').attr('stage'))]+' MVAr</p>').appendTo('#dataPopup');
             }
           }
-
           }
         }
         });

@@ -42,5 +42,4 @@ def read_active_network():
     active_sims = _fetch_files(dir_active_simulation)
     filename = active_sims['activesimulation']
     df_activesim = pd.read_csv('/'.join([dir_active_simulation, filename]))
-    df_activesim = df_activesim.convert_dtypes(convert_string=True)
     return df_activesim
