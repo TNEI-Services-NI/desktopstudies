@@ -36,7 +36,6 @@ function init_breakers(network, voltage, breakers, callback){
       url: "/simtool_bp/init_breakers/",
       data: {"network": network, "voltage": voltage},
       success: function(breaker_states){
-        alert("test1)");
         for (let breaker in breakers){
           if (breaker_states["state"][breaker] === undefined){
             breakers_new[breaker].state = "undefined";
