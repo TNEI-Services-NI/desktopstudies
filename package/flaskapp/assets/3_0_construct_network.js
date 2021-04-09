@@ -198,39 +198,20 @@
     }}
 
   function construct_dataviews(dict_components){
+
         for(i in dict_components.dataViews){
-        dv = dict_components.dataViews[i]
-
-        pos = [dv.x,dv.y]
-
-        thisline = dv.MVA
-        pos = thisline.offset
-        text = thisline.text
-        add_static_text([text],pos[0]*x_scaling,pos[1]*y_scaling,"yellow",function(){})
-
-
-        thisline = dv.MVAR
-        pos = thisline.offset
-        text = thisline.text
-        add_static_text([text],pos[0]*x_scaling,pos[1]*y_scaling,"yellow",function(){})
-
-        thisline = dv.AMPS
-        pos = thisline.offset
-        text = thisline.text
-        add_static_text([text],pos[0]*x_scaling,pos[1]*y_scaling,"yellow",function(){})
-
-        thisline = dv.kV
-        pos = thisline.offset
-        text = thisline.text
-        add_static_text([text],pos[0]*x_scaling,pos[1]*y_scaling,"yellow",function(){})
-
-        thisline = dv.MW
-        pos = thisline.offset
-        text = thisline.text
-        add_static_text([text],pos[0]*x_scaling,pos[1]*y_scaling,"yellow",function(){})
-
-      //TODO handle data changes with functions that do all the hardwork
-    }
+          dv = dict_components.dataViews[i]
+          data = dv.data
+          pos = [dv.x,dv.y]
+              for(i in data){
+              console.log(i)
+              static_text = data[i]
+              text = static_text.text
+              pos = static_text.offset
+              holder = []
+              add_static_text([text],pos[0]*x_scaling,pos[1]*y_scaling,"yellow",function(object){holder[0] = object})
+              }
+          }
   }
 
   function construct_SGTs(dict_components){

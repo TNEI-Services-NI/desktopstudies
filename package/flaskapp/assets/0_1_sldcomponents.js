@@ -284,11 +284,11 @@ function Isolator(line_id,pos, state = "closed",name=false){
 function DataView(x,y, data_labels = ["kV", "AMPS","MVAR","MW"]){
     this.x = x
     this.y = y
-    data = {}
+    this.data = {}
     offset = 0
     for(i in data_labels){
         type = data_labels[i]
-        data[type] = new StaticText("0" + type,[x,y + offset],"yellow")
+        this.data[type] = new StaticText("0" + type,[x,y + offset],"yellow")
         offset += 15
     }
 

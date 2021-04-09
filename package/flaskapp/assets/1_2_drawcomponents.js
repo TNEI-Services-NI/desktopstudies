@@ -788,10 +788,13 @@ function draw_SGT(dict_line,callback){
     circle2.stroke({ color: closed_color, width: circleWidth, linecap: 'white', linejoin: 'round' })
     circle2.stroke(dict_line.dict_styling.stroke)
     circle2.forward()
-    dict_tx.objects = [circle1,ellipse,rect1]
+
+    dict_tx.objects = [circle2,ellipse,rect1]
     group.add(ellipse)
     group.add(rect1)
-    group.add(circle1)
+    group.add(circle2)
+
+    circle1.center(center[0],center[1])
 
     group.horizontal = bHorizontal
     callback(group);
