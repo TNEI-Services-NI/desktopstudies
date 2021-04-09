@@ -1,3 +1,11 @@
+/**
+ * flashes the given element between original and given colours
+ * the breaker.
+ * @param  {svg object} graphic object which is to flash.
+ * @param  {string} colour of flash.
+ * @return {None}
+ */
+
 function flashColour(object, colour){
   var i;
   var time = 175

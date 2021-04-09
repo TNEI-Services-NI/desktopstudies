@@ -53,6 +53,9 @@ def _add_toggle_sidebar(dash_app):
     return dash_app
 
 
+
+
+
 # def _add_render_page_content(dash_app):
 #     @dash_app.callback(Output("page-content", "children"), [Input("url", "pathname")])
 #     def render_page_content(pathname):
@@ -75,7 +78,8 @@ def _add_toggle_sidebar(dash_app):
 
 
 def init_callbacks(dash_app):
-    dash_app = _add_toggle_sidebar(dash_app)
+    # dash_app = _add_toggle_sidebar(dash_app)
+    # dash_app = _reset_draw(dash_app)
     # dash_app = _add_render_page_content(dash_app)
 
     return dash_app

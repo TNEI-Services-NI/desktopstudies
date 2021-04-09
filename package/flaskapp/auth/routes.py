@@ -111,8 +111,6 @@ def new_disconnect():
 def trigger_checks(trig_data=None):
 
     required = pd.read_csv(data.dir_auth_data+'\\req_users.csv')
-    print(required)
-    print(required.groupby('entity')['name'].apply(lambda x: len(x)))
 
     active_users = User.query.filter_by(logged_in=1).all()
     logged_in = pd.DataFrame({'user': [user.name for user in active_users],
@@ -134,4 +132,4 @@ def trigger_checks(trig_data=None):
 
         socketio.emit('users_complete', logged_in['user'].values.tolist())
         time.sleep(2)
-        socketio.emit('redirect', 'dash_simtool_app.home') # This url is dummy data for now - not used in front end
+        socketio.emit('redirect', 'simtool_bp.index') # This url is dummy data for now - not used in front end
