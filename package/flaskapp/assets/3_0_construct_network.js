@@ -18,21 +18,22 @@
     }
   }
 
-  function style_line(temp_dict){
-    temp_dict.dict_styling = {fill: { width: 2}, stroke: { width: 2}}
-    if (temp_dict.dash){
-      temp_dict.dict_styling.stroke.dasharray = (5, 5)
+  function style_line(line){
+    line.dict_styling = {fill: { width: line_palette_style["width"]},
+                         stroke: { width: line_palette_style["width"]}}
+    if (line.dash){
+      line.dict_styling.stroke.dasharray = (5, 5)
     }
-    if (temp_dict.color){
-      temp_dict.dict_styling.stroke.color = temp_dict.color
-      temp_dict.dict_styling.fill.color = temp_dict.color
+    if (line.color){
+      line.dict_styling.stroke.color = line.color
+      line.dict_styling.fill.color = line.color
     } else {
-      temp_dict.dict_styling.stroke.color = "#ffffff"
-      temp_dict.dict_styling.fill.color = "#ffffff"
+      line.dict_styling.stroke.color = "#ffffff"
+      line.dict_styling.fill.color = "#ffffff"
     }
 
-    temp_dict.dict_styling.stroke.color = palette[temp_dict.voltage]
-    return temp_dict
+    line.dict_styling.stroke.color = palette[line.voltage]
+    return line
   }
 
   function construct_lines(dict_components){
