@@ -209,37 +209,34 @@
     }}
 
   function construct_dataviews(dict_components){
+
         for(i in dict_components.dataViews){
-        dv = dict_components.dataViews[i]
+          dv = dict_components.dataViews[i]
+          data = dv.data
+          pos = [dv.x,dv.y]
+              for(i in data){
+              console.log(i)
+              static_text = data[i]
+              text = static_text.text
+              pos = static_text.offset
+              holder = []
+              add_static_text([text],pos[0]*x_scaling,pos[1]*y_scaling,"yellow",function(object){holder[0] = object})
+              }
+          }
+  }
 
-        pos = [dv.x,dv.y]
+  function construct_SGTs(dict_components){
+      for(let i in dict_components.SGTs){
+        let sgt = dict_components.SGTs[i]
+        let line_id = sgt.lineID
+        let line = dict_components.lines[line_id]
+        let name = sgt.name
+        let callback = sgt.callback
+        draw_SGT(line,callback)
 
-        thisline = dv.MVA
-        pos = thisline.offset
-        text = thisline.text
-        add_static_text([text],pos[0]*x_scaling,pos[1]*y_scaling,"yellow",function(){})
-
-
-        thisline = dv.MVAR
-        pos = thisline.offset
-        text = thisline.text
-        add_static_text([text],pos[0]*x_scaling,pos[1]*y_scaling,"yellow",function(){})
-
-        thisline = dv.AMPS
-        pos = thisline.offset
-        text = thisline.text
-        add_static_text([text],pos[0]*x_scaling,pos[1]*y_scaling,"yellow",function(){})
-
-        thisline = dv.kV
-        pos = thisline.offset
-        text = thisline.text
-        add_static_text([text],pos[0]*x_scaling,pos[1]*y_scaling,"yellow",function(){})
-
-        thisline = dv.MW
-        pos = thisline.offset
-        text = thisline.text
-        add_static_text([text],pos[0]*x_scaling,pos[1]*y_scaling,"yellow",function(){})
-
-      //TODO handle data changes with functions that do all the hardwork
-    }
+        let id = i
+        let s = {info:sgt, UIElement: sgt.graphic[0], id : id}
+        components.lines[id] = s
+        component_modal(s)
+        }
   }

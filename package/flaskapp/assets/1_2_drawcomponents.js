@@ -746,3 +746,57 @@ function add_static_text(list_text, x=100, y=100, colour="#d3d3d3", callback){
         text1.center(text1.x_coord, text1.y_coord);
     callback(text1)
 }
+
+
+function draw_SGT(dict_line,callback){
+    var rad = 18
+    var overlapFactor = 0.25
+    var circleWidth = 1
+
+    var bVertical = false
+    var bHorizontal = false
+    var line1, line2, line3, line4
+
+    var group = draw.group();
+
+    var dict_tx = {}
+
+    if (dict_line.x1 === dict_line.x2){
+      bVertical = true
+    }
+    if (dict_line.y1 === dict_line.y2){
+      bHorizontal = true
+    }
+
+    center = [dict_line.x2,dict_line.y2]
+
+    closed_color = dict_line.dict_styling.stroke.color
+
+    ellipse = draw.ellipse(rad*2,rad*2.5)
+    ellipse.fill("black")
+    ellipse.center(center[0],center[1]+rad/2)
+    ellipse.stroke({ color: closed_color, width: circleWidth, linecap: 'white', linejoin: 'round' })
+    ellipse.stroke(dict_line.dict_styling.stroke)
+    ellipse.backward()
+    ellipse.skew(0,-rad/2)
+
+    rect1 = draw.rect(rad*2,rad*3).fill("black").center(center[0]+rad+circleWidth,center[1])
+    rect1.forward()
+
+    circle2 = draw.circle(2*rad).center(center[0], center[1]+rad)
+    circle2.fill('black')
+    circle2.stroke({ color: closed_color, width: circleWidth, linecap: 'white', linejoin: 'round' })
+    circle2.stroke(dict_line.dict_styling.stroke)
+    circle2.forward()
+
+    dict_tx.objects = [circle2,ellipse,rect1]
+    group.add(ellipse)
+    group.add(rect1)
+    group.add(circle2)
+
+    circle1.center(center[0],center[1])
+
+    group.horizontal = bHorizontal
+    callback(group);
+
+}

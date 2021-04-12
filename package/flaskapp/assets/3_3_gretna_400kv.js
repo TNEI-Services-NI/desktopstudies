@@ -45,12 +45,19 @@ Gretna_400kV={
 
     },
 
+    labels:{
+    1: new Text("M1",["M1"],[-465,0]),
+    2: new Text("R1",["R1"],[-465,0]),
+    3: new Text("HARK",["HARK"],[0,225]),
+    4: new Text("GRNA 680",["GRNA 680"],[0,110]),
+    5: new Text("GRNA 780",["GRNA 780"],[0,110]),
+    6: new Text("ELVA",["ELVA"],[0,-240]),
+    7: new Text("M1",["GRETNA 400kV"],[-50,-600]),
+    },
+
     tx:{
         "GRNA 780 tx": new Tx("GRNA 780 tx",1,"","", "132kV","LV"),
         "GRNA 680 tx": new Tx("GRNA 680 tx",1,"","", "132kV","LV"),
-    },
-
-    inductors:{
     },
 
     isolators:{
@@ -78,10 +85,18 @@ Gretna_400kV={
 
     dataViews:{
 
-        "ELVA": new DataView(420,100),
-        "HARK": new DataView(90,900),
-        "GRNA 780": new DataView(260,900),
-        "GRNA 680": new DataView(740,900),
+        "ELVA": new DataView(420,100, ["MVA","MW","MVAR","kV","Amps"]),
+        "HARK": new DataView(90,850, ["MVA","MW","MVAR","kV","Amps"]),
+        "GRNA 780": new DataView(260,850, ["MVA","MW","MVAR","kV","Amps"]),
+        "GRNA 680": new DataView(740,850, ["MVA","MW","MVAR","kV","Amps"]),
 
+        "R1": new DataView(70,410, ["kV"]),
+        "M1": new DataView(70,640, ["kV"]),
+
+    },
+
+    SGTs:{
+        "SGT1": new SGT("X510","SGT1"),
+        "SGT2": new SGT("X110","SGT2"),
     },
 }

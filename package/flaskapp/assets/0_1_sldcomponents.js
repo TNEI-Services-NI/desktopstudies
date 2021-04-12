@@ -204,6 +204,10 @@ function Text(lineID, text, offset, colour = "#d3d3d3", textSize=10){
     this.graphic = []
     this.textSize=textSize
     this.callback = Text_Callback(this.graphic)
+
+    // an idea I'd like to to take a look at
+    // a component creates itself and handles everything
+    this.draw = function(){alert("drawing")}
 }
 
 /**
@@ -231,6 +235,7 @@ function StaticText(text,pos, colour = "#d3d3d3",textSize=10,){
 function Tx(lineID,pos,name,mva, coil1 = "33kV",coil2 = "33kV",type="starDelta"){
     this.lineID =lineID
     this.pos = pos
+    this.component="Transformer"
     this.name = name
     this.mva = mva
     this.graphic = []
@@ -286,7 +291,6 @@ function Inductor(line_id,pos){
  * @usage instantiate as object i.e. new Isolator(...)
  */
 function Isolator(line_id,pos, state = "closed",name=false){
-
     this.lineID = line_id,
     this.pos = pos,
     this.state=state
@@ -294,13 +298,35 @@ function Isolator(line_id,pos, state = "closed",name=false){
     this.name = name,
     this.callback = Breaker_Callback(this.graphic,name)}
 
-
-function DataView(x,y){
+/**
+ * Dataview prototype object, contains everything reequired to make a dataview.
+ * @param  {double} x location
+ * @param  {double} y location
+ * @param  {list} labels of data desired ["kV", "AMPS", "Hz","MVAR","MVA","MW"]
+ * @return {None}
+ * @usage instantiate as object i.e. new DataView(...)
+ */
+function DataView(x,y, data_labels = ["kV", "AMPS","MVAR","MW"]){
     this.x = x
     this.y = y
-    this.MVA = new StaticText("0 MW",[x,y],"yellow")
-    this.MW = new StaticText("0 MW",[x,y+15],"yellow")
-    this.MVAR = new StaticText("0 kV",[x,y+30],"yellow")
-    this.kV = new StaticText("0 AMPS",[x,y+45],"yellow")
-    this.AMPS = new StaticText("0 MVAR",[x,y+60],"yellow")
+    this.data = {}
+    offset = 0
+    for(i in data_labels){
+        type = data_labels[i]
+        this.data[type] = new StaticText("0 " + type,[x,y + offset],"yellow")
+        offset += 15
+    }
+
+//    this.MVA = new StaticText("0 MW",[x,y],"yellow")
+//    this.MW = new StaticText("0 MW",[x,y+15],"yellow")
+//    this.MVAR = new StaticText("0 kV",[x,y+30],"yellow")
+//    this.kV = new StaticText("0 AMPS",[x,y+45],"yellow")
+//    this.AMPS = new StaticText("0 MVAR",[x,y+60],"yellow")
 }
+
+function SGT(line_id,name){
+    this.component = "SGT"
+    this.lineID = line_id,
+    this.graphic=[],
+    this.name = name,
+    this.callback = Breaker_Callback(this.graphic,name)}
