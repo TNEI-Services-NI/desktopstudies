@@ -100,7 +100,7 @@
                 color = palette[line.voltage]
                 this.closed = closed
                 if (closed == false){
-                    rect.fill({ color: 'black' })
+                    rect.fill({ color: palette["background-color"] })
                     rect.stroke({ color: 'white' })
                 } else if (closed == true){
                     rect.fill({ color: color })

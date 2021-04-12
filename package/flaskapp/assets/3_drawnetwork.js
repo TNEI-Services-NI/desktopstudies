@@ -64,6 +64,7 @@
 
   //Create canvas
   var draw = SVG('#drawing').size(x, y)
+  var background = draw.rect(x, y).fill(palette["background-color"])
 
   var x_scaling = x/1150
   var y_scaling = y/1050

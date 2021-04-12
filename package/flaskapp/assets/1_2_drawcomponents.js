@@ -49,9 +49,9 @@ circle1 = draw.circle(2*rad).center(fromCenter[0], fromCenter[1])
 circle2 = draw.circle(2*rad).center(toCenter[0], toCenter[1])
 circle3 = draw.circle(2*rad).center(fromCenter[0], fromCenter[1])
 circle4 = draw.circle(2*rad).center(toCenter[0], toCenter[1])
-circle1.fill('black')
+circle1.fill(palette["background-color"])
 circle1.stroke({ color: secondaryCoil, width: circleWidth, linecap: 'white', linejoin: 'round' })
-circle2.fill('black')
+circle2.fill(palette["background-color"])
 circle2.stroke({ color: primaryCoil, width: circleWidth, linecap: 'white', linejoin: 'round' })
 circle3.fill('none')
 circle3.stroke({ color: secondaryCoil, width: circleWidth, linecap: 'white', linejoin: 'round' })
@@ -176,7 +176,7 @@ var group = draw.group();
 var inside_group = draw.group();
 circle1 = group.circle(2*rad);
 group.add(circle1)
-circle1.fill('black');
+circle1.fill(palette["background-color"]);
 circle1.stroke({ color: stroke_color, width: circleWidth, linecap: 'black', linejoin: 'round' });
 if (type !== 'wind'){
   var text = group.text(type)
@@ -271,7 +271,7 @@ function draw_breaker(dict_line, position, size, state, callback){
   // }
 
   if (state === 'open'){
-    rect1 = draw.rect(size, size).center(center[0], center[1]).fill("black").stroke("white").stroke({width: 1})
+    rect1 = draw.rect(size, size).center(center[0], center[1]).fill(palette["background-color"]).stroke("white").stroke({width: 1})
   }
   else if (state === 'closed'){
     rect1 = draw.rect(size, size).center(center[0], center[1]).fill(closed_color).stroke("white").stroke({width: 1})
