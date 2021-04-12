@@ -28,7 +28,7 @@ def init_breakers():
     print("init breakers")
     data = request.form
     df_breakerstates = simtool_data.read_breaker_states(data['network'], data['voltage'])
-    return df_breakerstates.to_json()
+    return jsonify(df_breakerstates.to_dict())
 
 
 @simtool_bp.route("/get_state/", methods=['POST'])

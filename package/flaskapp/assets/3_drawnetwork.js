@@ -37,12 +37,15 @@
   **/
   function restoration_step_callback(step, step_data){
     steps[step] = step_data
-    components.breakers["698 11"].data = step_data["comp1"]
+    for (let line_ in components.lines){
+      components.lines[line_].data = step_data[line_]
+    }
   }
 
   function inc_state(){
     current_step += 1;
     console.log(current_step)
+    //alert(current_step)
     update_state(current_step,network,voltage,restoration_step_callback);
   }
 
@@ -79,8 +82,14 @@
   let current_step = 1
   let steps = []
 
-  let network = "chapelcross"
+  // let network = "chapelcross"
+  // let voltage = "132kv"
+
+    let network = "gretna"
   let voltage = "33kv"
+
+  //   let network = "gretna"
+  // let voltage = "400kv"
 
   if (network === "chapelcross" && voltage === "33kv"){
     dict_components = chapelcross_33kV

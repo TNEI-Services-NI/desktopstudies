@@ -35,6 +35,7 @@ function init_breakers(network, voltage, breakers, callback){
       url: "/simtool_bp/init_breakers/",
       data: {"network": network, "voltage": voltage},
       success: function(breaker_states){
+        //alert(breaker_states);
         for (let breaker in breakers){
           if (breaker_states["state"][breaker] === undefined){
             breakers_new[breaker].state = "undefined";
@@ -61,7 +62,7 @@ function init_breaker(breakerID){
       url: "/simtool_bp/init_breaker/",
       data: {"breaker": breakerID},
       success: function(state){
-        alert("success init breaker");
+        //alert("success init breaker");
       }})
   }
 
@@ -81,7 +82,6 @@ function update_state(stage,network,voltage, callbacks){
       data: {"stage": stage, "network": network,"voltage":voltage},
 //      dataType: 'application/json'
       }).done(function( state ) {
-
         state = JSON.parse(state)
         callbacks(stage, state);
 
@@ -99,7 +99,7 @@ function init_network(){
       url: "/simtool_bp/init_network/",
       data: {'string': 'none'},
       success: function(state){
-        alert(state);
+        //alert(state);
       }
       })
   }
