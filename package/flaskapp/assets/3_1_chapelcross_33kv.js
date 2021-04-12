@@ -3,10 +3,10 @@
 chapelcross_33kV = {
     lines:{
         "378": StraightLine([875,40],"right",130),
-        "into 378 4":StraightLine([885,155],"right",75),
-        "into 378 3":StraightLine([960,155],"down",90),
-        "into 378 2":StraightLine([900,250],"right",60),
-        "into 378 1":StraightLine([960,155],"down",95),
+        "into 378 4": StraightLine([885,155],"right",75),
+        "into 378 3": StraightLine([960,155],"down",90),
+        "into 378 2": StraightLine([900,250],"right",60),
+        "into 378 1": StraightLine([960,155],"down",95),
 
         "378 11": StraightLine([885,40],"down",115),
         "378 12": StraightLine([950, 40],"down",70),

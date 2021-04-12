@@ -28,7 +28,7 @@ def init_breakers():
     print("init breakers")
     data = request.form
     df_breakerstates = simtool_data.read_breaker_states(data['network'], data['voltage'])
-    return jsonify(df_breakerstates.to_dict())
+    return df_breakerstates.to_json()
 
 
 @simtool_bp.route("/get_state/", methods=['POST'])
@@ -38,9 +38,6 @@ def get_restoration_step():
     network = data["network"]
     voltage = data["voltage"]
     stage = data["stage"]
-    int(stage)
-
-    # df_breakerstates = simtool_data.read_breaker_states(data['network'], data['voltage'])
 
     stateDictionary = simtool_data.read_restoration_step(network, voltage, stage)
     return stateDictionary.to_json()
@@ -55,7 +52,6 @@ def init_network():
     print("init_network")
     data = request.form
     df_activesim = simtool_data.read_active_network()
-    print(data['string'])
-    print(df_activesim.to_dict())
-    return jsonify(df_activesim.to_dict())
+    print(df_activesim)
+    return df_activesim.to_json()
 

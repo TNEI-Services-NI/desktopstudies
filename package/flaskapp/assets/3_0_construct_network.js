@@ -38,22 +38,33 @@
   function construct_lines(dict_components){
     var bNodes = false
 
-    for (let idx_line in dict_components.lines){
-        let temp_dict = dict_components.lines[idx_line]
+    for (let id_line in dict_components.lines){
+        let line = dict_components.lines[id_line]
 
-        temp_dict = style_line(temp_dict)
+        line = style_line(line)
 
-        temp_dict.o_line = draw.line(temp_dict.x1 , temp_dict.y1,
-                                      temp_dict.x2, temp_dict.y2).stroke(temp_dict.dict_styling.stroke)
+        line.callback = Line_Callback(line.graphic)
 
-        temp_dict.line_idx = idx_line
+        line.o_line = draw.line(line.x1 , line.y1,
+                                      line.x2, line.y2).stroke(line.dict_styling.stroke)
+
+        line.callback(line.o_line)
+
+        line.line_idx = id_line
 
         if (bNodes){
-          draw_nodes(temp_dict, temp_dict.o_line)
+          draw_nodes(line, line.o_line)
+        }
+        let l = {
+            info: line,
+            UIElement: line.graphic[0],
+            id : id_line,
         }
 
-        dict_components.lines[idx_line] = temp_dict
-        components.lines[idx_line] = {drawInfo:temp_dict, UIElement: temp_dict.o_line}
+        dict_components.lines[id_line] = line
+        components.lines[id_line] = {drawInfo:line, UIElement: line.o_line}
+
+        component_modal(l)
     }
   }
 

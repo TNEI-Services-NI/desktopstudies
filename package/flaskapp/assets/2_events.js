@@ -60,11 +60,9 @@ function init_breaker(breakerID){
       type: "POST",
       url: "/simtool_bp/init_breaker/",
       data: {"breaker": breakerID},
-//      dataType: 'application/json'
-      }).done(function( state ) {
-        alert("test1)");
-        console.log(state);
-      })
+      success: function(state){
+        alert("success init breaker");
+      }})
   }
 
 /**
@@ -100,10 +98,9 @@ function init_network(){
       type: "POST",
       url: "/simtool_bp/init_network/",
       data: {'string': 'none'},
-//      dataType: 'application/json'
-      }).done(function( state ) {
-        alert("test");
-
+      success: function(state){
+        alert(state);
+      }
       })
   }
 
@@ -129,6 +126,10 @@ function component_modal(component){
 
       if(type ==="Generator"){
             $('<p> method = '+component.info.type+'</p>').appendTo('#dataPopup');
+      }
+
+      if(type ==="Line"){
+            $('<p>data</p>').appendTo('#dataPopup');
       }
 
       if(type ==="Transformer"){

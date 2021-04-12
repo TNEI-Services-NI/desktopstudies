@@ -23,6 +23,29 @@ function Breaker_Callback(graphic_objects, name = ''){
 }
 
 /**
+ * Callback function for breaker object instances. Adds object to list of child objects associated with
+ * the breaker.
+ * @param  {list} graphic_objects List of child objects associated with each breaker object.
+ * @param  {string} name String object containing name/contents of child object
+ * @return {function} None Returns a function that adds passed object to breaker child objects, and adds text label.
+ */
+function Line_Callback(graphic_objects, name = ''){
+    return function(object){
+        // Add object defined in
+        if(graphic_objects !== undefined){
+            graphic_objects.push(object)
+        }
+        if(name !== ''){
+            if(object.horizontal === true){
+                add_text(object, false, [name], 0, -15,"#d3d3d3", function(object){})
+            }
+            else{
+                add_text(object, false, [name], 9 + name.length*5, 0,"#d3d3d3", function(object){})}
+        }
+    }
+}
+
+/**
  * Callback function for text object instances. Adds object to list of child objects associated with
  * the text.
  * @param  {list} graphic_objects List of child objects associated with each breaker object.
@@ -125,12 +148,14 @@ function Breaker(lineID, pos, state = "closed", name=false){
  * @usage instantiate as object i.e. new Line(...)
  */
 function Line(x1, y1,x2, y2, voltage="32kV", dash = false, colour = ""){
+    this.component="Line"
     this.x1 = x1
     this.x2 = x2
     this.y1 = y1
     this.y2 = y2
     this.voltage = voltage
-    this.callback = 0
+    this.graphic = []
+    this.callback = Line_Callback(this.graphic)
     this.dash = dash
     this.colour=colour
 }
