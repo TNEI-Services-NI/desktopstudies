@@ -53,5 +53,7 @@ def init_network():
     data = request.form
     df_activesim = simtool_data.read_active_network()
     print(df_activesim)
-    return df_activesim.to_json()
+    df_activesim = df_activesim.fillna("Unknown")
+    return jsonify(df_activesim.to_dict())
+    # return df_activesim.to_json()
 

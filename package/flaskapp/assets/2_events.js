@@ -93,13 +93,15 @@ function update_state(stage,network,voltage, callbacks){
  * url parameter of ajax request must reference blueprint specific route to function
  * @return {None}
  */
-function init_network(){
+function init_network(callback){
       $.ajax({
       type: "POST",
       url: "/simtool_bp/init_network/",
       data: {'string': 'none'},
       success: function(state){
-        //alert(state);
+        let voltage = state["voltage"]["0"]
+        let network = state["network"]["0"]
+        callback(network, voltage)
       }
       })
   }
@@ -129,7 +131,7 @@ function component_modal(component){
       }
 
       if(type ==="Line"){
-            $('<p>data</p>').appendTo('#dataPopup');
+        $('<p>data</p>').appendTo('#dataPopup');
       }
 
       if(type ==="Transformer"){

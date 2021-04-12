@@ -32,9 +32,9 @@ def read_restoration_step(network: str, voltage: str, stage: int):
     restoration_steps = _fetch_files(dir_restoration_steps)
     filename = restoration_steps[network + voltage + "scenario1"]
     df_restoration = pd.read_csv('/'.join([dir_restoration_steps, filename]),
-                                 dtype={'step': int})
-    df_restoration = df_restoration.set_index("step")
-    df_restoration = df_restoration.loc[int(stage)]
+                                 dtype={'component': str})
+    df_restoration = df_restoration.set_index("component")
+    df_restoration = df_restoration.loc[:, stage]
     return df_restoration
 
 

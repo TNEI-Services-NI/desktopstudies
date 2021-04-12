@@ -62,14 +62,14 @@
         }
 
         dict_components.lines[id_line] = line
-        components.lines[id_line] = {drawInfo:line, UIElement: line.o_line}
+        components.lines[id_line] = l
 
         component_modal(l)
     }
   }
 
-  function construct_breakers(dict_components){
-        init_breakers("chapelcross", "33kv", dict_components.breakers, function(breakers){
+  function construct_breakers(dict_components, network, voltage){
+        init_breakers(network, voltage, dict_components.breakers, function(breakers){
         for(let id in breakers){
             //doing this means the inital data, and the SVG elements they make remain unchanged at all times.
             // may be very useful should a redraw/reset be needed...
@@ -111,8 +111,8 @@
                 let breaker = components.breakers[id]
                 breaker.setState(!breaker.closed)
             //        breaker.closed=!breaker.closed
-                post_breaker(id,breaker.closed)
-                inc_state()
+                post_breaker(id, breaker.closed)
+                inc_state(network, voltage)
             });
 
             components.breakers[id] = b
@@ -215,7 +215,6 @@
           data = dv.data
           pos = [dv.x,dv.y]
               for(i in data){
-              console.log(i)
               static_text = data[i]
               text = static_text.text
               pos = static_text.offset
