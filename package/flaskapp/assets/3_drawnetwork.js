@@ -4,7 +4,7 @@
    * @param {dictionary} data retrieved from this state
    * @return {None}
   **/
-  function restoration_step_callback(step, step_data){
+  function update_sim_data(step, step_data){
     steps[step] = step_data
     for (let line_ in components.lines){
       components.lines[line_].data = step_data[line_]
@@ -15,7 +15,7 @@
     current_step += 1;
     console.log(current_step)
     //alert(current_step)
-    update_state(current_step, network, restoration_step_callback);
+    fetch_sim_data(current_step, network, update_sim_data);
   }
 
   /**
@@ -43,7 +43,7 @@
 
     construct_SGTs(dict_components);
     //get stage zero state
-    update_state(current_step, network, restoration_step_callback);
+    fetch_sim_data(current_step, network, update_sim_data);
   }
 
 

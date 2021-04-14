@@ -88,7 +88,7 @@ function init_breaker(breakerID){
  * @param callbacks
  * @return {None}
  */
-function update_state(stage,network, callbacks){
+function fetch_sim_data(stage, network, callbacks){
       $.ajax({
       type: "POST",
       url: "/simtool_bp/get_state/",
