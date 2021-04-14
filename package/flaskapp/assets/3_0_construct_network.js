@@ -87,8 +87,8 @@
 
   }
 
-  function construct_breakers(dict_components, network){
-        init_breakers(network, dict_components.breakers, function(breakers){
+  function construct_breakers(dict_components, network_){
+        init_breakers(network_, dict_components.breakers, function(breakers){
         for(let id in breakers){
             //doing this means the inital data, and the SVG elements they make remain unchanged at all times.
             // may be very useful should a redraw/reset be needed...
@@ -131,7 +131,7 @@
                 breaker.setState(!breaker.closed)
             //        breaker.closed=!breaker.closed
                 post_breaker(id, breaker.closed)
-                inc_state(network)
+                inc_state(network_)
             });
 
             components.breakers[id] = b

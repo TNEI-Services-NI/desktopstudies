@@ -1,3 +1,7 @@
+function reset_global_vars(){
+
+}
+
   /**
    * callback function for updating step data when it has been retrieved
    * @param {integer} step number
@@ -11,11 +15,11 @@
     }
   }
 
-  function inc_state(network){
+  function inc_state(network_){
     current_step += 1;
     console.log(current_step)
     //alert(current_step)
-    fetch_sim_data(current_step, network, update_sim_data);
+    fetch_sim_data(current_step, network_, update_sim_data);
   }
 
   /**
@@ -23,11 +27,11 @@
    * @param {Dictionary} dictionary of object prototypes used to build and draw components
    * @return {None}
   **/
-  function draw_network(dict_components, network){
+  function draw_network(dict_components, network_){
 
     construct_lines(dict_components);
 
-    construct_breakers(dict_components, network);
+    construct_breakers(dict_components, network_);
 
     construct_labels(dict_components);
 
@@ -42,7 +46,12 @@
     construct_dataviews(dict_components);
 
     construct_SGTs(dict_components);
-    //get stage zero state
+  }
+
+  function master_draw(){
+    prepare_canvas(x, y);
+    dict_components = networks_undrawn[network]
+    draw_network(dict_components, network);
     fetch_sim_data(current_step, network, update_sim_data);
   }
 
@@ -51,40 +60,52 @@
   $(document).ready(function(){
   });
 
-  var socket = io();
-
- //Define parent attributes
- //  var x = document.getElementById('myDiv').clientWidth;
-  var x = window.innerWidth;
-  // var y = document.getElementById('myDiv').clientHeight;
-  var y = window.innerHeight;
-
-  var x_scaling = x/1150
-  var y_scaling = y/1050
-
-  const font_size = 14 *  Math.min(x_scaling, y_scaling)
-
+  var x = undefined;
+  var y = undefined;
+  var x_scaling = undefined;
+  var y_scaling = undefined;
+  var font_size = undefined;
   let dict_components = undefined
-  let components = {
-                      breakers: [],
-                      lines: [],
-                      labels:[],
-                      generators: [],
-                      isolators:[],
-                      text:[],
-                      transformers:[],
-                      SGTs:[]
-                  }
-  let current_step = 1
+  let components = undefined;
+
+  var socket = io();
+  let current_step = -1
   let steps = []
+
+   //Define parent attributes
+ //  var x = document.getElementById('myDiv').clientWidth;
+  x = window.innerWidth;
+  // var y = document.getElementById('myDiv').clientHeight;
+  y = window.innerHeight;
+
+  x_scaling = x/1150
+  y_scaling = y/1050
+
+  font_size = 14 *  Math.min(x_scaling, y_scaling)
+
+  dict_components = undefined
 
   scale_lines(networks_undrawn);
   scale_labels(networks_undrawn);
 
   socket.on('draw', function(data) {
-    prepare_canvas(x, y);
-    dict_components = networks_undrawn[data['network']]
-    draw_network(dict_components, data['network']);
+    network = data['network']
+    components = {
+                    breakers: [],
+                    lines: [],
+                    labels:[],
+                    generators: [],
+                    isolators:[],
+                    text:[],
+                    transformers:[],
+                    SGTs:[]
+                }
+    master_draw();
+  });
+
+  socket.on('reset', function() {
+    current_step = -1;
+    master_draw();
   });
 
 

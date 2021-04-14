@@ -41,12 +41,12 @@ function post_breaker(breakerID,state){
  * @param  {function} callback which interprets/draws a list of breakers.
  * @return {None}
  */
-function init_breakers(network, breakers, callback){
+function init_breakers(network_, breakers, callback){
     var breakers_new = breakers
     $.ajax({
       type: "POST",
       url: "/simtool_bp/init_breakers/",
-      data: {"network": network},
+      data: {"network": network_},
       success: function(breaker_states){
         //alert(breaker_states);
         for (let breaker in breakers){
@@ -88,11 +88,11 @@ function init_breaker(breakerID){
  * @param callbacks
  * @return {None}
  */
-function fetch_sim_data(stage, network, callbacks){
+function fetch_sim_data(stage, network_, callbacks){
       $.ajax({
       type: "POST",
       url: "/simtool_bp/get_state/",
-      data: {"stage": stage, "network": network},
+      data: {"stage": stage, "network": network_},
 //      dataType: 'application/json'
       }).done(function( state ) {
         state = JSON.parse(state)
@@ -113,8 +113,8 @@ function init_network(callback){
       data: {'string': 'none'},
       success: function(state){
         let voltage = state["voltage"]["0"]
-        let network = state["network"]["0"]
-        callback(network, voltage)
+        let network_ = state["network"]["0"]
+        callback(network_, voltage)
       }
       })
   }

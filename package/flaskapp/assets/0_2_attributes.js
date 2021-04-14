@@ -24,3 +24,5 @@ let networks_undrawn = {
     "ewehillwindfarm1": undefined,
     "ewehillwindfarm2": undefined,
 }
+
+let network = undefined

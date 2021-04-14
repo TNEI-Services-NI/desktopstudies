@@ -59,17 +59,8 @@ def init_dashboard(server=""):
     # add sidebar
     _sidebar = html.Div(
         [
-            # html.Button('<',
-            #             id='toggle_button',
-            #             style={
-            #                 'marginLeft': '9rem',
-            #                 "backgroundColor": "#ebc700",
-            #             }),
             html.H3("Options"),
             html.Hr(),
-            # html.P("Gretna 400KV", className="lead"),
-            # html.P("Chapelcross 132KV", className="lead"),
-            # html.P("Chapelcross 33KV", className="lead"),
             dbc.DropdownMenu(
                 label="Chapelcross 33kv",
                 children=[
@@ -86,14 +77,9 @@ def init_dashboard(server=""):
                     dbc.DropdownMenuItem("ewehillwindfarm2", id="ewehillwindfarm2"),
                 ],
                 id='network_menu'
-            )
-            # dbc.Button("reset", id="reset_draw"),
-            # html.Hr(),
-            # dbc.Button("Gretna 400KV", id="gret400"),
-            # html.Hr(),
-            # dbc.Button("Chapelcross 132KV", id="chap132"),
-            # html.Hr(),
-            # dbc.Button("Chapelcross 33KV", id="chap33"),
+            ),
+            html.Br(),
+            dbc.Button("Reset simulation", id="reset_sim_button"),
         ],
         style=styling.SIDEBAR_STYLE,
         id='sidebar'
