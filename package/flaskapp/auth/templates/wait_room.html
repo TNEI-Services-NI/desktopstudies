@@ -1,29 +1,39 @@
 {% extends "base.html" %}
 {% block content %}
+<div class="hero-body">
+   <div class="container has-text-centered">
+      <div class="box has-text-centered">
+         <h2> Welcome, {{ name }}. </h2>
+
+         <h3>Logged-in users:</h3>
+         <h4>
+            <ul id="demo"></ul>
+         </h4>
+         <br>
+         <h4 id="complete">
+         </h4>
+      </div>
+   </div>
+</div>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.8/socket.io.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
    $(document).ready(function() {
-
-
      const sio = io();
 
      sio.on('connect', () => {
          sio.emit('trigger', {dummy: []});
      })
 
-
      sio.on('redirect', (data) => {
           window.location.href = Flask.url_for(data)
      })
-
 
      sio.on('users_complete', (data) => {
            console.log(data);
            var users_complete = 'Expected participants complete ... redirecting...';
            document.getElementById("complete").innerHTML = users_complete;
      })
-
 
      sio.on('update_logged_users', (data) => {
 
@@ -56,19 +66,4 @@
    });
 
 </script>
-<div class="hero-body">
-   <div class="container has-text-centered">
-      <div class="box has-text-centered">
-         <h2> Welcome, {{ name }}. </h2>
-
-         <h3>Logged-in users:</h3>
-         <h4>
-            <ul id="demo"></ul>
-         </h4>
-         <br>
-         <h4 id="complete">
-         </h4>
-      </div>
-   </div>
-</div>
 {% endblock %}

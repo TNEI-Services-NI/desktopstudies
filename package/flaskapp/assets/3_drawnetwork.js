@@ -78,31 +78,6 @@
   let current_step = 1
   let steps = []
 
-  // let network = "chapelcross"
-  // let voltage = "132kv"
-
-  //   let network = "gretna"
-  // let voltage = "33kv"
-
-  //   let network = "gretna"
-  // let voltage = "400kv"
-
-  // prepare_canvas(x, y);
-  //
-  // init_network(function(network, voltage){
-  //   if (network === "chapelcross" && voltage === "33kv"){
-  //     dict_components = chapelcross_33kV
-  //   } else if (network === "chapelcross" && voltage === "132kv") {
-  //     dict_components = chapelcross_132kV
-  //   } else if (network === "gretna" && voltage === "400kv") {
-  //     dict_components = Gretna_400kV
-  //   } else {
-  //     dict_components = chapelcross_132kV
-  //   }
-  //   dict_components = chapelcross_33kV
-  //   draw_network(dict_components, network, voltage);
-  // });
-
   scale_lines(networks_undrawn);
   scale_labels(networks_undrawn);
 

@@ -2,7 +2,7 @@ breaker,-1,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19
 698 16,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 698 15,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 699 CHAP,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-SC generator Breaker,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+699 GENERATOR,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 698 14,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 698 13,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 GRID 1,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
@@ -19,26 +19,27 @@ GRID 1,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,o
 678 12,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 GRID 2,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 694,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-M12,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-M13,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-M14,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-M11,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+780 12,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+780 13,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+780 14,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+780 11,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 781 12,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 781 11,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-MP10,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-LH10,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-LH01,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-LH20,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-A10,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+682 10,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+676 10,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+676 01,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+676 20,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+662 10,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 662 01,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-A20,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-L13,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-KB10,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+662 20,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+694 13,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+675 10,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 683 10,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 683 01,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 683 20,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 694 12,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 694 22,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+694 23,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 679 10,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 679 01,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 679 20,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
@@ -52,4 +53,4 @@ KB10,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,
 123 12,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 785 21,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 785 22,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-785 CUSTOMER BREAKER,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+785 CUSTOMER,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
