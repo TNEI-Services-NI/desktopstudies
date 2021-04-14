@@ -49,15 +49,25 @@ def read_active_network():
 def _filter_format_data(comp_data_):
     comp_data_ = comp_data_.copy()
     comp_data_ = comp_data_.iloc[:, 4:]
+    comp_data_.columns = comp_data_.iloc[6, :]
     comp_data_ = comp_data_.iloc[7:, :]
 
-    comp_data_ = comp_data_.copy()
-    comp_data_.columns = comp_data_.iloc[6, :]
-
     comp_data_columns = list(filter(lambda x: type(x) == str, comp_data_.columns))
-    comp_data_ = comp_data_.loc[:, comp_data_]
+    comp_data_ = comp_data_.loc[:, comp_data_columns]
 
     return comp_data_
+
+
+def get_data_cols(comp_data_):
+    comp_cols_ = comp_data_.columns.tolist()
+    name_col = comp_cols_.index('Name')
+    post_blackout_col = comp_cols_.index('Stage - Post Blackout')
+    limit_cols = [x for x in range(name_col + 1, post_blackout_col)]
+    stage_cols = [x for x in range(post_blackout_col + 1, len(comp_data_.columns))]
+    return {'name': [name_col], 'limits': limit_cols,
+            'post_blackout': [post_blackout_col], 'stages': stage_cols}, \
+           {'name': ['Name'], 'limits': [comp_cols_[x] for x in limit_cols],
+            'post_blackout': ["Stage - Post Blackout"], 'stages': [comp_cols_[x] for x in stage_cols]}
 
 
 def read_LF_file(network, option):
@@ -76,12 +86,16 @@ def read_LF_file(network, option):
     dict_data['lines']['reactive_power'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename]), sheet_name='Lines - Reactive Power')
 
     for component, dict_comp_data in dict_data.items():
-        for field, comp_data in dict_comp_data.items():
+        for param, comp_data in dict_comp_data.items():
             comp_data_ = _filter_format_data(comp_data)
+            comp_data_columns_idx, comp_data_columns_name = get_data_cols(comp_data_)
+            dict_data[component][param] = {'data': comp_data_,
+                                           'fields_idx': comp_data_columns_idx,
+                                           'fields_name': comp_data_columns_name}
 
-            dict_data[component][field] = comp_data
+    return dict_data[component][param]
 
-    print()
 
 if __name__ == '__main__':
-    read_LF_file("ChapelCross", "Opt5")
+    dict_data = read_LF_file("ChapelCross", "Opt5")
+
