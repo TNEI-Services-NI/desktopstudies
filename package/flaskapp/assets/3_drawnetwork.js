@@ -27,11 +27,11 @@ function reset_global_vars(){
    * @param {Dictionary} dictionary of object prototypes used to build and draw components
    * @return {None}
   **/
-  function draw_network(dict_components, network_){
+  function draw_network(dict_components, network_, step){
 
     construct_lines(dict_components);
 
-    construct_breakers(dict_components, network_);
+    construct_breakers(dict_components, network_, step);
 
     construct_labels(dict_components);
 
@@ -51,7 +51,7 @@ function reset_global_vars(){
   function master_draw(){
     prepare_canvas(x, y);
     dict_components = networks_undrawn[network]
-    draw_network(dict_components, network);
+    draw_network(dict_components, network, current_step);
     fetch_sim_data(current_step, network, update_sim_data);
   }
 
@@ -69,7 +69,7 @@ function reset_global_vars(){
   let components = undefined;
 
   var socket = io();
-  let current_step = -1
+  let current_step = 0
   let steps = []
 
    //Define parent attributes
@@ -87,6 +87,7 @@ function reset_global_vars(){
 
   scale_lines(networks_undrawn);
   scale_labels(networks_undrawn);
+  draw = SVG('#drawing').size(x, y)
 
   socket.on('draw', function(data) {
     network = data['network']
@@ -104,7 +105,7 @@ function reset_global_vars(){
   });
 
   socket.on('reset', function() {
-    current_step = -1;
+    current_step = 0;
     master_draw();
   });
 

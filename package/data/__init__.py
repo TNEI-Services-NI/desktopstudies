@@ -35,7 +35,6 @@ def read_restoration_step(network: str, stage: int):
     df_restoration = pd.read_csv('/'.join([dir_restoration_steps, filename]),
                                  dtype={'component': str})
     df_restoration = df_restoration.set_index("component")
-    # print(df_restoration)
     df_restoration = df_restoration.loc[:, stage]
     return df_restoration
 

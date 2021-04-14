@@ -28,10 +28,8 @@ def receive_breaker():
 @simtool_bp.route("/init_breakers/", methods=['POST'])
 @login_required
 def init_breakers():
-    print("init breakers")
     data = request.form
     df_breakerstates = simtool_data.read_breaker_states(data['network'])
-    print((df_breakerstates.to_dict()))
     return jsonify(df_breakerstates.to_dict())
 
 

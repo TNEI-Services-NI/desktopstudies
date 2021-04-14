@@ -41,7 +41,7 @@ function post_breaker(breakerID,state){
  * @param  {function} callback which interprets/draws a list of breakers.
  * @return {None}
  */
-function init_breakers(network_, breakers, callback){
+function init_breakers(network_, breakers, step, callback){
     var breakers_new = breakers
     $.ajax({
       type: "POST",
@@ -50,10 +50,10 @@ function init_breakers(network_, breakers, callback){
       success: function(breaker_states){
         //alert(breaker_states);
         for (let breaker in breakers){
-          if (breaker_states["-1"][breaker] === undefined){
+          if (breaker_states[step][breaker] === undefined){
             breakers_new[breaker].state = "undefined";
           } else {
-            breakers_new[breaker].state = breaker_states["-1"][breaker];
+            breakers_new[breaker].state = breaker_states[step][breaker];
           }
         }
         callback(breakers_new);
