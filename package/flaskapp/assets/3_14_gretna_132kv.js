@@ -1,6 +1,6 @@
 //1550 x 1160 in mm
 //scale of 1000 x 1000, readjust with math...
-gretna_132kV={
+networks_undrawn["gretna132kv"]={
     lines:{
     "124 120 128": StraightLine([55,535],"right",900,"132kV"),
     "783 780 784": StraightLine([190,535],"up",355,"132kV"),

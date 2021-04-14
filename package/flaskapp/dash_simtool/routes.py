@@ -4,13 +4,16 @@ from flask import render_template, request, jsonify, url_for, redirect
 from flask_login import login_required
 import package.flaskapp.dash_simtool.app as dash_app
 import package.data as simtool_data
+from package.flaskapp import socketio
 
 
 # These routes are prefixed by the blueprint URL prefix
 @simtool_bp.route('/')
 @login_required
 def index():
-    return redirect(url_for(dash_app.URL_HOME))
+    return redirect(url_for(dash_app.URL_HOME,
+                            # test="test"
+                            ))
 
 
 @simtool_bp.route("/receive_breaker/", methods=['POST'])
@@ -27,7 +30,7 @@ def receive_breaker():
 def init_breakers():
     print("init breakers")
     data = request.form
-    df_breakerstates = simtool_data.read_breaker_states(data['network'], data['voltage'])
+    df_breakerstates = simtool_data.read_breaker_states(data['network'])
     print((df_breakerstates.to_dict()))
     return jsonify(df_breakerstates.to_dict())
 
@@ -37,10 +40,9 @@ def init_breakers():
 def get_restoration_step():
     data = request.form
     network = data["network"]
-    voltage = data["voltage"]
     stage = data["stage"]
 
-    stateDictionary = simtool_data.read_restoration_step(network, voltage, stage)
+    stateDictionary = simtool_data.read_restoration_step(network, stage)
     return stateDictionary.to_json()
 
     # stateDictionary = {"698 11": rand.random()}
@@ -58,3 +60,9 @@ def init_network():
     return jsonify(df_activesim.to_dict())
     # return df_activesim.to_json()
 
+
+@socketio.on('user_progressed_event')
+def handle_my_custom_event(data):
+    """This will emit a message to all users when this is called.
+    This would be useful for simulation synchronisation"""
+    socketio.emit('my response', data, broadcast=True)

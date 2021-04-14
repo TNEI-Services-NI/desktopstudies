@@ -1,6 +1,6 @@
 //1550 x 1160 in mm
 //scale of 1000 x 1000, readjust with math...
-chapelcross_gretna_2={
+networks_undrawn["chapelcrossgretna2"]={
     lines:{
     "R1": StraightLine([215,555],"right",130,"132kV"),
     "M1": StraightLine([215,740],"right",130,"132kV"),

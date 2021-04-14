@@ -5,6 +5,7 @@ import dash
 from dash.dependencies import Output, Input, State
 
 from flask import session
+from package.flaskapp import socketio
 
 # INT IMPORTS
 from package.flaskapp.dash_simtool.app.dashboard_components import init_calendar, init_line, init_graph_layout
@@ -53,7 +54,26 @@ def _add_toggle_sidebar(dash_app):
     return dash_app
 
 
+def _add_network_redraw(dash_app):
+    @dash_app.callback([Output("network_menu", "label")],
+                       [
+                           Input("chapelcross33kv", "n_clicks"),
+                           Input("chapelcross132kv", "n_clicks"),
+                           Input("gretna132kv", "n_clicks"),
+                           Input("gretna400kv", "n_clicks"),
+                       ],
+                       )
+    def _draw_network(chx33, chx132, grt132, grt400):
+        ctx = dash.callback_context
+        triggered_object = ctx.triggered[0]
+        if triggered_object['value'] is None:
+            network = "chapelcross33kv"
+        else:
+            network = triggered_object['prop_id'].split('.')[0]
+        socketio.emit('draw', {'network': network})
+        return [network]
 
+    return dash_app
 
 
 # def _add_render_page_content(dash_app):
@@ -79,7 +99,7 @@ def _add_toggle_sidebar(dash_app):
 
 def init_callbacks(dash_app):
     # dash_app = _add_toggle_sidebar(dash_app)
-    # dash_app = _reset_draw(dash_app)
+    dash_app = _add_network_redraw(dash_app)
     # dash_app = _add_render_page_content(dash_app)
 
     return dash_app

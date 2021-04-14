@@ -33,6 +33,7 @@ def init_dashboard(server=""):
             'https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js',
             'https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js',
             'https://cdn.jsdelivr.net/npm/@svgdotjs/svg.filter.js@3.0.1/dist/svg.filter.min.js',
+            'https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.8/socket.io.min.js',
             {'src': "https://code.jquery.com/jquery-1.12.4.min.js",
              'integrity': "sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ",
              'crossorigin': "anonymous"}
@@ -69,13 +70,30 @@ def init_dashboard(server=""):
             # html.P("Gretna 400KV", className="lead"),
             # html.P("Chapelcross 132KV", className="lead"),
             # html.P("Chapelcross 33KV", className="lead"),
-            dbc.Button("reset", id="reset_draw"),
-            html.Hr(),
-            dbc.Button("Gretna 400KV", id="gret400"),
-            html.Hr(),
-            dbc.Button("Chapelcross 132KV", id="chap132"),
-            html.Hr(),
-            dbc.Button("Chapelcross 33KV", id="chap33"),
+            dbc.DropdownMenu(
+                label="Chapelcross 33kv",
+                children=[
+                    dbc.DropdownMenuItem("Chapelcross 33kv", id="chapelcross33kv"),
+                    dbc.DropdownMenuItem("Chapelcross 132kv", id="chapelcross132kv"),
+                    dbc.DropdownMenuItem("Gretna 132kv", id="gretna132kv"),
+                    dbc.DropdownMenuItem("Gretna 400kv", id="gretna400kv"),
+                    dbc.DropdownMenuItem("chapelcrossgretna1", id="chapelcrossgretna1"),
+                    dbc.DropdownMenuItem("chapelcrossgretna2", id="chapelcrossgretna2"),
+                    dbc.DropdownMenuItem("ewehillgretna", id="ewehillgretna"),
+                    dbc.DropdownMenuItem("stevenscroft33kv", id="stevenscroft33kv"),
+                    dbc.DropdownMenuItem("minsca33kv", id="minsca33kv"),
+                    dbc.DropdownMenuItem("ewehillwindfarm1", id="ewehillwindfarm1"),
+                    dbc.DropdownMenuItem("ewehillwindfarm2", id="ewehillwindfarm2"),
+                ],
+                id='network_menu'
+            )
+            # dbc.Button("reset", id="reset_draw"),
+            # html.Hr(),
+            # dbc.Button("Gretna 400KV", id="gret400"),
+            # html.Hr(),
+            # dbc.Button("Chapelcross 132KV", id="chap132"),
+            # html.Hr(),
+            # dbc.Button("Chapelcross 33KV", id="chap33"),
         ],
         style=styling.SIDEBAR_STYLE,
         id='sidebar'
@@ -96,7 +114,9 @@ def init_dashboard(server=""):
 
     # compile overall layout
     dash_app.layout = html.Center([dcc.Location(id="home"),
+                                   dcc.Store(id='network_select'),
                                    dcc.Store(id='side_click'),
+                                   dcc.Store(id='reset_click'),
                                    _nav_bar,
                                    _sidebar,
                                    _body,

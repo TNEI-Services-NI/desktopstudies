@@ -1,6 +1,6 @@
 //1550 x 1160 in mm
 //scale of 1000 x 1000, readjust with math...
-chapelcross_132kV={
+networks_undrawn["chapelcross132kv"]={
     lines:{
     "698 01": StraightLine([125,865],"right",700, "33kV"),
     "GRID T1": StraightLine([280,865],"up",175, "33kV"),

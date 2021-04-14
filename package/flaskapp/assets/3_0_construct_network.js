@@ -1,21 +1,35 @@
 
-  function scale_lines(dict_components){
-    for (let idx_line in dict_components.lines){
-        let temp_dict = dict_components.lines[idx_line]
+  function prepare_canvas(x, y){
+    //Create canvas
+    $('#drawing').empty();
+    draw = SVG('#drawing').size(x, y)
+    background = draw.rect(x, y).fill(palette["background-color"])
+
+  }
+
+  function scale_lines(networks_undrawn){
+  for(let id_dict in networks_undrawn){
+    let temp_dict_components = networks_undrawn[id_dict]
+    for (let idx_line in temp_dict_components.lines){
+        let temp_dict = temp_dict_components.lines[idx_line]
         temp_dict.x1 = temp_dict.x1 * x_scaling
         temp_dict.x2 = temp_dict.x2 * x_scaling
         temp_dict.y1 = temp_dict.y1 * y_scaling
         temp_dict.y2 = temp_dict.y2 * y_scaling
     }
   }
+  }
 
-  function scale_labels(dict_components){
-    //scale text
-    for (let idx in dict_components.labels){
-        temp_dict = dict_components.labels[idx]
-        temp_dict.offset[0] = temp_dict.offset[0] * x_scaling
-        temp_dict.offset[1] = temp_dict.offset[1] * y_scaling
-    }
+  function scale_labels(networks_undrawn){
+   for(let id_dict in networks_undrawn) {
+     let temp_dict_components = networks_undrawn[id_dict]
+     //scale text
+     for (let idx in temp_dict_components.labels) {
+       temp_dict = temp_dict_components.labels[idx]
+       temp_dict.offset[0] = temp_dict.offset[0] * x_scaling
+       temp_dict.offset[1] = temp_dict.offset[1] * y_scaling
+     }
+   }
   }
 
   function style_line(line){
@@ -69,8 +83,12 @@
     }
   }
 
-  function construct_breakers(dict_components, network, voltage){
-        init_breakers(network, voltage, dict_components.breakers, function(breakers){
+  function destroy_lines(){
+
+  }
+
+  function construct_breakers(dict_components, network){
+        init_breakers(network, dict_components.breakers, function(breakers){
         for(let id in breakers){
             //doing this means the inital data, and the SVG elements they make remain unchanged at all times.
             // may be very useful should a redraw/reset be needed...
@@ -113,7 +131,7 @@
                 breaker.setState(!breaker.closed)
             //        breaker.closed=!breaker.closed
                 post_breaker(id, breaker.closed)
-                inc_state(network, voltage)
+                inc_state(network)
             });
 
             components.breakers[id] = b

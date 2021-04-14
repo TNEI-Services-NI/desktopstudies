@@ -1,6 +1,6 @@
 //1550 x 1160 in mm
 //scale of 1000 x 1000, readjust with math...
-chapelcross_33kV = {
+networks_undrawn["chapelcross33kv"] = {
     lines:{
         "378": StraightLine([875,40],"right",130),
         "into 378 4": StraightLine([885,155],"right",75),

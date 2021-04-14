@@ -1,6 +1,6 @@
 //1550 x 1160 in mm
 //scale of 1000 x 1000, readjust with math...
-Gretna_400kV={
+networks_undrawn["ewehillwindfarm2"]={
     lines:{
     "M1": StraightLine([60,620],"right",880,"400kV"),
     "R1": StraightLine([60,430],"right",880,"400kV"),

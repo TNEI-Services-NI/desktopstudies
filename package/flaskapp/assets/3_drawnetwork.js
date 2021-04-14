@@ -11,11 +11,11 @@
     }
   }
 
-  function inc_state(network, voltage){
+  function inc_state(network){
     current_step += 1;
     console.log(current_step)
     //alert(current_step)
-    update_state(current_step, network, voltage, restoration_step_callback);
+    update_state(current_step, network, restoration_step_callback);
   }
 
   /**
@@ -23,15 +23,11 @@
    * @param {Dictionary} dictionary of object prototypes used to build and draw components
    * @return {None}
   **/
-  function draw_network(dict_components, network, voltage){
-
-    scale_lines(dict_components);
-
-    scale_labels(dict_components);
+  function draw_network(dict_components, network){
 
     construct_lines(dict_components);
 
-    construct_breakers(dict_components, network, voltage);
+    construct_breakers(dict_components, network);
 
     construct_labels(dict_components);
 
@@ -47,7 +43,7 @@
 
     construct_SGTs(dict_components);
     //get stage zero state
-    update_state(current_step, network, voltage, restoration_step_callback);
+    update_state(current_step, network, restoration_step_callback);
   }
 
 
@@ -55,6 +51,7 @@
   $(document).ready(function(){
   });
 
+  var socket = io();
 
  //Define parent attributes
  //  var x = document.getElementById('myDiv').clientWidth;
@@ -62,15 +59,10 @@
   // var y = document.getElementById('myDiv').clientHeight;
   var y = window.innerHeight;
 
-  //Create canvas
-  var draw = SVG('#drawing').size(x, y)
-  var background = draw.rect(x, y).fill(palette["background-color"])
-
   var x_scaling = x/1150
   var y_scaling = y/1050
 
   const font_size = 14 *  Math.min(x_scaling, y_scaling)
-
 
   let dict_components = undefined
   let components = {
@@ -95,30 +87,29 @@
   //   let network = "gretna"
   // let voltage = "400kv"
 
+  // prepare_canvas(x, y);
+  //
+  // init_network(function(network, voltage){
+  //   if (network === "chapelcross" && voltage === "33kv"){
+  //     dict_components = chapelcross_33kV
+  //   } else if (network === "chapelcross" && voltage === "132kv") {
+  //     dict_components = chapelcross_132kV
+  //   } else if (network === "gretna" && voltage === "400kv") {
+  //     dict_components = Gretna_400kV
+  //   } else {
+  //     dict_components = chapelcross_132kV
+  //   }
+  //   dict_components = chapelcross_33kV
+  //   draw_network(dict_components, network, voltage);
+  // });
 
+  scale_lines(networks_undrawn);
+  scale_labels(networks_undrawn);
 
-  init_network(function(network, voltage){
-    if (network === "chapelcross" && voltage === "33kv"){
-      dict_components = chapelcross_33kV
-    } else if (network === "chapelcross" && voltage === "132kv") {
-      dict_components = chapelcross_132kV
-    } else if (network === "gretna" && voltage === "400kv") {
-      dict_components = Gretna_400kV
-    } else {
-      dict_components = chapelcross_132kV
-    }
-
-    dict_components = gretna_132kV
-
-    draw_network(dict_components, network, voltage);
+  socket.on('draw', function(data) {
+    prepare_canvas(x, y);
+    dict_components = networks_undrawn[data['network']]
+    draw_network(dict_components, data['network']);
   });
 
-//function de_energise(){
-//    for(i in components.lines){
-//        line = components.lines[i]
-//        console.log(line)
-//        line.setVoltage("LV")
-//        }
-//}
 
-//de_energise()

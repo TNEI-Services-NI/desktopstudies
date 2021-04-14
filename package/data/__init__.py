@@ -20,18 +20,18 @@ def _fetch_files(directory: str, file_type: str = '.csv'):
     return dict_files
 
 
-def read_breaker_states(network: str, voltage: str):
+def read_breaker_states(network: str):
     breaker_states = _fetch_files(dir_breaker_states)
-    filename = breaker_states[network + voltage]
+    filename = breaker_states[network]
     df_breakerstates = pd.read_csv('/'.join([dir_breaker_states, filename]))
     df_breakerstates = df_breakerstates.convert_dtypes(convert_string=True)
     df_breakerstates = df_breakerstates.set_index('breaker')
     return df_breakerstates
 
 
-def read_restoration_step(network: str, voltage: str, stage: int):
+def read_restoration_step(network: str, stage: int):
     restoration_steps = _fetch_files(dir_restoration_steps)
-    filename = restoration_steps[network + voltage + "scenario1"]
+    filename = restoration_steps[network + "scenario1"]
     df_restoration = pd.read_csv('/'.join([dir_restoration_steps, filename]),
                                  dtype={'component': str})
     df_restoration = df_restoration.set_index("component")

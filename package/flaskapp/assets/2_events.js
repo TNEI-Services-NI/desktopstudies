@@ -1,4 +1,17 @@
 
+function get_breaker(breakerID,state){
+  if(breakerID === null){breakerID="b1"}
+  if(state === null){state=false}
+  $.ajax({
+  type: "POST",
+  url: "/simtool_bp/receive_breaker/",
+  data: {"breaker": breakerID, "state": state },
+//      dataType: 'application/json'
+  }).done(function( data ) {
+    // console.log(data);
+  })
+}
+
 /**
  * sends breaker state to server as ajax request
  * @param  {string} id of breaker
@@ -28,12 +41,12 @@ function post_breaker(breakerID,state){
  * @param  {function} callback which interprets/draws a list of breakers.
  * @return {None}
  */
-function init_breakers(network, voltage, breakers, callback){
+function init_breakers(network, breakers, callback){
     var breakers_new = breakers
     $.ajax({
       type: "POST",
       url: "/simtool_bp/init_breakers/",
-      data: {"network": network, "voltage": voltage},
+      data: {"network": network},
       success: function(breaker_states){
         //alert(breaker_states);
         for (let breaker in breakers){
@@ -75,11 +88,11 @@ function init_breaker(breakerID){
  * @param callbacks
  * @return {None}
  */
-function update_state(stage,network,voltage, callbacks){
+function update_state(stage,network, callbacks){
       $.ajax({
       type: "POST",
       url: "/simtool_bp/get_state/",
-      data: {"stage": stage, "network": network,"voltage":voltage},
+      data: {"stage": stage, "network": network},
 //      dataType: 'application/json'
       }).done(function( state ) {
         state = JSON.parse(state)

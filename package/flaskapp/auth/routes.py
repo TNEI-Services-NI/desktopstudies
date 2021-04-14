@@ -97,14 +97,9 @@ def wait_room():
     return render_template('wait_room.html', name=current_user.name)
 
 
-@socketio.on('connect')
-def new_connect():
-    print('new connect')
-
-
 @socketio.on('disconnect')
 def new_disconnect():
-    print('new disconnect')
+    pass
 
 
 @socketio.on('trigger')
