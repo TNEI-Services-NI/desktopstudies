@@ -61,9 +61,18 @@ def _add_network_redraw(dash_app):
                            Input("chapelcross132kv", "n_clicks"),
                            Input("gretna132kv", "n_clicks"),
                            Input("gretna400kv", "n_clicks"),
+                           Input("chapelcrossgretna1", "n_clicks"),
+                           Input("chapelcrossgretna2", "n_clicks"),
+                           Input("ewehillgretna", "n_clicks"),
+                           Input("stevenscroft33kv", "n_clicks"),
+                           Input("minsca33kv", "n_clicks"),
+                           Input("ewehillwindfarm1", "n_clicks"),
+                           Input("ewehillwindfarm2", "n_clicks"),
+
+
                        ],
                        )
-    def _draw_network(chx33, chx132, grt132, grt400):
+    def _draw_network(chx33, chx132, grt132, grt400,chapgret1,chapgret2,ewehillgretna,stev33kV,minsca33kV,ewe1,ewe2):
         ctx = dash.callback_context
         triggered_object = ctx.triggered[0]
         if triggered_object['value'] is None:

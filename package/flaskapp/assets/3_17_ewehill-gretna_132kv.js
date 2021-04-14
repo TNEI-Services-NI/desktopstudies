@@ -20,6 +20,7 @@ networks_undrawn["ewehillgretna"]={
     "2L5": StraightLine([655,705],"down",80,"33kV"),
     "3L5": StraightLine([730,705],"down",80,"33kV"),
 
+    "GRID 1A dash": new Line(240,710,305,710,"0v",true,"#d3d3d3")
 
     },
 
