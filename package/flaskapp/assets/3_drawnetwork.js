@@ -79,7 +79,9 @@
                       labels:[],
                       generators: [],
                       isolators:[],
-                      text:[]
+                      text:[],
+                      transformers:[],
+                      SGTs:[]
                   }
   let current_step = 1
   let steps = []
@@ -106,7 +108,17 @@
       dict_components = chapelcross_132kV
     }
 
+    dict_components = gretna_132kV
+
     draw_network(dict_components, network, voltage);
   });
 
+//function de_energise(){
+//    for(i in components.lines){
+//        line = components.lines[i]
+//        console.log(line)
+//        line.setVoltage("LV")
+//        }
+//}
 
+//de_energise()
