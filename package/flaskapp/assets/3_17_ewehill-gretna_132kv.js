@@ -2,101 +2,81 @@
 //scale of 1000 x 1000, readjust with math...
 networks_undrawn["ewehillgretna"]={
     lines:{
-    "M1": StraightLine([60,620],"right",880,"400kV"),
-    "R1": StraightLine([60,430],"right",880,"400kV"),
+    "GRNA1": StraightLine([630,105],"right",130,"132kV"),
+    "804 805 803": StraightLine([700,340],"up",235,"132kV"),
+    "803 113": StraightLine([700,340],"left",430,"132kV"),
+    "113": StraightLine([270,340],"down",170,"132kV"),
+    "204 132kV": StraightLine([270,380],"left",55,"132kV"),
+    "204 0V": StraightLine([220,380],"left",55,"0V"),
 
-    "X606 X604": StraightLine([160,430],"down",190,"400kV"),
-        "HARK A": StraightLine([120,525],"right",40,"400kV"),
-        "HARK": StraightLine([120,525],"down",420,"400kV"),
+    "GRID 1A": StraightLine([270,505],"down",315,"33kV"),
 
-    "X516 X514": StraightLine([325,430],"down",190,"400kV"),
-        "GRNA 780 A": StraightLine([285,525],"right",40,"400kV"),
-        "X510": StraightLine([285,525],"down",215,"400kV"),
-        "GRNA 780": StraightLine([285,740],"down",190,"132kV"),
-        "GRNA 780 tx": StraightLine([285,800],"left",40,"132kV"),
+    "GRID 1A LV": StraightLine([270,565],"left",40,"33kV"),
 
+    "EWEH3": StraightLine([635,550],"left",365,"33kV"),
+    "GRID 1B": StraightLine([635,550],"down",155,"33kV"),
+    "BOARD B": StraightLine([615,705],"right",145,"33kV"),
 
-    "X406 X404": StraightLine([485,430],"down",190,"400kV"),
-        "ELVA A": StraightLine([445,525],"right",40, "400kV"),
-        "ELVA": StraightLine([445,525],"up",440, "400kV"),
-        "X447": StraightLine([445,275],"right",135,"400kV"),
-        "X449": StraightLine([445,220],"right",135,"400kV"),
-        "SC1" : StraightLine([530,275],"up",55,"400kV"),
-        "X448": StraightLine([580,220],"down",55,"400kV"),
+    "2L5": StraightLine([655,705],"down",80,"33kV"),
+    "3L5": StraightLine([730,705],"down",80,"33kV"),
 
-    "X236 X230 X234": StraightLine([620,430],"down",190,"400kV"),
-
-    "X116 X114": StraightLine([805,430],"down",190,"400kV"),
-        "GRNA 680 A": StraightLine([765,525],"right",40,"400kV"),
-        "X110": StraightLine([765,525],"down",215,"400kV"),
-        "GRNA 680": StraightLine([765,740],"down",190,"132kV"),
-        "GRNA 680 tx": StraightLine([765,800],"left",40,"132kV"),
 
     },
 
     breakers:{
-        "X442": new Breaker("ELVA",0.63),
-        "X448": new Breaker("X448",0.5),
-        "X405": new Breaker("ELVA", 0.37),
-        "X230": new Breaker("X236 X230 X234", 0.5),
-        "X110": new Breaker("X110",0.65),
-        "X510": new Breaker("X510",0.65),
-        "X605": new Breaker("HARK",0.332),
-
+        "805": new Breaker("804 805 803",0.6),
+        "GRID 1A": new Breaker("GRID 1A",0.33),
+        "WG2": new Breaker("GRID 1A",0.75),
+        "GRID 1B": new Breaker("GRID 1B",0.5),
+        "3L5": new Breaker("3L5",0.5),
+        "2L5": new Breaker("2L5",0.5),
     },
 
     labels:{
-    1: new Text("M1",["M1"],[-465,0]),
-    2: new Text("R1",["R1"],[-465,0]),
-    3: new Text("HARK",["HARK"],[0,225]),
-    4: new Text("GRNA 680",["GRNA 680"],[0,110]),
-    5: new Text("GRNA 780",["GRNA 780"],[0,110]),
-    6: new Text("ELVA",["ELVA"],[0,-240]),
-    7: new Text("M1",["GRETNA 400kV"],[-50,-600]),
+        1: new Text("2L5", ["CROSSDYKES 1"], [0,70]),
+        2: new Text("3L5", ["CROSSDYKES 2"], [0,70]),
+        3: new Text("113", ["EWEHII","132kV"], [60,-10]),
+        4: new Text("GRID 1A", ["EWEHII","33kV"], [60,40]),
+
+        5: new Text("GRNA1",["GRNA1"], [100,30]),
+        6: new Text("803 113",["EWE HILL - GRETNA"], [0,-300]),
+
+        7: new Text("204 0V",["FUTURE","CONNECTION"], [-70,0]),
+
+
     },
 
+    generators:{
+        "EWE HILL 2": new Generator("GRID 1A",1),
+        },
+
     tx:{
-        "GRNA 780 tx": new Tx("GRNA 780 tx",1,"","", "132kV","LV"),
-        "GRNA 680 tx": new Tx("GRNA 680 tx",1,"","", "132kV","LV"),
+        "GT1 90MVA" : new Tx("113",1,"","","33kV","132kV"),
+        "GRID 1A LV" : new Tx("GRID 1A LV",1,"","","33kV","LV"),
+
     },
 
     isolators:{
-        "X603": new Isolator("HARK",0.5),
+        "804": new Isolator("804 805 803",0.8),
+        "803": new Isolator("804 805 803",0.4),
+        "113": new Isolator("113",0.6),
+        "204": new Isolator("204 132kV",1,"open"),
 
-        "X604": new Isolator("X606 X604",0.75),
-        "X606": new Isolator("X606 X604",0.25,"open"),
+        "1L4A": new Breaker("GRID 1A",0.5),
 
-        "X514": new Isolator("X516 X514",0.75),
-        "X516": new Isolator("X516 X514",0.25,"open"),
-
-        "X404": new Isolator("X406 X404",0.75),
-        "X406": new Isolator("X406 X404",0.25,"open"),
-
-        "X234": new Isolator("X236 X230 X234",0.75),
-        "X236": new Isolator("X236 X230 X234",0.25,),
-
-        "X114": new Isolator("X116 X114",0.75),
-        "X116": new Isolator("X116 X114",0.25,"open"),
-
-        "X405": new Isolator("ELVA",0.3),
-        "X447": new Isolator("X447",0.3),
-        "X449": new Isolator("X449",0.3),
     },
 
     dataViews:{
+        1 : new DataView(605,135, ["MW","MVAR","kV","Amps"]),
+        2 : new DataView(340,585, ["MVA","MW","MVAR","kV","Amps"]),
+        3 : new DataView(580,585, ["MVA","MW","MVAR","kV","Amps"]),
 
-        "ELVA": new DataView(420,100, ["MVA","MW","MVAR","kV","Amps"]),
-        "HARK": new DataView(90,850, ["MVA","MW","MVAR","kV","Amps"]),
-        "GRNA 780": new DataView(260,850, ["MVA","MW","MVAR","kV","Amps"]),
-        "GRNA 680": new DataView(740,850, ["MVA","MW","MVAR","kV","Amps"]),
-
-        "R1": new DataView(70,410, ["kV"]),
-        "M1": new DataView(70,640, ["kV"]),
+        4: new DataView(615,765,["Amps"]),
+        5: new DataView(695,765,["Amps"]),
 
     },
 
     SGTs:{
-        "SGT1": new SGT("X510","SGT1"),
-        "SGT2": new SGT("X110","SGT2"),
+
     },
 }
