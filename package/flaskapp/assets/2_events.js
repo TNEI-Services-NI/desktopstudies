@@ -37,10 +37,10 @@ function init_breakers(network, voltage, breakers, callback){
       success: function(breaker_states){
         //alert(breaker_states);
         for (let breaker in breakers){
-          if (breaker_states["state"][breaker] === undefined){
+          if (breaker_states["-1"][breaker] === undefined){
             breakers_new[breaker].state = "undefined";
           } else {
-            breakers_new[breaker].state = breaker_states["state"][breaker];
+            breakers_new[breaker].state = breaker_states["-1"][breaker];
           }
         }
         callback(breakers_new);
