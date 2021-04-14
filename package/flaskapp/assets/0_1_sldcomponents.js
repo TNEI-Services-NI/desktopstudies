@@ -10,7 +10,7 @@ function Breaker_Callback(graphic_objects, name = ''){
     return function(object){
         // Add object defined in
         if(graphic_objects !== undefined){
-            graphic_objects.push(object)
+            graphic_objects[0] = object
         }
         if(name !== ''){
             if(object.horizontal === true){
@@ -33,7 +33,7 @@ function Line_Callback(graphic_objects, name = ''){
     return function(object){
         // Add object defined in
         if(graphic_objects !== undefined){
-            graphic_objects.push(object)
+            graphic_objects[0] = object
         }
         if(name !== ''){
             if(object.horizontal === true){
@@ -55,7 +55,7 @@ function Text_Callback(graphic_objects){
     return function(object){
         // Add object defined in
         if(graphic_objects !== undefined){
-            graphic_objects.push(object)
+            graphic_objects[0] = object
         }
     }
 }
@@ -73,7 +73,7 @@ function Tx_Callback(graphic_objects, name = false, mva = false){
             //revamp post_breaker to a function that figures out its state instead
 //            object.on("breaker_clicked",function(){post_breaker()})
             if(graphic_objects != undefined){
-                graphic_objects.push(group)
+                graphic_objects[0] = group
             }
 
             if(name.constructor !== Array){
@@ -107,7 +107,7 @@ function Tx_Callback(graphic_objects, name = false, mva = false){
 function Gen_Callback(graphic_objects){
         return function(group){
             if(graphic_objects != undefined){
-                graphic_objects.push(group)
+                graphic_objects[0] = group
             }
             if(group.horizontal === true){
                 add_text(group, false, ["GENERATOR"], 0, -25, "#d3d3d3",function(group){})
