@@ -108,7 +108,7 @@
       dict_components = chapelcross_132kV
     }
 
-    dict_components = gretna_132kV
+    dict_components = ewehill_gretna
 
     draw_network(dict_components, network, voltage);
   });

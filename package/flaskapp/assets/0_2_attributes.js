@@ -3,6 +3,7 @@ let palette = {"400kV":"#0000e6",
   "33kV":"#00ff00",
   "11kV":"#996633",
   "LV":"#ff3ae8",
+  "0V":"#d3d3d3",
   "background-color": "#000000"}
 
 let line_palette_style = {'width': 4}
