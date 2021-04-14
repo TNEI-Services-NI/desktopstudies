@@ -75,12 +75,16 @@ function Tx_Callback(graphic_objects, name = false, mva = false){
             if(graphic_objects != undefined){
                 graphic_objects.push(group)
             }
+
+            if(name.constructor !== Array){
+             name = [name]
+            }
             if(name != false){
             if(group.horizontal === true){
-                add_text(group, false, [name], 0, -25, "#d3d3d3", function(group){})
+                add_text(group, false, name, 0, -25, "#d3d3d3", function(group){})
             }
             else{
-                add_text(group, false, [name], 45,-10,"#d3d3d3", function(group){})}
+                add_text(group, false, name, 60,-10,"#d3d3d3", function(group){})}
             }
 
             if(mva != false){
