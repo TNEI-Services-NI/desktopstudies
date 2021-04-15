@@ -134,7 +134,9 @@ function Breaker(lineID, pos, state = "closed", name=false){
     this.state = state
     this.size = 15
     this.graphic = []
+    this.colour = undefined
     this.name = name
+    this.live = live_dead
     this.callback = Breaker_Callback(this.graphic)
 
 }
@@ -161,6 +163,7 @@ function Line(x1, y1,x2, y2, voltage="32kV", dash = false, colour = ""){
     this.graphic = []
     this.callback = Line_Callback(this.graphic)
     this.dash = dash
+    this.live = live_dead
     this.colour=colour
 }
 
@@ -246,6 +249,8 @@ function Tx(lineID,pos,name,mva, coil1 = "33kV",coil2 = "33kV",type="starDelta")
     this.type = type
     this.coil1 = coil1
     this.coil2 = coil2
+    this.live = live_dead
+    this.colour = undefined
     this.callback = Tx_Callback(this.graphic, this.name,this.mva)
 }
 
@@ -264,6 +269,7 @@ function Generator(line_id,pos, type= "wind"){
     this.pos = pos
     this.type = type
     this.graphic=[]
+    this.live = live_dead
     //TEMP Breaker callback
     this.callback = Gen_Callback(this.graphic)
 }
@@ -281,6 +287,7 @@ function Inductor(line_id,pos){
     this.lineID = line_id,
     this.pos = pos,
     this.graphic=[],
+    this.live = live_dead
     this.callback = Breaker_Callback(this.graphic)
 }
 
@@ -300,6 +307,8 @@ function Isolator(line_id,pos, state = "closed",name=false){
     this.state=state,
     this.graphic=[],
     this.name = name,
+    this.live = live_dead
+    this.colour = undefined
     this.callback = Breaker_Callback(this.graphic,name)}
 
 /**

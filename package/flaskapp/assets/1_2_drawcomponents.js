@@ -7,10 +7,16 @@
  * @return {callback} a callback which takes the created generator group as an argument
  * @return {None}
  */
-function draw_tx(dict_line, position, type, coils, callback){
+function draw_tx(dict_line, tx){
 var rad = 12
 var overlapFactor = 0.25
 var circleWidth = 1
+
+let position = tx.pos
+let type = tx.type
+let coils = [tx.coil1, tx.coil2]
+let callback = tx.callback
+let live = tx.live
 
 var bVertical = false
 var bHorizontal = false
@@ -35,16 +41,19 @@ if (bHorizontal){
   var fromCenter = [-rad*(1-overlapFactor)+dict_line.x1+(dict_line.x2-dict_line.x1)*position, dict_line.y1]
   var toCenter = [rad*(1-overlapFactor)+dict_line.x1+(dict_line.x2-dict_line.x1)*position, dict_line.y1]
 }
+// alert(live);
+if(live === false){
+  coils = ["0V", "0V"]
+}
 
-if(coils != undefined){
+if(coils !== undefined){
     secondaryCoil = palette[coils[1]]
     primaryCoil = palette[coils[0]]
 }
 else{
     primaryCoil = dict_line.dict_styling.stroke.color
-    secondaryCoil =dict_line.dict_styling.stroke.color
+    secondaryCoil = dict_line.dict_styling.stroke.color
 }
-
 circle1 = draw.circle(2*rad).center(fromCenter[0], fromCenter[1])
 circle2 = draw.circle(2*rad).center(toCenter[0], toCenter[1])
 circle3 = draw.circle(2*rad).center(fromCenter[0], fromCenter[1])
@@ -245,9 +254,16 @@ callback(group)
  * @return {callback} a callback which takes the created breaker as an argument
  * @return {None}
  */
-function draw_breaker(dict_line, position, size, state, callback){
+function draw_breaker(dict_line, breaker){
   var bVertical = false;
   var bHorizontal = false;
+  let position = breaker.pos
+  let size = breaker.size
+  let state = breaker.state
+  let callback = breaker.callback
+  let live_colour = breaker.colour
+  let live = breaker.live
+  let colour = undefined
 
   var dict_breaker = {}
 
@@ -259,39 +275,33 @@ function draw_breaker(dict_line, position, size, state, callback){
     bHorizontal = true;
     var center = [dict_line.x1+(dict_line.x2-dict_line.x1)*position, dict_line.y1];
   }
-  closed_color = dict_line.dict_styling.stroke.color
-  // } else {
-  //   if (state === 'open'){
-  //     dict_line.dict_styling.fill.color = 'white'
-  //     dict_line.dict_styling.stroke.color = '#a0a0a0'
-  //   } else if (state === 'closed'){
-  //     dict_line.dict_styling.fill.color = '#a0a0a0'
-  //     dict_line.dict_styling.stroke.color = '#a0a0a0'
-  //   }
-  // }
+
+  if(live_colour === undefined){
+    live_colour = palette[dict_line.voltage]
+  }
+
+  if(live === true){
+    colour = live_colour
+  } else {
+    colour = palette["0V"]
+  }
 
   if (state === 'open'){
-    rect1 = draw.rect(size, size).center(center[0], center[1]).fill(palette["background-color"]).stroke("white").stroke({width: 1})
+    rect1 = draw.rect(size, size).center(center[0], center[1]).fill(palette["background-color"]).stroke(colour).stroke({width: 1})
   }
   else if (state === 'closed'){
-    rect1 = draw.rect(size, size).center(center[0], center[1]).fill(closed_color).stroke("white").stroke({width: 1})
+    rect1 = draw.rect(size, size).center(center[0], center[1]).fill(colour).stroke(colour).stroke({width: 1})
   }
   else{
-      rect1 = draw.rect(size, size).center(center[0], center[1]).fill("grey").stroke("grey").stroke({width: 1})
+      rect1 = draw.rect(size, size).center(center[0], center[1]).fill("red").stroke("red").stroke({width: 1})
       rect1.horizontal = bHorizontal
-      rect1.closed_color = closed_color
+      rect1.live_colour = live_colour
       dict_breaker.objects = [rect1];
       callback(rect1);
       return
     }
 
   rect1.click(function() {
-  //      if (this.attr('fill') === dict_line.dict_styling.stroke.color){
-  //        this.fill({ color: 'black' })
-  //      } else {
-  //        this.fill(dict_line.dict_styling.stroke)
-  //      }
-
     this.fire(breaker_clicked_event)
   });
   rect1.horizontal = bHorizontal
@@ -308,9 +318,15 @@ function draw_breaker(dict_line, position, size, state, callback){
  * @return {callback} a callback which takes the created isolator as an argument
  * @return {None}
  */
-function draw_isolator(dict_line, position, size, state, callback){
+function draw_isolator(dict_line, isolator){
 var bVertical = false;
 var bHorizontal = false;
+let position = isolator.pos
+let size = isolator.size
+let state = isolator.state
+let callback = isolator.callback
+let live_colour = isolator.colour
+let live = isolator.live
 
 var dict_breaker = {}
 
@@ -322,13 +338,20 @@ if (dict_line.y1 === dict_line.y2){
   bHorizontal = true;
   var center = [dict_line.x1+(dict_line.x2-dict_line.x1)*position, dict_line.y1];
 }
-closed_color = dict_line.dict_styling.stroke.color
+if(live_colour === undefined){
+  live_colour = palette[dict_line.voltage]
+}
 
+if(live === true){
+  colour = live_colour
+} else {
+  colour = palette["0V"]
+}
 if (state === 'open'){
-  circle1 = draw.circle(size, size).center(center[0], center[1]).fill("black").stroke("white").stroke({width: 1})
+  circle1 = draw.circle(size, size).center(center[0], center[1]).fill(palette["background-color"]).stroke(colour).stroke({width: 1})
 }
 if (state === 'closed'){
-  circle1 = draw.circle(size, size).center(center[0], center[1]).fill(closed_color).stroke("white").stroke({width: 1})
+  circle1 = draw.circle(size, size).center(center[0], center[1]).fill(colour).stroke(colour).stroke({width: 1})
 }
 
 circle1.horizontal = bHorizontal

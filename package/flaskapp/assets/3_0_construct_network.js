@@ -40,15 +40,16 @@
       line.dict_styling.stroke.dasharray = (5, 5)
 
     }
-    if (line.color){
-      line.dict_styling.stroke.color = line.color
-      line.dict_styling.fill.color = line.color
-    } else {
-      line.dict_styling.stroke.color = "#ffffff"
-      line.dict_styling.fill.color = "#ffffff"
-    }
+    let colour = undefined
+    if (line.live){
+      colour = palette[line.voltage]
 
-    line.dict_styling.stroke.color = palette[line.voltage]
+    } else {
+      colour = palette["0V"]
+    }
+    line.dict_styling.stroke.color = colour
+    line.dict_styling.fill.color = colour
+    // line.dict_styling.stroke.color = palette[line.voltage]
     return line
   }
 
@@ -61,6 +62,7 @@
         line = style_line(line)
 
         line.callback = Line_Callback(line.graphic)
+
 
         line.o_line = draw.line(line.x1 , line.y1,
                                       line.x2, line.y2).stroke(line.dict_styling.stroke)
@@ -103,7 +105,7 @@
 
             breaker.callback = Breaker_Callback(breaker.graphic, breaker.name)
 
-            draw_breaker(dict_components.lines[breaker.lineID] ,breaker.pos, breaker.size, breaker.state, breaker.callback)
+            draw_breaker(dict_components.lines[breaker.lineID] , breaker)
             let closed = breaker.state === 'closed'
             let b = {
                 info:breaker,
@@ -118,13 +120,13 @@
                 line = components.breakers[id].line
                 rect = components.breakers[id].UIElement
 
-                color = palette[line.voltage]
+                breaker.colour = palette[line.voltage]
                 this.closed = closed
                 if (closed == false){
                     rect.fill({ color: palette["background-color"] })
                     rect.stroke({ color: 'white' })
                 } else if (closed == true){
-                    rect.fill({ color: color })
+                    rect.fill({ color: colour })
                     rect.stroke({ color: "white" })
               }
             }
@@ -166,11 +168,12 @@
         let line_id = tx.lineID
         let line = dict_components.lines[line_id]
         let name = tx.name
-        let type = tx.type
         let pos = tx.pos
+        let type = tx.type
         let coil1 = tx.coil1
         let coil2 = tx.coil2
-        draw_tx(line,pos,type,[coil1,coil2],tx.callback)
+        let callback = tx.callback
+        draw_tx(line, tx)
 
         let id = i
         let t = {info:tx, UIElement: tx.graphic[0], id : id}
@@ -215,14 +218,12 @@
     for(i in dict_components.isolators){
         isolator = dict_components.isolators[i]
         line = dict_components.lines[isolator.lineID]
-        pos = isolator.pos
         state = isolator.state
         if(isolator.name === false){
             isolator.name = i
         }
         isolator.callback = Breaker_Callback(isolator.graphic,isolator.name)
-        callback = isolator.callback
-        draw_isolator(line,pos,12,state,callback)
+        draw_isolator(line, isolator)
         let id = i
         let closed = state == 'closed'
         let iso = {drawInfo:isolator, UIElement: isolator.graphic[0], closed: closed, id : id, line : line}
