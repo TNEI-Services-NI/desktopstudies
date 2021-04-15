@@ -252,8 +252,6 @@
           if(observingComponent === undefined){
             observingComponent = components.generators[componentID]
           }
-          console.log(componentID);
-          console.log(observingComponent);
 
           callback = function(){
               for(text in textObjects){

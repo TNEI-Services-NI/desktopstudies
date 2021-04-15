@@ -1,17 +1,6 @@
 
-  function append_modal_data(list_modal_data, dict_step_data, ){
-
-  }
-
-  /**
-   * callback function for updating step data when it has been retrieved
-   * @param {integer} step number
-   * @param {dictionary} data retrieved from this state
-   * @return {None}
-  **/
-  function update_sim_data(step, step_data){
-    steps[step] = step_data
-    for (let line_ in components.lines) {
+  function update_line_modals(step_data){
+        for (let line_ in components.lines) {
       line_id_LF = line_.split("#")[0]
       line_instance = components.lines[line_]
       line_instance.data = []
@@ -37,9 +26,19 @@
     }
   }
 
+  /**
+   * callback function for updating step data when it has been retrieved
+   * @param {integer} step number
+   * @param {dictionary} data retrieved from this state
+   * @return {None}
+  **/
+  function update_sim_data(step, step_data){
+    steps[step] = step_data
+    update_line_modals(step_data)
+  }
+
   function inc_state(network_){
     current_step += 1;
-    console.log(current_step)
     //alert(current_step)
     fetch_sim_data(network_, current_step, option, scenario, update_sim_data);
   }
