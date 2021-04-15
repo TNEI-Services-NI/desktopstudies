@@ -35,7 +35,10 @@
     line.dict_styling = {fill: { width: line_palette_style["width"]},
                          stroke: { width: line_palette_style["width"]}}
     if (line.dash){
+              line.dict_styling = {fill: { width: line_palette_style["width"]/2},
+                         stroke: { width: line_palette_style["width"]/2}}
       line.dict_styling.stroke.dasharray = (5, 5)
+
     }
     if (line.color){
       line.dict_styling.stroke.color = line.color
