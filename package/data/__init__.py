@@ -37,6 +37,7 @@ def read_restoration_step(network: str, option: str, scenario: str, stage: int):
     dict_data = {k: pd.read_csv('/'.join([dir_opt_scen, v]),
                                  dtype={'Name': str})
                         .set_index("Name")
+                        .round(3)
                         .loc[:, 'Stage {}'.format(stage)]
                         .to_json()
                  for k, v in dict_filenames.items()}

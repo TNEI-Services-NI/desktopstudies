@@ -32,6 +32,21 @@ function post_breaker(breakerID,state){
   })
 }
 
+function post_breakers(breakers){
+  let breakers_ = {}
+  for(let idb in breakers){
+    console.log(breakers[idb]['closed'])
+    breakers_[idb] = undefined
+  }
+
+  $.ajax({
+  type: "POST",
+  url: "/simtool_bp/receive_breakers/",
+  data: {"breakers": breakers },
+  }).done(function( data ) {
+  })
+}
+
 /**
  * receives initial states of all breakers through ajax request
  * url parameter of ajax request must reference blueprint specific route to function
@@ -206,7 +221,11 @@ function component_modal(component){
       $("#dataPopup").css('visibility', 'hidden');
     });
     group.mousemove(function(e){
-      $('#dataPopup').css('top', e.pageY-25);
+      if(e.pageY > (y - $('#dataPopup').height() - 25)){
+        $('#dataPopup').css('top', e.pageY-$('#dataPopup').height());
+      } else {
+        $('#dataPopup').css('top', e.pageY);
+      }
       if(e.pageX > (x - 250)){
         $('#dataPopup').css('left', e.pageX-210);
       } else {

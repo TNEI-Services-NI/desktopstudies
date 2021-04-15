@@ -126,16 +126,16 @@
                     rect.fill({ color: palette["background-color"] })
                     rect.stroke({ color: 'white' })
                 } else if (closed == true){
-                    rect.fill({ color: colour })
+                    rect.fill({ color: breaker.colour })
                     rect.stroke({ color: "white" })
               }
             }
+
             b.UIElement.on("breaker_clicked",function(event){
                 let breaker = components.breakers[id]
                 breaker.setState(!breaker.closed)
-            //        breaker.closed=!breaker.closed
-                post_breaker(id, breaker.closed)
-                inc_state(network_)
+                // post_breakers(components.breakers)
+                inc_state(network_)  // IF correct breaker is clicked
             });
 
             components.breakers[id] = b

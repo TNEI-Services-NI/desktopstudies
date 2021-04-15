@@ -21,6 +21,7 @@ breaker,-1,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19
 683 01,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 683 10,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
 683 20,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+692 01,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 694 12,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
 694 13,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 694 22,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
