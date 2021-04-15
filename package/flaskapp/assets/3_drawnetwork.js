@@ -59,7 +59,8 @@
       line_instance = components.lines[line_]
       line_instance.data = []
       if (line_id_LF in step_data["lines_active_power"]) {
-        step_data["lines_active_power"][line_id_LF]
+        line_instance.data["lines_active_power"] =
+          step_data["lines_active_power"][line_id_LF]
 
       }
       if (line_id_LF in step_data["lines_reactive_power"]) {
@@ -68,7 +69,7 @@
 
       }
       if (line_id_LF in step_data["busbars_voltage"]) {
-        line_instance.data["busbars_voltage"] = step_data["busbars_voltage"]
+        line_instance.data["busbars_voltage"] = step_data["busbars_voltage"][line_id_LF]
 
       }
       components.lines[line_] = line_instance
@@ -79,6 +80,33 @@
 
   }
 
+  function update_dataviews(step_data){
+    for(let id_dv in components.dataviews){
+      let text_list = [];
+      var units = "";
+      for(let component_parameter in step_data){
+        if (id_dv in step_data[component_parameter]) {
+          if(component_parameter.includes('reactive')){
+            units = " MVAr"
+          } else if(component_parameter.includes('active')){
+            units = " MW"
+          } else if(component_parameter.includes('loading')){
+            units = " MVA"
+          } else if(component_parameter.includes('voltage')){
+            units = " V p.u."
+          } else if(component_parameter.includes('taps')){
+            units = " ."
+          }
+
+          text_list = text_list.concat(
+            [String(step_data[component_parameter][id_dv]) + units]
+          );
+        }
+      }
+      redraw_dataview(id_dv, text_list);
+    }
+  }
+
   /**
    * callback function for updating step data when it has been retrieved
    * @param {integer} step number
@@ -86,10 +114,12 @@
    * @return {None}
   **/
   function update_sim_data(step, step_data){
-    steps[step] = step_data
-    update_line_modals(step_data)
-    update_generator_modals(step_data)
-    update_transformer_modals(step_data)
+    steps[step] = step_data;
+    update_line_modals(step_data);
+    update_generator_modals(step_data);
+    update_transformer_modals(step_data);
+
+    update_dataviews(step_data);
   //  redraw text labels
   //   update_line_data_views(step_data)
   }
@@ -123,6 +153,8 @@
     construct_isolators(dict_components);
 
     construct_dataviews(dict_components);
+
+    // redraw_dataviews();
 
     construct_SGTs(dict_components);
   }
@@ -168,6 +200,7 @@
 
   scale_lines(networks_undrawn);
   scale_labels(networks_undrawn);
+  scale_dataviews(networks_undrawn);
 
 
   socket.on('draw', function(data) {

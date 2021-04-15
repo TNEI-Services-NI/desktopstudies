@@ -352,36 +352,15 @@ networks_undrawn["chapelcross33kv"] = {
 
     },
     dataViews:{
-//        //generator
-//        "SOLWAYBANK": new DataView(850,100, "378",["MW","MVAR","kV","AMPS"]),
-//        "GRID 2": new DataView(740,100, "GRID 2", ["MW","MVAR","kV","AMPS"]),
-//        "GRID 1": new DataView(400,100 ,"GRID 1", ["MW","MVAR","kV","AMPS"]),
-//        //generator
-////        "STEVENSCROFT": new DataView(50,400,"STCR5-_1", ["MW","MVAR","kV","AMPS"]),
-//        "MINSCA": new DataView(950,450,"GRID 1", ["MW","MVAR","kV","AMPS"]),
-//
-//        "CRAIG II": new DataView(800,770,"GRID 1", ["MW","MVAR","kV","AMPS","Hz"]),
-//
-//        "MINSCA Hz": new DataView(970,600,"GRID 1", ["Hz"]),
-//        "SOLWAYBANK Hz": new DataView(990,30,"GRID 1", ["Hz"]),
-
-//        "398 26": new DataView(880,230, "398 26",["Amps"]),
-//        "398 25": new DataView(820,230, "398 25",["Amps"]),
-//        "398 24": new DataView(760,230,"398 24", ["Amps"]),
-//        "398 23": new DataView(680,230,"GRID 1", ["Amps"]),
-//        "398 22": new DataView(605,230, "GRID 1",["Amps"]),
-//        "398 21": new DataView(550,230,"GRID 1", ["Amps"]),
-//
-//        "398 11": new DataView(455,230, "GRID 1",["Amps"]),
-//        "398 12": new DataView(390,230,"GRID 1", ["Amps"]),
-//        "398 13": new DataView(230,230,"GRID 1", ["Amps"]),
-        "398 14": new DataView(125,230,"ANANT1_CHAP3-_1#1", ["Amps"]),
-//        "398 15": new DataView(65,230,"GRID 1", ["Amps"]),
-//        "398 16": new DataView(15,230,"GRID 1", ["Amps"]),
-
-
-
-
+        //lines
+        "CHAP3-_STCR3-_1": new DataView("CHAP3-_STCR3-_1", [-25, 10]),
+        "ANANT1_CHAP3-_1": new DataView("ANANT1_CHAP3-_1#1", [-25, 10]),
+        "ANANT1_CHAP3-_1": new DataView("ANANT1_CHAP3-_1#1", [-25, 10]),
+        "ANANT1_CHAP3-_1": new DataView("ANANT1_CHAP3-_1#1", [-25, 10]),
+        "ANANT1_CHAP3-_1": new DataView("ANANT1_CHAP3-_1#1", [-25, 10]),
+        "ANANT1_CHAP3-_1": new DataView("ANANT1_CHAP3-_1#1", [-25, 10]),
+        //generator
+        "STCR5-_1": new DataView("STCR5-_1", [-35, 0]),
 
     },
 }

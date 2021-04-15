@@ -748,6 +748,11 @@ function add_text(object, bool_dict_obj, list_text, x_from_center=0, y_from_cent
     callback(text1)
 }
 
+function add_dataview(observer, text, offset, callback) {
+  let colour = "#e5b815"
+  add_text(observer, false, text, offset[0], offset[1], colour, callback)
+}
+
 function add_static_text(list_text, x=100, y=100, colour="#d3d3d3", callback){
     var rad = 3
     var txtSize = font_size

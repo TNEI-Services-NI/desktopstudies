@@ -31,6 +31,18 @@
    }
   }
 
+  function scale_dataviews(networks_undrawn){
+   for(let id_dict in networks_undrawn) {
+     let temp_dict_components = networks_undrawn[id_dict]
+     //scale text
+     for (let idx in temp_dict_components.dataViews) {
+       temp_dict = temp_dict_components.dataViews[idx]
+       temp_dict.offset[0] = temp_dict.offset[0] * x_scaling
+       temp_dict.offset[1] = temp_dict.offset[1] * y_scaling
+     }
+   }
+  }
+
   function style_line(line){
     line.dict_styling = {fill: { width: line_palette_style["width"]},
                          stroke: { width: line_palette_style["width"]}}
@@ -231,84 +243,48 @@
     }
     }
 
-  function construct_dataviews(dict_components){
-        for(i in dict_components.dataViews){
-          dv = dict_components.dataViews[i]
-          let text_data = dv.data
-          let pos = [dv.x,dv.y]
-          componentID = dv.componentID
-          let observingComponent = undefined
-          var componentID = dv.componentID
-          if (componentID == ""){
-            componentID = Object.keys(dict_components.lines)[0]
-          }
-          observingComponent = components.lines[componentID]
+  function construct_dataviews(dict_components) {
+      for(let id_dv in dict_components.dataViews){
+        let dataview_ = dict_components.dataViews[id_dv]
+        let componentID = dataview_.componentID
+        let line = components.lines[componentID]
+        let gen = components.generators[componentID]
+        let tx = components.transformers[componentID]
+        let offset = dataview_.offset
+        let observer = undefined
 
-          let group = draw.group()
-          let textObjects = {}
-          observingComponent = components.lines[componentID]
-          if(observingComponent === undefined){
-            observingComponent = components.generators[componentID]
-          }
-
-          callback = function(){
-              for(text in textObjects){
-                textObjects[text].remove()
-              }
-              offset = 0
-              for(i in observingComponent.data){
-                  static_text = text_data["Amps"]
-                  text = observingComponent.data[i] + " " + Abbreviations[i]
-                  pos = static_text.offset
-                  holder = []
-                  add_static_text([text],pos[0]*x_scaling,pos[1]+offset*y_scaling,"yellow",function(object){holder[0] = object})
-                  textObjects[i] = holder[0]
-//                  group.add(holder[0])
-                  offset+=15
-              }
-          }
-
-          observingComponent.data_changed_callback = callback
-
-
-//
-
-//
-//              for(i in data){
-//                  static_text = data[i]
-//                  text = static_text.text
-//                  pos = static_text.offset
-//                  holder = []
-//                  add_static_text([text],pos[0]*x_scaling,pos[1]*y_scaling,"yellow",function(object){holder[0] = object})
-//                  textObjects[i] = holder[0]
-//                  group.add(holder[0])
-//              }
-//
-//          //todo add listener to that component
-//            id = i
-//            let dataview = {drawInfo:dv, UIElement: group, textObjects: textObjects, id : i, componentID : componentID}
-//
-//            //todo decide how it knows what kind of component it's watching...
-//            observingComponent = components.lines[componentID]
-//            observingComponent.addEventListener("component_data_changed",function(event){alert("component changed!")})
-
-
-          observingComponent.data_changed_callback = callback
-}}
-  function destroy_dataviews(dict_components){
-
-      for(i in dict_components.dataViews){
-        dv = dict_components.dataViews[i]
-        data = dv.data
-        pos = [dv.x,dv.y]
-        for(i in data){
-            static_text = data[i]
-            text = static_text.text
-            pos = static_text.offset
-            holder = []
-            add_static_text([text],pos[0]*x_scaling,pos[1]*y_scaling,"yellow",function(object){holder[0] = object})
-            }
+        if(line !== undefined){
+          observer = line.UIElement
+        } else if(gen !== undefined){
+          observer = gen.UIElement
+        } else if(tx !== undefined){
+          observer = tx.UIElement
         }
+
+        add_dataview(observer, "", offset, function (text_object) {
+          components.dataviews[id_dv] = {
+            text: "",
+            observer: observer,
+            text_object: text_object,
+            offset: offset,
+            colour: colour
+          }
+        })
+    }
+  }
+
+  function redraw_dataview(id_dv, text_list){
+    let dataview_ = components.dataviews[id_dv];
+    dataview_.text_object.remove()
+    add_dataview(dataview_.observer, text_list, dataview_.offset, function (text_object) {
+    components.dataviews[id_dv] = {
+        text: text_list,
+        observer: dataview_.observer,
+        text_object: text_object,
+        offset: dataview_.offset,
+        colour: dataview_.colour
+    }
+    })
   }
 
   function construct_SGTs(dict_components){
