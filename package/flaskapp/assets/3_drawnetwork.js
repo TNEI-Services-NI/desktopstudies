@@ -20,10 +20,7 @@
         )
       }
       components.lines[line_] = line_instance
-      if(line_instance.data_changed_callback !== undefined){line_instance.data_changed_callback(line_instance.data)}
-      if(line_instance.data_changed_callback !== undefined){
-        line_instance.data_changed_callback()
-      }
+      if(line_instance.data_changed_callback !== undefined){line_instance.data_changed_callback()}
       //  redraw text labels
     }
   }

@@ -43,6 +43,8 @@ let networks_undrawn = {
     "ewehillwindfarm2": undefined,
 }
 
+Abbreviations = {"lines_active_power": "MW",
+                 "lines_reactive_power": "MVAR"}
 
 var socket = io();
 let current_step = -1  // initial simulation status
