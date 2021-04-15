@@ -5,20 +5,22 @@
       line_instance = components.lines[line_]
       line_instance.data = []
       if (line_id_LF in step_data["lines_active_power"]) {
-        line_instance.data = line_instance.data.concat(
+        line_instance.data["lines_active_power"] = line_instance.data.concat(
           ["Active power: " + step_data["lines_active_power"][line_id_LF] + " MW"]
         )
       }
       if (line_id_LF in step_data["lines_reactive_power"]) {
-        line_instance.data = line_instance.data.concat(
+        line_instance.data["lines_reactive_power"] = line_instance.data.concat(
           ["Reactive power: " + step_data["lines_reactive_power"][line_id_LF] + " MVAr"]
         )
       }
       if (line_id_LF in step_data["busbars_voltage"]) {
-        line_instance.data = line_instance.data.concat(
+        line_instance.data["busbars_voltage"] = line_instance.data.concat(
           ["Voltage: " + step_data["busbars_voltage"][line_id_LF] + " V"]
         )
       }
+      components.lines[line_] = line_instance
+      if(line_instance.data_changed_callback !== undefined){line_instance.data_changed_callback(line_instance.data)}
       if(line_instance.data_changed_callback !== undefined){
         line_instance.data_changed_callback()
       }

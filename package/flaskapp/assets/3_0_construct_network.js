@@ -177,7 +177,7 @@
 
         let id = i
         let t = {info:tx, UIElement: tx.graphic[0], id : id}
-        components.lines[id] = t
+        components.transformers[id] = t
         component_modal(t)
         }
   }
@@ -228,14 +228,18 @@
         let closed = state == 'closed'
         let iso = {drawInfo:isolator, UIElement: isolator.graphic[0], closed: closed, id : id, line : line}
         components.isolators[id] = iso
-    }}
+    }
+    }
 
   function construct_dataviews(dict_components){
-
         for(i in dict_components.dataViews){
           dv = dict_components.dataViews[i]
-          let data = dv.data
+          let text_data = dv.data
+
+          console.log(text_data)
+
           let pos = [dv.x,dv.y]
+          componentID = dv.componentID
           let observingComponent = undefined
           var componentID = dv.componentID
           if (componentID == ""){
@@ -245,26 +249,31 @@
 
           let group = draw.group()
           let textObjects = {}
-
-          if(observingComponent === undefined){
-            observingComponent = components.lines[componentID]
-          }
+          observingComponent = components.lines[componentID]
           if(observingComponent === undefined){
             observingComponent = components.generators[componentID]
           }
+          callback = function(data){
+
+              for(i in text_data){
+              //retrieve again because it's outdated
+                  static_text = text_data[i]
+                  text = data[0] + " " + i
 
           callback = function(){
               for(text in textObjects){
                 textObjects[text].remove()
               }
+              offset = 0
               for(i in data){
-                  static_text = data[i]
+                  static_text = text_data["Amps"]
                   text = observingComponent.data + " " + i
                   pos = static_text.offset
                   holder = []
-                  add_static_text([text],pos[0]*x_scaling,pos[1]*y_scaling,"yellow",function(object){holder[0] = object})
+                  add_static_text([text],pos[0]*x_scaling,pos[1]+offset*y_scaling,"yellow",function(object){holder[0] = object})
                   textObjects[i] = holder[0]
 //                  group.add(holder[0])
+                  offset+=15
               }
           }
 
@@ -293,7 +302,8 @@
 //            observingComponent.addEventListener("component_data_changed",function(event){alert("component changed!")})
             }
   }
-
+          observingComponent.data_changed_callback = callback
+}}
   function destroy_dataviews(dict_components){
 
       for(i in dict_components.dataViews){
