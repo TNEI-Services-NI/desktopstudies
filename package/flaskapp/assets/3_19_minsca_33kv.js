@@ -242,7 +242,7 @@ networks_undrawn["minsca33kv"]={
     },
 
     dataViews:{
-
+        1: new DataView(400,105, ["MW","MVAR","kV","Amps","Hz"]),
     },
 
     SGTs:{
