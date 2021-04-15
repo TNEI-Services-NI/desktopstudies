@@ -41,8 +41,8 @@
     }
   }
   function update_transformer_modals(step_data){
-        for (let tx_ in components.transformers) {
-      tx_instance = components.generators[tx_]
+    for (let tx_ in components.transformers) {
+      tx_instance = components.transformers[tx_]
       tx_instance.data = []
       if (tx_ in step_data["transformers_loading"]) {
         tx_instance.data = tx_instance.data.concat(
