@@ -126,7 +126,7 @@
                     rect.fill({ color: palette["background-color"] })
                     rect.stroke({ color: 'white' })
                 } else if (closed == true){
-                    rect.fill({ color: colour })
+                    rect.fill({ color: breaker.colour })
                     rect.stroke({ color: "white" })
               }
             }
