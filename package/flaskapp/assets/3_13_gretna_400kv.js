@@ -85,13 +85,13 @@ networks_undrawn["gretna400kv"]={
 
     dataViews:{
 
-        "ELVA": new DataView(420,100, ["MVA","MW","MVAR","kV","Amps"]),
-        "HARK": new DataView(90,850, ["MVA","MW","MVAR","kV","Amps"]),
-        "GRNA 780": new DataView(260,850, ["MVA","MW","MVAR","kV","Amps"]),
-        "GRNA 680": new DataView(740,850, ["MVA","MW","MVAR","kV","Amps"]),
-
-        "R1": new DataView(70,410, ["kV"]),
-        "M1": new DataView(70,640, ["kV"]),
+//        "ELVA": new DataView(420,100, ["MVA","MW","MVAR","kV","Amps"]),
+//        "HARK": new DataView(90,850, ["MVA","MW","MVAR","kV","Amps"]),
+//        "GRNA 780": new DataView(260,850, ["MVA","MW","MVAR","kV","Amps"]),
+//        "GRNA 680": new DataView(740,850, ["MVA","MW","MVAR","kV","Amps"]),
+//
+//        "R1": new DataView(70,410, ["kV"]),
+//        "M1": new DataView(70,640, ["kV"]),
 
     },
 

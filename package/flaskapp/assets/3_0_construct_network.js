@@ -241,10 +241,13 @@
             componentID = Object.keys(dict_components.lines)[0]
           }
           observingComponent = components.lines[componentID]
+          let group = draw.group()
+          let textObjects = {}
 
           callback = function(){
-          textObjects = {}
-          var group = draw.group();
+              for(text in textObjects){
+                textObjects[text].remove()
+              }
               for(i in data){
                   static_text = data[i]
                   text = observingComponent.data + " " + i
@@ -252,7 +255,7 @@
                   holder = []
                   add_static_text([text],pos[0]*x_scaling,pos[1]*y_scaling,"yellow",function(object){holder[0] = object})
                   textObjects[i] = holder[0]
-                  group.add(holder[0])
+//                  group.add(holder[0])
               }
           }
 

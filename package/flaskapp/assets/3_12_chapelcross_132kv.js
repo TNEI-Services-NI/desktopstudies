@@ -129,21 +129,21 @@ networks_undrawn["chapelcross132kv"]={
 
     },
     dataViews:{
-        "ECCF-1": new DataView(250,190,"",["MVA", "MW","MVAR","kV","Amps"]),
-        "GRNA-1": new DataView(80,190,"", ["MVA", "MW","MVAR","kV","Amps"]),
-        "DUMF-1": new DataView(420,190,"",["MVA", "MW","MVAR","kV","Amps"]),
-        "GRNA-2": new DataView(560,190,"",["MVA", "MW","MVAR","kV","Amps"]),
-        "ECCF-2": new DataView(700,190,"",["MVA", "MW","MVAR","kV","Amps"]),
-        "DUMF-2": new DataView(870,190,"",["MVA", "MW","MVAR","kV","Amps"]),
-        "HARK": new DataView(950,190, "", ["MVA", "MW","MVAR","kV","Amps"]),
-        "GRID 1": new DataView(350,770,"",["MVA", "MW","MVAR","kV","Amps"]),
-        "GRID 2": new DataView(750,770,"",["MVA", "MW","MVAR","kV","Amps"]),
-
-        "R1 1": new DataView(45,350, "",["kV"]),
-        "M1 1": new DataView(45,590, "",["kV"]),
-
-        "R1 2": new DataView(945,350,"", ["kV"]),
-        "M1 2": new DataView(945,590, "",["kV"]),
+//        "ECCF-1": new DataView(250,190,"",["MVA", "MW","MVAR","kV","Amps"]),
+//        "GRNA-1": new DataView(80,190,"", ["MVA", "MW","MVAR","kV","Amps"]),
+//        "DUMF-1": new DataView(420,190,"",["MVA", "MW","MVAR","kV","Amps"]),
+//        "GRNA-2": new DataView(560,190,"",["MVA", "MW","MVAR","kV","Amps"]),
+//        "ECCF-2": new DataView(700,190,"",["MVA", "MW","MVAR","kV","Amps"]),
+//        "DUMF-2": new DataView(870,190,"",["MVA", "MW","MVAR","kV","Amps"]),
+//        "HARK": new DataView(950,190, "", ["MVA", "MW","MVAR","kV","Amps"]),
+//        "GRID 1": new DataView(350,770,"",["MVA", "MW","MVAR","kV","Amps"]),
+//        "GRID 2": new DataView(750,770,"",["MVA", "MW","MVAR","kV","Amps"]),
+//
+//        "R1 1": new DataView(45,350, "",["kV"]),
+//        "M1 1": new DataView(45,590, "",["kV"]),
+//
+//        "R1 2": new DataView(945,350,"", ["kV"]),
+//        "M1 2": new DataView(945,590, "",["kV"]),
     },
     labels:{
     1: new Text("698 01", ["CHAPELCROSS GSP"], [0,-70]),
