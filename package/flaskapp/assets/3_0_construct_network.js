@@ -236,11 +236,19 @@
           dv = dict_components.dataViews[i]
           let data = dv.data
           let pos = [dv.x,dv.y]
+          let observingComponent = undefined
           var componentID = dv.componentID
           if (componentID == ""){
             componentID = Object.keys(dict_components.lines)[0]
           }
-          observingComponent = components.lines[componentID]
+          if(observingComponent === undefined){
+            observingComponent = components.lines[componentID]
+          }
+          if(observingComponent === undefined){
+            observingComponent = components.generators[componentID]
+          }
+          console.log(componentID);
+          console.log(observingComponent);
 
           callback = function(){
           textObjects = {}

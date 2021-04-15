@@ -30,7 +30,9 @@
           ["Voltage: " + step_data["busbars_voltage"][line_id_LF] + " V"]
         )
       }
-      if(line_instance.data_changed_callback !== undefined){line.data_changed_callback()}
+      if(line_instance.data_changed_callback !== undefined){
+        line_instance.data_changed_callback()
+      }
       //  redraw text labels
     }
   }
