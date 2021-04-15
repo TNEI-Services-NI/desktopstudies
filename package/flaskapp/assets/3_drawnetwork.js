@@ -11,15 +11,22 @@ function reset_global_vars(){
   function update_sim_data(step, step_data){
     steps[step] = step_data
     for (let line_ in components.lines){
-      components.lines[line_].data = step_data[line_]
+      components.lines[line_].data = []
+      components.lines[line_].data = components.lines[line_].data.concat(
+        ["Active power: " + step_data["lines_active_power"][line_] + " MW"]
+      )
+      components.lines[line_].data = components.lines[line_].data.concat(
+        ["Reactive power: " + step_data["lines_reactive_power"][line_] + " MVAr"]
+      )
     }
+  //  redraw text labels
   }
 
   function inc_state(network_){
     current_step += 1;
     console.log(current_step)
     //alert(current_step)
-    fetch_sim_data(current_step, network_, update_sim_data);
+    fetch_sim_data(network_, current_step, option, scenario, update_sim_data);
   }
 
   /**
@@ -53,7 +60,7 @@ function reset_global_vars(){
     prepare_canvas(x, y);
     dict_components = networks_undrawn[network]
     draw_network(dict_components, network, current_step);
-    fetch_sim_data(current_step, network, update_sim_data);
+    fetch_sim_data(network, current_step, option, scenario, update_sim_data);
   }
 
 

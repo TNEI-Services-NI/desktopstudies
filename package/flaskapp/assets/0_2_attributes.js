@@ -6,6 +6,9 @@ let palette = {"400kV":"#0000e6",
   "0V":"#d3d3d3",
   "background-color": "#000000"}
 
+let option = "5"
+let scenario = "1"
+
 let line_palette_style = {'width': 4}
 
 let live_dead = false

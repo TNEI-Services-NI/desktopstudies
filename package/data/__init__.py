@@ -30,14 +30,19 @@ def read_breaker_states(network: str):
     return df_breakerstates
 
 
-def read_restoration_step(network: str, stage: int):
-    restoration_steps = _fetch_files(dir_restoration_steps)
-    filename = restoration_steps[network + "scenario1"]
-    df_restoration = pd.read_csv('/'.join([dir_restoration_steps, filename]),
-                                 dtype={'component': str})
-    df_restoration = df_restoration.set_index("component")
-    df_restoration = df_restoration.loc[:, stage]
-    return df_restoration
+def read_restoration_step(network: str, option: str, scenario: str, stage: int):
+    case_folder = '_'.join([network, 'Opt' + option])
+    dir_opt_scen = '/'.join([dir_restoration_steps, case_folder])
+    dict_filenames = _fetch_files(dir_opt_scen)
+    dict_data = {k: pd.read_csv('/'.join([dir_opt_scen, v]),
+                                 dtype={'Name': str})
+                        .set_index("Name")
+                        .loc[:, 'Stage {}'.format(stage)]
+                        .to_json()
+                 for k, v in dict_filenames.items()}
+    # df_restoration = df_restoration.set_index("component")
+    # df_restoration = df_restoration.loc[:, stage]
+    return dict_data
 
 
 def read_active_network():
@@ -57,22 +62,26 @@ def _filter_format_data(comp_data_):
     comp_data_columns = list(filter(lambda x: type(x) == str, comp_data_.columns))
     comp_data_ = comp_data_.loc[:, comp_data_columns]
 
+    comp_data_ = comp_data_.rename(columns={
+        'Stage - Post Blackout': "Stage -1",
+    })
+
     return comp_data_
 
 
 def get_data_cols(comp_data_):
     comp_cols_ = comp_data_.columns.tolist()
     name_col = comp_cols_.index('Name')
-    post_blackout_col = comp_cols_.index('Stage - Post Blackout')
+    post_blackout_col = comp_cols_.index('Stage -1')
     limit_cols = [x for x in range(name_col + 1, post_blackout_col)]
     stage_cols = [x for x in range(post_blackout_col + 1, len(comp_data_.columns))]
     return {'name': [name_col], 'limits': limit_cols,
             'post_blackout': [post_blackout_col], 'stages': stage_cols}, \
            {'name': ['Name'], 'limits': [comp_cols_[x] for x in limit_cols],
-            'post_blackout': ["Stage - Post Blackout"], 'stages': [comp_cols_[x] for x in stage_cols]}
+            'post_blackout': ["Stage -1"], 'stages': [comp_cols_[x] for x in stage_cols]}
 
 
-def read_LF_file(network="ChapelCross", option="Opt5"):
+def read_LF_file(network="chapelcross33kv", option="Opt5"):
     raw_data_files = _fetch_files(dir_raw_simtool_data, file_type='.xlsx')
     filename = raw_data_files[network + option]
 
@@ -107,4 +116,4 @@ def read_LF_file(network="ChapelCross", option="Opt5"):
 
 
 if __name__ == '__main__':
-    dict_data = read_LF_file("ChapelCross", "Opt5")
+    dict_data = read_LF_file("chapelcross33kv", "Opt5")

@@ -88,16 +88,17 @@ function init_breaker(breakerID){
  * @param callbacks
  * @return {None}
  */
-function fetch_sim_data(stage, network_, callbacks){
+function fetch_sim_data(network_, stage_, option_, scenario_, callbacks){
       $.ajax({
       type: "POST",
       url: "/simtool_bp/get_state/",
-      data: {"stage": stage, "network": network_},
+      data: {"stage": stage_, "network": network_, "option": option_, "scenario": scenario_},
 //      dataType: 'application/json'
-      }).done(function( state ) {
-        state = JSON.parse(state)
-        callbacks(stage, state);
-
+      }).done(function( component_values ) {
+        for(let component_parameter in component_values){
+          component_values[component_parameter] = JSON.parse(component_values[component_parameter])
+        }
+        callbacks(stage_, component_values);
       })
   }
 
@@ -144,7 +145,6 @@ function component_modal(component){
       }
 
       if(type ==="Line"){
-        $('<p>data</p>').appendTo('#dataPopup');
       }
 
       if(type ==="Transformer"){
@@ -152,7 +152,10 @@ function component_modal(component){
       }
 
       if(component.data !== undefined){
-            $('<p> restoration step based data = '+component.data+'</p>').appendTo('#dataPopup');
+          $('<p>restoration step based data:</p>').appendTo('#dataPopup');
+          for(let data_row in component.data){
+            $('<p>'+component.data[data_row]+'</p>').appendTo('#dataPopup');
+          }
       }
       // $('<p>Data:</p>').appendTo('#dataPopup');
 

@@ -1,4 +1,4 @@
-Name,HV (kV),LV (kV),Min Tap,Max Tap,Stage - Post Blackout,Stage 0,Stage 1,Stage 2,Stage 3,Stage 4,Stage 5,Stage 6,Stage 7,Stage 8,Stage 9,Stage 10,Stage 11,Stage 12,Stage 13,Stage 14,Stage 15
+Name,HV (kV),LV (kV),Min Tap,Max Tap,Stage -1,Stage 0,Stage 1,Stage 2,Stage 3,Stage 4,Stage 5,Stage 6,Stage 7,Stage 8,Stage 9,Stage 10,Stage 11,Stage 12,Stage 13,Stage 14,Stage 15
 EWHC3-_EWHC0G_1,33,0.6899999976158142,-2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 CRAG5A_CRAG0A_1,11,0.6899999976158142,-2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 LAHOT2_LAHO20_T2,33,11.0,1,17,9,9,9,9,9,9,9,9,9,9,9,9,8,7,8,8,8
