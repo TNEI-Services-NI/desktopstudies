@@ -20,6 +20,7 @@ let components = {
                     generators: [],
                     isolators:[],
                     text:[],
+                    dataviews:[],
                     transformers:[],
                     SGTs:[]
                 };

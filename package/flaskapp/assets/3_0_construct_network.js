@@ -233,9 +233,9 @@
 
         for(i in dict_components.dataViews){
           dv = dict_components.dataViews[i]
-          data = dv.data
-          pos = [dv.x,dv.y]
-              for(i in data){
+          let data = dv.data
+          let pos = [dv.x,dv.y]
+          for(i in data){
               static_text = data[i]
               text = static_text.text
               pos = static_text.offset
@@ -243,6 +243,22 @@
               add_static_text([text],pos[0]*x_scaling,pos[1]*y_scaling,"yellow",function(object){holder[0] = object})
               }
           }
+  }
+
+  function destroy_dataviews(dict_components){
+
+      for(i in dict_components.dataViews){
+        dv = dict_components.dataViews[i]
+        data = dv.data
+        pos = [dv.x,dv.y]
+        for(i in data){
+            static_text = data[i]
+            text = static_text.text
+            pos = static_text.offset
+            holder = []
+            add_static_text([text],pos[0]*x_scaling,pos[1]*y_scaling,"yellow",function(object){holder[0] = object})
+            }
+        }
   }
 
   function construct_SGTs(dict_components){
