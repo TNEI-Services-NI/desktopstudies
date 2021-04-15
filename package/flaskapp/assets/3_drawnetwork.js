@@ -1,6 +1,7 @@
-function reset_global_vars(){
 
-}
+  function append_modal_data(list_modal_data, dict_step_data, ){
+
+  }
 
   /**
    * callback function for updating step data when it has been retrieved
@@ -8,18 +9,30 @@ function reset_global_vars(){
    * @param {dictionary} data retrieved from this state
    * @return {None}
   **/
-  function update_sim_data(step, step_data){
+  function update_sim_data(step, step_data) {
     steps[step] = step_data
-    for (let line_ in components.lines){
+    for (let line_ in components.lines) {
+      line_id_LF = line_.split("#")[0]
       components.lines[line_].data = []
-      components.lines[line_].data = components.lines[line_].data.concat(
-        ["Active power: " + step_data["lines_active_power"][line_] + " MW"]
-      )
-      components.lines[line_].data = components.lines[line_].data.concat(
-        ["Reactive power: " + step_data["lines_reactive_power"][line_] + " MVAr"]
-      )
+      if (line_id_LF in step_data["lines_active_power"]) {
+        components.lines[line_].data = components.lines[line_].data.concat(
+          ["Active power: " + step_data["lines_active_power"][line_id_LF] + " MW"]
+        )
+      }
+      if (line_id_LF in step_data["lines_reactive_power"]) {
+        components.lines[line_].data = components.lines[line_].data.concat(
+          ["Reactive power: " + step_data["lines_reactive_power"][line_id_LF] + " MVAr"]
+        )
+      }
+      if (line_id_LF in step_data["busbars_voltage"]) {
+        components.lines[line_].data = components.lines[line_].data.concat(
+          ["Voltage: " + step_data["busbars_voltage"][line_id_LF] + " V"]
+        )
+      }
+      //  redraw text labels
     }
-  //  redraw text labels
+
+
   }
 
   function inc_state(network_){

@@ -134,7 +134,7 @@ function component_modal(component){
       $("#dataPopup").css('visibility', 'visible');
       $('#dataPopup').text(type+':');
       $('<p>'+component.id+'</p>').appendTo('#dataPopup');
-
+      $('<p>'+component.id.split("#")[0]+'</p>').appendTo('#dataPopup');
 
       if(type ==="Breaker" || type === "Isolator"){
             $('<p> closed = '+component.closed+'</p>').appendTo('#dataPopup');
