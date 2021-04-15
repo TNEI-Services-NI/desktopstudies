@@ -25,16 +25,17 @@
     }
   }
   function update_generator_modals(step_data){
-        for (let gen_ in components.generators) {
+    let gen_instance;
+    for (let gen_ in components.generators) {
       gen_instance = components.generators[gen_]
-      gen_instance.data = []
+      gen_instance.modal_data = []
       if (gen_ in step_data["generators_active_power"]) {
-        gen_instance.data = gen_instance.data.concat(
+        gen_instance.modal_data = gen_instance.modal_data.concat(
           ["Active power: " + step_data["generators_active_power"][gen_] + " [MW]"]
         )
       }
       if (gen_ in step_data["generators_reactive_power"]) {
-        gen_instance.data = gen_instance.data.concat(
+        gen_instance.modal_data = gen_instance.modal_data.concat(
           ["Reactive power: " + step_data["generators_reactive_power"][gen_] + " [MVAr]"]
         )
       }
@@ -43,9 +44,9 @@
   function update_transformer_modals(step_data){
     for (let tx_ in components.transformers) {
       tx_instance = components.transformers[tx_]
-      tx_instance.data = []
+      tx_instance.modal_data = []
       if (tx_ in step_data["transformers_loading"]) {
-        tx_instance.data = tx_instance.data.concat(
+        tx_instance.modal_data = tx_instance.modal_data.concat(
           ["Utilisation: " + step_data["transformers_loading"][tx_] + " [MVA]"]
         )
       }
@@ -90,7 +91,7 @@
     update_generator_modals(step_data)
     update_transformer_modals(step_data)
   //  redraw text labels
-    update_line_data_views(step_data)
+  //   update_line_data_views(step_data)
   }
 
   function inc_state(network_){

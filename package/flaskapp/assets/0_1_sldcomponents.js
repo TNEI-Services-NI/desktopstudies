@@ -131,7 +131,7 @@ function Breaker(lineID, pos, state = "closed", name=false){
     this.component="Breaker"
     this.lineID = lineID
     this.pos = pos
-    this.state = state
+    this.state = "closed"
     this.size = 15
     this.graphic = []
     this.colour = undefined
