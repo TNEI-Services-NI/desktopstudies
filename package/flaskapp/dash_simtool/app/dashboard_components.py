@@ -6,6 +6,7 @@ import dash_bootstrap_components as dbc
 import dash_daq as daq
 from dash_canvas import DashCanvas
 
+import package.flaskapp.dash_simtool.app.dashboard_styling as styling
 import package.flaskapp.dash_simtool.app as dash_app
 
 import plotly.graph_objs as go
@@ -329,16 +330,25 @@ def hidden_divs():
     return [_login, _user, _redirect]
 
 
-def navbar_controls():
+def navbar_controls(url_page):
     row = html.Div(
         [
             dbc.Nav(
                 [
-                    dbc.NavLink("Home", href=dash_app.URL_HOME, active=True, external_link=True),
-                    dbc.NavLink("SLDs", href=dash_app.URL_SLDS, external_link=True),
-                    dbc.NavLink("Scripts", href=dash_app.URL_SCRIPTS, external_link=True),
-                    dbc.NavLink("About", href=dash_app.URL_ABOUT, external_link=True),
-                    dbc.NavLink("Log out", href='/logout', external_link=True),
+                    dbc.NavLink("Home", href=dash_app.URL_HOME,
+                                active=True if dash_app.URL_HOME == url_page else False,
+                                external_link=True),
+                    dbc.NavLink("SLDs", href=dash_app.URL_SLDS,
+                                active=True if dash_app.URL_SLDS == url_page else False,
+                                external_link=True),
+                    dbc.NavLink("Scripts", href=dash_app.URL_SCRIPTS,
+                                active=True if dash_app.URL_SCRIPTS == url_page else False,
+                                external_link=True),
+                    dbc.NavLink("About", href=dash_app.URL_ABOUT,
+                                active=True if dash_app.URL_ABOUT == url_page else False,
+                                external_link=True),
+                    dbc.NavLink("Log out", href='/logout',
+                                external_link=True),
                 ],
                 vertical=False,
                 pills=True,
@@ -347,3 +357,16 @@ def navbar_controls():
         ]
     )
     return row
+
+
+def navbar(url_page):
+    # nav bar
+    _nav_bar = dbc.NavbarSimple(brand='Desktop Studies Communications Tool',
+                                color='#80361e',
+                                dark=True,
+                                id='nav_bar',
+                                children=navbar_controls(url_page),
+                                fixed="top",
+                                style=styling.NAVBAR_STYLE
+                                )
+    return _nav_bar

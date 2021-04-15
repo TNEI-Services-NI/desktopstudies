@@ -98,8 +98,14 @@ def _configure_database(app):
 
 
 def __load_dash_sim_tool(app):
-    from .dash_simtool.app import init_dashboard
-    app = init_dashboard(app)
+    from .dash_simtool.app.home import init_dashboard as init_home
+    app = init_home(app)
+    from .dash_simtool.app.SLDs import init_dashboard as init_slds
+    app = init_slds(app)
+    from .dash_simtool.app.scripts import init_dashboard as init_scripts
+    app = init_scripts(app)
+    from .dash_simtool.app.about import init_dashboard as init_about
+    app = init_about(app)
     return app
 
 

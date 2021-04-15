@@ -10,7 +10,7 @@ from package.flaskapp import socketio
 # INT IMPORTS
 from package.flaskapp.dash_simtool.app.dashboard_components import init_calendar, init_line, init_graph_layout
 # from package.flaskapp.dash_simtool.app.dataprocessing import format_dfs, calc_success
-from ...auth.routes import login_required
+from package.flaskapp.auth.routes import login_required
 import dash_html_components as html
 import dash_core_components as dcc
 import dash_bootstrap_components as dbc
