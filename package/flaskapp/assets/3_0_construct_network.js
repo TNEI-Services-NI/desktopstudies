@@ -236,14 +236,50 @@
           dv = dict_components.dataViews[i]
           let data = dv.data
           let pos = [dv.x,dv.y]
-          for(i in data){
-              static_text = data[i]
-              text = static_text.text
-              pos = static_text.offset
-              holder = []
-              add_static_text([text],pos[0]*x_scaling,pos[1]*y_scaling,"yellow",function(object){holder[0] = object})
+          var componentID = dv.componentID
+          if (componentID == ""){
+            componentID = Object.keys(dict_components.lines)[0]
+          }
+          observingComponent = components.lines[componentID]
+
+          callback = function(){
+          textObjects = {}
+          var group = draw.group();
+              for(i in data){
+                  static_text = data[i]
+                  text = observingComponent.data + " " + i
+                  pos = static_text.offset
+                  holder = []
+                  add_static_text([text],pos[0]*x_scaling,pos[1]*y_scaling,"yellow",function(object){holder[0] = object})
+                  textObjects[i] = holder[0]
+                  group.add(holder[0])
               }
           }
+
+          observingComponent.data_changed_callback = callback
+
+
+//
+
+//
+//              for(i in data){
+//                  static_text = data[i]
+//                  text = static_text.text
+//                  pos = static_text.offset
+//                  holder = []
+//                  add_static_text([text],pos[0]*x_scaling,pos[1]*y_scaling,"yellow",function(object){holder[0] = object})
+//                  textObjects[i] = holder[0]
+//                  group.add(holder[0])
+//              }
+//
+//          //todo add listener to that component
+//            id = i
+//            let dataview = {drawInfo:dv, UIElement: group, textObjects: textObjects, id : i, componentID : componentID}
+//
+//            //todo decide how it knows what kind of component it's watching...
+//            observingComponent = components.lines[componentID]
+//            observingComponent.addEventListener("component_data_changed",function(event){alert("component changed!")})
+            }
   }
 
   function destroy_dataviews(dict_components){

@@ -9,30 +9,30 @@
    * @param {dictionary} data retrieved from this state
    * @return {None}
   **/
-  function update_sim_data(step, step_data) {
+  function update_sim_data(step, step_data){
     steps[step] = step_data
     for (let line_ in components.lines) {
       line_id_LF = line_.split("#")[0]
-      components.lines[line_].data = []
+      line_instance = components.lines[line_]
+      line_instance.data = []
       if (line_id_LF in step_data["lines_active_power"]) {
-        components.lines[line_].data = components.lines[line_].data.concat(
+        line_instance.data = line_instance.data.concat(
           ["Active power: " + step_data["lines_active_power"][line_id_LF] + " MW"]
         )
       }
       if (line_id_LF in step_data["lines_reactive_power"]) {
-        components.lines[line_].data = components.lines[line_].data.concat(
+        line_instance.data = line_instance.data.concat(
           ["Reactive power: " + step_data["lines_reactive_power"][line_id_LF] + " MVAr"]
         )
       }
       if (line_id_LF in step_data["busbars_voltage"]) {
-        components.lines[line_].data = components.lines[line_].data.concat(
+        line_instance.data = line_instance.data.concat(
           ["Voltage: " + step_data["busbars_voltage"][line_id_LF] + " V"]
         )
       }
+      if(line_instance.data_changed_callback !== undefined){line.data_changed_callback()}
       //  redraw text labels
     }
-
-
   }
 
   function inc_state(network_){
