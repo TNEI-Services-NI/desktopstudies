@@ -65,16 +65,7 @@ function reset_global_vars(){
 
   socket.on('draw', function(data) {
     network = data['network']
-    components = {
-                    breakers: [],
-                    lines: [],
-                    labels:[],
-                    generators: [],
-                    isolators:[],
-                    text:[],
-                    transformers:[],
-                    SGTs:[]
-                }
+    current_step = data['sim_step'];
     master_draw();
   });
 

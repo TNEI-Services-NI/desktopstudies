@@ -14,6 +14,7 @@ from ...auth.routes import login_required
 import dash_html_components as html
 import dash_core_components as dcc
 import dash_bootstrap_components as dbc
+import package.flaskapp.dash_simtool._config as cf
 import package.flaskapp.dash_simtool.app.dashboard_styling as styling
 
 
@@ -68,24 +69,27 @@ def _add_network_redraw(dash_app):
                            Input("minsca33kv", "n_clicks"),
                            Input("ewehillwindfarm1", "n_clicks"),
                            Input("ewehillwindfarm2", "n_clicks"),
-
-
                        ],
                        )
     def _draw_network(chx33, chx132, grt132, grt400,chapgret1,chapgret2,ewehillgretna,stev33kV,minsca33kV,ewe1,ewe2):
         ctx = dash.callback_context
         triggered_object = ctx.triggered[0]
-        if triggered_object['value'] is None:
+        if triggered_object['value'] is None and 'network' not in session:
             network = "chapelcross33kv"
+        elif triggered_object['value'] is None and 'network' in session:
+            network = session['network']
         else:
             network = triggered_object['prop_id'].split('.')[0]
-        socketio.emit('draw', {'network': network})
+        session['network'] = network
+        sim_step = session['sim_step'] if 'sim_step' in session else cf.start_sim_step
+        session['sim_step'] = sim_step
+        socketio.emit('draw', {'network': network, 'sim_step': sim_step})
         return [network]
 
     return dash_app
 
 
-def _add_sidebar_buttons(dash_app):
+def _add_reset_button(dash_app):
     @dash_app.callback([Output("reset_click", "data")],
                        [
                            Input("reset_sim_button", "n_clicks"),
@@ -95,9 +99,14 @@ def _add_sidebar_buttons(dash_app):
         ctx = dash.callback_context
         triggered_object = ctx.triggered[0]
         if not triggered_object['value'] is None:
-            socketio.emit('redraw', {'sim_step': -1})
+            socketio.emit('redraw', {'sim_step': cf.start_sim_step})
+            session['sim_step'] = cf.start_sim_step
         return [reset_button_nclicks]
 
+    return dash_app
+
+
+def _add_sim_progress_buttons(dash_app):
     @dash_app.callback([Output("sim_state", "data"),
                         Output("sim_status_div", "children")],
                        [
@@ -111,17 +120,21 @@ def _add_sidebar_buttons(dash_app):
         triggered_object = ctx.triggered[0]
         if triggered_object['prop_id'].split('.')[0] == 'next_button':
             sim_status += 1
-            print(sim_status)
             socketio.emit('redraw', {'sim_step': sim_status})
         elif triggered_object['prop_id'].split('.')[0] == 'back_button':
-            sim_status -= 1 if sim_status > -1 else 0
-            print(sim_status)
+            sim_status -= 1 if sim_status > cf.start_sim_step else 0
             socketio.emit('redraw', {'sim_step': sim_status})
         else:
-            sim_status = -1  # initial simulation status
+            sim_status = session['sim_step'] if 'sim_step' in session else cf.start_sim_step  # initial simulation status
+        session['sim_step'] = sim_status
         return [sim_status, "Simulation status: {}".format(sim_status)]
 
+    return dash_app
 
+
+def _add_sidebar_buttons(dash_app):
+    dash_app = _add_reset_button(dash_app)
+    dash_app = _add_sim_progress_buttons(dash_app)
     return dash_app
 
 

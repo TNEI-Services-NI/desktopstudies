@@ -10,10 +10,19 @@ let line_palette_style = {'width': 4}
 
 let background = undefined
 let network = undefined
-let components = undefined;
 let dict_components = undefined
 let steps = []
 
+let components = {
+                    breakers: [],
+                    lines: [],
+                    labels:[],
+                    generators: [],
+                    isolators:[],
+                    text:[],
+                    transformers:[],
+                    SGTs:[]
+                };
 let networks_undrawn = {
     "chapelcross33kv": undefined,
     "chapelcross132kv": undefined,
