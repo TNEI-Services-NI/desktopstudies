@@ -23,7 +23,8 @@ function reset_global_vars(){
   }
 
   /**
-   * draws components from dict_components object
+   * draws components from
+   dict_components object
    * @param {Dictionary} dictionary of object prototypes used to build and draw components
    * @return {None}
   **/
@@ -58,10 +59,38 @@ function reset_global_vars(){
 
   // Document Initialisation
   $(document).ready(function(){
+
+
   });
+
+  var x = undefined;
+  var y = undefined;
+  var x_scaling = undefined;
+  var y_scaling = undefined;
+  var font_size = undefined;
+
+  var socket = io();
+//  let current_step = -1
+//  let steps = []
+
+   //Define parent attributes
+ //  var x = document.getElementById('myDiv').clientWidth;
+  x = window.innerWidth;
+  // var y = document.getElementById('myDiv').clientHeight;
+  y = window.innerHeight;
+
+  x_scaling = x/1150
+  y_scaling = y/1050
+
+  font_size = 14 *  Math.min(x_scaling, y_scaling)
+
+  dict_components = undefined
+
+
 
   scale_lines(networks_undrawn);
   scale_labels(networks_undrawn);
+
 
   socket.on('draw', function(data) {
     network = data['network']
