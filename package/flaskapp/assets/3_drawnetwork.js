@@ -27,11 +27,11 @@ function reset_global_vars(){
    * @param {Dictionary} dictionary of object prototypes used to build and draw components
    * @return {None}
   **/
-  function draw_network(dict_components, network_){
+  function draw_network(dict_components, network_, step){
 
     construct_lines(dict_components);
 
-    construct_breakers(dict_components, network_);
+    construct_breakers(dict_components, network_, step);
 
     construct_labels(dict_components);
 
@@ -51,7 +51,7 @@ function reset_global_vars(){
   function master_draw(){
     prepare_canvas(x, y);
     dict_components = networks_undrawn[network]
-    draw_network(dict_components, network);
+    draw_network(dict_components, network, current_step);
     fetch_sim_data(current_step, network, update_sim_data);
   }
 
@@ -60,51 +60,17 @@ function reset_global_vars(){
   $(document).ready(function(){
   });
 
-  var x = undefined;
-  var y = undefined;
-  var x_scaling = undefined;
-  var y_scaling = undefined;
-  var font_size = undefined;
-  let dict_components = undefined
-  let components = undefined;
-
-  var socket = io();
-  let current_step = -1
-  let steps = []
-
-   //Define parent attributes
- //  var x = document.getElementById('myDiv').clientWidth;
-  x = window.innerWidth;
-  // var y = document.getElementById('myDiv').clientHeight;
-  y = window.innerHeight;
-
-  x_scaling = x/1150
-  y_scaling = y/1050
-
-  font_size = 14 *  Math.min(x_scaling, y_scaling)
-
-  dict_components = undefined
-
   scale_lines(networks_undrawn);
   scale_labels(networks_undrawn);
 
   socket.on('draw', function(data) {
     network = data['network']
-    components = {
-                    breakers: [],
-                    lines: [],
-                    labels:[],
-                    generators: [],
-                    isolators:[],
-                    text:[],
-                    transformers:[],
-                    SGTs:[]
-                }
+    current_step = data['sim_step'];
     master_draw();
   });
 
-  socket.on('reset', function() {
-    current_step = -1;
+  socket.on('redraw', function(data) {
+    current_step = data['sim_step'];
     master_draw();
   });
 

@@ -78,8 +78,12 @@ def init_dashboard(server=""):
                 ],
                 id='network_menu'
             ),
-            html.Br(),
+            html.Hr(),
             dbc.Button("Reset simulation", id="reset_sim_button"),
+            dbc.Button("Back", id="back_button", style={"margin-top": "15px"}),
+            dbc.Button("Next", id="next_button", style={"margin-top": "15px", "margin-left": "15px"}),
+            html.Hr(),
+            html.Div(id='sim_status_div', children="Siulation status: -1")
         ],
         style=styling.SIDEBAR_STYLE,
         id='sidebar'
@@ -103,6 +107,7 @@ def init_dashboard(server=""):
                                    dcc.Store(id='network_select'),
                                    dcc.Store(id='side_click'),
                                    dcc.Store(id='reset_click'),
+                                   dcc.Store(id='sim_state'),
                                    _nav_bar,
                                    _sidebar,
                                    _body,

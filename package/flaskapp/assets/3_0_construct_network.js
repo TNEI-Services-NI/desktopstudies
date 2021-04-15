@@ -2,7 +2,6 @@
   function prepare_canvas(x, y){
     //Create canvas
     $('#drawing').empty();
-    draw = SVG('#drawing').size(x, y)
     background = draw.rect(x, y).fill(palette["background-color"])
 
   }
@@ -87,8 +86,8 @@
 
   }
 
-  function construct_breakers(dict_components, network_){
-        init_breakers(network_, dict_components.breakers, function(breakers){
+  function construct_breakers(dict_components, network_, step){
+        init_breakers(network_, dict_components.breakers, step, function(breakers){
         for(let id in breakers){
             //doing this means the inital data, and the SVG elements they make remain unchanged at all times.
             // may be very useful should a redraw/reset be needed...

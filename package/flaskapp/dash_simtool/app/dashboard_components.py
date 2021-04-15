@@ -338,6 +338,7 @@ def navbar_controls():
                     dbc.NavLink("SLDs", href=dash_app.URL_SLDS, external_link=True),
                     dbc.NavLink("Scripts", href=dash_app.URL_SCRIPTS, external_link=True),
                     dbc.NavLink("About", href=dash_app.URL_ABOUT, external_link=True),
+                    dbc.NavLink("Log out", href='/logout', external_link=True),
                 ],
                 vertical=False,
                 pills=True,

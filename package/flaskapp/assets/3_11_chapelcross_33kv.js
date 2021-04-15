@@ -270,7 +270,7 @@ networks_undrawn["chapelcross33kv"] = {
 
         },
     generators:{
-        1: new Generator("CHAP3-_STCR3-_1",1),
+        "STCR5-_1": new Generator("CHAP3-_STCR3-_1",1),
         2: new Generator("781 11",1),
         3: new Generator("785 22",1),
         "MINSCA WF": new Generator("761 GENERATOR", 1),
