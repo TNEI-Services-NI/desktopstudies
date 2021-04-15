@@ -72,17 +72,17 @@ networks_undrawn["gretna132kv"]={
     },
 
     dataViews:{
-    1: new DataView(230,215,["MVA","MW","MVAR","kV","Amps"]),
-    2: new DataView(380,215,["MVA","MW","MVAR","kV","Amps"]),
-    3: new DataView(665,215,["MVA","MW","MVAR","kV","Amps"]),
-    4: new DataView(810,215,["MVA","MW","MVAR","kV","Amps"]),
-
-    5: new DataView(300,815,["MVA","MW","MVAR","kV","Amps"]),
-    6: new DataView(730,815,["MVA","MW","MVAR","kV","Amps"]),
-    7: new DataView(895,815,["MVA","MW","MVAR","kV","Amps"]),
-
-    8: new DataView(75,525,["kV"]),
-    9: new DataView(940,525,["kV"]),
+//    1: new DataView(230,215,["MVA","MW","MVAR","kV","Amps"]),
+//    2: new DataView(380,215,["MVA","MW","MVAR","kV","Amps"]),
+//    3: new DataView(665,215,["MVA","MW","MVAR","kV","Amps"]),
+//    4: new DataView(810,215,["MVA","MW","MVAR","kV","Amps"]),
+//
+//    5: new DataView(300,815,["MVA","MW","MVAR","kV","Amps"]),
+//    6: new DataView(730,815,["MVA","MW","MVAR","kV","Amps"]),
+//    7: new DataView(895,815,["MVA","MW","MVAR","kV","Amps"]),
+//
+//    8: new DataView(75,525,["kV"]),
+//    9: new DataView(940,525,["kV"]),
 
     },
 

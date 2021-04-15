@@ -68,12 +68,12 @@ networks_undrawn["ewehillgretna"]={
     },
 
     dataViews:{
-        1 : new DataView(605,135, ["MW","MVAR","kV","Amps"]),
-        2 : new DataView(340,585, ["MVA","MW","MVAR","kV","Amps"]),
-        3 : new DataView(580,585, ["MVA","MW","MVAR","kV","Amps"]),
-
-        4: new DataView(615,765,["Amps"]),
-        5: new DataView(695,765,["Amps"]),
+//        1 : new DataView(605,135, ["MW","MVAR","kV","Amps"]),
+//        2 : new DataView(340,585, ["MVA","MW","MVAR","kV","Amps"]),
+//        3 : new DataView(580,585, ["MVA","MW","MVAR","kV","Amps"]),
+//
+//        4: new DataView(615,765,["Amps"]),
+//        5: new DataView(695,765,["Amps"]),
 
     },
 
