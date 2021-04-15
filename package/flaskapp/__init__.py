@@ -75,12 +75,21 @@ def __load_dash_views(app):
     app.register_blueprint(dash_route.simtool_bp)
 
 
+def __load_dash_requests(app):
+    # load dash requests
+    from .dash_simtool import requests as dash_requests
+    app.register_blueprint(dash_requests.simtool_bp)
+
+
 def _load_blueprints(app):
     # load auth views
     __load_auth_views(app)
 
     # load dash simulation view
     __load_dash_views(app)
+
+    # load dash simulation requests
+    __load_dash_requests(app)
 
 
 def _configure_database(app):

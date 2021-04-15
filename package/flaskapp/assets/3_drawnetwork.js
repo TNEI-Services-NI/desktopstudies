@@ -1,6 +1,7 @@
-function reset_global_vars(){
 
-}
+  function append_modal_data(list_modal_data, dict_step_data, ){
+
+  }
 
   /**
    * callback function for updating step data when it has been retrieved
@@ -10,10 +11,27 @@ function reset_global_vars(){
   **/
   function update_sim_data(step, step_data){
     steps[step] = step_data
-    for (let line_ in components.lines){
-      line = components.lines[line_]
-      line.data = step_data[line_]
-      if(line.data_changed_callback != undefined){line.data_changed_callback()}
+    for (let line_ in components.lines) {
+      line_id_LF = line_.split("#")[0]
+      line_instance = components.lines[line_]
+      line_instance.data = []
+      if (line_id_LF in step_data["lines_active_power"]) {
+        line_instance.data = line_instance.data.concat(
+          ["Active power: " + step_data["lines_active_power"][line_id_LF] + " MW"]
+        )
+      }
+      if (line_id_LF in step_data["lines_reactive_power"]) {
+        line_instance.data = line_instance.data.concat(
+          ["Reactive power: " + step_data["lines_reactive_power"][line_id_LF] + " MVAr"]
+        )
+      }
+      if (line_id_LF in step_data["busbars_voltage"]) {
+        line_instance.data = line_instance.data.concat(
+          ["Voltage: " + step_data["busbars_voltage"][line_id_LF] + " V"]
+        )
+      }
+      if(line_instance.data_changed_callback !== undefined){line.data_changed_callback()}
+      //  redraw text labels
     }
   }
 
@@ -21,7 +39,7 @@ function reset_global_vars(){
     current_step += 1;
     console.log(current_step)
     //alert(current_step)
-    fetch_sim_data(current_step, network_, update_sim_data);
+    fetch_sim_data(network_, current_step, option, scenario, update_sim_data);
   }
 
   /**
@@ -55,7 +73,7 @@ function reset_global_vars(){
     prepare_canvas(x, y);
     dict_components = networks_undrawn[network]
     draw_network(dict_components, network, current_step);
-    fetch_sim_data(current_step, network, update_sim_data);
+    fetch_sim_data(network, current_step, option, scenario, update_sim_data);
   }
 
 
@@ -98,7 +116,6 @@ function reset_global_vars(){
     network = data['network']
     current_step = data['sim_step'];
     master_draw();
-
   });
 
   socket.on('redraw', function(data) {

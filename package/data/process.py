@@ -2,7 +2,7 @@ import os
 import package.data as data
 
 
-def process_LF_data(network="ChapelCross", option="Opt5"):
+def process_LF_data(network="chapelcross33kv", option="Opt5"):
     net_opt_dir = '\\'.join([data.dir_restoration_steps, '{}_{}'.format(network, option)])
 
     if not os.path.exists(net_opt_dir):
