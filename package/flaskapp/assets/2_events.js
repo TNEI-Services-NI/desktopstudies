@@ -32,6 +32,21 @@ function post_breaker(breakerID,state){
   })
 }
 
+function post_breakers(breakers){
+  let breakers_ = {}
+  for(let idb in breakers){
+    console.log(breakers[idb]['closed'])
+    breakers_[idb] = undefined
+  }
+
+  $.ajax({
+  type: "POST",
+  url: "/simtool_bp/receive_breakers/",
+  data: {"breakers": breakers },
+  }).done(function( data ) {
+  })
+}
+
 /**
  * receives initial states of all breakers through ajax request
  * url parameter of ajax request must reference blueprint specific route to function

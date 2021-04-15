@@ -130,12 +130,12 @@
                     rect.stroke({ color: "white" })
               }
             }
+
             b.UIElement.on("breaker_clicked",function(event){
                 let breaker = components.breakers[id]
                 breaker.setState(!breaker.closed)
-            //        breaker.closed=!breaker.closed
-                post_breaker(id, breaker.closed)
-                inc_state(network_)
+                // post_breakers(components.breakers)
+                inc_state(network_)  // IF correct breaker is clicked
             });
 
             components.breakers[id] = b
