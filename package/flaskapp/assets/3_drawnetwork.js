@@ -11,7 +11,9 @@ function reset_global_vars(){
   function update_sim_data(step, step_data){
     steps[step] = step_data
     for (let line_ in components.lines){
-      components.lines[line_].data = step_data[line_]
+      line = components.lines[line_]
+      line.data = step_data[line_]
+      if(line.data_changed_callback != undefined){line.data_changed_callback()}
     }
   }
 
@@ -96,6 +98,7 @@ function reset_global_vars(){
     network = data['network']
     current_step = data['sim_step'];
     master_draw();
+
   });
 
   socket.on('redraw', function(data) {

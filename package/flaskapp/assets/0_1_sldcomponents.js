@@ -310,11 +310,13 @@ function Isolator(line_id,pos, state = "closed",name=false){
  * @return {None}
  * @usage instantiate as object i.e. new DataView(...)
  */
-function DataView(x,y, data_labels = ["kV", "AMPS","MVAR","MW"]){
+function DataView(x,y, componentID = "", data_labels = ["kV", "AMPS","MVAR","MW"]){
     this.x = x
     this.y = y
     this.data = {}
+    this.componentID = componentID
     offset = 0
+    //todo map for component Values and labels, aids with accessing info
     for(i in data_labels){
         type = data_labels[i]
         this.data[type] = new StaticText("0 " + type,[x,y + offset],"yellow")

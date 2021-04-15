@@ -120,6 +120,7 @@ function init_network(callback){
   }
 
 const breaker_clicked_event = new CustomEvent('breaker_clicked')
+const component_data_changed_event = new CustomEvent('component_data_changed')
 
 /**
  * adds modal to a component which shows when the mouse hovers over it
@@ -130,6 +131,8 @@ function component_modal(component){
   let type = component.info.component
   let group = component.UIElement
     group.mouseenter(function(e){
+
+
       $("#dataPopup").css('visibility', 'visible');
       $('#dataPopup').text(type+':');
       $('<p>'+component.id+'</p>').appendTo('#dataPopup');
