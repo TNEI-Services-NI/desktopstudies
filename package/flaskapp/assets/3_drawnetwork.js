@@ -6,23 +6,49 @@
       line_instance.data = []
       if (line_id_LF in step_data["lines_active_power"]) {
         line_instance.data = line_instance.data.concat(
-          ["Active power: " + step_data["lines_active_power"][line_id_LF] + " MW"]
+          ["Active power: " + step_data["lines_active_power"][line_id_LF] + " [MW]"]
         )
       }
       if (line_id_LF in step_data["lines_reactive_power"]) {
         line_instance.data = line_instance.data.concat(
-          ["Reactive power: " + step_data["lines_reactive_power"][line_id_LF] + " MVAr"]
+          ["Reactive power: " + step_data["lines_reactive_power"][line_id_LF] + " [MVAr]"]
         )
       }
       if (line_id_LF in step_data["busbars_voltage"]) {
         line_instance.data = line_instance.data.concat(
-          ["Voltage: " + step_data["busbars_voltage"][line_id_LF] + " V"]
+          ["Voltage: " + step_data["busbars_voltage"][line_id_LF] + " [p.u.]"]
         )
       }
       if(line_instance.data_changed_callback !== undefined){
         line_instance.data_changed_callback()
       }
-      //  redraw text labels
+    }
+  }
+  function update_generator_modals(step_data){
+        for (let gen_ in components.generators) {
+      gen_instance = components.generators[gen_]
+      gen_instance.data = []
+      if (gen_ in step_data["generators_active_power"]) {
+        gen_instance.data = gen_instance.data.concat(
+          ["Active power: " + step_data["generators_active_power"][gen_] + " [MW]"]
+        )
+      }
+      if (gen_ in step_data["generators_reactive_power"]) {
+        gen_instance.data = gen_instance.data.concat(
+          ["Reactive power: " + step_data["generators_reactive_power"][gen_] + " [MVAr]"]
+        )
+      }
+    }
+  }
+  function update_transformer_modals(step_data){
+        for (let tx_ in components.transformers) {
+      tx_instance = components.generators[tx_]
+      tx_instance.data = []
+      if (tx_ in step_data["transformers_loading"]) {
+        tx_instance.data = tx_instance.data.concat(
+          ["Utilisation: " + step_data["transformers_loading"][tx_] + " [MVA]"]
+        )
+      }
     }
   }
 
@@ -35,6 +61,9 @@
   function update_sim_data(step, step_data){
     steps[step] = step_data
     update_line_modals(step_data)
+    update_generator_modals(step_data)
+    update_transformer_modals(step_data)
+  //  redraw text labels
   }
 
   function inc_state(network_){

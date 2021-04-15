@@ -206,7 +206,11 @@ function component_modal(component){
       $("#dataPopup").css('visibility', 'hidden');
     });
     group.mousemove(function(e){
-      $('#dataPopup').css('top', e.pageY-25);
+      if(e.pageY > (y - $('#dataPopup').height() - 25)){
+        $('#dataPopup').css('top', e.pageY-$('#dataPopup').height());
+      } else {
+        $('#dataPopup').css('top', e.pageY);
+      }
       if(e.pageX > (x - 250)){
         $('#dataPopup').css('left', e.pageX-210);
       } else {
