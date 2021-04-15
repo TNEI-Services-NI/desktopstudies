@@ -154,10 +154,10 @@ function component_modal(component){
             $('<p> type = '+component.info.type+'</p>').appendTo('#dataPopup');
       }
 
-      if(component.data !== undefined){
+      if(component.modal_data !== undefined){
           $('<p>restoration step based data:</p>').appendTo('#dataPopup');
-          for(let data_row in component.data){
-            $('<p>'+component.data[data_row]+'</p>').appendTo('#dataPopup');
+          for(let data_row in component.modal_data){
+            $('<p>'+component.modal_data[data_row]+'</p>').appendTo('#dataPopup');
           }
       }
       // $('<p>Data:</p>').appendTo('#dataPopup');

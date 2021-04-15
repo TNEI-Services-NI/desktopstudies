@@ -3,26 +3,51 @@
         for (let line_ in components.lines) {
       line_id_LF = line_.split("#")[0]
       line_instance = components.lines[line_]
-      line_instance.data = []
+      line_instance.modal_data = []
       if (line_id_LF in step_data["lines_active_power"]) {
-        line_instance.data["lines_active_power"] = line_instance.data.concat(
+        line_instance.modal_data = line_instance.modal_data.concat(
           ["Active power: " + step_data["lines_active_power"][line_id_LF] + " MW"]
         )
       }
       if (line_id_LF in step_data["lines_reactive_power"]) {
-        line_instance.data["lines_reactive_power"] = line_instance.data.concat(
+        line_instance.modal_data = line_instance.modal_data.concat(
           ["Reactive power: " + step_data["lines_reactive_power"][line_id_LF] + " MVAr"]
         )
       }
       if (line_id_LF in step_data["busbars_voltage"]) {
-        line_instance.data["busbars_voltage"] = line_instance.data.concat(
+        line_instance.modal_data = line_instance.modal_data.concat(
           ["Voltage: " + step_data["busbars_voltage"][line_id_LF] + " V"]
         )
+      }
+      components.lines[line_] = line_instance
+      //  redraw text labels
+    }
+  }
+
+  function update_line_data_views(step_data){
+        for (let line_ in components.lines) {
+      line_id_LF = line_.split("#")[0]
+      line_instance = components.lines[line_]
+      line_instance.data = []
+      if (line_id_LF in step_data["lines_active_power"]) {
+        step_data["lines_active_power"][line_id_LF]
+
+      }
+      if (line_id_LF in step_data["lines_reactive_power"]) {
+        line_instance.data["lines_reactive_power"] =
+          step_data["lines_reactive_power"][line_id_LF]
+
+      }
+      if (line_id_LF in step_data["busbars_voltage"]) {
+        line_instance.data["busbars_voltage"] = step_data["busbars_voltage"]
+
       }
       components.lines[line_] = line_instance
       if(line_instance.data_changed_callback !== undefined){line_instance.data_changed_callback()}
       //  redraw text labels
     }
+
+
   }
 
   /**
@@ -34,6 +59,7 @@
   function update_sim_data(step, step_data){
     steps[step] = step_data
     update_line_modals(step_data)
+    update_line_data_views(step_data)
   }
 
   function inc_state(network_){
