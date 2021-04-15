@@ -8,8 +8,9 @@ dir_simtool_data = '\\'.join([dir_data, 'simtool'])
 
 dir_raw_simtool_data = '\\'.join([dir_simtool_data, 'raw'])
 dir_breaker_states = '\\'.join([dir_simtool_data, 'breakerstates'])
-dir_restoration_steps = '\\'.join([dir_simtool_data, 'restorationsteps'])
 dir_active_simulation = '\\'.join([dir_simtool_data, 'activesimulation'])
+
+dir_restoration_steps = '\\'.join([dir_simtool_data, 'restorationsteps'])
 
 dir_auth_data = '\\'.join([dir_data, 'auth'])
 
@@ -51,6 +52,7 @@ def _filter_format_data(comp_data_):
     comp_data_ = comp_data_.iloc[:, 4:]
     comp_data_.columns = comp_data_.iloc[6, :]
     comp_data_ = comp_data_.iloc[7:, :]
+    comp_data_ = comp_data_.loc[~comp_data_.iloc[:, 0].isna(), :]
 
     comp_data_columns = list(filter(lambda x: type(x) == str, comp_data_.columns))
     comp_data_ = comp_data_.loc[:, comp_data_columns]
@@ -70,20 +72,28 @@ def get_data_cols(comp_data_):
             'post_blackout': ["Stage - Post Blackout"], 'stages': [comp_cols_[x] for x in stage_cols]}
 
 
-def read_LF_file(network, option):
+def read_LF_file(network="ChapelCross", option="Opt5"):
     raw_data_files = _fetch_files(dir_raw_simtool_data, file_type='.xlsx')
-    filename = raw_data_files[network+option]
+    filename = raw_data_files[network + option]
 
     dict_data = {'generators': {}, 'busbars': {}, 'lines': {}, 'transformers': {}}
 
-    dict_data['generators']['active_power'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename]), sheet_name='Generators - Active Power')
-    dict_data['generators']['reactive_power'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename]), sheet_name='Generators - Reactive Power')
-    dict_data['busbars']['voltage'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename]), sheet_name='Busbars - Voltage(pu)')
-    dict_data['transformers']['loading'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename]), sheet_name='Transformers - Loading')
-    dict_data['transformers']['taps'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename]), sheet_name='Transformers - Taps')
-    dict_data['lines']['loading'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename]), sheet_name='Lines - Loading')
-    dict_data['lines']['active_power'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename]), sheet_name='Lines - Active Power')
-    dict_data['lines']['reactive_power'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename]), sheet_name='Lines - Reactive Power')
+    dict_data['generators']['active_power'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
+                                                            , sheet_name='Generators - Active Power')
+    dict_data['generators']['reactive_power'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
+                                                              , sheet_name='Generators - Reactive Power')
+    dict_data['busbars']['voltage'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
+                                                    , sheet_name='Busbars - Voltage(pu)')
+    dict_data['transformers']['loading'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
+                                                         , sheet_name='Transformers - Loading')
+    dict_data['transformers']['taps'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
+                                                      , sheet_name='Transformers - Taps')
+    dict_data['lines']['loading'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
+                                                  , sheet_name='Lines - Loading')
+    dict_data['lines']['active_power'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
+                                                       , sheet_name='Lines - Active Power')
+    dict_data['lines']['reactive_power'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
+                                                         , sheet_name='Lines - Reactive Power')
 
     for component, dict_comp_data in dict_data.items():
         for param, comp_data in dict_comp_data.items():
@@ -93,9 +103,8 @@ def read_LF_file(network, option):
                                            'fields_idx': comp_data_columns_idx,
                                            'fields_name': comp_data_columns_name}
 
-    return dict_data[component][param]
+    return dict_data
 
 
 if __name__ == '__main__':
     dict_data = read_LF_file("ChapelCross", "Opt5")
-

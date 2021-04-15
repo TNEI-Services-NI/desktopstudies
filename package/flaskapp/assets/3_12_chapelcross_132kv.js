@@ -47,7 +47,7 @@ networks_undrawn["chapelcross132kv"]={
     "716": StraightLine([240,370],"down",100,"132kV"),
     "714": StraightLine([240,470],"down",100,"132kV"),
         "710": StraightLine([280,465],"down",225,"132kV"),
-        "710 A": StraightLine([280,465],"left",45,"132kV"),
+        "710 A": StraightLine([280,465],"left",40,"132kV"),
 
     "916": StraightLine([150,370],"down",100,"132kV"),
     "914": StraightLine([150,470],"down",100,"132kV"),
