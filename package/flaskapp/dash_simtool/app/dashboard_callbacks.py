@@ -95,8 +95,32 @@ def _add_sidebar_buttons(dash_app):
         ctx = dash.callback_context
         triggered_object = ctx.triggered[0]
         if not triggered_object['value'] is None:
-            socketio.emit('reset')
+            socketio.emit('redraw', {'sim_step': -1})
         return [reset_button_nclicks]
+
+    @dash_app.callback([Output("sim_state", "data"),
+                        Output("sim_status_div", "children")],
+                       [
+                           Input("back_button", "n_clicks"),
+                           Input("next_button", "n_clicks"),
+                       ],
+                       [Input("sim_state", "data")]
+                       )
+    def _progress_sim(back_button_nclicks, next_button_nclicks, sim_status):
+        ctx = dash.callback_context
+        triggered_object = ctx.triggered[0]
+        if triggered_object['prop_id'].split('.')[0] == 'next_button':
+            sim_status += 1
+            print(sim_status)
+            socketio.emit('redraw', {'sim_step': sim_status})
+        elif triggered_object['prop_id'].split('.')[0] == 'back_button':
+            sim_status -= 1 if sim_status > -1 else 0
+            print(sim_status)
+            socketio.emit('redraw', {'sim_step': sim_status})
+        else:
+            sim_status = -1  # initial simulation status
+        return [sim_status, "Simulation status: {}".format(sim_status)]
+
 
     return dash_app
 

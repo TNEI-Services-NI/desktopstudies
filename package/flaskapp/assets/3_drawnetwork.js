@@ -78,8 +78,8 @@ function reset_global_vars(){
     master_draw();
   });
 
-  socket.on('reset', function() {
-    current_step = 0;
+  socket.on('redraw', function(data) {
+    current_step = data['sim_step'];
     master_draw();
   });
 

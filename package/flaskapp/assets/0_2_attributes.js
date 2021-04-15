@@ -30,7 +30,7 @@ let networks_undrawn = {
 
 
 var socket = io();
-let current_step = -1
+let current_step = -1  // initial simulation status
  //Define parent attributes
 //  var x = document.getElementById('myDiv').clientWidth;
 var x = window.innerWidth;
