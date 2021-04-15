@@ -2,101 +2,143 @@
 //scale of 1000 x 1000, readjust with math...
 networks_undrawn["ewehillwindfarm1"]={
     lines:{
-    "M1": StraightLine([60,620],"right",880,"400kV"),
-    "R1": StraightLine([60,430],"right",880,"400kV"),
+    "761": StraightLine([265,90],"right",105,"33kV"),
+    "761 11 A": StraightLine([285,90],"down",30,"33kV"),
+    "761 11 B": StraightLine([285,120],"down",30,"33kV"),
+    "761 11 C": StraightLine([255,150],"right",30,"33kV"),
+    "761 11 D": StraightLine([255,150],"up",80,"33kV"),
 
-    "X606 X604": StraightLine([160,430],"down",190,"400kV"),
-        "HARK A": StraightLine([120,525],"right",40,"400kV"),
-        "HARK": StraightLine([120,525],"down",420,"400kV"),
+    "761 12": StraightLine([345,90],"down",30,"33kV"),
+    "761 CUSTOMER": StraightLine([345,120],"down",85,"33kV"),
+    "761 CUSTOMER A": StraightLine([345,120],"down",85,"33kV"),
+    "761 CUSTOMER B": StraightLine([345,205],"down",55,"33kV"),
 
-    "X516 X514": StraightLine([325,430],"down",190,"400kV"),
-        "GRNA 780 A": StraightLine([285,525],"right",40,"400kV"),
-        "X510": StraightLine([285,525],"down",215,"400kV"),
-        "GRNA 780": StraightLine([285,740],"down",190,"132kV"),
-        "GRNA 780 tx": StraightLine([285,800],"left",40,"132kV"),
+    "EWEHILL1 BUSBAR": StraightLine([325,260],"right",425,"33kV"),
+
+    "CB01 A": StraightLine([365,260],"down",30,"33kV"),
+    "CB01 B": StraightLine([365,290],"down",80,"33kV"),
+
+    "CB02 A": StraightLine([480,260],"down",30,"33kV"),
+    "CB02 B": StraightLine([480,290],"down",80,"33kV"),
+
+    "CB04 A": StraightLine([730,260],"down",30,"33kV"),
+    "CB04 B": StraightLine([730,290],"down",85,"33kV"),
+
+    "WTG04 A": StraightLine([480,370],"right",45,"33kV"),
+    "WTG04 B": StraightLine([505,405],"right",20,"33kV"),
+    "WTG04 C": StraightLine([525,360],"down",60,"33kV"),
+    "WTG04 D": StraightLine([525,390],"right",40,"33kV"),
+    "WTG04 E": StraightLine([565,390],"right",65,"LV"),
+    "WTG04 OUTLINE A": new Line(515,355,680,355,"0V",true),
+    "WTG04 OUTLINE B": new Line(680,355,680,425,"0V",true),
+    "WTG04 OUTLINE C": new Line(515,425,680,425,"0V",true),
+    "WTG04 OUTLINE D": new Line(515,355,515,425,"0V",true),
+
+    "WTG05 A": StraightLine([505,447],"right",20,"33kV"),
+    "WTG05 B": StraightLine([505,482],"right",20,"33kV"),
+    "WTG05 C": StraightLine([525,437],"down",60,"33kV"),
+    "WTG05 D": StraightLine([525,467],"right",40,"33kV"),
+    "WTG05 E": StraightLine([565,467],"right",65,"LV"),
+    "WTG05 OUTLINE A": new Line(515,432,680,432,"0V",true),
+    "WTG05 OUTLINE B": new Line(680,432,680,502,"0V",true),
+    "WTG05 OUTLINE C": new Line(515,502,680,502,"0V",true),
+    "WTG05 OUTLINE D": new Line(515,432,515,502,"0V",true),
+
+    "WTG06 A": StraightLine([505,527],"right",20,"33kV"),
+    "WTG06 C": StraightLine([525,517],"down",60,"33kV"),
+    "WTG06 D": StraightLine([525,547],"right",40,"33kV"),
+    "WTG06 E": StraightLine([565,547],"right",65,"LV"),
+    "WTG06 OUTLINE A": new Line(515,512,680,512,"0V",true),
+    "WTG06 OUTLINE B": new Line(680,512,680,582,"0V",true),
+    "WTG06 OUTLINE C": new Line(515,582,680,582,"0V",true),
+    "WTG06 OUTLINE D": new Line(515,512,515,582,"0V",true),
+
+    "WTG01 A": StraightLine([365,370],"left",45,"33kV"),
+    "WTG01 B": StraightLine([340,405],"left",20,"33kV"),
+    "WTG01 C": StraightLine([320,360],"down",57,"33kV"),
+    "WTG01 D": StraightLine([320,390],"left",40,"33kV"),
+    "WTG01 E": StraightLine([285,390],"left",65,"LV"),
+    "WTG01 OUTLINE A": new Line(165,355,330,355,"0V",true),
+    "WTG01 OUTLINE B": new Line(330,355,330,425,"0V",true),
+    "WTG01 OUTLINE C": new Line(165,425,330,425,"0V",true),
+    "WTG01 OUTLINE D": new Line(165,425,165,355,"0V",true),
+    "WTG02 A": StraightLine([340,447],"left",20,"33kV"),
+    "WTG02 B": StraightLine([340,482],"left",20,"33kV"),
+    "WTG02 C": StraightLine([320,437],"down",57,"33kV"),
+    "WTG02 D": StraightLine([320,467],"left",40,"33kV"),
+    "WTG02 E": StraightLine([285,467],"left",65,"LV"),
+    "WTG02 OUTLINE A": new Line(165,432,330,432,"0V",true),
+    "WTG02 OUTLINE B": new Line(330,432,330,502,"0V",true),
+    "WTG02 OUTLINE C": new Line(165,502,330,502,"0V",true),
+    "WTG02 OUTLINE D": new Line(165,502,165,432,"0V",true),
+    "WTG03 A": StraightLine([340,524],"left",20,"33kV"),
+    "WTG03 C": StraightLine([320,514],"down",57,"33kV"),
+    "WTG03 D": StraightLine([320,544],"left",40,"33kV"),
+    "WTG03 E": StraightLine([285,544],"left",65,"LV"),
+    "WTG03 OUTLINE A": new Line(165,509,330,509,"0V",true),
+    "WTG03 OUTLINE B": new Line(330,509,330,579,"0V",true),
+    "WTG03 OUTLINE C": new Line(165,579,330,579,"0V",true),
+    "WTG03 OUTLINE D": new Line(165,579,165,509,"0V",true),
 
 
-    "X406 X404": StraightLine([485,430],"down",190,"400kV"),
-        "ELVA A": StraightLine([445,525],"right",40, "400kV"),
-        "ELVA": StraightLine([445,525],"up",440, "400kV"),
-        "X447": StraightLine([445,275],"right",135,"400kV"),
-        "X449": StraightLine([445,220],"right",135,"400kV"),
-        "SC1" : StraightLine([530,275],"up",55,"400kV"),
-        "X448": StraightLine([580,220],"down",55,"400kV"),
+    "WTG01 WTG02": new StraightLine([340,403],"down",46,"33kV"),
+    "WTG02 WTG03": new StraightLine([340,480],"down",46,"33kV"),
 
-    "X236 X230 X234": StraightLine([620,430],"down",190,"400kV"),
+    "WTG06 WTG05": new StraightLine([505,481],"down",48,"33kV"),
+    "WTG05 WTG04": new StraightLine([505,403],"down",46,"33kV"),
 
-    "X116 X114": StraightLine([805,430],"down",190,"400kV"),
-        "GRNA 680 A": StraightLine([765,525],"right",40,"400kV"),
-        "X110": StraightLine([765,525],"down",215,"400kV"),
-        "GRNA 680": StraightLine([765,740],"down",190,"132kV"),
-        "GRNA 680 tx": StraightLine([765,800],"left",40,"132kV"),
+
 
     },
 
     breakers:{
-        "X442": new Breaker("ELVA",0.63),
-        "X448": new Breaker("X448",0.5),
-        "X405": new Breaker("ELVA", 0.37),
-        "X230": new Breaker("X236 X230 X234", 0.5),
-        "X110": new Breaker("X110",0.65),
-        "X510": new Breaker("X510",0.65),
-        "X605": new Breaker("HARK",0.332),
+    "761 11": new Breaker("761 11 A",1),
+    "761 12": new Breaker("761 12",1),
+    "761 CUSTOMER": new Breaker("761 CUSTOMER",1),
+    "CB01": new Breaker("CB01 A",1),
+    "CB02": new Breaker("CB02 A",1),
+    "CB04": new Breaker("CB04 A",1),
 
     },
 
     labels:{
-    1: new Text("M1",["M1"],[-465,0]),
-    2: new Text("R1",["R1"],[-465,0]),
-    3: new Text("HARK",["HARK"],[0,225]),
-    4: new Text("GRNA 680",["GRNA 680"],[0,110]),
-    5: new Text("GRNA 780",["GRNA 780"],[0,110]),
-    6: new Text("ELVA",["ELVA"],[0,-240]),
-    7: new Text("M1",["GRETNA 400kV"],[-50,-600]),
+
     },
 
     tx:{
-        "GRNA 780 tx": new Tx("GRNA 780 tx",1,"","", "132kV","LV"),
-        "GRNA 680 tx": new Tx("GRNA 680 tx",1,"","", "132kV","LV"),
+        "EWEHILL 1 Auxiliary": new Tx("CB04 B",1,["AUXILIARY","TRANSFORMER"],"","LV","33kV"),
+
+        "WTG 04 Tx": new Tx("WTG04 D",1,["WTG 04"],"","LV","33kV"),
+        "WTG 05 Tx": new Tx("WTG05 D",1,["WTG 05"],"","LV","33kV"),
+        "WTG 06 Tx": new Tx("WTG06 D",1,["WTG 06"],"","LV","33kV"),
+
+        "WTG 01 Tx": new Tx("WTG01 D",1,["WTG 01"],"","33kV","LV"),
+        "WTG 02 Tx": new Tx("WTG02 D",1,["WTG 02"],"","33kV","LV"),
+        "WTG 03 Tx": new Tx("WTG03 D",1,["WTG 03"],"","33kV","LV"),
+
+
+
     },
 
     isolators:{
-        "X603": new Isolator("HARK",0.5),
-
-        "X604": new Isolator("X606 X604",0.75),
-        "X606": new Isolator("X606 X604",0.25,"open"),
-
-        "X514": new Isolator("X516 X514",0.75),
-        "X516": new Isolator("X516 X514",0.25,"open"),
-
-        "X404": new Isolator("X406 X404",0.75),
-        "X406": new Isolator("X406 X404",0.25,"open"),
-
-        "X234": new Isolator("X236 X230 X234",0.75),
-        "X236": new Isolator("X236 X230 X234",0.25,),
-
-        "X114": new Isolator("X116 X114",0.75),
-        "X116": new Isolator("X116 X114",0.25,"open"),
-
-        "X405": new Isolator("ELVA",0.3),
-        "X447": new Isolator("X447",0.3),
-        "X449": new Isolator("X449",0.3),
     },
 
     dataViews:{
 
-        "ELVA": new DataView(420,100, ["MVA","MW","MVAR","kV","Amps"]),
-        "HARK": new DataView(90,850, ["MVA","MW","MVAR","kV","Amps"]),
-        "GRNA 780": new DataView(260,850, ["MVA","MW","MVAR","kV","Amps"]),
-        "GRNA 680": new DataView(740,850, ["MVA","MW","MVAR","kV","Amps"]),
-
-        "R1": new DataView(70,410, ["kV"]),
-        "M1": new DataView(70,640, ["kV"]),
-
     },
 
     SGTs:{
-        "SGT1": new SGT("X510","SGT1"),
-        "SGT2": new SGT("X110","SGT2"),
+
+    },
+
+    generators:{
+        "WTG 04": new Generator("WTG04 E",1),
+        "WTG 05": new Generator("WTG05 E",1),
+        "WTG 06": new Generator("WTG06 E",1),
+
+        "WTG 01": new Generator("WTG01 E",1),
+        "WTG 02": new Generator("WTG02 E",1),
+        "WTG 03": new Generator("WTG03 E",1),
+
     },
 }
