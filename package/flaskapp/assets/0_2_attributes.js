@@ -8,8 +8,11 @@ let palette = {"400kV":"#0000e6",
 
 let line_palette_style = {'width': 4}
 
-let draw = undefined
 let background = undefined
+let network = undefined
+let components = undefined;
+let dict_components = undefined
+let steps = []
 
 let networks_undrawn = {
     "chapelcross33kv": undefined,
@@ -25,4 +28,19 @@ let networks_undrawn = {
     "ewehillwindfarm2": undefined,
 }
 
-let network = undefined
+
+var socket = io();
+let current_step = -1
+ //Define parent attributes
+//  var x = document.getElementById('myDiv').clientWidth;
+var x = window.innerWidth;
+// var y = document.getElementById('myDiv').clientHeight;
+var y = window.innerHeight;
+
+let draw = SVG('#drawing').size(x, y)
+
+var x_scaling = x/1150
+var y_scaling = y/1050
+
+var font_size = 14 *  Math.min(x_scaling, y_scaling)
+

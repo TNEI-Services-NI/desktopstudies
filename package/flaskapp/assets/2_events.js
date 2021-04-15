@@ -201,6 +201,10 @@ function component_modal(component){
     });
     group.mousemove(function(e){
       $('#dataPopup').css('top', e.pageY-25);
-      $('#dataPopup').css('left', e.pageX+25);
+      if(e.pageX > (x - 250)){
+        $('#dataPopup').css('left', e.pageX-210);
+      } else {
+        $('#dataPopup').css('left', e.pageX+10);
+      }
     });
   }
