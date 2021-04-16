@@ -60,7 +60,9 @@
       colour = palette["0V"]
     }
     line.dict_styling.stroke.color = colour
+    line.dict_styling.stroke.live_color = palette[line.voltage]
     line.dict_styling.fill.color = colour
+    line.dict_styling.fill.live_color = palette[line.voltage]
     // line.dict_styling.stroke.color = palette[line.voltage]
     return line
   }

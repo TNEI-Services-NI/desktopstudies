@@ -11,7 +11,7 @@ let scenario = "1"
 
 let line_palette_style = {'width': 4}
 
-let live_dead = true
+let live_dead = false
 
 let background = undefined
 let network = undefined

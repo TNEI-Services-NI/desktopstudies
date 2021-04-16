@@ -107,21 +107,20 @@
     }
   }
 
-  /**
-   * callback function for updating step data when it has been retrieved
-   * @param {integer} step number
-   * @param {dictionary} data retrieved from this state
-   * @return {None}
-  **/
-  function update_sim_data(step, step_data){
-    steps[step] = step_data;
-    update_line_modals(step_data);
-    update_generator_modals(step_data);
-    update_transformer_modals(step_data);
+  function update_line_colours(step_data_){
 
-    update_dataviews(step_data);
-  //  redraw text labels
-  //   update_line_data_views(step_data)
+    for(let idl in components.lines){
+      let line_instance = components.lines[idl]
+      let line_id_LF = idl.split("#")[0]
+      // alert(Object.keys(line_instance));
+      // alert(line_instance.UIElement);
+      if((step_data_["lines_loading"][line_id_LF] !== 0)&&(step_data_["lines_loading"][line_id_LF] !== undefined)){
+
+        line_instance.info.o_line.attr({stroke: line_instance.info.dict_styling.stroke.live_color});
+      }
+
+    }
+
   }
 
   function inc_state(network_){
@@ -163,7 +162,15 @@
     prepare_canvas(x, y);
     dict_components = networks_undrawn[network]
     draw_network(dict_components, network, current_step);
-    fetch_sim_data(network, current_step, option, scenario, update_sim_data);
+    fetch_sim_data(network, current_step, option, scenario, function(stage_, step_data){
+      steps[stage_] = step_data;
+      update_line_modals(step_data);
+      update_generator_modals(step_data);
+      update_transformer_modals(step_data);
+      update_dataviews(step_data);
+      update_line_colours(step_data);
+      }
+    );
   }
 
 
