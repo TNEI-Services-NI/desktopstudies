@@ -341,14 +341,13 @@ if (dict_line.y1 === dict_line.y2){
 if(live_colour === undefined){
   live_colour = palette[dict_line.voltage]
 }
-
 if(live === true){
   colour = live_colour
 } else {
   colour = palette["0V"]
 }
 if (state === 'open'){
-  circle1 = draw.circle(size, size).center(center[0], center[1]).fill(palette["background-color"]).stroke(colour).stroke({width: 1})
+  circle1 = draw.circle(size, size).center(center[0], center[1]).fill(palette["background-color"]).stroke(colour).stroke({width: 3})
 }
 if (state === 'closed'){
   circle1 = draw.circle(size, size).center(center[0], center[1]).fill(colour).stroke(colour).stroke({width: 1})
