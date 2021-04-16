@@ -17,7 +17,7 @@ function Breaker_Callback(graphic_objects, name = ''){
                 add_text(object, false, [name], 0, -15,"#d3d3d3", function(object){})
             }
             else{
-                add_text(object, false, [name], 9 + name.length*5, 0,"#d3d3d3", function(object){})}
+                add_text(object, false, [name], 3 + name.length*5, 0,"#d3d3d3", function(object){})}
         }
     }
 }
