@@ -8,7 +8,7 @@
  * @return {None}
  */
 function draw_tx(dict_line, tx){
-var rad = 12
+var rad = 16
 var overlapFactor = 0.25
 var circleWidth = 1
 
@@ -160,7 +160,7 @@ callback(group);
  * @return {None}
  */
 function draw_gen(dict_line, position, type, callback){
-var rad = 15;
+var rad = 16;
 var circleWidth = 1;
 
 var bVertical = false;
