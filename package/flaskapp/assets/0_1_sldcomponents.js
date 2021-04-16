@@ -304,6 +304,7 @@ function Inductor(line_id,pos){
 function Isolator(line_id,pos, state = "closed",name=false){
     this.lineID = line_id,
     this.pos = pos,
+    this.size = 15,
     this.state=state,
     this.graphic=[],
     this.name = name,

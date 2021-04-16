@@ -132,7 +132,7 @@ def _add_sim_progress_buttons(dash_app):
         else:
             sim_status = session['sim_step'] if 'sim_step' in session else cf.start_sim_step  # initial simulation status
         session['sim_step'] = sim_status
-        return [sim_status, "Simulation status: {}".format(sim_status)]
+        return [sim_status, "Simulation status: {}".format(cf.step_map[sim_status])]
 
     return dash_app
 

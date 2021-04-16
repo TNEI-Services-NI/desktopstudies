@@ -8,7 +8,7 @@
  * @return {None}
  */
 function draw_tx(dict_line, tx){
-var rad = 12
+var rad = 16
 var overlapFactor = 0.25
 var circleWidth = 1
 
@@ -160,7 +160,7 @@ callback(group);
  * @return {None}
  */
 function draw_gen(dict_line, position, type, callback){
-var rad = 15;
+var rad = 16;
 var circleWidth = 1;
 
 var bVertical = false;
@@ -341,14 +341,13 @@ if (dict_line.y1 === dict_line.y2){
 if(live_colour === undefined){
   live_colour = palette[dict_line.voltage]
 }
-
 if(live === true){
   colour = live_colour
 } else {
   colour = palette["0V"]
 }
 if (state === 'open'){
-  circle1 = draw.circle(size, size).center(center[0], center[1]).fill(palette["background-color"]).stroke(colour).stroke({width: 1})
+  circle1 = draw.circle(size, size).center(center[0], center[1]).fill(palette["background-color"]).stroke(colour).stroke({width: 3})
 }
 if (state === 'closed'){
   circle1 = draw.circle(size, size).center(center[0], center[1]).fill(colour).stroke(colour).stroke({width: 1})
