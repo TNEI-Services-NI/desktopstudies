@@ -2,16 +2,13 @@
 //scale of 1000 x 1000, readjust with math...
 networks_undrawn["ewehillwindfarm2"]={
     lines:{
-    "761": StraightLine([265,90],"right",105,"33kV"),
-    "761 CHAP A": StraightLine([285,90],"down",30,"33kV"),
-    "761 CHAP B": StraightLine([285,120],"down",30,"33kV"),
-    "761 CHAP C": StraightLine([255,150],"right",30,"33kV"),
-    "761 CHAP D": StraightLine([255,150],"up",80,"33kV"),
+    "GT1": StraightLine([345,50],"down",40,"33kV"),
+    "GT1 A": StraightLine([305,100],"right",40,"33kV"),
 
     "761 MINS WF": StraightLine([345,90],"down",30,"33kV"),
-    "761 CUSTOMER": StraightLine([345,120],"down",85,"33kV"),
-    "761 CUSTOMER A": StraightLine([345,120],"down",85,"33kV"),
-    "761 CUSTOMER B": StraightLine([345,205],"down",55,"33kV"),
+    "1L3A": StraightLine([345,120],"down",85,"33kV"),
+    "WG2 A": StraightLine([345,120],"down",85,"33kV"),
+    "WG2 B": StraightLine([345,205],"down",55,"33kV"),
 
     "MINSCA BUSBAR": StraightLine([325,260],"right",425,"33kV"),
 
@@ -73,7 +70,7 @@ networks_undrawn["ewehillwindfarm2"]={
     "WTG14 OUTLINE C": new Line(515,736,680,736,"0V",true),
     "WTG14 OUTLINE D": new Line(515,666,515,736,"0V",true),
 
-    "WTG16 A": StraightLine([505,758],"right",20,"33kV"),
+    "WTG16 A": StraightLine([482,758],"right",44,"33kV"),
     "WTG16 B": StraightLine([505,793],"right",20,"33kV"),
     "WTG16 C": StraightLine([525,748],"down",60,"33kV"),
     "WTG16 D": StraightLine([525,778],"right",40,"33kV"),
@@ -181,7 +178,6 @@ networks_undrawn["ewehillwindfarm2"]={
 
     "WTG15 WTG13": new StraightLine([505,868],"down",46,"33kV"),
     "WTG16 WTG15": new StraightLine([505,791],"down",46,"33kV"),
-    "WTG14 WTG16": new StraightLine([505,714],"down",46,"33kV"),
     "WTG12 WTG14": new StraightLine([505,637],"down",46,"33kV"),
     "WTG12 WTG14": new StraightLine([505,637],"down",46,"33kV"),
     "WTG11 WTG10": new StraightLine([505,481],"down",48,"33kV"),
@@ -197,13 +193,15 @@ networks_undrawn["ewehillwindfarm2"]={
     "WTG11 WTG12 A": StraightLine([483,467],"right",45,"33kV"),
     "WTG11 WTG12 B": new StraightLine([483,467],"down",137,"33kV"),
 
+    "WTG12 WTG16 A": StraightLine([483,621],"right",45,"33kV"),
+    "WTG12 WTG16 B": new StraightLine([483,621],"down",137,"33kV"),
 
     },
 
     breakers:{
 //        "761 CHAP": new Breaker("761 CHAP A",1),
-    "761 MINS WF": new Breaker("761 MINS WF",1),
-    "761 CUSTOMER": new Breaker("761 CUSTOMER",1),
+    "WG2": new Breaker("WG2 A" ,1),
+    "GRID 1A": new Breaker("761 CUSTOMER",1),
     "CB01": new Breaker("CB01 A",1),
     "CB02": new Breaker("CB02 A",1),
     "CB04": new Breaker("CB04 A",1),
@@ -215,6 +213,8 @@ networks_undrawn["ewehillwindfarm2"]={
     },
 
     tx:{
+        "GT1" : new Tx("GT1",0,["GT1 90MVA","TAP 12"],"","33kV","132kV"),
+        "GT1 A": new Tx("GT1 A", 0, "","","33kV","LV"),
         "Minsca Auxiliary": new Tx("CB04 B",1,["AUXILIARY","TRANSFORMER"],"","LV","33kV"),
 
         "WTG 09 Tx": new Tx("WTG09 D",1,["WTG 09"],"","LV","33kV"),
@@ -239,6 +239,8 @@ networks_undrawn["ewehillwindfarm2"]={
     },
 
     isolators:{
+        "1L3A": new Isolator("1L3A" ,1),
+
     },
 
     dataViews:{
