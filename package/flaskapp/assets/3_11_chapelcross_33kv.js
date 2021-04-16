@@ -366,6 +366,7 @@ networks_undrawn["chapelcross33kv"] = {
         //generator
         "STCR5-_1": new DataView("STCR5-_1", [-35, 0]),
         "CRAG0B_1": new DataView("CRAG0B_1", [-35, 0]),
+        "EWHC0G_1": new DataView("EWHC0G_1", [35, 0]),
 
     },
 }
