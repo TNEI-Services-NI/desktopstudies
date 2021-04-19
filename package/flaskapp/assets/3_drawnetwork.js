@@ -103,6 +103,7 @@
           );
         }
       }
+
       redraw_dataview(id_dv, text_list);
     }
   }

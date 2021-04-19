@@ -3,9 +3,9 @@
 networks_undrawn["chapelcross132kv"]={
     lines:{
     "698 01": StraightLine([125,865],"right",700, "33kV"),
-    "GRID T1": StraightLine([280,865],"up",175, "33kV"),
+    "GRID 1": StraightLine([280,865],"up",175, "33kV"),
         "into GRID T1 tx": StraightLine([280,750],"left",40, "33kV"),
-    "GRID T2": StraightLine([665,865],"up",175,"33kV"),
+    "GRID 2": StraightLine([665,865],"up",175,"33kV"),
         "into GRID T2 tx": StraightLine([665,750],"left",40,"33kV"),
 
     "M1": StraightLine([35,570],"right",905,"132kV"),
@@ -63,8 +63,8 @@ networks_undrawn["chapelcross132kv"]={
     },
     breakers:{
         "698 01": new Breaker("698 01", 0.5,"closed"),
-        "GRID T1": new Breaker("GRID T1", 0.3,"open"),
-        "GRID T2": new Breaker("GRID T2",0.3,"open"),
+        "GRID 1": new Breaker("GRID 1", 0.3,"open"),
+        "GRID 2": new Breaker("GRID 2",0.3,"open"),
 
         "710":new Breaker("710",0.7,"open"),
         "120": new Breaker("M1",0.49,"closed"),
@@ -80,10 +80,10 @@ networks_undrawn["chapelcross132kv"]={
 
     },
     tx:{1: new Tx("into GRID T1 tx",1,"","", coil1 = "33kV", coil2 = "LV"),
-        2: new Tx("GRID T1",1,"GRID T1","90MVA",coil1 = "33kV", coil2 = "132kV"),
+        2: new Tx("GRID 1",1,"GRID T1","90MVA",coil1 = "33kV", coil2 = "132kV"),
 
         3: new Tx("into GRID T2 tx",1,"","", coil1 = "33kV", coil2 = "LV"),
-        4: new Tx("GRID T2",1,"GRID T2","90MVA",coil1 = "33kV",coil2 = "132kV"),
+        4: new Tx("GRID 2",1,"GRID T2","90MVA",coil1 = "33kV",coil2 = "132kV"),
         },
     isolators:{
         "1103": new Isolator("GRNA-1",0.7,"closed"),

@@ -3,7 +3,17 @@
     //Create canvas
     $('#drawing').empty();
     background = draw.rect(x, y).fill(palette["background-color"])
-
+    components = {
+                    breakers: [],
+                    lines: [],
+                    labels:[],
+                    generators: [],
+                    isolators:[],
+                    text:[],
+                    dataviews:[],
+                    transformers:[],
+                    SGTs:[]
+                }
   }
 
   function scale_lines(networks_undrawn){
@@ -106,7 +116,7 @@
   }
 
   function construct_breakers(dict_components, network_, step){
-        init_breakers(network_, dict_components.breakers, step, function(breakers){
+        init_breakers(network_, option, dict_components.breakers, step, function(breakers){
         for(let id in breakers){
             //doing this means the inital data, and the SVG elements they make remain unchanged at all times.
             // may be very useful should a redraw/reset be needed...

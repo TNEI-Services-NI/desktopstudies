@@ -21,18 +21,24 @@ def _fetch_files(directory: str, file_type: str = '.csv'):
     return dict_files
 
 
-def read_breaker_states(network: str):
-    breaker_states = _fetch_files(dir_breaker_states)
-    filename = breaker_states[network]
-    df_breakerstates = pd.read_csv('/'.join([dir_breaker_states, filename]))
+def read_breaker_states(network: str, option: str):
+    states_by_option = _fetch_files(dir_breaker_states)
+    option_folder = states_by_option['Opt' + option]
+    dir_option = '/'.join([dir_breaker_states, option_folder])
+    breaker_state_files = _fetch_files(dir_option)
+    filename = breaker_state_files[network]
+
+    df_breakerstates = pd.read_csv('/'.join([dir_option, filename]))
+    df_breakerstates = pd.read_csv('/'.join([dir_option, "allbreakers.csv"]))
+
+    # format data
     df_breakerstates = df_breakerstates.convert_dtypes(convert_string=True)
     df_breakerstates = df_breakerstates.set_index('breaker')
     return df_breakerstates
 
 
 def read_restoration_step(network: str, option: str, scenario: str, stage: int):
-    case_folder = '_'.join([network, 'Opt' + option])
-    dir_opt_scen = '/'.join([dir_restoration_steps, case_folder])
+    dir_opt_scen = '/'.join([dir_restoration_steps, 'Opt' + option, network])
     dict_filenames = _fetch_files(dir_opt_scen)
     dict_data = {k: pd.read_csv('/'.join([dir_opt_scen, v]),
                                  dtype={'Name': str})

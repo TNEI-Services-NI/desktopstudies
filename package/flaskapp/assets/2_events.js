@@ -50,20 +50,20 @@ function post_breakers(breakers){
 /**
  * receives initial states of all breakers through ajax request
  * url parameter of ajax request must reference blueprint specific route to function
- * @param  {string} network of sld
- * @param  {string} voltage section of said network
- * @param  {list} list of breaker prototypes to be drawn once data is received
+ * @param network_
+ * @param option_
+ * @param breakers
+ * @param step
  * @param  {function} callback which interprets/draws a list of breakers.
  * @return {None}
  */
-function init_breakers(network_, breakers, step, callback){
+function init_breakers(network_, option_, breakers, step, callback){
     var breakers_new = breakers
     $.ajax({
       type: "POST",
       url: "/simtool_bp/init_breakers/",
-      data: {"network": network_},
+      data: {"network": network_, "option": option_},
       success: function(breaker_states){
-        //alert(breaker_states);
         for (let breaker in breakers){
           if (breaker_states[step][breaker] === undefined){
             breakers_new[breaker].state = "undefined";

@@ -179,7 +179,6 @@ networks_undrawn["ewehillwindfarm2"]={
     "WTG15 WTG13": new StraightLine([505,868],"down",46,"33kV"),
     "WTG16 WTG15": new StraightLine([505,791],"down",46,"33kV"),
     "WTG12 WTG14": new StraightLine([505,637],"down",46,"33kV"),
-    "WTG12 WTG14": new StraightLine([505,637],"down",46,"33kV"),
     "WTG11 WTG10": new StraightLine([505,481],"down",48,"33kV"),
     "WTG09 WTG11": new StraightLine([505,403],"down",46,"33kV"),
 
@@ -200,11 +199,11 @@ networks_undrawn["ewehillwindfarm2"]={
 
     breakers:{
 //        "761 CHAP": new Breaker("761 CHAP A",1),
-    "WG2": new Breaker("WG2 A" ,1),
-    "GRID 1A": new Breaker("761 CUSTOMER",1),
-    "CB01": new Breaker("CB01 A",1),
-    "CB02": new Breaker("CB02 A",1),
-    "CB04": new Breaker("CB04 A",1),
+    "WG2": new Breaker("WG2 A" ,0.5),
+    // "GRID 1A": new Breaker("761 CUSTOMER",1),
+    // "CB01": new Breaker("CB01 A",1),
+    // "CB02": new Breaker("CB02 A",1),
+    // "CB04": new Breaker("CB04 A",1),
 
     },
 

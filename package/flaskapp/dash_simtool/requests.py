@@ -19,7 +19,9 @@ def receive_breaker():
 @login_required
 def init_breakers():
     data = request.form
-    df_breakerstates = simtool_data.read_breaker_states(data['network'])
+    network = data['network']
+    option = data['option']
+    df_breakerstates = simtool_data.read_breaker_states(network, option)
     return jsonify(df_breakerstates.to_dict())
 
 
