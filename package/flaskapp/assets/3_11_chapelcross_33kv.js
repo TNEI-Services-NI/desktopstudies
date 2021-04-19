@@ -16,12 +16,12 @@ networks_undrawn["chapelcross33kv"] = {
         "698 16": StraightLine([33,175], "down",85),
             "chapelcross dash": StraightLine([15,240],"right",35, dash=true),
         "CHAP3-_STCR3-_1": StraightLine([85,175], "down",300),
-            "STCR5-": StraightLine([25,370],"right",90),
-            "generator dash": StraightLine([70,440],"right",35,dash=true),
+            "STCR3-": StraightLine([25,370],"right",90),
+            "STCR5-": StraightLine([70,440],"right",35),
         "ANANT1_CHAP3-_1#1": StraightLine([145,175],"down",105),
             "ANANT1_CHAP3-_1#2": StraightLine([145,280], "right",150),
-        "CHAPX1_LOBI3A_1": StraightLine([250,175],"down",225),
-            "into DUMF": StraightLine([250,340],"left",90),
+        "CHAPX1_LOBI3A_1#0": StraightLine([250,175],"down",225),
+            "CHAPX1_LOBI3A_1#1": StraightLine([250,340],"left",90),
         "GRID 1": StraightLine([330,175],"up",120),
             "into DAR tx":StraightLine([330,110],"left",40),
         "CHAP3-_MIBI3-_1#0": StraightLine([415,175],"down",75),
@@ -42,27 +42,28 @@ networks_undrawn["chapelcross33kv"] = {
             "into Lockerbie 2":StraightLine([530,310],"down",90),
         "GRID 2": StraightLine([670,175],"up",115),
             "into GRID 2 tx": StraightLine([670,110],"left",40),
-        "698 23": StraightLine([700,175],"down",105),
+        "ANANT2_CHAP3-_1#0": StraightLine([700,175],"down",105),
         "CHAP3-_MINS3-_1#0": StraightLine([780,175],"down",110),
         "698 25": StraightLine([840,175],"down",60),
         "698 26": StraightLine([900,175],"down",75),
-        "694": StraightLine([230,400],"right",350),
+        "LOBI5-1": StraightLine([230,400],"right",175),
+        "LOBI5-2": StraightLine([230+175,400],"right",175),
 
         "LOCKERBIE13":StraightLine([265,400],"down",240),
 
         //Middlebie
-        "M12": StraightLine([95,525],"down",50),
-        "Middlebie": StraightLine([65,575],"right",175),
-        "M13": StraightLine([80,575],"down",160),
+        "CHAP3-_MIBI3-_1": StraightLine([95,525],"down",50),
+        "MIBI3-": StraightLine([65,575],"right",175),
+        "EWHC3-_MIBI3-_1#0": StraightLine([80,575],"down",160),
         "M14": StraightLine([160,575],"down",190),
         "M11": StraightLine([205,575],"down",120),
 
-        "into EWE HILL 1": StraightLine([80,735],"left",50),
-        "into EWE HILL 2": StraightLine([30,735],"down",150),
-        "into EWE HILL 3": StraightLine([30,885],"right",30),
-        "781 12": StraightLine([60,885],"up",80),
-        "EWE HILL": StraightLine([45,805],"right",85),
-        "781 11": StraightLine([115,805],"down",90),
+        "EWHC3-_MIBI3-_1#1": StraightLine([80,735],"left",50),
+        "EWHC3-_MIBI3-_1#2": StraightLine([30,735],"down",150),
+        "EWHC3-_MIBI3-_1#3": StraightLine([30,885],"right",30),
+        "EWHC3-_MIBI3-_1#4": StraightLine([60,885],"up",80),
+        "EWHC3-": StraightLine([45,805],"right",85),
+        "EWHC3-_EWHC0G_1": StraightLine([115,805],"down",90),
 
         "Middlebie Primary Transformer": StraightLine([205,695],"right",25),
         "MP10": StraightLine([230,695],"right",50,"11kV"),
@@ -82,17 +83,18 @@ networks_undrawn["chapelcross33kv"] = {
 
         "Langholm to gretna 1": StraightLine([525,855],"up",175),
         "Langholm to gretna 2": StraightLine([525,680],"right",90),
-        "Langholm to gretna 3": StraightLine([615,680],"up",300),
+        "CHAP3-_CHAPX3_1#2": StraightLine([615,680],"up",300),
 
-        "ANNAN10": StraightLine([340,280],"left",50, "11kV"),
-        "into 662 1": StraightLine([340,280],"down",35, "11kV"),
-        "662 01": StraightLine([310,315],"right",105, "11kV"),
-        "into 662 2": StraightLine([385,280],"down",35, "11kV"),
-        "ANNAN20": StraightLine([385,280],"right",50, "11kV"),
+        "ANANT1_ANAN10_T1#0": StraightLine([340,280],"left",50, "11kV"),
+        "ANANT1_ANAN10_T1#1": StraightLine([340,280],"down",35, "11kV"),
+        "ANAN5-1": StraightLine([310,315],"right",52, "11kV"),
+        "ANAN5-2": StraightLine([310+52,315],"right",53, "11kV"),
+        "ANANT2_ANAN20_T2#1": StraightLine([385,280],"down",35, "11kV"),
+        "ANANT2_ANAN20_T2#0": StraightLine([385,280],"right",50, "11kV"),
 
-        "698 23 into Annan": StraightLine([435,280],"right",265),
+        "ANANT2_CHAP3-_1#1": StraightLine([435,280],"right",265),
 
-        "698 21 into gretna 1": StraightLine([570,380],"right",45),
+        "CHAP3-_CHAPX3_1#1": StraightLine([570,380],"right",45),
 
         "KIRKBANK T": StraightLine([265,550],"right",75),
         "MOFFAT T1": StraightLine([265,640],"right",75),
@@ -144,11 +146,11 @@ networks_undrawn["chapelcross33kv"] = {
         "CHAP3-_MINS3-_1#5": StraightLine([850,670],"right",30),
 
         "CHAP3-_MINS3-_1#6": StraightLine([880,670],"up",60),
-        "761": StraightLine([870,610],"right",105),
-        "761 WINDFARM": StraightLine([940,610],"down",30),
-        "761 CUSTOMER": StraightLine([940,690],"up",50),
-        "761 GENERATOR": StraightLine([940,690],"down",60),
-        "761 DASH": StraightLine([925,660],"right",30),
+        "MINS3-": StraightLine([870,610],"right",105),
+        "MINS3-_MINS0G_1#0": StraightLine([940,610],"down",30),
+        "MINS3-_MINS0G_1#1": StraightLine([940,690],"up",50),
+        "MINS3-_MINS0G_1#2": StraightLine([940,690],"down",60),
+        "MINS0G": StraightLine([925,660],"right",30),
 
         "NEWCASTLETON 1": StraightLine([585,820],"up",30),
         "NEWCASTLETON 2": StraightLine([585,820],"right",50),
@@ -170,17 +172,17 @@ networks_undrawn["chapelcross33kv"] = {
     breakers:{
         "698 16": new Breaker("698 16",0.25),
         "698 15": new Breaker("CHAP3-_STCR3-_1",0.07),
-        "699 CHAP": new Breaker("CHAP3-_STCR3-_1",0.60, "CHAP"),
-        "699 GENERATOR": new Breaker("CHAP3-_STCR3-_1",0.85,"open",name = ""),
+        "699 CHAP": new Breaker("CHAP3-_STCR3-_1",0.58, "CHAP"),
+        "699 GENERATOR": new Breaker("CHAP3-_STCR3-_1",0.8,"open",name = ""),
         "698 14": new Breaker("ANANT1_CHAP3-_1#1",0.19),
-        "698 13": new Breaker("CHAPX1_LOBI3A_1",0.1),
+        "698 13": new Breaker("CHAPX1_LOBI3A_1#0",0.1),
         "GRID 1": new Breaker("GRID 1",0.2),
         "698 12": new Breaker("CHAP3-_MIBI3-_1#0",0.3),
         "698 11": new Breaker("CHAP3-_GRNA3B_1#0",0.3),
         "698 01": new Breaker("CHAP3A1",1),
         "698 21": new Breaker("CHAP3-_CHAPX3_1#0",0.11),
         "698 22": new Breaker("698 22",0.16),
-        "698 23": new Breaker("698 23",0.19),
+        "698 23": new Breaker("ANANT2_CHAP3-_1#0",0.19),
         "698 24": new Breaker("CHAP3-_MINS3-_1#0",0.19),
         "698 25": new Breaker("698 25",0.31),
         "698 26": new Breaker("698 26",0.26),
@@ -188,17 +190,17 @@ networks_undrawn["chapelcross33kv"] = {
         "678 12": new Breaker("378 12",0.3),
         "GRID 2": new Breaker("GRID 2",0.2),
 
-        "694": new Breaker("694",0.53),
+        "694": new Breaker("LOBI5-1",1),
 
         //some of these below are arc breakers
 
-        "780 12": new Breaker("M12",0.5,"12"),
-        "780 13": new Breaker("M13",0.1,"13"),
+        "780 12": new Breaker("CHAP3-_MIBI3-_1",0.5,"12"),
+        "780 13": new Breaker("EWHC3-_MIBI3-_1#0",0.1,"13"),
         "780 14": new Breaker("M14",0.08,"14"),
         "780 11": new Breaker("M11",0.12,"11"),
 
-        "781 12": new Breaker("781 12",0.65,"12"),
-        "781 11": new Breaker("781 11",0.3,"11"),
+        "781 12": new Breaker("EWHC3-_MIBI3-_1#4",0.65,"12"),
+        "781 11": new Breaker("EWHC3-_EWHC0G_1",0.3,"11"),
 
         "682 10": new Breaker("MP10",0.6,"10"),
 
@@ -208,9 +210,9 @@ networks_undrawn["chapelcross33kv"] = {
         "676 01": new Breaker("Langholm01",0.5,"01"),
         "676 20": new Breaker("Langholm20",0.4,"20"),
 
-        "662 10": new Breaker("ANNAN10",0.3,"10"),
-        "662 01": new Breaker("662 01",0.5,"01"),
-        "662 20": new Breaker("ANNAN20",0.3,"20"),
+        "662 10": new Breaker("ANANT1_ANAN10_T1#0",0.3,"10"),
+        "662 01": new Breaker("ANAN5-1",1,"01"),
+        "662 20": new Breaker("ANANT2_ANAN20_T2#0",0.3,"20"),
 
         "694 13": new Breaker("LOCKERBIE13",0.1,"13"),
 
@@ -233,8 +235,8 @@ networks_undrawn["chapelcross33kv"] = {
         "673 20": new Breaker("673 20",0.25,"20"),
 
         "761 CHAP": new Breaker("CHAP3-_MINS3-_1#6",0.55,"CHAP"),
-        "761 WINDFARM": new Breaker("761 WINDFARM",1,"WINDFARM"),
-        "761 CUSTOMER": new Breaker("761 CUSTOMER",0,"CUSTOMER"),
+        "761 WINDFARM": new Breaker("MINS3-_MINS0G_1#0",1,"WINDFARM"),
+        "761 CUSTOMER": new Breaker("MINS3-_MINS0G_1#1",0,"CUSTOMER"),
 
         "123 10": new Breaker("123 10",0.25,"10"),
         "123 12": new Breaker("123 12",0.7,"12"),
@@ -257,7 +259,7 @@ networks_undrawn["chapelcross33kv"] = {
         6: new Tx("Langholm tx 33kV",1,"T1","12 MVA","11kV"),
         7: new Tx("Langholm Tx2",1,"T2","12 MVA","33kV","11kV"),
         "ANANT1_ANAN10_T1": new Tx("ANANT1_CHAP3-_1#2",1,"T1","12 MVA","11kV"),
-        "ANANT2_ANAN20_T2": new Tx("ANNAN20",1,"T2","12 MVA","33kV","11kV"),
+        "ANANT2_ANAN20_T2": new Tx("ANANT2_ANAN20_T2#0",1,"T2","12 MVA","33kV","11kV"),
         "KIBAT1_KIBA10_T1": new Tx("KIRKBANK T",1,"","5VA","11kV"),
         "MOFTT1_MOFT10_T1": new Tx("MOFFAT T1",1,"T1","7.5 MVA","11kV"),
         "MOFTT1_MOFT10_T2": new Tx("MOFFAT20",1,"T2","7.5 MVA","33kV","11kV"),
@@ -273,9 +275,9 @@ networks_undrawn["chapelcross33kv"] = {
         },
     generators:{
         "STCR5-_1": new Generator("CHAP3-_STCR3-_1",1),
-        "EWHC0G_1": new Generator("781 11",1),
+        "EWHC0G_1": new Generator("EWHC3-_EWHC0G_1",1),
         "CRAG0B_1": new Generator("CRAG5B_LAHO5-_1",1),
-        "MINS0G_1": new Generator("761 GENERATOR", 1),
+        "MINS0G_1": new Generator("MINS3-_MINS0G_1#2", 1),
         5: new Generator("378 12",1),
         },
     labels:{
@@ -286,22 +288,22 @@ networks_undrawn["chapelcross33kv"] = {
     4: new Text("698 16", ["CHAPELCROSS"],[0,50]),
     5: new Text("698 16", ["NO1"],[0,65]),
 
-    6: new Text("Middlebie", ["MIDDLEBIE"],[20,-40]),
-    7: new Text("Middlebie", ["33KV SW/STN"],[20,-25]),
-    8: new Text("Middlebie", ["780"],[20,-10]),
+    6: new Text("MIBI3-", ["MIDDLEBIE"],[20,-40]),
+    7: new Text("MIBI3-", ["33KV SW/STN"],[20,-25]),
+    8: new Text("MIBI3-", ["780"],[20,-10]),
 
-    9: new Text("EWE HILL", ["EWE HILL"],[0,-40]),
-    10: new Text("EWE HILL", ["WINDFARM"],[0,-25]),
-    11: new Text("EWE HILL", ["781"],[0,-10]),
+    9: new Text("EWHC3-", ["EWE HILL"],[0,-40]),
+    10: new Text("EWHC3-", ["WINDFARM"],[0,-25]),
+    11: new Text("EWHC3-", ["781"],[0,-10]),
 
     12: new Text("MP", ["MIDDLEBIE "],[5,-40]),
     13: new Text("MP", ["PRIMARY"],[5,-25]),
     14: new Text("MP", ["682"],[5,-10]),
 
-    15: new Text("694", ["LOCKERBIE 33KV"],[10,-40]),
+    15: new Text("LOBI5-1", ["LOCKERBIE 33KV"],[10,-40]),
 
-    16: new Text("662 01", ["ANNAN"],[0,-45]),
-    17: new Text("662 01", ["662"],[0,-30]),
+    16: new Text("ANAN5-1", ["ANNAN"],[25,-45]),
+    17: new Text("ANAN5-1", ["662"],[25,-30]),
 
     18: new Text("679 01", ["LOCKERBIE"],[3,-45]),
     19: new Text("679 01", ["679"],[3,-30]),
@@ -321,13 +323,13 @@ networks_undrawn["chapelcross33kv"] = {
     29: new Text("Langholm01", ["LANGHOLM 33KV"],[0,-65]),
     30: new Text("Langholm01", ["692"],[0,-45]),
 
-    31: new Text("STCR5-", ["STEVENS CROFT"],[-25,-45]),
-    32:new Text("STCR5-", ["33KV"],[-25,-30]),
-    33:new Text("STCR5-", ["699"],[-25,-15]),
+    31: new Text("STCR3-", ["STEVENS CROFT"],[-25,-45]),
+    32:new Text("STCR3-", ["33KV"],[-25,-30]),
+    33:new Text("STCR3-", ["699"],[-25,-15]),
 
-    34:new Text("into DUMF", ["CARRUTHERSTOWN"],[-55,-15]),
-    35:new Text("into DUMF", ["33 kV"],[-59,0]),
-    36:new Text("into DUMF", ["DUMF"],[-50,-30]),
+    34:new Text("CHAPX1_LOBI3A_1#1", ["CARRUTHERSTOWN"],[-55,-15]),
+    35:new Text("CHAPX1_LOBI3A_1#1", ["33 kV"],[-59,0]),
+    36:new Text("CHAPX1_LOBI3A_1#1", ["DUMF"],[-50,-30]),
 
     37:new Text("GRETNA 691", ["GRETNA 33kV"],[0,-30]),
     38:new Text("GRETNA 691", ["691"],[0,-15]),
@@ -341,8 +343,8 @@ networks_undrawn["chapelcross33kv"] = {
     43: new Text("785 B", ["CRAIG II WINDFARM 11KV"],[20,-30]),
     44: new Text("785 B",["785"],[20,-15]),
 
-    45: new Text("761",["MINSCA 33KV"],[0,-30]),
-    46: new Text("761",["761"],[0,-15]),
+    45: new Text("MINS3-",["MINSCA 33KV"],[0,-30]),
+    46: new Text("MINS3-",["761"],[0,-15]),
 
     47: new Text("698 25",["CHAPELCROSS"],[0,40]),
     48: new Text("698 25",["NO2"],[0,55]),
@@ -357,7 +359,7 @@ networks_undrawn["chapelcross33kv"] = {
         "ANANT1_CHAP3-_1": new DataView("ANANT1_CHAP3-_1#1", [-25, 0]),
         "CRAG5B_LAHO5-_1": new DataView("CRAG5B_LAHO5-_1", [65, -60]),
         "CHAP3-_MINS3-_1": new DataView("CHAP3-_MINS3-_1#2", [35, 0]),
-        "CHAPX1_LOBI3A_1": new DataView("CHAPX1_LOBI3A_1", [-25, -75]),
+        "CHAPX1_LOBI3A_1": new DataView("CHAPX1_LOBI3A_1#0", [-25, -75]),
         "CHAP3-_MIBI3-_1": new DataView("CHAP3-_MIBI3-_1#0", [-25, 0]),
         "CHAP3-_GRNA3B_1": new DataView("CHAP3-_GRNA3B_1#0", [-25, 0]),
         "CHAP3-_CHAPX3_1": new DataView("CHAP3-_CHAPX3_1#0", [-25, -60]),

@@ -145,6 +145,7 @@ const component_data_changed_event = new CustomEvent('component_data_changed')
  */
 function component_modal(component){
   let type = component.info.component
+  let loc = [0, 0]
   let group = component.UIElement
     group.mouseenter(function(e){
 
@@ -174,6 +175,8 @@ function component_modal(component){
           for(let data_row in component.modal_data){
             $('<p>'+component.modal_data[data_row]+'</p>').appendTo('#dataPopup');
           }
+
+      $('<p id="loc">'+loc+'</p>').appendTo('#dataPopup');
       }
       // $('<p>Data:</p>').appendTo('#dataPopup');
 
@@ -221,6 +224,8 @@ function component_modal(component){
       $("#dataPopup").css('visibility', 'hidden');
     });
     group.mousemove(function(e){
+      loc = [e.pageX, e.pageY]
+      // $("#loc").children(loc[0] + ", " + l)
       if(e.pageY > (y - $('#dataPopup').height() - 25)){
         $('#dataPopup').css('top', e.pageY-$('#dataPopup').height());
       } else {

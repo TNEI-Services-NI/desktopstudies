@@ -113,15 +113,45 @@
     for(let idl in components.lines){
       let line_instance = components.lines[idl]
       let line_id_LF = idl.split("#")[0]
-      // alert(Object.keys(line_instance));
-      // alert(line_instance.UIElement);
-      if((step_data_["lines_loading"][line_id_LF] !== 0)&&(step_data_["lines_loading"][line_id_LF] !== undefined)){
+      if(((step_data_["lines_loading"][line_id_LF] !== 0)&&(step_data_["lines_loading"][line_id_LF] !== undefined))||
+        ((step_data_["busbars_voltage"][line_id_LF] !== 0)&&(step_data_["busbars_voltage"][line_id_LF] !== undefined))||
+        ((step_data_["transformers_loading"][line_id_LF] !== 0)&&(step_data_["transformers_loading"][line_id_LF] !== undefined))){
 
         line_instance.info.o_line.attr({stroke: line_instance.info.dict_styling.stroke.live_color});
       }
 
     }
 
+  }
+
+  function update_breaker_colours(step_data_){
+    for(let idb in components.breakers){
+      let breaker_instance = components.breakers[idb]
+      let idl = breaker_instance.line.line_idx
+      let line_id_LF = idl.split("#")[0]
+      if(((step_data_["lines_loading"][line_id_LF] !== 0)&&(step_data_["lines_loading"][line_id_LF] !== undefined))||
+        ((step_data_["busbars_voltage"][line_id_LF] !== 0)&&(step_data_["busbars_voltage"][line_id_LF] !== undefined))||
+        ((step_data_["transformers_loading"][line_id_LF] !== 0)&&(step_data_["transformers_loading"][line_id_LF] !== undefined))){
+        breaker_instance.UIElement.attr({
+          'stroke': breaker_instance.line.dict_styling.stroke.live_color,
+          'fill': breaker_instance.line.dict_styling.stroke.live_color
+        })
+      }
+    }
+  }
+
+  function update_generator_colours(step_data_){
+    for(let idg in components.generators){
+      let gen_instance = components.generators[idg]
+      let idl = gen_instance.info.lineID
+      let line_instance = components.lines[idl]
+      let line_id_LF = idl.split("#")[0]
+      if((step_data_["generators_active_power"][idg] !== 0)&&(step_data_["generators_active_power"][idg] !== undefined)){
+        gen_instance.UIElement.find('.circle-class').attr({
+          'stroke': line_instance.info.dict_styling.stroke.live_color
+        })
+      }
+    }
   }
 
   function inc_state(network_){
@@ -137,6 +167,18 @@
    * @return {None}
   **/
   function draw_network(dict_components, network_, step){
+
+    var text1 = draw.text("test")
+    .font({size: 15, family: 'Helvetica'}).fill({color: "white"})
+
+    text1.x_coord = x*0.5*x_scaling
+    text1.y_coord = y*y_scaling
+    text1.center(text1.x_coord, text1.y_coord);
+
+    svg.addEventListener('mousemove',function(evt){
+      var loc = cursorPoint(evt);
+      text1.text(String(Math.round(loc.x/x_scaling)) + ", " + String(Math.round(loc.y/y_scaling)));
+    },false);
 
     construct_lines(dict_components);
 
@@ -170,6 +212,8 @@
       update_transformer_modals(step_data);
       update_dataviews(step_data);
       update_line_colours(step_data);
+      update_breaker_colours(step_data);
+      update_generator_colours(step_data);
       }
     );
   }
@@ -221,5 +265,21 @@
     current_step = data['sim_step'];
     master_draw();
   });
+
+  // Find your root SVG element
+  var svg = document.querySelector("#drawing");
+
+  // Create an SVGPoint for future math
+  var pt = svg.createSVGPoint();
+
+  // Get point in global SVG space
+  function cursorPoint(evt){
+    pt.x = evt.clientX; pt.y = evt.clientY;
+    return pt.matrixTransform(svg.getScreenCTM().inverse());
+  }
+
+
+
+
 
 

@@ -183,7 +183,7 @@ stroke_color = dict_line.dict_styling.stroke.color
 
 var group = draw.group();
 var inside_group = draw.group();
-circle1 = group.circle(2*rad);
+circle1 = group.circle(2*rad).addClass('circle-class');
 group.add(circle1)
 circle1.fill(palette["background-color"]);
 circle1.stroke({ color: stroke_color, width: circleWidth, linecap: 'black', linejoin: 'round' });
@@ -770,7 +770,7 @@ function add_static_text(list_text, x=100, y=100, colour="#d3d3d3", callback){
 
     text1.x_coord = x
     text1.y_coord = y
-        text1.center(text1.x_coord, text1.y_coord);
+    text1.center(text1.x_coord, text1.y_coord);
     callback(text1)
 }
 

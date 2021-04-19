@@ -127,7 +127,7 @@ function Gen_Callback(graphic_objects){
  * @return None
  * @usage instantiate as object i.e. new Breaker(...)
  */
-function Breaker(lineID, pos, state = "closed", name=false){
+function Breaker(lineID, pos, name=false, state = "closed"){
     this.component="Breaker"
     this.lineID = lineID
     this.pos = pos

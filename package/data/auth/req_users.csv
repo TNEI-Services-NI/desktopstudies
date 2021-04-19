@@ -1,4 +1,4 @@
 name,entity,email,required,status
-max,Other,max@max,FALSE,FALSE
+max,Observer,max@max,FALSE,FALSE
 Chris,ESO,chris@chris,FALSE,FALSE
 Joe,DNO,joe@joe,FALSE,FALSE
