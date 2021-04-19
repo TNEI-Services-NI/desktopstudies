@@ -77,9 +77,10 @@
     return line
   }
 
+
   function construct_coord_display(){
-    var text1 = draw.text("coordinate dislay")
-    .font({size: 15, family: 'Helvetica'}).fill({color: "white"})
+    const text1 = draw.text("coordinate dislay")
+      .font({size: 15, family: 'Helvetica'}).fill({color: "white"});
 
     text1.x_coord = x*0.5*x_scaling
     text1.y_coord = y*y_scaling
@@ -87,7 +88,10 @@
 
     svg.addEventListener('mousemove',function(evt){
       var loc = cursorPoint(evt);
-      text1.text(String(Math.round(loc.x/x_scaling)) + ", " + String(Math.round(loc.y/y_scaling)));
+      text1.text(function(add){
+        add.tspan("Scaled: (" + String(Math.round(loc.x)) + ", " + String(Math.round(loc.y)) + ")").newLine();
+        add.tspan("Actual: (" + String(Math.round(loc.x/x_scaling)) + ", " + String(Math.round(loc.y/y_scaling)) + ")").newLine();
+      });
     },false);
   }
 
