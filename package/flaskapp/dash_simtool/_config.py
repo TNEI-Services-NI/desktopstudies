@@ -8,3 +8,11 @@ step_map = {
         'Pre-restoration' if k == 0 else
         'Post-restoration' for k in range(-1, 25)
 }
+
+entity_network_map = {
+    'ESO': 'chapelcross132kv',
+    'DNO': 'chapelcross33kv',
+    'TO': 'chapelcross132kv',
+    'DER': 'chapelcross132kv',
+    'Other': 'gretna400kv',
+}

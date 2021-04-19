@@ -222,7 +222,7 @@ function component_modal(component){
     group.mouseleave(function(e){
       setTimeout(function(){
         $("#dataPopup").css('visibility', 'hidden');
-      }, 1500)
+      }, modal_timeout*1000)
     });
     group.mousemove(function(e){
       loc = [e.pageX, e.pageY]

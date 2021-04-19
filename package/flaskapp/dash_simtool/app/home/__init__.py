@@ -5,14 +5,19 @@ import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 import os
 import json
+from flask import session
+from package.flaskapp import socketio
 
 # INT IMPORTS
 import package.flaskapp.dash_simtool as dash_simtool
 import package.flaskapp.dash_simtool.app.dashboard_components as components
 import package.flaskapp.dash_simtool.app.home.dashboard_callbacks as callbacks
 import package.flaskapp.dash_simtool.app.dashboard_styling as styling
+import package.flaskapp.dash_simtool._config as cf
 
 URL_PAGE = dash_simtool.app.URL_HOME
+STYLING_SIDEBAR = styling.CONTENT_STYLE_SIDEBAR_HIDDEN
+
 def init_dashboard(server=""):
     """Create a Plotly Dash dashboard."""
     # Define encapsulating dash app
@@ -63,15 +68,15 @@ def init_dashboard(server=""):
     )
 
     # compile body
-    _body = components.compile_body(styling.CONTENT_STYLE)
+    _body = components.compile_body(STYLING_SIDEBAR)
 
     # graphical output
     _data_upload_output = dbc.Row([dbc.Col([html.Div(id='output-data-upload')], width=2)])
 
     with open(dash_simtool.TEMPLATES_DIR + 'dash_sim_tool.html', "r") as dash_app_html_file:
         dash_app_html = dash_app_html_file.read()
-        dash_app_html = dash_app_html.replace('{% marginLeft %}', styling.CONTENT_STYLE['marginLeft'])
-        dash_app_html = dash_app_html.replace('{% marginTop %}', "0px")
+        # dash_app_html = dash_app_html.replace('{% marginLeft %}', STYLING_SIDEBAR['marginLeft'])
+        # dash_app_html = dash_app_html.replace('{% marginTop %}', "0rem")
         dash_app.index_string = dash_app_html
 
 
@@ -81,8 +86,8 @@ def init_dashboard(server=""):
                                    dcc.Store(id='side_click'),
                                    dcc.Store(id='reset_click'),
                                    dcc.Store(id='sim_state'),
+                                   html.Div(id='hidden_div00'),
                                    _nav_bar,
-                                   _sidebar,
                                    _body,
                                    ],
                                   )

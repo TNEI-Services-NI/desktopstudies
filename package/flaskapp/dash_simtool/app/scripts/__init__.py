@@ -5,11 +5,12 @@ import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 import os
 import json
+from package.flaskapp import socketio
 
 # INT IMPORTS
 import package.flaskapp.dash_simtool as dash_simtool
 import package.flaskapp.dash_simtool.app.dashboard_components as components
-import package.flaskapp.dash_simtool.app.home.dashboard_callbacks as callbacks
+import package.flaskapp.dash_simtool.app.scripts.dashboard_callbacks as callbacks
 import package.flaskapp.dash_simtool.app.dashboard_styling as styling
 
 URL_PAGE = dash_simtool.app.URL_SCRIPTS

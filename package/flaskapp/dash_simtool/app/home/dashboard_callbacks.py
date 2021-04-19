@@ -56,30 +56,11 @@ def _add_toggle_sidebar(dash_app):
 
 
 def _add_network_redraw(dash_app):
-    @dash_app.callback([Output("network_menu", "label")],
-                       [
-                           Input("chapelcross33kv", "n_clicks"),
-                           Input("chapelcross132kv", "n_clicks"),
-                           Input("gretna132kv", "n_clicks"),
-                           Input("gretna400kv", "n_clicks"),
-                           Input("chapelcrossgretna1", "n_clicks"),
-                           Input("chapelcrossgretna2", "n_clicks"),
-                           Input("ewehillgretna", "n_clicks"),
-                           Input("stevenscroft33kv", "n_clicks"),
-                           Input("minsca33kv", "n_clicks"),
-                           Input("ewehillwindfarm1", "n_clicks"),
-                           Input("ewehillwindfarm2", "n_clicks"),
-                       ],
+    @dash_app.callback([Output("network_select", "data")],
+                       [Input("hidden_div00", "children")],
                        )
-    def _draw_network(chx33, chx132, grt132, grt400,chapgret1,chapgret2,ewehillgretna,stev33kV,minsca33kV,ewe1,ewe2):
-        ctx = dash.callback_context
-        triggered_object = ctx.triggered[0]
-        if triggered_object['value'] is None and 'network' not in session:
-            network = "chapelcross33kv"
-        elif triggered_object['value'] is None and 'network' in session:
-            network = session['network']
-        else:
-            network = triggered_object['prop_id'].split('.')[0]
+    def _draw_network(state):
+        network = cf.entity_network_map[session['entity'] if 'entity' in session else 'Other']
         session['network'] = network
         sim_step = session['sim_step'] if 'sim_step' in session else cf.start_sim_step
         session['sim_step'] = sim_step

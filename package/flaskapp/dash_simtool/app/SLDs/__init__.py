@@ -9,10 +9,12 @@ import json
 # INT IMPORTS
 import package.flaskapp.dash_simtool as dash_simtool
 import package.flaskapp.dash_simtool.app.dashboard_components as components
-import package.flaskapp.dash_simtool.app.home.dashboard_callbacks as callbacks
+import package.flaskapp.dash_simtool.app.SLDs.dashboard_callbacks as callbacks
 import package.flaskapp.dash_simtool.app.dashboard_styling as styling
 
 URL_PAGE = dash_simtool.app.URL_SLDS
+
+
 def init_dashboard(server=""):
     """Create a Plotly Dash dashboard."""
     # Define encapsulating dash app
@@ -73,7 +75,6 @@ def init_dashboard(server=""):
         dash_app_html = dash_app_html.replace('{% marginLeft %}', styling.CONTENT_STYLE['marginLeft'])
         dash_app_html = dash_app_html.replace('{% marginTop %}', "0px")
         dash_app.index_string = dash_app_html
-
 
     # compile overall layout
     dash_app.layout = html.Center([dcc.Location(id="home"),
