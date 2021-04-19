@@ -176,7 +176,6 @@ function component_modal(component){
             $('<p>'+component.modal_data[data_row]+'</p>').appendTo('#dataPopup');
           }
 
-      $('<p id="loc">'+loc+'</p>').appendTo('#dataPopup');
       }
       // $('<p>Data:</p>').appendTo('#dataPopup');
 
@@ -221,20 +220,22 @@ function component_modal(component){
         });
     });
     group.mouseleave(function(e){
-      $("#dataPopup").css('visibility', 'hidden');
+      setTimeout(function(){
+        $("#dataPopup").css('visibility', 'hidden');
+      }, 1500)
     });
     group.mousemove(function(e){
       loc = [e.pageX, e.pageY]
-      // $("#loc").children(loc[0] + ", " + l)
-      if(e.pageY > (y - $('#dataPopup').height() - 25)){
-        $('#dataPopup').css('top', e.pageY-$('#dataPopup').height());
+      let datapopup = $('#dataPopup')
+      if(e.pageY > (y - datapopup.height())){
+        datapopup.css('top', e.pageY-datapopup.height()-modal_y_offset);
       } else {
-        $('#dataPopup').css('top', e.pageY);
+        datapopup.css('top', e.pageY);
       }
-      if(e.pageX > (x - 250)){
-        $('#dataPopup').css('left', e.pageX-210);
+      if(e.pageX > (x - datapopup.width())){
+        datapopup.css('left', e.pageX-datapopup.width()-modal_x_offset);
       } else {
-        $('#dataPopup').css('left', e.pageX+10);
+        datapopup.css('left', e.pageX+modal_x_offset);
       }
     });
   }

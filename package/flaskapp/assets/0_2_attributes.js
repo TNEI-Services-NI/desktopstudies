@@ -13,6 +13,9 @@ let line_palette_style = {'width': 4}
 
 let live_dead = false
 
+let modal_x_offset = 20
+let modal_y_offset = 20
+
 let background = undefined
 let network = undefined
 let dict_components = undefined
