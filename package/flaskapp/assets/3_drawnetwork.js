@@ -168,17 +168,7 @@
   **/
   function draw_network(dict_components, network_, step){
 
-    var text1 = draw.text("test")
-    .font({size: 15, family: 'Helvetica'}).fill({color: "white"})
-
-    text1.x_coord = x*0.5*x_scaling
-    text1.y_coord = y*y_scaling
-    text1.center(text1.x_coord, text1.y_coord);
-
-    svg.addEventListener('mousemove',function(evt){
-      var loc = cursorPoint(evt);
-      text1.text(String(Math.round(loc.x/x_scaling)) + ", " + String(Math.round(loc.y/y_scaling)));
-    },false);
+    construct_coord_display();
 
     construct_lines(dict_components);
 
