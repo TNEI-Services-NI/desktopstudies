@@ -1,5 +1,7 @@
 Blackstart Desktop Studies
 ========================
+[![forthebadge made-with-python](https://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
+[![forthebadge made-with-javascript](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://www.javascript.com/)
 
 This is a repository for the Blackstart Desktop Simulations project.
 
