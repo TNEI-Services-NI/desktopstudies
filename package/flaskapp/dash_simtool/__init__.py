@@ -11,4 +11,4 @@ simtool_bp = Blueprint(
     static_folder='static'
 )
 
-TEMPLATES_DIR = os.path.dirname(__file__)+r'\templates'
+TEMPLATES_DIR = os.path.dirname(__file__)+r'/templates'

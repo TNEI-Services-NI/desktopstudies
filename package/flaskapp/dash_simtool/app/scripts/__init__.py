@@ -69,7 +69,7 @@ def init_dashboard(server=""):
     # graphical output
     _data_upload_output = dbc.Row([dbc.Col([html.Div(id='output-data-upload')], width=2)])
 
-    with open(dash_simtool.TEMPLATES_DIR + '\dash_sim_tool.html', "r") as dash_app_html_file:
+    with open(dash_simtool.TEMPLATES_DIR + '/dash_sim_tool.html', "r") as dash_app_html_file:
         dash_app_html = dash_app_html_file.read()
         dash_app_html = dash_app_html.replace('{% marginLeft %}', styling.CONTENT_STYLE['marginLeft'])
         dash_app_html = dash_app_html.replace('{% marginTop %}', "0px")
