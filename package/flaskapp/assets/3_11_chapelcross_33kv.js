@@ -166,11 +166,12 @@ networks_undrawn["chapelcross33kv"] = {
         "123": StraightLine([695,680],"right",85, "11kV"),
         "123 12": StraightLine([745,680],"down",55, "11kV"),
 
-        "785 A": StraightLine([680,940],"left",155,"11kV"),
-        "785 21": StraightLine([680,940],"up",160, "11kV"),
-        "785 B": StraightLine([670,780],"right",90,"11kV"),
-        "CRAG5B_LAHO5-_1": StraightLine([740,780],"down",145,"11kV"),
-        "785 DASH": StraightLine([720,835],"right",45,dash=true),
+        // CRAIG II WINDFARM 11KV
+        // "CRAG5B_LAHO5-_1": StraightLine([740,780],"down",145,"11kV"),
+        // "785 A": StraightLine([680,940],"left",155,"11kV"),
+        // "785 B": StraightLine([670,780],"right",90,"11kV"),
+        // "785 21": StraightLine([680,940],"up",160, "11kV"),
+        // "785 DASH": StraightLine([720,835],"right",45,dash=true),
 
      },
     breakers:{
@@ -245,14 +246,16 @@ networks_undrawn["chapelcross33kv"] = {
         "123 10": new Breaker("123 10",0.25,"10"),
         "123 12": new Breaker("123 12",0.7,"12"),
 
-        "785 21": new Breaker("785 21",0.86,"21"),
-        "785 22": new Breaker("CRAG5B_LAHO5-_1",0.15,"22"),
-        "785 CUSTOMER": new Breaker("CRAG5B_LAHO5-_1",0.5,"open","CUSTOMER BREAKER"),
+        // CRAIG II WINDFARM 11KV
+        // "785 21": new Breaker("785 21",0.86,"21"),
+        // "785 22": new Breaker("CRAG5B_LAHO5-_1",0.15,"22"),
+        // "785 CUSTOMER": new Breaker("CRAG5B_LAHO5-_1",0.5,"open","CUSTOMER BREAKER"),
 
 
         },
     isolators:{
-            "785 CUSTOMER": new Breaker("CRAG5B_LAHO5-_1",0.7,"CUSTOMER ISOLATOR"),
+        // CRAIG II WINDFARM 11KV
+        // "785 CUSTOMER": new Breaker("CRAG5B_LAHO5-_1",0.7,"CUSTOMER ISOLATOR"),
     },
     tx:{
         0: new Tx("into GRID 2 tx",1,"","","33kV","LV"),
@@ -280,7 +283,8 @@ networks_undrawn["chapelcross33kv"] = {
     generators:{
         "STCR5-_1": new Generator("CHAP3-_STCR3-_1",1),
         "EWHC0G_1": new Generator("EWHC3-_EWHC0G_1",1),
-        "CRAG0B_1": new Generator("CRAG5B_LAHO5-_1",1),
+        // CRAIG II WINDFARM 11KV
+        // "CRAG0B_1": new Generator("CRAG5B_LAHO5-_1",1),
         "MINS0G_1": new Generator("MINS3-_MINS0G_1#2", 1),
         5: new Generator("378 12",1),
         },
@@ -341,8 +345,9 @@ networks_undrawn["chapelcross33kv"] = {
     41: new Text("123", ["NEWCASTLETON"],[20,-30]),
     42: new Text("123",["123"],[20,-15]),
 
-    43: new Text("785 B", ["CRAIG II WINDFARM 11KV"],[20,-30]),
-    44: new Text("785 B",["785"],[20,-15]),
+    // CRAIG II WINDFARM 11KV
+    // 43: new Text("785 B", ["CRAIG II WINDFARM 11KV"],[20,-30]),
+    // 44: new Text("785 B",["785"],[20,-15]),
 
     45: new Text("MINS3-",["MINSCA 33KV"],[0,-30]),
     46: new Text("MINS3-",["761"],[0,-15]),
@@ -358,7 +363,8 @@ networks_undrawn["chapelcross33kv"] = {
         //lines
         "CHAP3-_STCR3-_1": new DataView("CHAP3-_STCR3-_1", [-25, -95]),
         "ANANT1_CHAP3-_1": new DataView("ANANT1_CHAP3-_1#1", [-25, 0]),
-        "CRAG5B_LAHO5-_1": new DataView("CRAG5B_LAHO5-_1", [65, -60]),
+        // CRAIG II WINDFARM 11KV
+        // "CRAG5B_LAHO5-_1": new DataView("CRAG5B_LAHO5-_1", [65, -60]),
         "CHAP3-_MINS3-_1": new DataView("CHAP3-_MINS3-_1#2", [35, 0]),
         "CHAPX1_LOBI3A_1": new DataView("CHAPX1_LOBI3A_1#0", [-25, -75]),
         "CHAP3-_MIBI3-_1": new DataView("CHAP3-_MIBI3-_1#0", [-25, 0]),
@@ -370,7 +376,8 @@ networks_undrawn["chapelcross33kv"] = {
         // "ANANT1_CHAP3-_1": new DataView("ANANT1_CHAP3-_1#1", [-25, 10]),
         //generator
         "STCR5-_1": new DataView("STCR5-_1", [-35, 0]),
-        "CRAG0B_1": new DataView("CRAG0B_1", [-35, 0]),
+        // CRAIG II WINDFARM 11KV
+        // "CRAG0B_1": new DataView("CRAG0B_1", [-35, 0]),
         "EWHC0G_1": new DataView("EWHC0G_1", [35, 0]),
 
 //        //        //generator

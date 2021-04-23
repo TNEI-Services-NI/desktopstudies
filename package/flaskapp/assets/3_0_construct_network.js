@@ -275,12 +275,14 @@
 
   function construct_dataviews(dict_components) {
       for(let id_dv in dict_components.dataViews){
+        console.log(id_dv);
         let dataview_ = dict_components.dataViews[id_dv]
         let componentID = dataview_.componentID
         let line = components.lines[componentID]
         let gen = components.generators[componentID]
         let tx = components.transformers[componentID]
         let offset = dataview_.offset
+        let colour = "#d6ba00"
         let observer = undefined
 
         if(line !== undefined){
