@@ -260,8 +260,14 @@
 
   socket.on('redraw', function(data) {
     current_step = data['sim_step'];
+    socket.emit('sync_sim_step', {'sim_step': current_step});
     master_draw();
   });
+
+
+  // socket.on('connection', function(socket){
+  //   socket.emit("hello world", "");
+  // });
 
   // Find your root SVG element
   var svg = document.querySelector("#drawing");

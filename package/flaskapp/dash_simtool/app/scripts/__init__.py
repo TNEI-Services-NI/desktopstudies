@@ -57,7 +57,7 @@ def init_dashboard(server=""):
             dbc.Button("Back", id="back_button", style={"margin-top": "15px"}),
             dbc.Button("Next", id="next_button", style={"margin-top": "15px", "margin-left": "15px"}),
             html.Hr(),
-            html.Div(id='sim_status_div', children="Siulation status: -1")
+            html.Div(id='sim_status_div', children="Siulation status: -1"),
         ],
         style=styling.SIDEBAR_STYLE,
         id='sidebar'

@@ -275,7 +275,6 @@
 
   function construct_dataviews(dict_components) {
       for(let id_dv in dict_components.dataViews){
-        console.log(id_dv);
         let dataview_ = dict_components.dataViews[id_dv]
         let componentID = dataview_.componentID
         let line = components.lines[componentID]

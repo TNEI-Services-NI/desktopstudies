@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from . import simtool_bp
-from flask import request, jsonify
+from flask import request, jsonify, session
 from flask_login import login_required
 import package.data as simtool_data
 from package.flaskapp import socketio
@@ -50,8 +50,9 @@ def init_network():
     # return df_activesim.to_json()
 
 
-@socketio.on('user_progressed_event')
-def handle_my_custom_event(data):
+@socketio.on('sync_sim_step')
+def connection(data):
     """This will emit a message to all users when this is called.
     This would be useful for simulation synchronisation"""
-    socketio.emit('my response', data, broadcast=True)
+    print(session['sim_step'])
+    print(data['sim_step'])

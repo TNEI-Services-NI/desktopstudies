@@ -89,33 +89,19 @@ def _add_network_redraw(dash_app):
     return dash_app
 
 
-def _add_reset_button(dash_app):
-    @dash_app.callback([Output("reset_click", "data")],
-                       [
-                           Input("reset_sim_button", "n_clicks"),
-                       ],
-                       )
-    def _reset_simulation(reset_button_nclicks):
-        ctx = dash.callback_context
-        triggered_object = ctx.triggered[0]
-        if not triggered_object['value'] is None:
-            socketio.emit('redraw', {'sim_step': cf.start_sim_step})
-            session['sim_step'] = cf.start_sim_step
-        return [reset_button_nclicks]
-
-    return dash_app
-
-
 def _add_sim_progress_buttons(dash_app):
     @dash_app.callback([Output("sim_state", "data"),
                         Output("sim_status_div", "children")],
                        [
                            Input("back_button", "n_clicks"),
                            Input("next_button", "n_clicks"),
+                           Input("sync_button", "n_clicks"),
+                           Input("reset_sim_button", "n_clicks"),
                        ],
                        [Input("sim_state", "data")]
                        )
-    def _progress_sim(back_button_nclicks, next_button_nclicks, sim_status):
+    def _progress_sim(back_button_nclicks, next_button_nclicks, sync_button_nclicks,
+                      reset_sim_button_nclicks, sim_status):
         ctx = dash.callback_context
         triggered_object = ctx.triggered[0]
         if triggered_object['prop_id'].split('.')[0] == 'next_button':
@@ -124,6 +110,13 @@ def _add_sim_progress_buttons(dash_app):
         elif triggered_object['prop_id'].split('.')[0] == 'back_button':
             sim_status -= 1 if sim_status > cf.start_sim_step else 0
             socketio.emit('redraw', {'sim_step': sim_status})
+        elif triggered_object['prop_id'].split('.')[0] == 'sync_button':
+            sim_status = 0
+            socketio.emit('redraw', {'sim_step': sim_status}, broadcast=True)
+            # socketio.emit('message', 'hello world', broadcast=True)
+        elif triggered_object['prop_id'].split('.')[0] == 'reset_sim_button':
+            sim_status = cf.start_sim_step
+            socketio.emit('redraw', {'sim_step': cf.start_sim_step})
         else:
             sim_status = session['sim_step'] if 'sim_step' in session else cf.start_sim_step  # initial simulation status
         session['sim_step'] = sim_status
@@ -133,8 +126,8 @@ def _add_sim_progress_buttons(dash_app):
 
 
 def _add_sidebar_buttons(dash_app):
-    dash_app = _add_reset_button(dash_app)
     dash_app = _add_sim_progress_buttons(dash_app)
+
     return dash_app
 
 
