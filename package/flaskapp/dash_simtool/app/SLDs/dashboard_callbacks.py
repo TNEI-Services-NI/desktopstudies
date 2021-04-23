@@ -74,7 +74,7 @@ def _add_network_redraw(dash_app):
     def _draw_network(chx33, chx132, grt132, grt400,chapgret1,chapgret2,ewehillgretna,stev33kV,minsca33kV,ewe1,ewe2):
         ctx = dash.callback_context
         triggered_object = ctx.triggered[0]
-        if triggered_object['value'] is None and 'network' not in session:
+        if triggered_object['valuedash'] is None and 'network' not in session:
             network = "chapelcross33kv"
         elif triggered_object['value'] is None and 'network' in session:
             network = session['network']
@@ -106,17 +106,17 @@ def _add_sim_progress_buttons(dash_app):
         triggered_object = ctx.triggered[0]
         if triggered_object['prop_id'].split('.')[0] == 'next_button':
             sim_status += 1
-            socketio.emit('redraw', {'sim_step': sim_status})
+            socketio.emit('redraw', {'sim_step': sim_status}, broadcast=False)
         elif triggered_object['prop_id'].split('.')[0] == 'back_button':
             sim_status -= 1 if sim_status > cf.start_sim_step else 0
-            socketio.emit('redraw', {'sim_step': sim_status})
+            socketio.emit('redraw', {'sim_step': sim_status}, broadcast=False)
         elif triggered_object['prop_id'].split('.')[0] == 'sync_button':
             sim_status = 0
-            socketio.emit('redraw', {'sim_step': sim_status}, broadcast=True)
+            socketio.emit('redraw', {'sim_step': sim_status}, broadcast=False)
             # socketio.emit('message', 'hello world', broadcast=True)
         elif triggered_object['prop_id'].split('.')[0] == 'reset_sim_button':
             sim_status = cf.start_sim_step
-            socketio.emit('redraw', {'sim_step': cf.start_sim_step})
+            socketio.emit('redraw', {'sim_step': cf.start_sim_step}, broadcast=False)
         else:
             sim_status = session['sim_step'] if 'sim_step' in session else cf.start_sim_step  # initial simulation status
         session['sim_step'] = sim_status

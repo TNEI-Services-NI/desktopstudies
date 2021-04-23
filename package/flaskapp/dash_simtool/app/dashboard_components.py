@@ -1,18 +1,15 @@
-from package.flaskapp.dash_simtool.app.micromethods import hex_to_rgb
+from datetime import datetime, date, timedelta
 
-import dash_core_components as dcc
-import dash_html_components as html
 import dash_bootstrap_components as dbc
+import dash_core_components as dcc
 import dash_daq as daq
-from dash_canvas import DashCanvas
-
-import package.flaskapp.dash_simtool.app.dashboard_styling as styling
-import package.flaskapp.dash_simtool.app as dash_app
-
+import dash_html_components as html
+import numpy as np
 import plotly.graph_objs as go
 
-import numpy as np
-from datetime import datetime, date, timedelta
+import package.flaskapp.dash_simtool.app as dash_app
+import package.flaskapp.dash_simtool.app.dashboard_styling as styling
+from package.flaskapp.dash_simtool.app.micromethods import hex_to_rgb
 
 HEIGHT = 300
 
