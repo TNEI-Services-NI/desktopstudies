@@ -215,6 +215,11 @@
     );
   }
 
+  function event_draw(draw_data){
+    network = draw_data['network']
+    current_step = draw_data['sim_step'];
+    master_draw();
+  }
 
   // Document Initialisation
   $(document).ready(function(){
@@ -245,17 +250,32 @@
 
   dict_components = undefined
 
-
-
   scale_lines(networks_undrawn);
   scale_labels(networks_undrawn);
   scale_dataviews(networks_undrawn);
 
+  var room = undefined
+
+  socket.on('check_join_draw', function(data_join_draw) {
+    socket.emit('list_rooms', data_join_draw, function (data_list_rooms){});
+  });
+
+  socket.on('join_draw', function (data_join_draw){
+    if(room === undefined){
+      room = data_join_draw['room']
+      socket.emit('join_room', data_join_draw, function(data_join_room){
+        event_draw(data_join_room);
+      })
+    }
+  })
+
+  socket.on('list_rooms', function(data) {
+    socket.emit('list_rooms', data);
+  });
+
 
   socket.on('draw', function(data) {
-    network = data['network']
-    current_step = data['sim_step'];
-    master_draw();
+    event_draw(data);
   });
 
   socket.on('redraw', function(data) {
@@ -265,9 +285,13 @@
   });
 
 
-  // socket.on('connection', function(socket){
-  //   socket.emit("hello world", "");
-  // });
+  socket.on('shout_client', function(data){
+    alert("Client: ahhhhh");
+  });
+
+  socket.on('shout_server', function (data){
+    socket.emit('shout_server', data);
+  })
 
   // Find your root SVG element
   var svg = document.querySelector("#drawing");

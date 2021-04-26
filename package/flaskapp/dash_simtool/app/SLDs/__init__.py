@@ -60,7 +60,7 @@ def init_dashboard(server=""):
             html.Hr(),
             html.Div(id='sim_status_div', children="Siulation status: -1"),
             html.Hr(),
-            dbc.Button("sync", id="sync_button", style={"margin-top": "15px", "margin-left": "15px"}),
+            dbc.Button("debug", id="debug_button", style={"margin-top": "15px", "margin-left": "15px"}),
         ],
         style=styling.SIDEBAR_STYLE,
         id='sidebar'
@@ -85,6 +85,7 @@ def init_dashboard(server=""):
                                    dcc.Store(id='reset_click'),
                                    dcc.Store(id='sim_state'),
                                    dcc.Store(id='sync_state'),
+                                   dcc.Store(id='on_load'),
                                    _nav_bar,
                                    _sidebar,
                                    _body,

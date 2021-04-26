@@ -7,6 +7,7 @@ from package.flaskapp import socketio
 import time
 import pandas as pd
 import package.data as data
+from flask_socketio import rooms
 
 auth_bp = Blueprint('auth', __name__, static_folder='static', template_folder='templates')
 
@@ -59,7 +60,6 @@ def login_post():
     remember = True if request.form.get('remember') else False
 
     user = User.query.filter_by(email=email).first()
-    session['entity'] = user.entity
 
     # check if the user actually exists
     # take the user-supplied password, hash it, and compare it to the hashed password in the database
@@ -69,6 +69,9 @@ def login_post():
 
     # if the above check passes, then we know the user has the right credentials
     login_user(user, remember=remember)
+    session['entity'] = user.entity
+    session['username'] = user.name
+    session['namespace'] = '/'
     user.logged_in = 1
     db.session.commit()
 

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from . import simtool_bp
 from flask import request, jsonify, session
+from flask_socketio import join_room, rooms
 from flask_login import login_required
 import package.data as simtool_data
 from package.flaskapp import socketio
@@ -50,9 +51,51 @@ def init_network():
     # return df_activesim.to_json()
 
 
+@socketio.on('join_room')
+def on_join(data):
+    join_room(data['room'])
+    return data
+
+
+@socketio.on('list_rooms')
+def on_list_rooms(data):
+    rooms_ = rooms()
+    sid = request.sid
+    room = data['room']
+    network = data['network']
+    sim_step = data['sim_step']
+
+    if sid in rooms_ and room in rooms_:
+        socketio.emit('draw', {
+            'network': network,
+            'sim_step': sim_step,
+        }, room=session['room'])
+    elif len(rooms_) == 1:
+        session['room'] = room
+        socketio.emit('join_draw', {
+            'network': network,
+            'sim_step': sim_step,
+            'room': session['room']
+        })
+
+    return data
+
+
+@socketio.on('shout_server')
+def shout_server(data):
+    print("Server: ahhhhh")
+
+
+@socketio.on('ping_server')
+def ping_server(data):
+    print('pong')
+    return {'response': 'pong'}
+
+
 @socketio.on('sync_sim_step')
 def connection(data):
     """This will emit a message to all users when this is called.
     This would be useful for simulation synchronisation"""
     print(session['sim_step'])
     print(data['sim_step'])
+

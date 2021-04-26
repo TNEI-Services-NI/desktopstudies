@@ -6,6 +6,7 @@ from dash.dependencies import Output, Input, State
 
 from flask import session
 from package.flaskapp import socketio
+from flask_socketio import rooms, join_room
 
 # INT IMPORTS
 from package.flaskapp.dash_simtool.app.dashboard_components import init_calendar, init_line, init_graph_layout
@@ -16,6 +17,7 @@ import dash_core_components as dcc
 import dash_bootstrap_components as dbc
 import package.flaskapp.dash_simtool._config as cf
 import package.flaskapp.dash_simtool.app.dashboard_styling as styling
+import time
 
 
 def _add_toggle_sidebar(dash_app):
@@ -71,19 +73,34 @@ def _add_network_redraw(dash_app):
                            Input("ewehillwindfarm2", "n_clicks"),
                        ],
                        )
-    def _draw_network(chx33, chx132, grt132, grt400,chapgret1,chapgret2,ewehillgretna,stev33kV,minsca33kV,ewe1,ewe2):
+    def _draw_network(chx33, chx132, grt132, grt400, chapgret1, chapgret2, ewehillgretna, stev33kV, minsca33kV, ewe1,
+                      ewe2):
+
+        # Determine network for drawing
         ctx = dash.callback_context
         triggered_object = ctx.triggered[0]
-        if triggered_object['valuedash'] is None and 'network' not in session:
-            network = "chapelcross33kv"
-        elif triggered_object['value'] is None and 'network' in session:
-            network = session['network']
+        if triggered_object['value'] is None:
+            session['room'] = session['entity']
+            if 'network' not in session:
+                network = "chapelcross33kv"
+            else:
+                network = session['network']
         else:
             network = triggered_object['prop_id'].split('.')[0]
+
+        # store network, sim_step
         session['network'] = network
         sim_step = session['sim_step'] if 'sim_step' in session else cf.start_sim_step
         session['sim_step'] = sim_step
-        socketio.emit('draw', {'network': network, 'sim_step': sim_step})
+
+        print(session['room'])
+
+        socketio.emit('check_join_draw', {
+            'network': network,
+            'sim_step': sim_step,
+            'room': session['room']
+        })
+
         return [network]
 
     return dash_app
@@ -95,31 +112,37 @@ def _add_sim_progress_buttons(dash_app):
                        [
                            Input("back_button", "n_clicks"),
                            Input("next_button", "n_clicks"),
-                           Input("sync_button", "n_clicks"),
+                           Input("debug_button", "n_clicks"),
                            Input("reset_sim_button", "n_clicks"),
                        ],
                        [Input("sim_state", "data")]
                        )
-    def _progress_sim(back_button_nclicks, next_button_nclicks, sync_button_nclicks,
+    def _progress_sim(back_button_nclicks, next_button_nclicks, debug_button_nclicks,
                       reset_sim_button_nclicks, sim_status):
+
         ctx = dash.callback_context
-        triggered_object = ctx.triggered[0]
-        if triggered_object['prop_id'].split('.')[0] == 'next_button':
+        triggered_object = ctx.triggered[0]['prop_id'].split('.')[0]
+
+        if triggered_object == 'next_button':  # increment sim_step
             sim_status += 1
-            socketio.emit('redraw', {'sim_step': sim_status}, broadcast=False)
-        elif triggered_object['prop_id'].split('.')[0] == 'back_button':
+            socketio.emit('redraw', {'sim_step': sim_status}, room=session['room'])
+
+        elif triggered_object == 'back_button':  # decrement sim_step
             sim_status -= 1 if sim_status > cf.start_sim_step else 0
-            socketio.emit('redraw', {'sim_step': sim_status}, broadcast=False)
-        elif triggered_object['prop_id'].split('.')[0] == 'sync_button':
-            sim_status = 0
-            socketio.emit('redraw', {'sim_step': sim_status}, broadcast=False)
-            # socketio.emit('message', 'hello world', broadcast=True)
-        elif triggered_object['prop_id'].split('.')[0] == 'reset_sim_button':
+            socketio.emit('redraw', {'sim_step': sim_status}, room=session['room'])
+
+        elif triggered_object == 'debug_button':
+            socketio.emit('list_rooms', room=session['room'])
+
+        elif triggered_object == 'reset_sim_button':  # reset sim_step
             sim_status = cf.start_sim_step
-            socketio.emit('redraw', {'sim_step': cf.start_sim_step}, broadcast=False)
+            socketio.emit('redraw', {'sim_step': cf.start_sim_step}, room=session['room'])
+
         else:
-            sim_status = session['sim_step'] if 'sim_step' in session else cf.start_sim_step  # initial simulation status
+            sim_status = session['sim_step'] if 'sim_step' in session else cf.start_sim_step # initial simulation status
+
         session['sim_step'] = sim_status
+
         return [sim_status, "Simulation status: {}".format(sim_status)]
 
     return dash_app
@@ -134,5 +157,4 @@ def _add_sidebar_buttons(dash_app):
 def init_callbacks(dash_app):
     dash_app = _add_network_redraw(dash_app)
     dash_app = _add_sidebar_buttons(dash_app)
-
     return dash_app

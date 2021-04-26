@@ -7,7 +7,7 @@ from flask_jsglue import JSGlue
 dbs = SQLAlchemy()
 login_manager = LoginManager()
 socketio = SocketIO(
-    logger=True, engineio_logger=True
+    logger=True, engineio_logger=False
 )
 jsglue = JSGlue()
 migrate = Migrate()
