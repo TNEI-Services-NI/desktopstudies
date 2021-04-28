@@ -20,7 +20,7 @@ networks_undrawn["chapelcross33kv"] = {
 //            //fix the dash here
 //            "chapelcross dash": StraightLine([15,240],"right",35, "0V", dash=true),
 
-        "CHAP3A1#1": StraightLine([85,175], "down",20),
+        "CHAP3A1#0": StraightLine([85,175], "down",20),
         "CHAP3-_STCR3-_1": StraightLine([85,195], "down",280),
             "STCR3-": StraightLine([25,370],"right",90),
             "STCR5-": StraightLine([70,440],"right",35),
@@ -50,7 +50,7 @@ networks_undrawn["chapelcross33kv"] = {
             "into GRID 2 tx": StraightLine([670,110],"left",40),
         "ANANT2_CHAP3-_1#0": StraightLine([700,175],"down",105),
         "CHAP3-_MINS3-_1#0": StraightLine([780,175],"down",110),
-        "698 25": StraightLine([840,175],"down",60),
+//        "698 25": StraightLine([840,175],"down",60),
         "698 26": StraightLine([900,175],"down",75),
         "LOBI5-1": StraightLine([230,400],"right",175),
         "LOBI5-2": StraightLine([230+175,400],"right",175),
@@ -181,7 +181,7 @@ networks_undrawn["chapelcross33kv"] = {
 
      },
     breakers:{
-        "698 16": new Breaker("CHAP3A1#0",1),
+//        "698 16": new Breaker("CHAP3A1#0",1),
         "698 15": new Breaker("CHAP3-_STCR3-_1",0),
         "699 CHAP": new Breaker("CHAP3-_STCR3-_1",0.58, "CHAP"),
         "699 GENERATOR": new Breaker("CHAP3-_STCR3-_1",0.8,"open",name = ""),
@@ -195,7 +195,7 @@ networks_undrawn["chapelcross33kv"] = {
         "698 22": new Breaker("CHAP3-_LOBI3B_1#0",0.16),
         "698 23": new Breaker("ANANT2_CHAP3-_1#0",0.19),
         "698 24": new Breaker("CHAP3-_MINS3-_1#0",0.19),
-        "698 25": new Breaker("698 25",0.31),
+//        "698 25": new Breaker("698 25",0.31),
         "698 26": new Breaker("698 26",0.26),
         "678 11": new Breaker("378 11",0.18),
         "678 12": new Breaker("378 12",0.3),
@@ -299,8 +299,8 @@ networks_undrawn["chapelcross33kv"] = {
     2: new Text("CHAP3A1", ["698"], [220,-50]),
     3: new Text("CHAP3A1",["CHAPELCROSS GSP 33kV"],[220,-160]),
 
-    4: new Text("698 16", ["CHAPELCROSS"],[0,50]),
-    5: new Text("698 16", ["NO1"],[0,65]),
+//    4: new Text("698 16", ["CHAPELCROSS"],[0,50]),
+//    5: new Text("698 16", ["NO1"],[0,65]),
 
     6: new Text("MIBI3-", ["MIDDLEBIE"],[20,-40]),
     7: new Text("MIBI3-", ["33KV SW/STN"],[20,-25]),
@@ -358,8 +358,8 @@ networks_undrawn["chapelcross33kv"] = {
     45: new Text("MINS3-",["MINSCA 33KV"],[0,-30]),
     46: new Text("MINS3-",["761"],[0,-15]),
 
-    47: new Text("698 25",["CHAPELCROSS"],[0,40]),
-    48: new Text("698 25",["NO2"],[0,55]),
+//    47: new Text("698 25",["CHAPELCROSS"],[0,40]),
+//    48: new Text("698 25",["NO2"],[0,55]),
 
     49: new Text("378",["SOLWAY BANK 33KV"],[0,-30]),
     50: new Text("378",["378"],[0,-15]),
