@@ -184,7 +184,7 @@ networks_undrawn["chapelcross33kv"] = {
 //        "698 16": new Breaker("CHAP3A1#0",1),
         "698 15": new Breaker("CHAP3-_STCR3-_1",0),
         "699 CHAP": new Breaker("CHAP3-_STCR3-_1",0.58, "CHAP"),
-        "699 GENERATOR": new Breaker("CHAP3-_STCR3-_1",0.8,"open",name = ""),
+        "699 GENERATOR": new Breaker("CHAP3-_STCR3-_1",0.8,""),
         "698 14": new Breaker("ANANT1_CHAP3-_1#1",0.19),
         "698 13": new Breaker("CHAPX1_LOBI3A_1#0",0.1),
         "GRID 1": new Breaker("GRID 1",0.2),
@@ -257,7 +257,7 @@ networks_undrawn["chapelcross33kv"] = {
         // "785 22": new Breaker("CRAG5B_LAHO5-_1",0.15,"22"),
         // "785 CUSTOMER": new Breaker("CRAG5B_LAHO5-_1",0.5,"open","CUSTOMER BREAKER"),
 
-
+        "691 01": new Breaker("GRNA3A",1,"01"),
         },
     isolators:{
         // CRAIG II WINDFARM 11KV
@@ -342,8 +342,8 @@ networks_undrawn["chapelcross33kv"] = {
     35:new Text("CHAPX1_LOBI3A_1#1", ["33 kV"],[-59,0]),
     36:new Text("CHAPX1_LOBI3A_1#1", ["DUMF"],[-50,-30]),
 
-    37:new Text("GRNA3A", ["GRETNA 33kV"],[0,-30]),
-    38:new Text("GRNA3A", ["691"],[0,-15]),
+    37:new Text("GRNA3A", ["GRETNA 33kV"],[62,-45]),
+    38:new Text("GRNA3A", ["691"],[62,-30]),
 
     39:new Text("673 01", ["GRETNA"],[0,-60]),
     40:new Text("673 01", ["673"],[0,-45]),

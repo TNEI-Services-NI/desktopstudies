@@ -291,6 +291,17 @@
         } else if(tx !== undefined){
           observer = tx.UIElement
         }
+//          let group = draw.group()
+//          let textObjects = {}
+//
+//          //the following block will work but it's not ideal
+//          observingComponent = components.lines[componentID]
+//          if(observingComponent === undefined){
+//            observingComponent = components.generators[componentID]
+//          }
+//          if(observingComponent === undefined){
+//            observingComponent = components.transformers[componentID]
+//          }
 
         add_dataview(observer, "", offset, function (text_object) {
           components.dataviews[id_dv] = {
@@ -303,6 +314,22 @@
         })
     }
   }
+//          callback = function(){
+//              for(text in textObjects){
+//                textObjects[text].remove()
+//              }
+//              offset = 0
+//              for(i in observingComponent.data){
+//                  static_text = text_data["Amps"]
+//                  text = observingComponent.data[i] + " " + Abbreviations[i]
+//                  pos = static_text.offset
+//                  holder = []
+//                  add_static_text([text],pos[0]*x_scaling,(pos[1]+offset)*y_scaling,"yellow",function(object){holder[0] = object})
+//                  textObjects[i] = holder[0]
+////                  group.add(holder[0])
+//                  offset+=15
+//              }
+//          }
 
   function redraw_dataview(id_dv, text_list){
     let dataview_ = components.dataviews[id_dv];

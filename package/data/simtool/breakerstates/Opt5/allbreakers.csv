@@ -1,120 +1,121 @@
-breaker,-1,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14
-694,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-123 10,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-123 12,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-662 01,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,closed
-662 10,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-662 20,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-673 01,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-673 10,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,closed
-673 20,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-675 10,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-676 01,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-676 10,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-676 20,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,closed
-678 11,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-678 12,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-679 01,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,closed
-679 10,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-679 20,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-682 10,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-683 01,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,closed
-683 10,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-683 20,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-692 01,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-694 12,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-694 13,closed,open,open,open,open,open,open,open,open,open,open,open,open,closed,closed,closed
-694 22,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-694 23,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,closed,closed
-698 01,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-698 11,closed,open,open,open,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed
-698 12,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-698 13,closed,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed
-698 14,open,open,open,open,open,open,open,open,open,open,open,open,closed,closed,closed,closed
-698 15,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-698 16,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-698 21,closed,open,open,open,open,open,open,open,open,open,open,closed,closed,closed,closed,closed
-698 22,open,open,open,open,open,open,open,open,open,open,open,open,closed,closed,closed,closed
-698 23,open,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed
-698 24,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-698 25,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-698 26,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-699 CHAP,closed,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-699 GENERATOR,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-761 CHAP,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-761 CUSTOMER,closed,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-761 WINDFARM,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-780 11,closed,open,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed
-780 12,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-780 13,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-780 14,closed,open,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed
-781 11,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-781 12,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-785 21,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-785 22,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-785 CUSTOMER,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-GRID 1,closed,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-GRID 2,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-120,closed,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-205,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-330,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-410,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-500,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-615,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-710,closed,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-800,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-915,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-1005,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-1105,closed,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-1105,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-305,closed,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-205,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-805,closed,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-GRID 1A,closed,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-WG2,closed,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-GRID 1B,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-3L5,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-2L5,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-761 11,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-761 12,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-CB01,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-CB02,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-CB04,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-120,closed,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-780,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-680,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-505,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-405,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-805,closed,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-X442,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-X448,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-X405,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-X230,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-X110,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-X510,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-X605,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-761 MINS WF,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-305,closed,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-780,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-680,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-505,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-405,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-699 CUSTOMER,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-STEVENS AUX 1,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-STEVENS AUX 2,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-STEVENS AUX 3,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-STEVENS AUX 4,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-STEVENS AUX 5,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-STEVENS AUX 6,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-STEVENS AUX 7,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-STEVENS AUX 8,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-STEVENS AUX 9,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-STEVENS AUX 10,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-STEVENS AUX 11,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-STEVENS AUX 12,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-STEVENS AUX 13,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-STEVENS AUX 14,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-STEVENS AUX 15,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-STEVENS AUX 16,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-STEVENS AUX 17,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-STEVENS AUX 18,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+breaker,-1,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,network
+694,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,chapelcross33kv.csv
+123 10,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,chapelcross33kv.csv
+123 12,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,chapelcross33kv.csv
+662 01,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,closed,chapelcross33kv.csv
+662 10,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,chapelcross33kv.csv
+662 20,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,chapelcross33kv.csv
+673 01,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,chapelcross33kv.csv
+673 10,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,closed,chapelcross33kv.csv
+673 20,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,chapelcross33kv.csv
+675 10,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,chapelcross33kv.csv
+676 01,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,chapelcross33kv.csv
+676 10,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,chapelcross33kv.csv
+676 20,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,closed,chapelcross33kv.csv
+678 11,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,chapelcross33kv.csv
+678 12,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,chapelcross33kv.csv
+679 01,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,closed,chapelcross33kv.csv
+679 10,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,chapelcross33kv.csv
+679 20,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,chapelcross33kv.csv
+682 10,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,chapelcross33kv.csv
+683 01,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,closed,chapelcross33kv.csv
+683 10,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,chapelcross33kv.csv
+683 20,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,chapelcross33kv.csv
+692 01,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,chapelcross33kv.csv
+694 12,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,chapelcross33kv.csv
+694 13,closed,open,open,open,open,open,open,open,open,open,open,open,open,closed,closed,closed,chapelcross33kv.csv
+694 22,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,chapelcross33kv.csv
+694 23,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,closed,closed,chapelcross33kv.csv
+698 01,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,chapelcross33kv.csv
+698 11,closed,open,open,open,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed,chapelcross33kv.csv
+698 12,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,chapelcross33kv.csv
+698 13,closed,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,chapelcross33kv.csv
+698 14,open,open,open,open,open,open,open,open,open,open,open,open,closed,closed,closed,closed,chapelcross33kv.csv
+698 15,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,chapelcross33kv.csv
+698 16,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,chapelcross33kv.csv
+698 21,closed,open,open,open,open,open,open,open,open,open,open,closed,closed,closed,closed,closed,chapelcross33kv.csv
+698 22,open,open,open,open,open,open,open,open,open,open,open,open,closed,closed,closed,closed,chapelcross33kv.csv
+698 23,open,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,chapelcross33kv.csv
+698 24,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,chapelcross33kv.csv
+698 25,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,chapelcross33kv.csv
+698 26,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,chapelcross33kv.csv
+699 CHAP,closed,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,chapelcross33kv.csv
+699 GENERATOR,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,chapelcross33kv.csv
+761 CHAP,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,chapelcross33kv.csv
+761 CUSTOMER,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,chapelcross33kv.csv
+761 WINDFARM,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,chapelcross33kv.csv
+780 11,closed,open,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,chapelcross33kv.csv
+780 12,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,chapelcross33kv.csv
+780 13,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,chapelcross33kv.csv
+780 14,closed,open,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,chapelcross33kv.csv
+781 11,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,chapelcross33kv.csv
+781 12,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,chapelcross33kv.csv
+785 21,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,chapelcross33kv.csv
+785 22,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,chapelcross33kv.csv
+785 CUSTOMER,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,chapelcross33kv.csv
+GRID 1,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,chapelcross33kv.csv
+GRID 2,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,chapelcross33kv.csv
+691 01,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,chapelcross33kv.csv
+120,closed,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,allbreakers.csv
+205,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+330,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+410,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+500,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+615,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+710,closed,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,allbreakers.csv
+800,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+915,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+1005,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+1105,closed,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,allbreakers.csv
+305,closed,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,allbreakers.csv
+805,closed,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,allbreakers.csv
+GRID 1A,closed,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,allbreakers.csv
+WG2,closed,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,allbreakers.csv
+GRID 1B,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+3L5,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+2L5,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+761 11,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+761 12,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+CB01,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+CB02,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+CB04,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+780,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+680,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+505,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+405,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+X442,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+X448,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+X405,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+X230,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+X110,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+X510,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+X605,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+761 MINS WF,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+699 CUSTOMER,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+STEVENS AUX 1,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+STEVENS AUX 2,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+STEVENS AUX 3,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+STEVENS AUX 4,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+STEVENS AUX 5,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+STEVENS AUX 6,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+STEVENS AUX 7,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+STEVENS AUX 8,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+STEVENS AUX 9,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+STEVENS AUX 10,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+STEVENS AUX 11,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+STEVENS AUX 12,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+STEVENS AUX 13,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+STEVENS AUX 14,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+STEVENS AUX 15,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+STEVENS AUX 16,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+STEVENS AUX 17,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+STEVENS AUX 18,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,allbreakers.csv
+1105,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,chapelcrossgretna1.csv
+305,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,chapelcrossgretna1.csv
+205,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,chapelcrossgretna2.csv
+120,closed,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,gretna132kv.csv
+780,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,gretna132kv.csv
+680,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,gretna132kv.csv
+505,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,gretna132kv.csv
+405,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,gretna132kv.csv
+805,closed,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,gretna132kv.csv
