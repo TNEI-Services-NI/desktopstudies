@@ -62,13 +62,13 @@ networks_undrawn["chapelcross132kv"]={
 
     },
     breakers:{
-        "698 01": new Breaker("698 01", 0.5,"closed"),
-        "GRID 1": new Breaker("GRID 1", 0.3,"open"),
-        "GRID 2": new Breaker("GRID 2",0.3,"open"),
+        "698 01": new Breaker("698 01", 0.5),
+        "GRID 1": new Breaker("GRID 1", 0.3),
+        "GRID 2": new Breaker("GRID 2",0.3),
 
-        "710":new Breaker("710",0.7,"open"),
-        "120": new Breaker("M1",0.49,"closed"),
-        "330": new Breaker("336 330 334",0.5,"closed"),
+        "710":new Breaker("710",0.7),
+        "120": new Breaker("M1",0.49),
+        "330": new Breaker("336 330 334",0.5),
         "500":new Breaker("DUMF-1",0.5),
         "205": new Breaker("GRNA-2",0.5),
         "615": new Breaker("ECCF-2",0.5),
@@ -76,7 +76,7 @@ networks_undrawn["chapelcross132kv"]={
         "800": new Breaker("DUMF-2",0.5),
         "915": new Breaker("ECCF-1",0.5),
         "1105": new Breaker("GRNA-1",0.5),
-        "410": new Breaker("410",0.7,"open"),
+        "410": new Breaker("410",0.7),
 
     },
     tx:{1: new Tx("into GRID T1 tx",1,"","", coil1 = "33kV", coil2 = "LV"),

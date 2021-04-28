@@ -53,6 +53,6 @@ breaker,-1,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14
 785 21,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
 785 22,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 785 CUSTOMER,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-GRID 1,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+GRID 1,closed,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
 GRID 2,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 691 01,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
