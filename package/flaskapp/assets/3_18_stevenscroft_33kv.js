@@ -65,6 +65,7 @@ networks_undrawn["stevenscroft33kv"]={
     3: new Text("STEVENS AUX 2", ["UNIT AUXILIARY BOARD"],[100,-15]),
     4: new Text("STEVENS AUX 12", ["ACC SWITCHBOARD"],[60,15]),
     5: new Text("STEVENS AUX 13 14", ["STATION ESSENTIAL SERVICES BOARD"],[0,-25]),
+    6: new Text("POC", ["POC"],[55,0]),
 
 
     },

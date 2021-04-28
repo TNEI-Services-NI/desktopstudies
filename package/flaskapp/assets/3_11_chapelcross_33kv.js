@@ -77,8 +77,8 @@ networks_undrawn["chapelcross33kv"] = {
         "MIBI5-": StraightLine([260,730],"right",85,"11kV"),
 
         "MIBI3-_LAHO3A_1#1": StraightLine([160,765],"right",150),
-        "LAHO3A": StraightLine([300,790],"right",150),
-        "LAHO3B": StraightLine([450,790],"right",160),
+        "LAHO3A": StraightLine([300,790],"right",120),
+        "LAHO3B": StraightLine([420,790],"right",190),
         "MIBI3-_LAHO3A_1#2": StraightLine([310,765],"down",90),
         "MIBI3-_LAHO3A_1#3": StraightLine([310,855],"right",35),
         "MIBI3-_LAHO3A_1#4": StraightLine([395,855],"left",50,"11kV"),
@@ -328,11 +328,11 @@ networks_undrawn["chapelcross33kv"] = {
     23: new Text("MOFFAT01", ["MOFFAT"],[0,-45]),
     24: new Text("MOFFAT01", ["683"],[0,-30]),
 
-    25: new Text("LAHO3A", ["LANGHOLM 33KV"],[75,-55]),
-    26: new Text("LAHO3A", ["692"],[75,-40]),
+    25: new Text("LAHO3A", ["LANGHOLM 33KV"],[60,-45]),
+    26: new Text("LAHO3A", ["692"],[60,-30]),
 
-    29: new Text("LAHO5-1", ["LANGHOLM 33KV"],[0,-65]),
-    30: new Text("LAHO5-1", ["692"],[0,-45]),
+    29: new Text("LAHO5-1", ["LANGHOLM"],[27,-65]),
+    30: new Text("LAHO5-1", ["692"],[27,-45]),
 
     31: new Text("STCR3-", ["STEVENS CROFT"],[-25,-45]),
     32:new Text("STCR3-", ["33KV"],[-25,-30]),

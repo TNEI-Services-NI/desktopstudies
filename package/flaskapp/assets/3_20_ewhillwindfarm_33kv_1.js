@@ -13,6 +13,8 @@ networks_undrawn["ewehillwindfarm1"]={
     "761 CUSTOMER A": StraightLine([345,120],"down",85,"33kV"),
     "761 CUSTOMER B": StraightLine([345,205],"down",55,"33kV"),
 
+        "POC": StraightLine([320,160],"right",50,"",true),
+
     "EWEHILL1 BUSBAR": StraightLine([325,260],"right",425,"33kV"),
 
     "CB01 A": StraightLine([365,260],"down",30,"33kV"),

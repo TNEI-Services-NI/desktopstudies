@@ -29,8 +29,8 @@ breaker,-1,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14
 698 01,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
 698 11,closed,open,open,open,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed
 698 12,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-698 13,closed,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed
-698 14,open,open,open,open,open,open,open,open,open,open,open,open,closed,closed,closed,closed
+698 13,closed,open,open,open,open,open,open,open,open,open,open,open,closed,closed,closed,closed
+698 14,open,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed
 698 15,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
 698 16,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
 698 21,closed,open,open,open,open,open,open,open,open,open,open,closed,closed,closed,closed,closed
@@ -47,7 +47,7 @@ breaker,-1,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14
 780 11,closed,open,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed
 780 12,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
 780 13,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-780 14,closed,open,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed
+780 14,closed,open,open,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed
 781 11,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
 781 12,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
 785 21,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed

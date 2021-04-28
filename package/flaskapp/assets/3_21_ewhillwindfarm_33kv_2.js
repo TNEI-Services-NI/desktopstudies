@@ -7,8 +7,10 @@ networks_undrawn["ewehillwindfarm2"]={
 
     "761 MINS WF": StraightLine([345,90],"down",30,"33kV"),
     "1L3A": StraightLine([345,120],"down",85,"33kV"),
-    "WG2 A": StraightLine([345,120],"down",85,"33kV"),
-    "WG2 B": StraightLine([345,205],"down",55,"33kV"),
+    "WG2 A": StraightLine([345,120],"down",100,"33kV"),
+    "WG2 B": StraightLine([345,220],"down",40,"33kV"),
+
+        "POC": StraightLine([320,200],"right",50,"",true),
 
     "MINSCA BUSBAR": StraightLine([325,260],"right",425,"33kV"),
 
@@ -199,11 +201,11 @@ networks_undrawn["ewehillwindfarm2"]={
 
     breakers:{
 //        "761 CHAP": new Breaker("761 CHAP A",1),
-    "WG2": new Breaker("WG2 A" ,0.5),
-    // "GRID 1A": new Breaker("761 CUSTOMER",1),
-    // "CB01": new Breaker("CB01 A",1),
-    // "CB02": new Breaker("CB02 A",1),
-    // "CB04": new Breaker("CB04 A",1),
+    "WG2": new Breaker("WG2 A" ,1,"      WG2"),
+     "GRID 1A": new Breaker("WG2 A",0),
+     "CB01": new Breaker("CB01 A",1),
+     "CB02": new Breaker("CB02 A",1),
+     "CB04": new Breaker("CB04 A",1),
 
     },
 
@@ -238,7 +240,7 @@ networks_undrawn["ewehillwindfarm2"]={
     },
 
     isolators:{
-        "1L3A": new Isolator("1L3A" ,1),
+        "1L3A": new Isolator("WG2 A" ,0.5),
 
     },
 

@@ -11,6 +11,7 @@ networks_undrawn["minsca33kv"]={
     "761 MINS WF": StraightLine([345,90],"down",30,"33kV"),
     "761 CUSTOMER": StraightLine([345,120],"down",85,"33kV"),
     "761 CUSTOMER A": StraightLine([345,120],"down",85,"33kV"),
+        "POC": StraightLine([320,160],"right",50,"",true),
     "761 CUSTOMER B": StraightLine([345,205],"down",55,"33kV"),
 
     "MINSCA BUSBAR": StraightLine([325,260],"right",425,"33kV"),
@@ -204,6 +205,8 @@ networks_undrawn["minsca33kv"]={
 //        "761 CHAP": new Breaker("761 CHAP A",1),
     "761 MINS WF": new Breaker("761 MINS WF",1),
     "761 CUSTOMER": new Breaker("761 CUSTOMER",1),
+    "761 CHAP": new Breaker("761 CHAP A",1),
+
     "CB01": new Breaker("CB01 A",1),
     "CB02": new Breaker("CB02 A",1),
     "CB04": new Breaker("CB04 A",1),
