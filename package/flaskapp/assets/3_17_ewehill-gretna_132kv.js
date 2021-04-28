@@ -26,6 +26,7 @@ networks_undrawn["ewehillgretna"]={
 
     breakers:{
         "805": new Breaker("804 805 803",0.6),
+        //todo something is up with Grid 1A and WG2
         "GRID 1A": new Breaker("GRID 1A",0.33),
         "WG2": new Breaker("GRID 1A",0.75),
         "GRID 1B": new Breaker("GRID 1B",0.5),

@@ -37,7 +37,7 @@ networks_undrawn["gretna400kv"]={
     breakers:{
         "X442": new Breaker("ELVA",0.63),
         "X448": new Breaker("X448",0.5),
-        "X405": new Breaker("ELVA", 0.37),
+        "X405": new Breaker("ELVA", 0.3),
         "X230": new Breaker("X236 X230 X234", 0.5),
         "X110": new Breaker("X110",0.65),
         "X510": new Breaker("X510",0.65),
@@ -78,9 +78,9 @@ networks_undrawn["gretna400kv"]={
         "X114": new Isolator("X116 X114",0.75),
         "X116": new Isolator("X116 X114",0.25,"open"),
 
-        "X405": new Isolator("ELVA",0.3),
+        "X405": new Isolator("ELVA",0.37),
         "X447": new Isolator("X447",0.3),
-        "X449": new Isolator("X449",0.3),
+        "X449": new Isolator("X449",0.3,"closed"),
     },
 
     dataViews:{
