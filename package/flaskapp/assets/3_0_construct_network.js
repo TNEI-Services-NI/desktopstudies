@@ -427,34 +427,58 @@
           let callback = gen_info.callback
           let name = gen_info.name
           let id = gen_info_id
-          width = 175 * x_scaling
+
+          let width = 175 * x_scaling
+
 
           let center = [position[0]*x_scaling,position[1]*y_scaling]
           //draw heading
           add_static_text([name], center[0], center[1], colour=colour, callback)
 
-          add_static_text(["MW"], center[0]-width/4, center[1]+((font_size+10)*y_scaling), colour=colour, callback)
-          add_static_text(["MVAR"], center[0]-width/4, center[1]+((font_size*2+20)*y_scaling), colour=colour, callback)
+          add_static_text(["MW"], center[0]-width/4, center[1]+font_size*2, colour=colour, callback)
+          add_static_text(["MVAR"], center[0]-width/4, center[1]+font_size*4, colour=colour, callback)
 
-          //draw MW
+          //draw MW & MVAR
           MW_graphic = []
           MVAR_graphic = []
-          add_static_text(["0"], center[0]+width/4, center[1]+((font_size+10)*y_scaling), colour=colour, Text_Callback(MW_graphic))
-          add_static_text(["0"], center[0]+width/4, center[1]+((font_size*2+20)*y_scaling), colour=colour, Text_Callback(MVAR_graphic))
+          add_static_text(["0"], center[0]+width/4, center[1]+font_size*2, colour=colour, Text_Callback(MW_graphic))
+          add_static_text(["0"], center[0]+width/4, center[1]+font_size*4, colour=colour, Text_Callback(MVAR_graphic))
+
+          //draw grid
+          line_base_id = id+"_line"
+          let i = 0
+          let line1 = StraightLine([center[0]-width/2,center[1] + font_size], "right", width)
+          draw_line(line1, line_base_id+i++, "diagram")
+
+          let line2 = StraightLine([center[0]-width/2,center[1] + font_size*5], "right", width)
+          draw_line(line2, line_base_id+i++, "diagram")
+
+          let line3 = StraightLine([center[0]-width/2,center[1] + font_size], "down", font_size*4)
+          draw_line(line3, line_base_id+i++, "diagram")
+
+          let line4 = StraightLine([center[0],center[1] + font_size], "down", font_size*4)
+          draw_line(line4, line_base_id+i++, "diagram")
+
+          let line5 = StraightLine([center[0]+width/2,center[1] + font_size], "down", font_size*4)
+          draw_line(line5, line_base_id+i++, "diagram")
+
+          let line6 = StraightLine([center[0]-width/2,center[1] + font_size*3], "right", width)
+          draw_line(line6, line_base_id+i++, "diagram")
+
 
           let genInfo = {info:gen_info, UIElement: [MW_graphic[0],MVAR_graphic[0]], id : id}
 
           genInfo.setMVAR = function(MVAR){
             this.UIElement[1].remove()
             let graphic = []
-            variable_text = add_static_text([MVAR], center[0]+width/4, center[1]+((font_size*2+20)*y_scaling), colour=colour, Text_Callback(graphic))
+            variable_text = add_static_text([MVAR], center[0]+width/4, center[1]+font_size*4, colour=colour, Text_Callback(graphic))
             this.UIElement[1] = graphic[0]
           }
 
            genInfo.setMW = function(MW){
             this.UIElement[0].remove()
             let graphic = []
-            variable_text = add_static_text([MW], center[0]+width/4, center[1]+((font_size+10)*y_scaling), colour=colour, Text_Callback(graphic))
+            variable_text = add_static_text([MW], center[0]+width/4, center[1]+font_size*2, colour=colour, Text_Callback(graphic))
             this.UIElement[0] = graphic[0]
           }
 
@@ -463,8 +487,7 @@
 
         }
 
-          //draw MVAR
-          //draw grid
+
 
   }
 
