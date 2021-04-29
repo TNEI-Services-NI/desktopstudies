@@ -833,15 +833,25 @@ function draw_SGT(dict_line,callback){
 
 }
 
-function draw_line(line,id_line){
+function draw_line(line,id_line, type="busbar"){
         bNodes = false
+
+        if(type == "busbar"){
+        line = style_busbar(line)
+        }
+        else if(type == "diagram"){
+
+        line = style_diagram_line(line)
+        }
+        else{
         line = style_line(line)
+        }
 
         line.callback = Line_Callback(line.graphic)
 
-
         line.o_line = draw.line(line.x1 , line.y1,
-                                      line.x2, line.y2).stroke(line.dict_styling.stroke)
+                      line.x2, line.y2).stroke(line.dict_styling.stroke)
+
 
         line.callback(line.o_line)
 
@@ -859,5 +869,7 @@ function draw_line(line,id_line){
         dict_components.lines[id_line] = line
         components.lines[id_line] = l
 
-        component_modal(l)
+        if(type != "diagram"){
+            component_modal(l)
+        }
 }

@@ -20,6 +20,7 @@ networks_undrawn["gretna400kv"]={
         "ELVA A": StraightLine([445,525],"right",40, "400kV"),
         "ELVA": StraightLine([445,525],"up",440, "400kV"),
         "X447": StraightLine([445,275],"right",135,"400kV"),
+        "X447 X449": StraightLine([530,275],"up",55,"400kV"),
         "X449": StraightLine([445,220],"right",135,"400kV"),
         "SC1" : StraightLine([530,275],"up",55,"400kV"),
         "X448": StraightLine([580,220],"down",55,"400kV"),
@@ -31,6 +32,18 @@ networks_undrawn["gretna400kv"]={
         "X110": StraightLine([765,525],"down",215,"400kV"),
         "GRNA 680": StraightLine([765,740],"down",190,"132kV"),
         "GRNA 680 tx": StraightLine([765,800],"left",40,"132kV"),
+
+    "SC1": StraightLine([415,170],"right",350,"0V",true),
+    "SC2": StraightLine([415,170],"down",150,"0V",true),
+    "SC3": StraightLine([765,320],"up",150,"0V",true),
+    "SC4": StraightLine([765,320],"left",350,"0V",true),
+
+//530,275
+    "SC5": StraightLine([510,290],"up",85,"0V",true),
+    "SC6": StraightLine([510,290],"right",40,"0V",true),
+    "SC7": StraightLine([550,205],"down",85,"0V",true),
+    "SC8": StraightLine([550,205],"left",40,"0V",true),
+
 
     },
 
@@ -53,6 +66,10 @@ networks_undrawn["gretna400kv"]={
     5: new Text("GRNA 780",["GRNA 780"],[0,110]),
     6: new Text("ELVA",["ELVA"],[0,-240]),
     7: new Text("M1",["GRETNA 400kV"],[-50,-600]),
+    8: new Text("SC1",["SERIES COMPENSATION SC1"],[70,15]),
+    9: new Text("SC1",["COMPOUND"],[70,30]),
+    10: new Text("SC8",["SC1"],[-10,-10]),
+
     },
 
     tx:{

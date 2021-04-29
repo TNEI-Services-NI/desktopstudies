@@ -91,6 +91,55 @@
     return line
   }
 
+  function style_busbar(line){
+    line.dict_styling = {fill: { width: line_palette_style["width"]},
+                         stroke: { width: line_palette_style["width"]}}
+    if (line.dash){
+              line.dict_styling = {fill: { width: line_palette_style["width"]/2},
+                         stroke: { width: line_palette_style["width"]/2}}
+      line.dict_styling.stroke.dasharray = (5, 5)
+
+    }
+    let colour = undefined
+    if (line.live){
+      colour = palette[line.voltage]
+
+    } else {
+      colour = palette["0V"]
+    }
+    line.dict_styling.stroke.color = colour
+    line.dict_styling.stroke.live_color = palette[line.voltage]
+    line.dict_styling.fill.color = colour
+    line.dict_styling.fill.live_color = palette[line.voltage]
+    // line.dict_styling.stroke.color = palette[line.voltage]
+    return line
+  }
+
+  function style_diagram_line(line){
+    line.dict_styling = {fill: { width: line_palette_style["width"]/2},
+                         stroke: { width: line_palette_style["width"]}/2}
+    if (line.dash){
+              line.dict_styling = {fill: { width: line_palette_style["width"]/2},
+                         stroke: { width: line_palette_style["width"]/2}}
+      line.dict_styling.stroke.dasharray = (5, 5)
+
+    }
+    let colour = undefined
+    if (line.live){
+      colour = palette[line.voltage]
+
+    } else {
+      colour = palette["0V"]
+    }
+    line.dict_styling.stroke.color = colour
+    line.dict_styling.stroke.live_color = palette[line.voltage]
+    line.dict_styling.fill.color = colour
+    line.dict_styling.fill.live_color = palette[line.voltage]
+    // line.dict_styling.stroke.color = palette[line.voltage]
+    return line
+  }
+
+
 
   function construct_coord_display(){
     const text1 = draw.text("coordinate dislay")
@@ -335,16 +384,17 @@
           add_static_text(["POWER AVAILABLE"], x=position[0], y=position[1], colour=colour, callback)
           add_static_text(["0 MW"], x=position[0], y=position[1]+15*y_scaling, colour=colour, callback)
 
-          width = 15*4 * x_scaling
-          height = 15*3 * y_scaling
+          let width = font_size*5 * x_scaling
+          let height = font_size*3 * y_scaling
 
           topLeftPoint = [position[0]-width*4/5,position[1]+7.5*y_scaling-height/2]
           topRightPoint = [position[0]+width*4/5 ,position[1]+7.5*y_scaling+height/2]
 
-          draw_line(StraightLine(topLeftPoint,"right",width *8/5))
-          draw_line(StraightLine(topLeftPoint,"down",height))
-          draw_line(StraightLine(topRightPoint,"up",height))
-          draw_line(StraightLine(topRightPoint,"left",width*8/5))
+          i = 0;
+          draw_line(StraightLine(topLeftPoint,"right",width *8/5),componentID+"diagram"+i++,"diagram")
+          draw_line(StraightLine(topLeftPoint,"down",height),componentID+"diagram"+i++,"diagram")
+          draw_line(StraightLine(topRightPoint,"up",height),componentID+"diagram"+i++,"diagram")
+          draw_line(StraightLine(topRightPoint,"left",width*8/5),componentID+"diagram"+i++,"diagram")
 
 //function StraightLine(origin, direction, length, voltage="33kV", dash = false, colour = ""){
           let id = power_id

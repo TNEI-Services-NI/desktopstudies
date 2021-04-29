@@ -384,7 +384,6 @@ networks_undrawn["chapelcross33kv"] = {
         "STCR5-_1": new DataView("STCR5-_1", [-35, 0]),
         // CRAIG II WINDFARM 11KV
         // "CRAG0B_1": new DataView("CRAG0B_1", [-35, 0]),
-        "EWHC0G_1": new DataView("EWHC0G_1", [35, 0]),
 
 //        //        //generator
 ////        "SOLWAYBANK": new DataView(850,100, "378",["MW","MVAR","kV","AMPS"]),

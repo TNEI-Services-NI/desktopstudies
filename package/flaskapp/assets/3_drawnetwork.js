@@ -201,7 +201,7 @@
   }
 
   function master_draw(){
-    prepare_canvas(x, y);
+    prepare_canvas(x_max, y_max);
     dict_components = networks_undrawn[network]
     draw_network(dict_components, network, current_step);
     fetch_sim_data(network, current_step, option, scenario, function(stage_, step_data){
@@ -229,8 +229,8 @@
 
   });
 
-  var x = undefined;
-  var y = undefined;
+  var x_max = undefined;
+  var y_max = undefined;
   var x_scaling = undefined;
   var y_scaling = undefined;
   var font_size = undefined;
@@ -241,9 +241,9 @@
 
    //Define parent attributes
  //  var x = document.getElementById('myDiv').clientWidth;
-  x = window.innerWidth;
+  x_max = window.innerWidth;
   // var y = document.getElementById('myDiv').clientHeight;
-  y = window.innerHeight;
+  y_max = window.innerHeight;
 
   x_scaling = x/1150
   y_scaling = y/1050
