@@ -380,9 +380,11 @@
           let position = availablePower.pos
           let colour = "#ffffff"
           let callback = availablePower.callback
-          console.log(availablePower)
+
           add_static_text(["POWER AVAILABLE"], x=position[0], y=position[1], colour=colour, callback)
-          add_static_text(["0 MW"], x=position[0], y=position[1]+15*y_scaling, colour=colour, callback)
+          variable_text = add_static_text(["0 MW"], x=position[0], y=position[1]+15*y_scaling, colour=colour, Text_Callback(availablePower.graphic))
+
+          let UIElement = availablePower.graphic[0]
 
           let width = font_size*5 * x_scaling
           let height = font_size*3 * y_scaling
@@ -399,6 +401,15 @@
 //function StraightLine(origin, direction, length, voltage="33kV", dash = false, colour = ""){
           let id = power_id
           let pa = {info:availablePower, UIElement: availablePower.graphic[0], id : id}
+          pa.setAvailablePower = function(POWER){
+            this.UIElement.remove()
+            graphic = []
+            variable_text = add_static_text([POWER + " MW"], position[0], position[1]+15*y_scaling, colour=colour, Text_Callback(graphic))
+            let UIElement = availablePower.graphic[0]
+
+//            console.log(UIElement.node.children[0].innerHTML)
+//            UIElement.node.children[0].innerHTML = POWER + " MW"
+          }
           components.availablePowers[power_id] = pa
         }
   }
