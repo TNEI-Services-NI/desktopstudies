@@ -753,7 +753,7 @@ function add_dataview(observer, text, offset, callback) {
 }
 
 function add_available_power(observer, text, offset, callback) {
-  let colour = "#dedede"
+  let colour = "#ffffff"
   add_text(observer, false, text, offset[0], offset[1], colour, callback)
 }
 
@@ -831,4 +831,33 @@ function draw_SGT(dict_line,callback){
     group.horizontal = bHorizontal
     callback(group);
 
+}
+
+function draw_line(line,id_line){
+        bNodes = false
+        line = style_line(line)
+
+        line.callback = Line_Callback(line.graphic)
+
+
+        line.o_line = draw.line(line.x1 , line.y1,
+                                      line.x2, line.y2).stroke(line.dict_styling.stroke)
+
+        line.callback(line.o_line)
+
+        line.line_idx = id_line
+
+        if (bNodes){
+          draw_nodes(line, line.o_line)
+        }
+        let l = {
+            info: line,
+            UIElement: line.graphic[0],
+            id : id_line,
+        }
+
+        dict_components.lines[id_line] = line
+        components.lines[id_line] = l
+
+        component_modal(l)
 }

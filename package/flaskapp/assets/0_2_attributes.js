@@ -32,8 +32,10 @@ let components = {
                     text:[],
                     dataviews:[],
                     transformers:[],
-                    SGTs:[]
+                    SGTs:[],
+                    availablePowers:[],
                 };
+
 let networks_undrawn = {
     "chapelcross33kv": undefined,
     "chapelcross132kv": undefined,

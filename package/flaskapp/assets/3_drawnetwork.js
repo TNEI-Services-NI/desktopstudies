@@ -255,6 +255,7 @@
   scale_lines(networks_undrawn);
   scale_labels(networks_undrawn);
   scale_dataviews(networks_undrawn);
+  scale_availablePower(networks_undrawn);
 
   var room = undefined
 

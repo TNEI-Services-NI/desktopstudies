@@ -12,7 +12,8 @@
                     text:[],
                     dataviews:[],
                     transformers:[],
-                    SGTs:[]
+                    SGTs:[],
+                    availablePowers:[]
                 }
   }
 
@@ -51,6 +52,19 @@
        temp_dict.offset[1] = temp_dict.offset[1] * y_scaling
      }
    }
+  }
+
+  function scale_availablePower(networks_undrawn){
+     for(let id_dict in networks_undrawn) {
+        let temp_dict_components = networks_undrawn[id_dict]
+
+        for (let idx in temp_dict_components.availablePower) {
+           temp_dict = temp_dict_components.availablePower[idx]
+           temp_dict.pos[0] = temp_dict.pos[0] * x_scaling
+           temp_dict.pos[1] = temp_dict.pos[1] * y_scaling
+           temp_dict_components.availablePower[idx] = temp_dict
+        }
+     }
   }
 
   function style_line(line){
@@ -100,32 +114,8 @@
 
     for (let id_line in dict_components.lines){
         let line = dict_components.lines[id_line]
+        draw_line(line,id_line)
 
-        line = style_line(line)
-
-        line.callback = Line_Callback(line.graphic)
-
-
-        line.o_line = draw.line(line.x1 , line.y1,
-                                      line.x2, line.y2).stroke(line.dict_styling.stroke)
-
-        line.callback(line.o_line)
-
-        line.line_idx = id_line
-
-        if (bNodes){
-          draw_nodes(line, line.o_line)
-        }
-        let l = {
-            info: line,
-            UIElement: line.graphic[0],
-            id : id_line,
-        }
-
-        dict_components.lines[id_line] = line
-        components.lines[id_line] = l
-
-        component_modal(l)
     }
   }
 
@@ -291,17 +281,6 @@
         } else if(tx !== undefined){
           observer = tx.UIElement
         }
-//          let group = draw.group()
-//          let textObjects = {}
-//
-//          //the following block will work but it's not ideal
-//          observingComponent = components.lines[componentID]
-//          if(observingComponent === undefined){
-//            observingComponent = components.generators[componentID]
-//          }
-//          if(observingComponent === undefined){
-//            observingComponent = components.transformers[componentID]
-//          }
 
         add_dataview(observer, "", offset, function (text_object) {
           components.dataviews[id_dv] = {
@@ -346,20 +325,31 @@
   }
 
   function construct_available_power(dict_components){
-      for(let id in dict_components.availablePower){
-          let availablePower = dict_components.availablePower[id]
-          let componentID = id
+      for(let power_id in dict_components.availablePower){
+          let availablePower = dict_components.availablePower[power_id]
+          let componentID = power_id
           let position = availablePower.pos
-          let colour = "d3d3d3"
+          let colour = "#ffffff"
           let callback = availablePower.callback
           console.log(availablePower)
-          add_static_text(["available power: "], x=position[0], y=position[1], colour=colour, callback)
+          add_static_text(["POWER AVAILABLE"], x=position[0], y=position[1], colour=colour, callback)
+          add_static_text(["0 MW"], x=position[0], y=position[1]+15*y_scaling, colour=colour, callback)
 
-//
-//          let id = i
-//          let s = {info:sgt, UIElement: sgt.graphic[0], id : id}
-//          components.lines[id] = s
-//          component_modal(s)
+          width = 15*4 * x_scaling
+          height = 15*3 * y_scaling
+
+          topLeftPoint = [position[0]-width*4/5,position[1]+7.5*y_scaling-height/2]
+          topRightPoint = [position[0]+width*4/5 ,position[1]+7.5*y_scaling+height/2]
+
+          draw_line(StraightLine(topLeftPoint,"right",width *8/5))
+          draw_line(StraightLine(topLeftPoint,"down",height))
+          draw_line(StraightLine(topRightPoint,"up",height))
+          draw_line(StraightLine(topRightPoint,"left",width*8/5))
+
+//function StraightLine(origin, direction, length, voltage="33kV", dash = false, colour = ""){
+          let id = power_id
+          let pa = {info:availablePower, UIElement: availablePower.graphic[0], id : id}
+          components.availablePowers[power_id] = pa
         }
   }
 

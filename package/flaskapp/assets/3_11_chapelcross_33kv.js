@@ -415,9 +415,9 @@ networks_undrawn["chapelcross33kv"] = {
 
     },
     availablePower:{
-        "EWHC0G_1" : new AvailablePower([100,950]),
-        "MINS0G_1": new AvailablePower([950,950]),
-        "STCR5-_1": new AvailablePower([300,100]),
+        "EWHC0G_1" : new AvailablePower([115,970]),
+        "MINS0G_1": new AvailablePower([940,820]),
+        "STCR5-_1": new AvailablePower([800,50]),
 
     }
 }
