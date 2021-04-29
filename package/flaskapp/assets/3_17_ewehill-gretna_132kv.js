@@ -81,4 +81,7 @@ networks_undrawn["ewehillgretna"]={
     SGTs:{
 
     },
+    generationInfo:{
+        "WTG_EWEH0G_1": new GenerationInfo([120,780],"EWE HILL WINDFARM (EWHLW-1)"),
+    }
 }

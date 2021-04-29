@@ -13,7 +13,8 @@
                     dataviews:[],
                     transformers:[],
                     SGTs:[],
-                    availablePowers:[]
+                    availablePowers:[],
+                    generationInfo:[]
                 }
   }
 
@@ -414,6 +415,58 @@
         }
   }
 
+  function construct_generation_info(dict_components){
+      console.log(dict_components)
+      for(let gen_info_id in dict_components.generationInfo){
+          console.log(gen_info_id)
+          let gen_info = dict_components.generationInfo[gen_info_id]
+          console.log(gen_info)
+          let componentID = gen_info_id
+          let position = gen_info.pos
+          let colour = "#d6ba00"
+          let callback = gen_info.callback
+          let name = gen_info.name
+          let id = gen_info_id
+          width = 175 * x_scaling
+
+          let center = [position[0]*x_scaling,position[1]*y_scaling]
+          //draw heading
+          add_static_text([name], center[0], center[1], colour=colour, callback)
+
+          add_static_text(["MW"], center[0]-width/4, center[1]+((font_size+10)*y_scaling), colour=colour, callback)
+          add_static_text(["MVAR"], center[0]-width/4, center[1]+((font_size*2+20)*y_scaling), colour=colour, callback)
+
+          //draw MW
+          MW_graphic = []
+          MVAR_graphic = []
+          add_static_text(["0"], center[0]+width/4, center[1]+((font_size+10)*y_scaling), colour=colour, Text_Callback(MW_graphic))
+          add_static_text(["0"], center[0]+width/4, center[1]+((font_size*2+20)*y_scaling), colour=colour, Text_Callback(MVAR_graphic))
+
+          let genInfo = {info:gen_info, UIElement: [MW_graphic[0],MVAR_graphic[0]], id : id}
+
+          genInfo.setMVAR = function(MVAR){
+            this.UIElement[1].remove()
+            let graphic = []
+            variable_text = add_static_text([MVAR], center[0]+width/4, center[1]+((font_size*2+20)*y_scaling), colour=colour, Text_Callback(graphic))
+            this.UIElement[1] = graphic[0]
+          }
+
+           genInfo.setMW = function(MW){
+            this.UIElement[0].remove()
+            let graphic = []
+            variable_text = add_static_text([MW], center[0]+width/4, center[1]+((font_size+10)*y_scaling), colour=colour, Text_Callback(graphic))
+            this.UIElement[0] = graphic[0]
+          }
+
+          components.generationInfo[id] = genInfo
+
+
+        }
+
+          //draw MVAR
+          //draw grid
+
+  }
 
   function construct_SGTs(dict_components){
       for(let i in dict_components.SGTs){

@@ -337,6 +337,13 @@ function AvailablePower(position){
     this.callback = Text_Callback
 }
 
+function GenerationInfo(position, name){
+    this.pos = position
+    this.name = name
+    this.graphic = []
+    this.callback = Text_Callback
+}
+
 function SGT(line_id,name){
     this.component = "SGT"
     this.lineID = line_id,

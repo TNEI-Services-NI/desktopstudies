@@ -272,4 +272,7 @@ networks_undrawn["minsca33kv"]={
         "WTG 08": new Generator("WTG08 E",1),
 
     },
+    availablePower:{
+        "MINS0G_1" : new AvailablePower([500,150]),
+    }
 }

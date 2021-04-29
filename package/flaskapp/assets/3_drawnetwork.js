@@ -54,6 +54,21 @@
     }
   }
 
+  function update_generation_info(step_data){
+    let generation_info_instance;
+    for (let gen_ in components.generationInfo) {
+          console.log(components.generationInfo)
+          generation_info_instance = components.generationInfo[gen_]
+          if (gen_ in step_data["generators_active_power"]) {
+                generation_info_instance.setMW(step_data["generators_active_power"][gen_])
+          }
+          if (gen_ in step_data["generators_reactive_power"]) {
+                generation_info_instance.setMVAR(step_data["generators_reactive_power"][gen_])
+          }
+    }
+  }
+
+
   function update_transformer_modals(step_data){
     for (let tx_ in components.transformers) {
       tx_instance = components.transformers[tx_]
@@ -211,6 +226,10 @@
     construct_SGTs(dict_components);
 
     construct_available_power(dict_components)
+
+    construct_generation_info(dict_components)
+
+
   }
 
   function master_draw(){
@@ -227,6 +246,7 @@
       update_breaker_colours(step_data);
       update_generator_colours(step_data);
       update_available_power(step_data);
+      update_generation_info(step_data);
       }
     );
   }

@@ -272,4 +272,7 @@ networks_undrawn["ewehillwindfarm2"]={
         "WTG 08": new Generator("WTG08 E",1),
 
     },
+    availablePower:{
+        "EWHC0G_2" : new AvailablePower([500,150]),
+    }
 }

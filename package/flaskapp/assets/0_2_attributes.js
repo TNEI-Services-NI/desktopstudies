@@ -34,6 +34,7 @@ let components = {
                     transformers:[],
                     SGTs:[],
                     availablePowers:[],
+                    generationInfo:[]
                 };
 
 let networks_undrawn = {
