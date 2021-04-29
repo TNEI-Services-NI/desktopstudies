@@ -752,6 +752,11 @@ function add_dataview(observer, text, offset, callback) {
   add_text(observer, false, text, offset[0], offset[1], colour, callback)
 }
 
+function add_available_power(observer, text, offset, callback) {
+  let colour = "#dedede"
+  add_text(observer, false, text, offset[0], offset[1], colour, callback)
+}
+
 function add_static_text(list_text, x=100, y=100, colour="#d3d3d3", callback){
     var rad = 3
     var txtSize = font_size

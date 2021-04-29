@@ -196,6 +196,8 @@
     // redraw_dataviews();
 
     construct_SGTs(dict_components);
+
+    construct_available_power(dict_components)
   }
 
   function master_draw(){

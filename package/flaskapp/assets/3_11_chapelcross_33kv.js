@@ -414,4 +414,10 @@ networks_undrawn["chapelcross33kv"] = {
 ////        "398 16": new DataView(15,230,"GRID 1", ["Amps"]),
 
     },
+    availablePower:{
+        "EWHC0G_1" : new AvailablePower([100,950]),
+        "MINS0G_1": new AvailablePower([950,950]),
+        "STCR5-_1": new AvailablePower([300,100]),
+
+    }
 }

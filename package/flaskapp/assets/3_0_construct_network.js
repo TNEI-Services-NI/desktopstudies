@@ -345,6 +345,25 @@
     })
   }
 
+  function construct_available_power(dict_components){
+      for(let id in dict_components.availablePower){
+          let availablePower = dict_components.availablePower[id]
+          let componentID = id
+          let position = availablePower.pos
+          let colour = "d3d3d3"
+          let callback = availablePower.callback
+          console.log(availablePower)
+          add_static_text(["available power: "], x=position[0], y=position[1], colour=colour, callback)
+
+//
+//          let id = i
+//          let s = {info:sgt, UIElement: sgt.graphic[0], id : id}
+//          components.lines[id] = s
+//          component_modal(s)
+        }
+  }
+
+
   function construct_SGTs(dict_components){
       for(let i in dict_components.SGTs){
         let sgt = dict_components.SGTs[i]
