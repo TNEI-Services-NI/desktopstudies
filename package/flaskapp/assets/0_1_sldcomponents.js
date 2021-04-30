@@ -37,10 +37,10 @@ function Line_Callback(graphic_objects, name = ''){
         }
         if(name !== ''){
             if(object.horizontal === true){
-                add_text(object, false, [name], 0, -15,"#d3d3d3", function(object){})
+                add_text(object, false, [name], 0, -15 * y_scaling,"#d3d3d3", function(object){})
             }
             else{
-                add_text(object, false, [name], 9 + name.length*5, 0,"#d3d3d3", function(object){})}
+                add_text(object, false, [name], 9 + name.length*5 * x_scaling, 0,"#d3d3d3", function(object){})}
         }
     }
 }
@@ -110,10 +110,10 @@ function Gen_Callback(graphic_objects){
                 graphic_objects[0] = group
             }
             if(group.horizontal === true){
-                add_text(group, false, ["GENERATOR"], 0, -25, "#d3d3d3",function(group){})
+                add_text(group, false, ["GENERATOR"], 0, -25* y_scaling, "#d3d3d3",function(group){})
             }
             else{
-                add_text(group, false, ["GENERATOR"], 0,25,"#d3d3d3",function(group){})}
+                add_text(group, false, ["GENERATOR"], 0,25 * y_scaling,"#d3d3d3",function(group){})}
             }
         }
 

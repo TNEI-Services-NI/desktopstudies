@@ -69,11 +69,11 @@
   }
 
   function style_line(line){
-    line.dict_styling = {fill: { width: line_palette_style["width"]},
-                         stroke: { width: line_palette_style["width"]}}
+    line.dict_styling = {fill: { width: line_palette_style["width"] * Math.min(x_scaling,y_scaling)},
+                         stroke: { width: line_palette_style["width"] *  Math.min(x_scaling,y_scaling)}}
     if (line.dash){
-              line.dict_styling = {fill: { width: line_palette_style["width"]/2},
-                         stroke: { width: line_palette_style["width"]/2}}
+              line.dict_styling = {fill: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)},
+                         stroke: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)}}
       line.dict_styling.stroke.dasharray = (5, 5)
 
     }
@@ -93,11 +93,11 @@
   }
 
   function style_busbar(line){
-    line.dict_styling = {fill: { width: line_palette_style["width"]},
-                         stroke: { width: line_palette_style["width"]}}
+    line.dict_styling = {fill: { width: line_palette_style["width"] * Math.min(x_scaling,y_scaling)},
+                         stroke: { width: line_palette_style["width"] * Math.min(x_scaling,y_scaling)}}
     if (line.dash){
-              line.dict_styling = {fill: { width: line_palette_style["width"]/2},
-                         stroke: { width: line_palette_style["width"]/2}}
+              line.dict_styling = {fill: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)},
+                         stroke: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)}}
       line.dict_styling.stroke.dasharray = (5, 5)
 
     }
@@ -117,11 +117,11 @@
   }
 
   function style_diagram_line(line){
-    line.dict_styling = {fill: { width: line_palette_style["width"]/2},
-                         stroke: { width: line_palette_style["width"]}/2}
+    line.dict_styling = {fill: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)},
+                         stroke: { width: line_palette_style["width"]}/2 * Math.min(x_scaling,y_scaling)}
     if (line.dash){
-              line.dict_styling = {fill: { width: line_palette_style["width"]/2},
-                         stroke: { width: line_palette_style["width"]/2}}
+              line.dict_styling = {fill: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)},
+                         stroke: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)} }
       line.dict_styling.stroke.dasharray = (5, 5)
 
     }
@@ -383,21 +383,23 @@
           let callback = availablePower.callback
 
           add_static_text(["POWER AVAILABLE"], x=position[0], y=position[1], colour=colour, callback)
-          variable_text = add_static_text(["0 MW"], x=position[0], y=position[1]+15*y_scaling, colour=colour, Text_Callback(availablePower.graphic))
+          variable_text = add_static_text(["0 MW"], x=position[0], y=position[1]+font_size, colour=colour, Text_Callback(availablePower.graphic))
 
           let UIElement = availablePower.graphic[0]
 
-          let width = font_size*5 * x_scaling
-          let height = font_size*3 * y_scaling
-
-          topLeftPoint = [position[0]-width*4/5,position[1]+7.5*y_scaling-height/2]
-          topRightPoint = [position[0]+width*4/5 ,position[1]+7.5*y_scaling+height/2]
+          let width = font_size*7/x_scaling
+          let height = font_size*3
+            // topLeftPoint = [position[0]-width*4/5 * x_scaling,position[1]+(7.5*y_scaling-height)/2
+          topLeftPoint = [position[0]-width * x_scaling,position[1]-(height/2.5)]
+          topRightPoint = [position[0]+width * x_scaling ,position[1]+height/1.5]
 
           i = 0;
-          draw_line(StraightLine(topLeftPoint,"right",width *8/5),componentID+"diagram"+i++,"diagram")
-          draw_line(StraightLine(topLeftPoint,"down",height),componentID+"diagram"+i++,"diagram")
-          draw_line(StraightLine(topRightPoint,"up",height),componentID+"diagram"+i++,"diagram")
-          draw_line(StraightLine(topRightPoint,"left",width*8/5),componentID+"diagram"+i++,"diagram")
+
+          line_width = width*2*x_scaling
+          draw_line(StraightLine(topLeftPoint,"right",line_width),componentID+"diagram"+i++,"diagram")
+          draw_line(StraightLine(topLeftPoint,"down",height*1.07),componentID+"diagram"+i++,"diagram")
+          draw_line(StraightLine(topRightPoint,"up",height*1.07),componentID+"diagram"+i++,"diagram")
+          draw_line(StraightLine(topRightPoint,"left",line_width),componentID+"diagram"+i++,"diagram")
 
 //function StraightLine(origin, direction, length, voltage="33kV", dash = false, colour = ""){
           let id = power_id

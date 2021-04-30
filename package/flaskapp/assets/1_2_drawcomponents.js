@@ -160,7 +160,7 @@ callback(group);
  * @return {None}
  */
 function draw_gen(dict_line, position, type, callback){
-var rad = 16;
+var rad = 16 * Math.min(x_scaling,y_scaling);
 var circleWidth = 1;
 
 var bVertical = false;
@@ -258,7 +258,7 @@ function draw_breaker(dict_line, breaker){
   var bVertical = false;
   var bHorizontal = false;
   let position = breaker.pos
-  let size = breaker.size
+  let size = breaker.size * Math.min(x_scaling,y_scaling)
   let state = breaker.state
   let callback = breaker.callback
   let live_colour = breaker.colour
@@ -322,7 +322,7 @@ function draw_isolator(dict_line, isolator){
 var bVertical = false;
 var bHorizontal = false;
 let position = isolator.pos
-let size = isolator.size
+let size = isolator.size * Math.min(x_scaling,y_scaling)
 let state = isolator.state
 let callback = isolator.callback
 let live_colour = isolator.colour
@@ -781,7 +781,7 @@ function add_static_text(list_text, x=100, y=100, colour="#d3d3d3", callback){
 
 
 function draw_SGT(dict_line,callback){
-    var rad = 18
+    var rad = 18 * Math.min(x_scaling,y_scaling)
     var overlapFactor = 0.25
     var circleWidth = 1
 
@@ -812,7 +812,7 @@ function draw_SGT(dict_line,callback){
     ellipse.backward()
     ellipse.skew(0,-rad/2)
 
-    rect1 = draw.rect(rad*2,rad*3).fill("black").center(center[0]+rad+circleWidth,center[1])
+    rect1 = draw.rect(rad*2-(2*x_scaling),rad*3).fill("black").center(center[0]+rad+circleWidth,center[1])
     rect1.forward()
 
     circle2 = draw.circle(2*rad).center(center[0], center[1]+rad)

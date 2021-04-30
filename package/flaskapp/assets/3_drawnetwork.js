@@ -336,12 +336,14 @@
 
 function update_scaling(){
 console.log("resizing")
-    x_max = window.innerWidth;
 
-    y_max = window.innerHeight;
+    let drawBox = document.querySelector('drawing');
+    x_max = $("#drawing").attr("width")
 
-      x_scaling = x_max/1150
-      y_scaling = y_max/1050
+    y_max = $("#drawing").attr("height")
+
+      x_scaling = (x_max-250)/1000
+      y_scaling = (y_max-100)/1000
       font_size = 14 *  Math.min(x_scaling, y_scaling)
       network_scaled = networks_undrawn
       scale_lines(network_scaled);
