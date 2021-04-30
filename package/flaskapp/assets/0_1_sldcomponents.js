@@ -138,7 +138,6 @@ function Breaker(lineID, pos, name=false, state = "closed"){
     this.name = name
     this.live = live_dead
     this.callback = Breaker_Callback(this.graphic)
-
 }
 
 /**
