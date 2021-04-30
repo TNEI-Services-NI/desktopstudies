@@ -812,7 +812,7 @@ function draw_SGT(dict_line,callback){
     ellipse.backward()
     ellipse.skew(0,-rad/2)
 
-    rect1 = draw.rect(rad*2,rad*3).fill("black").center(center[0]+rad+circleWidth,center[1])
+    rect1 = draw.rect(rad*2-(2*x_scaling),rad*3).fill("black").center(center[0]+rad+circleWidth,center[1])
     rect1.forward()
 
     circle2 = draw.circle(2*rad).center(center[0], center[1]+rad)
