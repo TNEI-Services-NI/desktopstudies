@@ -36,11 +36,39 @@
       }
       if (gen_ in step_data["generators_reactive_power"]) {
         gen_instance.modal_data = gen_instance.modal_data.concat(
+
           ["Reactive power: " + step_data["generators_reactive_power"][gen_] + " [MVAr]"]
         )
       }
     }
   }
+
+  function update_available_power(step_data){
+    let available_power_instance;
+    for (let avp_ in components.availablePowers) {
+          available_power_instance = components.availablePowers[avp_]
+          available_power_instance.modal_data = []
+          if (avp_ in step_data["generators_active_power"]) {
+                available_power_instance.setAvailablePower(step_data["generators_active_power"][avp_])
+        }
+    }
+  }
+
+  function update_generation_info(step_data){
+    let generation_info_instance;
+    for (let gen_ in components.generationInfo) {
+          console.log(components.generationInfo)
+          generation_info_instance = components.generationInfo[gen_]
+          if (gen_ in step_data["generators_active_power"]) {
+                generation_info_instance.setMW(step_data["generators_active_power"][gen_])
+          }
+          if (gen_ in step_data["generators_reactive_power"]) {
+                generation_info_instance.setMVAR(step_data["generators_reactive_power"][gen_])
+          }
+    }
+  }
+
+
   function update_transformer_modals(step_data){
     for (let tx_ in components.transformers) {
       tx_instance = components.transformers[tx_]
@@ -196,10 +224,16 @@
     // redraw_dataviews();
 
     construct_SGTs(dict_components);
+
+    construct_available_power(dict_components)
+
+    construct_generation_info(dict_components)
+
+
   }
 
   function master_draw(){
-    prepare_canvas(x, y);
+    prepare_canvas(x_max, y_max);
     dict_components = networks_undrawn[network]
     draw_network(dict_components, network, current_step);
     fetch_sim_data(network, current_step, option, scenario, function(stage_, step_data){
@@ -211,6 +245,8 @@
       update_line_colours(step_data);
       update_breaker_colours(step_data);
       update_generator_colours(step_data);
+      update_available_power(step_data);
+      update_generation_info(step_data);
       }
     );
   }
@@ -227,8 +263,8 @@
 
   });
 
-  var x = undefined;
-  var y = undefined;
+  var x_max = undefined;
+  var y_max = undefined;
   var x_scaling = undefined;
   var y_scaling = undefined;
   var font_size = undefined;
@@ -239,9 +275,9 @@
 
    //Define parent attributes
  //  var x = document.getElementById('myDiv').clientWidth;
-  x = window.innerWidth;
+  x_max = window.innerWidth;
   // var y = document.getElementById('myDiv').clientHeight;
-  y = window.innerHeight;
+  y_max = window.innerHeight;
 
   x_scaling = x/1150
   y_scaling = y/1050
@@ -253,6 +289,7 @@
   scale_lines(networks_undrawn);
   scale_labels(networks_undrawn);
   scale_dataviews(networks_undrawn);
+  scale_availablePower(networks_undrawn);
 
   var room = undefined
 

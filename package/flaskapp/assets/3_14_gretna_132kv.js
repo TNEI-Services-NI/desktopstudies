@@ -15,16 +15,16 @@ networks_undrawn["gretna132kv"]={
     },
 
     breakers:{
-    "120": new Breaker("124 120 128",0.48,"closed"),
+    "120": new Breaker("124 120 128",0.48),
 
-    "780": new Breaker("783 780 784",0.45,"closed"),
-    "305": new Breaker("303 305 304",0.45,"closed"),
-    "205": new Breaker("203 205 204",0.45,"closed"),
-    "680": new Breaker("683 680 684",0.45,"closed"),
+    "780": new Breaker("783 780 784",0.45),
+    "305": new Breaker("303 305 304",0.45,),
+    "205": new Breaker("203 205 204",0.45),
+    "680": new Breaker("683 680 684",0.45),
 
-    "505": new Breaker("504 505 503",0.45,"closed"),
-    "405": new Breaker("404 405 403",0.45,"closed"),
-    "805": new Breaker("804 805 803",0.45,"closed"),
+    "505": new Breaker("504 505 503",0.45),
+    "405": new Breaker("404 405 403",0.45),
+    "805": new Breaker("804 805 803",0.45),
     },
 
     labels:{

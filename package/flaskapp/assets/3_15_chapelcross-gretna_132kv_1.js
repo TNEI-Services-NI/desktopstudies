@@ -21,9 +21,9 @@ networks_undrawn["chapelcrossgretna1"]={
     },
 
     breakers:{
-        "1105": new Breaker("1105 B",1,"closed"),
-        "1105": new Breaker("1105 B",1,"closed"),
-        "305": new Breaker("303 305",0,"closed"),
+        "1105": new Breaker("1105 B",1),
+        "1105": new Breaker("1105 B",1),
+        "305": new Breaker("303 305",0),
 
     },
 
@@ -42,8 +42,8 @@ networks_undrawn["chapelcrossgretna1"]={
     },
 
     isolators:{
-        "1106": new Isolator("1106 1104",0.25,"closed"),
-        "1104": new Isolator("1106 1104",0.75,"open"),
+        "1106": new Isolator("1106 1104",0.25,"open"),
+        "1104": new Isolator("1106 1104",0.75,"closed"),
         "1103": new Isolator("1105 1103",0,"closed"),
         "303": new Isolator("1103 303 C",1,"closed"),
         "304": new Isolator("305 304",1,"closed"),

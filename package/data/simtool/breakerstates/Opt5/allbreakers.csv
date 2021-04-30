@@ -29,8 +29,8 @@ breaker,-1,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14
 698 01,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
 698 11,closed,open,open,open,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed
 698 12,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-698 13,closed,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed
-698 14,open,open,open,open,open,open,open,open,open,open,open,open,closed,closed,closed,closed
+698 13,closed,open,open,open,open,open,open,open,open,open,open,open,closed,closed,closed,closed
+698 14,open,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed
 698 15,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
 698 16,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
 698 21,closed,open,open,open,open,open,open,open,open,open,open,closed,closed,closed,closed,closed
@@ -47,7 +47,7 @@ breaker,-1,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14
 780 11,closed,open,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed
 780 12,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
 780 13,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-780 14,closed,open,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed
+780 14,closed,open,open,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed
 781 11,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
 781 12,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
 785 21,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
@@ -55,7 +55,8 @@ breaker,-1,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14
 785 CUSTOMER,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 GRID 1,closed,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
 GRID 2,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-120,closed,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+691 01,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+120,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 205,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 330,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 410,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
@@ -66,40 +67,37 @@ GRID 2,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,o
 915,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 1005,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 1105,closed,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-1105,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 305,closed,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
 205,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-805,closed,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+1005,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+805,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 GRID 1A,closed,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
 WG2,closed,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-GRID 1B,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+GRID 1B,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
 3L5,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 2L5,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 761 11,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 761 12,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 CB01,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-CB02,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-CB04,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-120,closed,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-780,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+CB02,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+CB04,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+120,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+780,closed,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
 680,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 505,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 405,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 805,closed,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-X442,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-X448,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+X442,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+X448,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
 X405,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 X230,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 X110,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 X510,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 X605,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 761 MINS WF,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-305,closed,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-780,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-680,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-505,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-405,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 699 CUSTOMER,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+699 A,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+699 B,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 STEVENS AUX 1,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 STEVENS AUX 2,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
 STEVENS AUX 3,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open

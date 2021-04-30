@@ -17,7 +17,7 @@ function Breaker_Callback(graphic_objects, name = ''){
                 add_text(object, false, [name], 0, -15,"#d3d3d3", function(object){})
             }
             else{
-                add_text(object, false, [name], 3 + name.length*5, 0,"#d3d3d3", function(object){})}
+                add_text(object, false, [name], 3 + name.length*4 * x_scaling, 0,"#d3d3d3", function(object){})}
         }
     }
 }
@@ -327,12 +327,20 @@ function DataView(componentID = "", offset){
     this.componentID = componentID
     this.offset = offset
     this.callback = undefined
-    //todo map for component Values and labels, aids with accessing info
-    // for(i in data_labels){
-    //     type = data_labels[i]
-    //     this.data[type] = new StaticText("0 " + type,[x,y + offset],"yellow")
-    //     offset += 15
-    // }
+
+}
+
+function AvailablePower(position){
+    this.pos = position
+    this.graphic = []
+    this.callback = Text_Callback
+}
+
+function GenerationInfo(position, name){
+    this.pos = position
+    this.name = name
+    this.graphic = []
+    this.callback = Text_Callback
 }
 
 function SGT(line_id,name){

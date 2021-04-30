@@ -752,6 +752,11 @@ function add_dataview(observer, text, offset, callback) {
   add_text(observer, false, text, offset[0], offset[1], colour, callback)
 }
 
+function add_available_power(observer, text, offset, callback) {
+  let colour = "#ffffff"
+  add_text(observer, false, text, offset[0], offset[1], colour, callback)
+}
+
 function add_static_text(list_text, x=100, y=100, colour="#d3d3d3", callback){
     var rad = 3
     var txtSize = font_size
@@ -826,4 +831,45 @@ function draw_SGT(dict_line,callback){
     group.horizontal = bHorizontal
     callback(group);
 
+}
+
+function draw_line(line,id_line, type="busbar"){
+        bNodes = false
+
+        if(type == "busbar"){
+        line = style_busbar(line)
+        }
+        else if(type == "diagram"){
+
+        line = style_diagram_line(line)
+        }
+        else{
+        line = style_line(line)
+        }
+
+        line.callback = Line_Callback(line.graphic)
+
+        line.o_line = draw.line(line.x1 , line.y1,
+                      line.x2, line.y2).stroke(line.dict_styling.stroke)
+
+
+        line.callback(line.o_line)
+
+        line.line_idx = id_line
+
+        if (bNodes){
+          draw_nodes(line, line.o_line)
+        }
+        let l = {
+            info: line,
+            UIElement: line.graphic[0],
+            id : id_line,
+        }
+
+        dict_components.lines[id_line] = line
+        components.lines[id_line] = l
+
+        if(type != "diagram"){
+            component_modal(l)
+        }
 }
