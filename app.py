@@ -6,6 +6,7 @@ DEBUG = False
 
 app = create_app()
 migrate.init_app(app, dbs)
+
 if __name__ == '__main__':
     if DEBUG:
         app.run()
