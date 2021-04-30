@@ -4,15 +4,15 @@ import pandas as pd
 
 dir_data = os.path.dirname(__file__)
 
-dir_simtool_data = '\\'.join([dir_data, 'simtool'])
+dir_simtool_data = '/'.join([dir_data, 'simtool'])
 
-dir_raw_simtool_data = '\\'.join([dir_simtool_data, 'raw'])
-dir_breaker_states = '\\'.join([dir_simtool_data, 'breakerstates'])
-dir_active_simulation = '\\'.join([dir_simtool_data, 'activesimulation'])
+dir_raw_simtool_data = '/'.join([dir_simtool_data, 'raw'])
+dir_breaker_states = '/'.join([dir_simtool_data, 'breakerstates'])
+dir_active_simulation = '/'.join([dir_simtool_data, 'activesimulation'])
 
-dir_restoration_steps = '\\'.join([dir_simtool_data, 'restorationsteps'])
+dir_restoration_steps = '/'.join([dir_simtool_data, 'restorationsteps'])
 
-dir_auth_data = '\\'.join([dir_data, 'auth'])
+dir_auth_data = '/'.join([dir_data, 'auth'])
 
 
 def _fetch_files(directory: str, file_type: str = '.csv'):

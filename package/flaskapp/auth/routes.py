@@ -110,7 +110,7 @@ def new_disconnect():
 @socketio.on('trigger')
 def trigger_checks(trig_data=None):
 
-    required = pd.read_csv(data.dir_auth_data+'\\req_users.csv')
+    required = pd.read_csv(data.dir_auth_data+'/req_users.csv')
 
     active_users = User.query.filter_by(logged_in=1).all()
     logged_in = pd.DataFrame({'user': [user.name for user in active_users],
