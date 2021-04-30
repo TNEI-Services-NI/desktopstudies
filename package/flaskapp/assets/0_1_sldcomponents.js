@@ -81,18 +81,18 @@ function Tx_Callback(graphic_objects, name = false, mva = false){
             }
             if(name != false){
             if(group.horizontal === true){
-                add_text(group, false, name, 0, -25, "#d3d3d3", function(group){})
+                add_text(group, false, name, 0 * x_scaling, -20 *y_scaling, "#d3d3d3", function(group){})
             }
             else{
-                add_text(group, false, name, 60,-10,"#d3d3d3", function(group){})}
+                add_text(group, false, name, 30 * x_scaling,-10 *y_scaling, "#d3d3d3", function(group){})}
             }
 
             if(mva != false){
             if(group.horizontal === true){
-                add_text(group, false, [mva], 0, 25,"#d3d3d3", function(group){})
+                add_text(group, false, [mva], 0, 20 * y_scaling,"#d3d3d3", function(group){})
             }
             else{
-                add_text(group, false, [mva], 45,10,"#d3d3d3", function(group){})}
+                add_text(group, false, [mva], 30 * x_scaling,10 *y_scaling,"#d3d3d3", function(group){})}
             }
         }
     }

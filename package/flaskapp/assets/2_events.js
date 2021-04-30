@@ -227,12 +227,12 @@ function component_modal(component){
     group.mousemove(function(e){
       loc = [e.pageX, e.pageY]
       let datapopup = $('#dataPopup')
-      if(e.pageY > (y - datapopup.height())){
+      if(e.pageY > (y_max - datapopup.height())){
         datapopup.css('top', e.pageY-datapopup.height()-modal_y_offset);
       } else {
         datapopup.css('top', e.pageY);
       }
-      if(e.pageX > (x - datapopup.width())){
+      if(e.pageX > (x_max - datapopup.width())){
         datapopup.css('left', e.pageX-datapopup.width()-modal_x_offset);
       } else {
         datapopup.css('left', e.pageX+modal_x_offset);

@@ -8,7 +8,7 @@
  * @return {None}
  */
 function draw_tx(dict_line, tx){
-var rad = 16
+var rad = 10 * Math.min(x_scaling,y_scaling)
 var overlapFactor = 0.25
 var circleWidth = 1
 

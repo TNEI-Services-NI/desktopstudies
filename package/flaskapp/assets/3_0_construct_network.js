@@ -146,8 +146,8 @@
     const text1 = draw.text("coordinate dislay")
       .font({size: 15, family: 'Helvetica'}).fill({color: "white"});
 
-    text1.x_coord = x*0.5*x_scaling
-    text1.y_coord = y*y_scaling
+    text1.x_coord = x_max*0.5*x_scaling
+    text1.y_coord = y_max*y_scaling
     text1.center(text1.x_coord, text1.y_coord);
 
     svg.addEventListener('mousemove',function(evt){

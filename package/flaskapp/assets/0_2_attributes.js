@@ -37,7 +37,7 @@ let components = {
                     generationInfo:[]
                 };
 
-let networks_undrawn = {
+const networks_undrawn = {
     "chapelcross33kv": undefined,
     "chapelcross132kv": undefined,
     "gretna132kv": undefined,
@@ -56,16 +56,17 @@ Abbreviations = {"lines_active_power": "MW",
 
 var socket = io();
 let current_step = -1  // initial simulation status
- //Define parent attributes
+
+
 //  var x = document.getElementById('myDiv').clientWidth;
-var x = window.innerWidth;
+var x_max = window.innerWidth;
 // var y = document.getElementById('myDiv').clientHeight;
-var y = window.innerHeight;
+var y_max = window.innerHeight;
 
-let draw = SVG('#drawing').size(x, y)
+let draw = SVG('#drawing').size(x_max, y_max)
 
-var x_scaling = x/1150
-var y_scaling = y/1050
-
+var x_scaling = x_max/1150
+var y_scaling = y_max/1050
+//
 var font_size = 14 *  Math.min(x_scaling, y_scaling)
 

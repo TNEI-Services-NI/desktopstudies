@@ -252,44 +252,39 @@
   }
 
   function event_draw(draw_data){
+
     network = draw_data['network']
     current_step = draw_data['sim_step'];
     master_draw();
   }
 
+
   // Document Initialisation
   $(document).ready(function(){
-
-
   });
 
-  var x_max = undefined;
-  var y_max = undefined;
-  var x_scaling = undefined;
-  var y_scaling = undefined;
-  var font_size = undefined;
+  x_max = undefined;
+  y_max = undefined;
+  x_scaling = undefined;
+  y_scaling = undefined;
+  font_size = undefined;
+
+  var scaled_network = JSON.parse(JSON.stringify(networks_undrawn))
+
+  // Find your root SVG element
+  var svg = document.querySelector("#drawing");
+
+  // Create an SVGPoint for future math
+  var pt = svg.createSVGPoint();
+
+//  update_scaling();
+//  window.addEventListener('resize',update_scaling());
 
   var socket = io();
 //  let current_step = -1
 //  let steps = []
 
-   //Define parent attributes
- //  var x = document.getElementById('myDiv').clientWidth;
-  x_max = window.innerWidth;
-  // var y = document.getElementById('myDiv').clientHeight;
-  y_max = window.innerHeight;
-
-  x_scaling = x/1150
-  y_scaling = y/1050
-
-  font_size = 14 *  Math.min(x_scaling, y_scaling)
-
   dict_components = undefined
-
-  scale_lines(networks_undrawn);
-  scale_labels(networks_undrawn);
-  scale_dataviews(networks_undrawn);
-  scale_availablePower(networks_undrawn);
 
   var room = undefined
 
@@ -330,11 +325,6 @@
     socket.emit('shout_server', data);
   })
 
-  // Find your root SVG element
-  var svg = document.querySelector("#drawing");
-
-  // Create an SVGPoint for future math
-  var pt = svg.createSVGPoint();
 
   // Get point in global SVG space
   function cursorPoint(evt){
@@ -342,6 +332,26 @@
     return pt.matrixTransform(svg.getScreenCTM().inverse());
   }
 
+
+
+function update_scaling(){
+console.log("resizing")
+    x_max = window.innerWidth;
+
+    y_max = window.innerHeight;
+
+      x_scaling = x_max/1150
+      y_scaling = y_max/1050
+      font_size = 14 *  Math.min(x_scaling, y_scaling)
+      network_scaled = networks_undrawn
+      scale_lines(network_scaled);
+      scale_labels(network_scaled);
+      scale_dataviews(network_scaled);
+      scale_availablePower(network_scaled);
+  }
+
+update_scaling()
+//$( window ).resize(function(){update_scaling(), master_draw()})
 
 
 
