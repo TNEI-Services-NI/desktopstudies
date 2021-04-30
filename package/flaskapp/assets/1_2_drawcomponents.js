@@ -322,7 +322,7 @@ function draw_isolator(dict_line, isolator){
 var bVertical = false;
 var bHorizontal = false;
 let position = isolator.pos
-let size = isolator.size
+let size = isolator.size * Math.min(x_scaling,y_scaling)
 let state = isolator.state
 let callback = isolator.callback
 let live_colour = isolator.colour
@@ -781,7 +781,7 @@ function add_static_text(list_text, x=100, y=100, colour="#d3d3d3", callback){
 
 
 function draw_SGT(dict_line,callback){
-    var rad = 18
+    var rad = 18 * Math.min(x_scaling,y_scaling)
     var overlapFactor = 0.25
     var circleWidth = 1
 
