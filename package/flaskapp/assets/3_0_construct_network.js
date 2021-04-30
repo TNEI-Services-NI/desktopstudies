@@ -69,11 +69,11 @@
   }
 
   function style_line(line){
-    line.dict_styling = {fill: { width: line_palette_style["width"]},
-                         stroke: { width: line_palette_style["width"]}}
+    line.dict_styling = {fill: { width: line_palette_style["width"] * Math.min(x_scaling,y_scaling)},
+                         stroke: { width: line_palette_style["width"] *  Math.min(x_scaling,y_scaling)}}
     if (line.dash){
-              line.dict_styling = {fill: { width: line_palette_style["width"]/2},
-                         stroke: { width: line_palette_style["width"]/2}}
+              line.dict_styling = {fill: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)},
+                         stroke: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)}}
       line.dict_styling.stroke.dasharray = (5, 5)
 
     }
@@ -93,11 +93,11 @@
   }
 
   function style_busbar(line){
-    line.dict_styling = {fill: { width: line_palette_style["width"]},
-                         stroke: { width: line_palette_style["width"]}}
+    line.dict_styling = {fill: { width: line_palette_style["width"] * Math.min(x_scaling,y_scaling)},
+                         stroke: { width: line_palette_style["width"] * Math.min(x_scaling,y_scaling)}}
     if (line.dash){
-              line.dict_styling = {fill: { width: line_palette_style["width"]/2},
-                         stroke: { width: line_palette_style["width"]/2}}
+              line.dict_styling = {fill: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)},
+                         stroke: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)}}
       line.dict_styling.stroke.dasharray = (5, 5)
 
     }
@@ -117,11 +117,11 @@
   }
 
   function style_diagram_line(line){
-    line.dict_styling = {fill: { width: line_palette_style["width"]/2},
-                         stroke: { width: line_palette_style["width"]}/2}
+    line.dict_styling = {fill: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)},
+                         stroke: { width: line_palette_style["width"]}/2 * Math.min(x_scaling,y_scaling)}
     if (line.dash){
-              line.dict_styling = {fill: { width: line_palette_style["width"]/2},
-                         stroke: { width: line_palette_style["width"]/2}}
+              line.dict_styling = {fill: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)},
+                         stroke: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)} }
       line.dict_styling.stroke.dasharray = (5, 5)
 
     }

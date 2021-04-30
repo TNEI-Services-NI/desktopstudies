@@ -160,7 +160,7 @@ callback(group);
  * @return {None}
  */
 function draw_gen(dict_line, position, type, callback){
-var rad = 16;
+var rad = 16 * Math.min(x_scaling,y_scaling);
 var circleWidth = 1;
 
 var bVertical = false;
@@ -258,7 +258,7 @@ function draw_breaker(dict_line, breaker){
   var bVertical = false;
   var bHorizontal = false;
   let position = breaker.pos
-  let size = breaker.size
+  let size = breaker.size * Math.min(x_scaling,y_scaling)
   let state = breaker.state
   let callback = breaker.callback
   let live_colour = breaker.colour
