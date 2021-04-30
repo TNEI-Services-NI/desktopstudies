@@ -6,10 +6,11 @@ DEBUG = False
 
 app = create_app()
 migrate.init_app(app, dbs)
-if DEBUG:
-    app.run()
-else:
-    print("Running on http://127.0.0.1:5000/")
-    socketio.run(app)
+if __name__ == '__main__':
+    if DEBUG:
+        app.run()
+    else:
+        print("Running on http://127.0.0.1:5000/")
+        socketio.run(app)
 
 
