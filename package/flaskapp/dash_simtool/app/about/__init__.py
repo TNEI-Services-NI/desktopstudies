@@ -39,7 +39,7 @@ def init_dashboard(server=""):
             html.H4("What is the Desktop communications tool?")),
         dbc.CardBody([
             html.P('This tool simulates the process of re-energising a power network through a blackstart process'
-                   ' with each person taking the role of the ESO, DNO, TO, or DER. Observers may also join but cannot interact with the simulation'),
+                   ' with each user in a session taking the role of the ESO, DNO, TO, or DER. Observers may also join but cannot interact with the simulation'),
             html.P("The simulation data at each step is pre-calculated by use of the IPSA software"),
             html.P("Any changes made by the a user in the current lobby are synchronised between all users and "
                    "immediately viewable"),
