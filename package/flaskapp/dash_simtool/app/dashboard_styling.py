@@ -50,7 +50,7 @@ LEGEND_BUTTON = {
     "margin": "auto",
     "right": "0vw",
     "Top": "10vh",
-    "width": "12rem",
+    "width": "2rem",
     "height": "2rem",
     "border-radius": "15px",
     "backgroundColor": "#ffe600",

@@ -71,7 +71,7 @@ def init_dashboard(server=""):
 
     # # add legend
     _legendButton = html.Div(
-        [html.H3("Toggle Legend")],
+        [html.H3("i")],
         style=styling.LEGEND_BUTTON,
         id='legend_button'
     )

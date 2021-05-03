@@ -67,12 +67,6 @@ def init_dashboard(server=""):
         id='sidebar'
     )
 
-    #legend
-    _legendButton = html.Div(
-        [html.H3("Toggle Legend")],
-        style=styling.LEGEND_BUTTON,
-        id='legend_button'
-    )
     image_filename ="\static\imgs\legend1.jpg"
     _legend = html.Div(
         [html.Img(src=image_filename, style=styling.LEGEND_IMAGE)],
@@ -102,7 +96,6 @@ def init_dashboard(server=""):
                                    html.Div(id='hidden_div00'),
                                    _nav_bar,
                                    _legend,
-                                   _legendButton,
                                    _body,
                                    ],
                                   )
