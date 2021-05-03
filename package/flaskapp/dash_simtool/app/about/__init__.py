@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import dash
 import dash_html_components as html
 import dash_bootstrap_components as dbc
@@ -62,7 +61,7 @@ def init_dashboard(server=""):
                    'prescribed by the restoration script. '
                    ),
             html.H4("Navigating"),
-            html.P("The Top Navigation bar allows you to navigate the tools pages."),
+            html.P("The top navigation bar allows you to navigate the tools pages."),
             html.P("The Home Page shows the view relevant to your role"),
             html.P("SLDs allows access to to view all parts of the network"),
             html.P("Finally the Script page displays a copy of the restoration script."),
