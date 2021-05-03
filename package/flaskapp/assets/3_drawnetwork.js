@@ -352,7 +352,7 @@ console.log("resizing")
       scale_availablePower(network_scaled);
   }
 
-update_scaling()
+update_scaling();
 //$( window ).resize(function(){update_scaling(), master_draw()})
 
 

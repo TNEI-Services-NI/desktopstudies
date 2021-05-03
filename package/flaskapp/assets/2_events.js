@@ -53,6 +53,27 @@ function post_breakers(breakers){
  * @param network_
  * @param option_
  * @param breakers
+ * @param  {function} callback which interprets/draws a list of breakers.
+ * @return {None}
+ */
+function check_breakers(network_, option_, breakers, callback){
+    var breakers_new = breakers
+    $.ajax({
+      type: "POST",
+      url: "/simtool_bp/check_breakers/",
+      data: {"network": network_, "option": option_},
+      success: function(breaker_states){
+        callback(breaker_states);
+      }
+    });
+
+}
+/**
+ * receives initial states of all breakers through ajax request
+ * url parameter of ajax request must reference blueprint specific route to function
+ * @param network_
+ * @param option_
+ * @param breakers
  * @param step
  * @param  {function} callback which interprets/draws a list of breakers.
  * @return {None}
@@ -61,7 +82,7 @@ function init_breakers(network_, option_, breakers, step, callback){
     var breakers_new = breakers
     $.ajax({
       type: "POST",
-      url: "/simtool_bp/init_breakers/",
+      url: "/simtool_bp/check_breakers/",
       data: {"network": network_, "option": option_},
       success: function(breaker_states){
         for (let breaker in breakers){

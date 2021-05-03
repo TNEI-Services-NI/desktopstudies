@@ -118,7 +118,7 @@
 
   function style_diagram_line(line){
     line.dict_styling = {fill: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)},
-                         stroke: { width: line_palette_style["width"]}/2 * Math.min(x_scaling,y_scaling)}
+                         stroke: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)}}
     if (line.dash){
               line.dict_styling = {fill: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)},
                          stroke: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)} }
@@ -217,6 +217,7 @@
                 let breaker = components.breakers[id]
                 breaker.setState(!breaker.closed)
                 // post_breakers(components.breakers)
+
                 inc_state(network_)  // IF correct breaker is clicked
             });
 
