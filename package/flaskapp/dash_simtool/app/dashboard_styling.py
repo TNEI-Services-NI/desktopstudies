@@ -60,7 +60,7 @@ LEGEND = {
     "right": "0.4rem",
     "top": "4.8rem",
 
-    "width": "30vw",
+    "width": "40rem",
     "border": "2px solid",
     # "border-radius": "15px",
     "border-color": "#ffe600",
