@@ -62,13 +62,29 @@ function check_breakers(network_, option_, breakers, step, callback){
       type: "POST",
       url: "/simtool_bp/check_breakers/",
       data: {"network": network_, "option": option_},
-      success: function(breaker_states){
+      success: function(restoration_breaker_states){
+        let int_step = parseInt(step)
+        let int_next_step = int_step + 1
+        let breaker_matches_current = true
+        let breaker_matches_next = true
         for(let breaker_id in breakers){
+          let breaker_matches_current_ = (restoration_breaker_states[step][breaker_id]=="closed")==breakers[breaker_id].closed
+          if(!breaker_matches_current_){
+            breaker_matches_current = false
+          }
 
+          let breaker_matches_next_ = (restoration_breaker_states[int_next_step][breaker_id]=="closed")==breakers[breaker_id].closed
+          if(!breaker_matches_next_){
+            breaker_matches_next = false
+          }
         }
-        // alert(JSON.stringify(breakers));
-        alert(JSON.stringify(breaker_states[step]));
-        callback(breaker_states);
+        if(breaker_matches_current){
+          alert("Reset to original state")
+        }
+        if(breaker_matches_next){
+          socket.emit('redraw', {'sim_step': int_next_step});
+        }
+        callback(restoration_breaker_states);
       }
     });
 
@@ -89,12 +105,12 @@ function init_breakers(network_, option_, breakers, step, callback){
       type: "POST",
       url: "/simtool_bp/check_breakers/",
       data: {"network": network_, "option": option_},
-      success: function(breaker_states){
+      success: function(restoration_breaker_states){
         for (let breaker in breakers){
-          if (breaker_states[step][breaker] === undefined){
+          if (restoration_breaker_states[step][breaker] === undefined){
             breakers_new[breaker].state = "undefined";
           } else {
-            breakers_new[breaker].state = breaker_states[step][breaker];
+            breakers_new[breaker].state = restoration_breaker_states[step][breaker];
           }
         }
         callback(breakers_new);

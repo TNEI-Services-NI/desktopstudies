@@ -192,7 +192,7 @@
   function inc_state(network_){
     current_step += 1;
     //alert(current_step)
-    fetch_sim_data(network_, current_step, option, scenario, update_sim_data);
+    fetch_sim_data(network_, current_step, option, scenario, function(){});
   }
 
   /**

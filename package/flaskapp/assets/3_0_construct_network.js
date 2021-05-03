@@ -217,7 +217,7 @@
                 let breaker = components.breakers[id]
                 breaker.setState(!breaker.closed)
                 // post_breakers(components.breakers)
-                check_breakers(network_, option, dict_components.breakers, step, function(data){
+                check_breakers(network_, option, components.breakers, step, function(data){
                   // alert(JSON.stringify(data[step]));
                 })
                 inc_state(network_)  // IF correct breaker is clicked

@@ -86,6 +86,12 @@ def shout_server(data):
     print("Server: ahhhhh")
 
 
+@socketio.on('redraw')
+def redraw(data):
+    print("redraw server")
+    socketio.emit('redraw', {'sim_step': data['sim_step']}, room=session['room'])
+
+
 @socketio.on('ping_server')
 def ping_server(data):
     print('pong')
