@@ -75,7 +75,7 @@ def init_dashboard(server=""):
 
             html.H4("Interaction"),
             html.P(
-                "Circuit breakers can change state between being closed and opened by clicking them with the cursor. "
+                "Circuit breakers can change state between being closed and opened by clicking them. "
                 "You may only interact with breakers which are under your roles authority. "
                 "When all relevant breakers are in the correct state the simulation will progress to the next step")
 
