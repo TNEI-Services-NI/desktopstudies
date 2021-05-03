@@ -11,9 +11,11 @@ import package.flaskapp.dash_simtool as dash_simtool
 import package.flaskapp.dash_simtool.app.dashboard_components as components
 import package.flaskapp.dash_simtool.app.home.dashboard_callbacks as callbacks
 import package.flaskapp.dash_simtool.app.dashboard_styling as styling
-
+import dash_bootstrap_components as dbc
 
 URL_PAGE = dash_simtool.app.URL_ABOUT
+
+
 def init_dashboard(server=""):
     """Create a Plotly Dash dashboard."""
     # Define encapsulating dash app
@@ -29,52 +31,53 @@ def init_dashboard(server=""):
 
     # nav bar
     _nav_bar = components.navbar(URL_PAGE)
-    #
-    # add sidebar
-    _sidebar = html.Div(
-        [
-            html.H3("Options"),
-            html.Hr(),
-            dbc.DropdownMenu(
-                label="Chapelcross 33kv",
-                children=[
-                    dbc.DropdownMenuItem("Chapelcross 33kv", id="chapelcross33kv"),
-                    dbc.DropdownMenuItem("Chapelcross 132kv", id="chapelcross132kv"),
-                    dbc.DropdownMenuItem("Gretna 132kv", id="gretna132kv"),
-                    dbc.DropdownMenuItem("Gretna 400kv", id="gretna400kv"),
-                    dbc.DropdownMenuItem("chapelcrossgretna1", id="chapelcrossgretna1"),
-                    dbc.DropdownMenuItem("chapelcrossgretna2", id="chapelcrossgretna2"),
-                    dbc.DropdownMenuItem("ewehillgretna", id="ewehillgretna"),
-                    dbc.DropdownMenuItem("stevenscroft33kv", id="stevenscroft33kv"),
-                    dbc.DropdownMenuItem("minsca33kv", id="minsca33kv"),
-                    dbc.DropdownMenuItem("ewehillwindfarm1", id="ewehillwindfarm1"),
-                    dbc.DropdownMenuItem("ewehillwindfarm2", id="ewehillwindfarm2"),
-                ],
-                id='network_menu'
-            ),
-            html.Hr(),
-            dbc.Button("Reset simulation", id="reset_sim_button"),
-            dbc.Button("Back", id="back_button", style={"margin-top": "15px"}),
-            dbc.Button("Next", id="next_button", style={"margin-top": "15px", "margin-left": "15px"}),
-            html.Hr(),
-            html.Div(id='sim_status_div', children="Siulation status: -1")
-        ],
-        style=styling.SIDEBAR_STYLE,
-        id='sidebar'
-    )
 
     # compile body
     _body = components.compile_body(styling.CONTENT_STYLE)
 
-    # graphical output
-    _data_upload_output = dbc.Row([dbc.Col([html.Div(id='output-data-upload')], width=2)])
+    intro_card = dbc.Card([
+        dbc.CardHeader("What is the Desktop communications tool?"),
+        dbc.CardBody([
+            html.P('This tool simulates the process of re-energising a power network through a blackstart process'
+                   'with each person taking the role of DNO, ESO, TO, and DER'),
+            html.P("The simulation data at each step is pre-calculated by the IPSA software"),
+            html.P("Any changes made by the a user in the current lobby are synchronised between all users and "
+                   "immediately viewable")
 
-    with open(dash_simtool.TEMPLATES_DIR + '/dash_sim_tool.html', "r") as dash_app_html_file:
-        dash_app_html = dash_app_html_file.read()
-        dash_app_html = dash_app_html.replace('{% marginLeft %}', styling.CONTENT_STYLE['marginLeft'])
-        dash_app_html = dash_app_html.replace('{% marginTop %}', "0px")
-        dash_app.index_string = dash_app_html
+        ])
+    ],
+        style={"width": "75%", "margin-top": "5%"},
+    )
 
+    how_to_card = dbc.Card([
+        dbc.CardHeader("How To Use This Tool"),
+        dbc.CardBody([
+            html.P('By communication between the DNO, ESO, TO, and DER, The process of Re-energising the network by '
+                   'closing breakers in the correct order'),
+
+            html.H3("Navigating"),
+            html.P("The Top Navigation bar allows you to navigate the tools pages."),
+            html.P("The Home Page shows the view relevant to your role"),
+            html.P("SLDs allows access to to view all parts of the network [WHAT ELSE SHOULD BE AVAILABLE AND TO "
+                   "WHO], [WHERE WILL state views be available]"),
+            html.P("Finally the Script page displays a copy of the restoration script."),
+
+            html.H3("Viewing Data"),
+            html.P(
+                "Data regarding the current state of the network is immediately available in the form of panels which"
+                "show generator information, available Power, or specific data from busbars and lines."),
+            html.P("Alternatively, By Hovering over components with the mouse pointer, a modal will show all data "
+                   "available for the given component"),
+
+            html.H3("Interaction"),
+            html.P("Breakers can change state between being closed and opened by clicking them with the cursor. You "
+                   "may only interact with breakers which are under your roles authority. "
+                   "When all relevant breakers are in the correct state the simulation will progress to the next step")
+
+        ])
+    ],
+        style={"width": "75%", "margin-top": "5%"},
+    )
 
     # compile overall layout
     dash_app.layout = html.Center([dcc.Location(id="home"),
@@ -83,8 +86,9 @@ def init_dashboard(server=""):
                                    dcc.Store(id='reset_click'),
                                    dcc.Store(id='sim_state'),
                                    _nav_bar,
-                                   _sidebar,
                                    _body,
+                                   intro_card,
+                                   how_to_card,
                                    ],
                                   )
 
