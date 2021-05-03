@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, request, flash
+from flask import Blueprint, render_template, redirect, url_for, request, flash, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, login_required, current_user
 from package.flaskapp.auth.user import User
@@ -7,6 +7,7 @@ from package.flaskapp import socketio
 import time
 import pandas as pd
 import package.data as data
+from flask_socketio import rooms
 
 auth_bp = Blueprint('auth', __name__, static_folder='static', template_folder='templates')
 
@@ -68,6 +69,9 @@ def login_post():
 
     # if the above check passes, then we know the user has the right credentials
     login_user(user, remember=remember)
+    session['entity'] = user.entity
+    session['username'] = user.name
+    session['namespace'] = '/'
     user.logged_in = 1
     db.session.commit()
 
@@ -80,6 +84,7 @@ def login_post():
 def logout():
     current_user.logged_in = 0
     db.session.commit()
+    session.clear()
     logout_user()
     trigger_checks()
     return redirect(url_for('auth.index'))
@@ -97,20 +102,15 @@ def wait_room():
     return render_template('wait_room.html', name=current_user.name)
 
 
-@socketio.on('connect')
-def new_connect():
-    print('new connect')
-
-
 @socketio.on('disconnect')
 def new_disconnect():
-    print('new disconnect')
+    pass
 
 
 @socketio.on('trigger')
 def trigger_checks(trig_data=None):
 
-    required = pd.read_csv(data.dir_auth_data+'\\req_users.csv')
+    required = pd.read_csv(data.dir_auth_data+'/req_users.csv')
 
     active_users = User.query.filter_by(logged_in=1).all()
     logged_in = pd.DataFrame({'user': [user.name for user in active_users],

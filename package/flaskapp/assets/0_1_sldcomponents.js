@@ -10,14 +10,37 @@ function Breaker_Callback(graphic_objects, name = ''){
     return function(object){
         // Add object defined in
         if(graphic_objects !== undefined){
-            graphic_objects.push(object)
+            graphic_objects[0] = object
         }
         if(name !== ''){
             if(object.horizontal === true){
                 add_text(object, false, [name], 0, -15,"#d3d3d3", function(object){})
             }
             else{
-                add_text(object, false, [name], 9 + name.length*5, 0,"#d3d3d3", function(object){})}
+                add_text(object, false, [name], 3 + name.length*4 * x_scaling, 0,"#d3d3d3", function(object){})}
+        }
+    }
+}
+
+/**
+ * Callback function for breaker object instances. Adds object to list of child objects associated with
+ * the breaker.
+ * @param  {list} graphic_objects List of child objects associated with each breaker object.
+ * @param  {string} name String object containing name/contents of child object
+ * @return {function} None Returns a function that adds passed object to breaker child objects, and adds text label.
+ */
+function Line_Callback(graphic_objects, name = ''){
+    return function(object){
+        // Add object defined in
+        if(graphic_objects !== undefined){
+            graphic_objects[0] = object
+        }
+        if(name !== ''){
+            if(object.horizontal === true){
+                add_text(object, false, [name], 0, -15 * y_scaling,"#d3d3d3", function(object){})
+            }
+            else{
+                add_text(object, false, [name], 9 + name.length*5 * x_scaling, 0,"#d3d3d3", function(object){})}
         }
     }
 }
@@ -32,7 +55,7 @@ function Text_Callback(graphic_objects){
     return function(object){
         // Add object defined in
         if(graphic_objects !== undefined){
-            graphic_objects.push(object)
+            graphic_objects[0] = object
         }
     }
 }
@@ -50,22 +73,26 @@ function Tx_Callback(graphic_objects, name = false, mva = false){
             //revamp post_breaker to a function that figures out its state instead
 //            object.on("breaker_clicked",function(){post_breaker()})
             if(graphic_objects != undefined){
-                graphic_objects.push(group)
+                graphic_objects[0] = group
+            }
+
+            if(name.constructor !== Array){
+             name = [name]
             }
             if(name != false){
             if(group.horizontal === true){
-                add_text(group, false, [name], 0, -25, "#d3d3d3", function(group){})
+                add_text(group, false, name, 0 * x_scaling, -20 *y_scaling, "#d3d3d3", function(group){})
             }
             else{
-                add_text(group, false, [name], 45,-10,"#d3d3d3", function(group){})}
+                add_text(group, false, name, 30 * x_scaling,-10 *y_scaling, "#d3d3d3", function(group){})}
             }
 
             if(mva != false){
             if(group.horizontal === true){
-                add_text(group, false, [mva], 0, 25,"#d3d3d3", function(group){})
+                add_text(group, false, [mva], 0, 20 * y_scaling,"#d3d3d3", function(group){})
             }
             else{
-                add_text(group, false, [mva], 45,10,"#d3d3d3", function(group){})}
+                add_text(group, false, [mva], 30 * x_scaling,10 *y_scaling,"#d3d3d3", function(group){})}
             }
         }
     }
@@ -80,13 +107,13 @@ function Tx_Callback(graphic_objects, name = false, mva = false){
 function Gen_Callback(graphic_objects){
         return function(group){
             if(graphic_objects != undefined){
-                graphic_objects.push(group)
+                graphic_objects[0] = group
             }
             if(group.horizontal === true){
-                add_text(group, false, ["GENERATOR"], 0, -25, "#d3d3d3",function(group){})
+                add_text(group, false, ["GENERATOR"], 0, -25* y_scaling, "#d3d3d3",function(group){})
             }
             else{
-                add_text(group, false, ["GENERATOR"], 0,25,"#d3d3d3",function(group){})}
+                add_text(group, false, ["GENERATOR"], 0,25 * y_scaling,"#d3d3d3",function(group){})}
             }
         }
 
@@ -100,16 +127,17 @@ function Gen_Callback(graphic_objects){
  * @return None
  * @usage instantiate as object i.e. new Breaker(...)
  */
-function Breaker(lineID, pos, state = "closed", name=false){
+function Breaker(lineID, pos, name=false, state = "closed"){
     this.component="Breaker"
     this.lineID = lineID
     this.pos = pos
-    this.state = state
+    this.state = "closed"
     this.size = 15
     this.graphic = []
+    this.colour = undefined
     this.name = name
+    this.live = live_dead
     this.callback = Breaker_Callback(this.graphic)
-
 }
 
 /**
@@ -125,13 +153,16 @@ function Breaker(lineID, pos, state = "closed", name=false){
  * @usage instantiate as object i.e. new Line(...)
  */
 function Line(x1, y1,x2, y2, voltage="32kV", dash = false, colour = ""){
+    this.component="Line"
     this.x1 = x1
     this.x2 = x2
     this.y1 = y1
     this.y2 = y2
     this.voltage = voltage
-    this.callback = 0
+    this.graphic = []
+    this.callback = Line_Callback(this.graphic)
     this.dash = dash
+    this.live = live_dead
     this.colour=colour
 }
 
@@ -179,6 +210,10 @@ function Text(lineID, text, offset, colour = "#d3d3d3", textSize=10){
     this.graphic = []
     this.textSize=textSize
     this.callback = Text_Callback(this.graphic)
+
+    // an idea I'd like to to take a look at
+    // a component creates itself and handles everything
+    this.draw = function(){alert("drawing")}
 }
 
 /**
@@ -206,12 +241,15 @@ function StaticText(text,pos, colour = "#d3d3d3",textSize=10,){
 function Tx(lineID,pos,name,mva, coil1 = "33kV",coil2 = "33kV",type="starDelta"){
     this.lineID =lineID
     this.pos = pos
+    this.component="Transformer"
     this.name = name
     this.mva = mva
     this.graphic = []
     this.type = type
     this.coil1 = coil1
     this.coil2 = coil2
+    this.live = live_dead
+    this.colour = undefined
     this.callback = Tx_Callback(this.graphic, this.name,this.mva)
 }
 
@@ -230,6 +268,7 @@ function Generator(line_id,pos, type= "wind"){
     this.pos = pos
     this.type = type
     this.graphic=[]
+    this.live = live_dead
     //TEMP Breaker callback
     this.callback = Gen_Callback(this.graphic)
 }
@@ -247,6 +286,7 @@ function Inductor(line_id,pos){
     this.lineID = line_id,
     this.pos = pos,
     this.graphic=[],
+    this.live = live_dead
     this.callback = Breaker_Callback(this.graphic)
 }
 
@@ -261,21 +301,51 @@ function Inductor(line_id,pos){
  * @usage instantiate as object i.e. new Isolator(...)
  */
 function Isolator(line_id,pos, state = "closed",name=false){
-
     this.lineID = line_id,
     this.pos = pos,
-    this.state=state
+    this.size = 15,
+    this.state=state,
+    this.graphic=[],
+    this.name = name,
+    this.live = live_dead
+    this.colour = undefined
+    this.callback = Breaker_Callback(this.graphic,name)}
+
+/**
+ * Dataview prototype object, contains everything reequired to make a dataview.
+ * @param  {double} x location
+ * @param  {double} y location
+ * @param  {list} labels of data desired ["kV", "AMPS", "Hz","MVAR","MVA","MW"]
+ * @return {None}
+ * @usage instantiate as object i.e. new DataView(...)
+ */
+function DataView(componentID = "", offset){
+    // this.x = x
+    // this.y = y
+    this.data = {}
+    this.graphic = []
+    this.componentID = componentID
+    this.offset = offset
+    this.callback = undefined
+
+}
+
+function AvailablePower(position){
+    this.pos = position
+    this.graphic = []
+    this.callback = Text_Callback
+}
+
+function GenerationInfo(position, name){
+    this.pos = position
+    this.name = name
+    this.graphic = []
+    this.callback = Text_Callback
+}
+
+function SGT(line_id,name){
+    this.component = "SGT"
+    this.lineID = line_id,
     this.graphic=[],
     this.name = name,
     this.callback = Breaker_Callback(this.graphic,name)}
-
-
-function DataView(x,y){
-    this.x = x
-    this.y = y
-    this.MVA = new StaticText("0 MW",[x,y],"yellow")
-    this.MW = new StaticText("0 MW",[x,y+15],"yellow")
-    this.MVAR = new StaticText("0 kV",[x,y+30],"yellow")
-    this.kV = new StaticText("0 AMPS",[x,y+45],"yellow")
-    this.AMPS = new StaticText("0 MVAR",[x,y+60],"yellow")
-}

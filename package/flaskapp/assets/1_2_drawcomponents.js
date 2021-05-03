@@ -7,10 +7,16 @@
  * @return {callback} a callback which takes the created generator group as an argument
  * @return {None}
  */
-function draw_tx(dict_line, position, type, coils, callback){
-var rad = 12
+function draw_tx(dict_line, tx){
+var rad = 10 * Math.min(x_scaling,y_scaling)
 var overlapFactor = 0.25
 var circleWidth = 1
+
+let position = tx.pos
+let type = tx.type
+let coils = [tx.coil1, tx.coil2]
+let callback = tx.callback
+let live = tx.live
 
 var bVertical = false
 var bHorizontal = false
@@ -35,23 +41,26 @@ if (bHorizontal){
   var fromCenter = [-rad*(1-overlapFactor)+dict_line.x1+(dict_line.x2-dict_line.x1)*position, dict_line.y1]
   var toCenter = [rad*(1-overlapFactor)+dict_line.x1+(dict_line.x2-dict_line.x1)*position, dict_line.y1]
 }
+// alert(live);
+if(live === false){
+  coils = ["0V", "0V"]
+}
 
-if(coils != undefined){
+if(coils !== undefined){
     secondaryCoil = palette[coils[1]]
     primaryCoil = palette[coils[0]]
 }
 else{
     primaryCoil = dict_line.dict_styling.stroke.color
-    secondaryCoil =dict_line.dict_styling.stroke.color
+    secondaryCoil = dict_line.dict_styling.stroke.color
 }
-
 circle1 = draw.circle(2*rad).center(fromCenter[0], fromCenter[1])
 circle2 = draw.circle(2*rad).center(toCenter[0], toCenter[1])
 circle3 = draw.circle(2*rad).center(fromCenter[0], fromCenter[1])
 circle4 = draw.circle(2*rad).center(toCenter[0], toCenter[1])
-circle1.fill('black')
+circle1.fill(palette["background-color"])
 circle1.stroke({ color: secondaryCoil, width: circleWidth, linecap: 'white', linejoin: 'round' })
-circle2.fill('black')
+circle2.fill(palette["background-color"])
 circle2.stroke({ color: primaryCoil, width: circleWidth, linecap: 'white', linejoin: 'round' })
 circle3.fill('none')
 circle3.stroke({ color: secondaryCoil, width: circleWidth, linecap: 'white', linejoin: 'round' })
@@ -151,7 +160,7 @@ callback(group);
  * @return {None}
  */
 function draw_gen(dict_line, position, type, callback){
-var rad = 15;
+var rad = 16 * Math.min(x_scaling,y_scaling);
 var circleWidth = 1;
 
 var bVertical = false;
@@ -174,9 +183,9 @@ stroke_color = dict_line.dict_styling.stroke.color
 
 var group = draw.group();
 var inside_group = draw.group();
-circle1 = group.circle(2*rad);
+circle1 = group.circle(2*rad).addClass('circle-class');
 group.add(circle1)
-circle1.fill('black');
+circle1.fill(palette["background-color"]);
 circle1.stroke({ color: stroke_color, width: circleWidth, linecap: 'black', linejoin: 'round' });
 if (type !== 'wind'){
   var text = group.text(type)
@@ -245,9 +254,16 @@ callback(group)
  * @return {callback} a callback which takes the created breaker as an argument
  * @return {None}
  */
-function draw_breaker(dict_line, position, size, state, callback){
+function draw_breaker(dict_line, breaker){
   var bVertical = false;
   var bHorizontal = false;
+  let position = breaker.pos
+  let size = breaker.size * Math.min(x_scaling,y_scaling)
+  let state = breaker.state
+  let callback = breaker.callback
+  let live_colour = breaker.colour
+  let live = breaker.live
+  let colour = undefined
 
   var dict_breaker = {}
 
@@ -259,39 +275,33 @@ function draw_breaker(dict_line, position, size, state, callback){
     bHorizontal = true;
     var center = [dict_line.x1+(dict_line.x2-dict_line.x1)*position, dict_line.y1];
   }
-  closed_color = dict_line.dict_styling.stroke.color
-  // } else {
-  //   if (state === 'open'){
-  //     dict_line.dict_styling.fill.color = 'white'
-  //     dict_line.dict_styling.stroke.color = '#a0a0a0'
-  //   } else if (state === 'closed'){
-  //     dict_line.dict_styling.fill.color = '#a0a0a0'
-  //     dict_line.dict_styling.stroke.color = '#a0a0a0'
-  //   }
-  // }
+
+  if(live_colour === undefined){
+    live_colour = palette[dict_line.voltage]
+  }
+
+  if(live === true){
+    colour = live_colour
+  } else {
+    colour = palette["0V"]
+  }
 
   if (state === 'open'){
-    rect1 = draw.rect(size, size).center(center[0], center[1]).fill("black").stroke("white").stroke({width: 1})
+    rect1 = draw.rect(size, size).center(center[0], center[1]).fill(palette["background-color"]).stroke(colour).stroke({width: 1})
   }
   else if (state === 'closed'){
-    rect1 = draw.rect(size, size).center(center[0], center[1]).fill(closed_color).stroke("white").stroke({width: 1})
+    rect1 = draw.rect(size, size).center(center[0], center[1]).fill(colour).stroke(colour).stroke({width: 1})
   }
   else{
-      rect1 = draw.rect(size, size).center(center[0], center[1]).fill("grey").stroke("grey").stroke({width: 1})
+      rect1 = draw.rect(size, size).center(center[0], center[1]).fill("red").stroke("red").stroke({width: 1})
       rect1.horizontal = bHorizontal
-      rect1.closed_color = closed_color
+      rect1.live_colour = live_colour
       dict_breaker.objects = [rect1];
       callback(rect1);
       return
     }
 
   rect1.click(function() {
-  //      if (this.attr('fill') === dict_line.dict_styling.stroke.color){
-  //        this.fill({ color: 'black' })
-  //      } else {
-  //        this.fill(dict_line.dict_styling.stroke)
-  //      }
-
     this.fire(breaker_clicked_event)
   });
   rect1.horizontal = bHorizontal
@@ -308,9 +318,15 @@ function draw_breaker(dict_line, position, size, state, callback){
  * @return {callback} a callback which takes the created isolator as an argument
  * @return {None}
  */
-function draw_isolator(dict_line, position, size, state, callback){
+function draw_isolator(dict_line, isolator){
 var bVertical = false;
 var bHorizontal = false;
+let position = isolator.pos
+let size = isolator.size * Math.min(x_scaling,y_scaling)
+let state = isolator.state
+let callback = isolator.callback
+let live_colour = isolator.colour
+let live = isolator.live
 
 var dict_breaker = {}
 
@@ -322,13 +338,19 @@ if (dict_line.y1 === dict_line.y2){
   bHorizontal = true;
   var center = [dict_line.x1+(dict_line.x2-dict_line.x1)*position, dict_line.y1];
 }
-closed_color = dict_line.dict_styling.stroke.color
-
+if(live_colour === undefined){
+  live_colour = palette[dict_line.voltage]
+}
+if(live === true){
+  colour = live_colour
+} else {
+  colour = palette["0V"]
+}
 if (state === 'open'){
-  circle1 = draw.circle(size, size).center(center[0], center[1]).fill("black").stroke("white").stroke({width: 1})
+  circle1 = draw.circle(size, size).center(center[0], center[1]).fill(palette["background-color"]).stroke(colour).stroke({width: 3})
 }
 if (state === 'closed'){
-  circle1 = draw.circle(size, size).center(center[0], center[1]).fill(closed_color).stroke("white").stroke({width: 1})
+  circle1 = draw.circle(size, size).center(center[0], center[1]).fill(colour).stroke(colour).stroke({width: 1})
 }
 
 circle1.horizontal = bHorizontal
@@ -725,6 +747,16 @@ function add_text(object, bool_dict_obj, list_text, x_from_center=0, y_from_cent
     callback(text1)
 }
 
+function add_dataview(observer, text, offset, callback) {
+  let colour = "#e5b815"
+  add_text(observer, false, text, offset[0], offset[1], colour, callback)
+}
+
+function add_available_power(observer, text, offset, callback) {
+  let colour = "#ffffff"
+  add_text(observer, false, text, offset[0], offset[1], colour, callback)
+}
+
 function add_static_text(list_text, x=100, y=100, colour="#d3d3d3", callback){
     var rad = 3
     var txtSize = font_size
@@ -743,6 +775,101 @@ function add_static_text(list_text, x=100, y=100, colour="#d3d3d3", callback){
 
     text1.x_coord = x
     text1.y_coord = y
-        text1.center(text1.x_coord, text1.y_coord);
+    text1.center(text1.x_coord, text1.y_coord);
     callback(text1)
+}
+
+
+function draw_SGT(dict_line,callback){
+    var rad = 18 * Math.min(x_scaling,y_scaling)
+    var overlapFactor = 0.25
+    var circleWidth = 1
+
+    var bVertical = false
+    var bHorizontal = false
+    var line1, line2, line3, line4
+
+    var group = draw.group();
+
+    var dict_tx = {}
+
+    if (dict_line.x1 === dict_line.x2){
+      bVertical = true
+    }
+    if (dict_line.y1 === dict_line.y2){
+      bHorizontal = true
+    }
+
+    center = [dict_line.x2,dict_line.y2]
+
+    closed_color = dict_line.dict_styling.stroke.color
+
+    ellipse = draw.ellipse(rad*2,rad*2.5)
+    ellipse.fill("black")
+    ellipse.center(center[0],center[1]+rad/2)
+    ellipse.stroke({ color: closed_color, width: circleWidth, linecap: 'white', linejoin: 'round' })
+    ellipse.stroke(dict_line.dict_styling.stroke)
+    ellipse.backward()
+    ellipse.skew(0,-rad/2)
+
+    rect1 = draw.rect(rad*2-(2*x_scaling),rad*3).fill("black").center(center[0]+rad+circleWidth,center[1])
+    rect1.forward()
+
+    circle2 = draw.circle(2*rad).center(center[0], center[1]+rad)
+    circle2.fill('black')
+    circle2.stroke({ color: closed_color, width: circleWidth, linecap: 'white', linejoin: 'round' })
+    circle2.stroke(dict_line.dict_styling.stroke)
+    circle2.forward()
+
+    dict_tx.objects = [circle2,ellipse,rect1]
+    group.add(ellipse)
+    group.add(rect1)
+    group.add(circle2)
+
+    circle1.center(center[0],center[1])
+
+    group.horizontal = bHorizontal
+    callback(group);
+
+}
+
+function draw_line(line,id_line, type="busbar"){
+        bNodes = false
+
+        if(type == "busbar"){
+        line = style_busbar(line)
+        }
+        else if(type == "diagram"){
+
+        line = style_diagram_line(line)
+        }
+        else{
+        line = style_line(line)
+        }
+
+        line.callback = Line_Callback(line.graphic)
+
+        line.o_line = draw.line(line.x1 , line.y1,
+                      line.x2, line.y2).stroke(line.dict_styling.stroke)
+
+
+        line.callback(line.o_line)
+
+        line.line_idx = id_line
+
+        if (bNodes){
+          draw_nodes(line, line.o_line)
+        }
+        let l = {
+            info: line,
+            UIElement: line.graphic[0],
+            id : id_line,
+        }
+
+        dict_components.lines[id_line] = line
+        components.lines[id_line] = l
+
+        if(type != "diagram"){
+            component_modal(l)
+        }
 }

@@ -1,295 +1,361 @@
-  // Document Initialisation
-  $(document).ready(function(){
-  $("#chap132").click(function(){
-    alert("button clicked.");
 
-  });
-  });
+  function update_line_modals(step_data){
+        for (let line_ in components.lines) {
+      line_id_LF = line_.split("#")[0]
+      line_instance = components.lines[line_]
+      line_instance.modal_data = []
+      if (line_id_LF in step_data["lines_active_power"]) {
+        line_instance.modal_data = line_instance.modal_data.concat(
+          ["Active power: " + step_data["lines_active_power"][line_id_LF] + " MW"]
+        )
+      }
+      if (line_id_LF in step_data["lines_reactive_power"]) {
+        line_instance.modal_data = line_instance.modal_data.concat(
+          ["Reactive power: " + step_data["lines_reactive_power"][line_id_LF] + " MVAr"]
+        )
+      }
+      if (line_id_LF in step_data["busbars_voltage"]) {
+        line_instance.modal_data = line_instance.modal_data.concat(
+          ["Voltage: " + step_data["busbars_voltage"][line_id_LF] + " V"]
+        )
+      }
+      components.lines[line_] = line_instance
+      if(line_instance.data_changed_callback !== undefined){line_instance.data_changed_callback(line_instance.data)}
+      //  redraw text labels
+    }
+  }
+  function update_generator_modals(step_data){
+    let gen_instance;
+    for (let gen_ in components.generators) {
+      gen_instance = components.generators[gen_]
+      gen_instance.modal_data = []
+      if (gen_ in step_data["generators_active_power"]) {
+        gen_instance.modal_data = gen_instance.modal_data.concat(
+          ["Active power: " + step_data["generators_active_power"][gen_] + " [MW]"]
+        )
+      }
+      if (gen_ in step_data["generators_reactive_power"]) {
+        gen_instance.modal_data = gen_instance.modal_data.concat(
 
+          ["Reactive power: " + step_data["generators_reactive_power"][gen_] + " [MVAr]"]
+        )
+      }
+    }
+  }
 
- //Define parent attributes
- //  var x = document.getElementById('myDiv').clientWidth;
-  var x = window.innerWidth;
-  // var y = document.getElementById('myDiv').clientHeight;
-  var y = window.innerHeight;
+  function update_available_power(step_data){
+    let available_power_instance;
+    for (let avp_ in components.availablePowers) {
+          available_power_instance = components.availablePowers[avp_]
+          available_power_instance.modal_data = []
+          if (avp_ in step_data["generators_active_power"]) {
+                available_power_instance.setAvailablePower(step_data["generators_active_power"][avp_])
+        }
+    }
+  }
 
-  //Create canvas
-  var draw = SVG('#drawing').size(x, y)
-
-  var x_scaling = x/1150
-  var y_scaling = y/1050
-
-  const font_size = 14 *  Math.min(x_scaling,y_scaling)
-
-  let network = "chapelcross"
-  let voltage = "33kv"
-
-  let dict_components = undefined
-
-  if (network === "chapelcross" && voltage === "33kv"){
-    dict_components = chapelcross_33kV
-  } else if (network === "chapelcross" && voltage === "132kv") {
-    dict_components = chapelcross_132kV
-  } else if (network === "gretna" && voltage === "400kv") {
-    dict_components = Gretna_400kV
-  } else {
-    dict_components = chapelcross_33kV
+  function update_generation_info(step_data){
+    let generation_info_instance;
+    for (let gen_ in components.generationInfo) {
+          console.log(components.generationInfo)
+          generation_info_instance = components.generationInfo[gen_]
+          if (gen_ in step_data["generators_active_power"]) {
+                generation_info_instance.setMW(step_data["generators_active_power"][gen_])
+          }
+          if (gen_ in step_data["generators_reactive_power"]) {
+                generation_info_instance.setMVAR(step_data["generators_reactive_power"][gen_])
+          }
+    }
   }
 
 
-  dict_components = chapelcross_33kV
+  function update_transformer_modals(step_data){
+    for (let tx_ in components.transformers) {
+      tx_instance = components.transformers[tx_]
+      tx_instance.modal_data = []
+      if (tx_ in step_data["transformers_loading"]) {
+        tx_instance.modal_data = tx_instance.modal_data.concat(
+          ["Utilisation: " + step_data["transformers_loading"][tx_] + " [MVA]"]
+        )
+      }
+    }
+  }
+
+  function update_line_data_views(step_data){
+        for (let line_ in components.lines) {
+      line_id_LF = line_.split("#")[0]
+      line_instance = components.lines[line_]
+      line_instance.data = []
+      if (line_id_LF in step_data["lines_active_power"]) {
+        line_instance.data["lines_active_power"] =
+          step_data["lines_active_power"][line_id_LF]
+
+      }
+      if (line_id_LF in step_data["lines_reactive_power"]) {
+        line_instance.data["lines_reactive_power"] =
+          step_data["lines_reactive_power"][line_id_LF]
+
+      }
+      if (line_id_LF in step_data["busbars_voltage"]) {
+        line_instance.data["busbars_voltage"] = step_data["busbars_voltage"][line_id_LF]
+
+      }
+      components.lines[line_] = line_instance
+      if(line_instance.data_changed_callback !== undefined){line_instance.data_changed_callback()}
+      //  redraw text labels
+    }
 
 
-  let components = {
-                      breakers: [],
-                      lines: [],
-                      labels:[],
-                      generators: [],
-                      isolators:[],
-                      text:[]
-                  }
+  }
 
-  current_step = 1
-  steps = []
+  function update_dataviews(step_data){
+    for(let id_dv in components.dataviews){
+      let text_list = [];
+      var units = "";
+      for(let component_parameter in step_data){
+        if (id_dv in step_data[component_parameter]) {
+          if(component_parameter.includes('reactive')){
+            units = " MVAr"
+          } else if(component_parameter.includes('active')){
+            units = " MW"
+          } else if(component_parameter.includes('loading')){
+            units = " MVA"
+          } else if(component_parameter.includes('voltage')){
+            units = " V p.u."
+          } else if(component_parameter.includes('taps')){
+            units = " ."
+          }
 
-  /**
-   * callback function for updating step data when it has been retrieved
-   * @param {integer} step number
-   * @param {dictionary} data retrieved from this state
-   * @return {None}
-  **/
-  function restoration_step_callback(step, step_data){
-    steps[step] = step_data
-    components.breakers["698 11"].data = step_data["comp1"]
+          text_list = text_list.concat(
+            [String(step_data[component_parameter][id_dv]) + units]
+          );
+        }
+      }
+
+      redraw_dataview(id_dv, text_list);
+    }
+  }
+
+  function update_line_colours(step_data_){
+
+    for(let idl in components.lines){
+      let line_instance = components.lines[idl]
+      let line_id_LF = idl.split("#")[0]
+      if(((step_data_["lines_loading"][line_id_LF] !== 0)&&(step_data_["lines_loading"][line_id_LF] !== undefined))||
+        ((step_data_["busbars_voltage"][line_id_LF] !== 0)&&(step_data_["busbars_voltage"][line_id_LF] !== undefined))||
+        ((step_data_["transformers_loading"][line_id_LF] !== 0)&&(step_data_["transformers_loading"][line_id_LF] !== undefined))){
+
+        line_instance.info.o_line.attr({stroke: line_instance.info.dict_styling.stroke.live_color});
+
+      } else if (((step_data_["lines_loading"][line_id_LF] === undefined))&&
+        ((step_data_["busbars_voltage"][line_id_LF] === undefined))&&
+        ((step_data_["transformers_loading"][line_id_LF] === undefined))){
+
+        if(highlight_undefined){
+          line_instance.info.o_line.attr({stroke: "red"});
+        }
+      }
+    }
+
+  }
+
+  function update_breaker_colours(step_data_){
+    for(let idb in components.breakers){
+      let breaker_instance = components.breakers[idb]
+      let idl = breaker_instance.line.line_idx
+      let line_id_LF = idl.split("#")[0]
+      if(((step_data_["lines_loading"][line_id_LF] !== 0)&&(step_data_["lines_loading"][line_id_LF] !== undefined))||
+        ((step_data_["busbars_voltage"][line_id_LF] !== 0)&&(step_data_["busbars_voltage"][line_id_LF] !== undefined))||
+        ((step_data_["transformers_loading"][line_id_LF] !== 0)&&(step_data_["transformers_loading"][line_id_LF] !== undefined))){
+        breaker_instance.UIElement.attr({
+          'stroke': breaker_instance.line.dict_styling.stroke.live_color,
+          'fill': breaker_instance.line.dict_styling.stroke.live_color
+        })
+      }
+    }
+  }
+
+  function update_generator_colours(step_data_){
+    for(let idg in components.generators){
+      let gen_instance = components.generators[idg]
+      let idl = gen_instance.info.lineID
+      let line_instance = components.lines[idl]
+      let line_id_LF = idl.split("#")[0]
+      if((step_data_["generators_active_power"][idg] !== 0)&&(step_data_["generators_active_power"][idg] !== undefined)){
+        gen_instance.UIElement.find('.circle-class').attr({
+          'stroke': line_instance.info.dict_styling.stroke.live_color
+        })
+      }
+    }
+  }
+
+  function inc_state(network_){
+    current_step += 1;
+    //alert(current_step)
+    fetch_sim_data(network_, current_step, option, scenario, update_sim_data);
   }
 
   /**
-   * draws components from dict_components object
+   * draws components from
+   dict_components object
    * @param {Dictionary} dictionary of object prototypes used to build and draw components
    * @return {None}
   **/
-  function draw_network(dict_components){
+  function draw_network(dict_components, network_, step){
 
-  var idx_line, temp_dict
-  for (idx_line in dict_components.lines){
-      temp_dict = dict_components.lines[idx_line]
-      temp_dict.x1 = temp_dict.x1 * x_scaling
-      temp_dict.x2 = temp_dict.x2 * x_scaling
-      temp_dict.y1 = temp_dict.y1 * y_scaling
-      temp_dict.y2 = temp_dict.y2 * y_scaling
+    construct_coord_display();
+
+    construct_lines(dict_components);
+
+    construct_breakers(dict_components, network_, step);
+
+    construct_labels(dict_components);
+
+    construct_txs(dict_components);
+
+    construct_gens(dict_components);
+
+    construct_inductors(dict_components);
+
+    construct_isolators(dict_components);
+
+    construct_dataviews(dict_components);
+
+    // redraw_dataviews();
+
+    construct_SGTs(dict_components);
+
+    construct_available_power(dict_components)
+
+    construct_generation_info(dict_components)
+
+
   }
 
-  //scale text
-  for (idx in dict_components.labels){
-      temp_dict = dict_components.labels[idx]
-      temp_dict.offset[0] = temp_dict.offset[0] * x_scaling
-      temp_dict.offset[1] = temp_dict.offset[1] * y_scaling
+  function master_draw(){
+    prepare_canvas(x_max, y_max);
+    dict_components = networks_undrawn[network]
+    draw_network(dict_components, network, current_step);
+    fetch_sim_data(network, current_step, option, scenario, function(stage_, step_data){
+      steps[stage_] = step_data;
+      update_line_modals(step_data);
+      update_generator_modals(step_data);
+      update_transformer_modals(step_data);
+      update_dataviews(step_data);
+      update_line_colours(step_data);
+      update_breaker_colours(step_data);
+      update_generator_colours(step_data);
+      update_available_power(step_data);
+      update_generation_info(step_data);
+      }
+    );
   }
 
-  var bNodes = false
+  function event_draw(draw_data){
 
-  for (idx_line in dict_components.lines){
-      temp_dict = dict_components.lines[idx_line]
-      temp_dict.dict_styling = {fill: { width: 2}, stroke: { width: 2}}
-      if (temp_dict.dash){
-        temp_dict.dict_styling.stroke.dasharray = (5, 5)
-      }
-      if (temp_dict.color){
-        temp_dict.dict_styling.stroke.color = temp_dict.color
-        temp_dict.dict_styling.fill.color = temp_dict.color
-      } else {
-        temp_dict.dict_styling.stroke.color = "#ffffff"
-        temp_dict.dict_styling.fill.color = "#ffffff"
-      }
-
-      temp_dict.dict_styling.stroke.color = palette[temp_dict.voltage]
-
-      temp_dict.o_line = draw.line(temp_dict.x1 , temp_dict.y1,
-                                    temp_dict.x2, temp_dict.y2).stroke(temp_dict.dict_styling.stroke)
-
-      temp_dict.line_idx = idx_line
-
-      if (bNodes){
-        draw_nodes(temp_dict, temp_dict.o_line)
-      }
-
-      dict_components.lines[idx_line] = temp_dict
-      components.lines[idx_line] = {drawInfo:temp_dict, UIElement: temp_dict.o_line}
+    network = draw_data['network']
+    current_step = draw_data['sim_step'];
+    master_draw();
   }
 
-  init_breakers("chapelcross", "33kv", dict_components.breakers, function(breakers){
-      for(let id in breakers){
-          //doing this means the inital data, and the SVG elements they make remain unchanged at all times.
-          // may be very useful should a redraw/reset be needed...
-          // define listener handles now since they have access to everything relevant
 
-          let breaker = breakers[id]
-          if(breaker.name === false){
-              breaker.name = id
-          }
-
-          breaker.callback = Breaker_Callback(breaker.graphic, breaker.name)
-
-          draw_breaker(dict_components.lines[breaker.lineID] ,breaker.pos, breaker.size, breaker.state, breaker.callback)
-          let closed = breaker.state === 'closed'
-          let b = {
-              info:breaker,
-              UIElement: breaker.graphic[0],
-              closed: closed,
-              id : id,
-              line : dict_components.lines[breaker.lineID]
-          }
-
-
-          b.setState = function(closed){
-              line = components.breakers[id].line
-              rect = components.breakers[id].UIElement
-
-              color = palette[line.voltage]
-              this.closed = closed
-              if (closed == false){
-                  rect.fill({ color: 'black' })
-                  rect.stroke({ color: 'white' })
-              } else if (closed == true){
-                  rect.fill({ color: color })
-                  rect.stroke({ color: "white" })
-            }
-          }
-          b.UIElement.on("breaker_clicked",function(event){
-              let breaker = components.breakers[id]
-              breaker.setState(!breaker.closed)
-          //        breaker.closed=!breaker.closed
-              post_breaker(id,breaker.closed)
-              inc_state()
-          });
-
-          components.breakers[id] = b
-          component_modal(b)
-      }
+  // Document Initialisation
+  $(document).ready(function(){
   });
 
-      //add text
-  for(i in dict_components.labels){
-      text = dict_components.labels[i]
-      line_id = text.lineID
-      line = components.lines[line_id].UIElement
-      texts = text.text_strings
-      offset = text.offset
-      colour = text.colour
-      add_text(line,false,texts, offset[0],offset[1],colour,text.callback)
-      let id = i
-      let t = {initInfo:text, UIElement: text.graphic[0], id : id}
+  x_max = undefined;
+  y_max = undefined;
+  x_scaling = undefined;
+  y_scaling = undefined;
+  font_size = undefined;
 
-      components.labels[id] = t
-  }
+  var scaled_network = JSON.parse(JSON.stringify(networks_undrawn))
 
-      //add transformers
-  for(i in dict_components.tx){
-      tx = dict_components.tx[i]
-      line_id = tx.lineID
-      line = dict_components.lines[line_id]
-      name = tx.name
-      type = tx.type
-      pos = tx.pos
-      coil1 = tx.coil1
-      coil2 = tx.coil2
-      draw_tx(line,pos,type,[coil1,coil2],tx.callback)
+  // Find your root SVG element
+  var svg = document.querySelector("#drawing");
 
-      let id = i
-      let t = {info:tx, UIElement: tx.graphic[0], id : id}
-      components.lines[id] = t
-      component_modal(t)
-      }
+  // Create an SVGPoint for future math
+  var pt = svg.createSVGPoint();
 
-      //add Generators
-  for(i in dict_components.generators){
-      let gen = dict_components.generators[i]
-      let line = dict_components.lines[gen.lineID]
-      let pos = gen.pos
-      let callback = gen.callback
-      let type = gen.type
+//  update_scaling();
+//  window.addEventListener('resize',update_scaling());
 
-      draw_gen(line,pos,type, callback)
-      let id = i
-      let g = {info: gen, UIElement: gen.graphic[0], id : id}
-      components.generators[id] = g
-      component_modal(g)
+  var socket = io();
+//  let current_step = -1
+//  let steps = []
 
-  }
+  dict_components = undefined
 
-  for(i in dict_components.inductors){
-      inductor = dict_components.inductors[i]
-      line = dict_components.lines[inductor.lineID]
-      pos = inductor.pos
-      callback = inductor.callback
+  var room = undefined
 
-      draw_inductor(line,pos)
-      id = i
-      let ind = {initInfo:inductor, UIElement: inductor.graphic[0], id : id}
-      components.inductors[id] = inductor
-  }
+  socket.on('check_join_draw', function(data_join_draw) {
+    socket.emit('list_rooms', data_join_draw, function (data_list_rooms){});
+  });
 
-  for(i in dict_components.isolators){
-      isolator = dict_components.isolators[i]
-      line = dict_components.lines[isolator.lineID]
-      pos = isolator.pos
-      state = isolator.state
-      if(isolator.name === false){
-          isolator.name = i
-      }
-      isolator.callback = Breaker_Callback(isolator.graphic,isolator.name)
-      callback = isolator.callback
-      draw_isolator(line,pos,12,state,callback)
-      let id = i
-      let closed = state == 'closed'
-      let iso = {drawInfo:isolator, UIElement: isolator.graphic[0], closed: closed, id : id, line : line}
-      components.isolators[id] = iso
-  }
+  socket.on('join_draw', function (data_join_draw){
+    if(room === undefined){
+      room = data_join_draw['room']
+      socket.emit('join_room', data_join_draw, function(data_join_room){
+        event_draw(data_join_room);
+      })
+    }
+  })
 
-  for(i in dict_components.dataViews){
-      dv = dict_components.dataViews[i]
-
-      pos = [dv.x,dv.y]
-
-      thisline = dv.MVA
-      pos = thisline.offset
-      text = thisline.text
-      add_static_text([text],pos[0]*x_scaling,pos[1]*y_scaling,"yellow",function(){})
+  socket.on('list_rooms', function(data) {
+    socket.emit('list_rooms', data);
+  });
 
 
-      thisline = dv.MVAR
-      pos = thisline.offset
-      text = thisline.text
-      add_static_text([text],pos[0]*x_scaling,pos[1]*y_scaling,"yellow",function(){})
+  socket.on('draw', function(data) {
+    event_draw(data);
+  });
 
-      thisline = dv.AMPS
-      pos = thisline.offset
-      text = thisline.text
-      add_static_text([text],pos[0]*x_scaling,pos[1]*y_scaling,"yellow",function(){})
+  socket.on('redraw', function(data) {
+    current_step = data['sim_step'];
+    socket.emit('sync_sim_step', {'sim_step': current_step});
+    master_draw();
+  });
 
-      thisline = dv.kV
-      pos = thisline.offset
-      text = thisline.text
-      add_static_text([text],pos[0]*x_scaling,pos[1]*y_scaling,"yellow",function(){})
 
-      thisline = dv.MW
-      pos = thisline.offset
-      text = thisline.text
-      add_static_text([text],pos[0]*x_scaling,pos[1]*y_scaling,"yellow",function(){})
+  socket.on('shout_client', function(data){
+    alert("Client: ahhhhh");
+  });
 
-    //TODO handle data changes with functions that do all the hardwork
+  socket.on('shout_server', function (data){
+    socket.emit('shout_server', data);
+  })
+
+
+  // Get point in global SVG space
+  function cursorPoint(evt){
+    pt.x = evt.clientX; pt.y = evt.clientY;
+    return pt.matrixTransform(svg.getScreenCTM().inverse());
   }
 
 
-  //get stage zero state
-  update_state(current_step,network,voltage,restoration_step_callback);
+
+function update_scaling(){
+console.log("resizing")
+
+    let drawBox = document.querySelector('drawing');
+    x_max = $("#drawing").attr("width")
+
+    y_max = $("#drawing").attr("height")
+
+      x_scaling = (x_max-250)/1000
+      y_scaling = (y_max-100)/1000
+      font_size = 14 *  Math.min(x_scaling, y_scaling)
+      network_scaled = networks_undrawn
+      scale_lines(network_scaled);
+      scale_labels(network_scaled);
+      scale_dataviews(network_scaled);
+      scale_availablePower(network_scaled);
   }
 
-  draw_network(dict_components)
+update_scaling()
+//$( window ).resize(function(){update_scaling(), master_draw()})
 
-  function inc_state(){
-      current_step += 1;
-      console.log(current_step)
-      update_state(current_step,network,voltage,restoration_step_callback);
-  }
+
+
+
 

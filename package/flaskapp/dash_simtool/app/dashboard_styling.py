@@ -5,14 +5,13 @@ import numpy as np
 
 SIDEBAR_HIDE_OVERLAP = 0
 
-CONTENT_STYLE_SIDEBAR_HIDDEN = {
-    "marginLeft": "2rem",
-    "marginRight": "2rem",
-    "padding": "2rem 1rem",
-}
-
 NAVBAR_STYLE = {
     'height': '3rem'
+}
+
+CONTENT_STYLE_SIDEBAR_HIDDEN = {
+    "marginLeft": "0rem",
+    "marginTop": NAVBAR_STYLE['height'],
 }
 
 SIDEBAR_STYLE = {

@@ -4,9 +4,10 @@ from package.flaskapp.extensions import migrate
 
 DEBUG = False
 
-if __name__ == "__main__":
-    app = create_app()
-    migrate.init_app(app, dbs)
+app = create_app()
+migrate.init_app(app, dbs)
+
+if __name__ == '__main__':
     if DEBUG:
         app.run()
     else:

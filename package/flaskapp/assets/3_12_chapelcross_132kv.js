@@ -1,11 +1,11 @@
 //1550 x 1160 in mm
 //scale of 1000 x 1000, readjust with math...
-chapelcross_132kV={
+networks_undrawn["chapelcross132kv"]={
     lines:{
     "698 01": StraightLine([125,865],"right",700, "33kV"),
-    "GRID T1": StraightLine([280,865],"up",175, "33kV"),
+    "GRID 1": StraightLine([280,865],"up",175, "33kV"),
         "into GRID T1 tx": StraightLine([280,750],"left",40, "33kV"),
-    "GRID T2": StraightLine([665,865],"up",175,"33kV"),
+    "GRID 2": StraightLine([665,865],"up",175,"33kV"),
         "into GRID T2 tx": StraightLine([665,750],"left",40,"33kV"),
 
     "M1": StraightLine([35,570],"right",905,"132kV"),
@@ -47,7 +47,7 @@ chapelcross_132kV={
     "716": StraightLine([240,370],"down",100,"132kV"),
     "714": StraightLine([240,470],"down",100,"132kV"),
         "710": StraightLine([280,465],"down",225,"132kV"),
-        "710 A": StraightLine([280,465],"left",45,"132kV"),
+        "710 A": StraightLine([280,465],"left",40,"132kV"),
 
     "916": StraightLine([150,370],"down",100,"132kV"),
     "914": StraightLine([150,470],"down",100,"132kV"),
@@ -62,13 +62,13 @@ chapelcross_132kV={
 
     },
     breakers:{
-        "698 01": new Breaker("698 01", 0.5,"closed"),
-        "GRID T1": new Breaker("GRID T1", 0.3,"open"),
-        "GRID T2": new Breaker("GRID T2",0.3,"open"),
+        "698 01": new Breaker("698 01", 0.5),
+        "GRID 1": new Breaker("GRID 1", 0.3),
+        "GRID 2": new Breaker("GRID 2",0.3),
 
-        "710":new Breaker("710",0.7,"open"),
-        "120": new Breaker("M1",0.49,"closed"),
-        "330": new Breaker("336 330 334",0.5,"closed"),
+        "710":new Breaker("710",0.7),
+        "120": new Breaker("M1",0.49),
+        "330": new Breaker("336 330 334",0.5),
         "500":new Breaker("DUMF-1",0.5),
         "205": new Breaker("GRNA-2",0.5),
         "615": new Breaker("ECCF-2",0.5),
@@ -76,15 +76,14 @@ chapelcross_132kV={
         "800": new Breaker("DUMF-2",0.5),
         "915": new Breaker("ECCF-1",0.5),
         "1105": new Breaker("GRNA-1",0.5),
-        "410": new Breaker("410",0.7,"open"),
+        "410": new Breaker("410",0.7),
 
     },
     tx:{1: new Tx("into GRID T1 tx",1,"","", coil1 = "33kV", coil2 = "LV"),
-        2: new Tx("GRID T1",1,"GRID T1","90MVA",coil1 = "33kV", coil2 = "132kV"),
+        2: new Tx("GRID 1",1,"GRID T1","90MVA",coil1 = "33kV", coil2 = "132kV"),
 
         3: new Tx("into GRID T2 tx",1,"","", coil1 = "33kV", coil2 = "LV"),
-        4: new Tx("GRID T2",1,"GRID T2","90MVA",coil1 = "33kV",coil2 = "132kV"),
-
+        4: new Tx("GRID 2",1,"GRID T2","90MVA",coil1 = "33kV",coil2 = "132kV"),
         },
     isolators:{
         "1103": new Isolator("GRNA-1",0.7,"closed"),
@@ -130,16 +129,45 @@ chapelcross_132kV={
 
     },
     dataViews:{
-        "ECCF-1": new DataView(250,250),
-        "GRNA-1": new DataView(80,250),
-        "DUMF-1": new DataView(420,250),
-        "GRNA-2": new DataView(560,250),
-        "ECCF-2": new DataView(700,250),
-        "DUMF-2": new DataView(870,250),
-        "HARK": new DataView(950,250),
-
-        "GRID 1": new DataView(350,800),
-        "GRID 2": new DataView(750,800),
-
+//        "ECCF-1": new DataView(250,190,"",["MVA", "MW","MVAR","kV","Amps"]),
+//        "GRNA-1": new DataView(80,190,"", ["MVA", "MW","MVAR","kV","Amps"]),
+//        "DUMF-1": new DataView(420,190,"",["MVA", "MW","MVAR","kV","Amps"]),
+//        "GRNA-2": new DataView(560,190,"",["MVA", "MW","MVAR","kV","Amps"]),
+//        "ECCF-2": new DataView(700,190,"",["MVA", "MW","MVAR","kV","Amps"]),
+//        "DUMF-2": new DataView(870,190,"",["MVA", "MW","MVAR","kV","Amps"]),
+//        "HARK": new DataView(950,190, "", ["MVA", "MW","MVAR","kV","Amps"]),
+//        "GRID 1": new DataView(350,770,"",["MVA", "MW","MVAR","kV","Amps"]),
+//        "GRID 2": new DataView(750,770,"",["MVA", "MW","MVAR","kV","Amps"]),
+//
+//        "R1 1": new DataView(45,350, "",["kV"]),
+//        "M1 1": new DataView(45,590, "",["kV"]),
+//
+//        "R1 2": new DataView(945,350,"", ["kV"]),
+//        "M1 2": new DataView(945,590, "",["kV"]),
     },
+    labels:{
+    1: new Text("698 01", ["CHAPELCROSS GSP"], [0,-70]),
+    2: new Text("698 01", ["SPD"], [0,-180]),
+    3: new Text("698 01", ["33kV"], [0,-195]),
+    4: new Text("M1",["M1"],[-465,0]),
+    5: new Text("R1",["R1"],[-465,0]),
+    6: new Text("R1",["132kV"],[-10,90]),
+    7: new Text("R1",["(SPD)"],[-10,105]),
+
+    8: new Text("GRNA-1",["GRNA-1"],[0,-170]),
+    9: new Text("ECCF-1",["ECCF-1"],[0,-170]),
+    10: new Text("GRNA-2",["GRNA-2"],[0,-170]),
+    11: new Text("ECCF-2",["ECCF-2"],[0,-170]),
+    12: new Text("DUMF-2",["DUMF-2"],[0,-170]),
+    13: new Text("HARK",["HARK"],[0,-170]),
+    14: new Text("DUMF-1",["DUMF-1"],[0,-170]),
+
+    15: new Text("R1",["CHAPELCROSS 132kV"],[0,-350]),
+    },
+
+    generationInfo:{
+        "MINS0G_1": new GenerationInfo([120,780],"Minsca Windfarm (MINSW-1)"),
+        "WYSB0G_1": new GenerationInfo([120,680],"Solway Bank Windfarm (SWBKW-1)"),
+        "STCR5-_1": new GenerationInfo([820,620],"Stevens Croft Biomass (STCR-1)"),
+    }
 }

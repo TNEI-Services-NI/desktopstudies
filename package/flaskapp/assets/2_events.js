@@ -1,4 +1,17 @@
 
+function get_breaker(breakerID,state){
+  if(breakerID === null){breakerID="b1"}
+  if(state === null){state=false}
+  $.ajax({
+  type: "POST",
+  url: "/simtool_bp/receive_breaker/",
+  data: {"breaker": breakerID, "state": state },
+//      dataType: 'application/json'
+  }).done(function( data ) {
+    // console.log(data);
+  })
+}
+
 /**
  * sends breaker state to server as ajax request
  * @param  {string} id of breaker
@@ -19,30 +32,43 @@ function post_breaker(breakerID,state){
   })
 }
 
+function post_breakers(breakers){
+  let breakers_ = {}
+  for(let idb in breakers){
+    console.log(breakers[idb]['closed'])
+    breakers_[idb] = undefined
+  }
+
+  $.ajax({
+  type: "POST",
+  url: "/simtool_bp/receive_breakers/",
+  data: {"breakers": breakers },
+  }).done(function( data ) {
+  })
+}
+
 /**
  * receives initial states of all breakers through ajax request
  * url parameter of ajax request must reference blueprint specific route to function
- * @param  {string} network of sld
- * @param  {string} voltage section of said network
- * @param  {list} list of breaker prototypes to be drawn once data is received
+ * @param network_
+ * @param option_
+ * @param breakers
+ * @param step
  * @param  {function} callback which interprets/draws a list of breakers.
  * @return {None}
  */
-function init_breakers(network, voltage, breakers, callback){
-        callback(breakers);
-        return
+function init_breakers(network_, option_, breakers, step, callback){
     var breakers_new = breakers
     $.ajax({
       type: "POST",
       url: "/simtool_bp/init_breakers/",
-      data: {"network": network, "voltage": voltage},
+      data: {"network": network_, "option": option_},
       success: function(breaker_states){
-
         for (let breaker in breakers){
-          if (breaker_states["state"][breaker] === undefined){
+          if (breaker_states[step][breaker] === undefined){
             breakers_new[breaker].state = "undefined";
           } else {
-            breakers_new[breaker].state = breaker_states["state"][breaker];
+            breakers_new[breaker].state = breaker_states[step][breaker];
           }
         }
         callback(breakers_new);
@@ -63,35 +89,54 @@ function init_breaker(breakerID){
       type: "POST",
       url: "/simtool_bp/init_breaker/",
       data: {"breaker": breakerID},
-//      dataType: 'application/json'
-      }).done(function( state ) {
-        console.log(state);
-      })
+      success: function(state){
+        //alert("success init breaker");
+      }})
   }
 
 /**
  * retrieves state of network based on stage
  * url parameter of ajax request must reference blueprint specific route to function
  * @param  {integer} stage
- * @param  {String} Network of s
- * @param  {function} callback once data has been received
+ * @param network
+ * @param voltage
+ * @param callbacks
  * @return {None}
  */
-function update_state(stage,network,voltage, callbacks){
+function fetch_sim_data(network_, stage_, option_, scenario_, callbacks){
       $.ajax({
       type: "POST",
       url: "/simtool_bp/get_state/",
-      data: {"stage": stage, "network": network,"voltage":voltage},
+      data: {"stage": stage_, "network": network_, "option": option_, "scenario": scenario_},
 //      dataType: 'application/json'
-      }).done(function( state ) {
-        state = JSON.parse(state)
-        callbacks(stage, state);
-
+      }).done(function( component_values ) {
+        for(let component_parameter in component_values){
+          component_values[component_parameter] = JSON.parse(component_values[component_parameter])
+        }
+        callbacks(stage_, component_values);
       })
   }
 
+/**
+ * retrieves network/simulation
+ * url parameter of ajax request must reference blueprint specific route to function
+ * @return {None}
+ */
+function init_network(callback){
+      $.ajax({
+      type: "POST",
+      url: "/simtool_bp/init_network/",
+      data: {'string': 'none'},
+      success: function(state){
+        let voltage = state["voltage"]["0"]
+        let network_ = state["network"]["0"]
+        callback(network_, voltage)
+      }
+      })
+  }
 
 const breaker_clicked_event = new CustomEvent('breaker_clicked')
+const component_data_changed_event = new CustomEvent('component_data_changed')
 
 /**
  * adds modal to a component which shows when the mouse hovers over it
@@ -100,12 +145,15 @@ const breaker_clicked_event = new CustomEvent('breaker_clicked')
  */
 function component_modal(component){
   let type = component.info.component
+  let loc = [0, 0]
   let group = component.UIElement
     group.mouseenter(function(e){
+
+
       $("#dataPopup").css('visibility', 'visible');
       $('#dataPopup').text(type+':');
       $('<p>'+component.id+'</p>').appendTo('#dataPopup');
-
+      $('<p>'+component.id.split("#")[0]+'</p>').appendTo('#dataPopup');
 
       if(type ==="Breaker" || type === "Isolator"){
             $('<p> closed = '+component.closed+'</p>').appendTo('#dataPopup');
@@ -115,12 +163,19 @@ function component_modal(component){
             $('<p> method = '+component.info.type+'</p>').appendTo('#dataPopup');
       }
 
+      if(type ==="Line"){
+      }
+
       if(type ==="Transformer"){
             $('<p> type = '+component.info.type+'</p>').appendTo('#dataPopup');
       }
 
-      if(component.data != undefined){
-            $('<p> restoration step based data = '+component.data+'</p>').appendTo('#dataPopup');
+      if(component.modal_data !== undefined){
+          $('<p>restoration step based data:</p>').appendTo('#dataPopup');
+          for(let data_row in component.modal_data){
+            $('<p>'+component.modal_data[data_row]+'</p>').appendTo('#dataPopup');
+          }
+
       }
       // $('<p>Data:</p>').appendTo('#dataPopup');
 
@@ -160,16 +215,27 @@ function component_modal(component){
               $('<p>Q: '+cell_data[4+parseInt($('#buttonA').attr('stage'))]+' MVAr</p>').appendTo('#dataPopup');
             }
           }
-
           }
         }
         });
     });
     group.mouseleave(function(e){
-      $("#dataPopup").css('visibility', 'hidden');
+      setTimeout(function(){
+        $("#dataPopup").css('visibility', 'hidden');
+      }, modal_timeout*1000)
     });
     group.mousemove(function(e){
-      $('#dataPopup').css('top', e.pageY-25);
-      $('#dataPopup').css('left', e.pageX+25);
+      loc = [e.pageX, e.pageY]
+      let datapopup = $('#dataPopup')
+      if(e.pageY > (y_max - datapopup.height())){
+        datapopup.css('top', e.pageY-datapopup.height()-modal_y_offset);
+      } else {
+        datapopup.css('top', e.pageY);
+      }
+      if(e.pageX > (x_max - datapopup.width())){
+        datapopup.css('left', e.pageX-datapopup.width()-modal_x_offset);
+      } else {
+        datapopup.css('left', e.pageX+modal_x_offset);
+      }
     });
   }
