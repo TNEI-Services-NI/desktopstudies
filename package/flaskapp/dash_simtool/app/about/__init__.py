@@ -36,13 +36,16 @@ def init_dashboard(server=""):
     _body = components.compile_body(styling.CONTENT_STYLE)
 
     intro_card = dbc.Card([
-        dbc.CardHeader("What is the Desktop communications tool?"),
+        dbc.CardHeader(
+            html.H4("What is the Desktop communications tool?")),
         dbc.CardBody([
             html.P('This tool simulates the process of re-energising a power network through a blackstart process'
-                   'with each person taking the role of DNO, ESO, TO, and DER'),
-            html.P("The simulation data at each step is pre-calculated by the IPSA software"),
+                   ' with each person taking the role of the ESO, DNO, TO, or DER. Observers may also join but cannot interact with the simulation'),
+            html.P("The simulation data at each step is pre-calculated by use of the IPSA software"),
             html.P("Any changes made by the a user in the current lobby are synchronised between all users and "
-                   "immediately viewable")
+                   "immediately viewable"),
+
+            html.P("The currently implemented simulation is the restoration process for the Chapelcross GSP network")
 
         ])
     ],
@@ -50,33 +53,46 @@ def init_dashboard(server=""):
     )
 
     how_to_card = dbc.Card([
-        dbc.CardHeader("How To Use This Tool"),
+        dbc.CardHeader(
+            html.H4("How To Use This Tool")),
         dbc.CardBody([
-            html.P('By communication between the DNO, ESO, TO, and DER, The process of Re-energising the network by '
-                   'closing breakers in the correct order'),
-
-            html.H3("Navigating"),
+            # html.P('Through communication between the DNO, ESO, TO, and DER, The process of re-energising the network by '
+            #        'closing breakers in the prescribed order will be organised'),
+            html.P('The stages of the re-energising simulation are navigated by altering the states of components as '
+                   'prescribed by the restoration script. '
+                   ),
+            html.H4("Navigating"),
             html.P("The Top Navigation bar allows you to navigate the tools pages."),
             html.P("The Home Page shows the view relevant to your role"),
-            html.P("SLDs allows access to to view all parts of the network [WHAT ELSE SHOULD BE AVAILABLE AND TO "
-                   "WHO], [WHERE WILL state views be available]"),
+            html.P("SLDs allows access to to view all parts of the network"),
             html.P("Finally the Script page displays a copy of the restoration script."),
 
-            html.H3("Viewing Data"),
+            html.H4("Viewing Data"),
             html.P(
                 "Data regarding the current state of the network is immediately available in the form of panels which"
-                "show generator information, available Power, or specific data from busbars and lines."),
-            html.P("Alternatively, By Hovering over components with the mouse pointer, a modal will show all data "
-                   "available for the given component"),
+                "show generator information, available Power, or specific data from busbars and lines. Alternatively, "
+                "By Hovering over components with the mouse pointer, a modal window will show all "
+                "data available for the given component"),
 
-            html.H3("Interaction"),
-            html.P("Breakers can change state between being closed and opened by clicking them with the cursor. You "
-                   "may only interact with breakers which are under your roles authority. "
-                   "When all relevant breakers are in the correct state the simulation will progress to the next step")
+            html.H4("Interaction"),
+            html.P(
+                "Circuit breakers can change state between being closed and opened by clicking them with the cursor. "
+                "You may only interact with breakers which are under your roles authority. "
+                "When all relevant breakers are in the correct state the simulation will progress to the next step")
 
         ])
     ],
-        style={"width": "75%", "margin-top": "5%"},
+        style={"width": "75%", "margin-top": "3%"},
+    )
+
+    legend = dbc.Card(
+        [
+            dbc.CardHeader(
+                html.H4("Legend")),
+
+            dbc.CardImg(src="/static/imgs/legend1.jpg", top=True),
+        ],
+        style={"width": "75%", "margin-top": "3%"},
     )
 
     # compile overall layout
@@ -89,6 +105,7 @@ def init_dashboard(server=""):
                                    _body,
                                    intro_card,
                                    how_to_card,
+                                   legend,
                                    ],
                                   )
 
