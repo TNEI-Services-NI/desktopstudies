@@ -56,13 +56,18 @@ function post_breakers(breakers){
  * @param  {function} callback which interprets/draws a list of breakers.
  * @return {None}
  */
-function check_breakers(network_, option_, breakers, callback){
+function check_breakers(network_, option_, breakers, step, callback){
     var breakers_new = breakers
     $.ajax({
       type: "POST",
       url: "/simtool_bp/check_breakers/",
       data: {"network": network_, "option": option_},
       success: function(breaker_states){
+        for(let breaker_id in breakers){
+
+        }
+        // alert(JSON.stringify(breakers));
+        alert(JSON.stringify(breaker_states[step]));
         callback(breaker_states);
       }
     });
