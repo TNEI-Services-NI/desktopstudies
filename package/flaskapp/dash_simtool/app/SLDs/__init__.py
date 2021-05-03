@@ -66,11 +66,24 @@ def init_dashboard(server=""):
         id='sidebar'
     )
 
+    # # add legend
+    _legendButton = html.Div(
+        [html.H3("LEGEND")],
+        style=styling.LEGEND_BUTTON,
+        id='legend_button'
+    )
+    # _legend = html.Div(
+    #     [html.Img("src=/static/imgs/legend1.png")],
+    #     style=styling.LEGEND,
+    #     id='legend'
+    # )
+
     # compile body
     _body = components.compile_body(styling.CONTENT_STYLE)
 
     # graphical output
     _data_upload_output = dbc.Row([dbc.Col([html.Div(id='output-data-upload')], width=2)])
+
 
     with open(dash_simtool.TEMPLATES_DIR + '/dash_sim_tool.html', "r") as dash_app_html_file:
         dash_app_html = dash_app_html_file.read()
@@ -88,7 +101,10 @@ def init_dashboard(server=""):
                                    dcc.Store(id='on_load'),
                                    _nav_bar,
                                    _sidebar,
+                                   _legendButton,
+                                   # _legend,
                                    _body,
+
                                    ],
                                   )
 

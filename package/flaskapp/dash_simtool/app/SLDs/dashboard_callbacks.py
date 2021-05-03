@@ -31,7 +31,6 @@ def _add_toggle_sidebar(dash_app):
 
         [Input("toggle_button", "n_clicks")],
         [
-            State("side_click", "data"),
         ]
     )
     def toggle_sidebar(n, nclick):
@@ -150,11 +149,33 @@ def _add_sim_progress_buttons(dash_app):
 
 def _add_sidebar_buttons(dash_app):
     dash_app = _add_sim_progress_buttons(dash_app)
-
     return dash_app
 
+def _add_legend_button(dash_app):
+    @dash_app.callback(
+        [
+            Output("legend_button", "children"),
+        ],
+
+        [Input("legend_button", "n_clicks")],
+        [
+
+        ]
+    )
+    def toggle_legend(n):
+        if(n!=None):
+            if(n%2 == 0):
+                return ["clicked"]
+            else:
+                return ["legend"]
+        else:
+            return ["legend"]
+
+    return dash_app
 
 def init_callbacks(dash_app):
     dash_app = _add_network_redraw(dash_app)
     dash_app = _add_sidebar_buttons(dash_app)
+    dash_app = _add_legend_button(dash_app)
+
     return dash_app

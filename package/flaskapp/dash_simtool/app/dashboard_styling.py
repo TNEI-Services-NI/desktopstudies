@@ -44,3 +44,22 @@ TOGGLE_BUTTON = {
     'marginLeft': '9rem',
     "backgroundColor": "#ebc700",
 }
+
+LEGEND_BUTTON = {
+    "position": "absolute",
+    "margin": "auto",
+    "right": "0vw",
+    "Top": "10vh",
+    "width": "12rem",
+    "height": "2rem",
+    "border-radius": "15px",
+    "backgroundColor": "#ffe600",
+}
+LEGEND = {
+    "position": "absolute",
+    "margin": "auto",
+    "right": "0vw",
+    "Top": "10vh",
+    "border-radius": "15px",
+    "backgroundColor": "#ffe600",
+}
