@@ -40,7 +40,7 @@ def _add_legend_button(dash_app):
     )
     def toggle_legend(n):
         if(n!=None):
-            if(n%2 == 0):
+            if(n%2 == 1):
                 return [styling.LEGEND]
             else:
                 return [styling.LEGEND_HIDDEN]
