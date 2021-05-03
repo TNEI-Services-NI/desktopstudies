@@ -57,9 +57,25 @@ LEGEND_BUTTON = {
 }
 LEGEND = {
     "position": "absolute",
-    "margin": "auto",
-    "right": "0vw",
-    "Top": "10vh",
-    "border-radius": "15px",
+    "right": "0.4rem",
+    "top": "4.8rem",
+
+    "width": "30vw",
+    "border": "2px solid",
+    # "border-radius": "15px",
+    "border-color": "#ffe600",
     "backgroundColor": "#ffe600",
+}
+LEGEND_HIDDEN = {
+    "position": "absolute",
+    "right": "0vw",
+    "top": "5rem",
+    "width": "30vw",
+    "border": "2px",
+    "backgroundColor": "#ffe600",
+    "visibility": "hidden"
+}
+
+LEGEND_IMAGE = {
+    "width": "100%",
 }

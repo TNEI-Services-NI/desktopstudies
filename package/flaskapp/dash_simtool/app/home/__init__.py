@@ -67,6 +67,19 @@ def init_dashboard(server=""):
         id='sidebar'
     )
 
+    #legend
+    _legendButton = html.Div(
+        [html.H3("Toggle Legend")],
+        style=styling.LEGEND_BUTTON,
+        id='legend_button'
+    )
+    image_filename ="\static\imgs\legend1.jpg"
+    _legend = html.Div(
+        [html.Img(src=image_filename, style=styling.LEGEND_IMAGE)],
+        style=styling.LEGEND_HIDDEN,
+        id='legend'
+    )
+
     # compile body
     _body = components.compile_body(STYLING_SIDEBAR)
 
@@ -88,6 +101,8 @@ def init_dashboard(server=""):
                                    dcc.Store(id='sim_state'),
                                    html.Div(id='hidden_div00'),
                                    _nav_bar,
+                                   _legend,
+                                   _legendButton,
                                    _body,
                                    ],
                                   )

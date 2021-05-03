@@ -1,3 +1,4 @@
+import base64
 import copy
 from datetime import datetime
 
@@ -5,6 +6,8 @@ import dash
 from dash.dependencies import Output, Input, State
 
 from flask import session
+
+from package import BASE_DIR
 from package.flaskapp import socketio
 from flask_socketio import rooms, join_room
 
@@ -154,7 +157,7 @@ def _add_sidebar_buttons(dash_app):
 def _add_legend_button(dash_app):
     @dash_app.callback(
         [
-            Output("legend_button", "children"),
+            Output("legend", "style"),
         ],
 
         [Input("legend_button", "n_clicks")],
@@ -165,11 +168,11 @@ def _add_legend_button(dash_app):
     def toggle_legend(n):
         if(n!=None):
             if(n%2 == 0):
-                return ["clicked"]
+                return [styling.LEGEND]
             else:
-                return ["legend"]
+                return [styling.LEGEND_HIDDEN]
         else:
-            return ["legend"]
+            return [styling.LEGEND_HIDDEN]
 
     return dash_app
 
