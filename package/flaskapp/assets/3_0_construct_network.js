@@ -261,10 +261,17 @@
         let callback = tx.callback
         draw_tx(line, tx)
 
+
         let id = i
         let t = {info:tx, UIElement: tx.graphic[0], id : id}
+
+        t.setLive = function(){
+            console.log(this.UIElement)
+        }
+
         components.transformers[id] = t
         component_modal(t)
+
         }
   }
 

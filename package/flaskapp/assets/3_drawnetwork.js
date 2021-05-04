@@ -81,6 +81,19 @@
     }
   }
 
+  function update_transformers(step_data){
+    for(let tx_ in components.transformers){
+          tx_instance = components.transformers[tx_]
+          if(tx_ in step_data["transformers_loading"]){
+              loading = step_data["transformers_loading"][tx_]
+                if(Number(loading) > 0){
+                 tx_instance.setLive()
+                }
+          }
+          console.log(step_data)
+    }
+  }
+
   function update_line_data_views(step_data){
         for (let line_ in components.lines) {
       line_id_LF = line_.split("#")[0]
@@ -248,6 +261,7 @@
     update_line_modals(step_data);
     update_generator_modals(step_data);
     update_transformer_modals(step_data);
+    update_transformers(step_data)
     update_dataviews(step_data);
     update_line_colours(step_data);
     update_breaker_colours(step_data);

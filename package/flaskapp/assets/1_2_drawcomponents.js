@@ -14,7 +14,8 @@ var circleWidth = 1
 
 let position = tx.pos
 let type = tx.type
-let coils = [tx.coil1, tx.coil2]
+let coils = [dict_line.voltage,tx.coil2]
+console.log(coils)
 let callback = tx.callback
 let live = tx.live
 

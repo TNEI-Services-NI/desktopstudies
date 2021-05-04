@@ -98,9 +98,9 @@ function Tx_Callback(graphic_objects, name = false, mva = false){
     }
 
 /**
- * Callback function for Transformer object instances. Adds object to list of child objects associated with
- * the transformer.
- * @param  {list} graphic_objects List of child objects associated with each transformer object.
+ * Callback function for Generator object instances. Adds object to list of child objects associated with
+ * the generator.
+ * @param  {list} graphic_objects List of child objects associated with each generator object.
  * @param  {string} name String object containing name/contents of child objects
  * @return {function} None Returns a function that adds passed object to breaker child objects, and adds text label.
  */
@@ -238,7 +238,7 @@ function StaticText(text,pos, colour = "#d3d3d3",textSize=10,){
  * @return {None}
  * @usage instantiate as object i.e. new Transformer(...)
  */
-function Tx(lineID,pos,name,mva, coil1 = "33kV",coil2 = "33kV",type="starDelta"){
+function Tx(lineID,pos,name,mva, coil2 = "0V" ,type="starDelta"){
     this.lineID =lineID
     this.pos = pos
     this.component="Transformer"
@@ -246,7 +246,7 @@ function Tx(lineID,pos,name,mva, coil1 = "33kV",coil2 = "33kV",type="starDelta")
     this.mva = mva
     this.graphic = []
     this.type = type
-    this.coil1 = coil1
+    this.coil1 = lineID
     this.coil2 = coil2
     this.live = live_dead
     this.colour = undefined
