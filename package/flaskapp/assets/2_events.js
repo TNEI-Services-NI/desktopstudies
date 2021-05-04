@@ -153,7 +153,6 @@ function fetch_sim_data(network_, stage_, option_, scenario_, callbacks){
 //      dataType: 'application/json'
       }).done(function( component_values ) {
         for(let component_parameter in component_values){
-          // alert(JSON.parse(component_values[component_parameter]))
           component_values[component_parameter] = JSON.parse(component_values[component_parameter])
         }
         callbacks(stage_, component_values);

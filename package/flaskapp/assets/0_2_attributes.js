@@ -18,6 +18,8 @@ let modal_x_offset = 20
 let modal_y_offset = 20
 let modal_timeout = 5
 
+let dataview_round = 3
+
 let background = undefined
 let network = undefined
 let dict_components = undefined

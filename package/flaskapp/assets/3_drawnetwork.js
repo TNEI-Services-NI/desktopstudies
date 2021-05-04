@@ -6,17 +6,17 @@
       line_instance.modal_data = []
       if (line_id_LF in step_data["lines_active_power"]) {
         line_instance.modal_data = line_instance.modal_data.concat(
-          ["Active power: " + step_data["lines_active_power"][line_id_LF] + " MW"]
+          ["Active power: " + Math.round(step_data["lines_active_power"][line_id_LF]*(10**dataview_round))/(10**dataview_round) + " MW"]
         )
       }
       if (line_id_LF in step_data["lines_reactive_power"]) {
         line_instance.modal_data = line_instance.modal_data.concat(
-          ["Reactive power: " + step_data["lines_reactive_power"][line_id_LF] + " MVAr"]
+          ["Reactive power: " + Math.round(step_data["lines_reactive_power"][line_id_LF]*(10**dataview_round))/(10**dataview_round) + " MVAr"]
         )
       }
       if (line_id_LF in step_data["busbars_voltage"]) {
         line_instance.modal_data = line_instance.modal_data.concat(
-          ["Voltage: " + step_data["busbars_voltage"][line_id_LF] + " V"]
+          ["Voltage: " + Math.round(step_data["busbars_voltage"][line_id_LF]*(10**dataview_round))/(10**dataview_round) + " V"]
         )
       }
       components.lines[line_] = line_instance
@@ -130,8 +130,10 @@
             units = " AMPS"
           }
 
+          let value = Math.round(step_data[component_parameter][id_dv] * 1000) / 1000
+
           text_list = text_list.concat(
-            [String(step_data[component_parameter][id_dv]) + units]
+            [String(value) + units]
           );
         }
       }
