@@ -9,6 +9,7 @@
       <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
       <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
       <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
       {{ JSGlue.include() }}
    </head>
    <body>
@@ -50,13 +51,18 @@
          </div>
       </section>
 
-      <style>
+   </body>
+
+   <style>
       .homepage {
-        background-image: url('/static/imgs/Slide2.PNG');
+        background-image: url('/static/imgs/Slide1.PNG');
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-size: 100% 100%;
       }
-      </style>
-   </body>
+
+      .navbar-item{
+         border-radius:15px
+      }
+   </style>
 </html>

@@ -125,7 +125,10 @@ def trigger_checks(trig_data=None):
 
     print(f'Logged-in users are: {entities_active}')
 
-    socketio.emit('update_logged_users', logged_in.loc[:, 'user'].values.tolist())
+    users_active = logged_in.loc[:,"user"].values.tolist()
+    logged_in_users = list(zip(users_active,entities_active))
+
+    socketio.emit('update_logged_users', logged_in_users)
     socketio.emit('update_waiting_on', required.loc[~required['status'], 'name'].values.tolist())
 
     if len(required_entities-entities_active) == 0:
