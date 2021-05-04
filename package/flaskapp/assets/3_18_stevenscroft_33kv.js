@@ -71,8 +71,8 @@ networks_undrawn["stevenscroft33kv"]={
     },
 
     tx:{
-        "699 STEP UP": new Tx("699 CUSTOMER",1,"","", "11kV","33kV"),
-        "699 Auxiliary Transformer": new Tx("699 Auxiliary Transformer B",1,["Auxiliary","Transformer","11/0.4kV"],"", "11kV","33kV"),
+        "699 STEP UP": new Tx("699 CUSTOMER",1,"","", "33kV"),
+        "699 Auxiliary Transformer": new Tx("699 Auxiliary Transformer B",1,["Auxiliary","Transformer","11/0.4kV"],"","33kV"),
 
     },
 

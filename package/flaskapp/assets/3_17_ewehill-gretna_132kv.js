@@ -53,8 +53,8 @@ networks_undrawn["ewehillgretna"]={
         },
 
     tx:{
-        "GT1 90MVA" : new Tx("113",1,"","","33kV","132kV"),
-        "GRID 1A LV" : new Tx("GRID 1A LV",1,"","","33kV","LV"),
+        "GT1 90MVA" : new Tx("113",1,"","","132kV"),
+        "GRID 1A LV" : new Tx("GRID 1A LV",1,"","","0V"),
 
     },
 

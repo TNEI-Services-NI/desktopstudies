@@ -81,11 +81,11 @@ networks_undrawn["chapelcross132kv"]={
         "410": new Breaker("CHAP1-_CHAP3-_2#1",0.7),
 
     },
-    tx:{1: new Tx("CHAP1-_CHAP3-_1#3",1,"","", coil1 = "33kV", coil2 = "LV"),
-        "CHAP1-_CHAP3-_1": new Tx("CHAP1-_CHAP3-_1#0",1,"GRID T1","90MVA",coil1 = "33kV", coil2 = "132kV"),
+    tx:{1: new Tx("CHAP1-_CHAP3-_1#3",1,"","", "0V"),
+        "CHAP1-_CHAP3-_1": new Tx("CHAP1-_CHAP3-_1#0",1,"GRID T1","90MVA","132kV"),
 
-        3: new Tx("CHAP1-_CHAP3-_2#3",1,"","", coil1 = "33kV", coil2 = "LV"),
-        "CHAP1-_CHAP3-_2": new Tx("CHAP1-_CHAP3-_2#0",1,"GRID T2","90MVA",coil1 = "33kV",coil2 = "132kV"),
+        3: new Tx("CHAP1-_CHAP3-_2#3",1,"","", "0V"),
+        "CHAP1-_CHAP3-_2": new Tx("CHAP1-_CHAP3-_2#0",1,"GRID T2","90MVA","132kV"),
         },
     isolators:{
         "1103": new Isolator("GRNA-1",0.7,"closed"),
