@@ -192,7 +192,7 @@
   function inc_state(network_){
     current_step += 1;
     //alert(current_step)
-    fetch_sim_data(network_, current_step, option, scenario, function(){});
+    fetch_sim_data(network_, current_step, option, scenario, update_sim_data);
   }
 
   /**
@@ -232,22 +232,24 @@
 
   }
 
+  function update_sim_data(stage_, step_data){
+    steps[stage_] = step_data;
+    update_line_modals(step_data);
+    update_generator_modals(step_data);
+    update_transformer_modals(step_data);
+    update_dataviews(step_data);
+    update_line_colours(step_data);
+    update_breaker_colours(step_data);
+    update_generator_colours(step_data);
+    update_available_power(step_data);
+    update_generation_info(step_data);
+  }
+
   function master_draw(){
     prepare_canvas(x_max, y_max);
     dict_components = networks_undrawn[network]
     draw_network(dict_components, network, current_step);
-    fetch_sim_data(network, current_step, option, scenario, function(stage_, step_data){
-      steps[stage_] = step_data;
-      update_line_modals(step_data);
-      update_generator_modals(step_data);
-      update_transformer_modals(step_data);
-      update_dataviews(step_data);
-      update_line_colours(step_data);
-      update_breaker_colours(step_data);
-      update_generator_colours(step_data);
-      update_available_power(step_data);
-      update_generation_info(step_data);
-      }
+    fetch_sim_data(network, current_step, option, scenario, update_sim_data
     );
   }
 

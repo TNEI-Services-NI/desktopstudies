@@ -110,6 +110,8 @@ def read_LF_file(network="chapelcross33kv", option="Opt5"):
                                                        , sheet_name='Lines - Active Power')
     dict_data['lines']['reactive_power'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
                                                          , sheet_name='Lines - Reactive Power')
+    dict_data['lines']['current'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
+                                                         , sheet_name='Lines - Current')
 
     for component, dict_comp_data in dict_data.items():
         for param, comp_data in dict_comp_data.items():
