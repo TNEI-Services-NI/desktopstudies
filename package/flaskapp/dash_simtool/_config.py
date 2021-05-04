@@ -13,6 +13,6 @@ entity_network_map = {
     'ESO': 'chapelcross132kv',
     'DNO': 'chapelcross33kv',
     'TO': 'chapelcross132kv',
-    'DER': 'chapelcross132kv',
-    'Other': 'gretna400kv',
+    'DER': 'ewehill-gretna_132kv',
+    'Observer': 'chapelcross33kv',
 }

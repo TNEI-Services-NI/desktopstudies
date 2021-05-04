@@ -212,7 +212,9 @@
   **/
   function draw_network(dict_components, network_, step){
 
-    construct_coord_display();
+    if(coord_display){
+      construct_coord_display();
+    }
 
     construct_lines(dict_components);
 

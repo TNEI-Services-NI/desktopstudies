@@ -15,10 +15,15 @@ def _add_network_redraw(dash_app):
                        )
     def _draw_network(state):
         network = cf.entity_network_map[session['entity'] if 'entity' in session else 'Other']
+        session['room'] = session['entity']
         session['network'] = network
         sim_step = session['sim_step'] if 'sim_step' in session else cf.start_sim_step
         session['sim_step'] = sim_step
-        socketio.emit('draw', {'network': network, 'sim_step': sim_step}, broadcast=False)
+        socketio.emit('check_join_draw', {
+            'network': network,
+            'sim_step': sim_step,
+            'room': session['room']
+        })
         return [network]
 
     return dash_app

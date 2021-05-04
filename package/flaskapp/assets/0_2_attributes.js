@@ -14,6 +14,8 @@ let line_palette_style = {'width': 4}
 let live_dead = false
 let highlight_undefined = true
 
+let coord_display = false
+
 let modal_x_offset = 20
 let modal_y_offset = 20
 let modal_timeout = 5
