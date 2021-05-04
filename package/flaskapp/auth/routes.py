@@ -118,16 +118,19 @@ def trigger_checks(trig_data=None):
                               'entity': [user.entity for user in active_users],
                               'status': [1 for user in active_users]})
 
+    print(logged_in)
     required.loc[required['email'].isin(logged_in['email']), 'status'] = True
 
     required_entities = set(required.loc[required['required'], 'entity'].values.tolist())
-    entities_active = set(logged_in.loc[:, 'entity'].values.tolist())
+
+    entities_active_list = list(logged_in['entity'].values.tolist())
+    entities_active = set(entities_active_list)
 
     print(f'Logged-in users are: {entities_active}')
 
-    users_active = logged_in.loc[:,"user"].values.tolist()
-    logged_in_users = list(zip(users_active,entities_active))
-
+    users_active = logged_in["user"].values.tolist()
+    logged_in_users = list(zip(users_active,entities_active_list))
+    print(logged_in_users)
     socketio.emit('update_logged_users', logged_in_users)
     socketio.emit('update_waiting_on', required.loc[~required['status'], 'name'].values.tolist())
 

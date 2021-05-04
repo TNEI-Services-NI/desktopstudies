@@ -22,10 +22,12 @@
      margin-right: auto;
      min-width : 15%;
      text-align: center;
+     column-gap: 20px;
    }
 
    #logged-in-users .row-entity{
         text-align: center;
+        padding:0 15px;
    }
 
    #logged-in-users .row-name{
@@ -62,8 +64,7 @@
        table.empty();
        for(i = 0; i <= (n-1); i++){
            var list = user[i];
-           table.append("<tr><td class='row-name'><h4>" + list[0] + "</h4></td><td class='row-entity'><h4>"+list[1]+"</h4></td>")
-<!--           kk += "<li>"+list[0] + "\t" + list[1]+"</li>"-->
+           table.append("<tr><td class='row-name'><h4>" + list[0] + "</h4></td><td class='row-entity'><h4>"+list[1]+"</h4></td></tr>")
 
        }
        document.getElementById("demo").innerHTML = kk;
