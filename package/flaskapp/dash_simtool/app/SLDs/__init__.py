@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import base64
+
 import dash
 import dash_html_components as html
 import dash_bootstrap_components as dbc
@@ -11,6 +13,7 @@ import package.flaskapp.dash_simtool as dash_simtool
 import package.flaskapp.dash_simtool.app.dashboard_components as components
 import package.flaskapp.dash_simtool.app.SLDs.dashboard_callbacks as callbacks
 import package.flaskapp.dash_simtool.app.dashboard_styling as styling
+from package import BASE_DIR
 
 URL_PAGE = dash_simtool.app.URL_SLDS
 
@@ -66,11 +69,26 @@ def init_dashboard(server=""):
         id='sidebar'
     )
 
+    # # add legend
+    _legendButton = html.Div(
+        [html.H3("i")],
+        style=styling.LEGEND_BUTTON,
+        id='legend_button'
+    )
+
+    image_filename ="\static\imgs\legend1.jpg"
+    _legend = html.Div(
+        [html.Img(src=image_filename, style=styling.LEGEND_IMAGE)],
+        style=styling.LEGEND_HIDDEN,
+        id='legend'
+    )
+
     # compile body
     _body = components.compile_body(styling.CONTENT_STYLE)
 
     # graphical output
     _data_upload_output = dbc.Row([dbc.Col([html.Div(id='output-data-upload')], width=2)])
+
 
     with open(dash_simtool.TEMPLATES_DIR + '/dash_sim_tool.html', "r") as dash_app_html_file:
         dash_app_html = dash_app_html_file.read()
@@ -88,7 +106,10 @@ def init_dashboard(server=""):
                                    dcc.Store(id='on_load'),
                                    _nav_bar,
                                    _sidebar,
+                                   _legendButton,
+                                   _legend,
                                    _body,
+
                                    ],
                                   )
 

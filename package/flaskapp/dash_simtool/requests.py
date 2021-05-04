@@ -16,7 +16,7 @@ def receive_breaker():
     return jsonify("message received securely")
 
 
-@simtool_bp.route("/init_breakers/", methods=['POST'])
+@simtool_bp.route("/check_breakers/", methods=['POST'])
 @login_required
 def init_breakers():
     data = request.form
@@ -86,6 +86,12 @@ def shout_server(data):
     print("Server: ahhhhh")
 
 
+@socketio.on('redraw')
+def redraw(data):
+    print("redraw server")
+    socketio.emit('redraw', {'sim_step': data['sim_step']}, room=session['room'])
+
+
 @socketio.on('ping_server')
 def ping_server(data):
     print('pong')
@@ -96,6 +102,5 @@ def ping_server(data):
 def connection(data):
     """This will emit a message to all users when this is called.
     This would be useful for simulation synchronisation"""
-    print(session['sim_step'])
-    print(data['sim_step'])
+    session['sim_step'] = data['sim_step']
 

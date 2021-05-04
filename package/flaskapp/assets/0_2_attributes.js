@@ -14,9 +14,13 @@ let line_palette_style = {'width': 4}
 let live_dead = false
 let highlight_undefined = true
 
+let coord_display = false
+
 let modal_x_offset = 20
 let modal_y_offset = 20
 let modal_timeout = 5
+
+let dataview_round = 3
 
 let background = undefined
 let network = undefined
@@ -55,7 +59,7 @@ Abbreviations = {"lines_active_power": "MW",
                  "lines_reactive_power": "MVAR"}
 
 var socket = io();
-let current_step = -1  // initial simulation status
+let current_step = 0  // initial simulation status
 
 
 //  var x = document.getElementById('myDiv').clientWidth;
