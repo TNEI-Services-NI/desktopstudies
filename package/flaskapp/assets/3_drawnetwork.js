@@ -90,7 +90,6 @@
                  tx_instance.setLive()
                 }
           }
-          console.log(step_data)
     }
   }
 

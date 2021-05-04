@@ -14,7 +14,7 @@ function Breaker_Callback(graphic_objects, name = ''){
         }
         if(name !== ''){
             if(object.horizontal === true){
-                add_text(object, false, [name], 0, -15,"#d3d3d3", function(object){})
+                add_text(object, false, [name], 0, -15*y_scaling),"#d3d3d3", function(object){})
             }
             else{
                 add_text(object, false, [name], 3 + name.length*4 * x_scaling, 0,"#d3d3d3", function(object){})}
