@@ -1,0 +1,11 @@
+      .homepage {
+        background-image: url('/static/imgs/Slide1.PNG');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100% 100%;
+      }
+
+      .navbar-item{
+         border-radius:15px
+
+      }
