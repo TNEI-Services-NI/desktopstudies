@@ -28,7 +28,7 @@ networks_undrawn["chapelcross33kv"] = {
             "ANANT1_CHAP3-_1#2": StraightLine([145,280], "right",150),
         "CHAPX1_LOBI3A_1#0": StraightLine([250,175],"down",225),
             "CHAPX1_LOBI3A_1#1": StraightLine([250,340],"left",90),
-        "GRID 1": StraightLine([330,175],"up",120),
+        "CHAP3-_CHAPX1_1": StraightLine([330,175],"up",120),
             "into DAR tx":StraightLine([330,110],"left",40),
         "CHAP3-_MIBI3-_1#0": StraightLine([415,175],"down",75),
             "CHAP3-_MIBI3-_1#1": StraightLine([200,250],"right",215),
@@ -46,7 +46,7 @@ networks_undrawn["chapelcross33kv"] = {
         "CHAP3-_LOBI3B_1#0": StraightLine([625,175],"down",135),
             "CHAP3-_LOBI3B_1#1": StraightLine([530,310],"right",95),
             "CHAP3-_LOBI3B_1#2":StraightLine([530,310],"down",90),
-        "GRID 2": StraightLine([670,175],"up",115),
+        "CHAP3-_CHAPX3_1": StraightLine([670,175],"up",115),
             "into GRID 2 tx": StraightLine([670,110],"left",40),
         "ANANT2_CHAP3-_1#0": StraightLine([700,175],"down",105),
         "CHAP3-_MINS3-_1#0": StraightLine([780,175],"down",110),
@@ -192,7 +192,7 @@ networks_undrawn["chapelcross33kv"] = {
         "699 GENERATOR": new Breaker("CHAP3-_STCR3-_1",0.8,""),
         "698 14": new Breaker("ANANT1_CHAP3-_1#1",0.19),
         "698 13": new Breaker("CHAPX1_LOBI3A_1#0",0.1),
-        "GRID 1": new Breaker("GRID 1",0.2),
+        "GRID 1": new Breaker("CHAP3-_CHAPX1_1",0.2),
         "698 12": new Breaker("CHAP3-_MIBI3-_1#0",0.3),
         "698 11": new Breaker("CHAP3-_GRNA3B_1#0",0.3),
         "698 01": new Breaker("CHAP3A1",1),
@@ -204,7 +204,7 @@ networks_undrawn["chapelcross33kv"] = {
         "698 26": new Breaker("698 26",0.26),
         "678 11": new Breaker("378 11",0.18),
         "678 12": new Breaker("378 12",0.3),
-        "GRID 2": new Breaker("GRID 2",0.2),
+        "GRID 2": new Breaker("CHAP3-_CHAPX3_1",0.2),
 
         "694": new Breaker("LOBI3A",1),
 
@@ -270,8 +270,8 @@ networks_undrawn["chapelcross33kv"] = {
     },
     tx:{
         0: new Tx("into GRID 2 tx",1,"","","33kV","LV"),
-        1: new Tx("GRID 2",1,"GRID T2","90 MVA", "33kV","132kV"),
-        2: new Tx("GRID 1",1,"GRID T1", "90 MVA", "33kV","132kV"),
+        "CHAP1-_CHAP3-_2": new Tx("CHAP3-_CHAPX3_1",1,"GRID T2","90 MVA", "33kV","132kV"),
+        "CHAP1-_CHAP3-_1": new Tx("CHAP3-_CHAPX1_1",1,"GRID T1", "90 MVA", "33kV","132kV"),
         3: new Tx("into DAR tx",1,"","","33kV","LV"),
         5: new Tx("MIBI3-_MIBIT1_1#1",1,"","10 MVA","11kV","33kV"),
         6: new Tx("MIBI3-_LAHO3A_1#3",1,"T1","12 MVA","11kV"),
@@ -319,7 +319,7 @@ networks_undrawn["chapelcross33kv"] = {
     13: new Text("MIBI5-", ["PRIMARY"],[5,-25]),
     14: new Text("MIBI5-", ["682"],[5,-10]),
 
-    15: new Text("LOBI3A", ["LOCKERBIE 33KV"],[10,-40]),
+    15: new Text("LOBI3A", ["LOCKERBIE 33KV"],[85,-40]),
 
     16: new Text("ANAN5-1", ["ANNAN"],[25,-45]),
     17: new Text("ANAN5-1", ["662"],[25,-30]),
@@ -372,21 +372,25 @@ networks_undrawn["chapelcross33kv"] = {
     },
     dataViews:{
         //lines
-        "CHAP3-_STCR3-_1": new DataView("CHAP3-_STCR3-_1", [-25, -95]),
-        "ANANT1_CHAP3-_1": new DataView("ANANT1_CHAP3-_1#1", [-25, 0]),
+        "CHAP3-_STCR3-_1": new DataView("CHAP3-_STCR3-_1", [-25, -125], ['lines_current']),
+        "ANANT1_CHAP3-_1": new DataView("ANANT1_CHAP3-_1#1", [-25, -5], ['lines_current']),
         // CRAIG II WINDFARM 11KV
         // "CRAG5B_LAHO5-_1": new DataView("CRAG5B_LAHO5-_1", [65, -60]),
-        "CHAP3-_MINS3-_1": new DataView("CHAP3-_MINS3-_1#2", [35, 0]),
-        "CHAPX1_LOBI3A_1": new DataView("CHAPX1_LOBI3A_1#0", [-25, -75]),
-        "CHAP3-_MIBI3-_1": new DataView("CHAP3-_MIBI3-_1#0", [-25, 0]),
-        "CHAP3-_GRNA3B_1": new DataView("CHAP3-_GRNA3B_1#0", [-25, 0]),
-        "CHAP3-_CHAPX3_1": new DataView("CHAP3-_CHAPX3_1#0", [-25, -60]),
+        "CHAP3-_MINS3-_1": new DataView("CHAP3-_MINS3-_1#2", [25, 0], ['lines_current']),
+        "CHAPX1_LOBI3A_1": new DataView("CHAPX1_LOBI3A_1#0", [-25, -75], ['lines_current']),
+        "CHAP3-_MIBI3-_1": new DataView("CHAP3-_MIBI3-_1#0", [-25, 0], ['lines_current']),
+        "CHAP3-_GRNA3B_1": new DataView("CHAP3-_GRNA3B_1#0", [-25, 0], ['lines_current']),
+        "CHAP3-_CHAPX3_1": new DataView("CHAP3-_CHAPX3_1#0", [-25, -60], ['lines_current']),
         // "ANANT1_CHAP3-_1": new DataView("ANANT1_CHAP3-_1#1", [-25, 10]),
         // "ANANT1_CHAP3-_1": new DataView("ANANT1_CHAP3-_1#1", [-25, 10]),
         // "ANANT1_CHAP3-_1": new DataView("ANANT1_CHAP3-_1#1", [-25, 10]),
         // "ANANT1_CHAP3-_1": new DataView("ANANT1_CHAP3-_1#1", [-25, 10]),
         //generator
-        "STCR5-_1": new DataView("STCR5-_1", [-35, 0]),
+        "STCR5-_1": new DataView("STCR5-_1", [-35, 0],
+          [
+            'generators_active_power',
+            'generators_reactive_power',
+          ]),
         // CRAIG II WINDFARM 11KV
         // "CRAG0B_1": new DataView("CRAG0B_1", [-35, 0]),
 

@@ -319,13 +319,14 @@ function Isolator(line_id,pos, state = "closed",name=false){
  * @return {None}
  * @usage instantiate as object i.e. new DataView(...)
  */
-function DataView(componentID = "", offset){
+function DataView(componentID = "", offset, labels){
     // this.x = x
     // this.y = y
     this.data = {}
     this.graphic = []
     this.componentID = componentID
     this.offset = offset
+    this.labels = labels
     this.callback = undefined
 
 }
