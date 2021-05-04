@@ -95,12 +95,12 @@ networks_undrawn["chapelcross33kv"] = {
         "CHAP3-_CHAPX3_1#2": StraightLine([615,380],"down",535-380),
         "CHAPX3_LAHO3B_1#0": StraightLine([615,535],"down",680-535),
 
-        "ANANT1_ANAN10_T1#0": StraightLine([340,280],"left",50, "11kV"),
-        "ANANT1_ANAN10_T1#1": StraightLine([340,280],"down",35, "11kV"),
+        "ANANT1_CHAP3-_1#0": StraightLine([340,280],"left",50, "11kV"),
+        "ANANT1_CHAP3-_1#3": StraightLine([340,280],"down",35, "11kV"),
         "ANAN5-1": StraightLine([310,315],"right",52, "11kV"),
         "ANAN5-2": StraightLine([310+52,315],"right",53, "11kV"),
-        "ANANT2_ANAN20_T2#1": StraightLine([385,280],"down",35, "11kV"),
-        "ANANT2_ANAN20_T2#0": StraightLine([385,280],"right",50, "11kV"),
+        "ANANT2_CHAP3-_1#2": StraightLine([385,280],"down",35, "11kV"),
+        "ANANT2_CHAP3-_1#3": StraightLine([385,280],"right",50, "11kV"),
 
         "ANANT2_CHAP3-_1#1": StraightLine([435,280],"right",265),
 
@@ -226,9 +226,9 @@ networks_undrawn["chapelcross33kv"] = {
         "676 01": new Breaker("LAHO5-1",1,"01"),
         "676 20": new Breaker("CHAPX3_LAHO3B_1#4",0.4,"20"),
 
-        "662 10": new Breaker("ANANT1_ANAN10_T1#0",0.3,"10"),
+        "662 10": new Breaker("ANANT1_CHAP3-_1#0",0.3,"10"),
         "662 01": new Breaker("ANAN5-1",1,"01"),
-        "662 20": new Breaker("ANANT2_ANAN20_T2#0",0.3,"20"),
+        "662 20": new Breaker("ANANT2_CHAP3-_1#3",0.3,"20"),
 
         "694 13": new Breaker("CHAPX4_LOBI3A_1",0.1,"13"),
 
@@ -277,7 +277,7 @@ networks_undrawn["chapelcross33kv"] = {
         6: new Tx("MIBI3-_LAHO3A_1#3",1,"T1","12 MVA","11kV"),
         7: new Tx("CHAPX3_LAHO3B_1#3",1,"T2","12 MVA","33kV","11kV"),
         "ANANT1_ANAN10_T1": new Tx("ANANT1_CHAP3-_1#2",1,"T1","12 MVA","11kV"),
-        "ANANT2_ANAN20_T2": new Tx("ANANT2_ANAN20_T2#0",1,"T2","12 MVA","33kV","11kV"),
+        "ANANT2_ANAN20_T2": new Tx("ANANT2_CHAP3-_1#3",1,"T2","12 MVA","33kV","11kV"),
         "KIBAT1_KIBA10_T1": new Tx("CHAPX4_KIBAT1_1#0",1,"","5VA","11kV"),
         "MOFTT1_MOFT10_T1": new Tx("CHAPX4_MOFTT1_1#1",1,"T1","7.5 MVA","11kV"),
         "MOFTT1_MOFT10_T2": new Tx("LOBI3B_MOFTT2_1#3",1,"T2","7.5 MVA","33kV","11kV"),
