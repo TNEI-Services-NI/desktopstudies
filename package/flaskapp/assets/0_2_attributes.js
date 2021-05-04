@@ -55,7 +55,7 @@ Abbreviations = {"lines_active_power": "MW",
                  "lines_reactive_power": "MVAR"}
 
 var socket = io();
-let current_step = -1  // initial simulation status
+let current_step = 0  // initial simulation status
 
 
 //  var x = document.getElementById('myDiv').clientWidth;

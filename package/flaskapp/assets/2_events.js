@@ -262,9 +262,9 @@ function component_modal(component){
         });
     });
     group.mouseleave(function(e){
-      setTimeout(function(){
+      // setTimeout(function(){
         $("#dataPopup").css('visibility', 'hidden');
-      }, modal_timeout*1000)
+      // }, modal_timeout*1000)
     });
     group.mousemove(function(e){
       loc = [e.pageX, e.pageY]
