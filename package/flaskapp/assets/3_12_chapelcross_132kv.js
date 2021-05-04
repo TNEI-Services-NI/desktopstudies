@@ -2,11 +2,13 @@
 //scale of 1000 x 1000, readjust with math...
 networks_undrawn["chapelcross132kv"]={
     lines:{
-    "698 01": StraightLine([125,865],"right",700, "33kV"),
-    "GRID 1": StraightLine([280,865],"up",175, "33kV"),
-        "into GRID T1 tx": StraightLine([280,750],"left",40, "33kV"),
-    "GRID 2": StraightLine([665,865],"up",175,"33kV"),
-        "into GRID T2 tx": StraightLine([665,750],"left",40,"33kV"),
+    "CHAP3A1": StraightLine([125,865], "right",375),
+        "CHAP3A2": StraightLine([125+375,865], "right",375),
+
+    "CHAP1-_CHAP3-_1#0": StraightLine([280,865],"up",175, "33kV"),
+        "CHAP1-_CHAP3-_1#3": StraightLine([280,750],"left",40, "33kV"),
+    "CHAP1-_CHAP3-_2#0": StraightLine([665,865],"up",175,"33kV"),
+        "CHAP1-_CHAP3-_2#3": StraightLine([665,750],"left",40,"33kV"),
 
     "M1": StraightLine([35,570],"right",905,"132kV"),
     "R1": StraightLine([35,370],"right",905,"132kV"),
@@ -28,8 +30,8 @@ networks_undrawn["chapelcross132kv"]={
 
     "416": StraightLine([625,370],"down",100,"132kV"),
     "414": StraightLine([625,470],"down",100,"132kV"),
-        "410": StraightLine([665,465],"down",225,"132kV"),
-        "410 A": StraightLine([665,465],"left",40,"132kV"),
+        "CHAP1-_CHAP3-_2#1": StraightLine([665,465],"down",225,"132kV"),
+        "CHAP1-_CHAP3-_2#2": StraightLine([665,465],"left",40,"132kV"),
 
     "206": StraightLine([555,370],"down",100,"132kV"),
     "204": StraightLine([555,470],"down",100,"132kV"),
@@ -46,8 +48,8 @@ networks_undrawn["chapelcross132kv"]={
 
     "716": StraightLine([240,370],"down",100,"132kV"),
     "714": StraightLine([240,470],"down",100,"132kV"),
-        "710": StraightLine([280,465],"down",225,"132kV"),
-        "710 A": StraightLine([280,465],"left",40,"132kV"),
+        "CHAP1-_CHAP3-_1#1": StraightLine([280,465],"down",225,"132kV"),
+        "CHAP1-_CHAP3-_1#2": StraightLine([280,465],"left",40,"132kV"),
 
     "916": StraightLine([150,370],"down",100,"132kV"),
     "914": StraightLine([150,470],"down",100,"132kV"),
@@ -62,11 +64,11 @@ networks_undrawn["chapelcross132kv"]={
 
     },
     breakers:{
-        "698 01": new Breaker("698 01", 0.5),
-        "GRID 1": new Breaker("GRID 1", 0.3),
-        "GRID 2": new Breaker("GRID 2",0.3),
+        "698 01": new Breaker("CHAP3A1", 1),
+        "GRID 1": new Breaker("CHAP1-_CHAP3-_1#0", 0.3),
+        "GRID 2": new Breaker("CHAP1-_CHAP3-_2#0",0.3),
 
-        "710":new Breaker("710",0.7),
+        "710":new Breaker("CHAP1-_CHAP3-_1#1",0.7),
         "120": new Breaker("M1",0.49),
         "330": new Breaker("336 330 334",0.5),
         "500":new Breaker("DUMF-1",0.5),
@@ -76,14 +78,14 @@ networks_undrawn["chapelcross132kv"]={
         "800": new Breaker("DUMF-2",0.5),
         "915": new Breaker("ECCF-1",0.5),
         "1105": new Breaker("GRNA-1",0.5),
-        "410": new Breaker("410",0.7),
+        "410": new Breaker("CHAP1-_CHAP3-_2#1",0.7),
 
     },
-    tx:{1: new Tx("into GRID T1 tx",1,"","", coil1 = "33kV", coil2 = "LV"),
-        2: new Tx("GRID 1",1,"GRID T1","90MVA",coil1 = "33kV", coil2 = "132kV"),
+    tx:{1: new Tx("CHAP1-_CHAP3-_1#3",1,"","", coil1 = "33kV", coil2 = "LV"),
+        "CHAP1-_CHAP3-_1": new Tx("CHAP1-_CHAP3-_1#0",1,"GRID T1","90MVA",coil1 = "33kV", coil2 = "132kV"),
 
-        3: new Tx("into GRID T2 tx",1,"","", coil1 = "33kV", coil2 = "LV"),
-        4: new Tx("GRID 2",1,"GRID T2","90MVA",coil1 = "33kV",coil2 = "132kV"),
+        3: new Tx("CHAP1-_CHAP3-_2#3",1,"","", coil1 = "33kV", coil2 = "LV"),
+        "CHAP1-_CHAP3-_2": new Tx("CHAP1-_CHAP3-_2#0",1,"GRID T2","90MVA",coil1 = "33kV",coil2 = "132kV"),
         },
     isolators:{
         "1103": new Isolator("GRNA-1",0.7,"closed"),
@@ -136,8 +138,8 @@ networks_undrawn["chapelcross132kv"]={
 //        "ECCF-2": new DataView(700,190,"",["MVA", "MW","MVAR","kV","Amps"]),
 //        "DUMF-2": new DataView(870,190,"",["MVA", "MW","MVAR","kV","Amps"]),
 //        "HARK": new DataView(950,190, "", ["MVA", "MW","MVAR","kV","Amps"]),
-//        "GRID 1": new DataView(350,770,"",["MVA", "MW","MVAR","kV","Amps"]),
-//        "GRID 2": new DataView(750,770,"",["MVA", "MW","MVAR","kV","Amps"]),
+//        "CHAP1-_CHAP3-_1#0": new DataView(350,770,"",["MVA", "MW","MVAR","kV","Amps"]),
+//        "CHAP1-_CHAP3-_2#0": new DataView(750,770,"",["MVA", "MW","MVAR","kV","Amps"]),
 //
 //        "R1 1": new DataView(45,350, "",["kV"]),
 //        "M1 1": new DataView(45,590, "",["kV"]),
@@ -146,9 +148,9 @@ networks_undrawn["chapelcross132kv"]={
 //        "M1 2": new DataView(945,590, "",["kV"]),
     },
     labels:{
-    1: new Text("698 01", ["CHAPELCROSS GSP"], [0,-70]),
-    2: new Text("698 01", ["SPD"], [0,-180]),
-    3: new Text("698 01", ["33kV"], [0,-195]),
+    1: new Text("CHAP3A1", ["CHAPELCROSS GSP"], [185,-70]),
+    2: new Text("CHAP3A1", ["SPD"], [185,-180]),
+    3: new Text("CHAP3A1", ["33kV"], [185,-195]),
     4: new Text("M1",["M1"],[-465,0]),
     5: new Text("R1",["R1"],[-465,0]),
     6: new Text("R1",["132kV"],[-10,90]),
