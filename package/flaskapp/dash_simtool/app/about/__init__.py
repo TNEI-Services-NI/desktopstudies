@@ -89,7 +89,7 @@ def init_dashboard(server=""):
             dbc.CardHeader(
                 html.H4("Legend")),
 
-            dbc.CardImg(src="/static/imgs/legend1.tojpg", top=True),
+            dbc.CardImg(src="/static/imgs/legend1.jpg", top=True),
         ],
         style={"width": "75%", "margin-top": "3%"},
     )
