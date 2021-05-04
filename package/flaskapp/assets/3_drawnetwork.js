@@ -166,6 +166,7 @@
         ((step_data_["transformers_loading"][line_id_LF] !== 0)&&(step_data_["transformers_loading"][line_id_LF] !== undefined))){
 
         line_instance.info.o_line.attr({stroke: line_instance.info.dict_styling.stroke.live_color});
+        line_instance.UIElement.attr({stroke: line_instance.info.dict_styling.stroke.live_color});
 
       } else if (((step_data_["lines_loading"][line_id_LF] === undefined))&&
         ((step_data_["busbars_voltage"][line_id_LF] === undefined))&&
@@ -173,6 +174,8 @@
 
         if(highlight_undefined){
           line_instance.info.o_line.attr({stroke: "red"});
+          line_instance.UIElement.attr({stroke: "red"});
+
           // line_instance.info.o_line.attr({stroke: "grey"});
         }
       }
@@ -185,15 +188,14 @@
       let breaker_instance = components.breakers[idb]
       let idl = breaker_instance.line.line_idx
       let line_id_LF = idl.split("#")[0]
+
       if(((step_data_["lines_loading"][line_id_LF] !== 0)&&(step_data_["lines_loading"][line_id_LF] !== undefined))||
         ((step_data_["busbars_voltage"][line_id_LF] !== 0)&&(step_data_["busbars_voltage"][line_id_LF] !== undefined))||
         ((step_data_["transformers_loading"][line_id_LF] !== 0)&&(step_data_["transformers_loading"][line_id_LF] !== undefined))){
-        console.log("setting breaker state")
-        breaker_instance.setState(true)
-//        breaker_instance.UIElement.attr({
-//          'stroke': breaker_instance.line.dict_styling.stroke.live_color,
-//          'fill': breaker_instance.line.dict_styling.stroke.live_color
-//        })
+        breaker_instance.UIElement.attr({
+          'stroke': breaker_instance.line.dict_styling.stroke.live_color,
+          'fill': breaker_instance.line.dict_styling.stroke.live_color
+        })
       }
     }
   }

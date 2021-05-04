@@ -198,10 +198,11 @@
             }
 
             b.setState = function(closed){
+                console.log("Setting the state of this breaker")
                 line = components.breakers[id].line
                 rect = components.breakers[id].UIElement
 
-//                breaker.colour = palette[line.voltage]
+                breaker.colour = palette[line.voltage]
                 this.closed = closed
                 if (closed == false){
                     rect.fill({ color: palette["background-color"] })
@@ -210,6 +211,7 @@
                     rect.fill({ color: line.graphic[0].attr().stroke })
                     rect.stroke({ color: "white" })
               }
+              this.closed = closed
             }
 
             b.UIElement.on("breaker_clicked",function(event){

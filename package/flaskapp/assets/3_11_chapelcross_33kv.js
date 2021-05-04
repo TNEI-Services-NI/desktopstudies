@@ -21,7 +21,7 @@ networks_undrawn["chapelcross33kv"] = {
 //            "chapelcross dash": StraightLine([15,240],"right",35, "0V", dash=true),
 
         "CHAP3A1#0": StraightLine([85,175], "down",20),
-        "CHAP3-_STCR3-_1": StraightLine([85,195], "down",280),
+        "CHAP3-_STCR3-_1#0": StraightLine([85,195], "down",280),
             "STCR3-": StraightLine([25,370],"right",90),
             "STCR5-": StraightLine([70,440],"right",35),
         "ANANT1_CHAP3-_1#1": StraightLine([145,175],"down",105),
@@ -187,9 +187,9 @@ networks_undrawn["chapelcross33kv"] = {
      },
     breakers:{
 //        "698 16": new Breaker("CHAP3A1#0",1),
-        "698 15": new Breaker("CHAP3-_STCR3-_1",0),
-        "699 CHAP": new Breaker("CHAP3-_STCR3-_1",0.58, "CHAP"),
-        "699 GENERATOR": new Breaker("CHAP3-_STCR3-_1",0.8,""),
+        "698 15": new Breaker("CHAP3-_STCR3-_1#0",0),
+        "699 CHAP": new Breaker("CHAP3-_STCR3-_1#0",0.58, "CHAP"),
+        "699 GENERATOR": new Breaker("CHAP3-_STCR3-_1#0",0.8,""),
         "698 14": new Breaker("ANANT1_CHAP3-_1#1",0.19),
         "698 13": new Breaker("CHAPX1_LOBI3A_1#0",0.1),
         "GRID 1": new Breaker("CHAP1-_CHAP3-_1#0",0.2),
@@ -292,7 +292,7 @@ networks_undrawn["chapelcross33kv"] = {
 
         },
     generators:{
-        "STCR5-_1": new Generator("CHAP3-_STCR3-_1",1),
+        "STCR5-_1": new Generator("CHAP3-_STCR3-_1#0",1),
         "EWHC0G_1": new Generator("EWHC3-_EWHC0G_1",1),
         // CRAIG II WINDFARM 11KV
         // "CRAG0B_1": new Generator("CRAG5B_LAHO5-_1",1),
@@ -372,7 +372,7 @@ networks_undrawn["chapelcross33kv"] = {
     },
     dataViews:{
         //lines
-        "CHAP3-_STCR3-_1": new DataView("CHAP3-_STCR3-_1", [-25, -125], ['lines_current']),
+        "CHAP3-_STCR3-_1": new DataView("CHAP3-_STCR3-_1#0", [-25, -125], ['lines_current']),
         "ANANT1_CHAP3-_1": new DataView("ANANT1_CHAP3-_1#1", [-25, -5], ['lines_current']),
         // CRAIG II WINDFARM 11KV
         // "CRAG5B_LAHO5-_1": new DataView("CRAG5B_LAHO5-_1", [65, -60]),
