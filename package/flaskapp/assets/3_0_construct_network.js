@@ -271,14 +271,14 @@
             console.log(liveCoils)
             UIElements = this.UIElement.children()
             circle1 = UIElements[1]
-            circle1.attr({stroke: palette[liveCoils[1]]})
+            circle1.attr({stroke: palette[liveCoils[0]]})
             circle2 = UIElements[3]
-            circle2.attr({stroke: palette[liveCoils[1]]})
+            circle2.attr({stroke: palette[liveCoils[0]]})
 
             circle3 = UIElements[2]
-            circle3.attr({stroke: palette[liveCoils[0]]})
+            circle3.attr({stroke: palette[liveCoils[1]]})
             circle4 = UIElements[4]
-            circle4.attr({stroke: palette[liveCoils[0]]})
+            circle4.attr({stroke: palette[liveCoils[1]]})
 
 
         }
