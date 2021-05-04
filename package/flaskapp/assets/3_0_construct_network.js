@@ -208,7 +208,7 @@
                     rect.fill({ color: palette["background-color"] })
                     rect.stroke({ color: 'white' })
                 } else if (closed == true){
-                    rect.fill({ color: breaker.colour })
+                    rect.fill({ color: line.graphic[0].attr().stroke })
                     rect.stroke({ color: "white" })
               }
             }
@@ -267,8 +267,6 @@
         let t = {info:tx, UIElement: tx.graphic[0], id : id}
 
         t.setLive = function(){
-            console.log(line_id)
-            console.log(liveCoils)
             UIElements = this.UIElement.children()
             circle1 = UIElements[1]
             circle1.attr({stroke: palette[liveCoils[0]]})
