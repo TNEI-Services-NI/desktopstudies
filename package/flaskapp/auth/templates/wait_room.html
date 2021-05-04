@@ -22,6 +22,7 @@
      margin-right: auto;
      min-width : 15%;
      text-align: center;
+     column-gap: 4%;
    }
 
    #logged-in-users .row-entity{
@@ -43,9 +44,9 @@
          sio.emit('trigger', {dummy: []});
      })
 
-     sio.on('redirect', (data) => {
-          window.location.href = Flask.url_for(data)
-     })
+<!--     sio.on('redirect', (data) => {-->
+<!--          window.location.href = Flask.url_for(data)-->
+<!--     })-->
 
      sio.on('users_complete', (data) => {
            var users_complete = 'Expected participants complete ... redirecting...';
@@ -62,8 +63,7 @@
        table.empty();
        for(i = 0; i <= (n-1); i++){
            var list = user[i];
-           table.append("<tr><td class='row-name'><h4>" + list[0] + "</h4></td><td class='row-entity'><h4>"+list[1]+"</h4></td>")
-<!--           kk += "<li>"+list[0] + "\t" + list[1]+"</li>"-->
+           table.append("<tr><td class='row-name'><h4>" + list[0] + "</h4></td><td class='row-entity'><h4>"+list[1]+"</h4></td></tr>")
 
        }
        document.getElementById("demo").innerHTML = kk;
