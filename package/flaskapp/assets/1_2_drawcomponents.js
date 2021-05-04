@@ -279,12 +279,10 @@ function draw_breaker(dict_line, breaker){
   if(live_colour === undefined){
     live_colour = palette[dict_line.voltage]
   }
+  console.log(dict_line.graphic[0].attr())
 
-  if(live === true){
-    colour = live_colour
-  } else {
-    colour = palette["0V"]
-  }
+    colour = dict_line.graphic[0].attr()["stroke"]
+    console.log(colour)
 
   if (state === 'open'){
     rect1 = draw.rect(size, size).center(center[0], center[1]).fill(palette["background-color"]).stroke(colour).stroke({width: 1})

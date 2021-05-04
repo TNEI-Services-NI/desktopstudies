@@ -197,12 +197,11 @@
                 line : dict_components.lines[breaker.lineID]
             }
 
-
             b.setState = function(closed){
                 line = components.breakers[id].line
                 rect = components.breakers[id].UIElement
 
-                breaker.colour = palette[line.voltage]
+//                breaker.colour = palette[line.voltage]
                 this.closed = closed
                 if (closed == false){
                     rect.fill({ color: palette["background-color"] })

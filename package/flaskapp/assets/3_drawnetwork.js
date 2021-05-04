@@ -188,10 +188,12 @@
       if(((step_data_["lines_loading"][line_id_LF] !== 0)&&(step_data_["lines_loading"][line_id_LF] !== undefined))||
         ((step_data_["busbars_voltage"][line_id_LF] !== 0)&&(step_data_["busbars_voltage"][line_id_LF] !== undefined))||
         ((step_data_["transformers_loading"][line_id_LF] !== 0)&&(step_data_["transformers_loading"][line_id_LF] !== undefined))){
-        breaker_instance.UIElement.attr({
-          'stroke': breaker_instance.line.dict_styling.stroke.live_color,
-          'fill': breaker_instance.line.dict_styling.stroke.live_color
-        })
+        console.log("setting breaker state")
+        breaker_instance.setState(true)
+//        breaker_instance.UIElement.attr({
+//          'stroke': breaker_instance.line.dict_styling.stroke.live_color,
+//          'fill': breaker_instance.line.dict_styling.stroke.live_color
+//        })
       }
     }
   }

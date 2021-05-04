@@ -106,6 +106,7 @@ function init_breakers(network_, option_, breakers, step, callback){
       url: "/simtool_bp/check_breakers/",
       data: {"network": network_, "option": option_},
       success: function(restoration_breaker_states){
+      console.log(restoration_breaker_states)
         for (let breaker in breakers){
           if (restoration_breaker_states[step][breaker] === undefined){
             breakers_new[breaker].state = "undefined";
