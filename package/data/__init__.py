@@ -43,7 +43,6 @@ def read_restoration_step(network: str, option: str, scenario: str, stage: int):
     dict_data = {k: pd.read_csv('/'.join([dir_opt_scen, v]),
                                  dtype={'Name': str})
                         .set_index("Name")
-                        .round(3)
                         .loc[:, 'Stage {}'.format(stage)]
                         .to_json()
                  for k, v in dict_filenames.items()}
@@ -88,9 +87,9 @@ def get_data_cols(comp_data_):
             'post_blackout': ["Stage -1"], 'stages': [comp_cols_[x] for x in stage_cols]}
 
 
-def read_LF_file(network="chapelcross33kv", option="Opt5"):
+def read_LF_file(network="chapelcross", voltage="33kv", option="Opt5"):
     raw_data_files = _fetch_files(dir_raw_simtool_data, file_type='.xlsx')
-    filename = raw_data_files[network + option]
+    filename = raw_data_files[network + voltage + option]
 
     dict_data = {'generators': {}, 'busbars': {}, 'lines': {}, 'transformers': {}}
 

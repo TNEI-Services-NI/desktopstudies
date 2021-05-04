@@ -325,6 +325,7 @@
         let gen = components.generators[componentID]
         let tx = components.transformers[componentID]
         let offset = dataview_.offset
+        let labels = dataview_.labels
         let colour = "#d6ba00"
         let observer = undefined
 
@@ -342,6 +343,7 @@
             observer: observer,
             text_object: text_object,
             offset: offset,
+            labels: labels,
             colour: colour
           }
         })

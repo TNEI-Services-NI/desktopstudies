@@ -6,17 +6,17 @@
       line_instance.modal_data = []
       if (line_id_LF in step_data["lines_active_power"]) {
         line_instance.modal_data = line_instance.modal_data.concat(
-          ["Active power: " + step_data["lines_active_power"][line_id_LF] + " MW"]
+          ["Active power: " + Math.round(step_data["lines_active_power"][line_id_LF]*(10**dataview_round))/(10**dataview_round) + " MW"]
         )
       }
       if (line_id_LF in step_data["lines_reactive_power"]) {
         line_instance.modal_data = line_instance.modal_data.concat(
-          ["Reactive power: " + step_data["lines_reactive_power"][line_id_LF] + " MVAr"]
+          ["Reactive power: " + Math.round(step_data["lines_reactive_power"][line_id_LF]*(10**dataview_round))/(10**dataview_round) + " MVAr"]
         )
       }
       if (line_id_LF in step_data["busbars_voltage"]) {
         line_instance.modal_data = line_instance.modal_data.concat(
-          ["Voltage: " + step_data["busbars_voltage"][line_id_LF] + " V"]
+          ["Voltage: " + Math.round(step_data["busbars_voltage"][line_id_LF]*(10**dataview_round))/(10**dataview_round) + " V"]
         )
       }
       components.lines[line_] = line_instance
@@ -112,7 +112,9 @@
     for(let id_dv in components.dataviews){
       let text_list = [];
       var units = "";
-      for(let component_parameter in step_data){
+      let labels = components.dataviews[id_dv].labels
+      for(let id_component_parameter in labels){
+        let component_parameter = labels[id_component_parameter]
         if (id_dv in step_data[component_parameter]) {
           if(component_parameter.includes('reactive')){
             units = " MVAr"
@@ -124,10 +126,14 @@
             units = " V p.u."
           } else if(component_parameter.includes('taps')){
             units = " ."
+          } else if(component_parameter.includes('current')){
+            units = " AMPS"
           }
 
+          let value = Math.round(step_data[component_parameter][id_dv] * 1000) / 1000
+
           text_list = text_list.concat(
-            [String(step_data[component_parameter][id_dv]) + units]
+            [String(value) + units]
           );
         }
       }
@@ -142,6 +148,8 @@
       let line_instance = components.lines[idl]
       let line_id_LF = idl.split("#")[0]
       if(((step_data_["lines_loading"][line_id_LF] !== 0)&&(step_data_["lines_loading"][line_id_LF] !== undefined))||
+        ((step_data_["lines_active_power"][line_id_LF] !== 0)&&(step_data_["lines_active_power"][line_id_LF] !== undefined))||
+        ((step_data_["lines_reactive_power"][line_id_LF] !== 0)&&(step_data_["lines_reactive_power"][line_id_LF] !== undefined))||
         ((step_data_["busbars_voltage"][line_id_LF] !== 0)&&(step_data_["busbars_voltage"][line_id_LF] !== undefined))||
         ((step_data_["transformers_loading"][line_id_LF] !== 0)&&(step_data_["transformers_loading"][line_id_LF] !== undefined))){
 
@@ -153,6 +161,7 @@
 
         if(highlight_undefined){
           line_instance.info.o_line.attr({stroke: "red"});
+          // line_instance.info.o_line.attr({stroke: "grey"});
         }
       }
     }
