@@ -45,9 +45,9 @@
          sio.emit('trigger', {dummy: []});
      })
 
-<!--     sio.on('redirect', (data) => {-->
-<!--          window.location.href = Flask.url_for(data)-->
-<!--     })-->
+     sio.on('redirect', (data) => {
+          window.location.href = Flask.url_for(data)
+     })
 
      sio.on('users_complete', (data) => {
            var users_complete = 'Expected participants complete ... redirecting...';
