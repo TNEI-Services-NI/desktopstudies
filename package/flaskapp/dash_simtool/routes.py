@@ -11,4 +11,3 @@ from flask_socketio import join_room, rooms
 @login_required
 def index():
     return redirect(url_for(dash_app.URL_HOME))
-

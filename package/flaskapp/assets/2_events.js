@@ -53,6 +53,48 @@ function post_breakers(breakers){
  * @param network_
  * @param option_
  * @param breakers
+ * @param  {function} callback which interprets/draws a list of breakers.
+ * @return {None}
+ */
+function check_breakers(network_, option_, breakers, step, callback){
+    var breakers_new = breakers
+    $.ajax({
+      type: "POST",
+      url: "/simtool_bp/check_breakers/",
+      data: {"network": network_, "option": option_},
+      success: function(restoration_breaker_states){
+        let int_step = parseInt(step)
+        let int_next_step = int_step + 1
+        let breaker_matches_current = true
+        let breaker_matches_next = true
+        for(let breaker_id in breakers){
+          let breaker_matches_current_ = (restoration_breaker_states[step][breaker_id]=="closed")==breakers[breaker_id].closed
+          if(!breaker_matches_current_){
+            breaker_matches_current = false
+          }
+
+          let breaker_matches_next_ = (restoration_breaker_states[int_next_step][breaker_id]=="closed")==breakers[breaker_id].closed
+          if(!breaker_matches_next_){
+            breaker_matches_next = false
+          }
+        }
+        if(breaker_matches_current){
+          alert("Reset to original state")
+        }
+        if(breaker_matches_next){
+          socket.emit('redraw', {'sim_step': int_next_step});
+        }
+        callback(breaker_matches_next);
+      }
+    });
+
+}
+/**
+ * receives initial states of all breakers through ajax request
+ * url parameter of ajax request must reference blueprint specific route to function
+ * @param network_
+ * @param option_
+ * @param breakers
  * @param step
  * @param  {function} callback which interprets/draws a list of breakers.
  * @return {None}
@@ -61,14 +103,14 @@ function init_breakers(network_, option_, breakers, step, callback){
     var breakers_new = breakers
     $.ajax({
       type: "POST",
-      url: "/simtool_bp/init_breakers/",
+      url: "/simtool_bp/check_breakers/",
       data: {"network": network_, "option": option_},
-      success: function(breaker_states){
+      success: function(restoration_breaker_states){
         for (let breaker in breakers){
-          if (breaker_states[step][breaker] === undefined){
+          if (restoration_breaker_states[step][breaker] === undefined){
             breakers_new[breaker].state = "undefined";
           } else {
-            breakers_new[breaker].state = breaker_states[step][breaker];
+            breakers_new[breaker].state = restoration_breaker_states[step][breaker];
           }
         }
         callback(breakers_new);
@@ -220,9 +262,9 @@ function component_modal(component){
         });
     });
     group.mouseleave(function(e){
-      setTimeout(function(){
+      // setTimeout(function(){
         $("#dataPopup").css('visibility', 'hidden');
-      }, modal_timeout*1000)
+      // }, modal_timeout*1000)
     });
     group.mousemove(function(e){
       loc = [e.pageX, e.pageY]

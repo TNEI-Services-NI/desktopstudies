@@ -118,7 +118,7 @@
 
   function style_diagram_line(line){
     line.dict_styling = {fill: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)},
-                         stroke: { width: line_palette_style["width"]}/2 * Math.min(x_scaling,y_scaling)}
+                         stroke: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)}}
     if (line.dash){
               line.dict_styling = {fill: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)},
                          stroke: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)} }
@@ -217,7 +217,11 @@
                 let breaker = components.breakers[id]
                 breaker.setState(!breaker.closed)
                 // post_breakers(components.breakers)
-                inc_state(network_)  // IF correct breaker is clicked
+                check_breakers(network_, option, components.breakers, step, function(breaker_matches_next){
+                  if(breaker_matches_next){ // IF correct breaker is clicked
+                    inc_state(network_)
+                  }
+                })
             });
 
             components.breakers[id] = b
@@ -321,6 +325,7 @@
         let gen = components.generators[componentID]
         let tx = components.transformers[componentID]
         let offset = dataview_.offset
+        let labels = dataview_.labels
         let colour = "#d6ba00"
         let observer = undefined
 
@@ -338,6 +343,7 @@
             observer: observer,
             text_object: text_object,
             offset: offset,
+            labels: labels,
             colour: colour
           }
         })

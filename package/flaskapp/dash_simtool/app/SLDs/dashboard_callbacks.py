@@ -1,3 +1,4 @@
+import base64
 import copy
 from datetime import datetime
 
@@ -5,6 +6,8 @@ import dash
 from dash.dependencies import Output, Input, State
 
 from flask import session
+
+from package import BASE_DIR
 from package.flaskapp import socketio
 from flask_socketio import rooms, join_room
 
@@ -31,7 +34,6 @@ def _add_toggle_sidebar(dash_app):
 
         [Input("toggle_button", "n_clicks")],
         [
-            State("side_click", "data"),
         ]
     )
     def toggle_sidebar(n, nclick):
@@ -125,18 +127,23 @@ def _add_sim_progress_buttons(dash_app):
 
         if triggered_object == 'next_button':  # increment sim_step
             sim_status += 1
-            socketio.emit('redraw', {'sim_step': sim_status}, room=session['room'])
+            # socketio.emit('redraw', {'sim_step': sim_status}, room=session['room'])
+            socketio.emit('redraw', {'sim_step': sim_status}, broadcast=True)
 
         elif triggered_object == 'back_button':  # decrement sim_step
             sim_status -= 1 if sim_status > cf.start_sim_step else 0
-            socketio.emit('redraw', {'sim_step': sim_status}, room=session['room'])
+            # socketio.emit('redraw', {'sim_step': sim_status}, room=session['room'])
+            socketio.emit('redraw', {'sim_step': sim_status}, broadcast=True)
 
         elif triggered_object == 'debug_button':
-            socketio.emit('list_rooms', room=session['room'])
+            pass
+            # socketio.emit('list_rooms', room=session['room'])
+            # socketio.emit('list_rooms', room=session['room'])
 
         elif triggered_object == 'reset_sim_button':  # reset sim_step
             sim_status = cf.start_sim_step
-            socketio.emit('redraw', {'sim_step': cf.start_sim_step}, room=session['room'])
+            # socketio.emit('redraw', {'sim_step': cf.start_sim_step}, room=session['room'])
+            socketio.emit('redraw', {'sim_step': cf.start_sim_step}, broadcast=True)
 
         else:
             sim_status = session['sim_step'] if 'sim_step' in session else cf.start_sim_step # initial simulation status
@@ -150,11 +157,33 @@ def _add_sim_progress_buttons(dash_app):
 
 def _add_sidebar_buttons(dash_app):
     dash_app = _add_sim_progress_buttons(dash_app)
-
     return dash_app
 
+def _add_legend_button(dash_app):
+    @dash_app.callback(
+        [
+            Output("legend", "style"),
+        ],
+
+        [Input("legend_button", "n_clicks")],
+        [
+
+        ]
+    )
+    def toggle_legend(n):
+        if(n!=None):
+            if(n%2 == 1):
+                return [styling.LEGEND]
+            else:
+                return [styling.LEGEND_HIDDEN]
+        else:
+            return [styling.LEGEND_HIDDEN]
+
+    return dash_app
 
 def init_callbacks(dash_app):
     dash_app = _add_network_redraw(dash_app)
     dash_app = _add_sidebar_buttons(dash_app)
+    dash_app = _add_legend_button(dash_app)
+
     return dash_app
