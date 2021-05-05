@@ -260,7 +260,6 @@ function draw_breaker(dict_line, breaker){
 //BREAKERS GET DRAWN AFTER LINES
 //THEN the lines colours are modified
 //console log updates so it's not what the colour saw at the time, that's why there wrong
-
 //Hence, something is wrong with the breakers state being set. I don't see any thing that handles that...
 
   var bVertical = false;
@@ -290,10 +289,6 @@ function draw_breaker(dict_line, breaker){
 
   colour = dict_line.o_line.attr().stroke
 //  console.log(breaker)
-  if(breaker.lineID == "CHAP3-_STCR3-_1#0"){
-    console.log( dict_line.o_line.attr().stroke)
-  console.log(colour)
-  console.log(dict_line.o_line)}
 
   if (state === 'open'){
     rect1 = draw.rect(size, size).center(center[0], center[1]).fill(palette["background-color"]).stroke(colour).stroke({width: 1})
