@@ -208,13 +208,11 @@
     var bNodes = false
     for (let id_load in dict_components.loads){
         let load = dict_components.loads[id_load]
-//        load = style_line(load)
         draw_line(load,id_load,"load")
 
         let id = id_load
 
         let line_object = load.graphic[0]
-        console.log(line_object)
         //todo load needs to take colour of line through dict_style
         draw_load(load,1,true)
 
@@ -223,6 +221,11 @@
             UIElement: line_object,
             id : id,
         }
+
+        l.setEnergised = function(){
+              draw_load(load,1,true)
+        }
+
         //put same object pointer in multiple locations. if something goes wrong with updating deletion/ids, it'll happen here
         components.lines[id_load] = l
 //        components.loads[id_load] = l

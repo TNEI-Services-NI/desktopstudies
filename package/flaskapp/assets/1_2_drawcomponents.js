@@ -616,7 +616,6 @@ if (flipped === false){
   delta3X = deltaCenterX-0.866*deltaLength
   delta3Y = deltaCenterY-0.5*deltaLength
 }
-console.log(deltaCenterX)
 poly1 = draw.polygon(String(delta1X) + "," + String(delta1Y) + " " +
 String(delta2X) + "," + String(delta2Y) + " " +
 String(delta3X) + "," + String(delta3Y) + " " +
@@ -625,8 +624,8 @@ String(delta1X) + "," + String(delta1Y))
 //poly1 = poly1.stroke(dict_line.attr().stroke)
 //                                        .fill(dict_line.attr().stroke)
 //                                        .stroke({ width: 1})
-poly1.stroke({color: "red", width: 1, linecap: 'white' })
-poly1.fill({color: "red", width: 1, linecap: 'white' })
+poly1.stroke(dict_line.o_line.attr().stroke)
+poly1.fill(dict_line.o_line.attr().stroke)
 
 if (bHorizontal){
   poly1.rotate(90)
@@ -784,6 +783,7 @@ function add_static_text(list_text, x=100, y=100, colour="#d3d3d3", callback){
 }
 
 
+
 function draw_SGT(dict_line,callback){
     var rad = 18 * Math.min(x_scaling,y_scaling)
     var overlapFactor = 0.25
@@ -840,10 +840,7 @@ function draw_SGT(dict_line,callback){
 //types = "busbar","line","load","diagram"
 function draw_line(line,id_line, type="busbar"){
         bNodes = false
-            console.log(type)
-
         if(type == "busbar"){
-            console.log("styling busbar")
             line = style_busbar(line)
         }
         else if(type == "diagram"){
@@ -863,7 +860,6 @@ function draw_line(line,id_line, type="busbar"){
         if (bNodes){
           draw_nodes(line, line.o_line)
         }
-
 
         line.callback(line.o_line)
 

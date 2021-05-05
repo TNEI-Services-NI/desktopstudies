@@ -192,6 +192,9 @@ networks_undrawn["chapelcross33kv"] = {
         "STCR3-": StraightLine([25,370],"right",90),
         "EWHC3-": StraightLine([45,805],"right",85),
         "MIBI5-": StraightLine([260,730],"right",85,"11kV"),
+        "MIBI3-": StraightLine([65,575],"right",175),
+        "ANAN5-1": StraightLine([310,315],"right",52, "11kV"),
+        "ANAN5-2": StraightLine([310+52,315],"right",53, "11kV"),
        "LAHO5-1": StraightLine([365,890],"right",55,"11kV"),
         "LAHO5-2": StraightLine([365+55,890],"right",55,"11kV"),
         "KIBA5-":StraightLine([360,585],"right",85,"11kV"),
@@ -206,7 +209,15 @@ networks_undrawn["chapelcross33kv"] = {
         "NEWC5-": StraightLine([695,680],"right",85, "11kV"),
      },
     loads:{
-        0: StraightLine([405,315],"down",20)
+        "ANANT2_CHAP3-_1#4": StraightLine([405,315],"down",20,"11kV"),
+        "LOBI3B_LOBIT2_1#5": StraightLine([450,490],"down",20,"11kV"),
+        2: StraightLine([440,585],"down",20,"11kV"),
+        3: StraightLine([450,675],"down",20,"11kV"),
+        4: StraightLine([465,890],"down",20,"11kV"),
+        6: StraightLine([335,730],"down",20,"11kV"),
+        7: StraightLine([770,680],"down",20,"11kV"),
+        8: StraightLine([800,495],"down",20,"11kV"),
+
         },
     diagram:{},
     breakers:{
