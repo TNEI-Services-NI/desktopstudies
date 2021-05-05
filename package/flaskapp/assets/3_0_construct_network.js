@@ -6,6 +6,9 @@
     components = {
                     breakers: [],
                     lines: [],
+                    lines: [],
+                    loads:[],
+                    busbars:[],
                     labels:[],
                     generators: [],
                     isolators:[],
@@ -68,9 +71,22 @@
      }
   }
 
+  function scale_loads(networks_undrawn){
+  for(let id_dict in networks_undrawn){
+    let temp_dict_components = networks_undrawn[id_dict]
+    for (let idx_line in temp_dict_components.loads){
+        let temp_dict = temp_dict_components.loads[idx_line]
+        temp_dict.x1 = temp_dict.x1 * x_scaling
+        temp_dict.x2 = temp_dict.x2 * x_scaling
+        temp_dict.y1 = temp_dict.y1 * y_scaling
+        temp_dict.y2 = temp_dict.y2 * y_scaling
+    }
+  }
+  }
+
   function style_line(line){
-    line.dict_styling = {fill: { width: line_palette_style["width"] * Math.min(x_scaling,y_scaling)},
-                         stroke: { width: line_palette_style["width"] *  Math.min(x_scaling,y_scaling)}}
+    line.dict_styling = {fill: { width: line_palette_style["width"]/1.5 * Math.min(x_scaling,y_scaling)},
+                         stroke: { width: line_palette_style["width"]/1.5 *  Math.min(x_scaling,y_scaling)}}
     if (line.dash){
               line.dict_styling = {fill: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)},
                          stroke: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)}}
@@ -160,10 +176,9 @@
 
   function construct_lines(dict_components){
     var bNodes = false
-
     for (let id_line in dict_components.lines){
         let line = dict_components.lines[id_line]
-        draw_line(line,id_line)
+        draw_line(line,id_line,"line")
 
         let id = id_line
 
@@ -176,6 +191,61 @@
         component_modal(l)
     }
   }
+
+    function construct_loads(dict_components){
+    var bNodes = false
+    for (let id_load in dict_components.loads){
+        let load = dict_components.loads[id_load]
+//        load = style_line(load)
+        draw_line(load,id_load,"load")
+
+        let id = id_load
+
+        let line_object = load.graphic[0]
+        console.log(line_object)
+        //todo load needs to take colour of line through dict_style
+        draw_load(load,1,true)
+
+        let l = {
+            info: load,
+            UIElement: line_object,
+            id : id,
+        }
+        //put same object pointer in multiple locations. if something goes wrong with updating deletion/ids, it'll happen here
+        components.lines[id_load] = l
+//        components.loads[id_load] = l
+
+        component_modal(l)
+    }
+  }
+
+  function construct_busbars(dict_components){
+    console.log("making busbars")
+    var bNodes = false
+    console.log(dict_components)
+    for (let id_busbar in dict_components.busbars){
+        console.log(id_busbar)
+
+        let busbar = dict_components.busbars[id_busbar]
+//        load = style_line(load)
+        draw_line(busbar,id_busbar,"busbar")
+
+        let id = id_busbar
+
+        line_object = busbar.graphic[0]
+
+        let l = {
+            info: busbar,
+            UIElement: busbar.graphic[0],
+            id : id,
+        }
+        components.lines[id_busbar] = l
+        components.busbars[id_busbar] = l
+
+        component_modal(l)
+    }
+  }
+
   function destroy_lines(){
 
   }
@@ -524,14 +594,4 @@
         components.lines[id] = s
         component_modal(s)
         }
-  }
-
-  function construct_loads(dict_components){
-    var bNodes = false
-
-    for (let id_line in dict_components.loads){
-        let line = dict_components.loads[id_line]
-        draw_line(line,id_line)
-    }
-
   }

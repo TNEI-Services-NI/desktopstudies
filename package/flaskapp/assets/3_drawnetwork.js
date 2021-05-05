@@ -237,6 +237,10 @@
 
     construct_lines(dict_components);
 
+    construct_busbars(dict_components);
+
+    construct_loads(dict_components);
+
     construct_breakers(dict_components, network_, step);
 
     construct_labels(dict_components);
@@ -372,6 +376,7 @@ console.log("resizing")
       scale_lines(network_scaled);
       scale_labels(network_scaled);
       scale_dataviews(network_scaled);
+      scale_loads(network_scaled);
       scale_availablePower(network_scaled);
   }
 

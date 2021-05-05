@@ -185,8 +185,28 @@ networks_undrawn["chapelcross33kv"] = {
         // "785 DASH": StraightLine([720,835],"right",45,dash=true),
 
      },
+    busbars:{
+        "378": StraightLine([875,40],"right",130),
+        "CHAP3A1": StraightLine([25,175], "right",496),
+        "CHAP3A2": StraightLine([25+496,175], "right",399),
+        "STCR3-": StraightLine([25,370],"right",90),
+        "EWHC3-": StraightLine([45,805],"right",85),
+        "MIBI5-": StraightLine([260,730],"right",85,"11kV"),
+       "LAHO5-1": StraightLine([365,890],"right",55,"11kV"),
+        "LAHO5-2": StraightLine([365+55,890],"right",55,"11kV"),
+        "KIBA5-":StraightLine([360,585],"right",85,"11kV"),
+        "MOFT5-1": StraightLine([366,675],"right",45,"11kV"),
+        "MOFT5-2": StraightLine([366+45,675],"right",45,"11kV"),
+        "GRNA5-1": StraightLine([710,496],"right",50,"11kV"),
+        "GRNA5-2": StraightLine([760,496],"right",50,"11kV"),
+
+        "LOBI5-1": StraightLine([360,490],"right",50, "11kV"),
+        "LOBI5-2": StraightLine([410,490],"right",50, "11kV"),
+        "MINS3-": StraightLine([870,610],"right",105),
+        "NEWC5-": StraightLine([695,680],"right",85, "11kV"),
+     },
     loads:{
-        0: StraightLine([405,310],"down",20)
+        0: StraightLine([405,315],"down",20)
         },
     busbars:{},
     diagram:{},

@@ -27,22 +27,22 @@ let network = undefined
 let dict_components = undefined
 let steps = []
 
-let components = {
-                    breakers: [],
-                    lines: [],
-                    loads:[],
-                    busbars:[],
-                    diagram:[],
-                    labels:[],
-                    generators: [],
-                    isolators:[],
-                    text:[],
-                    dataviews:[],
-                    transformers:[],
-                    SGTs:[],
-                    availablePowers:[],
-                    generationInfo:[]
-                };
+//let components = {
+//                    breakers: [],
+//                    lines: [],
+//                    loads:[],
+//                    busbars:[],
+//                    diagram:[],
+//                    labels:[],
+//                    generators: [],
+//                    isolators:[],
+//                    text:[],
+//                    dataviews:[],
+//                    transformers:[],
+//                    SGTs:[],
+//                    availablePowers:[],
+//                    generationInfo:[]
+//                };
 
 const networks_undrawn = {
     "chapelcross33kv": undefined,
