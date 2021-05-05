@@ -111,4 +111,7 @@ def connection(data):
     """This will emit a message to all users when this is called.
     This would be useful for simulation synchronisation"""
     session['sim_step'] = data['sim_step']
+    broadcast = data['broadcast'] if 'broadcast' in data else False
+    if broadcast:
+        socketio.emit('redraw', {'sim_step': data['sim_step']})
 
