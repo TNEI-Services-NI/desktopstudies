@@ -182,6 +182,7 @@
       text1.text(function(add){
         add.tspan("Scaled: (" + String(Math.round(loc.x)) + ", " + String(Math.round(loc.y)) + ")").newLine();
         add.tspan("Actual: (" + String(Math.round(loc.x/x_scaling)) + ", " + String(Math.round(loc.y/y_scaling)) + ")").newLine();
+        add.tspan("Stage: " + current_step).newLine();
       });
     },false);
   }
