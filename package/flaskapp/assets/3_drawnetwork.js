@@ -281,6 +281,7 @@
 
   function master_draw(){
     prepare_canvas(x_max, y_max);
+    console.log(networks_undrawn)
     dict_components = networks_undrawn[network]
     draw_network(dict_components, network, current_step);
     fetch_sim_data(network, current_step, option, scenario, update_sim_data
@@ -374,6 +375,7 @@ console.log("resizing")
       font_size = 14 *  Math.min(x_scaling, y_scaling)
       network_scaled = networks_undrawn
       scale_lines(network_scaled);
+      scale_busbars(network_scaled)
       scale_labels(network_scaled);
       scale_dataviews(network_scaled);
       scale_loads(network_scaled);
