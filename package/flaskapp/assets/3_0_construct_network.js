@@ -33,6 +33,18 @@
     }
   }
   }
+  function scale_busbars(networks_undrawn){
+  for(let id_dict in networks_undrawn){
+    let temp_dict_components = networks_undrawn[id_dict]
+    for (let idx_line in temp_dict_components.busbars){
+        let temp_dict = temp_dict_components.busbars[idx_line]
+        temp_dict.x1 = temp_dict.x1 * x_scaling
+        temp_dict.x2 = temp_dict.x2 * x_scaling
+        temp_dict.y1 = temp_dict.y1 * y_scaling
+        temp_dict.y2 = temp_dict.y2 * y_scaling
+    }
+  }
+  }
 
   function scale_labels(networks_undrawn){
    for(let id_dict in networks_undrawn) {

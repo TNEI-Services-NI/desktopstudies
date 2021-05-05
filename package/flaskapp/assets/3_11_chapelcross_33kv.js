@@ -208,7 +208,6 @@ networks_undrawn["chapelcross33kv"] = {
     loads:{
         0: StraightLine([405,315],"down",20)
         },
-    busbars:{},
     diagram:{},
     breakers:{
 //        "698 16": new Breaker("CHAP3A1#0",1),
