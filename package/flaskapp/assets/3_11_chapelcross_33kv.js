@@ -185,6 +185,11 @@ networks_undrawn["chapelcross33kv"] = {
         // "785 DASH": StraightLine([720,835],"right",45,dash=true),
 
      },
+    loads:{
+        0: StraightLine([405,310],"down",20)
+        },
+    busbars:{},
+    diagram:{},
     breakers:{
 //        "698 16": new Breaker("CHAP3A1#0",1),
         "698 15": new Breaker("CHAP3-_STCR3-_1#0",0),

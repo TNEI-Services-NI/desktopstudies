@@ -256,12 +256,6 @@ callback(group)
  */
 function draw_breaker(dict_line, breaker){
 
-//what I think is happenning
-//BREAKERS GET DRAWN AFTER LINES
-//THEN the lines colours are modified
-//console log updates so it's not what the colour saw at the time, that's why there wrong
-//Hence, something is wrong with the breakers state being set. I don't see any thing that handles that...
-
   var bVertical = false;
   var bHorizontal = false;
   let position = breaker.pos
@@ -291,7 +285,7 @@ function draw_breaker(dict_line, breaker){
 //  console.log(breaker)
 
   if (state === 'open'){
-    rect1 = draw.rect(size, size).center(center[0], center[1]).fill(palette["background-color"]).stroke(colour).stroke({width: 1})
+    rect1 = draw.rect(size, size).center(center[0], center[1]).fill(palette["background-color"]).stroke("#d3d3d3").stroke({width: 1})
   }
   else if (state === 'closed'){
     rect1 = draw.rect(size, size).center(center[0], center[1]).fill(colour).stroke(colour).stroke({width: 1})
@@ -837,6 +831,7 @@ function draw_SGT(dict_line,callback){
 
 }
 
+//types = "busbar","line","load","diagram"
 function draw_line(line,id_line, type="busbar"){
         bNodes = false
 
@@ -856,24 +851,16 @@ function draw_line(line,id_line, type="busbar"){
         line.o_line = draw.line(line.x1 , line.y1,
                       line.x2, line.y2).stroke(line.dict_styling.stroke)
 
-
-        line.callback(line.o_line)
-
         line.line_idx = id_line
 
         if (bNodes){
           draw_nodes(line, line.o_line)
         }
-        let l = {
-            info: line,
-            UIElement: line.graphic[0],
-            id : id_line,
-        }
+//        if(type != "diagram"){
+//            component_modal(l)
+//        }
+
+        line.callback(line.o_line)
 
         dict_components.lines[id_line] = line
-        components.lines[id_line] = l
-
-        if(type != "diagram"){
-            component_modal(l)
-        }
 }

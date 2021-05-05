@@ -30,6 +30,9 @@ let steps = []
 let components = {
                     breakers: [],
                     lines: [],
+                    loads:[],
+                    busbars:[],
+                    diagram:[],
                     labels:[],
                     generators: [],
                     isolators:[],

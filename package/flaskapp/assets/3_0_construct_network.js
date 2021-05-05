@@ -141,7 +141,6 @@
   }
 
 
-
   function construct_coord_display(){
     const text1 = draw.text("coordinate dislay")
       .font({size: 15, family: 'Helvetica'}).fill({color: "white"});
@@ -166,9 +165,17 @@
         let line = dict_components.lines[id_line]
         draw_line(line,id_line)
 
+        let id = id_line
+
+        let l = {
+            info: line,
+            UIElement: line.graphic[0],
+            id : id,
+        }
+        components.lines[id_line] = l
+        component_modal(l)
     }
   }
-
   function destroy_lines(){
 
   }
@@ -209,7 +216,7 @@
                     rect.stroke({ color: 'white' })
                 } else if (closed == true){
                     rect.fill({ color: line.graphic[0].attr().stroke })
-                    rect.stroke({ color: "white" })
+                    rect.stroke({ color: line.graphic[0].attr().stroke })
               }
               this.closed = closed
             }
@@ -369,22 +376,6 @@
         })
     }
   }
-//          callback = function(){
-//              for(text in textObjects){
-//                textObjects[text].remove()
-//              }
-//              offset = 0
-//              for(i in observingComponent.data){
-//                  static_text = text_data["Amps"]
-//                  text = observingComponent.data[i] + " " + Abbreviations[i]
-//                  pos = static_text.offset
-//                  holder = []
-//                  add_static_text([text],pos[0]*x_scaling,(pos[1]+offset)*y_scaling,"yellow",function(object){holder[0] = object})
-//                  textObjects[i] = holder[0]
-////                  group.add(holder[0])
-//                  offset+=15
-//              }
-//          }
 
   function redraw_dataview(id_dv, text_list){
     let dataview_ = components.dataviews[id_dv];
@@ -427,8 +418,8 @@
           draw_line(StraightLine(topRightPoint,"up",height*1.07),componentID+"diagram"+i++,"diagram")
           draw_line(StraightLine(topRightPoint,"left",line_width),componentID+"diagram"+i++,"diagram")
 
-//function StraightLine(origin, direction, length, voltage="33kV", dash = false, colour = ""){
           let id = power_id
+          //todo potentially add diagram lines to dictionary
           let pa = {info:availablePower, UIElement: availablePower.graphic[0], id : id}
           pa.setAvailablePower = function(POWER){
             this.UIElement.remove()
@@ -533,4 +524,14 @@
         components.lines[id] = s
         component_modal(s)
         }
+  }
+
+  function construct_loads(dict_components){
+    var bNodes = false
+
+    for (let id_line in dict_components.loads){
+        let line = dict_components.loads[id_line]
+        draw_line(line,id_line)
+    }
+
   }

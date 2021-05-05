@@ -230,6 +230,7 @@
   **/
   function draw_network(dict_components, network_, step){
 
+    coord_display = true
     if(coord_display){
       construct_coord_display();
     }
@@ -257,7 +258,6 @@
     construct_available_power(dict_components)
 
     construct_generation_info(dict_components)
-
 
   }
 
