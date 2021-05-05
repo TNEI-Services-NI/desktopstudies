@@ -290,19 +290,21 @@
   // Create an SVGPoint for future math
   var pt = svg.createSVGPoint();
 
-//  update_scaling();
-//  window.addEventListener('resize',update_scaling());
-
   var socket = io();
-//  let current_step = -1
-//  let steps = []
 
   dict_components = undefined
 
   var room = undefined
+  var username = undefined
+  var sid = undefined
 
   socket.on('check_join_draw', function(data_join_draw) {
-    socket.emit('list_rooms', data_join_draw, function (data_list_rooms){});
+    if(username === undefined){
+      username = data_join_draw['username']
+    }
+    if(username === data_join_draw['username']){
+      socket.emit('check_join_draw', data_join_draw, function (data_check_rooms){});
+    }
   });
 
   socket.on('join_draw', function (data_join_draw){
@@ -330,22 +332,11 @@
   });
 
 
-  socket.on('shout_client', function(data){
-    alert("Client: ahhhhh");
-  });
-
-  socket.on('shout_server', function (data){
-    socket.emit('shout_server', data);
-  })
-
-
   // Get point in global SVG space
   function cursorPoint(evt){
     pt.x = evt.clientX; pt.y = evt.clientY;
     return pt.matrixTransform(svg.getScreenCTM().inverse());
   }
-
-
 
 function update_scaling(){
 console.log("resizing")
