@@ -17,4 +17,4 @@ entity_network_map = {
     'Observer': 'chapelcross33kv',
 }
 
-demo = True
+demo = False

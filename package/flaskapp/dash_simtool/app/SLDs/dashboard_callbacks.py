@@ -3,11 +3,10 @@ from dash.dependencies import Output, Input
 from flask import session
 
 # INT IMPORTS
-# from package.flaskapp.dash_simtool.app.dataprocessing import format_dfs, calc_success
 import package.flaskapp.dash_simtool._config as cf
+import package.flaskapp.dash_simtool.app.dashboard_callbacks as shared_clbks
 import package.flaskapp.dash_simtool.app.dashboard_styling as styling
 from package.flaskapp import socketio
-from flask_socketio import emit
 
 
 def _add_toggle_sidebar(dash_app):
@@ -150,31 +149,10 @@ def _add_sidebar_buttons(dash_app):
     dash_app = _add_sim_progress_buttons(dash_app)
     return dash_app
 
-def _add_legend_button(dash_app):
-    @dash_app.callback(
-        [
-            Output("legend", "style"),
-        ],
-
-        [Input("legend_button", "n_clicks")],
-        [
-
-        ]
-    )
-    def toggle_legend(n):
-        if(n!=None):
-            if(n%2 == 1):
-                return [styling.LEGEND]
-            else:
-                return [styling.LEGEND_HIDDEN]
-        else:
-            return [styling.LEGEND_HIDDEN]
-
-    return dash_app
 
 def init_callbacks(dash_app):
     dash_app = _add_network_redraw(dash_app)
     dash_app = _add_sidebar_buttons(dash_app)
-    dash_app = _add_legend_button(dash_app)
+    dash_app = shared_clbks.add_legend_button(dash_app)
 
     return dash_app
