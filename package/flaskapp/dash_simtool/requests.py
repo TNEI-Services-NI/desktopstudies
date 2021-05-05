@@ -31,12 +31,13 @@ def init_breakers():
 @login_required
 def get_restoration_step():
     data = request.form
+    case_network = data["case_network"]
     network = data["network"]
     stage = data["stage"]
     scenario = data["scenario"]
     option = data["option"]
 
-    stateDictionary = simtool_data.read_restoration_step(network, option, scenario, stage)
+    stateDictionary = simtool_data.read_restoration_step(case_network, network, option, scenario, stage)
     return jsonify(stateDictionary)
 
 

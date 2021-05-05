@@ -159,18 +159,30 @@
     for(let idl in components.lines){
       let line_instance = components.lines[idl]
       let line_id_LF = idl.split("#")[0]
-      if(((step_data_["lines_loading"][line_id_LF] !== 0)&&(step_data_["lines_loading"][line_id_LF] !== undefined))||
+      if(((step_data_["lines_loading"][line_id_LF] !== 0)&&(step_data_["lines_loading"][line_id_LF] > 997))||
+        ((step_data_["lines_active_power"][line_id_LF] !== 0)&&(step_data_["lines_active_power"][line_id_LF] > 997))||
+        ((step_data_["lines_reactive_power"][line_id_LF] !== 0)&&(step_data_["lines_reactive_power"][line_id_LF] > 997))
+        ||((step_data_["busbars_voltage"][line_id_LF] !== 0)&&(step_data_["busbars_voltage"][line_id_LF] > 997))
+        ||((step_data_["transformers_loading"][line_id_LF] !== 0)&&(step_data_["transformers_loading"][line_id_LF] > 997))
+      ){
+
+        line_instance.info.o_line.attr({stroke: "orange"});
+        line_instance.UIElement.attr({stroke: "orange"});
+
+      } else if(((step_data_["lines_loading"][line_id_LF] !== 0)&&(step_data_["lines_loading"][line_id_LF] !== undefined))||
         ((step_data_["lines_active_power"][line_id_LF] !== 0)&&(step_data_["lines_active_power"][line_id_LF] !== undefined))||
-        ((step_data_["lines_reactive_power"][line_id_LF] !== 0)&&(step_data_["lines_reactive_power"][line_id_LF] !== undefined))||
-        ((step_data_["busbars_voltage"][line_id_LF] !== 0)&&(step_data_["busbars_voltage"][line_id_LF] !== undefined))||
-        ((step_data_["transformers_loading"][line_id_LF] !== 0)&&(step_data_["transformers_loading"][line_id_LF] !== undefined))){
+        ((step_data_["lines_reactive_power"][line_id_LF] !== 0)&&(step_data_["lines_reactive_power"][line_id_LF] !== undefined))
+        ||((step_data_["busbars_voltage"][line_id_LF] !== 0)&&(step_data_["busbars_voltage"][line_id_LF] !== undefined))
+        ||((step_data_["transformers_loading"][line_id_LF] !== 0)&&(step_data_["transformers_loading"][line_id_LF] !== undefined))
+      ){
 
         line_instance.info.o_line.attr({stroke: line_instance.info.dict_styling.stroke.live_color});
         line_instance.UIElement.attr({stroke: line_instance.info.dict_styling.stroke.live_color});
 
       } else if (((step_data_["lines_loading"][line_id_LF] === undefined))&&
-        ((step_data_["busbars_voltage"][line_id_LF] === undefined))&&
-        ((step_data_["transformers_loading"][line_id_LF] === undefined))){
+                  ((step_data_["busbars_voltage"][line_id_LF] === undefined))&&
+                  ((step_data_["transformers_loading"][line_id_LF] === undefined))
+      ){
 
         if(highlight_undefined){
           line_instance.info.o_line.attr({stroke: "red"});
@@ -216,10 +228,10 @@
     }
   }
 
-  function inc_state(network_){
+  function inc_state(case_network_){
     current_step += 1;
     //alert(current_step)
-    fetch_sim_data(network_, current_step, option, scenario, update_sim_data);
+    fetch_sim_data(case_network_, network, current_step, option, scenario, update_sim_data);
     socket.emit('sync_sim_step', {'sim_step': current_step, 'broadcast': true});
   }
 
@@ -285,7 +297,7 @@
     console.log(networks_undrawn)
     dict_components = networks_undrawn[network]
     draw_network(dict_components, network, current_step);
-    fetch_sim_data(network, current_step, option, scenario, update_sim_data
+    fetch_sim_data(case_network, network, current_step, option, scenario, update_sim_data
     );
   }
 

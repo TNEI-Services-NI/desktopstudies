@@ -114,7 +114,7 @@ def _add_sim_progress_buttons(dash_app):
         redraw_data = {'sim_step': sim_status,
                               'username': session.get('username')}
 
-        if 'room' not in session['room']:
+        if ('room' not in session) or ('room' not in session['room']):
             session['room'] = 'room_{}'.format(session.get('username'))
 
         if triggered_object == 'next_button':  # increment sim_step

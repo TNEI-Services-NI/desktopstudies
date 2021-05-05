@@ -2,14 +2,13 @@
 //scale of 1000 x 1000, readjust with math...
 networks_undrawn["chapelcross33kv"] = {
     lines:{
-        "378": StraightLine([875,40],"right",130),
-        "into 378 4": StraightLine([885,155],"right",75),
-        "into 378 3": StraightLine([960,155],"down",90),
-        "into 378 2": StraightLine([900,250],"right",60),
-        "into 378 1": StraightLine([960,155],"down",95),
+        "CHAP3-_SOLWAY#0": StraightLine([875,40],"right",130),
+        "CHAP3-_SOLWAY#4": StraightLine([885,155],"right",75),
+        "CHAP3-_SOLWAY#2": StraightLine([900,250],"right",60),
+        "CHAP3-_SOLWAY#1": StraightLine([960,155],"down",95),
 
-        "378 11": StraightLine([885,40],"down",115),
-        "378 12": StraightLine([950, 40],"down",70),
+        "CHAP3-_SOLWAY#5": StraightLine([885,40],"down",115),
+        "CHAP3-_SOLWAY#6": StraightLine([950, 40],"down",70),
 
         "CHAP3A1": StraightLine([25,175], "right",496),
         "CHAP3A2": StraightLine([25+496,175], "right",399),
@@ -51,7 +50,7 @@ networks_undrawn["chapelcross33kv"] = {
         "ANANT2_CHAP3-_1#0": StraightLine([700,175],"down",105),
         "CHAP3-_MINS3-_1#0": StraightLine([780,175],"down",110),
 //        "698 25": StraightLine([840,175],"down",60),
-        "698 26": StraightLine([900,175],"down",75),
+        "CHAP3-_SOLWAY#3": StraightLine([900,175],"down",75),
         "LOBI3A": StraightLine([230,400],"right",175),
         "LOBI3B": StraightLine([230+175,400],"right",175),
 
@@ -186,7 +185,7 @@ networks_undrawn["chapelcross33kv"] = {
 
      },
     busbars:{
-        "378": StraightLine([875,40],"right",130),
+        "SOLWAY": StraightLine([875,40],"right",130),
         "CHAP3A1": StraightLine([25,175], "right",496),
         "CHAP3A2": StraightLine([25+496,175], "right",399),
         "STCR3-": StraightLine([25,370],"right",90),
@@ -225,9 +224,9 @@ networks_undrawn["chapelcross33kv"] = {
         "698 23": new Breaker("ANANT2_CHAP3-_1#0",0.19),
         "698 24": new Breaker("CHAP3-_MINS3-_1#0",0.19),
 //        "698 25": new Breaker("698 25",0.31),
-        "698 26": new Breaker("698 26",0.26),
-        "678 11": new Breaker("378 11",0.18),
-        "678 12": new Breaker("378 12",0.3),
+        "698 26": new Breaker("CHAP3-_SOLWAY#3",0.26),
+        "678 11": new Breaker("CHAP3-_SOLWAY#5",0.18),
+        "678 12": new Breaker("CHAP3-_SOLWAY#6",0.3),
         "GRID 2": new Breaker("CHAP1-_CHAP3-_2#0",0.2),
 
         "694": new Breaker("LOBI3A",1),
@@ -321,7 +320,7 @@ networks_undrawn["chapelcross33kv"] = {
         // CRAIG II WINDFARM 11KV
         // "CRAG0B_1": new Generator("CRAG5B_LAHO5-_1",1),
         "MINS0G_1": new Generator("MINS3-_MINS0G_1#2", 1),
-        5: new Generator("378 12",1),
+        5: new Generator("CHAP3-_SOLWAY#6",1),
         },
     labels:{
     1: new Text("CHAP3A1", ["CHAPELCROSS GSP"], [220,-70]),
@@ -390,8 +389,8 @@ networks_undrawn["chapelcross33kv"] = {
 //    47: new Text("698 25",["CHAPELCROSS"],[0,40]),
 //    48: new Text("698 25",["NO2"],[0,55]),
 
-    49: new Text("378",["SOLWAY BANK 33KV"],[0,-30]),
-    50: new Text("378",["378"],[0,-15]),
+    49: new Text("CHAP3-_SOLWAY#0",["SOLWAY BANK 33KV"],[0,-30]),
+    50: new Text("CHAP3-_SOLWAY#0",["378"],[0,-15]),
 
     },
     dataViews:{

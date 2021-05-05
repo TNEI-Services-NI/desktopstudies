@@ -37,15 +37,21 @@ def read_breaker_states(network: str, option: str):
     return df_breakerstates
 
 
-def read_restoration_step(network: str, option: str, scenario: str, stage: int):
-    dir_opt_scen = '/'.join([dir_restoration_steps, 'Opt' + option, network])
+def read_restoration_step(case_network: str, network: str, option: str, scenario: str, stage: int):
+    dir_opt_scen = '/'.join([dir_restoration_steps, 'Opt' + option, case_network])
     dict_filenames = _fetch_files(dir_opt_scen)
     dict_data = {k: pd.read_csv('/'.join([dir_opt_scen, v]),
                                  dtype={'Name': str})
                         .set_index("Name")
-                        .loc[:, 'Stage {}'.format(stage)]
-                        .to_json()
                  for k, v in dict_filenames.items()}
+
+    for k, v in dict_data.items():
+        if 'network' in v.columns:
+            dict_data[k] = v.loc[v['network'] == network, :]
+
+    dict_data = {k: v.loc[:, 'Stage {}'.format(stage)].to_json()
+                 for k, v in dict_data.items()}
+
     # df_restoration = df_restoration.set_index("component")
     # df_restoration = df_restoration.loc[:, stage]
     return dict_data
@@ -60,10 +66,10 @@ def read_active_network():
 
 def _filter_format_data(comp_data_):
     comp_data_ = comp_data_.copy()
-    comp_data_ = comp_data_.iloc[:, 4:]
+    comp_data_ = comp_data_.iloc[:, 3:]
     comp_data_.columns = comp_data_.iloc[6, :]
     comp_data_ = comp_data_.iloc[7:, :]
-    comp_data_ = comp_data_.loc[~comp_data_.iloc[:, 0].isna(), :]
+    comp_data_ = comp_data_.loc[~comp_data_.loc[:, 'Name'].isna(), :]
 
     comp_data_columns = list(filter(lambda x: type(x) == str, comp_data_.columns))
     comp_data_ = comp_data_.loc[:, comp_data_columns]
@@ -89,7 +95,8 @@ def get_data_cols(comp_data_):
 
 def read_LF_file(network="chapelcross", voltage="33kv", option="Opt5"):
     raw_data_files = _fetch_files(dir_raw_simtool_data, file_type='.xlsx')
-    filename = raw_data_files[network + voltage + option]
+    # filename = raw_data_files[network + voltage + option]
+    filename = raw_data_files[network + option]
 
     dict_data = {'generators': {}, 'busbars': {}, 'lines': {}, 'transformers': {}}
 

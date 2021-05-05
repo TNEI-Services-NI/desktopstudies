@@ -23,6 +23,7 @@ let modal_timeout = 5
 let dataview_round = 3
 
 let background = undefined
+let case_network = "chapelcross"
 let network = undefined
 let dict_components = undefined
 let steps = []

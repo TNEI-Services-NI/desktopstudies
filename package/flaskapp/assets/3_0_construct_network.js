@@ -310,7 +310,7 @@
                 // post_breakers(components.breakers)
                 check_breakers(network_, option, components.breakers, step, function(breaker_matches_next){
                   if(breaker_matches_next){ // IF correct breaker is clicked
-                    inc_state(network_)
+                    inc_state(case_network)
                   }
                 })
             });

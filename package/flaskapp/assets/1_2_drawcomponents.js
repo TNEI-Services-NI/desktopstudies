@@ -14,7 +14,7 @@ var circleWidth = 1
 
 let position = tx.pos
 let type = tx.type
-let coils = [dict_line.voltage,tx.coil2]
+let coils = [tx.coil1, tx.coil2]
 let callback = tx.callback
 let live = tx.live
 
@@ -34,8 +34,8 @@ if (dict_line.y1 === dict_line.y2){
 }
 
 if (bVertical){
-  var fromCenter = [dict_line.x1, rad*(1-overlapFactor)+dict_line.y1+(dict_line.y2-dict_line.y1)*position]
-  var toCenter = [dict_line.x1, -rad*(1-overlapFactor)+dict_line.y1+(dict_line.y2-dict_line.y1)*position]
+  var fromCenter = [dict_line.x1, -rad*(1-overlapFactor)+dict_line.y1+(dict_line.y2-dict_line.y1)*position]
+  var toCenter = [dict_line.x1, rad*(1-overlapFactor)+dict_line.y1+(dict_line.y2-dict_line.y1)*position]
 }
 if (bHorizontal){
   var fromCenter = [-rad*(1-overlapFactor)+dict_line.x1+(dict_line.x2-dict_line.x1)*position, dict_line.y1]
@@ -255,7 +255,6 @@ callback(group)
  * @return {None}
  */
 function draw_breaker(dict_line, breaker){
-
   var bVertical = false;
   var bHorizontal = false;
   let position = breaker.pos
@@ -281,11 +280,14 @@ function draw_breaker(dict_line, breaker){
     live_colour = palette[dict_line.voltage]
   }
 
-  colour = dict_line.o_line.attr().stroke
-//  console.log(breaker)
+  if(live === true){
+    colour = live_colour
+  } else {
+    colour = palette["0V"]
+  }
 
   if (state === 'open'){
-    rect1 = draw.rect(size, size).center(center[0], center[1]).fill(palette["background-color"]).stroke("#d3d3d3").stroke({width: 1})
+    rect1 = draw.rect(size, size).center(center[0], center[1]).fill(palette["background-color"]).stroke(colour).stroke({width: 1})
   }
   else if (state === 'closed'){
     rect1 = draw.rect(size, size).center(center[0], center[1]).fill(colour).stroke(colour).stroke({width: 1})
@@ -582,6 +584,7 @@ var bHorizontal = false;
 var center;
 
 var dict_load = {}
+
 if (dict_line.x1 === dict_line.x2){
   bVertical = true;
 } else if (dict_line.y1 === dict_line.y2){
@@ -593,10 +596,8 @@ if (position === 0){
 } else if (position === 1){
   center = [dict_line.x2, dict_line.y2];
 }
-else{ return}
 
 // DELTA SYMBOL
-console.log(center)
 deltaCenterX = center[0]
 deltaCenterY = center[1]
 deltaLength = rad*0.6
@@ -616,17 +617,12 @@ if (flipped === false){
   delta3X = deltaCenterX-0.866*deltaLength
   delta3Y = deltaCenterY-0.5*deltaLength
 }
-console.log(deltaCenterX)
 poly1 = draw.polygon(String(delta1X) + "," + String(delta1Y) + " " +
 String(delta2X) + "," + String(delta2Y) + " " +
 String(delta3X) + "," + String(delta3Y) + " " +
-String(delta1X) + "," + String(delta1Y))
-
-//poly1 = poly1.stroke(dict_line.attr().stroke)
-//                                        .fill(dict_line.attr().stroke)
-//                                        .stroke({ width: 1})
-poly1.stroke({color: "red", width: 1, linecap: 'white' })
-poly1.fill({color: "red", width: 1, linecap: 'white' })
+String(delta1X) + "," + String(delta1Y)).stroke(dict_line.dict_styling.stroke)
+                                        .fill(dict_line.dict_styling.stroke)
+                                        .stroke({ width: 1})
 
 if (bHorizontal){
   poly1.rotate(90)
@@ -837,16 +833,14 @@ function draw_SGT(dict_line,callback){
 
 }
 
-//types = "busbar","line","load","diagram"
 function draw_line(line,id_line, type="busbar"){
         bNodes = false
-            console.log(type)
 
         if(type == "busbar"){
-            console.log("styling busbar")
-            line = style_busbar(line)
+        line = style_busbar(line)
         }
         else if(type == "diagram"){
+
         line = style_diagram_line(line)
         }
         else{
@@ -858,14 +852,24 @@ function draw_line(line,id_line, type="busbar"){
         line.o_line = draw.line(line.x1 , line.y1,
                       line.x2, line.y2).stroke(line.dict_styling.stroke)
 
+
+        line.callback(line.o_line)
+
         line.line_idx = id_line
 
         if (bNodes){
           draw_nodes(line, line.o_line)
         }
-
-
-        line.callback(line.o_line)
+        let l = {
+            info: line,
+            UIElement: line.graphic[0],
+            id : id_line,
+        }
 
         dict_components.lines[id_line] = line
+        components.lines[id_line] = l
+
+        if(type != "diagram"){
+            component_modal(l)
+        }
 }

@@ -15,6 +15,7 @@ entity_network_map = {
     'TO': 'chapelcross132kv',
     'DER': 'ewehill-gretna_132kv',
     'Observer': 'chapelcross33kv',
+    'admin': 'chapelcross33kv',
 }
 
 demo = False

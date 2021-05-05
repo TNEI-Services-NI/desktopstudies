@@ -146,11 +146,11 @@ function init_breaker(breakerID){
  * @param callbacks
  * @return {None}
  */
-function fetch_sim_data(network_, stage_, option_, scenario_, callbacks){
+function fetch_sim_data(case_network_, network, stage_, option_, scenario_, callbacks){
       $.ajax({
       type: "POST",
       url: "/simtool_bp/get_state/",
-      data: {"stage": stage_, "network": network_, "option": option_, "scenario": scenario_},
+      data: {"stage": stage_, "case_network": case_network_, "network":network,  "option": option_, "scenario": scenario_},
 //      dataType: 'application/json'
       }).done(function( component_values ) {
         for(let component_parameter in component_values){
