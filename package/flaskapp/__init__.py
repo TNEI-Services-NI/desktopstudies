@@ -97,10 +97,6 @@ def _configure_database(app):
     @app.before_first_request
     def initialize_database():
         dbs.create_all()
-        # admin_username = app.config['ADMIN']['username']
-        # user = User.query.filter_by(username=admin_username).first()
-        # if user: user.delete_from_db()
-        # User(**app.config['ADMIN']).add_to_db()
 
     @app.teardown_request
     def shutdown_session(exception=None):

@@ -16,3 +16,5 @@ entity_network_map = {
     'DER': 'ewehill-gretna_132kv',
     'Observer': 'chapelcross33kv',
 }
+
+demo = False
