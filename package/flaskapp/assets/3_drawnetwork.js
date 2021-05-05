@@ -286,6 +286,7 @@
   }
 
   function master_draw(){
+
     prepare_canvas(x_max, y_max);
     console.log(networks_undrawn)
     dict_components = networks_undrawn[network]
@@ -352,6 +353,7 @@
 
 
   socket.on('draw', function(data) {
+
     event_draw(data);
   });
 
@@ -369,7 +371,6 @@
   }
 
 function update_scaling(){
-console.log("resizing")
 
     let drawBox = document.querySelector('drawing');
     x_max = $("#drawing").attr("width")

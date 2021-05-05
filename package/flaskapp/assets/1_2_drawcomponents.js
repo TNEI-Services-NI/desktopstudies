@@ -138,10 +138,10 @@ if (type == 'starDelta' | type == 'deltaStar'){
               deltaCenterX, deltaTopY).stroke({ width: 1})
 
   dict_tx.objects += [starLine1, starLine2, starLine3, starLine4, deltaLine1, deltaLine2, deltaLine3]
+group.add(starLine1, starLine2, starLine3, starLine4, deltaLine1, deltaLine2, deltaLine3)
 
 }
 
-group.add(starLine1, starLine2, starLine3, starLine4, deltaLine1, deltaLine2, deltaLine3)
 
 group.add(circle1)
 group.add(circle2)
