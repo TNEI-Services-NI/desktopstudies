@@ -236,7 +236,7 @@
   **/
   function draw_network(dict_components, network_, step){
 
-    coord_display = true
+//    coord_display = true
     if(coord_display){
       construct_coord_display();
     }
