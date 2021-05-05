@@ -750,6 +750,15 @@ function add_text(object, bool_dict_obj, list_text, x_from_center=0, y_from_cent
     callback(text1)
 }
 
+/**
+ * draws components required to draw dataview
+ * @param  {SVG object} object which the dataview is watching to
+ * @param  {string} list of data labels relevant to dataview
+ * @param  {[double]} offset is position of dataview
+ * @param  {function( SVG Object )} callback after drawing is complete
+ * @return {None}
+*/
+//todo refactor this
 function add_dataview(observer, text, offset, callback) {
   let colour = "#e5b815"
   add_text(observer, false, text, offset[0], offset[1], colour, callback)
