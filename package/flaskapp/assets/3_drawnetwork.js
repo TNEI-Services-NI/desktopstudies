@@ -180,6 +180,12 @@
         line_instance.info.o_line.attr({stroke: line_instance.info.dict_styling.stroke.live_color});
         line_instance.UIElement.attr({stroke: line_instance.info.dict_styling.stroke.live_color});
 
+        //method for notifying the line to handle it's children which it alone handles
+        if(line_instance.setEnergised != null){
+            line_instance.setEnergised()
+        }
+
+
       } else if (((step_data_["lines_loading"][line_id_LF] === undefined))&&
                   ((step_data_["busbars_voltage"][line_id_LF] === undefined))&&
                   ((step_data_["transformers_loading"][line_id_LF] === undefined))
@@ -188,7 +194,6 @@
         if(highlight_undefined){
           line_instance.info.o_line.attr({stroke: "red"});
           line_instance.UIElement.attr({stroke: "red"});
-
           // line_instance.info.o_line.attr({stroke: "grey"});
         }
       }
@@ -244,7 +249,7 @@
   **/
   function draw_network(dict_components, network_, step){
 
-    coord_display = true
+//    coord_display = true
     if(coord_display){
       construct_coord_display();
     }
@@ -294,6 +299,7 @@
   }
 
   function master_draw(){
+
     prepare_canvas(x_max, y_max);
     console.log(networks_undrawn)
     dict_components = networks_undrawn[network]
@@ -360,6 +366,7 @@
 
 
   socket.on('draw', function(data) {
+
     event_draw(data);
   });
 
@@ -377,7 +384,6 @@
   }
 
 function update_scaling(){
-console.log("resizing")
 
     let drawBox = document.querySelector('drawing');
     x_max = $("#drawing").attr("width")

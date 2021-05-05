@@ -198,6 +198,10 @@ networks_undrawn["ewehillwindfarm2"]={
     "WTG12 WTG16 B": new StraightLine([483,621],"down",137,"33kV"),
 
     },
+    busbars:{
+     "MINSCA BUSBAR": StraightLine([325,260],"right",425,"33kV"),
+
+    },
 
     breakers:{
 //        "761 CHAP": new Breaker("761 CHAP A",1),

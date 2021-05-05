@@ -93,6 +93,12 @@ networks_undrawn["ewehillwindfarm1"]={
 
     },
 
+    busbars:{
+     "EWEHILL1 BUSBAR": StraightLine([325,260],"right",425,"33kV"),
+    "761": StraightLine([265,90],"right",105,"33kV"),
+
+    },
+
     breakers:{
     "761 11": new Breaker("761 11 A",1),
     "761 12": new Breaker("761 12",1),
@@ -117,9 +123,6 @@ networks_undrawn["ewehillwindfarm1"]={
         "WTG 01 Tx": new Tx("WTG01 D",1,["WTG 01"],"","LV"),
         "WTG 02 Tx": new Tx("WTG02 D",1,["WTG 02"],"","LV"),
         "WTG 03 Tx": new Tx("WTG03 D",1,["WTG 03"],"","LV"),
-
-
-
     },
 
     isolators:{

@@ -14,7 +14,7 @@ var circleWidth = 1
 
 let position = tx.pos
 let type = tx.type
-let coils = [tx.coil1, tx.coil2]
+let coils = [dict_line.voltage,tx.coil2]
 let callback = tx.callback
 let live = tx.live
 
@@ -34,8 +34,8 @@ if (dict_line.y1 === dict_line.y2){
 }
 
 if (bVertical){
-  var fromCenter = [dict_line.x1, -rad*(1-overlapFactor)+dict_line.y1+(dict_line.y2-dict_line.y1)*position]
-  var toCenter = [dict_line.x1, rad*(1-overlapFactor)+dict_line.y1+(dict_line.y2-dict_line.y1)*position]
+  var fromCenter = [dict_line.x1, rad*(1-overlapFactor)+dict_line.y1+(dict_line.y2-dict_line.y1)*position]
+  var toCenter = [dict_line.x1, -rad*(1-overlapFactor)+dict_line.y1+(dict_line.y2-dict_line.y1)*position]
 }
 if (bHorizontal){
   var fromCenter = [-rad*(1-overlapFactor)+dict_line.x1+(dict_line.x2-dict_line.x1)*position, dict_line.y1]
@@ -138,10 +138,10 @@ if (type == 'starDelta' | type == 'deltaStar'){
               deltaCenterX, deltaTopY).stroke({ width: 1})
 
   dict_tx.objects += [starLine1, starLine2, starLine3, starLine4, deltaLine1, deltaLine2, deltaLine3]
+group.add(starLine1, starLine2, starLine3, starLine4, deltaLine1, deltaLine2, deltaLine3)
 
 }
 
-group.add(starLine1, starLine2, starLine3, starLine4, deltaLine1, deltaLine2, deltaLine3)
 
 group.add(circle1)
 group.add(circle2)
@@ -620,9 +620,13 @@ if (flipped === false){
 poly1 = draw.polygon(String(delta1X) + "," + String(delta1Y) + " " +
 String(delta2X) + "," + String(delta2Y) + " " +
 String(delta3X) + "," + String(delta3Y) + " " +
-String(delta1X) + "," + String(delta1Y)).stroke(dict_line.dict_styling.stroke)
-                                        .fill(dict_line.dict_styling.stroke)
-                                        .stroke({ width: 1})
+String(delta1X) + "," + String(delta1Y))
+
+//poly1 = poly1.stroke(dict_line.attr().stroke)
+//                                        .fill(dict_line.attr().stroke)
+//                                        .stroke({ width: 1})
+poly1.stroke(dict_line.o_line.attr().stroke)
+poly1.fill(dict_line.o_line.attr().stroke)
 
 if (bHorizontal){
   poly1.rotate(90)
@@ -747,6 +751,15 @@ function add_text(object, bool_dict_obj, list_text, x_from_center=0, y_from_cent
     callback(text1)
 }
 
+/**
+ * draws components required to draw dataview
+ * @param  {SVG object} object which the dataview is watching to
+ * @param  {string} list of data labels relevant to dataview
+ * @param  {[double]} offset is position of dataview
+ * @param  {function( SVG Object )} callback after drawing is complete
+ * @return {None}
+*/
+//todo refactor this
 function add_dataview(observer, text, offset, callback) {
   let colour = "#e5b815"
   add_text(observer, false, text, offset[0], offset[1], colour, callback)
@@ -778,6 +791,7 @@ function add_static_text(list_text, x=100, y=100, colour="#d3d3d3", callback){
     text1.center(text1.x_coord, text1.y_coord);
     callback(text1)
 }
+
 
 
 function draw_SGT(dict_line,callback){
@@ -837,10 +851,9 @@ function draw_line(line,id_line, type="busbar"){
         bNodes = false
 
         if(type == "busbar"){
-        line = style_busbar(line)
+            line = style_busbar(line)
         }
         else if(type == "diagram"){
-
         line = style_diagram_line(line)
         }
         else{

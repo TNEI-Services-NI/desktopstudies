@@ -331,12 +331,23 @@ function DataView(componentID = "", offset, labels){
 
 }
 
+/**
+ * Available power prototype object, contains everything required to produce an available power component.
+ * @param  {[double]} location
+ * @usage instantiate as object i.e. new AvailablePower(...)
+ */
 function AvailablePower(position){
     this.pos = position
     this.graphic = []
     this.callback = Text_Callback
 }
 
+/**
+ * Generator info prototype object, contains everything required to produce an generator info component.
+ * @param  {[double]} location
+ * @param  {string} full descriptive name of generator
+ * @usage instantiate as object i.e. new GenerationInfo(...)
+ */
 function GenerationInfo(position, name){
     this.pos = position
     this.name = name
@@ -344,6 +355,12 @@ function GenerationInfo(position, name){
     this.callback = Text_Callback
 }
 
+/**
+ * SGT prototype object, contains everything required to produce a SGT component.
+ * @param  {string} Line ID of which SGT is on
+ * @param  {double} pos of SGT on line (between 0 and 1)
+ * @usage instantiate as object i.e. new SGT(...)
+ */
 function SGT(line_id,name){
     this.component = "SGT"
     this.lineID = line_id,

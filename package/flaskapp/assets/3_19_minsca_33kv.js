@@ -200,7 +200,11 @@ networks_undrawn["minsca33kv"]={
 
 
     },
+    busbars:{
+     "MINSCA BUSBAR": StraightLine([325,260],"right",425,"33kV"),
+    "761": StraightLine([265,90],"right",105,"33kV"),
 
+    },
     breakers:{
 //        "761 CHAP": new Breaker("761 CHAP A",1),
     "761 MINS WF": new Breaker("761 MINS WF",1),

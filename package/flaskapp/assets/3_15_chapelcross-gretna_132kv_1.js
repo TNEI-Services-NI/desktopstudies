@@ -20,6 +20,13 @@ networks_undrawn["chapelcrossgretna1"]={
 
     },
 
+    busbars:{
+        "R1": StraightLine([215,555],"right",130,"132kV"),
+        "M1": StraightLine([215,740],"right",130,"132kV"),
+            "GRNA1 B": StraightLine([785,650],"left",130,"132kV"),
+
+    },
+
     breakers:{
         "1105": new Breaker("1105 B_1",1),
         "1105": new Breaker("1105 B_1",1),

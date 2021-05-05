@@ -22,7 +22,7 @@ networks_undrawn["chapelcross33kv"] = {
         "CHAP3A1#0": StraightLine([85,175], "down",20),
         "CHAP3-_STCR3-_1#0": StraightLine([85,195], "down",280),
             "STCR3-": StraightLine([25,370],"right",90),
-            "STCR5-": StraightLine([70,440],"right",35),
+            "STCR5-": StraightLine([70,440],"right",35,"0V",true),
         "ANANT1_CHAP3-_1#1": StraightLine([145,175],"down",105),
             "ANANT1_CHAP3-_1#2": StraightLine([145,280], "right",150),
         "CHAPX1_LOBI3A_1#0": StraightLine([250,175],"down",225),
@@ -164,7 +164,7 @@ networks_undrawn["chapelcross33kv"] = {
         "MINS3-_MINS0G_1#0": StraightLine([940,610],"down",30),
         "MINS3-_MINS0G_1#1": StraightLine([940,690],"up",50),
         "MINS3-_MINS0G_1#2": StraightLine([940,690],"down",60),
-        "MINS0G": StraightLine([925,660],"right",30),
+        "MINS0G": StraightLine([925,660],"right",30,"0V",true),
 
         "LAHO3B_NEWCT1_1#0": StraightLine([585,820],"up",30),
         "LAHO3B_NEWCT1_1#1": StraightLine([585,820],"right",50),
@@ -191,6 +191,9 @@ networks_undrawn["chapelcross33kv"] = {
         "STCR3-": StraightLine([25,370],"right",90),
         "EWHC3-": StraightLine([45,805],"right",85),
         "MIBI5-": StraightLine([260,730],"right",85,"11kV"),
+        "MIBI3-": StraightLine([65,575],"right",175),
+        "ANAN5-1": StraightLine([310,315],"right",52, "11kV"),
+        "ANAN5-2": StraightLine([310+52,315],"right",53, "11kV"),
        "LAHO5-1": StraightLine([365,890],"right",55,"11kV"),
         "LAHO5-2": StraightLine([365+55,890],"right",55,"11kV"),
         "KIBA5-":StraightLine([360,585],"right",85,"11kV"),
@@ -205,7 +208,15 @@ networks_undrawn["chapelcross33kv"] = {
         "NEWC5-": StraightLine([695,680],"right",85, "11kV"),
      },
     loads:{
-        0: StraightLine([405,315],"down",20)
+        "ANANT2_CHAP3-_1#4": StraightLine([405,315],"down",20,"11kV"),
+        "LOBI5-2#0": StraightLine([450,490],"down",20,"11kV"),
+        "KIBA5-#0": StraightLine([440,585],"down",20,"11kV"),
+        "MOFT5-2#0": StraightLine([450,675],"down",20,"11kV"),
+        "LAHO5-2#0": StraightLine([465,890],"down",20,"11kV"),
+        "MIBI5-#0": StraightLine([335,730],"down",20,"11kV"),
+        "NEWC5-#0": StraightLine([770,680],"down",20,"11kV"),
+        "GRNA5-2#0": StraightLine([800,495],"down",20,"11kV"),
+
         },
     diagram:{},
     breakers:{

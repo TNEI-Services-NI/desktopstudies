@@ -28,6 +28,13 @@ networks_undrawn["stevenscroft33kv"]={
 
 },
 
+    busbars:{
+       "699": StraightLine([170,255],"right",130,"33kV"),
+       "STEVENS AUX 2": StraightLine([350,540],"right",360,"LV"),
+    "STEVENS AUX 13 14": StraightLine([395,770],"right",300,"LV"),
+
+},
+
     breakers:{
         "699 CHAP": new Breaker("699 CHAP",0.45),
         "699 CUSTOMER": new Breaker("699 CUSTOMER",0.5),
