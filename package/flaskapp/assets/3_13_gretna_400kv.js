@@ -47,6 +47,11 @@ networks_undrawn["gretna400kv"]={
 
     },
 
+    busbars:{
+        "M1": StraightLine([60,620],"right",880,"400kV"),
+        "R1": StraightLine([60,430],"right",880,"400kV"),
+    },
+
     breakers:{
         "X442": new Breaker("ELVA",0.63),
         "X448": new Breaker("X448",0.5),
@@ -73,8 +78,8 @@ networks_undrawn["gretna400kv"]={
     },
 
     tx:{
-        "GRNA 780 tx": new Tx("GRNA 780 tx",1,"","", "132kV","LV"),
-        "GRNA 680 tx": new Tx("GRNA 680 tx",1,"","", "132kV","LV"),
+        "GRNA 780 tx": new Tx("GRNA 780 tx",1,"","", "0V"),
+        "GRNA 680 tx": new Tx("GRNA 680 tx",1,"","", "0V"),
     },
 
     isolators:{

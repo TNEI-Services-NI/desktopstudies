@@ -71,7 +71,6 @@ def login_post():
     login_user(user, remember=remember)
     session['entity'] = user.entity
     session['username'] = user.name
-    session['namespace'] = '/'
     user.logged_in = 1
     db.session.commit()
 

@@ -6,6 +6,9 @@
     components = {
                     breakers: [],
                     lines: [],
+                    lines: [],
+                    loads:[],
+                    busbars:[],
                     labels:[],
                     generators: [],
                     isolators:[],
@@ -23,6 +26,18 @@
     let temp_dict_components = networks_undrawn[id_dict]
     for (let idx_line in temp_dict_components.lines){
         let temp_dict = temp_dict_components.lines[idx_line]
+        temp_dict.x1 = temp_dict.x1 * x_scaling
+        temp_dict.x2 = temp_dict.x2 * x_scaling
+        temp_dict.y1 = temp_dict.y1 * y_scaling
+        temp_dict.y2 = temp_dict.y2 * y_scaling
+    }
+  }
+  }
+  function scale_busbars(networks_undrawn){
+  for(let id_dict in networks_undrawn){
+    let temp_dict_components = networks_undrawn[id_dict]
+    for (let idx_line in temp_dict_components.busbars){
+        let temp_dict = temp_dict_components.busbars[idx_line]
         temp_dict.x1 = temp_dict.x1 * x_scaling
         temp_dict.x2 = temp_dict.x2 * x_scaling
         temp_dict.y1 = temp_dict.y1 * y_scaling
@@ -68,9 +83,22 @@
      }
   }
 
+  function scale_loads(networks_undrawn){
+  for(let id_dict in networks_undrawn){
+    let temp_dict_components = networks_undrawn[id_dict]
+    for (let idx_line in temp_dict_components.loads){
+        let temp_dict = temp_dict_components.loads[idx_line]
+        temp_dict.x1 = temp_dict.x1 * x_scaling
+        temp_dict.x2 = temp_dict.x2 * x_scaling
+        temp_dict.y1 = temp_dict.y1 * y_scaling
+        temp_dict.y2 = temp_dict.y2 * y_scaling
+    }
+  }
+  }
+
   function style_line(line){
-    line.dict_styling = {fill: { width: line_palette_style["width"] * Math.min(x_scaling,y_scaling)},
-                         stroke: { width: line_palette_style["width"] *  Math.min(x_scaling,y_scaling)}}
+    line.dict_styling = {fill: { width: line_palette_style["width"]/1.5 * Math.min(x_scaling,y_scaling)},
+                         stroke: { width: line_palette_style["width"]/1.5 *  Math.min(x_scaling,y_scaling)}}
     if (line.dash){
               line.dict_styling = {fill: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)},
                          stroke: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)}}
@@ -141,7 +169,6 @@
   }
 
 
-
   function construct_coord_display(){
     const text1 = draw.text("coordinate dislay")
       .font({size: 15, family: 'Helvetica'}).fill({color: "white"});
@@ -155,17 +182,83 @@
       text1.text(function(add){
         add.tspan("Scaled: (" + String(Math.round(loc.x)) + ", " + String(Math.round(loc.y)) + ")").newLine();
         add.tspan("Actual: (" + String(Math.round(loc.x/x_scaling)) + ", " + String(Math.round(loc.y/y_scaling)) + ")").newLine();
+        add.tspan("Stage: " + current_step).newLine();
       });
     },false);
   }
 
   function construct_lines(dict_components){
     var bNodes = false
-
     for (let id_line in dict_components.lines){
         let line = dict_components.lines[id_line]
-        draw_line(line,id_line)
+        draw_line(line,id_line,"line")
 
+        let id = id_line
+
+        let l = {
+            info: line,
+            UIElement: line.graphic[0],
+            id : id,
+        }
+        components.lines[id_line] = l
+        component_modal(l)
+    }
+  }
+
+    function construct_loads(dict_components){
+    var bNodes = false
+    for (let id_load in dict_components.loads){
+        let load = dict_components.loads[id_load]
+        draw_line(load,id_load,"load")
+
+        let id = id_load
+
+        let line_object = load.graphic[0]
+        //todo load needs to take colour of line through dict_style
+        draw_load(load,1,true)
+
+        let l = {
+            info: load,
+            UIElement: line_object,
+            id : id,
+        }
+
+        l.setEnergised = function(){
+              draw_load(load,1,true)
+        }
+
+        //put same object pointer in multiple locations. if something goes wrong with updating deletion/ids, it'll happen here
+        components.lines[id_load] = l
+//        components.loads[id_load] = l
+
+        component_modal(l)
+    }
+  }
+
+  function construct_busbars(dict_components){
+    console.log("making busbars")
+    var bNodes = false
+    console.log(dict_components)
+    for (let id_busbar in dict_components.busbars){
+        console.log(id_busbar)
+
+        let busbar = dict_components.busbars[id_busbar]
+//        load = style_line(load)
+        draw_line(busbar,id_busbar,"busbar")
+
+        let id = id_busbar
+
+        line_object = busbar.graphic[0]
+
+        let l = {
+            info: busbar,
+            UIElement: busbar.graphic[0],
+            id : id,
+        }
+        components.lines[id_busbar] = l
+        components.busbars[id_busbar] = l
+
+        component_modal(l)
     }
   }
 
@@ -197,8 +290,8 @@
                 line : dict_components.lines[breaker.lineID]
             }
 
-
             b.setState = function(closed){
+                console.log("Setting the state of this breaker")
                 line = components.breakers[id].line
                 rect = components.breakers[id].UIElement
 
@@ -208,9 +301,10 @@
                     rect.fill({ color: palette["background-color"] })
                     rect.stroke({ color: 'white' })
                 } else if (closed == true){
-                    rect.fill({ color: breaker.colour })
-                    rect.stroke({ color: "white" })
+                    rect.fill({ color: line.graphic[0].attr().stroke })
+                    rect.stroke({ color: line.graphic[0].attr().stroke })
               }
+              this.closed = closed
             }
 
             b.UIElement.on("breaker_clicked",function(event){
@@ -219,7 +313,7 @@
                 // post_breakers(components.breakers)
                 check_breakers(network_, option, components.breakers, step, function(breaker_matches_next){
                   if(breaker_matches_next){ // IF correct breaker is clicked
-                    inc_state(network_)
+                    inc_state(case_network)
                   }
                 })
             });
@@ -261,10 +355,29 @@
         let callback = tx.callback
         draw_tx(line, tx)
 
+        let liveCoils = [line.voltage,coil2]
+
         let id = i
         let t = {info:tx, UIElement: tx.graphic[0], id : id}
+
+        t.setLive = function(){
+            UIElements = this.UIElement.children()
+            circle1 = UIElements[1]
+            circle1.attr({stroke: palette[liveCoils[0]]})
+            circle2 = UIElements[3]
+            circle2.attr({stroke: palette[liveCoils[0]]})
+
+            circle3 = UIElements[2]
+            circle3.attr({stroke: palette[liveCoils[1]]})
+            circle4 = UIElements[4]
+            circle4.attr({stroke: palette[liveCoils[1]]})
+
+
+        }
+
         components.transformers[id] = t
         component_modal(t)
+
         }
   }
 
@@ -349,22 +462,6 @@
         })
     }
   }
-//          callback = function(){
-//              for(text in textObjects){
-//                textObjects[text].remove()
-//              }
-//              offset = 0
-//              for(i in observingComponent.data){
-//                  static_text = text_data["Amps"]
-//                  text = observingComponent.data[i] + " " + Abbreviations[i]
-//                  pos = static_text.offset
-//                  holder = []
-//                  add_static_text([text],pos[0]*x_scaling,(pos[1]+offset)*y_scaling,"yellow",function(object){holder[0] = object})
-//                  textObjects[i] = holder[0]
-////                  group.add(holder[0])
-//                  offset+=15
-//              }
-//          }
 
   function redraw_dataview(id_dv, text_list){
     let dataview_ = components.dataviews[id_dv];
@@ -407,8 +504,8 @@
           draw_line(StraightLine(topRightPoint,"up",height*1.07),componentID+"diagram"+i++,"diagram")
           draw_line(StraightLine(topRightPoint,"left",line_width),componentID+"diagram"+i++,"diagram")
 
-//function StraightLine(origin, direction, length, voltage="33kV", dash = false, colour = ""){
           let id = power_id
+          //todo potentially add diagram lines to dictionary
           let pa = {info:availablePower, UIElement: availablePower.graphic[0], id : id}
           pa.setAvailablePower = function(POWER){
             this.UIElement.remove()

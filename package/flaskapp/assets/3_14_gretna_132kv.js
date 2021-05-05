@@ -14,6 +14,10 @@ networks_undrawn["gretna132kv"]={
 
     },
 
+    busbars:{
+        "124 120 128": StraightLine([55,535],"right",900,"132kV"),
+    },
+
     breakers:{
     "120": new Breaker("124 120 128",0.48),
 

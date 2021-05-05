@@ -28,6 +28,13 @@ networks_undrawn["stevenscroft33kv"]={
 
 },
 
+    busbars:{
+       "699": StraightLine([170,255],"right",130,"33kV"),
+       "STEVENS AUX 2": StraightLine([350,540],"right",360,"LV"),
+    "STEVENS AUX 13 14": StraightLine([395,770],"right",300,"LV"),
+
+},
+
     breakers:{
         "699 CHAP": new Breaker("699 CHAP",0.45),
         "699 CUSTOMER": new Breaker("699 CUSTOMER",0.5),
@@ -71,8 +78,8 @@ networks_undrawn["stevenscroft33kv"]={
     },
 
     tx:{
-        "699 STEP UP": new Tx("699 CUSTOMER",1,"","", "11kV","33kV"),
-        "699 Auxiliary Transformer": new Tx("699 Auxiliary Transformer B",1,["Auxiliary","Transformer","11/0.4kV"],"", "11kV","33kV"),
+        "699 STEP UP": new Tx("699 CUSTOMER",1,"","", "33kV"),
+        "699 Auxiliary Transformer": new Tx("699 Auxiliary Transformer B",1,["Auxiliary","Transformer","11/0.4kV"],"","33kV"),
 
     },
 

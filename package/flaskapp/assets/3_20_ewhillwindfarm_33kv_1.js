@@ -93,6 +93,12 @@ networks_undrawn["ewehillwindfarm1"]={
 
     },
 
+    busbars:{
+     "EWEHILL1 BUSBAR": StraightLine([325,260],"right",425,"33kV"),
+    "761": StraightLine([265,90],"right",105,"33kV"),
+
+    },
+
     breakers:{
     "761 11": new Breaker("761 11 A",1),
     "761 12": new Breaker("761 12",1),
@@ -108,18 +114,15 @@ networks_undrawn["ewehillwindfarm1"]={
     },
 
     tx:{
-        "EWEHILL 1 Auxiliary": new Tx("CB04 B",1,["AUXILIARY","TRANSFORMER"],"","LV","33kV"),
+        "EWEHILL 1 Auxiliary": new Tx("CB04 B",1,["AUXILIARY","TRANSFORMER"],"","33kV"),
 
-        "WTG 04 Tx": new Tx("WTG04 D",1,["WTG 04"],"","LV","33kV"),
-        "WTG 05 Tx": new Tx("WTG05 D",1,["WTG 05"],"","LV","33kV"),
-        "WTG 06 Tx": new Tx("WTG06 D",1,["WTG 06"],"","LV","33kV"),
+        "WTG 04 Tx": new Tx("WTG04 D",1,["WTG 04"],"","33kV"),
+        "WTG 05 Tx": new Tx("WTG05 D",1,["WTG 05"],"","33kV"),
+        "WTG 06 Tx": new Tx("WTG06 D",1,["WTG 06"],"","33kV"),
 
-        "WTG 01 Tx": new Tx("WTG01 D",1,["WTG 01"],"","33kV","LV"),
-        "WTG 02 Tx": new Tx("WTG02 D",1,["WTG 02"],"","33kV","LV"),
-        "WTG 03 Tx": new Tx("WTG03 D",1,["WTG 03"],"","33kV","LV"),
-
-
-
+        "WTG 01 Tx": new Tx("WTG01 D",1,["WTG 01"],"","LV"),
+        "WTG 02 Tx": new Tx("WTG02 D",1,["WTG 02"],"","LV"),
+        "WTG 03 Tx": new Tx("WTG03 D",1,["WTG 03"],"","LV"),
     },
 
     isolators:{
