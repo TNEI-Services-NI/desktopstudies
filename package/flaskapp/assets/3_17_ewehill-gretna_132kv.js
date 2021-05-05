@@ -24,6 +24,14 @@ networks_undrawn["ewehillgretna"]={
 
     },
 
+    busbars:{
+     "GRNA1": StraightLine([630,105],"right",130,"132kV"),
+    "BOARD B": StraightLine([615,705],"right",145,"33kV"),
+
+
+
+    },
+
     breakers:{
         "805": new Breaker("804 805 803",0.6),
         //todo something is up with Grid 1A and WG2
@@ -53,8 +61,8 @@ networks_undrawn["ewehillgretna"]={
         },
 
     tx:{
-        "GT1 90MVA" : new Tx("113",1,"","","33kV","132kV"),
-        "GRID 1A LV" : new Tx("GRID 1A LV",1,"","","33kV","LV"),
+        "GT1 90MVA" : new Tx("113",1,"","","132kV"),
+        "GRID 1A LV" : new Tx("GRID 1A LV",1,"","","0V"),
 
     },
 

@@ -81,6 +81,18 @@
     }
   }
 
+  function update_transformers(step_data){
+    for(let tx_ in components.transformers){
+          tx_instance = components.transformers[tx_]
+          if(tx_ in step_data["transformers_loading"]){
+              loading = step_data["transformers_loading"][tx_]
+                if(Number(loading) > 0){
+                 tx_instance.setLive()
+                }
+          }
+    }
+  }
+
   function update_line_data_views(step_data){
         for (let line_ in components.lines) {
       line_id_LF = line_.split("#")[0]
@@ -147,20 +159,41 @@
     for(let idl in components.lines){
       let line_instance = components.lines[idl]
       let line_id_LF = idl.split("#")[0]
-      if(((step_data_["lines_loading"][line_id_LF] !== 0)&&(step_data_["lines_loading"][line_id_LF] !== undefined))||
+      if(((step_data_["lines_loading"][line_id_LF] !== 0)&&(step_data_["lines_loading"][line_id_LF] > 997))||
+        ((step_data_["lines_active_power"][line_id_LF] !== 0)&&(step_data_["lines_active_power"][line_id_LF] > 997))||
+        ((step_data_["lines_active_power"][line_id_LF] !== 0)&&(step_data_["lines_active_power"][line_id_LF] > 997))||
+        ((step_data_["lines_reactive_power"][line_id_LF] !== 0)&&(step_data_["lines_reactive_power"][line_id_LF] > 997))
+        ||((step_data_["busbars_voltage"][line_id_LF] !== 0)&&(step_data_["busbars_voltage"][line_id_LF] > 997))
+        ||((step_data_["transformers_loading"][line_id_LF] !== 0)&&(step_data_["transformers_loading"][line_id_LF] > 997))
+      ){
+
+        line_instance.info.o_line.attr({stroke: "orange"});
+        line_instance.UIElement.attr({stroke: "orange"});
+
+      } else if(((step_data_["lines_loading"][line_id_LF] !== 0)&&(step_data_["lines_loading"][line_id_LF] !== undefined))||
         ((step_data_["lines_active_power"][line_id_LF] !== 0)&&(step_data_["lines_active_power"][line_id_LF] !== undefined))||
-        ((step_data_["lines_reactive_power"][line_id_LF] !== 0)&&(step_data_["lines_reactive_power"][line_id_LF] !== undefined))||
-        ((step_data_["busbars_voltage"][line_id_LF] !== 0)&&(step_data_["busbars_voltage"][line_id_LF] !== undefined))||
-        ((step_data_["transformers_loading"][line_id_LF] !== 0)&&(step_data_["transformers_loading"][line_id_LF] !== undefined))){
+        ((step_data_["lines_reactive_power"][line_id_LF] !== 0)&&(step_data_["lines_reactive_power"][line_id_LF] !== undefined))
+        ||((step_data_["busbars_voltage"][line_id_LF] !== 0)&&(step_data_["busbars_voltage"][line_id_LF] !== undefined))
+        ||((step_data_["transformers_loading"][line_id_LF] !== 0)&&(step_data_["transformers_loading"][line_id_LF] !== undefined))
+      ){
 
         line_instance.info.o_line.attr({stroke: line_instance.info.dict_styling.stroke.live_color});
+        line_instance.UIElement.attr({stroke: line_instance.info.dict_styling.stroke.live_color});
+
+        //method for notifying the line to handle it's children which it alone handles
+        if(line_instance.setEnergised != null){
+            line_instance.setEnergised()
+        }
+
 
       } else if (((step_data_["lines_loading"][line_id_LF] === undefined))&&
-        ((step_data_["busbars_voltage"][line_id_LF] === undefined))&&
-        ((step_data_["transformers_loading"][line_id_LF] === undefined))){
+                  ((step_data_["busbars_voltage"][line_id_LF] === undefined))&&
+                  ((step_data_["transformers_loading"][line_id_LF] === undefined))
+      ){
 
         if(highlight_undefined){
           line_instance.info.o_line.attr({stroke: "red"});
+          line_instance.UIElement.attr({stroke: "red"});
           // line_instance.info.o_line.attr({stroke: "grey"});
         }
       }
@@ -173,7 +206,10 @@
       let breaker_instance = components.breakers[idb]
       let idl = breaker_instance.line.line_idx
       let line_id_LF = idl.split("#")[0]
+
       if(((step_data_["lines_loading"][line_id_LF] !== 0)&&(step_data_["lines_loading"][line_id_LF] !== undefined))||
+        ((step_data_["lines_active_power"][line_id_LF] !== 0)&&(step_data_["lines_active_power"][line_id_LF] !== undefined))||
+        ((step_data_["lines_reactive_power"][line_id_LF] !== 0)&&(step_data_["lines_reactive_power"][line_id_LF] !== undefined))||
         ((step_data_["busbars_voltage"][line_id_LF] !== 0)&&(step_data_["busbars_voltage"][line_id_LF] !== undefined))||
         ((step_data_["transformers_loading"][line_id_LF] !== 0)&&(step_data_["transformers_loading"][line_id_LF] !== undefined))){
         breaker_instance.UIElement.attr({
@@ -198,10 +234,11 @@
     }
   }
 
-  function inc_state(network_){
+  function inc_state(case_network_){
     current_step += 1;
     //alert(current_step)
-    fetch_sim_data(network_, current_step, option, scenario, update_sim_data);
+    fetch_sim_data(case_network_, network, current_step, option, scenario, update_sim_data);
+    socket.emit('sync_sim_step', {'sim_step': current_step, 'broadcast': true});
   }
 
   /**
@@ -212,11 +249,16 @@
   **/
   function draw_network(dict_components, network_, step){
 
+//    coord_display = true
     if(coord_display){
       construct_coord_display();
     }
 
     construct_lines(dict_components);
+
+    construct_busbars(dict_components);
+
+    construct_loads(dict_components);
 
     construct_breakers(dict_components, network_, step);
 
@@ -240,16 +282,16 @@
 
     construct_generation_info(dict_components)
 
-
   }
 
   function update_sim_data(stage_, step_data){
     steps[stage_] = step_data;
+    update_line_colours(step_data);
     update_line_modals(step_data);
     update_generator_modals(step_data);
     update_transformer_modals(step_data);
+    update_transformers(step_data)
     update_dataviews(step_data);
-    update_line_colours(step_data);
     update_breaker_colours(step_data);
     update_generator_colours(step_data);
     update_available_power(step_data);
@@ -257,10 +299,12 @@
   }
 
   function master_draw(){
+
     prepare_canvas(x_max, y_max);
+    console.log(networks_undrawn)
     dict_components = networks_undrawn[network]
     draw_network(dict_components, network, current_step);
-    fetch_sim_data(network, current_step, option, scenario, update_sim_data
+    fetch_sim_data(case_network, network, current_step, option, scenario, update_sim_data
     );
   }
 
@@ -290,25 +334,27 @@
   // Create an SVGPoint for future math
   var pt = svg.createSVGPoint();
 
-//  update_scaling();
-//  window.addEventListener('resize',update_scaling());
-
   var socket = io();
-//  let current_step = -1
-//  let steps = []
 
   dict_components = undefined
 
   var room = undefined
+  var username = undefined
+  var sid = undefined
 
   socket.on('check_join_draw', function(data_join_draw) {
-    socket.emit('list_rooms', data_join_draw, function (data_list_rooms){});
+    if(username === undefined){
+      username = data_join_draw['username']
+    }
+    if(username === data_join_draw['username']){
+      socket.emit('check_join_draw', data_join_draw, function (data_check_rooms){});
+    }
   });
 
   socket.on('join_draw', function (data_join_draw){
     if(room === undefined){
-      room = data_join_draw['room']
       socket.emit('join_room', data_join_draw, function(data_join_room){
+        room = data_join_room['room']
         event_draw(data_join_room);
       })
     }
@@ -320,6 +366,7 @@
 
 
   socket.on('draw', function(data) {
+
     event_draw(data);
   });
 
@@ -330,25 +377,13 @@
   });
 
 
-  socket.on('shout_client', function(data){
-    alert("Client: ahhhhh");
-  });
-
-  socket.on('shout_server', function (data){
-    socket.emit('shout_server', data);
-  })
-
-
   // Get point in global SVG space
   function cursorPoint(evt){
     pt.x = evt.clientX; pt.y = evt.clientY;
     return pt.matrixTransform(svg.getScreenCTM().inverse());
   }
 
-
-
 function update_scaling(){
-console.log("resizing")
 
     let drawBox = document.querySelector('drawing');
     x_max = $("#drawing").attr("width")
@@ -360,8 +395,10 @@ console.log("resizing")
       font_size = 14 *  Math.min(x_scaling, y_scaling)
       network_scaled = networks_undrawn
       scale_lines(network_scaled);
+      scale_busbars(network_scaled)
       scale_labels(network_scaled);
       scale_dataviews(network_scaled);
+      scale_loads(network_scaled);
       scale_availablePower(network_scaled);
   }
 

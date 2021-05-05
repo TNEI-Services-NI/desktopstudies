@@ -106,6 +106,7 @@ function init_breakers(network_, option_, breakers, step, callback){
       url: "/simtool_bp/check_breakers/",
       data: {"network": network_, "option": option_},
       success: function(restoration_breaker_states){
+      console.log(restoration_breaker_states)
         for (let breaker in breakers){
           if (restoration_breaker_states[step][breaker] === undefined){
             breakers_new[breaker].state = "undefined";
@@ -145,11 +146,11 @@ function init_breaker(breakerID){
  * @param callbacks
  * @return {None}
  */
-function fetch_sim_data(network_, stage_, option_, scenario_, callbacks){
+function fetch_sim_data(case_network_, network, stage_, option_, scenario_, callbacks){
       $.ajax({
       type: "POST",
       url: "/simtool_bp/get_state/",
-      data: {"stage": stage_, "network": network_, "option": option_, "scenario": scenario_},
+      data: {"stage": stage_, "case_network": case_network_, "network":network,  "option": option_, "scenario": scenario_},
 //      dataType: 'application/json'
       }).done(function( component_values ) {
         for(let component_parameter in component_values){

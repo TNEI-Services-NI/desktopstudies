@@ -1,12 +1,15 @@
 """Initialize Flask app."""
+import os
+
+import eventlet
 from flask import Flask
 from flask_assets import Environment
-import os
-import eventlet
 
 import package as root
-from .extensions import login_manager, dbs, socketio, jsglue
+import package.flaskapp.auth.user as user
 from .auth.login_manager import init_manager
+from .extensions import login_manager, dbs, socketio, jsglue
+
 eventlet.monkey_patch()
 
 
@@ -97,10 +100,7 @@ def _configure_database(app):
     @app.before_first_request
     def initialize_database():
         dbs.create_all()
-        # admin_username = app.config['ADMIN']['username']
-        # user = User.query.filter_by(username=admin_username).first()
-        # if user: user.delete_from_db()
-        # User(**app.config['ADMIN']).add_to_db()
+        user.register_admin(dbs)
 
     @app.teardown_request
     def shutdown_session(exception=None):

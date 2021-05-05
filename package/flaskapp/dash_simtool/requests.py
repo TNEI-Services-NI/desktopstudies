@@ -5,6 +5,7 @@ from flask_socketio import join_room, rooms
 from flask_login import login_required
 import package.data as simtool_data
 from package.flaskapp import socketio
+from flask_socketio import send, emit
 
 
 @simtool_bp.route("/receive_breaker/", methods=['POST'])
@@ -30,12 +31,13 @@ def init_breakers():
 @login_required
 def get_restoration_step():
     data = request.form
+    case_network = data["case_network"]
     network = data["network"]
     stage = data["stage"]
     scenario = data["scenario"]
     option = data["option"]
 
-    stateDictionary = simtool_data.read_restoration_step(network, option, scenario, stage)
+    stateDictionary = simtool_data.read_restoration_step(case_network, network, option, scenario, stage)
     return jsonify(stateDictionary)
 
 
@@ -51,33 +53,40 @@ def init_network():
     # return df_activesim.to_json()
 
 
-@socketio.on('join_room')
-def on_join(data):
-    join_room(data['room'])
+@socketio.on('connect')
+def test_connect():
+    session['sid'] = request.sid
+    print("On connect: {}".format(session.get('sid')))
+
+
+@socketio.on('check_join_draw')
+def on_check_join_draw(data):
+
+    username = data['username']
+
+    if 'local' in data:
+        if data['local']:
+            data['room'] = 'room_{}'.format(username)
+
+    rooms_ = rooms()
+    sid_client = request.sid
+    room = data['room']
+
+    client_in_room = sid_client in rooms_ and room in rooms_
+
+    if client_in_room:
+        socketio.emit('draw', data, room=session['room'])
+    else:
+        session['sid'] = sid_client
+        session['room'] = room
+        socketio.emit('join_draw', data)
+
     return data
 
 
-@socketio.on('list_rooms')
-def on_list_rooms(data):
-    rooms_ = rooms()
-    sid = request.sid
-    room = data['room']
-    network = data['network']
-    sim_step = data['sim_step']
-
-    if sid in rooms_ and room in rooms_:
-        socketio.emit('draw', {
-            'network': network,
-            'sim_step': sim_step,
-        }, room=session['room'])
-    elif len(rooms_) == 1:
-        session['room'] = room
-        socketio.emit('join_draw', {
-            'network': network,
-            'sim_step': sim_step,
-            'room': session['room']
-        })
-
+@socketio.on('join_room')
+def on_join(data):
+    join_room(data['room'])
     return data
 
 
@@ -103,4 +112,7 @@ def connection(data):
     """This will emit a message to all users when this is called.
     This would be useful for simulation synchronisation"""
     session['sim_step'] = data['sim_step']
+    broadcast = data['broadcast'] if 'broadcast' in data else False
+    if broadcast:
+        socketio.emit('redraw', {'sim_step': data['sim_step']})
 

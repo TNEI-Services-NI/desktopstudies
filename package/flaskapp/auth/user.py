@@ -1,6 +1,7 @@
-from sqlalchemy import Column, Integer, String
-from package.flaskapp import dbs as db
 from flask_login import UserMixin
+from werkzeug.security import generate_password_hash
+
+from package.flaskapp.extensions import dbs as db
 
 
 class User(db.Model, UserMixin):
@@ -13,3 +14,15 @@ class User(db.Model, UserMixin):
 
     def __repr__(self):
         return str(self.name)
+
+def register_admin(dbs):
+    user = User.query.filter_by(
+        email='admin@admin').first()  # if this returns a user, then the email already exists in database
+    if not user:  # if a user is found, we want to redirect back to signup page so user can try again
+        new_user = User(email='admin@admin', name='admin', password=generate_password_hash('admin', method='sha256'),
+                        entity='admin')
+
+        # add the new user to the database
+        dbs.session.add(new_user)
+        dbs.session.commit()
+
