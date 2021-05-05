@@ -165,7 +165,7 @@ networks_undrawn["chapelcross33kv"] = {
         "MINS3-_MINS0G_1#0": StraightLine([940,610],"down",30),
         "MINS3-_MINS0G_1#1": StraightLine([940,690],"up",50),
         "MINS3-_MINS0G_1#2": StraightLine([940,690],"down",60),
-        "MINS0G": StraightLine([925,660],"right",30),
+        "MINS0G": StraightLine([925,660],"right",30,"0V",true),
 
         "LAHO3B_NEWCT1_1#0": StraightLine([585,820],"up",30),
         "LAHO3B_NEWCT1_1#1": StraightLine([585,820],"right",50),
