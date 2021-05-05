@@ -307,8 +307,8 @@
 
   socket.on('join_draw', function (data_join_draw){
     if(room === undefined){
-      room = data_join_draw['room']
       socket.emit('join_room', data_join_draw, function(data_join_room){
+        room = data_join_room['room']
         event_draw(data_join_room);
       })
     }

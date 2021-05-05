@@ -51,21 +51,30 @@ def init_network():
     # return df_activesim.to_json()
 
 
-@socketio.on('join_room')
-def on_join(data):
-    join_room(data['room'])
-    return data
-
-
 @socketio.on('list_rooms')
 def on_list_rooms(data):
+    print(data)
+    if 'local' in data:
+        if data['local']:
+            data['room'] = 'room_{}'.format(str(request.sid))
+
     rooms_ = rooms()
-    sid = request.sid
+    sid_client = request.sid
+    sid_triggered_client = data['sid']
     room = data['room']
+    local = data['local']
     network = data['network']
     sim_step = data['sim_step']
 
-    if sid in rooms_ and room in rooms_:
+    print("sid_client: {}".format(sid_client))
+    print("sid_triggered_client: {}".format(sid_triggered_client))
+    print("room: {}".format(room))
+    print("rooms_: {}".format(rooms_))
+
+    triggered_client_response = sid_client == sid_triggered_client
+    client_in_room = sid_client in rooms_ and room in rooms_
+
+    if triggered_client_response and client_in_room:
         socketio.emit('draw', {
             'network': network,
             'sim_step': sim_step,
@@ -75,9 +84,24 @@ def on_list_rooms(data):
         socketio.emit('join_draw', {
             'network': network,
             'sim_step': sim_step,
+            'local': local,
             'room': session['room']
         })
 
+    return data
+
+
+@socketio.on('join_room')
+def on_join(data):
+    join_room(data['room'])
+
+    rooms_ = rooms()
+    sid = request.sid
+    room = data['room']
+
+    print(sid)
+    print(room)
+    print(rooms_)
     return data
 
 

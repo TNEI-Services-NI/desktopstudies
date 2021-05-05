@@ -8,6 +8,7 @@ import numpy as np
 import plotly.graph_objs as go
 
 import package.flaskapp.dash_simtool.app as dash_app
+import package.flaskapp.dash_simtool._config as cf
 import package.flaskapp.dash_simtool.app.dashboard_styling as styling
 from package.flaskapp.dash_simtool.app.micromethods import hex_to_rgb
 
@@ -332,19 +333,24 @@ def navbar_controls(url_page):
         [
             dbc.Nav(
                 [
-                    dbc.NavLink("Home", href=dash_app.URL_HOME,
+                    dbc.NavLink("Home",
+                                href=dash_app.URL_SLDS if cf.demo else dash_app.URL_HOME,
                                 active=True if dash_app.URL_HOME == url_page else False,
                                 external_link=True),
-                    dbc.NavLink("SLDs", href=dash_app.URL_SLDS,
+                    dbc.NavLink("SLDs",
+                                href=dash_app.URL_SLDS,
                                 active=True if dash_app.URL_SLDS == url_page else False,
                                 external_link=True),
-                    dbc.NavLink("Scripts", href=dash_app.URL_SCRIPTS,
+                    dbc.NavLink("Scripts",
+                                href=dash_app.URL_SCRIPTS if cf.demo else dash_app.URL_HOME,
                                 active=True if dash_app.URL_SCRIPTS == url_page else False,
                                 external_link=True),
-                    dbc.NavLink("About", href=dash_app.URL_ABOUT,
+                    dbc.NavLink("About",
+                                href=dash_app.URL_ABOUT if cf.demo else dash_app.URL_HOME,
                                 active=True if dash_app.URL_ABOUT == url_page else False,
                                 external_link=True),
-                    dbc.NavLink("Log out", href='/logout',
+                    dbc.NavLink("Log out",
+                                href='/logout',
                                 external_link=True),
                 ],
                 vertical=False,
