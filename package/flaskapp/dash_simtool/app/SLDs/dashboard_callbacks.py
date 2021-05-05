@@ -134,7 +134,10 @@ def _add_sim_progress_buttons(dash_app):
             socketio.emit('redraw', redraw_data, room=session['room'])
 
         else:
-            redraw_data['sim_step'] = session['sim_step'] if 'sim_step' in session else cf.start_sim_step
+            redraw_data['sim_step'] = session['sim_step'] if \
+                'sim_step' in session and \
+                session['sim_step'] is not None \
+            else cf.start_sim_step
 
         session['sim_step'] = redraw_data['sim_step']
 
