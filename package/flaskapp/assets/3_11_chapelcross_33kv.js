@@ -123,8 +123,8 @@ networks_undrawn["chapelcross33kv"] = {
         "MOFT5-1": StraightLine([366,675],"right",45,"11kV"),
         "MOFT5-2": StraightLine([366+45,675],"right",45,"11kV"),
 
-        "CHAP08_CHAPX3_1#0": StraightLine([615,535],"right",30),
-        "CHAP08_CHAPX3_1#1": StraightLine([645,535],"up",150),
+        "CHAP3-_CHAPX3_1#3": StraightLine([615,535],"right",30),
+        "CHAP3-_CHAPX3_1#4": StraightLine([645,535],"up",150),
         "GRNA3A": StraightLine([630,385],"right",123),
         "GRNA3B": StraightLine([630+123,385],"right",122),
         "GRNA3A_GRNAT1_1#0": StraightLine([655,460],"up",75),
@@ -185,7 +185,7 @@ networks_undrawn["chapelcross33kv"] = {
 
      },
     busbars:{
-        "SOLWAY": StraightLine([875,40],"right",130),
+        "CHAP3-_SOLWAY#7": StraightLine([875,40],"right",130),
         "CHAP3A1": StraightLine([25,175], "right",496),
         "CHAP3A2": StraightLine([25+496,175], "right",399),
         "STCR3-": StraightLine([25,370],"right",90),

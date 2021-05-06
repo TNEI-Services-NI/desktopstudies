@@ -57,7 +57,6 @@
   function update_generation_info(step_data){
     let generation_info_instance;
     for (let gen_ in components.generationInfo) {
-          console.log(components.generationInfo)
           generation_info_instance = components.generationInfo[gen_]
           if (gen_ in step_data["generators_active_power"]) {
                 generation_info_instance.setMW(step_data["generators_active_power"][gen_])
@@ -285,6 +284,7 @@
   }
 
   function update_sim_data(stage_, step_data){
+      console.log("updating sim data")
     steps[stage_] = step_data;
     update_line_colours(step_data);
     update_line_modals(step_data);
@@ -299,9 +299,8 @@
   }
 
   function master_draw(){
-
+    console.log("calling master draw")
     prepare_canvas(x_max, y_max);
-    console.log(networks_undrawn)
     dict_components = networks_undrawn[network]
     draw_network(dict_components, network, current_step);
     fetch_sim_data(case_network, network, current_step, option, scenario, update_sim_data

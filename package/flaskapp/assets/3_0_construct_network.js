@@ -238,9 +238,7 @@
   function construct_busbars(dict_components){
     console.log("making busbars")
     var bNodes = false
-    console.log(dict_components)
     for (let id_busbar in dict_components.busbars){
-        console.log(id_busbar)
 
         let busbar = dict_components.busbars[id_busbar]
 //        load = style_line(load)
@@ -521,11 +519,8 @@
   }
 
   function construct_generation_info(dict_components){
-      console.log(dict_components)
       for(let gen_info_id in dict_components.generationInfo){
-          console.log(gen_info_id)
           let gen_info = dict_components.generationInfo[gen_info_id]
-          console.log(gen_info)
           let componentID = gen_info_id
           let position = gen_info.pos
           let colour = "#d6ba00"
