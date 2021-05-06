@@ -11,6 +11,7 @@ networks_undrawn["chapelcross33kv"] = {
         "CHAP3-_SOLWAY#6": StraightLine([950, 40],"down",70),
 
         "CHAP3A1": StraightLine([25,175], "right",496),
+
         "CHAP3A2": StraightLine([25+496,175], "right",399),
 
 //        "CHAP3A1#0": StraightLine([33,175],"down",20),
@@ -21,14 +22,18 @@ networks_undrawn["chapelcross33kv"] = {
 
         "CHAP3A1#0": StraightLine([85,175], "down",20),
         "CHAP3-_STCR3-_1#0": StraightLine([85,195], "down",280),
+
             "STCR3-": StraightLine([25,370],"right",90),
             "STCR5-": StraightLine([70,440],"right",35,"0V",true),
         "ANANT1_CHAP3-_1#1": StraightLine([145,175],"down",105),
             "ANANT1_CHAP3-_1#2": StraightLine([145,280], "right",150),
         "CHAPX1_LOBI3A_1#0": StraightLine([250,175],"down",225),
             "CHAPX1_LOBI3A_1#1": StraightLine([250,340],"left",90),
-        "CHAP1-_CHAP3-_1#0": StraightLine([330,175],"up",120),
-            "CHAP1-_CHAP3-_1#1":StraightLine([330,110],"left",40),
+
+        "CHAP3A1#1": StraightLine([330,175],"up",20),
+        "CHAP1-_CHAP3-_1#0": StraightLine([330,155],"up",95),
+         "CHAP1-_CHAP3-_1#1":StraightLine([330,110],"left",40),
+
         "CHAP3-_MIBI3-_1#0": StraightLine([415,175],"down",75),
             "CHAP3-_MIBI3-_1#1": StraightLine([200,250],"right",215),
             "CHAP3-_MIBI3-_1#2":StraightLine([200,250],"down",275),
@@ -45,8 +50,11 @@ networks_undrawn["chapelcross33kv"] = {
         "CHAP3-_LOBI3B_1#0": StraightLine([625,175],"down",135),
             "CHAP3-_LOBI3B_1#1": StraightLine([530,310],"right",95),
             "CHAP3-_LOBI3B_1#2":StraightLine([530,310],"down",90),
-        "CHAP1-_CHAP3-_2#0": StraightLine([670,175],"up",115),
+
+        "CHAP3A2#0": StraightLine([670,175],"up",20),
+        "CHAP1-_CHAP3-_2#0": StraightLine([670,155],"up",115),
             "CHAP1-_CHAP3-_2#1": StraightLine([670,110],"left",40),
+
         "ANANT2_CHAP3-_1#0": StraightLine([700,175],"down",105),
         "CHAP3-_MINS3-_1#0": StraightLine([780,175],"down",110),
 //        "698 25": StraightLine([840,175],"down",60),
@@ -226,7 +234,7 @@ networks_undrawn["chapelcross33kv"] = {
         "699 GENERATOR": new Breaker("CHAP3-_STCR3-_1#0",0.8,""),
         "698 14": new Breaker("ANANT1_CHAP3-_1#1",0.19),
         "698 13": new Breaker("CHAPX1_LOBI3A_1#0",0.1),
-        "GRID 1": new Breaker("CHAP1-_CHAP3-_1#0",0.2),
+        "GRID 1": new Breaker("CHAP3A1#1",1),
         "698 12": new Breaker("CHAP3-_MIBI3-_1#0",0.3),
         "698 11": new Breaker("CHAP3-_GRNA3B_1#0",0.3),
         "698 01": new Breaker("CHAP3A1",1),
@@ -238,7 +246,7 @@ networks_undrawn["chapelcross33kv"] = {
         "698 26": new Breaker("CHAP3-_SOLWAY#3",0.26),
         "678 11": new Breaker("CHAP3-_SOLWAY#5",0.18),
         "678 12": new Breaker("CHAP3-_SOLWAY#6",0.3),
-        "GRID 2": new Breaker("CHAP1-_CHAP3-_2#0",0.2),
+        "GRID 2": new Breaker("CHAP3A2#0",1),
 
         "694": new Breaker("LOBI3A",1),
 

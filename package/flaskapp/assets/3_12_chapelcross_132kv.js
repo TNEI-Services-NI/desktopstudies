@@ -2,8 +2,6 @@
 //scale of 1000 x 1000, readjust with math...
 networks_undrawn["chapelcross132kv"]={
     lines:{
-    "CHAP3A1": StraightLine([125,865], "right",375),
-        "CHAP3A2": StraightLine([125+375,865], "right",375),
 
     "CHAP1-_CHAP3-_1#0": StraightLine([280,865],"up",175, "33kV"),
         "CHAP1-_CHAP3-_1#3": StraightLine([280,750],"left",40, "33kV"),
@@ -68,6 +66,7 @@ networks_undrawn["chapelcross132kv"]={
     "M1": StraightLine([35,570],"right",905,"132kV"),
     "R1": StraightLine([35,370],"right",905,"132kV"),
     "CHAP3A1": StraightLine([125,865], "right",375),
+    "CHAP3A2": StraightLine([125+375,865], "right",375),
 
     },
 

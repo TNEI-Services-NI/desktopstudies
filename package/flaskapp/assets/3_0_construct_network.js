@@ -297,12 +297,27 @@
                 this.closed = closed
                 if (closed == false){
                     rect.fill({ color: palette["background-color"] })
-                    rect.stroke({ color: 'white' })
+                    rect.stroke({ color: ine.graphic[0].attr().stroke })
                 } else if (closed == true){
                     rect.fill({ color: line.graphic[0].attr().stroke })
                     rect.stroke({ color: line.graphic[0].attr().stroke })
               }
               this.closed = closed
+            }
+
+            b.setEnergised = function(){
+
+            if(this.closed){
+                 this.UIElement.attr({
+                'stroke': this.line.dict_styling.stroke.live_color,
+          'fill': this.line.dict_styling.stroke.live_color
+            })}
+            else{
+            this.UIElement.attr({
+                'stroke': this.line.dict_styling.stroke.live_color,
+//                'fill': this.line.dict_styling.stroke.live_color})
+            })
+            }
             }
 
             b.UIElement.on("breaker_clicked",function(event){
@@ -315,6 +330,7 @@
                   }
                 })
             });
+
 
             components.breakers[id] = b
             component_modal(b)
