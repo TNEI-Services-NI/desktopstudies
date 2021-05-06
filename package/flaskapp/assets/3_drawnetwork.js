@@ -57,7 +57,6 @@
   function update_generation_info(step_data){
     let generation_info_instance;
     for (let gen_ in components.generationInfo) {
-          console.log(components.generationInfo)
           generation_info_instance = components.generationInfo[gen_]
           if (gen_ in step_data["generators_active_power"]) {
                 generation_info_instance.setMW(step_data["generators_active_power"][gen_])
@@ -155,8 +154,11 @@
   }
 
   function update_line_colours(step_data_){
+        console.log(step_data_)
 
     for(let idl in components.lines){
+
+
       let line_instance = components.lines[idl]
       let line_id_LF = idl.split("#")[0]
       if(((step_data_["lines_loading"][line_id_LF] !== 0)&&(step_data_["lines_loading"][line_id_LF] > 997))||
@@ -167,10 +169,10 @@
         ||((step_data_["transformers_loading"][line_id_LF] !== 0)&&(step_data_["transformers_loading"][line_id_LF] > 997))
       ){
 
-        line_instance.info.o_line.attr({stroke: "orange"});
-        line_instance.UIElement.attr({stroke: "orange"});
+//        line_instance.info.o_line.attr({stroke: "orange"});
+//        line_instance.UIElement.attr({stroke: "orange"});
 
-      } else if(((step_data_["lines_loading"][line_id_LF] !== 0)&&(step_data_["lines_loading"][line_id_LF] !== undefined))||
+      } if(((step_data_["lines_loading"][line_id_LF] !== 0)&&(step_data_["lines_loading"][line_id_LF] !== undefined))||
         ((step_data_["lines_active_power"][line_id_LF] !== 0)&&(step_data_["lines_active_power"][line_id_LF] !== undefined))||
         ((step_data_["lines_reactive_power"][line_id_LF] !== 0)&&(step_data_["lines_reactive_power"][line_id_LF] !== undefined))
         ||((step_data_["busbars_voltage"][line_id_LF] !== 0)&&(step_data_["busbars_voltage"][line_id_LF] !== undefined))
@@ -212,10 +214,7 @@
         ((step_data_["lines_reactive_power"][line_id_LF] !== 0)&&(step_data_["lines_reactive_power"][line_id_LF] !== undefined))||
         ((step_data_["busbars_voltage"][line_id_LF] !== 0)&&(step_data_["busbars_voltage"][line_id_LF] !== undefined))||
         ((step_data_["transformers_loading"][line_id_LF] !== 0)&&(step_data_["transformers_loading"][line_id_LF] !== undefined))){
-        breaker_instance.UIElement.attr({
-          'stroke': breaker_instance.line.dict_styling.stroke.live_color,
-          'fill': breaker_instance.line.dict_styling.stroke.live_color
-        })
+        breaker_instance.setEnergised();
       }
     }
   }
@@ -285,6 +284,7 @@
   }
 
   function update_sim_data(stage_, step_data){
+      console.log("updating sim data")
     steps[stage_] = step_data;
     update_line_colours(step_data);
     update_line_modals(step_data);
@@ -299,9 +299,8 @@
   }
 
   function master_draw(){
-
+    console.log("calling master draw")
     prepare_canvas(x_max, y_max);
-    console.log(networks_undrawn)
     dict_components = networks_undrawn[network]
     draw_network(dict_components, network, current_step);
     fetch_sim_data(case_network, network, current_step, option, scenario, update_sim_data

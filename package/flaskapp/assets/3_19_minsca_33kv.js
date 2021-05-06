@@ -2,27 +2,25 @@
 //scale of 1000 x 1000, readjust with math...
 networks_undrawn["minsca33kv"]={
     lines:{
-    "761": StraightLine([265,90],"right",105,"33kV"),
-    "761 CHAP A": StraightLine([285,90],"down",30,"33kV"),
-    "761 CHAP B": StraightLine([285,120],"down",30,"33kV"),
-    "761 CHAP C": StraightLine([255,150],"right",30,"33kV"),
-    "761 CHAP D": StraightLine([255,150],"up",80,"33kV"),
+    "MINS3-": StraightLine([265,90],"right",105,"33kV"),
+    "MINS3-#0": StraightLine([285,90],"down",30,"33kV"),
+    "CHAP3-_MINS3-_1#6": StraightLine([285,150],"up",30,"33kV"),
+    "CHAP3-_MINS3-_1#5": StraightLine([255,150],"right",30,"33kV"),
+    "CHAP3-_MINS3-_1#4": StraightLine([255,150],"up",80,"33kV"),
 
-    "761 MINS WF": StraightLine([345,90],"down",30,"33kV"),
-    "761 CUSTOMER": StraightLine([345,120],"down",85,"33kV"),
-    "761 CUSTOMER A": StraightLine([345,120],"down",85,"33kV"),
+    "MINS3-#1": StraightLine([345,90],"down",30,"33kV"),
+//    "761 CUSTOMER": StraightLine([345,120],"down",85,"33kV"),
+    "MINS3-_MINSC": StraightLine([345,120],"down",85,"33kV"),
         "POC": StraightLine([320,160],"right",50,"",true),
-    "761 CUSTOMER B": StraightLine([345,205],"down",55,"33kV"),
+    "MINS3-_MINS0G#0": StraightLine([345,205],"down",55,"33kV"),
 
-    "MINSCA BUSBAR": StraightLine([325,260],"right",425,"33kV"),
-
-    "CB01 A": StraightLine([365,260],"down",30,"33kV"),
+    "MINS3-_MINS0G#1": StraightLine([365,260],"down",30,"33kV"),
     "CB01 B": StraightLine([365,290],"down",80,"33kV"),
 
-    "CB02 A": StraightLine([480,260],"down",30,"33kV"),
+    "MINS3-_MINS0G#2": StraightLine([480,260],"down",30,"33kV"),
     "CB02 B": StraightLine([480,290],"down",80,"33kV"),
 
-    "CB04 A": StraightLine([730,260],"down",30,"33kV"),
+    "MINS3-_MINS0G#3": StraightLine([730,260],"down",30,"33kV"),
     "CB04 B": StraightLine([730,290],"down",85,"33kV"),
 
     "WTG09 A": StraightLine([480,370],"right",45,"33kV"),
@@ -201,19 +199,19 @@ networks_undrawn["minsca33kv"]={
 
     },
     busbars:{
-     "MINSCA BUSBAR": StraightLine([325,260],"right",425,"33kV"),
-    "761": StraightLine([265,90],"right",105,"33kV"),
+     "MINS3-_MINS0G": StraightLine([325,260],"right",425,"33kV"),
+    "MINS3-": StraightLine([265,90],"right",105,"33kV"),
 
     },
     breakers:{
 //        "761 CHAP": new Breaker("761 CHAP A",1),
-    "761 MINS WF": new Breaker("761 MINS WF",1),
-    "761 CUSTOMER": new Breaker("761 CUSTOMER",1),
-    "761 CHAP": new Breaker("761 CHAP A",1),
+    "761 MINS WF": new Breaker("MINS3-#1",1),
+    "761 CHAP": new Breaker("CHAP3-_MINS3-_1#6",1),
+    "761 CUSTOMER": new Breaker("MINS3-_MINS0G#0",0),
 
-    "CB01": new Breaker("CB01 A",1),
-    "CB02": new Breaker("CB02 A",1),
-    "CB04": new Breaker("CB04 A",1),
+    "CB01": new Breaker("MINS3-_MINS0G#1",1),
+    "CB02": new Breaker("MINS3-_MINS0G#2",1),
+    "CB04": new Breaker("MINS3-_MINS0G#3",1),
 
     },
 
