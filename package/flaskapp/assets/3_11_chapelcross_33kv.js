@@ -177,8 +177,8 @@ networks_undrawn["chapelcross33kv"] = {
         "MINS3-#0": StraightLine([880,610],"down",30),
         "MINS3-#1": StraightLine([940,610],"down",30),
         "MINS3-_MINSC": StraightLine([940,690],"up",50),
-        "MINS3-_MINS0G": StraightLine([940,690],"down",60),
-        "MINS0G": StraightLine([925,660],"right",30,"0V",true),
+        "MINS0G": StraightLine([940,690],"down",60),
+        "MINS0G POC": StraightLine([925,660],"right",30,"0V",true),
 
         "LAHO3B_NEWCT1_1#0": StraightLine([585,820],"up",30),
         "LAHO3B_NEWCT1_1#1": StraightLine([585,820],"right",50),
@@ -344,7 +344,7 @@ networks_undrawn["chapelcross33kv"] = {
         "EWHC0G_1": new Generator("EWHC3-_EWHC0G_1",1),
         // CRAIG II WINDFARM 11KV
         // "CRAG0B_1": new Generator("CRAG5B_LAHO5-_1",1),
-        "MINS0G_1": new Generator("MINS3-_MINS0G", 1),
+        "MINS0G_1": new Generator("MINS0G", 1),
         5: new Generator("CHAP3-_SOLWAY#6",1),
         },
     labels:{

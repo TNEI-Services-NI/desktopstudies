@@ -90,7 +90,7 @@ networks_undrawn["stevenscroft33kv"]={
 
     dataViews:{
 
-//        1: new DataView(350,235, ["MW","MVAR","kV","Amps","Hz"]),
+        1: new DataView(350,235, ["MW","MVAR","kV","Amps","Hz"]),
 
 
     },
