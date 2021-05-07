@@ -236,7 +236,6 @@
   }
 
   function construct_busbars(dict_components){
-    console.log("making busbars")
     var bNodes = false
     for (let id_busbar in dict_components.busbars){
 
@@ -440,7 +439,22 @@
         let id = i
         let closed = state == 'closed'
         let iso = {drawInfo:isolator, UIElement: isolator.graphic[0], closed: closed, id : id, line : line}
+        iso.redraw = function(){
+            let colour = this.line.o_line.attr().stroke
+            if(this.closed){
+                 this.UIElement.attr({
+                'stroke': colour,
+          'fill':colour
+            })}
+            else{
+            this.UIElement.attr({
+                'stroke':colour,
+//                'fill': this.line.dict_styling.stroke.live_color})
+            })
+            }
+            }
         components.isolators[id] = iso
+
     }
     }
 

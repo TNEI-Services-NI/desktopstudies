@@ -45,9 +45,14 @@ def read_restoration_step(case_network: str, network: str, option: str, scenario
                         .set_index("Name")
                  for k, v in dict_filenames.items()}
 
+    print(dict_data.items())
+
     for k, v in dict_data.items():
         if 'network' in v.columns:
+
             dict_data[k] = v.loc[v['network'] == network, :]
+            # print(k)
+            # print(v.loc[v['network'] == network, :])
 
     dict_data = {k: v.loc[:, 'Stage {}'.format(stage)].to_json()
                  for k, v in dict_data.items()}

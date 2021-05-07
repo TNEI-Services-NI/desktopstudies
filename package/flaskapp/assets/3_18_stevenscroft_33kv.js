@@ -26,7 +26,8 @@ networks_undrawn["stevenscroft33kv"]={
     "STCR_AUX#12": StraightLine([435,650],"right",170,"LV"),
     "STCR_AUX#13": StraightLine([395,770],"right",300,"LV"),
     "STCR_AUX#15": StraightLine([430,770],"down",65,"LV"),
-    "STCR_AUX#16": StraightLine([500,770],"down",65,"LV"),
+    "STCR_AUX#16": StraightLine([500,770],"down",50,"LV"),
+    "STCR_DIESEL": StraightLine([500,820],"down",45,"LV"),
     "STCR_AUX#17": StraightLine([580,770],"down",65,"LV"),
     "STCR_AUX#18": StraightLine([680,770],"down",65,"LV"),
 
@@ -63,7 +64,7 @@ networks_undrawn["stevenscroft33kv"]={
         "STCR_AUX#14": new Breaker("STCR_AUX#13",0.48,""),
 
         "STCR_AUX#15": new Breaker("STCR_AUX#15",0.5,""),
-        "STCR_AUX#16": new Breaker("STCR_AUX#16",0.5,""),
+        "STCR_AUX#16": new Breaker("STCR_AUX#16",1,""),
         "STCR_AUX#17": new Breaker("STCR_AUX#17",0.5,""),
         "STCR_AUX#18": new Breaker("STCR_AUX#18",0.5,""),
 
@@ -102,7 +103,7 @@ networks_undrawn["stevenscroft33kv"]={
     generators:{
 
         1: new Generator("STCR0G-_1",1),
-        2: new Generator("STCR_AUX#16",1),
+        2: new Generator("STCR_DIESEL",1),
         3: new Generator("STCR_AUX#3",1)
     }
 }

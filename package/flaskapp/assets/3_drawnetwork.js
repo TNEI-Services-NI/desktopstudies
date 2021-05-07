@@ -233,6 +233,15 @@
     }
   }
 
+  function update_isolators(step_data_){
+        console.log("redrawing")
+    for(let ido in components.isolators){
+      let iso_instance = components.isolators[ido]
+      iso_instance.redraw()
+    }
+  }
+
+
   function inc_state(case_network_){
     current_step += 1;
     //alert(current_step)
@@ -296,6 +305,7 @@
     update_generator_colours(step_data);
     update_available_power(step_data);
     update_generation_info(step_data);
+    update_isolators(step_data);
   }
 
   function master_draw(){

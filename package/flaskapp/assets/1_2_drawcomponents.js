@@ -1,4 +1,5 @@
 /**
+/**
  * draws a Transformer
  * @param  {SVG Line} svg line which the transformer is drawn on
  * @param  {double} position of transformer on line (between 0 and 1)
