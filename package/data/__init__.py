@@ -75,8 +75,8 @@ def _filter_format_data(comp_data_):
     comp_data_ = comp_data_.loc[:, comp_data_columns]
 
     comp_data_ = comp_data_.rename(columns={
-        'Stage - Post Blackout': "Stage -2",
-        "Stage - Pre Restoration": "Stage -1",
+        'Stage - Post Blackout': "Step -1",
+        "Stage - Pre Restoration": "Step -1",
     })
 
     return comp_data_
@@ -86,13 +86,13 @@ def get_data_cols(comp_data_):
     comp_cols_ = comp_data_.columns.tolist()
 
     name_col = comp_cols_.index('Name')
-    post_blackout_col = comp_cols_.index('Stage -2')
+    post_blackout_col = comp_cols_.index('Step -2')
     limit_cols = [x for x in range(name_col + 1, post_blackout_col)]
     stage_cols = [x for x in range(post_blackout_col + 1, len(comp_data_.columns))]
     return {'name': [name_col], 'limits': limit_cols,
             'post_blackout': [post_blackout_col], 'stages': stage_cols}, \
            {'name': ['Name'], 'limits': [comp_cols_[x] for x in limit_cols],
-            'post_blackout': ["Stage -2"], 'stages': [comp_cols_[x] for x in stage_cols]}
+            'post_blackout': ["Step -2"], 'stages': [comp_cols_[x] for x in stage_cols]}
 
 
 def read_LF_file(network="chapelcross", voltage="33kv", option="Opt5"):

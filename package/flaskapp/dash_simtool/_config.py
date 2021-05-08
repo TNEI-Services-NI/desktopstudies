@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
-start_sim_step = -1
+start_sim_step = -2
 
 step_map = {
     k: 'Stage {}'.format(k) if k > 0 else
-        'Post-blackout' if k == -1 else
-        'Pre-restoration' if k == 0 else
-        'Post-restoration' for k in range(-1, 25)
+        'Post-blackout' if k == -2 else
+        'Pre-restoration' if k == -1 else
+        'Post-restoration' for k in range(-2, 32)
 }
 
 entity_network_map = {
