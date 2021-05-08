@@ -104,16 +104,17 @@ function Tx_Callback(graphic_objects, name = false, mva = false){
  * @param  {string} name String object containing name/contents of child objects
  * @return {function} None Returns a function that adds passed object to breaker child objects, and adds text label.
  */
-function Gen_Callback(graphic_objects){
+function Gen_Callback(graphic_objects, name="GENERATOR"){
         return function(group){
             if(graphic_objects != undefined){
                 graphic_objects[0] = group
             }
+
             if(group.horizontal === true){
-                add_text(group, false, ["GENERATOR"], 0, -25* y_scaling, "#d3d3d3",function(group){})
+                add_text(group, false, [name], 0, -25* y_scaling, "#d3d3d3",function(group){})
             }
             else{
-                add_text(group, false, ["GENERATOR"], 0,25 * y_scaling,"#d3d3d3",function(group){})}
+                add_text(group, false, [name], 0,25 * y_scaling,"#d3d3d3",function(group){})}
             }
         }
 
@@ -269,7 +270,7 @@ function Generator(line_id,pos, type= "wind"){
     this.type = type
     this.graphic=[]
     this.live = live_dead
-    //TEMP Breaker callback
+
     this.callback = Gen_Callback(this.graphic)
 }
 

@@ -38,27 +38,22 @@ def read_breaker_states(network: str, option: str):
 
 
 def read_restoration_step(case_network: str, network: str, option: str, scenario: str, stage: int):
+    print(stage)
     dir_opt_scen = '/'.join([dir_restoration_steps, 'Opt' + option, case_network])
     dict_filenames = _fetch_files(dir_opt_scen)
     dict_data = {k: pd.read_csv('/'.join([dir_opt_scen, v]),
                                  dtype={'Name': str})
                         .set_index("Name")
                  for k, v in dict_filenames.items()}
+    #
+    # for k, v in dict_data.items():
+    #     if 'network' in v.columns:
+    #         dict_data[k] = v.loc[v['network'] == network, :]
 
-    print(dict_data.items())
 
-    for k, v in dict_data.items():
-        if 'network' in v.columns:
-
-            dict_data[k] = v.loc[v['network'] == network, :]
-            # print(k)
-            # print(v.loc[v['network'] == network, :])
-
-    dict_data = {k: v.loc[:, 'Stage {}'.format(stage)].to_json()
+    dict_data = {k: v.loc[:, 'Step {}'.format(stage)].to_json()
                  for k, v in dict_data.items()}
 
-    # df_restoration = df_restoration.set_index("component")
-    # df_restoration = df_restoration.loc[:, stage]
     return dict_data
 
 
@@ -80,7 +75,8 @@ def _filter_format_data(comp_data_):
     comp_data_ = comp_data_.loc[:, comp_data_columns]
 
     comp_data_ = comp_data_.rename(columns={
-        'Stage - Post Blackout': "Stage -1",
+        'Stage - Post Blackout': "Stage -2",
+        "Stage - Pre Restoration": "Stage -1",
     })
 
     return comp_data_
@@ -88,14 +84,15 @@ def _filter_format_data(comp_data_):
 
 def get_data_cols(comp_data_):
     comp_cols_ = comp_data_.columns.tolist()
+
     name_col = comp_cols_.index('Name')
-    post_blackout_col = comp_cols_.index('Stage -1')
+    post_blackout_col = comp_cols_.index('Stage -2')
     limit_cols = [x for x in range(name_col + 1, post_blackout_col)]
     stage_cols = [x for x in range(post_blackout_col + 1, len(comp_data_.columns))]
     return {'name': [name_col], 'limits': limit_cols,
             'post_blackout': [post_blackout_col], 'stages': stage_cols}, \
            {'name': ['Name'], 'limits': [comp_cols_[x] for x in limit_cols],
-            'post_blackout': ["Stage -1"], 'stages': [comp_cols_[x] for x in stage_cols]}
+            'post_blackout': ["Stage -2"], 'stages': [comp_cols_[x] for x in stage_cols]}
 
 
 def read_LF_file(network="chapelcross", voltage="33kv", option="Opt5"):
