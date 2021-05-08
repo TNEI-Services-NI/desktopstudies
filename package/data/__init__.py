@@ -76,7 +76,7 @@ def _filter_format_data(comp_data_):
 
     comp_data_ = comp_data_.rename(columns={
         'Stage - Post Blackout': "Step -1",
-        "Stage - Pre Restoration": "Step -1",
+        "Stage - Pre Restoration": "Step -2",
     })
 
     return comp_data_
