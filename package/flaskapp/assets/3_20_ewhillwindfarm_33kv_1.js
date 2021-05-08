@@ -99,8 +99,8 @@ networks_undrawn["ewehillwindfarm1"]={
     },
 
     breakers:{
-    "781 11": new Breaker("EWHC3-#0",1),
-    "781 12": new Breaker("EWHC3-#1",1),
+    "781 11": new Breaker("EWHC3-#1",1),
+    "781 12": new Breaker("EWHC3-#0",1),
     "781 CUSTOMER": new Breaker("EWHC3-_EWHC0G_1",1),
     "CB01": new Breaker("EWHC0G#1",1),
     "CB02": new Breaker("EWHC0G#2",1),
