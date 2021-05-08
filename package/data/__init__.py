@@ -38,7 +38,7 @@ def read_breaker_states(network: str, option: str):
 
 
 def read_restoration_step(case_network: str, network: str, option: str, scenario: str, stage: int):
-    print(stage)
+
     dir_opt_scen = '/'.join([dir_restoration_steps, 'Opt' + option, case_network])
     dict_filenames = _fetch_files(dir_opt_scen)
     dict_data = {k: pd.read_csv('/'.join([dir_opt_scen, v]),
