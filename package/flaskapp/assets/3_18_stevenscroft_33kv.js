@@ -13,8 +13,8 @@ networks_undrawn["stevenscroft33kv"]={
     "STCR0G-_1": StraightLine([270,390],"down",40,"11kV"),
     "STCR0G-_1#0": StraightLine([270,410],"right",40,"11kV"),
 
-    "STCR0G-_STCRLVT#0": StraightLine([385,410],"left",75,"11kV"),
-    "STCR0G-_STCRLVT#1": StraightLine([385,410],"down",50,"11kV"),
+    "STCR0G-_1#1": StraightLine([385,410],"left",75,"11kV"),
+    "STCR0G-_1#2": StraightLine([385,410],"down",50,"11kV"),
 
     "STCR_AUX#1": StraightLine([385,455],"down",85,"LV"),
     "STCR_AUX#2": StraightLine([350,540],"right",360,"LV"),
@@ -82,7 +82,7 @@ networks_undrawn["stevenscroft33kv"]={
 
     tx:{
         "699 STEP UP": new Tx("STCR3-_STCR0G",1,"","", "33kV"),
-        "699 Auxiliary Transformer": new Tx("STCR0G-_STCRLVT#1",1,["Auxiliary","Transformer","11/0.4kV"],"","33kV"),
+        "699 Auxiliary Transformer": new Tx("STCR0G-_1#2",1,["Auxiliary","Transformer","11/0.4kV"],"","33kV"),
     },
 
     isolators:{
@@ -107,7 +107,7 @@ networks_undrawn["stevenscroft33kv"]={
     generators:{
 
         "STCR5-_1": new Generator("STCR0G-_1",1),
-        2: new Generator("STCR_DIESEL",1, "DIESEL"),
-        3: new Generator("STCR_AUX#3",1, "MOTOR")
+        "STCR_D1": new Generator("STCR_DIESEL",1, "DIESEL"),
+        "STCR_MOTOR": new Generator("STCR_AUX#3",1, "MOTOR")
     }
 }
