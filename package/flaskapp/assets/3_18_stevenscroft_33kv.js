@@ -91,7 +91,11 @@ networks_undrawn["stevenscroft33kv"]={
 
     dataViews:{
 
-        1: new DataView(350,235, ["MW","MVAR","kV","Amps","Hz"]),
+        "STCR5-_1": new DataView("STCR5-_1", [-35, 0],
+          [
+            'generators_active_power',
+            'generators_reactive_power',
+          ]),
 
 
     },
@@ -102,7 +106,7 @@ networks_undrawn["stevenscroft33kv"]={
 
     generators:{
 
-        1: new Generator("STCR0G-_1",1),
+        "STCR5-_1": new Generator("STCR0G-_1",1),
         2: new Generator("STCR_DIESEL",1, "DIESEL"),
         3: new Generator("STCR_AUX#3",1, "MOTOR")
     }
