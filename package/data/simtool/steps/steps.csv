@@ -28,5 +28,7 @@ description,Post black-out,Pre-restoration,Energise Steven's Croft,"1.1 Energise
 (683-01)","14.4 Connect Langholm T2 
 (676-20)","14.5 Connect Gretna T1
 (673-10)"
-entity,all,all,DER,DER,DNO,DER,DNO,DER,DNO,DNO,TO,TO,TO,TO,,,,,,,,,,,,,,,,,,,,
-network,all,all,stevenscroft33kv,chapelcross33kv,chapelcross33kv,minsca33kv,chapelcross33kv,ewehillwindfarm1,chapelcross33kv,chapelcross33kv,chapelcross132kv,chapelcross132kv,chapelcross132kv,chapelcross132kv,,,,,,,,,,,,,,,,,,,,
+entity,all,all,DER,DER,DNO,DNO,DER,DNO,DER,DNO,TO,TO,TO,TO,TO,DER,DNO,DNO,DNO,DER,DNO,DNO,DNO,DER,DNO,DER,DNO,DNO,DNO,DNO,DNO,DNO,DNO,DNO
+network,all,all,stevenscroft33kv,stevenscroft33kv,chapelcross33kv,chapelcross33kv,minsca33kv,chapelcross33kv,ewehillwindfarm1,chapelcross33kv,chapelcross132kv,chapelcross132kv,gretna132kv,gretna132kv,gretna132kv,ewehillwindfarm2,chapelcross33kv,chapelcross33kv,chapelcross33kv,minsca33kv,chapelcross33kv,chapelcross33kv,chapelcross33kv,chapelcross33kv,chapelcross33kv,chapelcross33kv,chapelcross33kv,chapelcross33kv,chapelcross33kv,chapelcross33kv,chapelcross33kv,chapelcross33kv,chapelcross33kv,chapelcross33kv
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,stevenscroft33kv,stevenscroft33kv,,,minsca33kv,,ewehillwindfarm1,,,,,,,ewehillwindfarm2,,,,minsca33kv,,,,chapelcross33kv,,chapelcross33kv,,,,,,,,
