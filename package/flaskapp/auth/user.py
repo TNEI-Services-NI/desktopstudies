@@ -2,6 +2,8 @@ from flask_login import UserMixin
 from werkzeug.security import generate_password_hash
 
 from package.flaskapp.extensions import dbs as db
+import package.data as data
+import pandas as pd
 
 
 class User(db.Model, UserMixin):
@@ -26,4 +28,21 @@ def register_admin(dbs):
         # add the new user to the database
         dbs.session.add(new_user)
         dbs.session.commit()
+
+
+def register_required_users(dbs):
+    required = pd.read_csv(data.dir_auth_data + '/req_users.csv')
+    for req_user in required.iterrows():
+        email = req_user[1]['email']
+        name = req_user[1]['name']
+        entity = req_user[1]['entity']
+        user = User.query.filter_by(
+            email=email).first()  # if this returns a user, then the email already exists in database
+        if not user:  # if a user is found, we want to redirect back to signup page so user can try again
+            new_user = User(email=email, name=name, password=generate_password_hash(entity, method='sha256'),
+                            entity=entity)
+
+            # add the new user to the database
+            dbs.session.add(new_user)
+            dbs.session.commit()
 

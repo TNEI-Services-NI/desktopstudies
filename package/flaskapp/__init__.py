@@ -101,6 +101,7 @@ def _configure_database(app):
     def initialize_database():
         dbs.create_all()
         user.register_admin(dbs)
+        user.register_required_users(dbs)
 
     @app.teardown_request
     def shutdown_session(exception=None):
