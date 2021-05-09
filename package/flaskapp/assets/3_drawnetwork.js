@@ -154,7 +154,6 @@
   }
 
   function update_line_colours(step_data_){
-        console.log(step_data_)
 
     for(let idl in components.lines){
 
@@ -233,7 +232,6 @@
   }
 
   function update_isolators(step_data_){
-        console.log("redrawing")
     for(let ido in components.isolators){
       let iso_instance = components.isolators[ido]
       iso_instance.redraw()
@@ -242,15 +240,26 @@
 
 
   function inc_state(case_network_){
-    current_step += 1;
-    //alert(current_step)
-    fetch_sim_data(case_network_, network, current_step, option, scenario, update_sim_data);
-    socket.emit('sync_sim_step', {
-      'sim_step': current_step,
-      'entity': entity,
-      'broadcast': true
-    });
-    $("#sim_status_div").html("Simulation status: " + current_step)
+    current_step += 1
+    $("body").css("cursor", "progress");
+
+    setTimeout(function(){
+      socket.emit('sync_sim_step', {
+        'sim_step': current_step,
+        'entity': entity,
+        'network': network,
+        'progress': true,
+        'broadcast': true
+      }, function (data){
+
+        network = data['network']
+        fetch_sim_data(case_network_, network, current_step, option, scenario, update_sim_data);
+
+      });
+      $("#sim_status_div").html("Simulation status: " + current_step)
+        $("body").css("cursor", "default");
+
+    }, 1000)
   }
 
   /**
@@ -294,10 +303,11 @@
 
     construct_generation_info(dict_components)
 
+    construct_action()
+
   }
 
   function update_sim_data(stage_, step_data){
-      console.log("updating sim data")
     steps[stage_] = step_data;
     update_line_colours(step_data);
     update_line_modals(step_data);
@@ -354,6 +364,8 @@
   var username = undefined
   var entity = undefined
 
+  var action = undefined
+
   socket.on('check_join_draw', function(data_join_draw) {
     if(username === undefined){
       username = data_join_draw['username']
@@ -392,7 +404,6 @@
   socket.on('redraw', function(data) {
     current_step = data['sim_step'];
     network = data['network'];
-    socket.emit('sync_sim_step', {'sim_step': current_step});
     master_draw();
   });
 

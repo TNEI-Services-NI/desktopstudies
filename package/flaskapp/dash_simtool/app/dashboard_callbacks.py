@@ -91,6 +91,7 @@ def add_sim_progress_buttons(dash_app, URL_PAGE):
         ctx = dash.callback_context
         triggered_object = ctx.triggered[0]['prop_id'].split('.')[0]
         sim_status = int(sim_status.split("Simulation status: ")[1])
+
         redraw_data = {'sim_step': sim_status,
                               'username': session.get('username')}
 

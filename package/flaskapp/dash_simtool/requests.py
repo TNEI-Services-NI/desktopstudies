@@ -33,6 +33,12 @@ def server_get_network_view(entity, sim_step, option="5"):
     return network
 
 
+def server_get_actions(entity, sim_step, option="5"):
+    df_actions = simtool_data.read_actions(option)
+    action = df_actions.loc[entity, sim_step]
+    return action
+
+
 @simtool_bp.route("/get_network_view/", methods=['POST'])
 @login_required
 def get_network_view():
@@ -40,6 +46,15 @@ def get_network_view():
     option = data['option']
     df_network_view = simtool_data.read_network_views(option)
     return jsonify(df_network_view.to_dict())
+
+
+@simtool_bp.route("/get_action/", methods=['POST'])
+@login_required
+def get_action():
+    data = request.form
+    option = data['option']
+    df_action = simtool_data.read_actions(option)
+    return jsonify(df_action.to_dict())
 
 
 @simtool_bp.route("/get_state/", methods=['POST'])
@@ -106,9 +121,6 @@ def on_join(data):
 
 @socketio.on('redraw')
 def redraw(data):
-    print(data['entity'])
-    print(data['sim_step'])
-    print(server_get_network_view(data['entity'], data['sim_step'], option="5"))
     socketio.emit('redraw', {
         'sim_step': data['sim_step'],
         'network': server_get_network_view(data['entity'], data['sim_step'], option="5"),
@@ -119,10 +131,23 @@ def redraw(data):
 def connection(data):
     """This will emit a message to all users when this is called.
     This would be useful for simulation synchronisation"""
+    progress = data['progress']
+
+    if progress:
+        next_network = server_get_network_view(data['entity'], data['sim_step'], option="5")
+    else:
+        next_network = data['network']
+
     session['sim_step'] = data['sim_step']
+
     broadcast = data['broadcast'] if 'broadcast' in data else False
+
+    switch_network = data['network'] != next_network
+
+    data['switch_network'] = switch_network
+
     if broadcast:
-        socketio.emit('redraw', {
-            'sim_step': data['sim_step'],
-            'network': server_get_network_view(data['entity'], data['sim_step'], option="5"),
-        })
+        data['network'] = next_network
+        socketio.emit('redraw', data)
+
+    return data
