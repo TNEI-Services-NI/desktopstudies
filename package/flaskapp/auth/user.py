@@ -15,6 +15,7 @@ class User(db.Model, UserMixin):
     def __repr__(self):
         return str(self.name)
 
+
 def register_admin(dbs):
     user = User.query.filter_by(
         email='admin@admin').first()  # if this returns a user, then the email already exists in database

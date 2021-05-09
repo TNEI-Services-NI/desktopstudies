@@ -411,15 +411,19 @@ def sidebar(URL_PAGE):
         html.Div(id='sim_status_div', children="Siulation status: -1"),
         html.Hr(),
     ]
+    _entity_view = [
+        html.Div(id='entity_view', children=""),
+        html.Hr(),
+    ]
     _debug = [
         dbc.Button("debug", id="debug_button", style={"margin-top": "15px", "margin-left": "15px"}),
         html.Hr(),
     ]
 
     if 'SLDs' in URL_PAGE:
-        _sidebar_widgets = sum([_heading, _dropdown, _sim_buttons, _sim_status, _debug], [])
+        _sidebar_widgets = sum([_heading, _dropdown, _sim_buttons, _sim_status, _entity_view, _debug], [])
     elif 'home' in URL_PAGE:
-        _sidebar_widgets = sum([_heading, _sim_buttons, _sim_status, _debug], [])
+        _sidebar_widgets = sum([_heading, _sim_buttons, _sim_status, _entity_view, _debug], [])
 
     sidebar = html.Div(
         _sidebar_widgets,

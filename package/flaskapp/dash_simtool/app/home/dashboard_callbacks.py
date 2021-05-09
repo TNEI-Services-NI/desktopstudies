@@ -38,8 +38,8 @@ def _add_network_redraw(dash_app):
 
 def init_callbacks(dash_app):
     dash_app = _add_network_redraw(dash_app)
+    dash_app = shared_clbks.add_sim_progress_buttons(dash_app)
     dash_app = shared_clbks.add_legend_button(dash_app)
-
     return dash_app
 
 
