@@ -1,3 +1,32 @@
-Issues
-- ChapelcrossGretna1.csv missing from breaker states (DG didn't send this among others)
-	- 
+data link
+- fix breaker names stevens croft 
+- Breakers in stevens croft all closed apart from south generator 
+
+views
+- DNO view ewehill-gretna step 13
+
+graphic
+- add loads on left side of split busbars 
+- add current kA
+- add data view for each WFs 
+- link power available to asset rating (assuming high wind) 
+- add dataviews for each wind farm on all diagrams 
+- add ewe hill customer breaker (just as minsca) 
+
+colouring
+- earthing transformers colouring chapelcross 33kv 
+- transformer colour middlebie
+- gretna 132 colours
+- chapelcross 132kv breakers 204 and 604 colour of live lines
+- CHAP breaker chapelcross 33kv should outline green when energised but not open
+- Stevens croft diagram colouring as 33kv chapelcross
+
+steps
+- add step for closing grid 1A ewehill gretna THEN WG2 ewehill 2
+
+values
+- MINS0G voltage 0 step 3
+- EWHC0G voltage 0 step 5
+
+breaker states
+- 698 26 solway breaker open prerestoration

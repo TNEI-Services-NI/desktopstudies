@@ -365,7 +365,7 @@ def navbar_controls(url_page):
 def navbar(url_page):
     # nav bar
     _nav_bar = dbc.NavbarSimple(brand='Desktop Studies Communications Tool',
-                                color='#80361e',
+                                color='#c35d09',
                                 dark=True,
                                 id='nav_bar',
                                 children=navbar_controls(url_page),

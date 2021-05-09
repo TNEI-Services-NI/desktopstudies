@@ -1,4 +1,4 @@
-,Step -2,Step -1,Step 0,Step 1,Step 2,Step 3,Step 4,Step 5,Step 6,Step 7,Step 8,Step 9,Step 10,Step 11,Step 12,Step 13,Step 14,Step 15,Step 16,Step 17,Step 18,Step 19,Step 20,Step 21,Step 22,Step 23,Step 24,Step 25,Step 26,Step 27,Step 28,Step 29,Step 30,Step 31
+,-2,-1,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31
 step_index,Stage - Post Blackout,Step -1,Step 0,Step 1,Step 2,Step 3,Step 4,Step 5,Step 6,Step 7,Step 8,Step 9,Step 10,Step 11,Step 12,Step 13,Step 14,Step 15,Step 16,Step 17,Step 18,Step 19,Step 20,Step 21,Step 22,Step 23,Step 24,Step 25,Step 26,Step 27,Step 28,Step 29,Step 30,Step 31
 description,Post black-out,Pre-restoration,Energise Steven's Croft,"1.1 Energise Steven's croft BB
 (CUSTOMER)","1.2 Energise Steven's Croft cable to Chapelcross
@@ -28,5 +28,7 @@ description,Post black-out,Pre-restoration,Energise Steven's Croft,"1.1 Energise
 (683-01)","14.4 Connect Langholm T2 
 (676-20)","14.5 Connect Gretna T1
 (673-10)"
-entity,all,all,DER Stevenscroft,DNO,DNO,DER Minsca,DNO,DER Ewe Hill,DNO,DNO,TO,TO,TO,TO,,,,,,,,,,,,,,,,,,,,
-network,all,all,stevenscroft33kv,chapelcross33kv,chapelcross33kv,minsca33kv,chapelcross33kv,ewehillwindfarm1,chapelcross33kv,chapelcross33kv,chapelcross132kv,chapelcross132kv,chapelcross132kv,chapelcross132kv,,,,,,,,,,,,,,,,,,,,
+entity,all,all,DER,DER,DNO,DNO,DER,DNO,DER,DNO,TO,TO,TO,TO,TO,DER,DNO,DNO,DNO,DER,DNO,DNO,DNO,DER,DNO,DER,DNO,DNO,DNO,DNO,DNO,DNO,DNO,DNO
+network,all,all,stevenscroft33kv,stevenscroft33kv,chapelcross33kv,chapelcross33kv,minsca33kv,chapelcross33kv,ewehillwindfarm1,chapelcross33kv,chapelcross132kv,chapelcross132kv,gretna132kv,gretna132kv,gretna132kv,ewehillwindfarm2,chapelcross33kv,chapelcross33kv,chapelcross33kv,minsca33kv,chapelcross33kv,chapelcross33kv,chapelcross33kv,chapelcross33kv,chapelcross33kv,chapelcross33kv,chapelcross33kv,chapelcross33kv,chapelcross33kv,chapelcross33kv,chapelcross33kv,chapelcross33kv,chapelcross33kv,chapelcross33kv
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,stevenscroft33kv,stevenscroft33kv,,,minsca33kv,,ewehillwindfarm1,,,,,,,ewehillwindfarm2,,,,minsca33kv,,,,chapelcross33kv,,chapelcross33kv,,,,,,,,
