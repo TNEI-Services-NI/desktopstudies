@@ -6,6 +6,7 @@ import package.flaskapp.dash_simtool._config as cf
 import package.flaskapp.dash_simtool.app.dashboard_callbacks as shared_clbks
 from package.flaskapp import socketio
 from package.flaskapp.dash_simtool.app import URL_HOME
+import package.flaskapp.dash_simtool.requests as requests
 
 
 def _add_network_redraw(dash_app):
@@ -19,18 +20,20 @@ def _add_network_redraw(dash_app):
             session['sim_step'] is not None \
             else cf.start_sim_step
 
-        network = cf.entity_network_map[session['entity'] if 'entity' in session else 'Observer']
+        # network = cf.entity_network_map[session['entity'] if 'entity' in session else 'Observer']
+        network = requests.server_get_network_view(session['entity'], sim_step)
 
         session['room'] = session['entity']
         session['network_main'] = network
         session['sim_step'] = sim_step
-
+        print(session['entity'])
         socketio.emit('check_join_draw', {
             'network': network,
             'sim_step': sim_step,
             'local': True,
             'username': session.get('username'),
-            'room': session.get('room')
+            'room': session.get('room'),
+            'entity': session['entity']
         })
         return [network]
 

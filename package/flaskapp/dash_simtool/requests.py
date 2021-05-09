@@ -12,8 +12,8 @@ from flask_socketio import send, emit
 @login_required
 def receive_breaker():
     data = request.form
-    print("breaker ID: "+ data["breaker"])
-    print("state: "+ data["state"])
+    print("breaker ID: " + data["breaker"])
+    print("state: " + data["state"])
     return jsonify("message received securely")
 
 
@@ -25,6 +25,36 @@ def init_breakers():
     option = data['option']
     df_breakerstates = simtool_data.read_breaker_states(network, option)
     return jsonify(df_breakerstates.to_dict())
+
+
+def server_get_network_view(entity, sim_step, option="5"):
+    df_network_view = simtool_data.read_network_views(option)
+    network = df_network_view.loc[entity, sim_step]
+    return network
+
+
+def server_get_actions(entity, sim_step, option="5"):
+    df_actions = simtool_data.read_actions(option)
+    action = df_actions.loc[entity, sim_step]
+    return action
+
+
+@simtool_bp.route("/get_network_view/", methods=['POST'])
+@login_required
+def get_network_view():
+    data = request.form
+    option = data['option']
+    df_network_view = simtool_data.read_network_views(option)
+    return jsonify(df_network_view.to_dict())
+
+
+@simtool_bp.route("/get_action/", methods=['POST'])
+@login_required
+def get_action():
+    data = request.form
+    option = data['option']
+    df_action = simtool_data.read_actions(option)
+    return jsonify(df_action.to_dict())
 
 
 @simtool_bp.route("/get_state/", methods=['POST'])
@@ -61,7 +91,6 @@ def test_connect():
 
 @socketio.on('check_join_draw')
 def on_check_join_draw(data):
-
     username = data['username']
 
     if 'local' in data:
@@ -90,29 +119,35 @@ def on_join(data):
     return data
 
 
-@socketio.on('shout_server')
-def shout_server(data):
-    print("Server: ahhhhh")
-
-
 @socketio.on('redraw')
 def redraw(data):
-    print("redraw server")
-    socketio.emit('redraw', {'sim_step': data['sim_step']}, room=session['room'])
-
-
-@socketio.on('ping_server')
-def ping_server(data):
-    print('pong')
-    return {'response': 'pong'}
+    socketio.emit('redraw', {
+        'sim_step': data['sim_step'],
+        'network': server_get_network_view(data['entity'], data['sim_step'], option="5"),
+    }, room=session['room'])
 
 
 @socketio.on('sync_sim_step')
 def connection(data):
     """This will emit a message to all users when this is called.
     This would be useful for simulation synchronisation"""
-    session['sim_step'] = data['sim_step']
-    broadcast = data['broadcast'] if 'broadcast' in data else False
-    if broadcast:
-        socketio.emit('redraw', {'sim_step': data['sim_step']})
+    progress = data['progress']
 
+    if progress:
+        next_network = server_get_network_view(data['entity'], data['sim_step'], option="5")
+    else:
+        next_network = data['network']
+
+    session['sim_step'] = data['sim_step']
+
+    broadcast = data['broadcast'] if 'broadcast' in data else False
+
+    switch_network = data['network'] != next_network
+
+    data['switch_network'] = switch_network
+
+    if broadcast:
+        data['network'] = next_network
+        socketio.emit('redraw', data)
+
+    return data

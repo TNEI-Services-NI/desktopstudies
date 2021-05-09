@@ -853,6 +853,33 @@ function draw_SGT(dict_line,callback){
 
 }
 
+
+function draw_action_button(){
+  var group = draw.group();
+
+    $.ajax({
+    type: "POST",
+    url: "/simtool_bp/get_action/",
+    data: {"option": option},
+    }).done(function( action_values ) {
+      action = action_values[current_step][entity]
+      if(action !== ''){
+        let rect1 = draw.rect(x_max*0.1,y_max*0.07).fill("yellow").center(x_max*0.8,y_max*0.82);
+        add_text(rect1, false, ["Take action: ", action], 0, 0, "#000000", 12, function(){})
+        rect1.click(function() {
+          action = undefined
+          inc_state(case_network)
+        })
+      }
+
+    })
+
+
+
+
+}
+
+
 function draw_line(line,id_line, type="busbar"){
         bNodes = false
 

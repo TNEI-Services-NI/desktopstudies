@@ -35,7 +35,6 @@ function post_breaker(breakerID,state){
 function post_breakers(breakers){
   let breakers_ = {}
   for(let idb in breakers){
-    console.log(breakers[idb]['closed'])
     breakers_[idb] = undefined
   }
 
@@ -81,9 +80,7 @@ function check_breakers(network_, option_, breakers, step, callback){
         if(breaker_matches_current){
           alert("Reset to original state")
         }
-        if(breaker_matches_next){
-          socket.emit('redraw', {'sim_step': int_next_step});
-        }
+
         callback(breaker_matches_next);
       }
     });
@@ -106,7 +103,6 @@ function init_breakers(network_, option_, breakers, step, callback){
       url: "/simtool_bp/check_breakers/",
       data: {"network": network_, "option": option_},
       success: function(restoration_breaker_states){
-      console.log(restoration_breaker_states)
         for (let breaker in breakers){
           if (restoration_breaker_states[step][breaker] === undefined){
             breakers_new[breaker].state = "undefined";
@@ -179,6 +175,7 @@ function init_network(callback){
   }
 
 const breaker_clicked_event = new CustomEvent('breaker_clicked')
+const action_clicked_event = new CustomEvent('action_clicked')
 const component_data_changed_event = new CustomEvent('component_data_changed')
 
 /**

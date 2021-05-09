@@ -116,10 +116,10 @@ function Gen_Callback(graphic_objects, name=""){
                 type = "GENERATOR"
             }
             if(group.horizontal === true){
-                add_text(group, false, [name, type], 0, -0* y_scaling, "#d3d3d3",font_size, function(group){})
+                add_text(group, false, [type, name], 0, -0* y_scaling, "#d3d3d3",font_size, function(group){})
             }
             else{
-                add_text(group, false, [name, type], 0,40 * y_scaling,"#d3d3d3",font_size, function(group){})}
+                add_text(group, false, [type, name], 0,30 * y_scaling,"#d3d3d3",font_size, function(group){})}
             }
         }
 

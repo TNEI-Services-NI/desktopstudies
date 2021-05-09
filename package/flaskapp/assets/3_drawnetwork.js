@@ -154,7 +154,6 @@
   }
 
   function update_line_colours(step_data_){
-        console.log(step_data_)
 
     for(let idl in components.lines){
 
@@ -233,7 +232,6 @@
   }
 
   function update_isolators(step_data_){
-        console.log("redrawing")
     for(let ido in components.isolators){
       let iso_instance = components.isolators[ido]
       iso_instance.redraw()
@@ -242,10 +240,21 @@
 
 
   function inc_state(case_network_){
-    current_step += 1;
-    //alert(current_step)
-    fetch_sim_data(case_network_, network, current_step, option, scenario, update_sim_data);
-    socket.emit('sync_sim_step', {'sim_step': current_step, 'broadcast': true});
+    current_step += 1
+    $("body").css("cursor", "progress");
+
+    setTimeout(function(){
+      socket.emit('sync_sim_step', {
+        'sim_step': current_step,
+        'entity': entity,
+        'network': network,
+        'progress': true,
+        'broadcast': true
+      }, function (data){});
+      $("#sim_status_div").html("Simulation status: " + current_step)
+        $("body").css("cursor", "default");
+
+    }, 1000)
   }
 
   /**
@@ -289,10 +298,11 @@
 
     construct_generation_info(dict_components)
 
+    construct_action()
+
   }
 
   function update_sim_data(stage_, step_data){
-      console.log("updating sim data")
     steps[stage_] = step_data;
     update_line_colours(step_data);
     update_line_modals(step_data);
@@ -308,7 +318,6 @@
   }
 
   function master_draw(){
-    console.log("calling master draw")
     prepare_canvas(x_max, y_max);
     dict_components = networks_undrawn[network]
     draw_network(dict_components, network, current_step);
@@ -348,11 +357,16 @@
 
   var room = undefined
   var username = undefined
-  var sid = undefined
+  var entity = undefined
+
+  var action = undefined
 
   socket.on('check_join_draw', function(data_join_draw) {
     if(username === undefined){
       username = data_join_draw['username']
+    }
+    if(entity === undefined){
+      entity = data_join_draw['entity']
     }
     if(username === data_join_draw['username']){
       socket.emit('check_join_draw', data_join_draw, function (data_check_rooms){});
@@ -372,6 +386,10 @@
     socket.emit('list_rooms', data);
   });
 
+  socket.on('debug', function(data) {
+
+  });
+
 
   socket.on('draw', function(data) {
 
@@ -380,7 +398,7 @@
 
   socket.on('redraw', function(data) {
     current_step = data['sim_step'];
-    socket.emit('sync_sim_step', {'sim_step': current_step});
+    network = data['network'];
     master_draw();
   });
 

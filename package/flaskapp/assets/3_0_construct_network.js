@@ -6,7 +6,6 @@
     components = {
                     breakers: [],
                     lines: [],
-                    lines: [],
                     loads:[],
                     busbars:[],
                     labels:[],
@@ -288,7 +287,6 @@
             }
 
             b.setState = function(closed){
-                console.log("Setting the state of this breaker")
                 line = components.breakers[id].line
                 rect = components.breakers[id].UIElement
 
@@ -296,7 +294,7 @@
                 this.closed = closed
                 if (closed == false){
                     rect.fill({ color: palette["background-color"] })
-                    rect.stroke({ color: ine.graphic[0].attr().stroke })
+                    rect.stroke({ color: line.graphic[0].attr().stroke })
                 } else if (closed == true){
                     rect.fill({ color: line.graphic[0].attr().stroke })
                     rect.stroke({ color: line.graphic[0].attr().stroke })
@@ -622,6 +620,10 @@
 
   }
 
+  function construct_action(){
+    draw_action_button();
+  }
+
   function construct_SGTs(dict_components){
       for(let i in dict_components.SGTs){
         let sgt = dict_components.SGTs[i]
@@ -629,7 +631,7 @@
         let line = dict_components.lines[line_id]
         let name = sgt.name
         let callback = sgt.callback
-        draw_SGT(line,callback)
+        draw_SGT(line, callback)
 
         let id = i
         let s = {info:sgt, UIElement: sgt.graphic[0], id : id}

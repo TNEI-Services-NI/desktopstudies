@@ -19,3 +19,5 @@ entity_network_map = {
 }
 
 demo = False
+
+debug = False
