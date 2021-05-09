@@ -6,6 +6,7 @@ from flask import session
 import package.flaskapp.dash_simtool._config as cf
 import package.flaskapp.dash_simtool.app.dashboard_callbacks as shared_clbks
 from package.flaskapp import socketio
+from package.flaskapp.dash_simtool.app import URL_SLDS
 
 
 def _add_network_redraw(dash_app):
@@ -32,15 +33,15 @@ def _add_network_redraw(dash_app):
         triggered_object = ctx.triggered[0]
         if triggered_object['value'] is None:
             session['room'] = session['entity']
-            if 'network' not in session:
+            if 'network_explore' not in session:
                 network = "chapelcross33kv"
             else:
-                network = session['network']
+                network = session['network_explore']
         else:
             network = triggered_object['prop_id'].split('.')[0]
 
         # store network, sim_step
-        session['network'] = network
+        session['network_explore'] = network
         sim_step = session['sim_step'] if 'sim_step' in session else cf.start_sim_step
         session['sim_step'] = sim_step
 
@@ -59,7 +60,7 @@ def _add_network_redraw(dash_app):
 
 def init_callbacks(dash_app):
     dash_app = _add_network_redraw(dash_app)
-    dash_app = shared_clbks.add_sim_progress_buttons(dash_app)
+    dash_app = shared_clbks.add_sim_progress_buttons(dash_app, URL_SLDS)
     dash_app = shared_clbks.add_legend_button(dash_app)
 
     return dash_app

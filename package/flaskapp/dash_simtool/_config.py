@@ -12,8 +12,8 @@ step_map = {
 entity_network_map = {
     'ESO': 'chapelcross132kv',
     'DNO': 'chapelcross33kv',
-    'TO': 'chapelcross132kv',
-    'DER': 'ewehill-gretna_132kv',
+    'TO': 'gretna400kv',
+    'DER': 'ewehillgretna',
     'Observer': 'chapelcross33kv',
     'admin': 'chapelcross33kv',
 }

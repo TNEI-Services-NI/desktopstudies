@@ -69,7 +69,7 @@ def _add_toggle_sidebar(dash_app):
     return dash_app
 
 
-def add_sim_progress_buttons(dash_app):
+def add_sim_progress_buttons(dash_app, URL_PAGE):
     @dash_app.callback([
         Output("sim_state", "data"),
         Output("sim_status_div", "children"),

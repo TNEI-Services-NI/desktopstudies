@@ -1,19 +1,13 @@
 # -*- coding: utf-8 -*-
 import dash
-import dash_html_components as html
-import dash_bootstrap_components as dbc
 import dash_core_components as dcc
-import os
-import json
-from flask import session
-from package.flaskapp import socketio
+import dash_html_components as html
 
 # INT IMPORTS
 import package.flaskapp.dash_simtool as dash_simtool
 import package.flaskapp.dash_simtool.app.dashboard_components as components
-import package.flaskapp.dash_simtool.app.home.dashboard_callbacks as callbacks
 import package.flaskapp.dash_simtool.app.dashboard_styling as styling
-import package.flaskapp.dash_simtool._config as cf
+import package.flaskapp.dash_simtool.app.home.dashboard_callbacks as callbacks
 
 URL_PAGE = dash_simtool.app.URL_HOME
 STYLING_SIDEBAR = styling.CONTENT_STYLE_SIDEBAR_HIDDEN
