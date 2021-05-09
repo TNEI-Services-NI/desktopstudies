@@ -10,7 +10,7 @@ NAVBAR_STYLE = {
 }
 
 CONTENT_STYLE_SIDEBAR_HIDDEN = {
-    "marginLeft": "0rem",
+    "marginLeft": "5rem",
     "marginTop": NAVBAR_STYLE['height'],
 }
 

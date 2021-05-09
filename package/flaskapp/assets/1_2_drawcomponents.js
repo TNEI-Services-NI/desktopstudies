@@ -861,7 +861,6 @@ function draw_action_button(){
     type: "POST",
     url: "/simtool_bp/get_action/",
     data: {"option": option},
-//      dataType: 'application/json'
     }).done(function( action_values ) {
       action = action_values[current_step][entity]
       if(action !== ''){

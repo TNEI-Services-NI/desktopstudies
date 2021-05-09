@@ -250,12 +250,7 @@
         'network': network,
         'progress': true,
         'broadcast': true
-      }, function (data){
-
-        network = data['network']
-        fetch_sim_data(case_network_, network, current_step, option, scenario, update_sim_data);
-
-      });
+      }, function (data){});
       $("#sim_status_div").html("Simulation status: " + current_step)
         $("body").css("cursor", "default");
 
