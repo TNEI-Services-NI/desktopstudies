@@ -1,118 +1,116 @@
-breaker,-1,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14
-694,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-123 10,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-123 12,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-662 01,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,closed
-662 10,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-662 20,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-673 01,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-673 10,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,closed
-673 20,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-675 10,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-676 01,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-676 10,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-676 20,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,closed
-678 11,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-678 12,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-679 01,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,closed
-679 10,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-679 20,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-682 10,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-683 01,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,closed
-683 10,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-683 20,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-692 01,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-694 12,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-694 13,closed,open,open,open,open,open,open,open,open,open,open,open,open,closed,closed,closed
-694 22,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-694 23,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,closed,closed
-698 01,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-698 11,closed,open,open,open,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed
-698 12,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-698 13,closed,open,open,open,open,open,open,open,open,open,open,open,closed,closed,closed,closed
-698 14,open,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed
-698 15,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-698 16,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-698 21,closed,open,open,open,open,open,open,open,open,open,open,closed,closed,closed,closed,closed
-698 22,open,open,open,open,open,open,open,open,open,open,open,open,closed,closed,closed,closed
-698 23,open,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed
-698 24,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-698 25,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-698 26,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-699 CHAP,closed,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-699 GENERATOR,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-761 CHAP,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-761 CUSTOMER,closed,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-761 WINDFARM,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-780 11,closed,open,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed
-780 12,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-780 13,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-780 14,closed,open,open,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed
-781 11,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-781 12,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-785 21,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-785 22,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-785 CUSTOMER,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-GRID 1,closed,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-GRID 2,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-691 01,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-120,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-205,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-330,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-410,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-500,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-615,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-710,closed,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-800,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-915,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-1005,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-1105,closed,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-305,closed,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-205,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-1005,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-805,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-GRID 1A,closed,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-WG2,closed,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-GRID 1B,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-3L5,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-2L5,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-761 11,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-761 12,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-CB01,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-CB02,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-CB04,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-120,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-780,closed,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-680,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-505,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-405,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-805,closed,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-X442,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-X448,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
-X405,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-X230,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-X110,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-X510,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-X605,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-761 MINS WF,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-699 CUSTOMER,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-699 A,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-699 B,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-STEVENS AUX 1,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-STEVENS AUX 2,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-STEVENS AUX 3,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-STEVENS AUX 4,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-STEVENS AUX 5,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-STEVENS AUX 6,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-STEVENS AUX 7,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-STEVENS AUX 8,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-STEVENS AUX 9,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-STEVENS AUX 10,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-STEVENS AUX 11,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-STEVENS AUX 12,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-STEVENS AUX 13,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-STEVENS AUX 14,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-STEVENS AUX 15,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-STEVENS AUX 16,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-STEVENS AUX 17,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
-STEVENS AUX 18,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+breaker,-2,-1,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31
+694,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+123 10,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+123 12,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+662 01,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,closed,closed,closed,closed,closed
+662 10,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+662 20,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+673 01,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+673 10,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,closed
+673 20,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+675 10,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+676 01,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+676 10,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+676 20,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,closed,closed
+678 11,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+678 12,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+679 01,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,closed,closed,closed,closed
+679 10,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+679 20,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+682 10,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+683 01,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,closed,closed,closed
+683 10,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+683 20,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+692 01,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+694 12,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+694 13,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed
+694 22,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+694 23,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed
+698 01,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+698 11,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+698 12,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+698 13,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+698 14,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+698 15,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+698 16,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+698 21,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+698 22,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed
+698 23,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+698 24,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+698 25,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+698 26,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+699 CHAP,closed,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+699 CUSTOMER,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+761 CHAP,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+761 CUSTOMER,closed,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+761 WINDFARM,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+780 11,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+780 12,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+780 13,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+780 14,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+781 11,closed,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+781 12,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+781 CUSTOMER,open,open,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+785 21,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+785 22,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+785 CUSTOMER,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+GRID 1,closed,open,open,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+GRID 2,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+691 01,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+120,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+205,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+330,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+410,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+500,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+615,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+710,closed,open,open,open,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+800,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+915,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+1005,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+1105,closed,open,open,open,open,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+205,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+1005,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+805,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+GRID 1A,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+WG2,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+GRID 1B,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+3L5,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+2L5,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+CB01,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+CB02,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+CB04,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+120,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+780,closed,open,open,open,open,open,open,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+305,closed,open,open,open,open,open,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+680,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+505,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+405,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+805,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+X442,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+X448,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+X405,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+X230,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+X110,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+X510,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+X605,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+761 MINS WF,closed,open,open,open,open,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+699 A,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+699 B,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+STEVENS AUX 1,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+STEVENS AUX 2,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+STEVENS AUX 3,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+STEVENS AUX 4,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+STEVENS AUX 5,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+STEVENS AUX 6,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+STEVENS AUX 7,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+STEVENS AUX 8,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+STEVENS AUX 9,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+STEVENS AUX 10,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+STEVENS AUX 11,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+STEVENS AUX 12,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+STEVENS AUX 13,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+STEVENS AUX 14,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+STEVENS AUX 15,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+STEVENS AUX 16,closed,closed,closed,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open,open
+STEVENS AUX 17,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed
+STEVENS AUX 18,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed,closed

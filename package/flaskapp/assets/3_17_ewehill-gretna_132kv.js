@@ -49,7 +49,7 @@ networks_undrawn["ewehillgretna"]={
         4: new Text("GRID 1A", ["EWEHII","33kV"], [60,40]),
 
         5: new Text("GRNA1",["GRNA1"], [100,30]),
-        6: new Text("803 113",["EWE HILL - GRETNA"], [0,-300]),
+        6: new Text("803 113",["EWE HILL - GRETNA"], [0,-300], 25),
 
         7: new Text("204 0V",["FUTURE","CONNECTION"], [-70,0]),
 

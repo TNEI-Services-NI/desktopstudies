@@ -236,11 +236,8 @@
   }
 
   function construct_busbars(dict_components){
-    console.log("making busbars")
     var bNodes = false
-    console.log(dict_components)
     for (let id_busbar in dict_components.busbars){
-        console.log(id_busbar)
 
         let busbar = dict_components.busbars[id_busbar]
 //        load = style_line(load)
@@ -299,12 +296,27 @@
                 this.closed = closed
                 if (closed == false){
                     rect.fill({ color: palette["background-color"] })
-                    rect.stroke({ color: 'white' })
+                    rect.stroke({ color: ine.graphic[0].attr().stroke })
                 } else if (closed == true){
                     rect.fill({ color: line.graphic[0].attr().stroke })
                     rect.stroke({ color: line.graphic[0].attr().stroke })
               }
               this.closed = closed
+            }
+
+            b.setEnergised = function(){
+
+            if(this.closed){
+                 this.UIElement.attr({
+                'stroke': this.line.dict_styling.stroke.live_color,
+          'fill': this.line.dict_styling.stroke.live_color
+            })}
+            else{
+            this.UIElement.attr({
+                'stroke': this.line.dict_styling.stroke.live_color,
+//                'fill': this.line.dict_styling.stroke.live_color})
+            })
+            }
             }
 
             b.UIElement.on("breaker_clicked",function(event){
@@ -317,6 +329,7 @@
                   }
                 })
             });
+
 
             components.breakers[id] = b
             component_modal(b)
@@ -332,8 +345,9 @@
         let line = components.lines[line_id].UIElement
         let texts = text.text_strings
         let offset = text.offset
+        let size = text.size
         let colour = text.colour
-        add_text(line,false,texts, offset[0],offset[1],colour,text.callback)
+        add_text(line,false,texts, offset[0],offset[1],colour,size,text.callback)
         let id = i
         let t = {initInfo:text, UIElement: text.graphic[0], id : id}
 
@@ -426,7 +440,22 @@
         let id = i
         let closed = state == 'closed'
         let iso = {drawInfo:isolator, UIElement: isolator.graphic[0], closed: closed, id : id, line : line}
+        iso.redraw = function(){
+            let colour = this.line.o_line.attr().stroke
+            if(this.closed){
+                 this.UIElement.attr({
+                'stroke': colour,
+          'fill':colour
+            })}
+            else{
+            this.UIElement.attr({
+                'stroke':colour,
+//                'fill': this.line.dict_styling.stroke.live_color})
+            })
+            }
+            }
         components.isolators[id] = iso
+
     }
     }
 
@@ -521,11 +550,8 @@
   }
 
   function construct_generation_info(dict_components){
-      console.log(dict_components)
       for(let gen_info_id in dict_components.generationInfo){
-          console.log(gen_info_id)
           let gen_info = dict_components.generationInfo[gen_info_id]
-          console.log(gen_info)
           let componentID = gen_info_id
           let position = gen_info.pos
           let colour = "#d6ba00"

@@ -14,10 +14,10 @@ function Breaker_Callback(graphic_objects, name = ''){
         }
         if(name !== ''){
             if(object.horizontal === true){
-                add_text(object, false, [name], 0, -15*y_scaling,"#d3d3d3", function(object){})
+                add_text(object, false, [name], 0, -15*y_scaling,"#d3d3d3", font_size, function(object){})
             }
             else{
-                add_text(object, false, [name], 3 + name.length*4 * x_scaling, 0,"#d3d3d3", function(object){})}
+                add_text(object, false, [name], 3 + name.length*4 * x_scaling, 0,"#d3d3d3", font_size, function(object){})}
         }
     }
 }
@@ -37,10 +37,10 @@ function Line_Callback(graphic_objects, name = ''){
         }
         if(name !== ''){
             if(object.horizontal === true){
-                add_text(object, false, [name], 0, -15 * y_scaling,"#d3d3d3", function(object){})
+                add_text(object, false, [name], 0, -15 * y_scaling,"#d3d3d3", font_size, function(object){})
             }
             else{
-                add_text(object, false, [name], 9 + name.length*5 * x_scaling, 0,"#d3d3d3", function(object){})}
+                add_text(object, false, [name], 9 + name.length*5 * x_scaling, 0,"#d3d3d3", font_size, function(object){})}
         }
     }
 }
@@ -81,18 +81,18 @@ function Tx_Callback(graphic_objects, name = false, mva = false){
             }
             if(name != false){
             if(group.horizontal === true){
-                add_text(group, false, name, 0 * x_scaling, -20 *y_scaling, "#d3d3d3", function(group){})
+                add_text(group, false, name, 0 * x_scaling, -20 *y_scaling, "#d3d3d3", font_size, function(group){})
             }
             else{
-                add_text(group, false, name, 30 * x_scaling,-10 *y_scaling, "#d3d3d3", function(group){})}
+                add_text(group, false, name, 30 * x_scaling,-10 *y_scaling, "#d3d3d3", font_size, function(group){})}
             }
 
             if(mva != false){
             if(group.horizontal === true){
-                add_text(group, false, [mva], 0, 20 * y_scaling,"#d3d3d3", function(group){})
+                add_text(group, false, [mva], 0, 20 * y_scaling,"#d3d3d3", font_size, function(group){})
             }
             else{
-                add_text(group, false, [mva], 30 * x_scaling,10 *y_scaling,"#d3d3d3", function(group){})}
+                add_text(group, false, [mva], 30 * x_scaling,10 *y_scaling,"#d3d3d3", font_size, function(group){})}
             }
         }
     }
@@ -104,16 +104,17 @@ function Tx_Callback(graphic_objects, name = false, mva = false){
  * @param  {string} name String object containing name/contents of child objects
  * @return {function} None Returns a function that adds passed object to breaker child objects, and adds text label.
  */
-function Gen_Callback(graphic_objects){
+function Gen_Callback(graphic_objects, name="GENERATOR"){
         return function(group){
             if(graphic_objects != undefined){
                 graphic_objects[0] = group
             }
+
             if(group.horizontal === true){
-                add_text(group, false, ["GENERATOR"], 0, -25* y_scaling, "#d3d3d3",function(group){})
+                add_text(group, false, [name], 0, -25* y_scaling, "#d3d3d3",font_size, function(group){})
             }
             else{
-                add_text(group, false, ["GENERATOR"], 0,25 * y_scaling,"#d3d3d3",function(group){})}
+                add_text(group, false, [name], 0,25 * y_scaling,"#d3d3d3",font_size, function(group){})}
             }
         }
 
@@ -202,13 +203,13 @@ function StraightLine(origin, direction, length, voltage="33kV", dash = false, c
  * @return {None}
  * @usage instantiate as object i.e. new Line(...)
  */
-function Text(lineID, text, offset, colour = "#d3d3d3", textSize=10){
+function Text(lineID, text, offset, size, colour = "#d3d3d3"){
     this.lineID = lineID
     this.text_strings = text
     this.offset = offset
     this.colour = colour
     this.graphic = []
-    this.textSize=textSize
+    this.size=size
     this.callback = Text_Callback(this.graphic)
 
     // an idea I'd like to to take a look at
@@ -269,7 +270,7 @@ function Generator(line_id,pos, type= "wind"){
     this.type = type
     this.graphic=[]
     this.live = live_dead
-    //TEMP Breaker callback
+
     this.callback = Gen_Callback(this.graphic)
 }
 

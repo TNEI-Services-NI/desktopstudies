@@ -373,3 +373,81 @@ def navbar(url_page):
                                 style=styling.NAVBAR_STYLE
                                 )
     return _nav_bar
+
+
+def sidebar(URL_PAGE):
+    _heading = [
+        html.H3("Options"),
+        html.Hr(),
+    ]
+    _dropdown = [
+        dbc.DropdownMenu(
+            label="Chapelcross 33kv",
+            children=[
+                dbc.DropdownMenuItem("Chapelcross 33kv", id="chapelcross33kv"),
+                dbc.DropdownMenuItem("Chapelcross 132kv", id="chapelcross132kv"),
+                dbc.DropdownMenuItem("Gretna 132kv", id="gretna132kv"),
+                dbc.DropdownMenuItem("Gretna 400kv", id="gretna400kv"),
+                dbc.DropdownMenuItem("chapelcrossgretna1", id="chapelcrossgretna1"),
+                dbc.DropdownMenuItem("chapelcrossgretna2", id="chapelcrossgretna2"),
+                dbc.DropdownMenuItem("ewehillgretna", id="ewehillgretna"),
+                dbc.DropdownMenuItem("stevenscroft33kv", id="stevenscroft33kv"),
+                dbc.DropdownMenuItem("minsca33kv", id="minsca33kv"),
+                dbc.DropdownMenuItem("ewehillwindfarm1", id="ewehillwindfarm1"),
+                dbc.DropdownMenuItem("ewehillwindfarm2", id="ewehillwindfarm2"),
+            ],
+            id='network_menu'
+        ),
+        html.Hr(),
+
+    ]
+    _sim_buttons = [
+        dbc.Button("Reset simulation", id="reset_sim_button"),
+        dbc.Button("Back", id="back_button", style={"margin-top": "15px"}),
+        dbc.Button("Next", id="next_button", style={"margin-top": "15px", "margin-left": "15px"}),
+        html.Hr(),
+    ]
+    _sim_status = [
+        html.Div(id='sim_status_div', children="Siulation status: -1"),
+        html.Hr(),
+    ]
+    _entity_view = [
+        html.Div(id='entity_view', children=""),
+        html.Hr(),
+    ]
+    _debug = [
+        dbc.Button("debug", id="debug_button", style={"margin-top": "15px", "margin-left": "15px"}),
+        html.Hr(),
+    ]
+
+    if 'SLDs' in URL_PAGE:
+        _sidebar_widgets = sum([_heading, _dropdown, _sim_buttons, _sim_status, _entity_view, _debug], [])
+    elif 'home' in URL_PAGE:
+        _sidebar_widgets = sum([_heading, _sim_buttons, _sim_status, _entity_view, _debug], [])
+
+    sidebar = html.Div(
+        _sidebar_widgets,
+        style=styling.SIDEBAR_STYLE,
+        id='sidebar'
+    )
+    return sidebar
+
+
+def legend_button():
+    leg_button = html.Div(
+        [html.H3("i")],
+        style=styling.LEGEND_BUTTON,
+        id='legend_button'
+    )
+    return leg_button
+
+
+def legend():
+    image_filename = "\static\imgs\legend1.jpg"
+
+    _legend = html.Div(
+        [html.Img(src=image_filename, style=styling.LEGEND_IMAGE)],
+        style=styling.LEGEND_HIDDEN,
+        id='legend'
+    )
+    return _legend

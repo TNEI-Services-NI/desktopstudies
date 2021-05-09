@@ -70,7 +70,7 @@ networks_undrawn["gretna400kv"]={
     4: new Text("GRNA 680",["GRNA 680"],[0,110]),
     5: new Text("GRNA 780",["GRNA 780"],[0,110]),
     6: new Text("ELVA",["ELVA"],[0,-240]),
-    7: new Text("M1",["GRETNA 400kV"],[-50,-600]),
+    7: new Text("M1",["GRETNA 400kV"],[-50,-600], 25),
     8: new Text("SC1",["SERIES COMPENSATION SC1"],[70,15]),
     9: new Text("SC1",["COMPOUND"],[70,30]),
     10: new Text("SC8",["SC1"],[-10,-10]),
