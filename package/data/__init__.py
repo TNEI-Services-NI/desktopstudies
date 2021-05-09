@@ -26,6 +26,7 @@ def read_breaker_states(network: str, option: str):
     option_folder = states_by_option['Opt' + option]
     dir_option = '/'.join([dir_breaker_states, option_folder])
     breaker_state_files = _fetch_files(dir_option)
+    print(breaker_state_files.keys())
     filename = breaker_state_files[network]
 
     df_breakerstates = pd.read_csv('/'.join([dir_option, filename]))
