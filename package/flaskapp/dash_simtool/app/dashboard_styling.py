@@ -21,7 +21,7 @@ SIDEBAR_STYLE = {
     "bottom": 0,
     "width": "12rem",
     "padding": "1rem 1rem",
-    "backgroundColor": "#ffe600",
+    "backgroundColor": "#8c8c8c",
 }
 
 SIDEBAR_STYLE_HIDDEN = {

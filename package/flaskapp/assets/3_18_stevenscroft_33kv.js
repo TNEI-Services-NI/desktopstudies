@@ -103,7 +103,7 @@ networks_undrawn["stevenscroft33kv"]={
     generators:{
 
         1: new Generator("STCR0G-_1",1),
-        2: new Generator("STCR_DIESEL",1),
-        3: new Generator("STCR_AUX#3",1)
+        2: new Generator("STCR_DIESEL",1, "DIESEL"),
+        3: new Generator("STCR_AUX#3",1, "MOTOR")
     }
 }

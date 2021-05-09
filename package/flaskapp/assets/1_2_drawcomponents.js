@@ -189,10 +189,10 @@ group.add(circle1)
 circle1.fill(palette["background-color"]);
 circle1.stroke({ color: stroke_color, width: circleWidth, linecap: 'black', linejoin: 'round' });
 if (type !== 'wind'){
-  var text = group.text(type)
-                .font({size: 15, family: 'Helvetica'})
-                .fill({color: 'white'})
-                .center(0.5*circle1.width(), 0.4*circle1.height());
+  // var text = group.text(type)
+  //               .font({size: 15, family: 'Helvetica'})
+  //               .fill({color: 'white'})
+  //               .center(0.5*circle1.width(), 0.4*circle1.height());
 
   // group.add(text);
   // inside_group.add(text);

@@ -104,17 +104,22 @@ function Tx_Callback(graphic_objects, name = false, mva = false){
  * @param  {string} name String object containing name/contents of child objects
  * @return {function} None Returns a function that adds passed object to breaker child objects, and adds text label.
  */
-function Gen_Callback(graphic_objects, name="GENERATOR"){
+function Gen_Callback(graphic_objects, name=""){
         return function(group){
             if(graphic_objects != undefined){
                 graphic_objects[0] = group
             }
-
+            var type = undefined
+            if(name==="MOTOR"){
+                type = ""
+            } else {
+                type = "GENERATOR"
+            }
             if(group.horizontal === true){
-                add_text(group, false, [name], 0, -25* y_scaling, "#d3d3d3",font_size, function(group){})
+                add_text(group, false, [name, type], 0, -0* y_scaling, "#d3d3d3",font_size, function(group){})
             }
             else{
-                add_text(group, false, [name], 0,25 * y_scaling,"#d3d3d3",font_size, function(group){})}
+                add_text(group, false, [name, type], 0,40 * y_scaling,"#d3d3d3",font_size, function(group){})}
             }
         }
 
@@ -262,7 +267,7 @@ function Tx(lineID,pos,name,mva, coil2 = "0V" ,type="starDelta"){
  * @return {None}
  * @usage instantiate as object i.e. new Generator(...)
  */
-function Generator(line_id,pos, type= "wind"){
+function Generator(line_id,pos, type= ""){
     this.component="Generator"
 
     this.lineID = line_id
@@ -271,7 +276,7 @@ function Generator(line_id,pos, type= "wind"){
     this.graphic=[]
     this.live = live_dead
 
-    this.callback = Gen_Callback(this.graphic)
+    this.callback = Gen_Callback(this.graphic, type)
 }
 
 /**
