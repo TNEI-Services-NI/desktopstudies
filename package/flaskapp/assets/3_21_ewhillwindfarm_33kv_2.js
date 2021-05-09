@@ -214,7 +214,7 @@ networks_undrawn["ewehillwindfarm2"]={
     },
 
     labels:{
-
+        1: new Text("MINSCA BUSBAR",["Ewehill WF 2"],[0,-190], 25),
     },
 
     tx:{

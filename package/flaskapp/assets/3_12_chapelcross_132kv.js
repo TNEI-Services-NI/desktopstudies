@@ -183,7 +183,7 @@ networks_undrawn["chapelcross132kv"]={
     13: new Text("HARK",["HARK"],[0,-100]),
     14: new Text("DUMF-1",["DUMF-1"],[0,0-100]),
 
-    15: new Text("CHAP1-_R1-_1",["CHAPELCROSS 132kV"],[0,-350]),
+    15: new Text("CHAP1-_R1-_1",["CHAPELCROSS 132kV"],[0,-325], 25),
     },
 //
     generationInfo:{

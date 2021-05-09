@@ -216,7 +216,7 @@ networks_undrawn["minsca33kv"]={
     },
 
     labels:{
-
+        1: new Text("MINS3-",["Minsca 33kv"],[150,-40], 25),
     },
 
     tx:{

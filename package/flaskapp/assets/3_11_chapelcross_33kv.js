@@ -368,7 +368,7 @@ networks_undrawn["chapelcross33kv"] = {
     labels:{
     1: new Text("CHAP3A1", ["CHAPELCROSS GSP"], [220,-70]),
     2: new Text("CHAP3A1", ["698"], [220,-50]),
-    3: new Text("CHAP3A1",["CHAPELCROSS GSP 33kV"],[220,-160]),
+    3: new Text("CHAP3A1",["CHAPELCROSS GSP 33kV"],[220,-145], 25),
 
 //    4: new Text("698 16", ["CHAPELCROSS"],[0,50]),
 //    5: new Text("698 16", ["NO1"],[0,65]),

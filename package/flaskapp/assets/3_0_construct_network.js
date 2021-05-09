@@ -345,8 +345,9 @@
         let line = components.lines[line_id].UIElement
         let texts = text.text_strings
         let offset = text.offset
+        let size = text.size
         let colour = text.colour
-        add_text(line,false,texts, offset[0],offset[1],colour,text.callback)
+        add_text(line,false,texts, offset[0],offset[1],colour,size,text.callback)
         let id = i
         let t = {initInfo:text, UIElement: text.graphic[0], id : id}
 

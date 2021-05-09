@@ -72,7 +72,7 @@ networks_undrawn["stevenscroft33kv"]={
     },
 
     labels:{
-    1: new Text("STCR3-",["STEVENS CROFT 33kV"],[-20,-40]),
+    1: new Text("STCR3-",["STEVENS CROFT 33kV"],[270,-170], 25),
     2: new Text("STCR3-",["699"],[-20,-20]),
     3: new Text("STCR_AUX#2", ["UNIT AUXILIARY BOARD"],[100,-15]),
     4: new Text("STCR_AUX#12", ["ACC SWITCHBOARD"],[60,15]),

@@ -711,9 +711,14 @@ return dict_earth
  * @param {function} callback which takes text object as argument
  * @return {None}
  */
-function add_text(object, bool_dict_obj, list_text, x_from_center=0, y_from_center=-15, colour="#d3d3d3", callback){
+function add_text(object, bool_dict_obj, list_text, x_from_center=0, y_from_center=-15, colour="#d3d3d3", size, callback){
     var rad = 3
-    var txtSize = font_size
+    var txtSize = undefined
+    if (size===undefined){
+      txtSize = font_size
+    } else {
+      txtSize = size
+    }
 
     var bVertical = false;
     var bHorizontal = false;
@@ -763,12 +768,12 @@ function add_text(object, bool_dict_obj, list_text, x_from_center=0, y_from_cent
 //todo refactor this
 function add_dataview(observer, text, offset, callback) {
   let colour = "#e5b815"
-  add_text(observer, false, text, offset[0], offset[1], colour, callback)
+  add_text(observer, false, text, offset[0], offset[1], colour, font_size, callback)
 }
 
 function add_available_power(observer, text, offset, callback) {
   let colour = "#ffffff"
-  add_text(observer, false, text, offset[0], offset[1], colour, callback)
+  add_text(observer, false, text, offset[0], offset[1], colour, font_size, callback)
 }
 
 function add_static_text(list_text, x=100, y=100, colour="#d3d3d3", callback){

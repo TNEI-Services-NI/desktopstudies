@@ -33,7 +33,7 @@ networks_undrawn["gretna132kv"]={
 
     labels:{
     1: new Text("124 120 128", ["132kV"], [-18,-70]),
-    2: new Text("124 120 128", ["GRETNA 132kV"], [-18,-400]),
+    2: new Text("124 120 128", ["GRETNA 132kV"], [-18,-400], 25),
 
     3: new Text("783 780 784", ["SGT1"], [0,-200]),
     4: new Text("303 305 304", ["CHAP-1"], [0,-200]),

@@ -109,7 +109,7 @@ networks_undrawn["ewehillwindfarm1"]={
     },
 
     labels:{
-
+        1: new Text("EWHC3-",["Ewehill WF 1"],[150,-40], 25),
     },
 
     tx:{
