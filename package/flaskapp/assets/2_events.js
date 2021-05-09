@@ -82,7 +82,11 @@ function check_breakers(network_, option_, breakers, step, callback){
           alert("Reset to original state")
         }
         if(breaker_matches_next){
-          socket.emit('redraw', {'sim_step': int_next_step});
+          socket.emit('redraw', {
+            'sim_step': int_next_step,
+            'entity': entity,
+            'option': option,
+          });
         }
         callback(breaker_matches_next);
       }

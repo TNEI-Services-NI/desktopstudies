@@ -50,7 +50,8 @@ def _add_network_redraw(dash_app):
             'sim_step': sim_step,
             'local': True,
             'username': session.get('username'),
-            'room': session.get('room')
+            'room': session.get('room'),
+            'entity': session['entity']
         })
 
         return [network]

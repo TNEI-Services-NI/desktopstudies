@@ -408,7 +408,7 @@ def sidebar(URL_PAGE):
         html.Hr(),
     ]
     _sim_status = [
-        html.Div(id='sim_status_div', children="Siulation status: -1"),
+        html.Div(id='sim_status_div', children="Simulation status: -1"),
         html.Hr(),
     ]
     _entity_view = [

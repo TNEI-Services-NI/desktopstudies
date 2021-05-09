@@ -8,6 +8,7 @@ dir_simtool_data = '/'.join([dir_data, 'simtool'])
 
 dir_raw_simtool_data = '/'.join([dir_simtool_data, 'raw'])
 dir_breaker_states = '/'.join([dir_simtool_data, 'breakerstates'])
+dir_network_views = '/'.join([dir_simtool_data, 'networkviews'])
 dir_active_simulation = '/'.join([dir_simtool_data, 'activesimulation'])
 
 dir_restoration_steps = '/'.join([dir_simtool_data, 'restorationsteps'])
@@ -26,7 +27,6 @@ def read_breaker_states(network: str, option: str):
     option_folder = states_by_option['Opt' + option]
     dir_option = '/'.join([dir_breaker_states, option_folder])
     breaker_state_files = _fetch_files(dir_option)
-    print(breaker_state_files.keys())
     filename = breaker_state_files[network]
 
     df_breakerstates = pd.read_csv('/'.join([dir_option, filename]))
@@ -36,6 +36,22 @@ def read_breaker_states(network: str, option: str):
     df_breakerstates = df_breakerstates.convert_dtypes(convert_string=True)
     df_breakerstates = df_breakerstates.set_index('breaker')
     return df_breakerstates
+
+
+def read_network_views(option: str):
+    networks_by_option = _fetch_files(dir_network_views)
+    option_folder = networks_by_option['Opt' + option]
+    dir_option = '/'.join([dir_network_views, option_folder])
+    network_views = _fetch_files(dir_option)
+    print(network_views.keys())
+
+    df_views = pd.read_csv('/'.join([dir_option, "views.csv"]))
+
+    # format data
+    df_views = df_views.convert_dtypes(convert_string=True)
+    df_views = df_views.set_index('entity')
+    df_views.columns = list(map(int, df_views.columns))
+    return df_views
 
 
 def read_restoration_step(case_network: str, network: str, option: str, scenario: str, stage: int):

@@ -296,7 +296,7 @@
                 this.closed = closed
                 if (closed == false){
                     rect.fill({ color: palette["background-color"] })
-                    rect.stroke({ color: ine.graphic[0].attr().stroke })
+                    rect.stroke({ color: line.graphic[0].attr().stroke })
                 } else if (closed == true){
                     rect.fill({ color: line.graphic[0].attr().stroke })
                     rect.stroke({ color: line.graphic[0].attr().stroke })
