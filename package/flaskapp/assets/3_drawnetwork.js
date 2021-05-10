@@ -396,6 +396,11 @@
     event_draw(data);
   });
 
+  socket.on('check_redraw', function(check_redraw_data) {
+    check_redraw_data['entity'] = entity
+    socket.emit('check_redraw', check_redraw_data);
+  });
+
   socket.on('redraw', function(data) {
     current_step = data['sim_step'];
     network = data['network'];

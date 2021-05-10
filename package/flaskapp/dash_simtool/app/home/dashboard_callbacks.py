@@ -26,7 +26,6 @@ def _add_network_redraw(dash_app):
         session['room'] = session['entity']
         session['network_main'] = network
         session['sim_step'] = sim_step
-        print(session['entity'])
         socketio.emit('check_join_draw', {
             'network': network,
             'sim_step': sim_step,

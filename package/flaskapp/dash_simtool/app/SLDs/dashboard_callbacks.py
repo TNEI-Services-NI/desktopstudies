@@ -44,6 +44,7 @@ def _add_network_redraw(dash_app):
         session['network_explore'] = network
         sim_step = session['sim_step'] if 'sim_step' in session else cf.start_sim_step
         session['sim_step'] = sim_step
+        print(session['sim_step'])
 
         socketio.emit('check_join_draw', {
             'network': network,

@@ -119,7 +119,7 @@ def on_join(data):
     return data
 
 
-@socketio.on('redraw')
+@socketio.on('check_redraw')
 def redraw(data):
     socketio.emit('redraw', {
         'sim_step': data['sim_step'],
@@ -145,9 +145,10 @@ def connection(data):
     switch_network = data['network'] != next_network
 
     data['switch_network'] = switch_network
+    data['broadcast'] = broadcast
 
     if broadcast:
         data['network'] = next_network
-        socketio.emit('redraw', data)
+        socketio.emit('check_redraw', data)
 
     return data
