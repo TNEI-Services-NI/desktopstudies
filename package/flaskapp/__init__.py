@@ -7,8 +7,10 @@ from flask_assets import Environment
 
 import package as root
 import package.flaskapp.auth.user as user
+import package.flaskapp.dash_simtool.db as simtool_db
 from .auth.login_manager import init_manager
 from .extensions import login_manager, dbs, socketio, jsglue
+import package.flaskapp.dash_simtool._config as cf
 
 eventlet.monkey_patch()
 
@@ -100,6 +102,7 @@ def _configure_database(app):
     @app.before_first_request
     def initialize_database():
         dbs.create_all()
+        simtool_db.replace_simstatus(dbs, cf.start_sim_step)
         user.register_admin(dbs)
         user.register_required_users(dbs)
 

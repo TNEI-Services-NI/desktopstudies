@@ -622,6 +622,7 @@
 
   function construct_action(){
     draw_action_button();
+    draw_admin_buttons();
   }
 
   function construct_SGTs(dict_components){

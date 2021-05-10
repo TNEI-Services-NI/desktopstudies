@@ -238,9 +238,7 @@
     }
   }
 
-
-  function inc_state(case_network_){
-    current_step += 1
+  function update_state(case_network_){
     $("body").css("cursor", "progress");
 
     setTimeout(function(){
@@ -255,6 +253,24 @@
         $("body").css("cursor", "default");
 
     }, 1000)
+  }
+
+
+  function inc_state(case_network_){
+    current_step += 1;
+    update_state(case_network_);
+  }
+
+
+  function dec_state(case_network_){
+    current_step -= 1;
+    update_state(case_network_);
+  }
+
+
+  function reset_state(case_network_){
+    current_step = -2;
+    update_state(case_network_);
   }
 
   /**
@@ -394,6 +410,11 @@
   socket.on('draw', function(data) {
 
     event_draw(data);
+  });
+
+  socket.on('check_redraw', function(check_redraw_data) {
+    check_redraw_data['entity'] = entity
+    socket.emit('check_redraw', check_redraw_data);
   });
 
   socket.on('redraw', function(data) {

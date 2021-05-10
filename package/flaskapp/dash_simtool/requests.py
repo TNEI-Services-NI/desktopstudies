@@ -6,6 +6,8 @@ from flask_login import login_required
 import package.data as simtool_data
 from package.flaskapp import socketio
 from flask_socketio import send, emit
+from package.flaskapp.extensions import dbs
+import package.flaskapp.dash_simtool.db as simtool_db
 
 
 @simtool_bp.route("/receive_breaker/", methods=['POST'])
@@ -119,7 +121,7 @@ def on_join(data):
     return data
 
 
-@socketio.on('redraw')
+@socketio.on('check_redraw')
 def redraw(data):
     socketio.emit('redraw', {
         'sim_step': data['sim_step'],
@@ -139,15 +141,17 @@ def connection(data):
         next_network = data['network']
 
     session['sim_step'] = data['sim_step']
+    simtool_db.replace_simstatus(dbs, data['sim_step'])
 
     broadcast = data['broadcast'] if 'broadcast' in data else False
 
     switch_network = data['network'] != next_network
 
     data['switch_network'] = switch_network
+    data['broadcast'] = broadcast
 
     if broadcast:
         data['network'] = next_network
-        socketio.emit('redraw', data)
+        socketio.emit('check_redraw', data)
 
     return data
