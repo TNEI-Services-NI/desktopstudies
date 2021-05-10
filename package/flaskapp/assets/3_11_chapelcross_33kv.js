@@ -121,8 +121,10 @@ networks_undrawn["chapelcross33kv"] = {
         "MIBI3-_LAHO3A_1#5": StraightLine([395,855],"down",35,"11kV"),
         "LAHO5-1": StraightLine([365,890],"right",55,"11kV"),
         "LAHO5-2": StraightLine([365+55,890],"right",55,"11kV"),
-        "CHAPX3_LAHO3B_1#5": StraightLine([445,855],"down",35,"11kV"),
+        "LAHO5-2#1": StraightLine([445,855],"down",35,"11kV"),
         "CHAPX3_LAHO3B_1#4": StraightLine([445,855],"right",35,"11kV"),
+        "LAHO5-2#2": StraightLine([445,855],"right",15,"11kV"),
+
         "CHAPX3_LAHO3B_1#3": StraightLine([525,855],"left",35),
 
         "CHAPX3_LAHO3B_1#1": StraightLine([525,855],"up",175),
@@ -306,7 +308,7 @@ networks_undrawn["chapelcross33kv"] = {
 
         "676 10": new Breaker("MIBI3-_LAHO3A_1#4",0.3,"10"),
         "676 01": new Breaker("LAHO5-1",1,"01"),
-        "676 20": new Breaker("CHAPX3_LAHO3B_1#4",0.4,"20"),
+        "676 20": new Breaker("LAHO5-2#2",1,"20"),
 
         "662 10": new Breaker("ANANT1_CHAP3-_1#0",0.3,"10"),
         "662 01": new Breaker("ANAN5-1",1,"01"),
@@ -344,7 +346,7 @@ networks_undrawn["chapelcross33kv"] = {
         // "785 22": new Breaker("CRAG5B_LAHO5-_1",0.15,"22"),
         // "785 CUSTOMER": new Breaker("CRAG5B_LAHO5-_1",0.5,"open","CUSTOMER BREAKER"),
 
-        "691 01": new Breaker("GRNA3A",1,"01"),
+        "691 01": new Breaker("GRNA3B",0,"01"),
         },
     isolators:{
         // CRAIG II WINDFARM 11KV
