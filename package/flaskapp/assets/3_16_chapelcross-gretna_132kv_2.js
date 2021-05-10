@@ -38,7 +38,7 @@ networks_undrawn["chapelcrossgretna2"]={
         3: new Text("M1_2", ["M1"], [-80,0]),
         4: new Text("R1_2", ["R1"], [-80,0]),
 
-        5: new Text("203 203 B_2", ["CHAPELCROSS - GRETNA 2"], [0,-170]),
+        5: new Text("203 203 B_2", ["CHAPELCROSS - GRETNA 2"], [0,-170], 25),
 
     },
 

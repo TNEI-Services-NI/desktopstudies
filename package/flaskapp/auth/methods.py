@@ -30,3 +30,6 @@ def check_cred(request, method):
                 error = 'Incorrect password.'
 
     return db, user, username, password, error
+
+
+

@@ -13,8 +13,8 @@ networks_undrawn["stevenscroft33kv"]={
     "STCR0G-_1": StraightLine([270,390],"down",40,"11kV"),
     "STCR0G-_1#0": StraightLine([270,410],"right",40,"11kV"),
 
-    "STCR0G-_STCRLVT#0": StraightLine([385,410],"left",75,"11kV"),
-    "STCR0G-_STCRLVT#1": StraightLine([385,410],"down",50,"11kV"),
+    "STCR0G-_1#1": StraightLine([385,410],"left",75,"11kV"),
+    "STCR0G-_1#2": StraightLine([385,410],"down",50,"11kV"),
 
     "STCR_AUX#1": StraightLine([385,455],"down",85,"LV"),
     "STCR_AUX#2": StraightLine([350,540],"right",360,"LV"),
@@ -26,7 +26,8 @@ networks_undrawn["stevenscroft33kv"]={
     "STCR_AUX#12": StraightLine([435,650],"right",170,"LV"),
     "STCR_AUX#13": StraightLine([395,770],"right",300,"LV"),
     "STCR_AUX#15": StraightLine([430,770],"down",65,"LV"),
-    "STCR_AUX#16": StraightLine([500,770],"down",65,"LV"),
+    "STCR_AUX#16": StraightLine([500,770],"down",50,"LV"),
+    "STCR_DIESEL": StraightLine([500,820],"down",45,"LV"),
     "STCR_AUX#17": StraightLine([580,770],"down",65,"LV"),
     "STCR_AUX#18": StraightLine([680,770],"down",65,"LV"),
 
@@ -63,7 +64,7 @@ networks_undrawn["stevenscroft33kv"]={
         "STCR_AUX#14": new Breaker("STCR_AUX#13",0.48,""),
 
         "STCR_AUX#15": new Breaker("STCR_AUX#15",0.5,""),
-        "STCR_AUX#16": new Breaker("STCR_AUX#16",0.5,""),
+        "STCR_AUX#16": new Breaker("STCR_AUX#16",1,""),
         "STCR_AUX#17": new Breaker("STCR_AUX#17",0.5,""),
         "STCR_AUX#18": new Breaker("STCR_AUX#18",0.5,""),
 
@@ -71,7 +72,7 @@ networks_undrawn["stevenscroft33kv"]={
     },
 
     labels:{
-    1: new Text("STCR3-",["STEVENS CROFT 33kV"],[-20,-40]),
+    1: new Text("STCR3-",["STEVENS CROFT 33kV"],[270,-170], 25),
     2: new Text("STCR3-",["699"],[-20,-20]),
     3: new Text("STCR_AUX#2", ["UNIT AUXILIARY BOARD"],[100,-15]),
     4: new Text("STCR_AUX#12", ["ACC SWITCHBOARD"],[60,15]),
@@ -80,8 +81,8 @@ networks_undrawn["stevenscroft33kv"]={
     },
 
     tx:{
-        "699 STEP UP": new Tx("STCR3-_STCR0G",1,"","", "33kV"),
-        "699 Auxiliary Transformer": new Tx("STCR0G-_STCRLVT#1",1,["Auxiliary","Transformer","11/0.4kV"],"","33kV"),
+        "MINS3-_MINS0G_1": new Tx("STCR0G-_2",0,"","", "33kV"),
+        "699 Auxiliary Transformer": new Tx("STCR0G-_1#2",1,["Auxiliary","Transformer","11/0.4kV"],"","33kV"),
     },
 
     isolators:{
@@ -90,7 +91,11 @@ networks_undrawn["stevenscroft33kv"]={
 
     dataViews:{
 
-//        1: new DataView(350,235, ["MW","MVAR","kV","Amps","Hz"]),
+        "STCR5-_1": new DataView("STCR5-_1", [-35, 0],
+          [
+            'generators_active_power',
+            'generators_reactive_power',
+          ]),
 
 
     },
@@ -101,8 +106,8 @@ networks_undrawn["stevenscroft33kv"]={
 
     generators:{
 
-        1: new Generator("STCR0G-_1",1),
-        2: new Generator("STCR_AUX#16",1),
-        3: new Generator("STCR_AUX#3",1)
+        "STCR5-_1": new Generator("STCR0G-_1",1),
+        "STCR_D1": new Generator("STCR_DIESEL",1, "DIESEL"),
+        "STCR_MOTOR": new Generator("STCR_AUX#3",1, "MOTOR")
     }
 }

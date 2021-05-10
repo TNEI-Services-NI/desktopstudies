@@ -1,4 +1,5 @@
 /**
+/**
  * draws a Transformer
  * @param  {SVG Line} svg line which the transformer is drawn on
  * @param  {double} position of transformer on line (between 0 and 1)
@@ -188,10 +189,10 @@ group.add(circle1)
 circle1.fill(palette["background-color"]);
 circle1.stroke({ color: stroke_color, width: circleWidth, linecap: 'black', linejoin: 'round' });
 if (type !== 'wind'){
-  var text = group.text(type)
-                .font({size: 15, family: 'Helvetica'})
-                .fill({color: 'white'})
-                .center(0.5*circle1.width(), 0.4*circle1.height());
+  // var text = group.text(type)
+  //               .font({size: 15, family: 'Helvetica'})
+  //               .fill({color: 'white'})
+  //               .center(0.5*circle1.width(), 0.4*circle1.height());
 
   // group.add(text);
   // inside_group.add(text);
@@ -710,9 +711,14 @@ return dict_earth
  * @param {function} callback which takes text object as argument
  * @return {None}
  */
-function add_text(object, bool_dict_obj, list_text, x_from_center=0, y_from_center=-15, colour="#d3d3d3", callback){
+function add_text(object, bool_dict_obj, list_text, x_from_center=0, y_from_center=-15, colour="#d3d3d3", size, callback){
     var rad = 3
-    var txtSize = font_size
+    var txtSize = undefined
+    if (size===undefined){
+      txtSize = font_size
+    } else {
+      txtSize = size
+    }
 
     var bVertical = false;
     var bHorizontal = false;
@@ -762,12 +768,12 @@ function add_text(object, bool_dict_obj, list_text, x_from_center=0, y_from_cent
 //todo refactor this
 function add_dataview(observer, text, offset, callback) {
   let colour = "#e5b815"
-  add_text(observer, false, text, offset[0], offset[1], colour, callback)
+  add_text(observer, false, text, offset[0], offset[1], colour, font_size, callback)
 }
 
 function add_available_power(observer, text, offset, callback) {
   let colour = "#ffffff"
-  add_text(observer, false, text, offset[0], offset[1], colour, callback)
+  add_text(observer, false, text, offset[0], offset[1], colour, font_size, callback)
 }
 
 function add_static_text(list_text, x=100, y=100, colour="#d3d3d3", callback){
@@ -846,6 +852,63 @@ function draw_SGT(dict_line,callback){
     callback(group);
 
 }
+
+
+function draw_action_button(){
+  var group = draw.group();
+
+    $.ajax({
+    type: "POST",
+    url: "/simtool_bp/get_action/",
+    data: {"option": option},
+    }).done(function( action_values ) {
+      action = action_values[current_step][entity]
+      if(action !== ''){
+        let rect1 = draw.rect(x_max*0.1,y_max*0.07).fill("yellow").center(x_max*0.8,y_max*0.82);
+        add_text(rect1, false, ["Take action: ", action], 0, 0, "#000000", 12, function(){})
+        rect1.click(function() {
+          rect1.off('click')
+          action = undefined
+          inc_state(case_network)
+        })
+      }
+
+    })
+
+
+
+
+}
+
+
+function draw_admin_buttons(){
+  var group = draw.group();
+
+
+    if(entity === 'admin'){
+      let rect0 = draw.rect(x_max*0.07,y_max*0.05).fill("yellow").center(x_max*0.5,y_max*0.82);
+      add_text(rect0, false, ["Admin action: reset"], 0, 0, "#000000", 12, function(){})
+      let rect1 = draw.rect(x_max*0.07,y_max*0.05).fill("yellow").center(x_max*0.6,y_max*0.82);
+      add_text(rect1, false, ["Admin action: back"], 0, 0, "#000000", 12, function(){})
+      let rect2 = draw.rect(x_max*0.07,y_max*0.05).fill("yellow").center(x_max*0.7,y_max*0.82);
+      add_text(rect1, false, ["Admin action: back"], 0, 0, "#000000", 12, function(){})
+      add_text(rect2, false, ["Admin action: next"], 0, 0, "#000000", 12, function(){})
+      rect0.click(function() {
+        rect0.off('click')
+        reset_state(case_network)
+      })
+      rect1.click(function() {
+        rect1.off('click')
+        dec_state(case_network)
+      })
+      rect2.click(function() {
+        rect2.off('click')
+        inc_state(case_network)
+      })
+    }
+
+}
+
 
 function draw_line(line,id_line, type="busbar"){
         bNodes = false

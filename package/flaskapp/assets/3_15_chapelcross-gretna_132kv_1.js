@@ -29,7 +29,6 @@ networks_undrawn["chapelcrossgretna1"]={
 
     breakers:{
         "1105": new Breaker("1105 B_1",1),
-        "1105": new Breaker("1105 B_1",1),
         "305": new Breaker("303 305_1",0),
 
     },
@@ -41,7 +40,7 @@ networks_undrawn["chapelcrossgretna1"]={
         3: new Text("M1_1", ["M1"], [-80,0]),
         4: new Text("R1_1", ["R1"], [-80,0]),
 
-        5: new Text("1103 303 B_1", ["CHAPELCROSS - GRETNA 1"], [0,-170]),
+        5: new Text("1103 303 B_1", ["CHAPELCROSS - GRETNA 1"], [0,-170], 25),
 
     },
 

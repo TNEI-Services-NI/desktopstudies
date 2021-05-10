@@ -1,5 +1,5 @@
 name,entity,email,required,status
-Daniel Auty,ESO,daniel.auty@nationalgrideso.com,FALSE,FALSE
+Daniel Auty,TO,daniel.auty@nationalgrideso.com,FALSE,FALSE
 Dozie Nnabuife,ESO,dozie.nnabuife@nationalgrideso.com,FALSE,FALSE
 Deepak Lala,ESO,deepak.lala@nationalgrideso.com,FALSE,FALSE
 Christopher Salter,DNO,christopher.salter2@nationalgrideso.com,FALSE,FALSE
@@ -7,4 +7,4 @@ Joe Hunter,DNO,joe.hunter@spenergynetworks.co.uk,FALSE,FALSE
 Colin Foote,DNO,cfoote@spenergynetworks.co.uk,FALSE,FALSE
 Michael Kenny,DER,michael.kenny@nationalgrideso.com,FALSE,FALSE
 Dieter Gutschow,DER,dieter.gutschow@tneigroup.com,FALSE,FALSE
-Max McFarlane,Other,max.mcfarlane@tneigroup.com,FALSE,FALSE
+Max McFarlane,admin,max.mcfarlane@tneigroup.com,FALSE,FALSE
