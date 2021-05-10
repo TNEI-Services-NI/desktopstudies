@@ -123,6 +123,7 @@
     for(let id_dv in components.dataviews){
       let text_list = [];
       var units = "";
+      var scale = 1;
       let labels = components.dataviews[id_dv].labels
       for(let id_component_parameter in labels){
         let component_parameter = labels[id_component_parameter]
@@ -139,9 +140,10 @@
             units = " ."
           } else if(component_parameter.includes('current')){
             units = " AMPS"
+            scale = 1000
           }
 
-          let value = Math.round(step_data[component_parameter][id_dv] * 1000) / 1000
+          let value = scale * Math.round(step_data[component_parameter][id_dv] * 1000) / 1000
 
           text_list = text_list.concat(
             [String(value) + units]
