@@ -416,7 +416,8 @@ def sidebar(URL_PAGE):
         html.Hr(),
     ]
     _debug = [
-        dbc.Button("debug", id="debug_button", style={"margin-top": "15px", "margin-left": "15px"}),
+        dbc.Button("debug", id="debug_button", style={"margin-top": "15px", "margin-left": "15px",
+                                                      "display": "none"}),
         html.Hr(),
     ]
 
@@ -427,13 +428,13 @@ def sidebar(URL_PAGE):
         _sidebar_widgets += _sim_buttons
         _sidebar_widgets += _sim_status
         _sidebar_widgets += _entity_view
-        # _sidebar_widgets += _debug)
+        _sidebar_widgets += _debug
     elif 'home' in URL_PAGE:
         _sidebar_widgets += _heading
         _sidebar_widgets += _sim_buttons
         _sidebar_widgets += _sim_status
         _sidebar_widgets += _entity_view
-        # _sidebar_widgets += _debug)
+        _sidebar_widgets += _debug
 
     sidebar = html.Div(
         _sidebar_widgets,
