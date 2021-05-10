@@ -424,7 +424,9 @@ else if (((step_data_["lines_loading"][line_id_LF] === undefined))&&
 
   socket.on('redraw', function(data) {
     current_step = data['sim_step'];
-    network = data['network'];
+    if('network' in data){
+      network = data['network'];
+    }
     master_draw();
   });
 

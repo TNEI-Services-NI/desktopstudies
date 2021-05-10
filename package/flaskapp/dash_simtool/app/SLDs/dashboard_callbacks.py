@@ -3,10 +3,11 @@ from dash.dependencies import Output, Input
 from flask import session
 
 # INT IMPORTS
-import package.flaskapp.dash_simtool._config as cf
 import package.flaskapp.dash_simtool.app.dashboard_callbacks as shared_clbks
+import package.flaskapp.dash_simtool.db as simtool_db
 from package.flaskapp import socketio
 from package.flaskapp.dash_simtool.app import URL_SLDS
+from package.flaskapp.extensions import dbs
 
 
 def _add_network_redraw(dash_app):
@@ -33,18 +34,21 @@ def _add_network_redraw(dash_app):
         triggered_object = ctx.triggered[0]
         if triggered_object['value'] is None:
             session['room'] = session['entity']
+            sim_step = simtool_db.get_simstatus()
+            simtool_db.replace_room_simstatus(dbs, sim_step, session['entity'])
             if 'network_explore' not in session:
                 network = "chapelcross33kv"
             else:
                 network = session['network_explore']
         else:
+            sim_step = simtool_db.get_room_simstatus(session['entity'])
             network = triggered_object['prop_id'].split('.')[0]
 
         # store network, sim_step
         session['network_explore'] = network
-        sim_step = session['sim_step'] if 'sim_step' in session else cf.start_sim_step
+        print(session['entity'])
+
         session['sim_step'] = sim_step
-        print(session['sim_step'])
 
         socketio.emit('check_join_draw', {
             'network': network,

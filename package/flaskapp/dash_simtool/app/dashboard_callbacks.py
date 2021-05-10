@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 import dash
 from dash.dependencies import Output, Input
 from flask import session
@@ -7,8 +6,10 @@ from flask import session
 # INT IMPORTS
 import package.flaskapp.dash_simtool._config as cf
 import package.flaskapp.dash_simtool.app.dashboard_styling as styling
-from package.flaskapp import socketio
+import package.flaskapp.dash_simtool.db as simtool_db
 import package.flaskapp.dash_simtool.requests as requests
+from package.flaskapp.extensions import dbs
+from package.flaskapp import socketio
 
 
 def add_legend_button(dash_app):
@@ -90,7 +91,9 @@ def add_sim_progress_buttons(dash_app, URL_PAGE):
 
         ctx = dash.callback_context
         triggered_object = ctx.triggered[0]['prop_id'].split('.')[0]
-        sim_status = int(sim_status.split("Simulation status: ")[1])
+        print(session['entity'])
+        sim_status = simtool_db.get_room_simstatus(session['entity'])
+
 
         redraw_data = {'sim_step': sim_status,
                               'username': session.get('username')}
@@ -100,12 +103,14 @@ def add_sim_progress_buttons(dash_app, URL_PAGE):
 
         if triggered_object == 'next_button':  # increment sim_step
             redraw_data['sim_step'] += 1
-            redraw_data['network'] = requests.server_get_network_view(session['entity'], redraw_data['sim_step'])
+            simtool_db.replace_room_simstatus(dbs, redraw_data['sim_step'], session['entity'])
+            # redraw_data['network'] = requests.server_get_network_view(session['entity'], redraw_data['sim_step'])
             socketio.emit('redraw', redraw_data, room=session['room'])
 
         elif triggered_object == 'back_button':  # decrement sim_step
             redraw_data['sim_step'] -= 1 if sim_status > cf.start_sim_step else 0
-            redraw_data['network'] = requests.server_get_network_view(session['entity'], redraw_data['sim_step'])
+            simtool_db.replace_room_simstatus(dbs, redraw_data['sim_step'], session['entity'])
+            # redraw_data['network'] = requests.server_get_network_view(session['entity'], redraw_data['sim_step'])
             socketio.emit('redraw', redraw_data, room=session['room'])
 
         elif triggered_object == 'debug_button':
@@ -113,15 +118,13 @@ def add_sim_progress_buttons(dash_app, URL_PAGE):
             pass
 
         elif triggered_object == 'reset_sim_button':  # reset sim_step
-            redraw_data['sim_step'] = cf.start_sim_step
-            redraw_data['network'] = requests.server_get_network_view(session['entity'], redraw_data['sim_step'])
+            redraw_data['sim_step'] = simtool_db.get_simstatus()
+            simtool_db.replace_room_simstatus(dbs, redraw_data['sim_step'], session['entity'])
+            # redraw_data['network'] = requests.server_get_network_view(session['entity'], redraw_data['sim_step'])
             socketio.emit('redraw', redraw_data, room=session['room'])
 
         else:
-            redraw_data['sim_step'] = session['sim_step'] if \
-                'sim_step' in session and \
-                session['sim_step'] is not None \
-            else cf.start_sim_step
+            redraw_data['sim_step'] = simtool_db.get_simstatus()
 
         session['sim_step'] = redraw_data['sim_step']
 
