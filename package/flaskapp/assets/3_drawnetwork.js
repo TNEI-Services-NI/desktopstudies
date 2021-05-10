@@ -186,8 +186,7 @@
         }
 
 
-      }
-else if (((step_data_["lines_loading"][line_id_LF] === undefined))&&
+      } else if (((step_data_["lines_loading"][line_id_LF] === undefined))&&
                   ((step_data_["busbars_voltage"][line_id_LF] === undefined))&&
                   ((step_data_["transformers_loading"][line_id_LF] === undefined)))
                {

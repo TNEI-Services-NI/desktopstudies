@@ -241,10 +241,16 @@ networks_undrawn["chapelcross33kv"] = {
      },
     loads:{
         "ANANT2_CHAP3-_1#4": StraightLine([405,315],"down",20,"11kV"),
+        "ANANT1_CHAP3-_1#4": StraightLine([321,315],"down",20,"11kV"),
         "LOBI5-2#0": StraightLine([450,490],"down",20,"11kV"),
+        "LOBI5-1#0": StraightLine([370,490],"down",20,"11kV"),
         "KIBA5-#0": StraightLine([440,585],"down",20,"11kV"),
         "MOFT5-2#0": StraightLine([450,675],"down",20,"11kV"),
+        "MOFT5-1#0": StraightLine([372,675],"down",20,"11kV"),
+
         "LAHO5-2#0": StraightLine([465,890],"down",20,"11kV"),
+        "LAHO5-1#0": StraightLine([375,890],"down",20,"11kV"),
+
         "MIBI5-#0": StraightLine([335,730],"down",20,"11kV"),
         "NEWC5-#0": StraightLine([770,680],"down",20,"11kV"),
         "GRNA5-2#0": StraightLine([800,495],"down",20,"11kV"),
@@ -339,22 +345,22 @@ networks_undrawn["chapelcross33kv"] = {
         "CHAP1-_CHAP3-_2": new Tx("CHAP1-_CHAP3-_2#0",1,"GRID T2","90 MVA","132kV"),
         "CHAP1-_CHAP3-_1": new Tx("CHAP1-_CHAP3-_1#0",1,"GRID T1", "90 MVA","132kV"),
         3: new Tx("CHAP1-_CHAP3-_1#1",1,"","","0V"),
-        5: new Tx("MIBI3-_MIBIT1_1#1",1,"","10 MVA","33kV"),
-        6: new Tx("MIBI3-_LAHO3A_1#3",1,"T1","12 MVA","33kV"),
-        7: new Tx("CHAPX3_LAHO3B_1#3",1,"T2","12 MVA","11kV"),
+        "MIBIT1_MIBI10_T1": new Tx("MIBI3-_MIBIT1_1#1",1,"","10 MVA","11kV"),
+        "LAHOT1_LAHO10_T1": new Tx("MIBI3-_LAHO3A_1#3",1,"T1","12 MVA","11kV"),
+        "LAHOT2_LAHO20_T2": new Tx("CHAPX3_LAHO3B_1#4",1.2,"T2","12 MVA","33kV"),
         "ANANT1_ANAN10_T1": new Tx("ANANT1_CHAP3-_1#2",1,"T1","12 MVA","11kV"),
         "ANANT2_ANAN20_T2": new Tx("ANANT2_CHAP3-_1#3",1,"T2","12 MVA","33kV"),
         "KIBAT1_KIBA10_T1": new Tx("CHAPX4_KIBAT1_1#0",1,"","5VA","11kV"),
         "MOFTT1_MOFT10_T1": new Tx("CHAPX4_MOFTT1_1#1",1,"T1","7.5 MVA","11kV"),
-        "MOFTT1_MOFT10_T2": new Tx("LOBI3B_MOFTT2_1#3",1,"T2","7.5 MVA","33kV"),
+        "MOFTT2_MOFT20_T2": new Tx("LOBI3B_MOFTT2_1#3",1,"T2","7.5 MVA","33kV"),
 
         "LOBIT1_LOBI10_T1": new Tx("LOBI3A_LOBIT1_1#1", 1, "T1", "24 MVA","11kV"),
-        "LOBIT1_LOBI10_T2": new Tx("LOBI3B_LOBIT2_1#4",0,"T2","24 MVA","33kV"),
+        "LOBIT2_LOBI20_T2": new Tx("LOBI3B_LOBIT2_1#3",1,"T2","24 MVA","33kV"),
 
-        16: new Tx("GRNA3A_GRNAT1_1#1",1,"T1","24 MVA","33kV"),
-        17: new Tx("GRNA3B_GRNAT2_1#1",1,"T2","24 MVA","11kV"),
+        "GRNAT1_GRNA10_T1": new Tx("GRNA3A_GRNAT1_1#1",1,"T1","24 MVA","11kV"),
+        "GRNAT2_GRNA20_T2": new Tx("GRNA3B_GRNAT2_1#2",1,"T2","24 MVA","33kV"),
 
-        18: new Tx("LAHO3B_NEWCT1_1#4",1,"T1","5 MVA","33kV"),
+        "NEWCT1_NEWC10_T1": new Tx("LAHO3B_NEWCT1_1#4",1,"T1","5 MVA","11kV"),
 
         },
     generators:{
