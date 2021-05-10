@@ -248,8 +248,10 @@
         'progress': true,
         'broadcast': true
       }, function (data){});
-      $("#sim_status_div").html("Simulation status: " + current_step)
-        $("body").css("cursor", "default");
+        $("#sim_status_div").html("Simulation status: " + current_step)
+        if(!data['broadcast']){
+          $("body").css("cursor", "default");
+        }
 
     }, 1000)
   }
@@ -340,6 +342,7 @@
     draw_network(dict_components, network, current_step);
     fetch_sim_data(case_network, network, current_step, option, scenario, update_sim_data
     );
+    $("body").css("cursor", "default");
   }
 
   function event_draw(draw_data){
@@ -427,6 +430,7 @@
       network = data['network'];
     }
     master_draw();
+
   });
 
 

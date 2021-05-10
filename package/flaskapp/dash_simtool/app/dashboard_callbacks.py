@@ -91,9 +91,7 @@ def add_sim_progress_buttons(dash_app, URL_PAGE):
 
         ctx = dash.callback_context
         triggered_object = ctx.triggered[0]['prop_id'].split('.')[0]
-        print(session['entity'])
-        sim_status = simtool_db.get_room_simstatus(session['entity'])
-
+        sim_status = simtool_db.get_room_simstatus(session['username'])
 
         redraw_data = {'sim_step': sim_status,
                               'username': session.get('username')}
@@ -103,15 +101,15 @@ def add_sim_progress_buttons(dash_app, URL_PAGE):
 
         if triggered_object == 'next_button':  # increment sim_step
             redraw_data['sim_step'] += 1
-            simtool_db.replace_room_simstatus(dbs, redraw_data['sim_step'], session['entity'])
             # redraw_data['network'] = requests.server_get_network_view(session['entity'], redraw_data['sim_step'])
             socketio.emit('redraw', redraw_data, room=session['room'])
+            simtool_db.replace_room_simstatus(dbs, redraw_data['sim_step'], session['username'])
 
         elif triggered_object == 'back_button':  # decrement sim_step
             redraw_data['sim_step'] -= 1 if sim_status > cf.start_sim_step else 0
-            simtool_db.replace_room_simstatus(dbs, redraw_data['sim_step'], session['entity'])
             # redraw_data['network'] = requests.server_get_network_view(session['entity'], redraw_data['sim_step'])
             socketio.emit('redraw', redraw_data, room=session['room'])
+            simtool_db.replace_room_simstatus(dbs, redraw_data['sim_step'], session['username'])
 
         elif triggered_object == 'debug_button':
             socketio.emit('debug', {}, room=session['room'])
@@ -119,9 +117,9 @@ def add_sim_progress_buttons(dash_app, URL_PAGE):
 
         elif triggered_object == 'reset_sim_button':  # reset sim_step
             redraw_data['sim_step'] = simtool_db.get_simstatus()
-            simtool_db.replace_room_simstatus(dbs, redraw_data['sim_step'], session['entity'])
             # redraw_data['network'] = requests.server_get_network_view(session['entity'], redraw_data['sim_step'])
             socketio.emit('redraw', redraw_data, room=session['room'])
+            simtool_db.replace_room_simstatus(dbs, redraw_data['sim_step'], session['username'])
 
         else:
             redraw_data['sim_step'] = simtool_db.get_simstatus()
