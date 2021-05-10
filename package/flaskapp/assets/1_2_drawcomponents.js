@@ -880,6 +880,32 @@ function draw_action_button(){
 }
 
 
+function draw_admin_buttons(){
+  var group = draw.group();
+
+
+    if(entity === 'admin'){
+      let rect0 = draw.rect(x_max*0.07,y_max*0.05).fill("yellow").center(x_max*0.5,y_max*0.82);
+      add_text(rect0, false, ["Admin action: reset"], 0, 0, "#000000", 12, function(){})
+      let rect1 = draw.rect(x_max*0.07,y_max*0.05).fill("yellow").center(x_max*0.6,y_max*0.82);
+      add_text(rect1, false, ["Admin action: back"], 0, 0, "#000000", 12, function(){})
+      let rect2 = draw.rect(x_max*0.07,y_max*0.05).fill("yellow").center(x_max*0.7,y_max*0.82);
+      add_text(rect1, false, ["Admin action: back"], 0, 0, "#000000", 12, function(){})
+      add_text(rect2, false, ["Admin action: next"], 0, 0, "#000000", 12, function(){})
+      rect0.click(function() {
+        reset_state(case_network)
+      })
+      rect1.click(function() {
+        dec_state(case_network)
+      })
+      rect2.click(function() {
+        inc_state(case_network)
+      })
+    }
+
+}
+
+
 function draw_line(line,id_line, type="busbar"){
         bNodes = false
 
