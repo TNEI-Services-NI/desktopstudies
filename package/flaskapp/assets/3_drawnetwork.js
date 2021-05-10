@@ -48,8 +48,8 @@
     for (let avp_ in components.availablePowers) {
           available_power_instance = components.availablePowers[avp_]
           available_power_instance.modal_data = []
-          if (avp_ in step_data["generators_active_power"]) {
-                available_power_instance.setAvailablePower(step_data["generators_active_power"][avp_])
+          if (avp_ in step_data["generators_rating"]) {
+                available_power_instance.setAvailablePower(step_data["generators_rating"][avp_])
         }
     }
   }
