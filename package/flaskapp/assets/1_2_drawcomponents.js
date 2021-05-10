@@ -894,12 +894,15 @@ function draw_admin_buttons(){
       add_text(rect1, false, ["Admin action: back"], 0, 0, "#000000", 12, function(){})
       add_text(rect2, false, ["Admin action: next"], 0, 0, "#000000", 12, function(){})
       rect0.click(function() {
+        rect0.off('click')
         reset_state(case_network)
       })
       rect1.click(function() {
+        rect1.off('click')
         dec_state(case_network)
       })
       rect2.click(function() {
+        rect2.off('click')
         inc_state(case_network)
       })
     }
