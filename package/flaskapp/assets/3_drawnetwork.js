@@ -193,6 +193,7 @@
                   ((step_data_["transformers_loading"][line_id_LF] === undefined)))
                {
         if(highlight_undefined){
+            console.log(line_instance)
           line_instance.info.o_line.attr({stroke: "#d3d3d3"});
           line_instance.UIElement.attr({stroke: "#d3d3d3"});
           // line_instance.info.o_line.attr({stroke: "grey"});

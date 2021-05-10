@@ -84,6 +84,8 @@ networks_undrawn["chapelcross33kv"] = {
         "LOBI3B": StraightLine([230+175,400],"right",175),
 
         "CHAPX4_LOBI3A_1":StraightLine([265,400],"down",550-400),
+        "LOBI3A#0":StraightLine([265,400],"down",20),
+
         "CHAPX4_MOFTT1_1#0":StraightLine([265,550],"down",90),
 
         //Middlebie
@@ -148,6 +150,8 @@ networks_undrawn["chapelcross33kv"] = {
         "CHAPX4_MOFTT1_1#3": StraightLine([390,640],"down",35, "11kV"),
 
         "LOBI3B_MOFTT2_1#0": StraightLine([565,640],"up",240),
+        "LOBI3B#1":StraightLine([565,400],"down",20),
+
         "LOBI3B_MOFTT2_1#1": StraightLine([565,640],"left",80),
         "LOBI3B_MOFTT2_1#2": StraightLine([440,640],"down",35,"11kV"),
         "LOBI3B_MOFTT2_1#3": StraightLine([440,640],"right",50,"11kV"),
@@ -306,7 +310,7 @@ networks_undrawn["chapelcross33kv"] = {
         "662 01": new Breaker("ANAN5-1",1,"01"),
         "662 20": new Breaker("ANANT2_CHAP3-_1#3",0.3,"20"),
 
-        "694 13": new Breaker("CHAPX4_LOBI3A_1",0.1,"13"),
+        "694 13": new Breaker("LOBI3A#0",1,"13"),
 
         "675 10": new Breaker("CHAPX4_KIBAT1_1#1",0.3,"10"),
 
@@ -316,7 +320,7 @@ networks_undrawn["chapelcross33kv"] = {
 
         "694 12": new Breaker("LOBI3A_LOBIT1_1#0", 0.5,"12"),
         "694 22": new Breaker("LOBI3B_LOBIT2_1#0", 0.5,"22"),
-        "694 23": new Breaker("LOBI3B_MOFTT2_1#0", 0.89,"13"),
+        "694 23": new Breaker("LOBI3B#1", 1,"23"),
 
         "679 10": new Breaker("LOBI3A_LOBIT1_1#2", 0.7,"10"),
         "679 01": new Breaker("LOBI5-1",1,"01"),
