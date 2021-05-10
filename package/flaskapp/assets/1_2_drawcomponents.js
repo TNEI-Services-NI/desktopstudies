@@ -867,6 +867,7 @@ function draw_action_button(){
         let rect1 = draw.rect(x_max*0.1,y_max*0.07).fill("yellow").center(x_max*0.8,y_max*0.82);
         add_text(rect1, false, ["Take action: ", action], 0, 0, "#000000", 12, function(){})
         rect1.click(function() {
+          rect1.off('click')
           action = undefined
           inc_state(case_network)
         })
