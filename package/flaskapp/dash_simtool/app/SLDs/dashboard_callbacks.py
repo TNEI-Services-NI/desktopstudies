@@ -50,6 +50,7 @@ def _add_network_redraw(dash_app):
             'network': network,
             'sim_step': sim_step,
             'local': True,
+            'page': "SLDs",
             'username': session.get('username'),
             'room': session.get('room'),
             'entity': session['entity']

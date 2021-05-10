@@ -313,7 +313,9 @@
 
     construct_generation_info(dict_components)
 
-    construct_action()
+    if(page === 'home'){
+      construct_action()
+    }
 
   }
 
@@ -376,6 +378,8 @@
 
   var action = undefined
 
+  var page = undefined
+
   socket.on('check_join_draw', function(data_join_draw) {
     if(username === undefined){
       username = data_join_draw['username']
@@ -383,6 +387,7 @@
     if(entity === undefined){
       entity = data_join_draw['entity']
     }
+    page = data_join_draw['page']
     if(username === data_join_draw['username']){
       socket.emit('check_join_draw', data_join_draw, function (data_check_rooms){});
     }
