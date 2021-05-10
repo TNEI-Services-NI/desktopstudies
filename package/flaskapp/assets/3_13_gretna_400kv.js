@@ -2,7 +2,6 @@
 //scale of 1000 x 1000, readjust with math...
 networks_undrawn["gretna400kv"]={
     lines:{
-    "R1": StraightLine([60,430],"right",880,"400kV"),
 
     "X606 X604": StraightLine([160,430],"down",190,"400kV"),
         "HARK A": StraightLine([120,525],"right",40,"400kV"),
@@ -11,8 +10,10 @@ networks_undrawn["gretna400kv"]={
     "X516 X514": StraightLine([325,430],"down",190,"400kV"),
         "GRNA 780 A": StraightLine([285,525],"right",40,"400kV"),
         "X510": StraightLine([285,525],"down",215,"400kV"),
-        "GRNA 780": StraightLine([285,740],"down",190,"132kV"),
-        "GRNA 780 tx": StraightLine([285,800],"left",40,"132kV"),
+
+        "GRNA4-_M1-_SGT1": StraightLine([285,740],"up",75,"400kV"),
+        "GRNA1-_SGT1#1": StraightLine([285,930],"up",190,"132kV"),
+        "GRNA1-_SGT1#0": StraightLine([285,800],"left",40,"132kV"),
 
 
     "X406 X404": StraightLine([485,430],"down",190,"400kV"),
@@ -29,8 +30,8 @@ networks_undrawn["gretna400kv"]={
     "X116 X114": StraightLine([805,430],"down",190,"400kV"),
         "GRNA 680 A": StraightLine([765,525],"right",40,"400kV"),
         "X110": StraightLine([765,525],"down",215,"400kV"),
-        "GRNA 680": StraightLine([765,740],"down",190,"132kV"),
-        "GRNA 680 tx": StraightLine([765,800],"left",40,"132kV"),
+        "GRNA1-_SGT2#0": StraightLine([765,740],"down",190,"132kV"),
+        "GRNA1-_SGT2#1": StraightLine([765,800],"left",40,"132kV"),
 
     "SC1": StraightLine([415,170],"right",350,"0V",true),
     "SC2": StraightLine([415,170],"down",150,"0V",true),
@@ -48,7 +49,7 @@ networks_undrawn["gretna400kv"]={
 
     busbars:{
     "GRNA4-_M1": StraightLine([60,620],"right",880,"400kV"),
-        "R1": StraightLine([60,430],"right",880,"400kV"),
+    "GRNA4-_R1": StraightLine([60,430],"right",880,"400kV"),
     },
 
     breakers:{
@@ -57,17 +58,17 @@ networks_undrawn["gretna400kv"]={
         "X405": new Breaker("ELVA", 0.3),
         "X230": new Breaker("X236 X230 X234", 0.5),
         "X110": new Breaker("X110",0.65),
-        "X510": new Breaker("X510",0.65),
+        "X510": new Breaker("GRNA4-_M1-_SGT1",1),
         "X605": new Breaker("HARK",0.332),
 
     },
 
     labels:{
     1: new Text("GRNA4-_M1",["M1"],[-465,0]),
-    2: new Text("R1",["R1"],[-465,0]),
+    2: new Text("GRNA4-_R1",["R1"],[-465,0]),
     3: new Text("HARK",["HARK"],[0,225]),
-    4: new Text("GRNA 680",["GRNA 680"],[0,110]),
-    5: new Text("GRNA 780",["GRNA 780"],[0,110]),
+    4: new Text("GRNA1-_SGT2#0",["GRNA 680"],[0,110]),
+    5: new Text("GRNA1-_SGT1#1",["GRNA 780"],[0,110]),
     6: new Text("ELVA",["ELVA"],[0,-240]),
     7: new Text("GRNA4-_M1",["GRETNA 400kV"],[-50,-600], 25),
     8: new Text("SC1",["SERIES COMPENSATION SC1"],[70,15]),
@@ -77,8 +78,8 @@ networks_undrawn["gretna400kv"]={
     },
 
     tx:{
-        "GRNA 780 tx": new Tx("GRNA 780 tx",1,"","", "0V"),
-        "GRNA 680 tx": new Tx("GRNA 680 tx",1,"","", "0V"),
+        "GRNA 780 tx": new Tx("GRNA1-_SGT1#0",1,"","", "0V"),
+        "GRNA 680 tx": new Tx("GRNA1-_SGT2#1",1,"","", "0V"),
     },
 
     isolators:{
@@ -117,7 +118,7 @@ networks_undrawn["gretna400kv"]={
     },
 
     SGTs:{
-        "SGT1": new SGT("X510","SGT1"),
+        "SGT1": new SGT("GRNA1-_SGT1#1","SGT1"),
         "SGT2": new SGT("X110","SGT2"),
     },
 }

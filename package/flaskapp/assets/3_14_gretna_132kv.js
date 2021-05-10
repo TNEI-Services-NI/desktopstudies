@@ -3,7 +3,7 @@
 networks_undrawn["gretna132kv"]={
     lines:{
     "GRNA1-": StraightLine([55,535],"right",900,"132kV"),
-    "GRANA1-_SGT1": StraightLine([190,535],"up",355,"132kV"),
+    "GRNA1-_SGT1": StraightLine([190,535],"up",355,"132kV"),
     "GRNA1-#0": StraightLine([190,535],"up",165,"132kV"),
 
     "CHAP1-_GRNA1": StraightLine([340,535],"up",355,"132kV"),
@@ -12,7 +12,7 @@ networks_undrawn["gretna132kv"]={
     "CHAP1-_GRNA2": StraightLine([625,535],"up",355,"132kV"),
     "GRNA1-#2": StraightLine([625,535],"up",165,"132kV"),
 
-    "GRANA1-_SGT2": StraightLine([775,535],"up",355,"132kV"),
+    "GRNA1-_SGT2": StraightLine([775,535],"up",355,"132kV"),
     "GRNA1-#3": StraightLine([775,535],"up",165,"132kV"),
 
     "HARK": StraightLine([270,535],"down",355,"132kV"),
@@ -21,7 +21,7 @@ networks_undrawn["gretna132kv"]={
     "HAWI": StraightLine([695,535],"down",355,"132kV"),
     "GRNA1-#5": StraightLine([695,535],"down",165,"132kV"),
 
-    "EWEH": StraightLine([850,535],"down",355,"132kV"),
+    "GRNA1-_EWEH": StraightLine([850,535],"down",355,"132kV"),
     "GRNA1-#6": StraightLine([850,535],"down",165,"132kV"),
 
     },
@@ -47,14 +47,14 @@ networks_undrawn["gretna132kv"]={
     1: new Text("GRNA1-", ["132kV"], [-18,-70]),
     2: new Text("GRNA1-", ["GRETNA 132kV"], [-18,-400], 25),
 
-    3: new Text("GRANA1-_SGT1", ["SGT1"], [0,-200]),
+    3: new Text("GRNA1-_SGT1", ["SGT1"], [0,-200]),
     4: new Text("CHAP1-_GRNA1", ["CHAP-1"], [0,-200]),
     5: new Text("CHAP1-_GRNA2", ["CHAP-2"], [0,-200]),
-    6: new Text("GRANA1-_SGT2", ["SGT2"], [0,-200]),
+    6: new Text("GRNA1-_SGT2", ["SGT2"], [0,-200]),
 
     7: new Text("HARK", ["HARK/HAWI"], [0,200]),
     8: new Text("HAWI", ["HAWI"], [0,200]),
-    9: new Text("EWEH", ["EWEH"], [0,200]),
+    9: new Text("GRNA1-_EWEH", ["EWEH"], [0,200]),
     },
 
     tx:{
@@ -65,7 +65,7 @@ networks_undrawn["gretna132kv"]={
     "125": new Isolator("GRNA1-",0.53,"closed"),
 
     "784": new Isolator("GRNA1-#0",0.5,"closed"),
-    "783": new Isolator("GRANA1-_SGT1",0.65,"closed"),
+    "783": new Isolator("GRNA1-_SGT1",0.65,"closed"),
 
     "304": new Isolator("GRNA1-#1",0.5,"closed"),
     "383": new Isolator("CHAP1-_GRNA1",0.65,"closed"),
@@ -74,7 +74,7 @@ networks_undrawn["gretna132kv"]={
     "203": new Isolator("CHAP1-_GRNA2",0.65,"closed"),
 
     "684": new Isolator("GRNA1-#3",0.5,"closed"),
-    "683": new Isolator("GRANA1-_SGT2",0.65,"closed"),
+    "683": new Isolator("GRNA1-_SGT2",0.65,"closed"),
 
 
     "504": new Isolator("GRNA1-#4",0.5,"closed"),
@@ -84,7 +84,7 @@ networks_undrawn["gretna132kv"]={
     "403": new Isolator("HAWI",0.65,"closed"),
 
     "804": new Isolator("GRNA1-#6",0.5,"closed"),
-    "803": new Isolator("EWEH",0.65,"closed"),
+    "803": new Isolator("GRNA1-_EWEH",0.65,"closed"),
     },
 
     dataViews:{
