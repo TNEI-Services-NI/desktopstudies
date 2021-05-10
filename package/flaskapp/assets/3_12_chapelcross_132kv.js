@@ -123,13 +123,13 @@ networks_undrawn["chapelcross132kv"]={
 
         "203": new Isolator("GRNA-2",0.3,"closed"),
         "206": new Isolator("CHAP1-_R1-_1#6",0.33,"closed"),
-        "204": new Isolator("CHAP1-_R1-_1#6",1,"open"),
+        "204": new Isolator("CHAP1-_M1-_2#10",0,"open"),
         "416": new Isolator("CHAP1-_M1-_2#7",0,"open"),
         "414": new Isolator("CHAP1-_M1-_2#7",0.66,"closed"),
 
         "613": new Isolator("ECCF-2",0.3,"closed"),
         "616": new Isolator("CHAP1-_R1-_1#2",0.33,"closed"),
-        "614": new Isolator("CHAP1-_R1-_1#2",1,"open"),
+        "614": new Isolator("CHAP1-_M1-_2#6",0.5,"open"),
 
         "803": new Isolator("DUMF-2",0.3,"closed"),
         "806": new Isolator("CHAP1-_M1-_2#3",0,"open"),
