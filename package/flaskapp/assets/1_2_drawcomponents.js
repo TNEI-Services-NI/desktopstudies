@@ -867,6 +867,7 @@ function draw_action_button(){
         let rect1 = draw.rect(x_max*0.1,y_max*0.07).fill("yellow").center(x_max*0.8,y_max*0.82);
         add_text(rect1, false, ["Take action: ", action], 0, 0, "#000000", 12, function(){})
         rect1.click(function() {
+          rect1.off('click')
           action = undefined
           inc_state(case_network)
         })
@@ -893,12 +894,15 @@ function draw_admin_buttons(){
       add_text(rect1, false, ["Admin action: back"], 0, 0, "#000000", 12, function(){})
       add_text(rect2, false, ["Admin action: next"], 0, 0, "#000000", 12, function(){})
       rect0.click(function() {
+        rect0.off('click')
         reset_state(case_network)
       })
       rect1.click(function() {
+        rect1.off('click')
         dec_state(case_network)
       })
       rect2.click(function() {
+        rect2.off('click')
         inc_state(case_network)
       })
     }

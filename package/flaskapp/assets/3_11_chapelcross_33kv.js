@@ -463,6 +463,16 @@ networks_undrawn["chapelcross33kv"] = {
             'generators_active_power',
             'generators_reactive_power',
           ]),
+        "EWHC0G_1": new DataView("EWHC0G_1", [35, 0],
+          [
+            'generators_active_power',
+            'generators_reactive_power',
+          ]),
+        "MINS0G_1": new DataView("MINS0G_1", [35, 0],
+          [
+            'generators_active_power',
+            'generators_reactive_power',
+          ]),
         // CRAIG II WINDFARM 11KV
         // "CRAG0B_1": new DataView("CRAG0B_1", [-35, 0]),
 

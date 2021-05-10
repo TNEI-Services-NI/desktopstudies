@@ -48,8 +48,8 @@
     for (let avp_ in components.availablePowers) {
           available_power_instance = components.availablePowers[avp_]
           available_power_instance.modal_data = []
-          if (avp_ in step_data["generators_active_power"]) {
-                available_power_instance.setAvailablePower(step_data["generators_active_power"][avp_])
+          if (avp_ in step_data["generators_rating"]) {
+                available_power_instance.setAvailablePower(step_data["generators_rating"][avp_])
         }
     }
   }
@@ -123,6 +123,7 @@
     for(let id_dv in components.dataviews){
       let text_list = [];
       var units = "";
+      var scale = 1;
       let labels = components.dataviews[id_dv].labels
       for(let id_component_parameter in labels){
         let component_parameter = labels[id_component_parameter]
@@ -139,9 +140,10 @@
             units = " ."
           } else if(component_parameter.includes('current')){
             units = " AMPS"
+            scale = 1000
           }
 
-          let value = Math.round(step_data[component_parameter][id_dv] * 1000) / 1000
+          let value = scale * Math.round(step_data[component_parameter][id_dv] * 1000) / 1000
 
           text_list = text_list.concat(
             [String(value) + units]
@@ -248,8 +250,10 @@
         'progress': true,
         'broadcast': true
       }, function (data){});
-      $("#sim_status_div").html("Simulation status: " + current_step)
-        $("body").css("cursor", "default");
+        $("#sim_status_div").html("Simulation status: " + current_step)
+        if(!data['broadcast']){
+          $("body").css("cursor", "default");
+        }
 
     }, 1000)
   }
@@ -340,6 +344,7 @@
     draw_network(dict_components, network, current_step);
     fetch_sim_data(case_network, network, current_step, option, scenario, update_sim_data
     );
+    $("body").css("cursor", "default");
   }
 
   function event_draw(draw_data){
@@ -427,6 +432,7 @@
       network = data['network'];
     }
     master_draw();
+
   });
 
 

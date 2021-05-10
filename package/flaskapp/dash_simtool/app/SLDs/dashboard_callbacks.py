@@ -35,14 +35,14 @@ def _add_network_redraw(dash_app):
         if triggered_object['value'] is None:
             session['room'] = session['entity']
             sim_step = simtool_db.get_simstatus()
-            simtool_db.replace_room_simstatus(dbs, sim_step, session['entity'])
+            simtool_db.replace_room_simstatus(dbs, sim_step, session['username'])
             if 'network_explore' not in session:
                 network = "chapelcross33kv"
             else:
                 network = session['network_explore']
         else:
-            sim_step = simtool_db.get_room_simstatus(session['entity'])
             network = triggered_object['prop_id'].split('.')[0]
+            sim_step = simtool_db.get_room_simstatus(session['username'])
 
         # store network, sim_step
         session['network_explore'] = network
