@@ -2,7 +2,7 @@
 //scale of 1000 x 1000, readjust with math...
 networks_undrawn["gretna132kv"]={
     lines:{
-    "124 120 128": StraightLine([55,535],"right",900,"132kV"),
+    "GRNA1-": StraightLine([55,535],"right",900,"132kV"),
     "783 780 784": StraightLine([190,535],"up",355,"132kV"),
     "303 305 304": StraightLine([340,535],"up",355,"132kV"),
     "203 205 204": StraightLine([625,535],"up",355,"132kV"),
@@ -15,11 +15,11 @@ networks_undrawn["gretna132kv"]={
     },
 
     busbars:{
-        "124 120 128": StraightLine([55,535],"right",900,"132kV"),
+        "GRNA1-": StraightLine([55,535],"right",900,"132kV"),
     },
 
     breakers:{
-    "120": new Breaker("124 120 128",0.48),
+    "120": new Breaker("GRNA1-",0.48),
 
     "780": new Breaker("783 780 784",0.45),
     "305": new Breaker("303 305 304",0.45,),
@@ -32,8 +32,8 @@ networks_undrawn["gretna132kv"]={
     },
 
     labels:{
-    1: new Text("124 120 128", ["132kV"], [-18,-70]),
-    2: new Text("124 120 128", ["GRETNA 132kV"], [-18,-400], 25),
+    1: new Text("GRNA1-", ["132kV"], [-18,-70]),
+    2: new Text("GRNA1-", ["GRETNA 132kV"], [-18,-400], 25),
 
     3: new Text("783 780 784", ["SGT1"], [0,-200]),
     4: new Text("303 305 304", ["CHAP-1"], [0,-200]),
@@ -49,8 +49,8 @@ networks_undrawn["gretna132kv"]={
     },
 
     isolators:{
-    "124": new Isolator("124 120 128",0.43,"closed"),
-    "125": new Isolator("124 120 128",0.53,"closed"),
+    "124": new Isolator("GRNA1-",0.43,"closed"),
+    "125": new Isolator("GRNA1-",0.53,"closed"),
 
     "784": new Isolator("783 780 784",0.25,"closed"),
     "783": new Isolator("783 780 784",0.65,"closed"),

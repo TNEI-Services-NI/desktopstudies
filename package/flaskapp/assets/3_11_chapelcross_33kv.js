@@ -172,7 +172,9 @@ networks_undrawn["chapelcross33kv"] = {
 
         //GRETNA 11kV
         "GRNAT1_GRNA10_T1#0": StraightLine([735,460],"left",50, "11kV"),
-        "GRNAT1_GRNA10_T1#1": StraightLine([735,460],"down",35,"11kV"),
+        "GRNA5-1#2": StraightLine([735,460],"left",15, "11kV"),
+
+        "GRNA5-1#1": StraightLine([735,460],"down",35,"11kV"),
         "GRNA5-1": StraightLine([710,496],"right",50,"11kV"),
         "GRNA5-2": StraightLine([760,496],"right",50,"11kV"),
         "GRNA3B_GRNAT2_1#3": StraightLine([785,460],"down",35,"11kV"),
@@ -326,7 +328,7 @@ networks_undrawn["chapelcross33kv"] = {
         "679 01": new Breaker("LOBI5-1",1,"01"),
         "679 20": new Breaker("LOBI3B_LOBIT2_1#3",0.3,"20"),
 
-        "673 10": new Breaker("GRNAT1_GRNA10_T1#0",0.25,"10"),
+        "673 10": new Breaker("GRNA5-1#2",1,"10"),
         "673 01": new Breaker("GRNA5-1",1,"01"),
         "673 20": new Breaker("GRNA3B_GRNAT2_1#2",0.25,"20"),
 

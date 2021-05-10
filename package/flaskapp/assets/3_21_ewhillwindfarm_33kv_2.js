@@ -199,7 +199,7 @@ networks_undrawn["ewehillwindfarm2"]={
 
     },
     busbars:{
-     "MINSCA BUSBAR": StraightLine([325,260],"right",425,"33kV"),
+     "EWHC0G_2": StraightLine([325,260],"right",425,"33kV"),
 
     },
 
