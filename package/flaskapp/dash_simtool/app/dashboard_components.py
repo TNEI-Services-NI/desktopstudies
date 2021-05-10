@@ -402,7 +402,7 @@ def sidebar(URL_PAGE):
 
     ]
     _sim_buttons = [
-        dbc.Button("Reset simulation", id="reset_sim_button"),
+        dbc.Button("Return to simulation", id="reset_sim_button"),
         dbc.Button("Back", id="back_button", style={"margin-top": "15px"}),
         dbc.Button("Next", id="next_button", style={"margin-top": "15px", "margin-left": "15px"}),
         html.Hr(),
