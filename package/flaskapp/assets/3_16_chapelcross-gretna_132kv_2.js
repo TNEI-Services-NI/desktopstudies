@@ -2,8 +2,8 @@
 //scale of 1000 x 1000, readjust with math...
 networks_undrawn["chapelcrossgretna2"]={
     lines:{
-    "R1_2": StraightLine([215,555],"right",130,"132kV"),
-    "M1_2": StraightLine([215,740],"right",130,"132kV"),
+    "CHAP1-_R1-_1": StraightLine([215,555],"right",130,"132kV"),
+    "CHAP1-_M1-_1": StraightLine([215,740],"right",130,"132kV"),
     "206 204_2": StraightLine([250,555],"down",185, "132kV"),
     "205 A_2": StraightLine([290,650],"left",40,"132kV"),
     "205 B_2": StraightLine([290,650],"up",135,"132kV"),
@@ -19,8 +19,8 @@ networks_undrawn["chapelcrossgretna2"]={
 
     },
     busbars:{
-        "R1": StraightLine([215,555],"right",130,"132kV"),
-        "M1": StraightLine([215,740],"right",130,"132kV"),
+        "CHAP1-_R1-_1": StraightLine([215,555],"right",130,"132kV"),
+        "CHAP1-_M1-_2": StraightLine([215,740],"right",130,"132kV"),
             "GRNA1 B": StraightLine([785,650],"left",130,"132kV"),
 
     },
@@ -35,8 +35,8 @@ networks_undrawn["chapelcrossgretna2"]={
         1: new Text("GRNA1 B_2", ["GRNA1"], [0,30]),
         2: new Text("206 204_2", ["CHAP1"], [80,0]),
 
-        3: new Text("M1_2", ["M1"], [-80,0]),
-        4: new Text("R1_2", ["R1"], [-80,0]),
+        3: new Text("CHAP1-_M1-_1", ["M1"], [-80,0]),
+        4: new Text("CHAP1-_R1-_1", ["R1"], [-80,0]),
 
         5: new Text("203 203 B_2", ["CHAPELCROSS - GRETNA 2"], [0,-170], 25),
 
@@ -46,11 +46,11 @@ networks_undrawn["chapelcrossgretna2"]={
     },
 
     isolators:{
-        "1006": new Isolator("206 204_2",0.25,"closed"),
-        "1004": new Isolator("206 204_2",0.75,"open"),
+        "206": new Isolator("206 204_2",0.25,"closed"),
+        "204": new Isolator("206 204_2",0.75,"open"),
         "1003": new Isolator("205 203_2",0,"closed"),
         "203": new Isolator("203 203 C_2",1,"closed"),
-        "204": new Isolator("205 204_2",1,"closed"),
+        " 204": new Isolator("205 204_2",1,"closed"),
 
     },
 

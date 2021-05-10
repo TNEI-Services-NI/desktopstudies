@@ -96,7 +96,7 @@ networks_undrawn["chapelcross132kv"]={
         "800": new Breaker("CHAP1-_M1-_2#5",1),
         "915": new Breaker("CHAP1-_M1-_1#8",1),
         "1105": new Breaker("CHAP1-_M1-_1#11",1),
-        "410": new Breaker("CHAP1-_T2",1),
+        "410": new Breaker("CHAP1-_M1-_2#9",1),
 
     },
 
