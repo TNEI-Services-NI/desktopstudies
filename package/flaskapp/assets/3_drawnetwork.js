@@ -186,14 +186,14 @@
         }
 
 
-      } else if (((step_data_["lines_loading"][line_id_LF] === undefined))&&
+      }
+else if (((step_data_["lines_loading"][line_id_LF] === undefined))&&
                   ((step_data_["busbars_voltage"][line_id_LF] === undefined))&&
-                  ((step_data_["transformers_loading"][line_id_LF] === undefined))
-      ){
-
+                  ((step_data_["transformers_loading"][line_id_LF] === undefined)))
+               {
         if(highlight_undefined){
-          line_instance.info.o_line.attr({stroke: "red"});
-          line_instance.UIElement.attr({stroke: "red"});
+          line_instance.info.o_line.attr({stroke: "#d3d3d3"});
+          line_instance.UIElement.attr({stroke: "#d3d3d3"});
           // line_instance.info.o_line.attr({stroke: "grey"});
         }
       }
