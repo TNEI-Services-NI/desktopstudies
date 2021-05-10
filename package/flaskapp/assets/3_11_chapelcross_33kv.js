@@ -241,10 +241,16 @@ networks_undrawn["chapelcross33kv"] = {
      },
     loads:{
         "ANANT2_CHAP3-_1#4": StraightLine([405,315],"down",20,"11kV"),
+        "ANANT1_CHAP3-_1#4": StraightLine([321,315],"down",20,"11kV"),
         "LOBI5-2#0": StraightLine([450,490],"down",20,"11kV"),
+        "LOBI5-1#0": StraightLine([370,490],"down",20,"11kV"),
         "KIBA5-#0": StraightLine([440,585],"down",20,"11kV"),
         "MOFT5-2#0": StraightLine([450,675],"down",20,"11kV"),
+        "MOFT5-1#0": StraightLine([372,675],"down",20,"11kV"),
+
         "LAHO5-2#0": StraightLine([465,890],"down",20,"11kV"),
+        "LAHO5-1#0": StraightLine([375,890],"down",20,"11kV"),
+
         "MIBI5-#0": StraightLine([335,730],"down",20,"11kV"),
         "NEWC5-#0": StraightLine([770,680],"down",20,"11kV"),
         "GRNA5-2#0": StraightLine([800,495],"down",20,"11kV"),
