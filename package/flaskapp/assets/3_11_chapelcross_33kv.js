@@ -93,7 +93,10 @@ networks_undrawn["chapelcross33kv"] = {
         "MIBI3-": StraightLine([65,575],"right",175),
         "EWHC3-_MIBI3-_1#0": StraightLine([80,575],"down",160),
         "MIBI3-_LAHO3A_1#0": StraightLine([160,575],"down",190),
+        "MIBI3-#0": StraightLine([160,575],"down",17),
+
         "MIBI3-_MIBIT1_1#0": StraightLine([205,575],"down",120),
+        "MIBI3-#1": StraightLine([205,575],"down",17),
 
         "EWHC3-_MIBI3-_1#1": StraightLine([80,735],"left",50),
         "EWHC3-_MIBI3-_1#2": StraightLine([30,735],"down",150),
@@ -254,6 +257,7 @@ networks_undrawn["chapelcross33kv"] = {
         "MIBI5-#0": StraightLine([335,730],"down",20,"11kV"),
         "NEWC5-#0": StraightLine([770,680],"down",20,"11kV"),
         "GRNA5-2#0": StraightLine([800,495],"down",20,"11kV"),
+        "GRNA5-1#0": StraightLine([720,495],"down",20,"11kV"),
 
         },
     diagram:{},
@@ -284,8 +288,8 @@ networks_undrawn["chapelcross33kv"] = {
 
         "780 12": new Breaker("CHAP3-_MIBI3-_1",0.5,"12"),
         "780 13": new Breaker("EWHC3-_MIBI3-_1#0",0.1,"13"),
-        "780 14": new Breaker("MIBI3-_LAHO3A_1#0",0.08,"14"),
-        "780 11": new Breaker("MIBI3-_MIBIT1_1#0",0.12,"11"),
+        "780 14": new Breaker("MIBI3-#0",1,"14"),
+        "780 11": new Breaker("MIBI3-#1",1,"11"),
 
         "781 12": new Breaker("EWHC3-_MIBI3-_1#4",0.65,"12"),
         "781 11": new Breaker("EWHC3-_EWHC0G_1",0.3,"11"),
