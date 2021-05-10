@@ -19,7 +19,6 @@ networks_undrawn["chapelcrossgretna1"]={
     "GRNA1-#1": StraightLine([720,510],"down",65,"132kV"),
 
     "GRNA1-#4": StraightLine([720,575],"down",75,"132kV"),
-    "GRNA1 B_1": StraightLine([785,650],"left",130,"132kV"),
 
     },
 
