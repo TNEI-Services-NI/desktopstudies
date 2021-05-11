@@ -2,7 +2,6 @@
 //scale of 1000 x 1000, readjust with math...
 networks_undrawn["gretna400kv"]={
     lines:{
-    "M1": StraightLine([60,620],"right",880,"400kV"),
     "R1": StraightLine([60,430],"right",880,"400kV"),
 
     "X606 X604": StraightLine([160,430],"down",190,"400kV"),
@@ -47,6 +46,11 @@ networks_undrawn["gretna400kv"]={
 
     },
 
+    busbars:{
+    "GRNA4-_M1": StraightLine([60,620],"right",880,"400kV"),
+        "R1": StraightLine([60,430],"right",880,"400kV"),
+    },
+
     breakers:{
         "X442": new Breaker("ELVA",0.63),
         "X448": new Breaker("X448",0.5),
@@ -59,13 +63,13 @@ networks_undrawn["gretna400kv"]={
     },
 
     labels:{
-    1: new Text("M1",["M1"],[-465,0]),
+    1: new Text("GRNA4-_M1",["M1"],[-465,0]),
     2: new Text("R1",["R1"],[-465,0]),
     3: new Text("HARK",["HARK"],[0,225]),
     4: new Text("GRNA 680",["GRNA 680"],[0,110]),
     5: new Text("GRNA 780",["GRNA 780"],[0,110]),
     6: new Text("ELVA",["ELVA"],[0,-240]),
-    7: new Text("M1",["GRETNA 400kV"],[-50,-600]),
+    7: new Text("GRNA4-_M1",["GRETNA 400kV"],[-50,-600], 25),
     8: new Text("SC1",["SERIES COMPENSATION SC1"],[70,15]),
     9: new Text("SC1",["COMPOUND"],[70,30]),
     10: new Text("SC8",["SC1"],[-10,-10]),
@@ -73,8 +77,8 @@ networks_undrawn["gretna400kv"]={
     },
 
     tx:{
-        "GRNA 780 tx": new Tx("GRNA 780 tx",1,"","", "132kV","LV"),
-        "GRNA 680 tx": new Tx("GRNA 680 tx",1,"","", "132kV","LV"),
+        "GRNA 780 tx": new Tx("GRNA 780 tx",1,"","", "0V"),
+        "GRNA 680 tx": new Tx("GRNA 680 tx",1,"","", "0V"),
     },
 
     isolators:{

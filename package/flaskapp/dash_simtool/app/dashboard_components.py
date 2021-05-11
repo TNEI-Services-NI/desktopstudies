@@ -8,6 +8,7 @@ import numpy as np
 import plotly.graph_objs as go
 
 import package.flaskapp.dash_simtool.app as dash_app
+import package.flaskapp.dash_simtool._config as cf
 import package.flaskapp.dash_simtool.app.dashboard_styling as styling
 from package.flaskapp.dash_simtool.app.micromethods import hex_to_rgb
 
@@ -332,19 +333,24 @@ def navbar_controls(url_page):
         [
             dbc.Nav(
                 [
-                    dbc.NavLink("Home", href=dash_app.URL_HOME,
+                    dbc.NavLink("Home",
+                                href=dash_app.URL_SLDS if cf.demo else dash_app.URL_HOME,
                                 active=True if dash_app.URL_HOME == url_page else False,
                                 external_link=True),
-                    dbc.NavLink("SLDs", href=dash_app.URL_SLDS,
+                    dbc.NavLink("SLDs",
+                                href=dash_app.URL_SLDS,
                                 active=True if dash_app.URL_SLDS == url_page else False,
                                 external_link=True),
-                    dbc.NavLink("Scripts", href=dash_app.URL_SCRIPTS,
+                    dbc.NavLink("Scripts",
+                                href=dash_app.URL_SLDS if cf.demo else dash_app.URL_SCRIPTS,
                                 active=True if dash_app.URL_SCRIPTS == url_page else False,
                                 external_link=True),
-                    dbc.NavLink("About", href=dash_app.URL_ABOUT,
+                    dbc.NavLink("About",
+                                href=dash_app.URL_SLDS if cf.demo else dash_app.URL_ABOUT,
                                 active=True if dash_app.URL_ABOUT == url_page else False,
                                 external_link=True),
-                    dbc.NavLink("Log out", href='/logout',
+                    dbc.NavLink("Log out",
+                                href='/logout',
                                 external_link=True),
                 ],
                 vertical=False,
@@ -359,7 +365,7 @@ def navbar_controls(url_page):
 def navbar(url_page):
     # nav bar
     _nav_bar = dbc.NavbarSimple(brand='Desktop Studies Communications Tool',
-                                color='#80361e',
+                                color='#c35d09',
                                 dark=True,
                                 id='nav_bar',
                                 children=navbar_controls(url_page),
@@ -367,3 +373,92 @@ def navbar(url_page):
                                 style=styling.NAVBAR_STYLE
                                 )
     return _nav_bar
+
+
+def sidebar(URL_PAGE):
+    _heading = [
+        html.H3("Options"),
+        html.Hr(),
+    ]
+    _dropdown = [
+        dbc.DropdownMenu(
+            label="Chapelcross 33kv",
+            children=[
+                dbc.DropdownMenuItem("Chapelcross 33kv", id="chapelcross33kv"),
+                dbc.DropdownMenuItem("Chapelcross 132kv", id="chapelcross132kv"),
+                dbc.DropdownMenuItem("Gretna 132kv", id="gretna132kv"),
+                dbc.DropdownMenuItem("Gretna 400kv", id="gretna400kv"),
+                dbc.DropdownMenuItem("chapelcrossgretna1", id="chapelcrossgretna1"),
+                dbc.DropdownMenuItem("chapelcrossgretna2", id="chapelcrossgretna2"),
+                dbc.DropdownMenuItem("ewehillgretna", id="ewehillgretna"),
+                dbc.DropdownMenuItem("stevenscroft33kv", id="stevenscroft33kv"),
+                dbc.DropdownMenuItem("minsca33kv", id="minsca33kv"),
+                dbc.DropdownMenuItem("ewehillwindfarm1", id="ewehillwindfarm1"),
+                dbc.DropdownMenuItem("ewehillwindfarm2", id="ewehillwindfarm2"),
+            ],
+            id='network_menu'
+        ),
+        html.Hr(),
+
+    ]
+    _sim_buttons = [
+        dbc.Button("Return to simulation", id="reset_sim_button"),
+        dbc.Button("Back", id="back_button", style={"margin-top": "15px"}),
+        dbc.Button("Next", id="next_button", style={"margin-top": "15px", "margin-left": "15px"}),
+        html.Hr(),
+    ]
+    _sim_status = [
+        html.Div(id='sim_status_div', children="Simulation status: -1"),
+        html.Hr(),
+    ]
+    _entity_view = [
+        html.Div(id='entity_view', children=""),
+        html.Hr(),
+    ]
+    _debug = [
+        dbc.Button("debug", id="debug_button", style={"margin-top": "15px", "margin-left": "15px",
+                                                      "display": "none"}),
+        html.Hr(),
+    ]
+
+    _sidebar_widgets = []
+    if 'SLDs' in URL_PAGE:
+        _sidebar_widgets += _heading
+        _sidebar_widgets += _dropdown
+        _sidebar_widgets += _sim_buttons
+        _sidebar_widgets += _sim_status
+        _sidebar_widgets += _entity_view
+        _sidebar_widgets += _debug
+    elif 'home' in URL_PAGE:
+        _sidebar_widgets += _heading
+        _sidebar_widgets += _sim_buttons
+        _sidebar_widgets += _sim_status
+        _sidebar_widgets += _entity_view
+        _sidebar_widgets += _debug
+
+    sidebar = html.Div(
+        _sidebar_widgets,
+        style=styling.SIDEBAR_STYLE,
+        id='sidebar'
+    )
+    return sidebar
+
+
+def legend_button():
+    leg_button = html.Div(
+        [html.H3("i")],
+        style=styling.LEGEND_BUTTON,
+        id='legend_button'
+    )
+    return leg_button
+
+
+def legend():
+    image_filename = "\static\imgs\legend1.jpg"
+
+    _legend = html.Div(
+        [html.Img(src=image_filename, style=styling.LEGEND_IMAGE)],
+        style=styling.LEGEND_HIDDEN,
+        id='legend'
+    )
+    return _legend

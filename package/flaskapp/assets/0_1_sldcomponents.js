@@ -14,10 +14,10 @@ function Breaker_Callback(graphic_objects, name = ''){
         }
         if(name !== ''){
             if(object.horizontal === true){
-                add_text(object, false, [name], 0, -15,"#d3d3d3", function(object){})
+                add_text(object, false, [name], 0, -15*y_scaling,"#d3d3d3", font_size, function(object){})
             }
             else{
-                add_text(object, false, [name], 3 + name.length*4 * x_scaling, 0,"#d3d3d3", function(object){})}
+                add_text(object, false, [name], 3 + name.length*4 * x_scaling, 0,"#d3d3d3", font_size, function(object){})}
         }
     }
 }
@@ -37,10 +37,10 @@ function Line_Callback(graphic_objects, name = ''){
         }
         if(name !== ''){
             if(object.horizontal === true){
-                add_text(object, false, [name], 0, -15 * y_scaling,"#d3d3d3", function(object){})
+                add_text(object, false, [name], 0, -15 * y_scaling,"#d3d3d3", font_size, function(object){})
             }
             else{
-                add_text(object, false, [name], 9 + name.length*5 * x_scaling, 0,"#d3d3d3", function(object){})}
+                add_text(object, false, [name], 9 + name.length*5 * x_scaling, 0,"#d3d3d3", font_size, function(object){})}
         }
     }
 }
@@ -81,39 +81,45 @@ function Tx_Callback(graphic_objects, name = false, mva = false){
             }
             if(name != false){
             if(group.horizontal === true){
-                add_text(group, false, name, 0 * x_scaling, -20 *y_scaling, "#d3d3d3", function(group){})
+                add_text(group, false, name, 0 * x_scaling, -20 *y_scaling, "#d3d3d3", font_size, function(group){})
             }
             else{
-                add_text(group, false, name, 30 * x_scaling,-10 *y_scaling, "#d3d3d3", function(group){})}
+                add_text(group, false, name, 30 * x_scaling,-10 *y_scaling, "#d3d3d3", font_size, function(group){})}
             }
 
             if(mva != false){
             if(group.horizontal === true){
-                add_text(group, false, [mva], 0, 20 * y_scaling,"#d3d3d3", function(group){})
+                add_text(group, false, [mva], 0, 20 * y_scaling,"#d3d3d3", font_size, function(group){})
             }
             else{
-                add_text(group, false, [mva], 30 * x_scaling,10 *y_scaling,"#d3d3d3", function(group){})}
+                add_text(group, false, [mva], 30 * x_scaling,10 *y_scaling,"#d3d3d3", font_size, function(group){})}
             }
         }
     }
 
 /**
- * Callback function for Transformer object instances. Adds object to list of child objects associated with
- * the transformer.
- * @param  {list} graphic_objects List of child objects associated with each transformer object.
+ * Callback function for Generator object instances. Adds object to list of child objects associated with
+ * the generator.
+ * @param  {list} graphic_objects List of child objects associated with each generator object.
  * @param  {string} name String object containing name/contents of child objects
  * @return {function} None Returns a function that adds passed object to breaker child objects, and adds text label.
  */
-function Gen_Callback(graphic_objects){
+function Gen_Callback(graphic_objects, name=""){
         return function(group){
             if(graphic_objects != undefined){
                 graphic_objects[0] = group
             }
+            var type = undefined
+            if(name==="MOTOR"){
+                type = ""
+            } else {
+                type = "GENERATOR"
+            }
             if(group.horizontal === true){
-                add_text(group, false, ["GENERATOR"], 0, -25* y_scaling, "#d3d3d3",function(group){})
+                add_text(group, false, [type, name], 0, -0* y_scaling, "#d3d3d3",font_size, function(group){})
             }
             else{
-                add_text(group, false, ["GENERATOR"], 0,25 * y_scaling,"#d3d3d3",function(group){})}
+                add_text(group, false, [type, name], 0,30 * y_scaling,"#d3d3d3",font_size, function(group){})}
             }
         }
 
@@ -202,13 +208,13 @@ function StraightLine(origin, direction, length, voltage="33kV", dash = false, c
  * @return {None}
  * @usage instantiate as object i.e. new Line(...)
  */
-function Text(lineID, text, offset, colour = "#d3d3d3", textSize=10){
+function Text(lineID, text, offset, size, colour = "#d3d3d3"){
     this.lineID = lineID
     this.text_strings = text
     this.offset = offset
     this.colour = colour
     this.graphic = []
-    this.textSize=textSize
+    this.size=size
     this.callback = Text_Callback(this.graphic)
 
     // an idea I'd like to to take a look at
@@ -238,7 +244,7 @@ function StaticText(text,pos, colour = "#d3d3d3",textSize=10,){
  * @return {None}
  * @usage instantiate as object i.e. new Transformer(...)
  */
-function Tx(lineID,pos,name,mva, coil1 = "33kV",coil2 = "33kV",type="starDelta"){
+function Tx(lineID,pos,name,mva, coil2 = "0V" ,type="starDelta"){
     this.lineID =lineID
     this.pos = pos
     this.component="Transformer"
@@ -246,7 +252,7 @@ function Tx(lineID,pos,name,mva, coil1 = "33kV",coil2 = "33kV",type="starDelta")
     this.mva = mva
     this.graphic = []
     this.type = type
-    this.coil1 = coil1
+    this.coil1 = lineID
     this.coil2 = coil2
     this.live = live_dead
     this.colour = undefined
@@ -261,7 +267,7 @@ function Tx(lineID,pos,name,mva, coil1 = "33kV",coil2 = "33kV",type="starDelta")
  * @return {None}
  * @usage instantiate as object i.e. new Generator(...)
  */
-function Generator(line_id,pos, type= "wind"){
+function Generator(line_id,pos, type= ""){
     this.component="Generator"
 
     this.lineID = line_id
@@ -269,8 +275,8 @@ function Generator(line_id,pos, type= "wind"){
     this.type = type
     this.graphic=[]
     this.live = live_dead
-    //TEMP Breaker callback
-    this.callback = Gen_Callback(this.graphic)
+
+    this.callback = Gen_Callback(this.graphic, type)
 }
 
 /**
@@ -331,12 +337,23 @@ function DataView(componentID = "", offset, labels){
 
 }
 
+/**
+ * Available power prototype object, contains everything required to produce an available power component.
+ * @param  {[double]} location
+ * @usage instantiate as object i.e. new AvailablePower(...)
+ */
 function AvailablePower(position){
     this.pos = position
     this.graphic = []
     this.callback = Text_Callback
 }
 
+/**
+ * Generator info prototype object, contains everything required to produce an generator info component.
+ * @param  {[double]} location
+ * @param  {string} full descriptive name of generator
+ * @usage instantiate as object i.e. new GenerationInfo(...)
+ */
 function GenerationInfo(position, name){
     this.pos = position
     this.name = name
@@ -344,6 +361,12 @@ function GenerationInfo(position, name){
     this.callback = Text_Callback
 }
 
+/**
+ * SGT prototype object, contains everything required to produce a SGT component.
+ * @param  {string} Line ID of which SGT is on
+ * @param  {double} pos of SGT on line (between 0 and 1)
+ * @usage instantiate as object i.e. new SGT(...)
+ */
 function SGT(line_id,name){
     this.component = "SGT"
     this.lineID = line_id,

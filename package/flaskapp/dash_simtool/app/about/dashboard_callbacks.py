@@ -16,7 +16,7 @@ import dash_core_components as dcc
 import dash_bootstrap_components as dbc
 import package.flaskapp.dash_simtool._config as cf
 import package.flaskapp.dash_simtool.app.dashboard_styling as styling
-
+import package.flaskapp.dash_simtool.db as simtool_db
 
 def _add_toggle_sidebar(dash_app):
     @dash_app.callback(
@@ -81,7 +81,8 @@ def _add_network_redraw(dash_app):
         else:
             network = triggered_object['prop_id'].split('.')[0]
         session['network'] = network
-        sim_step = session['sim_step'] if 'sim_step' in session else cf.start_sim_step
+        # sim_step = session['sim_step'] if 'sim_step' in session else cf.start_sim_step
+        sim_step = simtool_db.get_simstatus()
         session['sim_step'] = sim_step
         socketio.emit('draw', {'network': network, 'sim_step': sim_step})
         return [network]
@@ -96,11 +97,7 @@ def _add_reset_button(dash_app):
                        ],
                        )
     def _reset_simulation(reset_button_nclicks):
-        ctx = dash.callback_context
-        triggered_object = ctx.triggered[0]
-        if not triggered_object['value'] is None:
-            socketio.emit('redraw', {'sim_step': cf.start_sim_step})
-            session['sim_step'] = cf.start_sim_step
+
         return [reset_button_nclicks]
 
     return dash_app
@@ -116,17 +113,7 @@ def _add_sim_progress_buttons(dash_app):
                        [Input("sim_state", "data")]
                        )
     def _progress_sim(back_button_nclicks, next_button_nclicks, sim_status):
-        ctx = dash.callback_context
-        triggered_object = ctx.triggered[0]
-        if triggered_object['prop_id'].split('.')[0] == 'next_button':
-            sim_status += 1
-            socketio.emit('redraw', {'sim_step': sim_status})
-        elif triggered_object['prop_id'].split('.')[0] == 'back_button':
-            sim_status -= 1 if sim_status > cf.start_sim_step else 0
-            socketio.emit('redraw', {'sim_step': sim_status})
-        else:
-            sim_status = session['sim_step'] if 'sim_step' in session else cf.start_sim_step  # initial simulation status
-        session['sim_step'] = sim_status
+
         return [sim_status, "Simulation status: {}".format(sim_status)]
 
     return dash_app

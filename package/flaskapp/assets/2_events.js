@@ -35,7 +35,6 @@ function post_breaker(breakerID,state){
 function post_breakers(breakers){
   let breakers_ = {}
   for(let idb in breakers){
-    console.log(breakers[idb]['closed'])
     breakers_[idb] = undefined
   }
 
@@ -81,9 +80,7 @@ function check_breakers(network_, option_, breakers, step, callback){
         if(breaker_matches_current){
           alert("Reset to original state")
         }
-        if(breaker_matches_next){
-          socket.emit('redraw', {'sim_step': int_next_step});
-        }
+
         callback(breaker_matches_next);
       }
     });
@@ -145,11 +142,11 @@ function init_breaker(breakerID){
  * @param callbacks
  * @return {None}
  */
-function fetch_sim_data(network_, stage_, option_, scenario_, callbacks){
+function fetch_sim_data(case_network_, network, stage_, option_, scenario_, callbacks){
       $.ajax({
       type: "POST",
       url: "/simtool_bp/get_state/",
-      data: {"stage": stage_, "network": network_, "option": option_, "scenario": scenario_},
+      data: {"stage": stage_, "case_network": case_network_, "network":network,  "option": option_, "scenario": scenario_},
 //      dataType: 'application/json'
       }).done(function( component_values ) {
         for(let component_parameter in component_values){
@@ -178,6 +175,7 @@ function init_network(callback){
   }
 
 const breaker_clicked_event = new CustomEvent('breaker_clicked')
+const action_clicked_event = new CustomEvent('action_clicked')
 const component_data_changed_event = new CustomEvent('component_data_changed')
 
 /**
