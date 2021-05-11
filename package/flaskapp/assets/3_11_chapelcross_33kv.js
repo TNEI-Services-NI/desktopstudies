@@ -93,19 +93,19 @@ networks_undrawn["chapelcross33kv"] = {
         "CHAP3-_MIBI3-_1": StraightLine([95,525],"down",50),
 
         "MIBI3-": StraightLine([65,575],"right",175),
-        "EWHC3-_MIBI3-_1#0": StraightLine([80,575],"down",160),
+        "EWEH3-_MIBI3-_1#0": StraightLine([80,575],"down",160),
         "MIBI3-_LAHO3A_1#0": StraightLine([160,575],"down",190),
         "MIBI3-#0": StraightLine([160,575],"down",17),
 
         "MIBI3-_MIBIT1_1#0": StraightLine([205,575],"down",120),
         "MIBI3-#1": StraightLine([205,575],"down",17),
 
-        "EWHC3-_MIBI3-_1#1": StraightLine([80,735],"left",50),
-        "EWHC3-_MIBI3-_1#2": StraightLine([30,735],"down",150),
-        "EWHC3-_MIBI3-_1#3": StraightLine([30,885],"right",30),
-        "EWHC3-_MIBI3-_1#4": StraightLine([60,885],"up",80),
-        "EWHC3-": StraightLine([45,805],"right",85),
-        "EWHC3-_EWHC0G_1": StraightLine([115,805],"down",90),
+        "EWEH3-_MIBI3-_1#1": StraightLine([80,735],"left",50),
+        "EWEH3-_MIBI3-_1#2": StraightLine([30,735],"down",150),
+        "EWEH3-_MIBI3-_1#3": StraightLine([30,885],"right",30),
+        "EWEH3-_MIBI3-_1#4": StraightLine([60,885],"up",80),
+        "EWEH3-": StraightLine([45,805],"right",85),
+        "EWEH3-_EWEH0G_1": StraightLine([115,805],"down",90),
 
         "MIBI3-_MIBIT1_1#1": StraightLine([205,695],"right",25),
         "MIBI3-_MIBIT1_1#2": StraightLine([230,695],"right",50,"11kV"),
@@ -232,7 +232,7 @@ networks_undrawn["chapelcross33kv"] = {
         "CHAP3A1": StraightLine([25,175], "right",496),
         "CHAP3A2": StraightLine([25+496,175], "right",399),
         "STCR3-": StraightLine([25,370],"right",90),
-        "EWHC3-": StraightLine([45,805],"right",85),
+        "EWEH3-": StraightLine([45,805],"right",85),
         "MIBI5-": StraightLine([260,730],"right",85,"11kV"),
         "MIBI3-": StraightLine([65,575],"right",175),
         "ANAN5-1": StraightLine([310,315],"right",52, "11kV"),
@@ -295,12 +295,12 @@ networks_undrawn["chapelcross33kv"] = {
         //some of these below are arc breakers
 
         "780 12": new Breaker("CHAP3-_MIBI3-_1",0.5,"12"),
-        "780 13": new Breaker("EWHC3-_MIBI3-_1#0",0.1,"13"),
+        "780 13": new Breaker("EWEH3-_MIBI3-_1#0",0.1,"13"),
         "780 14": new Breaker("MIBI3-#0",1,"14"),
         "780 11": new Breaker("MIBI3-#1",1,"11"),
 
-        "781 12": new Breaker("EWHC3-_MIBI3-_1#4",0.65,"12"),
-        "781 11": new Breaker("EWHC3-_EWHC0G_1",0.3,"11"),
+        "781 12": new Breaker("EWEH3-_MIBI3-_1#4",0.65,"12"),
+        "781 11": new Breaker("EWEH3-_EWEH0G_1",0.3,"11"),
 
         "682 10": new Breaker("MIBI3-_MIBIT1_1#2",0.6,"10"),
 
@@ -377,7 +377,7 @@ networks_undrawn["chapelcross33kv"] = {
         },
     generators:{
         "STCR5-_1": new Generator("STCR3-_STCR0G",1),
-        "EWHC0G_1": new Generator("EWHC3-_EWHC0G_1",1),
+        "EWEH0G_1": new Generator("EWEH3-_EWEH0G_1",1),
         // CRAIG II WINDFARM 11KV
         // "CRAG0B_1": new Generator("CRAG5B_LAHO5-_1",1),
         "MINS0G_1": new Generator("MINS0G", 1),
@@ -395,9 +395,9 @@ networks_undrawn["chapelcross33kv"] = {
     7: new Text("MIBI3-", ["33KV SW/STN"],[20,-25]),
     8: new Text("MIBI3-", ["780"],[20,-10]),
 
-    9: new Text("EWHC3-", ["EWE HILL"],[0,-40]),
-    10: new Text("EWHC3-", ["WINDFARM"],[0,-25]),
-    11: new Text("EWHC3-", ["781"],[0,-10]),
+    9: new Text("EWEH3-", ["EWE HILL"],[0,-40]),
+    10: new Text("EWEH3-", ["WINDFARM"],[0,-25]),
+    11: new Text("EWEH3-", ["781"],[0,-10]),
 
     12: new Text("MIBI5-", ["MIDDLEBIE "],[5,-40]),
     13: new Text("MIBI5-", ["PRIMARY"],[5,-25]),
@@ -475,7 +475,7 @@ networks_undrawn["chapelcross33kv"] = {
             'generators_active_power',
             'generators_reactive_power',
           ]),
-        "EWHC0G_1": new DataView("EWHC0G_1", [35, 0],
+        "EWEH0G_1": new DataView("EWEH0G_1", [35, 0],
           [
             'generators_active_power',
             'generators_reactive_power',
@@ -517,7 +517,7 @@ networks_undrawn["chapelcross33kv"] = {
 
     },
     availablePower:{
-        "EWHC0G_1" : new AvailablePower([115,970]),
+        "EWEH0G_1" : new AvailablePower([115,970]),
         "MINS0G_1": new AvailablePower([940,820]),
         "STCR5-_1": new AvailablePower([800,50]),
 
