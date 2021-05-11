@@ -207,7 +207,7 @@ networks_undrawn["minsca33kv"]={
 //        "761 CHAP": new Breaker("761 CHAP A",1),
     "761 MINS WF": new Breaker("MINS3-#1",1),
     "761 CHAP": new Breaker("CHAP3-_MINS3-_1#6",1),
-    "761 CUSTOMER": new Breaker("MINS0G#0",0),
+    "761 CUSTOMER": new Breaker("MINS3-_MINSC",1),
 
     "CB01": new Breaker("MINS0G#1",1),
     "CB02": new Breaker("MINS0G#2",1),
