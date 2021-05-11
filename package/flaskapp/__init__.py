@@ -103,6 +103,7 @@ def _configure_database(app):
     def initialize_database():
         dbs.create_all()
         simtool_db.replace_simstatus(dbs, cf.start_sim_step)
+        simtool_db.replace_room_simstatus_all(dbs, cf.start_sim_step)
         user.register_admin(dbs)
         user.register_required_users(dbs)
 

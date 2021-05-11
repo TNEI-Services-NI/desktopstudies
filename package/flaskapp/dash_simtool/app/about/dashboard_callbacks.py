@@ -16,7 +16,7 @@ import dash_core_components as dcc
 import dash_bootstrap_components as dbc
 import package.flaskapp.dash_simtool._config as cf
 import package.flaskapp.dash_simtool.app.dashboard_styling as styling
-
+import package.flaskapp.dash_simtool.db as simtool_db
 
 def _add_toggle_sidebar(dash_app):
     @dash_app.callback(
@@ -81,7 +81,8 @@ def _add_network_redraw(dash_app):
         else:
             network = triggered_object['prop_id'].split('.')[0]
         session['network'] = network
-        sim_step = session['sim_step'] if 'sim_step' in session else cf.start_sim_step
+        # sim_step = session['sim_step'] if 'sim_step' in session else cf.start_sim_step
+        sim_step = simtool_db.get_simstatus()
         session['sim_step'] = sim_step
         socketio.emit('draw', {'network': network, 'sim_step': sim_step})
         return [network]

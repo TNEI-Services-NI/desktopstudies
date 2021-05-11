@@ -307,7 +307,7 @@
             if(this.closed){
                  this.UIElement.attr({
                 'stroke': this.line.dict_styling.stroke.live_color,
-          'fill': this.line.dict_styling.stroke.live_color
+                'fill': this.line.dict_styling.stroke.live_color
             })}
             else{
             this.UIElement.attr({
@@ -322,7 +322,7 @@
                 breaker.setState(!breaker.closed)
                 // post_breakers(components.breakers)
                 check_breakers(network_, option, components.breakers, step, function(breaker_matches_next){
-                  if(breaker_matches_next){ // IF correct breaker is clicked
+                  if(breaker_matches_next && page === "home"){ // IF correct breaker is clicked
                     inc_state(case_network)
                   }
                 })

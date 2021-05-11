@@ -16,24 +16,20 @@ def _add_network_redraw(dash_app):
                        [Input("hidden_div00", "children")],
                        )
     def _draw_network(state):
-        # store network, sim_step
-        # sim_step = session['sim_step'] if \
-        #     'sim_step' in session and \
-        #     session['sim_step'] is not None \
-        #     else cf.start_sim_step
 
         sim_step = simtool_db.get_simstatus()
 
-        # network = cf.entity_network_map[session['entity'] if 'entity' in session else 'Observer']
         network = requests.server_get_network_view(session['entity'], sim_step)
 
         session['room'] = session['entity']
         session['network_main'] = network
         session['sim_step'] = sim_step
+
         socketio.emit('check_join_draw', {
             'network': network,
             'sim_step': sim_step,
             'local': True,
+            'page': "home",
             'username': session.get('username'),
             'room': session.get('room'),
             'entity': session['entity']
