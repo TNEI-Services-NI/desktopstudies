@@ -105,7 +105,15 @@ networks_undrawn["chapelcross33kv"] = {
         "EWEH3-_MIBI3-_1#3": StraightLine([30,885],"right",30),
         "EWEH3-_MIBI3-_1#4": StraightLine([60,885],"up",80),
         "EWEH3-": StraightLine([45,805],"right",85),
-        "EWEH3-_EWEH0G_1": StraightLine([115,805],"down",90),
+
+        "EWEH3-#0": StraightLine([115,805],"down",27),
+
+        "EWEH3-_EWEH0G_1": StraightLine([115,832],"down",40),
+
+        "EWEH_POC": StraightLine([100,852],"right",30,"0V", true ),
+
+        "EWEH0G": StraightLine([115,872],"down",30),
+
 
         "MIBI3-_MIBIT1_1#1": StraightLine([205,695],"right",25),
         "MIBI3-_MIBIT1_1#2": StraightLine([230,695],"right",50,"11kV"),
@@ -219,13 +227,6 @@ networks_undrawn["chapelcross33kv"] = {
 
         "NEWC5-": StraightLine([695,680],"right",85, "11kV"),
 
-        // CRAIG II WINDFARM 11KV
-        // "CRAG5B_LAHO5-_1": StraightLine([740,780],"down",145,"11kV"),
-        // "785 A": StraightLine([680,940],"left",155,"11kV"),
-        // "785 B": StraightLine([670,780],"right",90,"11kV"),
-        // "785 21": StraightLine([680,940],"up",160, "11kV"),
-        // "785 DASH": StraightLine([720,835],"right",45,dash=true),
-
      },
     busbars:{
         "CHAP3-_SOLWAY#7": StraightLine([875,40],"right",130),
@@ -300,7 +301,9 @@ networks_undrawn["chapelcross33kv"] = {
         "780 11": new Breaker("MIBI3-#1",1,"11"),
 
         "781 12": new Breaker("EWEH3-_MIBI3-_1#4",0.65,"12"),
-        "781 11": new Breaker("EWEH3-_EWEH0G_1",0.3,"11"),
+        "781 11": new Breaker("EWEH3-#0",1,"11"),
+
+        "781 CUSTOMER": new Breaker("EWEH3-_EWEH0G_1",1,"CUSTOMER"),
 
         "682 10": new Breaker("MIBI3-_MIBIT1_1#2",0.6,"10"),
 
@@ -377,7 +380,7 @@ networks_undrawn["chapelcross33kv"] = {
         },
     generators:{
         "STCR5-_1": new Generator("STCR3-_STCR0G",1),
-        "EWEH0G_1": new Generator("EWEH3-_EWEH0G_1",1),
+        "EWEH0G_1": new Generator("EWEH0G",1),
         // CRAIG II WINDFARM 11KV
         // "CRAG0B_1": new Generator("CRAG5B_LAHO5-_1",1),
         "MINS0G_1": new Generator("MINS0G", 1),
