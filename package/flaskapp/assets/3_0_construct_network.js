@@ -303,18 +303,23 @@
             }
 
             b.setEnergised = function(){
-
-            if(this.closed){
+              console.log(this.line.dict_styling.stroke.live_color)
+              if(this.closed){
                  this.UIElement.attr({
                 'stroke': this.line.dict_styling.stroke.live_color,
                 'fill': this.line.dict_styling.stroke.live_color
-            })}
-            else{
-            this.UIElement.attr({
-                'stroke': this.line.dict_styling.stroke.live_color,
-//                'fill': this.line.dict_styling.stroke.live_color})
-            })
-            }
+                })
+              }
+              else{
+                this.UIElement.attr({
+                    'stroke': this.line.dict_styling.stroke.live_color,
+    //                'fill': this.line.dict_styling.stroke.live_color})
+                })
+              }
+    //            this.UIElement.attr({
+    //             'stroke': this.line.dict_styling.stroke.live_color,
+    //             'fill': this.line.dict_styling.stroke.live_color
+    //             })
             }
 
             b.UIElement.on("breaker_clicked",function(event){

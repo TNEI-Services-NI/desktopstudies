@@ -375,7 +375,7 @@ def navbar(url_page):
     return _nav_bar
 
 
-def sidebar(URL_PAGE):
+def sidebar(url_page, styling):
     _heading = [
         html.H3("Options"),
         html.Hr(),
@@ -422,14 +422,14 @@ def sidebar(URL_PAGE):
     ]
 
     _sidebar_widgets = []
-    if 'SLDs' in URL_PAGE:
+    if 'SLDs' in url_page:
         _sidebar_widgets += _heading
         _sidebar_widgets += _dropdown
         _sidebar_widgets += _sim_buttons
         _sidebar_widgets += _sim_status
         _sidebar_widgets += _entity_view
         _sidebar_widgets += _debug
-    elif 'home' in URL_PAGE:
+    elif 'home' in url_page:
         _sidebar_widgets += _heading
         _sidebar_widgets += _sim_buttons
         _sidebar_widgets += _sim_status
@@ -438,7 +438,7 @@ def sidebar(URL_PAGE):
 
     sidebar = html.Div(
         _sidebar_widgets,
-        style=styling.SIDEBAR_STYLE,
+        style=styling,
         id='sidebar'
     )
     return sidebar

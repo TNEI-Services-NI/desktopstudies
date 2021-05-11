@@ -123,9 +123,11 @@ def on_join(data):
 
 @socketio.on('check_redraw')
 def redraw(data):
+    network = server_get_network_view(data['entity'], data['sim_step'], option="5")
+    print(network)
     socketio.emit('redraw', {
         'sim_step': data['sim_step'],
-        'network': server_get_network_view(data['entity'], data['sim_step'], option="5"),
+        'network': network,
     }, room=session['room'])
 
 
