@@ -264,7 +264,7 @@ function update_state(case_network_) {
             $("body").css("cursor", "default");
         }
 
-    }, 1000)
+    }, 200)
 }
 
 
