@@ -42,7 +42,7 @@ networks_undrawn["stevenscroft33kv"]={
 
     breakers:{
         "699 CHAP": new Breaker("STCR3-#0",1),
-        "699 CUSTOMER": new Breaker("STCR3-#1",1),
+        "699 CUSTOMER": new Breaker("STCR3-_STCR0G",0),
         "699 A": new Breaker("STCR0G-_2",1,""),
         "699 B": new Breaker("STCR0G-_1#0",1,""),
 
