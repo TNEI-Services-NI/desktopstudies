@@ -229,10 +229,11 @@ function update_breaker_colours(step_data_) {
 function update_generator_colours(step_data_) {
     for (let idg in components.generators) {
         let gen_instance = components.generators[idg]
+
         let idl = gen_instance.info.lineID
         let line_instance = components.lines[idl]
-        let line_id_LF = idl.split("#")[0]
-        if ((step_data_["generators_active_power"][idg] !== 0) && (step_data_["generators_active_power"][idg] !== undefined)) {
+        let gen_id_LF = idg.split("#")[0]
+        if ((step_data_["generators_active_power"][gen_id_LF] !== 0) && (step_data_["generators_active_power"][gen_id_LF] !== undefined)) {
             gen_instance.UIElement.find('.circle-class').attr({
                 'stroke': line_instance.info.dict_styling.stroke.live_color
             })
