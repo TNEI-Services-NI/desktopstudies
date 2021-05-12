@@ -15,47 +15,48 @@ class Simstatus(db.Model):
         return str(self.name)
 
 
-class Simdata(db.Model):
-    def __init__(self):
-        self.Base = automap_base()
+# class Simdata(db.Model):
+#     def __init__(self):
+#         self.Base = automap_base()
+#
+#         # engine, suppose it has two tables 'user' and 'address' set up
+#         self.engine = create_engine('sqlite:///' + root.DB_DIR)
+#
+#         self.allbreakers = None
+#         self.views = None
+#         self.busbars_voltage = None
+#         self.generators_active_power = None
+#         self.generators_rating = None
+#         self.generators_reactive_power = None
+#         self.lines_active_power = None
+#         self.lines_current = None
+#         self.lines_loading = None
+#         self.lines_reactive_power = None
+#         self.transformers_loading = None
+#         self.transformers_taps = None
+#
+#         self.update_tables()
+#
+#
+#     def update_tables(self):
+#         # reflect the tables
+#         self.Base.prepare(self.engine, reflect=True)
+#
+#         # mapped classes are now created with names by default
+#         # matching that of the table name.
+#         self.allbreakers = self.Base.classes.allbreakers
+#         self.views = self.Base.classes.views
+#         self.busbars_voltage = self.Base.classes.busbars_voltage
+#         self.generators_active_power = self.Base.classes.generators_active_power
+#         self.generators_rating = self.Base.classes.generators_rating
+#         self.generators_reactive_power = self.Base.classes.generators_reactive_power
+#         self.lines_active_power = self.Base.classes.lines_active_power
+#         self.lines_current = self.Base.classes.lines_current
+#         self.lines_loading = self.Base.classes.lines_loading
+#         self.lines_reactive_power = self.Base.classes.lines_reactive_power
+#         self.transformers_loading = self.Base.classes.transformers_loading
+#         self.transformers_taps = self.Base.classes.transformers_taps
 
-        # engine, suppose it has two tables 'user' and 'address' set up
-        self.engine = create_engine('sqlite:///' + root.DB_DIR)
-
-        self.allbreakers = None
-        self.views = None
-        self.busbars_voltage = None
-        self.generators_active_power = None
-        self.generators_rating = None
-        self.generators_reactive_power = None
-        self.lines_active_power = None
-        self.lines_current = None
-        self.lines_loading = None
-        self.lines_reactive_power = None
-        self.transformers_loading = None
-        self.transformers_taps = None
-
-        self.update_tables()
-
-
-    def update_tables(self):
-        # reflect the tables
-        self.Base.prepare(self.engine, reflect=True)
-
-        # mapped classes are now created with names by default
-        # matching that of the table name.
-        self.allbreakers = self.Base.classes.allbreakers
-        self.views = self.Base.classes.views
-        self.busbars_voltage = self.Base.classes.busbars_voltage
-        self.generators_active_power = self.Base.classes.generators_active_power
-        self.generators_rating = self.Base.classes.generators_rating
-        self.generators_reactive_power = self.Base.classes.generators_reactive_power
-        self.lines_active_power = self.Base.classes.lines_active_power
-        self.lines_current = self.Base.classes.lines_current
-        self.lines_loading = self.Base.classes.lines_loading
-        self.lines_reactive_power = self.Base.classes.lines_reactive_power
-        self.transformers_loading = self.Base.classes.transformers_loading
-        self.transformers_taps = self.Base.classes.transformers_taps
 
 def delete_simstatus(dbs):
     simstatus = Simstatus.query.filter(Simstatus.entity == 'all').all()

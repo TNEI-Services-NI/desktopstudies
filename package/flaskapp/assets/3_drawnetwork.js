@@ -160,7 +160,7 @@ function update_dataviews(step_data) {
 }
 
 function update_line_colours(step_data_) {
-
+    console.log(Object.keys(step_data_))
     for (let idl in components.lines) {
 
 
@@ -291,7 +291,7 @@ function reset_state(case_network_) {
  * @param {Dictionary} dictionary of object prototypes used to build and draw components
  * @return {None}
 **/
-function draw_network(dict_components, network_, step) {
+function draw_network(dict_components, network_, step, callback) {
 
     //    coord_display = true
     if (coord_display) {
@@ -303,8 +303,6 @@ function draw_network(dict_components, network_, step) {
     construct_busbars(dict_components);
 
     construct_loads(dict_components);
-
-    construct_breakers(dict_components, network_, step);
 
     construct_labels(dict_components);
 
@@ -330,6 +328,10 @@ function draw_network(dict_components, network_, step) {
         construct_action()
     }
 
+    construct_breakers(dict_components, network_, step, function (data_con_break){
+        callback(data_con_break)
+    });
+
 }
 
 function update_sim_data(stage_, step_data) {
@@ -351,9 +353,13 @@ function master_draw() {
     prepare_canvas(x_max, y_max);
     // alert("master_draw")
     dict_components = networks_undrawn[network]
-    draw_network(dict_components, network, current_step);
-    $("body").css("cursor", "default");
-    fetch_sim_data(case_network, network, current_step, option, scenario, update_sim_data);
+    draw_network(dict_components, network, current_step, function(data_draw_net){
+        fetch_sim_data(case_network, network, current_step, option, scenario, function (stage_, component_values){
+            update_sim_data(stage_, component_values);
+            $("body").css("cursor", "default");
+        });
+    });
+
 }
 
 function event_draw(draw_data) {

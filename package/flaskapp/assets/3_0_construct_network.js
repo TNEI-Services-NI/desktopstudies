@@ -262,7 +262,7 @@
 
   }
 
-  function construct_breakers(dict_components, network_, step){
+  function construct_breakers(dict_components, network_, step, callback){
         init_breakers(network_, option, dict_components.breakers, step, function(breakers){
         for(let id in breakers){
             //doing this means the inital data, and the SVG elements they make remain unchanged at all times.
@@ -336,6 +336,7 @@
             components.breakers[id] = b
             component_modal(b)
         }
+        callback({});
     });
   }
 
@@ -481,9 +482,9 @@
           observer = tx.UIElement
         }
 
-        add_dataview(observer, "", offset, function (text_object) {
+        add_dataview(observer, [""], offset, function (text_object) {
           components.dataviews[id_dv] = {
-            text: "",
+            text: [""],
             observer: observer,
             text_object: text_object,
             offset: offset,
@@ -496,7 +497,7 @@
 
   function redraw_dataview(id_dv, text_list){
     let dataview_ = components.dataviews[id_dv];
-    dataview_.text_object.remove()
+    // dataview_.text_object.remove()
     add_dataview(dataview_.observer, text_list, dataview_.offset, function (text_object) {
     components.dataviews[id_dv] = {
         text: text_list,

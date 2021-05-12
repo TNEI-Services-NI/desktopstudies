@@ -25,21 +25,21 @@ def init_breakers():
     data = request.form
     network = data['network']
     option = data['option']
-    # df_breakerstates = simtool_data.read_breaker_states(network, option)
-    df_breakerstates = simtool_data.read_breaker_states_db(network, option)
+    df_breakerstates = simtool_data.read_breaker_states(network, option)
+    # df_breakerstates = simtool_data.read_breaker_states_db(network, option)
     return jsonify(df_breakerstates.to_dict())
 
 
 def server_get_network_view(entity, sim_step, option="5"):
-    # df_network_view = simtool_data.read_network_views(option)
-    df_network_view = simtool_data.read_network_views_db(option)
+    df_network_view = simtool_data.read_network_views(option)
+    # df_network_view = simtool_data.read_network_views_db(option)
     network = df_network_view.loc[entity, sim_step]
     return network
 
 
 def server_get_actions(entity, sim_step, option="5"):
-    # df_actions = simtool_data.read_actions(option)
-    df_actions = simtool_data.read_actions_db(option)
+    df_actions = simtool_data.read_actions(option)
+    # df_actions = simtool_data.read_actions_db(option)
     action = df_actions.loc[entity, sim_step]
     return action
 
@@ -49,8 +49,8 @@ def server_get_actions(entity, sim_step, option="5"):
 def get_network_view():
     data = request.form
     option = data['option']
-    # df_network_view = simtool_data.read_network_views(option)
-    df_network_view = simtool_data.read_network_views_db(option)
+    df_network_view = simtool_data.read_network_views(option)
+    # df_network_view = simtool_data.read_network_views_db(option)
     return jsonify(df_network_view.to_dict())
 
 
@@ -59,8 +59,8 @@ def get_network_view():
 def get_action():
     data = request.form
     option = data['option']
-    # df_action = simtool_data.read_actions(option)
-    df_action = simtool_data.read_actions_db(option)
+    df_action = simtool_data.read_actions(option)
+    # df_action = simtool_data.read_actions_db(option)
     return jsonify(df_action.to_dict())
 
 
@@ -74,8 +74,8 @@ def get_restoration_step():
     scenario = data["scenario"]
     option = data["option"]
 
-    # stateDictionary = simtool_data.read_restoration_step(case_network, network, option, scenario, stage)
-    stateDictionary = simtool_data.read_restoration_step_db(case_network, network, option, scenario, stage)
+    stateDictionary = simtool_data.read_restoration_step(case_network, network, option, scenario, stage)
+    # stateDictionary = simtool_data.read_restoration_step_db(case_network, network, option, scenario, stage)
     return jsonify(stateDictionary)
 
 
@@ -84,8 +84,8 @@ def get_restoration_step():
 def init_network():
     print("init_network")
     data = request.form
-    # df_activesim = simtool_data.read_active_network()
-    df_activesim = simtool_data.read_active_network_db()
+    df_activesim = simtool_data.read_active_network()
+    # df_activesim = simtool_data.read_active_network_db()
     # print(df_activesim)
     df_activesim = df_activesim.fillna("Unknown")
     return jsonify(df_activesim.to_dict())
