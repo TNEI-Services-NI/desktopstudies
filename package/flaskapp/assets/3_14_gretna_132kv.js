@@ -4,26 +4,30 @@ networks_undrawn["gretna132kv"]={
     lines:{
     "GRNA1-": StraightLine([55,535],"right",900,"132kV"),
 
-    "GRNA1-_SGT1": StraightLine([190,535-165],"up",200,"132kV"),
     "GRNA1-#0": StraightLine([190,535],"up",165,"132kV"),
 
-    "CHAP1-_GRNA1": StraightLine([340,535-165],"up",200,"132kV"),
     "GRNA1-#1": StraightLine([340,535],"up",165,"132kV"),
 
-    "CHAP1-_GRNA2": StraightLine([625,535-165],"up",200,"132kV"),
     "GRNA1-#2": StraightLine([625,535],"up",165,"132kV"),
 
-    "GRNA1-_SGT2": StraightLine([775,535-165],"up",200,"132kV"),
     "GRNA1-#3": StraightLine([775,535],"up",165,"132kV"),
 
-    "HARK": StraightLine([270,535+165],"down",165,"132kV"),
     "GRNA1-#4": StraightLine([270,535],"down",165,"132kV"),
 
-    "HAWI": StraightLine([695,535+165],"down",165,"132kV"),
     "GRNA1-#5": StraightLine([695,535],"down",165,"132kV"),
 
-    "GRNA1-_EWEH": StraightLine([850,535+165],"down",165,"132kV"),
     "GRNA1-#6": StraightLine([850,535],"down",165,"132kV"),
+
+    },
+
+    loads:{
+        "GRNA1-_SGT1": StraightLine([190,535-165],"up",200,"132kV"),
+        "CHAP1-_GRNA1": StraightLine([340,535-165],"up",200,"132kV"),
+        "CHAP1-_GRNA2": StraightLine([625,535-165],"up",200,"132kV"),
+        "GRNA1-_SGT2": StraightLine([775,535-165],"up",200,"132kV"),
+        "HARK": StraightLine([270,535+165],"down",165,"132kV"),
+        "HAWI": StraightLine([695,535+165],"down",165,"132kV"),
+        "GRNA1-_EWEH": StraightLine([850,535+165],"down",165,"132kV"),
 
     },
 

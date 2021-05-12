@@ -394,9 +394,6 @@ networks_undrawn["chapelcross33kv"] = {
     2: new Text("CHAP3A1", ["698"], [220,-50]),
     3: new Text("CHAP3A1",["CHAPELCROSS GSP 33kV"],[240,-145], 25),
 
-//    4: new Text("698 16", ["CHAPELCROSS"],[0,50]),
-//    5: new Text("698 16", ["NO1"],[0,65]),
-
     6: new Text("MIBI3-", ["MIDDLEBIE"],[20,-40]),
     7: new Text("MIBI3-", ["33KV SW/STN"],[20,-25]),
     8: new Text("MIBI3-", ["780"],[20,-10]),
@@ -462,7 +459,7 @@ networks_undrawn["chapelcross33kv"] = {
     },
     dataViews:{
         //lines
-        "CHAP3-_STCR3-_1": new DataView("CHAP3-_STCR3-_1#0", [-25, -125], ['lines_current']),
+        "CHAP3-_STCR3-_1": new DataView("CHAP3-_STCR3-_1#0", [-25, -35], ['lines_current']),
         "ANANT1_CHAP3-_1": new DataView("ANANT1_CHAP3-_1#1", [-25, -5], ['lines_current']),
         // CRAIG II WINDFARM 11KV
         // "CRAG5B_LAHO5-_1": new DataView("CRAG5B_LAHO5-_1", [65, -60]),
@@ -475,6 +472,17 @@ networks_undrawn["chapelcross33kv"] = {
         // "ANANT1_CHAP3-_1": new DataView("ANANT1_CHAP3-_1#1", [-25, 10]),
         // "ANANT1_CHAP3-_1": new DataView("ANANT1_CHAP3-_1#1", [-25, 10]),
         // "ANANT1_CHAP3-_1": new DataView("ANANT1_CHAP3-_1#1", [-25, 10]),
+
+        //transformers
+        "CHAP1-_CHAP3-_1": new DataView("CHAP1-_CHAP3-_1#0",[-30,-40],[
+            "transformers_loading",
+            "lines_reactive_power"
+        ]),
+        "CHAP1-_CHAP3-_2": new DataView("CHAP1-_CHAP3-_2#0",[-30,-40],[
+            "transformers_loading",
+            "lines_reactive_power"
+        ]),
+
         //generator
         "STCR5-_1": new DataView("STCR5-_1", [-35, 0],
           [
@@ -491,35 +499,10 @@ networks_undrawn["chapelcross33kv"] = {
             'generators_active_power',
             'generators_reactive_power',
           ]),
-        // CRAIG II WINDFARM 11KV
-        // "CRAG0B_1": new DataView("CRAG0B_1", [-35, 0]),
 
-//        //        //generator
-////        "SOLWAYBANK": new DataView(850,100, "378",["MW","MVAR","kV","AMPS"]),
-////        "GRID 2": new DataView(740,100, "GRID 2", ["MW","MVAR","kV","AMPS"]),
-////        "GRID 1": new DataView(400,100 ,"GRID 1", ["MW","MVAR","kV","AMPS"]),
-////        //generator
-//        "STEVENSCROFT": new DataView(50,400,"STCR5-_1", ["MW","MVAR","kV","AMPS"]),
-////        "MINSCA": new DataView(950,450,"GRID 1", ["MW","MVAR","kV","AMPS"]),
-////
-////        "CRAIG II": new DataView(800,770,"GRID 1", ["MW","MVAR","kV","AMPS","Hz"]),
-////
-////        "MINSCA Hz": new DataView(970,600,"GRID 1", ["Hz"]),
-////        "SOLWAYBANK Hz": new DataView(990,30,"GRID 1", ["Hz"]),
-//
-////        "398 26": new DataView(880,230, "398 26",["Amps"]),
-////        "398 25": new DataView(820,230, "398 25",["Amps"]),
-////        "398 24": new DataView(760,230,"398 24", ["Amps"]),
-////        "398 23": new DataView(680,230,"GRID 1", ["Amps"]),
-////        "398 22": new DataView(605,230, "GRID 1",["Amps"]),
-////        "398 21": new DataView(550,230,"GRID 1", ["Amps"]),
-////
-////        "398 11": new DataView(455,230, "GRID 1",["Amps"]),
-////        "398 12": new DataView(390,230,"GRID 1", ["Amps"]),
-////        "398 13": new DataView(230,230,"GRID 1", ["Amps"]),
-//        "398 14": new DataView(125,230,"ANANT1_CHAP3-_1#1", ["Amps"]),
-////        "398 15": new DataView(65,230,"GRID 1", ["Amps"]),
-////        "398 16": new DataView(15,230,"GRID 1", ["Amps"]),
+        //BUSBARS
+
+        "CHAP3A1": new DataView("CHAP3A1", [-15, -20], ['busbars_voltage']),
 
     },
     availablePower:{

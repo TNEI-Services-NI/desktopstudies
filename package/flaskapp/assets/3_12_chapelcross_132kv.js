@@ -150,8 +150,10 @@ networks_undrawn["chapelcross132kv"]={
         "334": new Isolator("CHAP1-_M1-_1#12", 0.45, "closed"),
 
     },
-//    dataViews:{
-//        "ECCF-1": new DataView(250,190,"",["MVA", "MW","MVAR","kV","Amps"]),
+    dataViews:{
+        "CHAP1-_CHAP3-_1": new DataView("CHAP1-_CHAP3-_1#0",[80,40],['lines_loading',"lines_active_power","lines_reactive_power","lines_current"]),
+        "CHAP1-_CHAP3-_2": new DataView("CHAP1-_CHAP3-_2#0",[80,40],['lines_loading',"lines_active_power","lines_reactive_power","lines_current"]),
+
 //        "GRNA-1": new DataView(80,190,"", ["MVA", "MW","MVAR","kV","Amps"]),
 //        "DUMF-1": new DataView(420,190,"",["MVA", "MW","MVAR","kV","Amps"]),
 //        "GRNA-2": new DataView(560,190,"",["MVA", "MW","MVAR","kV","Amps"]),
@@ -166,7 +168,7 @@ networks_undrawn["chapelcross132kv"]={
 //
 //        "R1-_1 2": new DataView(945,350,"", ["kV"]),
 //        "M1 2": new DataView(945,590, "",["kV"]),
-//    },
+    },
     labels:{
     1: new Text("CHAP3A1", ["CHAPELCROSS GSP"], [185,-70]),
     2: new Text("CHAP3A1", ["SPD"], [185,-180]),

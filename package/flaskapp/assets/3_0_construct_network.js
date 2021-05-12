@@ -125,8 +125,14 @@
         let id = id_load
 
         let line_object = load.graphic[0]
-        //todo load needs to take colour of line through dict_style
-        draw_load(load,1,true)
+
+        if(load.y2 > load.y1 ){
+                draw_load(load,1,true)
+        }
+        if(load.y2 < load.y1 ){
+                draw_load(load,1,false)
+        }
+
 
         let l = {
             info: load,

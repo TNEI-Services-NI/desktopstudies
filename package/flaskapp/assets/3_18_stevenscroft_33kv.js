@@ -52,6 +52,7 @@ networks_undrawn["stevenscroft33kv"]={
         "699 A": new Breaker("STCR0G-_2",1,""),
         "699 B": new Breaker("STCR0G-_1#0",1,""),
 
+        "STCR Loadbank":new Breaker("STCR3-#2",0.5,""),
 
         "STCR_AUX#0": new Breaker("STCR_AUX#1",0.8,""),
         "STCR_AUX#2": new Breaker("STCR_AUX#2",0.47,""),
