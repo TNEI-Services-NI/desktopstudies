@@ -83,9 +83,10 @@ function update_transformer_modals(step_data) {
 
 function update_transformers(step_data) {
     for (let tx_ in components.transformers) {
+        tx_id_LF = tx_.split("#")[0]
         tx_instance = components.transformers[tx_]
-        if (tx_ in step_data["transformers_loading"]) {
-            loading = step_data["transformers_loading"][tx_]
+        if (tx_id_LF in step_data["transformers_loading"]) {
+            loading = step_data["transformers_loading"][tx_id_LF]
             if (Number(loading) > 0) {
                 tx_instance.setLive()
             }
