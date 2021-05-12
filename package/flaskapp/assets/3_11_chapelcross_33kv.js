@@ -1,7 +1,10 @@
 //1550 x 1160 in mm
 //scale of 1000 x 1000, readjust with math...
 networks_undrawn["chapelcross33kv"] = {
-    lines:{
+    lines:
+    Object.assign(
+      LoadBank(130,370, "STCR3-"),
+      {
         "CHAP3-_SOLWAY#0": StraightLine([875,40],"right",130),
         "CHAP3-_SOLWAY#4": StraightLine([885,155],"right",75),
         "CHAP3-_SOLWAY#2": StraightLine([900,250],"right",60),
@@ -25,20 +28,7 @@ networks_undrawn["chapelcross33kv"] = {
 
         "STCR3-#0": StraightLine([85,375], "down",40),
         "STCR3-#1": StraightLine([85,375], "up",30),
-        "STCR3-#2": StraightLine([130,370], "down",30),
-        "STCR3-#2.1": StraightLine([125,400], "right",10),
-        "STCR3-#2.2": StraightLine([135,400], "down",40),
-        "STCR3-#2.3": StraightLine([135,440], "left",10),
-        "STCR3-#2.4": StraightLine([125,440], "up",40),
-        "STCR3-#2.LE1": StraightLine([127.5,407], "NEE",2.5),
-        "STCR3-#2.L0": StraightLine([127.5,407], "SEE",5),
-        "STCR3-#2.L1": StraightLine([127.5+5,407+5*0.75], "SWW",5),
-        "STCR3-#2.L2": StraightLine([127.5,407+10*0.75], "SEE",5),
-        "STCR3-#2.L3": StraightLine([127.5+5,407+15*0.75], "SWW",5),
-        "STCR3-#2.L4": StraightLine([127.5,407+20*0.75], "SEE",5),
-        "STCR3-#2.L5": StraightLine([127.5+5,407+25*0.75], "SWW",5),
-        "STCR3-#2.L6": StraightLine([127.5,407+30*0.75], "SEE",5),
-        "STCR3-#2.LE2": StraightLine([127.5+5,407+35*0.75], "SWW",2.5),
+
 
         "STCR3-_STCR0G": StraightLine([85,415], "down",60),
 
@@ -243,6 +233,8 @@ networks_undrawn["chapelcross33kv"] = {
         "NEWC5-": StraightLine([695,680],"right",85, "11kV"),
 
      },
+    ),
+
     busbars:{
         "CHAP3-_SOLWAY#7": StraightLine([875,40],"right",130),
         "CHAP3A1": StraightLine([25,175], "right",496),

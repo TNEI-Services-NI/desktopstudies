@@ -210,6 +210,27 @@ function StraightLine(origin, direction, length, voltage="33kV", dash = false, c
     }
 }
 
+function LoadBank(x1,y1, line_id){
+    let component = {
+    }
+    component[line_id+"#2"] = StraightLine([x1,y1], "down",30)
+    component[line_id+"#2.1"] = StraightLine([x1-5,y1+30], "right",10)
+    component[line_id+"#2.2"] = StraightLine([x1+5,y1+30], "down",40)
+    component[line_id+"#2.3"] = StraightLine([x1+5,y1+70], "left",10)
+    component[line_id+"#2.4"] = StraightLine([x1-5,y1+70], "up",40)
+    component[line_id+"#2.LE1"] = StraightLine([x1-2.5,y1+37], "NEE",2.5)
+    component[line_id+"#2.L0"] = StraightLine([x1-2.5,y1+37], "SEE",5)
+    component[line_id+"#2.L1"] = StraightLine([x1-2.5+5,y1+37+5*0.75], "SWW",5)
+    component[line_id+"#2.L2"] = StraightLine([x1-2.5,y1+37+10*0.75], "SEE",5)
+    component[line_id+"#2.L3"] = StraightLine([x1-2.5+5,y1+37+15*0.75], "SWW",5)
+    component[line_id+"#2.L4"] = StraightLine([x1-2.5,y1+37+20*0.75], "SEE",5)
+    component[line_id+"#2.L5"] = StraightLine([x1-2.5+5,y1+37+25*0.75], "SWW",5)
+    component[line_id+"#2.L6"] = StraightLine([x1-2.5,y1+37+30*0.75], "SEE",5)
+    component[line_id+"#2.LE2"] = StraightLine([x1-2.5+5,y1+37+35*0.75], "SWW",2.5)
+    return component
+
+}
+
 /**
  * Text Prototype object
  * @param  {string} Line ID of which text is linked to

@@ -1,13 +1,18 @@
 //1550 x 1160 in mm
 //scale of 1000 x 1000, readjust with math...
+
 networks_undrawn["stevenscroft33kv"]={
-    lines:{
+    lines:
+      Object.assign(
+        LoadBank(400, 255, "STCR3-"),
+        {
     "CHAP3-_STCR3-_1": StraightLine([285,220],"up",50,"33kV"),
     "STCR3-#0": StraightLine([285,255],"up",35,"33kV"),
 
     "STCR3-#1": StraightLine([270,255],"down",50,"33kV"),
     "STCR3-_STCR0G": StraightLine([270,305],"down",50,"33kV"),
     "POC": StraightLine([230,280],"right",80,"0V",true),
+
 
     "STCR0G-_2": StraightLine([270,350],"down",40,"11kV"),
     "STCR0G-_1": StraightLine([270,390],"down",40,"11kV"),
@@ -32,9 +37,10 @@ networks_undrawn["stevenscroft33kv"]={
     "STCR_AUX#18": StraightLine([680,770],"down",65,"LV"),
 
 },
+      ),
 
     busbars:{
-       "STCR3-": StraightLine([170,255],"right",130,"33kV"),
+       "STCR3-": StraightLine([170,255],"right",250,"33kV"),
        "STCR_AUX#2": StraightLine([350,540],"right",360,"LV"),
     "STCR_AUX#13": StraightLine([395,770],"right",300,"LV"),
 
