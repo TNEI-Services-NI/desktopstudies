@@ -196,6 +196,18 @@ function StraightLine(origin, direction, length, voltage="33kV", dash = false, c
     if(direction =="down"){
     return new Line(x1,y1,x1,y1+length,voltage,dash,colour)
     }
+    if(direction =="NEE"){
+    return new Line(x1,y1,x1+length,y1-length*0.7,voltage,dash,colour)
+    }
+    if(direction =="NWW"){
+    return new Line(x1,y1,x1-length,y1-length*0.7,voltage,dash,colour)
+    }
+    if(direction =="SEE"){
+    return new Line(x1,y1,x1+length,y1+length*0.7,voltage,dash,colour)
+    }
+    if(direction =="SWW"){
+    return new Line(x1,y1,x1-length,y1+length*0.7,voltage,dash,colour)
+    }
 }
 
 /**
