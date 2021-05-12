@@ -59,8 +59,7 @@ def _add_network_redraw(dash_app):
             'room': session.get('room'),
             'entity': session['entity']
         })
-
-        return [network]
+        return ["Select network"]
 
     return dash_app
 

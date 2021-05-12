@@ -17,12 +17,6 @@ networks_undrawn["chapelcross33kv"] = {
 
         "CHAP3A2": StraightLine([25+496,175], "right",399),
 
-//        "CHAP3A1#0": StraightLine([33,175],"down",20),
-//
-//        "698 16": StraightLine([33,195], "down",65),
-//            //fix the dash here
-//            "chapelcross dash": StraightLine([15,240],"right",35, "0V", dash=true),
-
         "CHAP3A1#0": StraightLine([85,175], "down",20),
         "CHAP3-_STCR3-_1#0": StraightLine([85,195], "down",150),
 
