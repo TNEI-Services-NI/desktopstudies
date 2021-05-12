@@ -113,15 +113,15 @@ networks_undrawn["ewehillwindfarm1"]={
     },
 
     tx:{
-        "EWEH0G-AUX-_2": new Tx("EWEH0G#101",1,["AUXILIARY","TRANSFORMER"],"","33kV"),
+        "EWEH0G-AUX-_1": new Tx("EWEH0G#101",1,["AUXILIARY","TRANSFORMER"],"","33kV"),
 
-        "WTG 04 Tx": new Tx("EWEH0G#9",1,["WTG 04"],"","33kV"),
-        "WTG 05 Tx": new Tx("EWEH0G#14",1,["WTG 05"],"","33kV"),
-        "WTG 06 Tx": new Tx("EWEH0G#18",1,["WTG 06"],"","33kV"),
+        "EWEH-_WTG-_1#0": new Tx("EWEH0G#9",1,["WTG 04"],"","LV"),
+        "EWEH-_WTG-_1#1": new Tx("EWEH0G#14",1,["WTG 05"],"","LV"),
+        "EWEH-_WTG-_1#2": new Tx("EWEH0G#18",1,["WTG 06"],"","LV"),
 
-        "WTG 01 Tx": new Tx("EWEH0G#23",1,["WTG 01"],"","LV"),
-        "WTG 02 Tx": new Tx("EWEH0G#28",1,["WTG 02"],"","LV"),
-        "WTG 03 Tx": new Tx("EWEH0G#32",1,["WTG 03"],"","LV"),
+        "EWEH-_WTG-_1#3": new Tx("EWEH0G#24",0,["WTG 01"],"","33kV"),
+        "EWEH-_WTG-_1#4": new Tx("EWEH0G#29",0,["WTG 02"],"","33kV"),
+        "EWEH-_WTG-_1#5": new Tx("EWEH0G#33",0,["WTG 03"],"","33kV"),
     },
 
     isolators:{

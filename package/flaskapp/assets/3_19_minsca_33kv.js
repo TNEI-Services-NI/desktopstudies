@@ -21,7 +21,8 @@ networks_undrawn["minsca33kv"]={
     "MINS0G#87": StraightLine([480,290],"down",80,"33kV"),
 
     "MINS0G#3": StraightLine([730,260],"down",30,"33kV"),
-    "MINS0G#88": StraightLine([730,290],"down",85,"33kV"),
+    "MINS0G#110": StraightLine([730,290],"down",85,"33kV"),
+    "MINS0G#120": StraightLine([730,375],"down",10,"0V"),
 
     "MINS0G#4": StraightLine([480,370],"right",45,"33kV"),
     "MINS0G#5": StraightLine([505,405],"right",20,"33kV"),
@@ -220,25 +221,25 @@ networks_undrawn["minsca33kv"]={
     },
 
     tx:{
-        "Minsca Auxiliary": new Tx("MINS0G#88",1,["AUXILIARY","TRANSFORMER"],"","33kV"),
+        "MINSC-AUX": new Tx("MINS0G#120",1,["AUXILIARY","TRANSFORMER"],"","33kV"),
 
-        "WTG 09 Tx": new Tx("MINS0G#7",1,["WTG 09"],"","33kV"),
-        "WTG 10 Tx": new Tx("MINS0G#16",1,["WTG 10"],"","33kV"),
-        "WTG 11 Tx": new Tx("MINS0G#12",1,["WTG 11"],"","33kV"),
-        "WTG 12 Tx": new Tx("MINS0G#21",1,["WTG 12"],"","33kV"),
-        "WTG 13 Tx": new Tx("MINS0G#25",1,["WTG 13"],"","33kV"),
-        "WTG 14 Tx": new Tx("MINS0G#30",1,["WTG 14"],"","33kV"),
-        "WTG 15 Tx": new Tx("MINS0G#40",1,["WTG 15"],"","33kV"),
-        "WTG 16 Tx": new Tx("MINS0G#35",1,["WTG 16"],"","33kV"),
+        "MINSC-_WTG#0": new Tx("MINS0G#7",1,["WTG 09"],"","LV"),
+        "MINSC-_WTG#1": new Tx("MINS0G#16",1,["WTG 10"],"","LV"),
+        "MINSC-_WTG#2": new Tx("MINS0G#12",1,["WTG 11"],"","LV"),
+        "MINSC-_WTG#3": new Tx("MINS0G#21",1,["WTG 12"],"","LV"),
+        "MINSC-_WTG#4": new Tx("MINS0G#25",1,["WTG 13"],"","LV"),
+        "MINSC-_WTG#5": new Tx("MINS0G#30",1,["WTG 14"],"","LV"),
+        "MINSC-_WTG#6": new Tx("MINS0G#40",1,["WTG 15"],"","LV"),
+        "MINSC-_WTG#7": new Tx("MINS0G#35",1,["WTG 16"],"","LV"),
 
-        "WTG 01 Tx": new Tx("MINS0G#44",1,["WTG 01"],"","LV"),
-        "WTG 02 Tx": new Tx("MINS0G#49",1,["WTG 02"],"","LV"),
-        "WTG 03 Tx": new Tx("MINS0G#61",1,["WTG 03"],"","LV"),
-        "WTG 04 Tx": new Tx("MINS0G#65",1,["WTG 04"],"","LV"),
-        "WTG 05 Tx": new Tx("MINS0G#70",1,["WTG 05"],"","LV"),
-        "WTG 06 Tx": new Tx("MINS0G#75",1,["WTG 06"],"","LV"),
-        "WTG 07 Tx": new Tx("MINS0G#80",1,["WTG 07"],"","LV"),
-        "WTG 08 Tx": new Tx("MINS0G#84",1,["WTG 08"],"","LV"),
+        "MINSC-_WTG#8": new Tx("MINS0G#45",0,["WTG 01"],"","33kV"),
+        "MINSC-_WTG#9": new Tx("MINS0G#50",0,["WTG 02"],"","33kV"),
+        "MINSC-_WTG#10": new Tx("MINS0G#62",0,["WTG 03"],"","33kV"),
+        "MINSC-_WTG#11": new Tx("MINS0G#66",0,["WTG 04"],"","33kV"),
+        "MINSC-_WTG#12": new Tx("MINS0G#71",0,["WTG 05"],"","33kV"),
+        "MINSC-_WTG#13": new Tx("MINS0G#76",0,["WTG 06"],"","33kV"),
+        "MINSC-_WTG#14": new Tx("MINS0G#81",0,["WTG 07"],"","33kV"),
+        "MINSC-_WTG#15": new Tx("MINS0G#85",0,["WTG 08"],"","33kV"),
 
 
     },
