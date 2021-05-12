@@ -22,28 +22,20 @@ let modal_timeout = 5
 
 let dataview_round = 3
 
-let background = undefined
 let case_network = "chapelcross"
+
+let background = undefined
 let network = undefined
 let dict_components = undefined
 let steps = []
 
-//let components = {
-//                    breakers: [],
-//                    lines: [],
-//                    loads:[],
-//                    busbars:[],
-//                    diagram:[],
-//                    labels:[],
-//                    generators: [],
-//                    isolators:[],
-//                    text:[],
-//                    dataviews:[],
-//                    transformers:[],
-//                    SGTs:[],
-//                    availablePowers:[],
-//                    generationInfo:[]
-//                };
+var room = undefined
+var username = undefined
+var entity = undefined
+
+var action = undefined
+
+var page = undefined
 
 const networks_undrawn = {
     "chapelcross33kv": undefined,
@@ -58,9 +50,6 @@ const networks_undrawn = {
     "ewehillwindfarm1": undefined,
     "ewehillwindfarm2": undefined,
 }
-
-Abbreviations = {"lines_active_power": "MW",
-                 "lines_reactive_power": "MVAR"}
 
 var socket = io();
 let current_step = 0  // initial simulation status

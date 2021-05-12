@@ -386,68 +386,6 @@ var svg = document.querySelector("#drawing");
 // Create an SVGPoint for future math
 var pt = svg.createSVGPoint();
 
-var socket = io();
-
-dict_components = undefined
-
-var room = undefined
-var username = undefined
-var entity = undefined
-
-var action = undefined
-
-var page = undefined
-
-socket.on('check_join_draw', function(data_join_draw) {
-    if (username === undefined) {
-        username = data_join_draw['username']
-    }
-    if (entity === undefined) {
-        entity = data_join_draw['entity']
-    }
-    page = data_join_draw['page']
-    if (username === data_join_draw['username']) {
-        socket.emit('check_join_draw', data_join_draw, function(data_check_rooms) {});
-    }
-});
-
-socket.on('join_draw', function(data_join_draw) {
-    if (room === undefined) {
-        socket.emit('join_room', data_join_draw, function(data_join_room) {
-            room = data_join_room['room']
-            event_draw(data_join_room);
-        })
-    }
-})
-
-socket.on('list_rooms', function(data) {
-    socket.emit('list_rooms', data);
-});
-
-socket.on('debug', function(data) {
-
-});
-
-
-socket.on('draw', function(data) {
-
-    event_draw(data);
-});
-
-socket.on('check_redraw', function(check_redraw_data) {
-    check_redraw_data['entity'] = entity
-    socket.emit('check_redraw', check_redraw_data);
-});
-
-socket.on('redraw', function(data) {
-    current_step = data['sim_step'];
-    if ('network' in data) {
-        network = data['network'];
-    }
-    master_draw();
-
-});
-
 
 // Get point in global SVG space
 function cursorPoint(evt) {

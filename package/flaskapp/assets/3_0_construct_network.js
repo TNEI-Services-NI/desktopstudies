@@ -1,3 +1,4 @@
+  //--------------------------------------------------------------------------------------------------------------------
 
   function prepare_canvas(x, y){
     //Create canvas
@@ -20,53 +21,48 @@
                 }
   }
 
+  function scale_two_point_objects(networks_undrawn, component){
+    for(let id_dict in networks_undrawn){
+    let temp_dict_components = networks_undrawn[id_dict]
+    for (let idx_line in temp_dict_components[component]){
+        let temp_dict = temp_dict_components[component][idx_line]
+        temp_dict.x1 = temp_dict.x1 * x_scaling
+        temp_dict.x2 = temp_dict.x2 * x_scaling
+        temp_dict.y1 = temp_dict.y1 * y_scaling
+        temp_dict.y2 = temp_dict.y2 * y_scaling
+    }
+  }
+  }
+
+  function scale_text(networks_undrawn, component){
+   for(let id_dict in networks_undrawn) {
+     let temp_dict_components = networks_undrawn[id_dict]
+     for (let idx in temp_dict_components[component]) {
+       temp_dict = temp_dict_components[component][idx]
+       temp_dict.offset[0] = temp_dict.offset[0] * x_scaling
+       temp_dict.offset[1] = temp_dict.offset[1] * y_scaling
+     }
+   }
+  }
+
   function scale_lines(networks_undrawn){
-  for(let id_dict in networks_undrawn){
-    let temp_dict_components = networks_undrawn[id_dict]
-    for (let idx_line in temp_dict_components.lines){
-        let temp_dict = temp_dict_components.lines[idx_line]
-        temp_dict.x1 = temp_dict.x1 * x_scaling
-        temp_dict.x2 = temp_dict.x2 * x_scaling
-        temp_dict.y1 = temp_dict.y1 * y_scaling
-        temp_dict.y2 = temp_dict.y2 * y_scaling
-    }
+    scale_two_point_objects(networks_undrawn, 'lines')
   }
-  }
+
   function scale_busbars(networks_undrawn){
-  for(let id_dict in networks_undrawn){
-    let temp_dict_components = networks_undrawn[id_dict]
-    for (let idx_line in temp_dict_components.busbars){
-        let temp_dict = temp_dict_components.busbars[idx_line]
-        temp_dict.x1 = temp_dict.x1 * x_scaling
-        temp_dict.x2 = temp_dict.x2 * x_scaling
-        temp_dict.y1 = temp_dict.y1 * y_scaling
-        temp_dict.y2 = temp_dict.y2 * y_scaling
-    }
+    scale_two_point_objects(networks_undrawn, 'busbars')
   }
+
+  function scale_loads(networks_undrawn){
+    scale_two_point_objects(networks_undrawn, 'loads')
   }
 
   function scale_labels(networks_undrawn){
-   for(let id_dict in networks_undrawn) {
-     let temp_dict_components = networks_undrawn[id_dict]
-     //scale text
-     for (let idx in temp_dict_components.labels) {
-       temp_dict = temp_dict_components.labels[idx]
-       temp_dict.offset[0] = temp_dict.offset[0] * x_scaling
-       temp_dict.offset[1] = temp_dict.offset[1] * y_scaling
-     }
-   }
+    scale_text(networks_undrawn, 'labels')
   }
 
   function scale_dataviews(networks_undrawn){
-   for(let id_dict in networks_undrawn) {
-     let temp_dict_components = networks_undrawn[id_dict]
-     //scale text
-     for (let idx in temp_dict_components.dataViews) {
-       temp_dict = temp_dict_components.dataViews[idx]
-       temp_dict.offset[0] = temp_dict.offset[0] * x_scaling
-       temp_dict.offset[1] = temp_dict.offset[1] * y_scaling
-     }
-   }
+   scale_text(networks_undrawn, 'dataViews')
   }
 
   function scale_availablePower(networks_undrawn){
@@ -74,7 +70,7 @@
         let temp_dict_components = networks_undrawn[id_dict]
 
         for (let idx in temp_dict_components.availablePower) {
-           temp_dict = temp_dict_components.availablePower[idx]
+           let temp_dict = temp_dict_components.availablePower[idx]
            temp_dict.pos[0] = temp_dict.pos[0] * x_scaling
            temp_dict.pos[1] = temp_dict.pos[1] * y_scaling
            temp_dict_components.availablePower[idx] = temp_dict
@@ -82,91 +78,7 @@
      }
   }
 
-  function scale_loads(networks_undrawn){
-  for(let id_dict in networks_undrawn){
-    let temp_dict_components = networks_undrawn[id_dict]
-    for (let idx_line in temp_dict_components.loads){
-        let temp_dict = temp_dict_components.loads[idx_line]
-        temp_dict.x1 = temp_dict.x1 * x_scaling
-        temp_dict.x2 = temp_dict.x2 * x_scaling
-        temp_dict.y1 = temp_dict.y1 * y_scaling
-        temp_dict.y2 = temp_dict.y2 * y_scaling
-    }
-  }
-  }
-
-  function style_line(line){
-    line.dict_styling = {fill: { width: line_palette_style["width"]/1.5 * Math.min(x_scaling,y_scaling)},
-                         stroke: { width: line_palette_style["width"]/1.5 *  Math.min(x_scaling,y_scaling)}}
-    if (line.dash){
-              line.dict_styling = {fill: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)},
-                         stroke: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)}}
-      line.dict_styling.stroke.dasharray = (5, 5)
-
-    }
-    let colour = undefined
-    if (line.live){
-      colour = palette[line.voltage]
-
-    } else {
-      colour = palette["0V"]
-    }
-    line.dict_styling.stroke.color = colour
-    line.dict_styling.stroke.live_color = palette[line.voltage]
-    line.dict_styling.fill.color = colour
-    line.dict_styling.fill.live_color = palette[line.voltage]
-    // line.dict_styling.stroke.color = palette[line.voltage]
-    return line
-  }
-
-  function style_busbar(line){
-    line.dict_styling = {fill: { width: line_palette_style["width"] * Math.min(x_scaling,y_scaling)},
-                         stroke: { width: line_palette_style["width"] * Math.min(x_scaling,y_scaling)}}
-    if (line.dash){
-              line.dict_styling = {fill: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)},
-                         stroke: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)}}
-      line.dict_styling.stroke.dasharray = (5, 5)
-
-    }
-    let colour = undefined
-    if (line.live){
-      colour = palette[line.voltage]
-
-    } else {
-      colour = palette["0V"]
-    }
-    line.dict_styling.stroke.color = colour
-    line.dict_styling.stroke.live_color = palette[line.voltage]
-    line.dict_styling.fill.color = colour
-    line.dict_styling.fill.live_color = palette[line.voltage]
-    // line.dict_styling.stroke.color = palette[line.voltage]
-    return line
-  }
-
-  function style_diagram_line(line){
-    line.dict_styling = {fill: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)},
-                         stroke: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)}}
-    if (line.dash){
-              line.dict_styling = {fill: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)},
-                         stroke: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)} }
-      line.dict_styling.stroke.dasharray = (5, 5)
-
-    }
-    let colour = undefined
-    if (line.live){
-      colour = palette[line.voltage]
-
-    } else {
-      colour = palette["0V"]
-    }
-    line.dict_styling.stroke.color = colour
-    line.dict_styling.stroke.live_color = palette[line.voltage]
-    line.dict_styling.fill.color = colour
-    line.dict_styling.fill.live_color = palette[line.voltage]
-    // line.dict_styling.stroke.color = palette[line.voltage]
-    return line
-  }
-
+  //--------------------------------------------------------------------------------------------------------------------
 
   function construct_coord_display(){
     const text1 = draw.text("coordinate dislay")
@@ -204,7 +116,7 @@
     }
   }
 
-    function construct_loads(dict_components){
+  function construct_loads(dict_components){
     var bNodes = false
     for (let id_load in dict_components.loads){
         let load = dict_components.loads[id_load]
@@ -256,10 +168,6 @@
 
         component_modal(l)
     }
-  }
-
-  function destroy_lines(){
-
   }
 
   function construct_breakers(dict_components, network_, step, callback){
