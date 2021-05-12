@@ -118,7 +118,7 @@ networks_undrawn["gretna400kv"]={
     },
 
     SGTs:{
-        "SGT1": new SGT("GRNA1-_SGT1#1","SGT1"),
-        "SGT2": new SGT("X110","SGT2"),
+        "tr3_GRNA4-_GRNA1-_1": new SGT("GRNA1-_SGT1#1","SGT1"),
+        "tr3_GRNA4-_GRNA1-_2": new SGT("X110","SGT2"),
     },
 }

@@ -16,6 +16,7 @@ networks_undrawn["ewehillgretna"]={
     "EWEH0G_2": StraightLine([270,755],"down",50,"33kV"),
 
     "EWEH3#6": StraightLine([270,565],"left",40,"33kV"),
+    "EWEH3#7": StraightLine([230,565],"left",0,"0V"),
 
     "EWEH3": StraightLine([635,550],"left",365,"33kV"),
     "EWEH3#1": StraightLine([635,550],"down",155,"33kV"),
@@ -64,8 +65,8 @@ networks_undrawn["ewehillgretna"]={
         },
 
     tx:{
-        "GT1 90MVA" : new Tx("GRNA1-_EWEH#2",1,"","","132kV"),
-        "GRID 1A LV" : new Tx("EWEH3#6",1,"","","0V"),
+        "trf_EWEH3-_EWEH0G_1" : new Tx("EWEH3#5",0,"","","132kV"),
+        "EWEH3-AUX-_1" : new Tx("EWEH3#7",1,"","","33kV"),
 
     },
 

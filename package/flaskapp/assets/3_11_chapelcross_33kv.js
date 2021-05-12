@@ -41,7 +41,8 @@ networks_undrawn["chapelcross33kv"] = {
 
         "CHAP3A1#1": StraightLine([330,175],"up",20),
         "CHAP1-_CHAP3-_1#0": StraightLine([330,155],"up",95),
-         "CHAP1-_CHAP3-_1#1":StraightLine([330,110],"left",40),
+         "CHAP1-_CHAP3-_1#1":StraightLine([290,110],"right",40),
+         "CHAP1-_CHAP3-_1#3":StraightLine([290,110],"right",0,"0V"),
 
         "CHAP3-_MIBI3-_1#0": StraightLine([415,195],"down",55),
         "CHAP3A1#5": StraightLine([415,175],"down",20),
@@ -356,10 +357,10 @@ networks_undrawn["chapelcross33kv"] = {
         // "785 CUSTOMER": new Breaker("CRAG5B_LAHO5-_1",0.7,"CUSTOMER ISOLATOR"),
     },
     tx:{
-        0: new Tx("CHAP1-_CHAP3-_2#1",1,"","","0V"),
+        "CHAP3-AUX-_2": new Tx("CHAP1-_CHAP3-_2#1",1,"","","0V"),
         "CHAP1-_CHAP3-_2": new Tx("CHAP1-_CHAP3-_2#0",1,"GRID T2","90 MVA","132kV"),
         "CHAP1-_CHAP3-_1": new Tx("CHAP1-_CHAP3-_1#0",1,"GRID T1", "90 MVA","132kV"),
-        3: new Tx("CHAP1-_CHAP3-_1#1",1,"","","0V"),
+        "CHAP3-AUX-_1": new Tx("CHAP1-_CHAP3-_1#3",0,"","","33kV"),
         "MIBIT1_MIBI10_T1": new Tx("MIBI3-_MIBIT1_1#1",1,"","10 MVA","11kV"),
         "LAHOT1_LAHO10_T1": new Tx("MIBI3-_LAHO3A_1#3",1,"T1","12 MVA","11kV"),
         "LAHOT2_LAHO20_T2": new Tx("CHAPX3_LAHO3B_1#4",1.2,"T2","12 MVA","33kV"),
