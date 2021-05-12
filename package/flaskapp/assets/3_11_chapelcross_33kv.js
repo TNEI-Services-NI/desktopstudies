@@ -252,6 +252,8 @@ networks_undrawn["chapelcross33kv"] = {
         "MINS3-": StraightLine([870,610],"right",105),
         "NEWC5-": StraightLine([695,680],"right",85, "11kV"),
      },
+     //possible approach to assigning a transformer load
+     //  "ANANT2_CHAP3-_1#4": Object.assign(StraightLine([405,315],"down",20,"11kV"),{transformer:"ANANT2_ANAN20_T2"}),
     loads:{
         "ANANT2_CHAP3-_1#4": StraightLine([405,315],"down",20,"11kV"),
         "ANANT1_CHAP3-_1#4": StraightLine([321,315],"down",20,"11kV"),
@@ -461,17 +463,11 @@ networks_undrawn["chapelcross33kv"] = {
         //lines
         "CHAP3-_STCR3-_1": new DataView("CHAP3-_STCR3-_1#0", [-25, -35], ['lines_current']),
         "ANANT1_CHAP3-_1": new DataView("ANANT1_CHAP3-_1#1", [-25, -5], ['lines_current']),
-        // CRAIG II WINDFARM 11KV
-        // "CRAG5B_LAHO5-_1": new DataView("CRAG5B_LAHO5-_1", [65, -60]),
         "CHAP3-_MINS3-_1": new DataView("CHAP3-_MINS3-_1#2", [25, 0], ['lines_current']),
         "CHAPX1_LOBI3A_1": new DataView("CHAPX1_LOBI3A_1#0", [-25, -75], ['lines_current']),
         "CHAP3-_MIBI3-_1": new DataView("CHAP3-_MIBI3-_1#0", [-25, 0], ['lines_current']),
         "CHAP3-_GRNA3B_1": new DataView("CHAP3-_GRNA3B_1#0", [-25, 0], ['lines_current']),
         "CHAP3-_CHAPX3_1": new DataView("CHAP3-_CHAPX3_1#0", [-25, -60], ['lines_current']),
-        // "ANANT1_CHAP3-_1": new DataView("ANANT1_CHAP3-_1#1", [-25, 10]),
-        // "ANANT1_CHAP3-_1": new DataView("ANANT1_CHAP3-_1#1", [-25, 10]),
-        // "ANANT1_CHAP3-_1": new DataView("ANANT1_CHAP3-_1#1", [-25, 10]),
-        // "ANANT1_CHAP3-_1": new DataView("ANANT1_CHAP3-_1#1", [-25, 10]),
 
         //transformers
         "CHAP1-_CHAP3-_1": new DataView("CHAP1-_CHAP3-_1#0",[-30,-40],[
@@ -501,8 +497,53 @@ networks_undrawn["chapelcross33kv"] = {
           ]),
 
         //BUSBARS
-
         "CHAP3A1": new DataView("CHAP3A1", [-15, -20], ['busbars_voltage']),
+
+        //transformers for loads
+        "ANANT2_ANAN20_T2": new DataView("ANANT2_CHAP3-_1#4",[35,0],[
+            "transformers_loading",
+        ]),
+        "ANANT1_ANAN10_T1":new DataView("ANANT1_CHAP3-_1#4",[-35,0],[
+            "transformers_loading",
+        ]),
+        "LOBIT1_LOBI10_T1": new DataView("LOBI5-1#0",[-35,0],[
+            "transformers_loading",
+        ]),
+        "LOBIT2_LOBI20_T2": new DataView("LOBI5-2#0",[35,0],[
+            "transformers_loading",
+        ]),
+        "LAHOT1_LAHO10_T1":new DataView("LAHO5-1#0",[-35,0],[
+            "transformers_loading",
+        ]),
+        "LAHOT2_LAHO20_T2": new DataView("LAHO5-2#0",[35,0],[
+            "transformers_loading",
+        ]),
+        "MOFTT1_MOFT10_T1": new DataView("MOFT5-1#0",[25,10],[
+            "transformers_loading",
+        ]),
+        "MOFTT2_MOFT20_T2": new DataView("MOFT5-2#0",[35,10],[
+            "transformers_loading",
+        ]),
+        "NEWCT1_NEWC10_T1":new DataView("NEWC5-#0",[35,0],[
+            "transformers_loading",
+        ]),
+        "GRNAT1_GRNA10_T1": new DataView("GRNA5-1#0",[0,30],[
+            "transformers_loading",
+        ]),
+        "GRNAT2_GRNA20_T2": new DataView("GRNA5-2#0",[0,30],[
+            "transformers_loading",
+        ]),
+        "KIBAT1_KIBA10_T1": new DataView("KIBA5-#0",[35,0],[
+            "transformers_loading",
+        ]),
+        "MIBIT1_MIBI10_T1":new DataView("MIBI5-#0",[-25,5],[
+            "transformers_loading",
+        ]),
+
+
+
+
+
 
     },
     availablePower:{
