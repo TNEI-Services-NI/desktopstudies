@@ -69,7 +69,6 @@ function update_generation_info(step_data) {
     }
 }
 
-
 function update_transformer_modals(step_data) {
     for (let tx_ in components.transformers) {
         tx_instance = components.transformers[tx_]
@@ -332,6 +331,8 @@ function draw_network(dict_components, network_, step, callback) {
         callback(data_con_break)
     });
 
+//    alert("DRAW NETWORK WAS CALLED")
+
 }
 
 function update_sim_data(stage_, step_data) {
@@ -351,7 +352,6 @@ function update_sim_data(stage_, step_data) {
 
 function master_draw() {
     prepare_canvas(x_max, y_max);
-    // alert("master_draw")
     dict_components = networks_undrawn[network]
     draw_network(dict_components, network, current_step, function(data_draw_net){
         fetch_sim_data(case_network, network, current_step, option, scenario, function (stage_, component_values){

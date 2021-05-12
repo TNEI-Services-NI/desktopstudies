@@ -4,8 +4,10 @@ networks_undrawn["ewehillwindfarm2"]={
     lines:{
     "EWEH3#1": StraightLine([345,50],"down",40,"33kV"),
     "EWEH3": StraightLine([305,100],"right",40,"33kV"),
+    "EWEH3#3": StraightLine([315,100],"right",0,"0V"),
 
     "EWEH3#2": StraightLine([345,90],"down",30,"33kV"),
+
     "1L3A": StraightLine([345,120],"down",85,"33kV"),
     "EWEH3-_GRID1A-_WG2": StraightLine([345,120],"down",100,"33kV"),
     "EWEH0G_2#100": StraightLine([345,220],"down",40,"33kV"),
@@ -22,6 +24,7 @@ networks_undrawn["ewehillwindfarm2"]={
 
     "EWEH0G_2#4": StraightLine([730,260],"down",30,"33kV"),
     "EWEH0G_2#5": StraightLine([730,290],"down",85,"33kV"),
+    "EWEH0G_2#102": StraightLine([730,375],"down",10,"0V"),
 
     "EWEH0G_2#6": StraightLine([480,370],"right",45,"33kV"),
     "EWEH0G_2#7": StraightLine([505,405],"right",20,"33kV"),
@@ -218,9 +221,9 @@ networks_undrawn["ewehillwindfarm2"]={
     },
 
     tx:{
-        "GT1" : new Tx("EWEH3#1",0,["GT1 90MVA","TAP 12"],"","33kV","132kV"),
-        "EWEH3": new Tx("EWEH3", 0, "","","33kV","LV"),
-        "Minsca Auxiliary": new Tx("EWEH0G_2#5",1,["AUXILIARY","TRANSFORMER"],"","LV","33kV"),
+        "trf_EWEH3-_EWEH0G_1" : new Tx("EWEH3#1",0,["GT1 90MVA","TAP 12"],"","132kV"),
+        "EWEH3-AUX-_1": new Tx("EWEH3#3", 0, "","","33kV"),
+        "EWEH0G-AUX-_1": new Tx("EWEH0G_2#102",1,["AUXILIARY","TRANSFORMER"],"","33kV"),
 
         "WTG 09 Tx": new Tx("EWEH0G_2#9",1,["WTG 09"],"","33kV"),
         "WTG 10 Tx": new Tx("EWEH0G_2#18",1,["WTG 10"],"","33kV"),
