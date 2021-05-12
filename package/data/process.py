@@ -18,6 +18,7 @@ def process_LF_data(network="chapelcross", voltage="33kv", option="Opt5"):
             dir_data = '\\'.join([net_opt_dir, '{}_{}.csv'.format(component, parameter)])
             df_data = dict_data[component][parameter]['data'].fillna(-9999)
             df_data.to_csv(dir_data, index=False)
+    combine_LF_data()
 
 
 def migrate_csvs(folder_path):
@@ -49,9 +50,19 @@ def get_tables():
     con.close()
 
 
+def combine_LF_data(network="chapelcross", voltage="33kv", option="Opt5"):
+    # net_opt_dir = '\\'.join([data.dir_restoration_steps, option, network+voltage])
+    net_opt_dir = '\\'.join([data.dir_restoration_steps, option, network])
+    csvs = list(filter(lambda x: '.csv' in x, os.listdir(net_opt_dir)))
+    list_data = [pd.read_csv('/'.join([net_opt_dir, csv])).set_index('Name').filter(like='Step').assign(component=csv.split('.csv')[0]) for csv in csvs]
+    data_concat = pd.concat(list_data)
+    data_concat.to_csv('/'.join([net_opt_dir, 'alldata.csv']))
+
+
 if __name__ == '__main__':
     # process_LF_data()
     # migrate_csvs("package/data/simtool/breakerstates/Opt5")
     # migrate_csvs("package/data/simtool/networkviews/Opt5")
     # migrate_csvs("package/data/simtool/restorationsteps/Opt5/chapelcross")
-    get_tables()
+    # get_tables()
+    pass

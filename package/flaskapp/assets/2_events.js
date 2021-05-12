@@ -220,7 +220,6 @@ function component_modal(component){
       // $('<p>Data:</p>').appendTo('#dataPopup');
 
       $.ajax({
-        url:"data/scenario1.csv",
         dataType:"text",
         success:function(data)
         {

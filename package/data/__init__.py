@@ -65,7 +65,7 @@ def read_breaker_states(network: str, option: str):
     option_folder = states_by_option['Opt' + option]
     dir_option = '/'.join([dir_breaker_states, option_folder])
     breaker_state_files = _fetch_files(dir_option)
-    filename = breaker_state_files[network]
+    # filename = breaker_state_files[network]
 
     # df_breakerstates = pd.read_csv('/'.join([dir_option, filename]))
     df_breakerstates = pd.read_csv('/'.join([dir_option, "allbreakers.csv"]))
@@ -110,16 +110,14 @@ def read_actions(option: str):
 def read_restoration_step(case_network: str, network: str, option: str, scenario: str, stage: int):
 
     dir_opt_scen = '/'.join([dir_restoration_steps, 'Opt' + option, case_network])
-    dict_filenames = _fetch_files(dir_opt_scen)
-    dict_data = {k: pd.read_csv('/'.join([dir_opt_scen, v]),
-                                 dtype={'Name': str})
-                        .set_index("Name")
-                 for k, v in dict_filenames.items()}
-    #
-    # for k, v in dict_data.items():
-    #     if 'network' in v.columns:
-    #         dict_data[k] = v.loc[v['network'] == network, :]
+    # dict_filenames = _fetch_files(dir_opt_scen)
+    # dict_data = {k: pd.read_csv('/'.join([dir_opt_scen, v]),
+    #                              dtype={'Name': str})
+    #                     .set_index("Name")
+    #              for k, v in dict_filenames.items()}
+    df_data = pd.read_csv('/'.join([dir_opt_scen, 'alldata.csv']), index_col=0)
 
+    dict_data = {k: df_data.loc[df_data['component']==k, :] for k in df_data['component'].unique()}
 
     dict_data = {k: v.loc[:, 'Step {}'.format(stage)].to_json()
                  for k, v in dict_data.items()}
