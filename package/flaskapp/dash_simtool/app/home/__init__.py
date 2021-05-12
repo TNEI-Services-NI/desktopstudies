@@ -65,6 +65,6 @@ def init_dashboard(server=""):
     # compile overall layout
     dash_app.layout = html.Center(content)
 
-    dash_app = callbacks.init_callbacks(dash_app)
+    dash_app = callbacks.init_callbacks(dash_app, URL_PAGE)
 
     return dash_app if server == "" else dash_app.server
