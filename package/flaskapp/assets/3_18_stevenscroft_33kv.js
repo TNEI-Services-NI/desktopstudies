@@ -81,8 +81,8 @@ networks_undrawn["stevenscroft33kv"]={
     },
 
     tx:{
-        "MINS3-_MINS0G_1": new Tx("STCR0G-_2",0,"","", "33kV"),
-        "699 Auxiliary Transformer": new Tx("STCR0G-_1#2",1,["Auxiliary","Transformer","11/0.4kV"],"","33kV"),
+        "STCR3-_STCR5-_1": new Tx("STCR0G-_2",0,"","", "33kV"),
+        "STCR0G-_STCRLV": new Tx("STCR_AUX#1",0,["Auxiliary","Transformer","11/0.4kV"],"","11kV"),
     },
 
     isolators:{
