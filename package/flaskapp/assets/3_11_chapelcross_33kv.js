@@ -289,8 +289,8 @@ networks_undrawn["chapelcross33kv"] = {
         "698 24": new Breaker("CHAP3A2#4",1),
 //        "698 25": new Breaker("698 25",0.31),
         "698 26": new Breaker("CHAP3A2#5",1),
-        "678 11": new Breaker("CHAP3-_SOLWAY#5",0.18),
-        "678 12": new Breaker("CHAP3-_SOLWAY#6",0.3),
+        "378 11": new Breaker("CHAP3-_SOLWAY#5",0.18),
+        "378 12": new Breaker("CHAP3-_SOLWAY#6",0.3),
         "GRID 2": new Breaker("CHAP3A2#0",1),
 
         "694": new Breaker("LOBI3A",1),
