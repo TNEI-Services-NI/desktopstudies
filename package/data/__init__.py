@@ -23,6 +23,43 @@ def _fetch_files(directory: str, file_type: str = '.csv'):
     return dict_files
 
 
+def read_LF_file(network="chapelcross", voltage="33kv", option="Opt5"):
+    raw_data_files = _fetch_files(dir_raw_simtool_data, file_type='.xlsx')
+    # filename = raw_data_files[network + voltage + option]
+    filename = raw_data_files[network + option]
+
+    dict_data = {'generators': {}, 'busbars': {}, 'lines': {}, 'transformers': {}}
+
+    dict_data['generators']['active_power'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
+                                                            , sheet_name='Generators - Active Power')
+    dict_data['generators']['reactive_power'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
+                                                              , sheet_name='Generators - Reactive Power')
+    dict_data['busbars']['voltage'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
+                                                    , sheet_name='Busbars - Voltage(pu)')
+    dict_data['transformers']['loading'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
+                                                         , sheet_name='Transformers - Loading')
+    dict_data['transformers']['taps'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
+                                                      , sheet_name='Transformers - Taps')
+    dict_data['lines']['loading'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
+                                                  , sheet_name='Lines - Loading')
+    dict_data['lines']['active_power'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
+                                                       , sheet_name='Lines - Active Power')
+    dict_data['lines']['reactive_power'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
+                                                         , sheet_name='Lines - Reactive Power')
+    dict_data['lines']['current'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
+                                                         , sheet_name='Lines - Current')
+
+    for component, dict_comp_data in dict_data.items():
+        for param, comp_data in dict_comp_data.items():
+            comp_data_ = _filter_format_data(comp_data)
+            comp_data_columns_idx, comp_data_columns_name = get_data_cols(comp_data_)
+            dict_data[component][param] = {'data': comp_data_,
+                                           'fields_idx': comp_data_columns_idx,
+                                           'fields_name': comp_data_columns_name}
+
+    return dict_data
+
+
 def read_breaker_states(network: str, option: str):
     states_by_option = _fetch_files(dir_breaker_states)
     option_folder = states_by_option['Opt' + option]
@@ -30,7 +67,7 @@ def read_breaker_states(network: str, option: str):
     breaker_state_files = _fetch_files(dir_option)
     filename = breaker_state_files[network]
 
-    df_breakerstates = pd.read_csv('/'.join([dir_option, filename]))
+    # df_breakerstates = pd.read_csv('/'.join([dir_option, filename]))
     df_breakerstates = pd.read_csv('/'.join([dir_option, "allbreakers.csv"]))
 
     # format data
@@ -97,6 +134,67 @@ def read_active_network():
     return df_activesim
 
 
+def read_breaker_states_db(network: str, option: str):
+
+    # format data
+    df_breakerstates = df_breakerstates.convert_dtypes(convert_string=True)
+    df_breakerstates = df_breakerstates.set_index('breaker')
+    return df_breakerstates
+
+
+def read_network_views_db(option: str):
+    networks_by_option = _fetch_files(dir_network_views)
+    option_folder = networks_by_option['Opt' + option]
+    dir_option = '/'.join([dir_network_views, option_folder])
+    network_views = _fetch_files(dir_option)
+
+    df_views = pd.read_csv('/'.join([dir_option, "views.csv"]))
+
+    # format data
+    df_views = df_views.convert_dtypes(convert_string=True)
+    df_views = df_views.set_index('entity')
+    df_views.columns = list(map(int, df_views.columns))
+    return df_views
+
+
+def read_actions_db(option: str):
+    actions_by_option = _fetch_files(dir_actions)
+    option_folder = actions_by_option['Opt' + option]
+    dir_option = '/'.join([dir_actions, option_folder])
+    actions = _fetch_files(dir_option)
+
+    df_actions = pd.read_csv('/'.join([dir_option, "actions.csv"]))
+
+    # format data
+    df_actions = df_actions.fillna('')
+    df_actions = df_actions.convert_dtypes(convert_string=True)
+    df_actions = df_actions.set_index('entity')
+    df_actions.columns = list(map(int, df_actions.columns))
+    return df_actions
+
+
+def read_restoration_step_db(case_network: str, network: str, option: str, scenario: str, stage: int):
+
+    dir_opt_scen = '/'.join([dir_restoration_steps, 'Opt' + option, case_network])
+    dict_filenames = _fetch_files(dir_opt_scen)
+    dict_data = {k: pd.read_csv('/'.join([dir_opt_scen, v]),
+                                 dtype={'Name': str})
+                        .set_index("Name")
+                 for k, v in dict_filenames.items()}
+
+    dict_data = {k: v.loc[:, 'Step {}'.format(stage)].to_json()
+                 for k, v in dict_data.items()}
+
+    return dict_data
+
+
+def read_active_network_db():
+    active_sims = _fetch_files(dir_active_simulation)
+    filename = active_sims['activesimulation']
+    df_activesim = pd.read_csv('/'.join([dir_active_simulation, filename]))
+    return df_activesim
+
+
 def _filter_format_data(comp_data_):
     comp_data_ = comp_data_.copy()
     comp_data_ = comp_data_.iloc[:, 3:]
@@ -108,9 +206,13 @@ def _filter_format_data(comp_data_):
     comp_data_ = comp_data_.loc[:, comp_data_columns]
 
     comp_data_ = comp_data_.rename(columns={
-        'Stage - Post Blackout': "Step -1",
-        "Stage - Pre Restoration": "Step -2",
+        'Stage - Post Blackout': "-2",
+        "Stage - Pre Restoration": "-1",
     })
+
+    map = {k: k.replace('step', '').replace('Step ', '') for k in comp_data_.columns}
+
+    comp_data_ = comp_data_.rename(columns=map)
 
     return comp_data_
 
@@ -128,42 +230,6 @@ def get_data_cols(comp_data_):
             'post_blackout': ["Step -2"], 'stages': [comp_cols_[x] for x in stage_cols]}
 
 
-def read_LF_file(network="chapelcross", voltage="33kv", option="Opt5"):
-    raw_data_files = _fetch_files(dir_raw_simtool_data, file_type='.xlsx')
-    # filename = raw_data_files[network + voltage + option]
-    filename = raw_data_files[network + option]
-
-    dict_data = {'generators': {}, 'busbars': {}, 'lines': {}, 'transformers': {}}
-
-    dict_data['generators']['active_power'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
-                                                            , sheet_name='Generators - Active Power')
-    dict_data['generators']['reactive_power'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
-                                                              , sheet_name='Generators - Reactive Power')
-    dict_data['busbars']['voltage'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
-                                                    , sheet_name='Busbars - Voltage(pu)')
-    dict_data['transformers']['loading'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
-                                                         , sheet_name='Transformers - Loading')
-    dict_data['transformers']['taps'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
-                                                      , sheet_name='Transformers - Taps')
-    dict_data['lines']['loading'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
-                                                  , sheet_name='Lines - Loading')
-    dict_data['lines']['active_power'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
-                                                       , sheet_name='Lines - Active Power')
-    dict_data['lines']['reactive_power'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
-                                                         , sheet_name='Lines - Reactive Power')
-    dict_data['lines']['current'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
-                                                         , sheet_name='Lines - Current')
-
-    for component, dict_comp_data in dict_data.items():
-        for param, comp_data in dict_comp_data.items():
-            comp_data_ = _filter_format_data(comp_data)
-            comp_data_columns_idx, comp_data_columns_name = get_data_cols(comp_data_)
-            dict_data[component][param] = {'data': comp_data_,
-                                           'fields_idx': comp_data_columns_idx,
-                                           'fields_name': comp_data_columns_name}
-
-    return dict_data
-
-
 if __name__ == '__main__':
-    dict_data = read_LF_file("chapelcross33kv", "Opt5")
+    # dict_data = read_LF_file("chapelcross33kv", "Opt5")
+    read_breaker_states_db("chapelcross33kv", "Opt5")

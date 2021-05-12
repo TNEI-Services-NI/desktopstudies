@@ -303,7 +303,6 @@
             }
 
             b.setEnergised = function(){
-              console.log(this.line.dict_styling.stroke.live_color)
               if(this.closed){
                  this.UIElement.attr({
                 'stroke': this.line.dict_styling.stroke.live_color,

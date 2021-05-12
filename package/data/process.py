@@ -1,5 +1,8 @@
 import os
 import package.data as data
+import sqlite3
+import package as root
+import pandas as pd
 
 
 def process_LF_data(network="chapelcross", voltage="33kv", option="Opt5"):
@@ -17,5 +20,38 @@ def process_LF_data(network="chapelcross", voltage="33kv", option="Opt5"):
             df_data.to_csv(dir_data, index=False)
 
 
+def migrate_csvs(folder_path):
+    full_folder_path = '/'.join([root.BASE_DIR, folder_path])
+    folder_contents = os.listdir(full_folder_path)
+    csvs = list(filter(lambda x: '.csv' in x, folder_contents))
+    for csv_file in csvs:
+        csv_path = '/'.join([folder_path, csv_file])
+        csv_to_sqlite(csv_path)
+
+
+def csv_to_sqlite(csv_path):
+    db_dir = os.path.join(root.BASE_DIR, 'instance', 'db.sqlite')
+    con = sqlite3.connect(db_dir) # change to 'sqlite:///your_filename.db'
+    df_data = pd.read_csv('/'.join([root.BASE_DIR, csv_path]))
+    table_name = csv_path.split("/")[-1].split(".")[0]
+    df_data.to_sql(table_name, con, if_exists='replace')
+    con.commit()
+    con.close()
+
+
+def get_tables():
+    db_dir = os.path.join(root.BASE_DIR, 'instance', 'db.sqlite')
+    con = sqlite3.connect(db_dir) # change to 'sqlite:///your_filename.db'
+    cur = con.cursor()
+    cur.execute("SELECT name FROM sqlite_master WHERE type='table';")
+    response = cur.fetchall()
+    print(response)
+    con.close()
+
+
 if __name__ == '__main__':
-    process_LF_data()
+    # process_LF_data()
+    # migrate_csvs("package/data/simtool/breakerstates/Opt5")
+    # migrate_csvs("package/data/simtool/networkviews/Opt5")
+    # migrate_csvs("package/data/simtool/restorationsteps/Opt5/chapelcross")
+    get_tables()

@@ -201,9 +201,6 @@ function update_line_colours(step_data_) {
             ((step_data_["busbars_voltage"][line_id_LF] === undefined)) &&
             ((step_data_["transformers_loading"][line_id_LF] === undefined))) {
             if (highlight_undefined) {
-                line_instance.info.o_line.attr({
-                    stroke: "#d3d3d3"
-                });
                 line_instance.UIElement.attr({
                     stroke: "#d3d3d3"
                 });
@@ -355,12 +352,11 @@ function master_draw() {
     // alert("master_draw")
     dict_components = networks_undrawn[network]
     draw_network(dict_components, network, current_step);
-    fetch_sim_data(case_network, network, current_step, option, scenario, update_sim_data);
     $("body").css("cursor", "default");
+    fetch_sim_data(case_network, network, current_step, option, scenario, update_sim_data);
 }
 
 function event_draw(draw_data) {
-
     network = draw_data['network']
     current_step = draw_data['sim_step'];
     master_draw();
