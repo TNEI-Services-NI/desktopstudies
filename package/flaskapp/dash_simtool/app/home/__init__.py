@@ -31,7 +31,7 @@ def init_dashboard(server=""):
     _nav_bar = components.navbar(URL_PAGE)
     #
     # add sidebar
-    _sidebar = components.sidebar(URL_PAGE)
+    _sidebar = components.sidebar(URL_PAGE, styling.SIDEBAR_STYLE_HIDDEN)
 
     #legend
     _legend = components.legend()
@@ -54,6 +54,7 @@ def init_dashboard(server=""):
                                    html.Div(id='hidden_div00'),
                                    _nav_bar,
                                    _legend,
+                                    _sidebar,
                                    _legendButton,
                                    _body,
                                    ]

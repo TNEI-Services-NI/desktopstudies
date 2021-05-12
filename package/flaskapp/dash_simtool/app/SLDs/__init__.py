@@ -35,7 +35,7 @@ def init_dashboard(server=""):
     _nav_bar = components.navbar(URL_PAGE)
     #
     # add sidebar
-    _sidebar = components.sidebar(URL_PAGE)
+    _sidebar = components.sidebar(URL_PAGE, styling.SIDEBAR_STYLE)
 
     #legend
     _legend = components.legend()
