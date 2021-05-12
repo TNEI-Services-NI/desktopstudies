@@ -109,17 +109,20 @@ function Gen_Callback(graphic_objects, name=""){
             if(graphic_objects != undefined){
                 graphic_objects[0] = group
             }
-            var type = undefined
+            var label = []
             if(name==="MOTOR"){
-                type = ""
-            } else {
-                type = "GENERATOR"
-            }
-            if(group.horizontal === true){
-                add_text(group, false, [type, name], 0, -0* y_scaling, "#d3d3d3",font_size, function(group){})
+                label = ["MOTOR"]
+            } else if(name === "EMERGENCY"){
+                label = ["EMERGENCY","GENERATOR"]
             }
             else{
-                add_text(group, false, [type, name], 0,30 * y_scaling,"#d3d3d3",font_size, function(group){})}
+                label = ["GENERATOR"]
+            }
+            if(group.horizontal === true){
+                add_text(group, false, label, 0, -0* y_scaling, "#d3d3d3",font_size, function(group){})
+            }
+            else{
+                add_text(group, false, label, 0,30 * y_scaling,"#d3d3d3",font_size, function(group){})}
             }
         }
 

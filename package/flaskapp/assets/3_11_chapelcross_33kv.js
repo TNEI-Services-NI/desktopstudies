@@ -429,9 +429,9 @@ networks_undrawn["chapelcross33kv"] = {
     29: new Text("LAHO5-1", ["LANGHOLM"],[27,-65]),
     30: new Text("LAHO5-1", ["692"],[27,-45]),
 
-    31: new Text("STCR3-", ["STEVENS CROFT"],[-25,-45]),
-    32:new Text("STCR3-", ["33KV"],[-25,-30]),
-    33:new Text("STCR3-", ["699"],[-25,-15]),
+    31: new Text("STCR3-", ["STEVENS CROFT"],[-45,-45]),
+    32:new Text("STCR3-", ["33KV"],[-45,-30]),
+    33:new Text("STCR3-", ["699"],[-45,-15]),
 
     34:new Text("CHAPX1_LOBI3A_1#1", ["CARRUTHERSTOWN"],[-55,-15]),
     35:new Text("CHAPX1_LOBI3A_1#1", ["33 kV"],[-59,0]),

@@ -61,10 +61,10 @@ function update_generation_info(step_data) {
     for (let gen_ in components.generationInfo) {
         generation_info_instance = components.generationInfo[gen_]
         if (gen_ in step_data["generators_active_power"]) {
-            generation_info_instance.setMW(step_data["generators_active_power"][gen_])
+            generation_info_instance.setMW(step_data["generators_active_power"][gen_].toFixed(2))
         }
         if (gen_ in step_data["generators_reactive_power"]) {
-            generation_info_instance.setMVAR(step_data["generators_reactive_power"][gen_])
+            generation_info_instance.setMVAR(step_data["generators_reactive_power"][gen_].toFixed(2))
         }
     }
 }

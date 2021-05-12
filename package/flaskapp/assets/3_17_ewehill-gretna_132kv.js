@@ -40,7 +40,7 @@ networks_undrawn["ewehillgretna"]={
     breakers:{
         "805": new Breaker("GRNA1-#0",0),
         "GRID 1A": new Breaker("EWEH3#5",1),
-        "WG2": new Breaker("EWEH3-_GRID1A-_WG2",0.75),
+        "WG2": new Breaker("EWEH3-_GRID1A-_WG2",0.75, " CUSTOMER"),
         "GRID 1B": new Breaker("EWEH3#1",0.5),
         "3L5": new Breaker("EWEH3#3",0.5),
         "2L5": new Breaker("EWEH3#2",0.5),

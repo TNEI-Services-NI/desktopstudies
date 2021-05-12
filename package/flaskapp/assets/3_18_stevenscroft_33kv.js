@@ -47,8 +47,8 @@ networks_undrawn["stevenscroft33kv"]={
 },
 
     breakers:{
-        "699 CHAP": new Breaker("STCR3-#0",1),
-        "699 CUSTOMER": new Breaker("STCR3-_STCR0G",0),
+        "699 CHAP": new Breaker("STCR3-#0",1, "CHAP"),
+        "699 CUSTOMER": new Breaker("STCR3-_STCR0G",0, "CUSTOMER"),
         "699 A": new Breaker("STCR0G-_2",1,""),
         "699 B": new Breaker("STCR0G-_1#0",1,""),
 
@@ -79,11 +79,15 @@ networks_undrawn["stevenscroft33kv"]={
 
     labels:{
     1: new Text("STCR3-",["STEVENS CROFT 33kV"],[270,-170], 25),
-    2: new Text("STCR3-",["699"],[-20,-20]),
     3: new Text("STCR_AUX#2", ["UNIT AUXILIARY BOARD"],[100,-15]),
     4: new Text("STCR_AUX#12", ["ACC SWITCHBOARD"],[60,15]),
     5: new Text("STCR_AUX#13", ["STATION ESSENTIAL SERVICES BOARD"],[0,-25]),
     6: new Text("POC", ["POC"],[55,0]),
+
+    2: new Text("STCR3-",["699"],[-70,-20]),
+    7: new Text("STCR3-",["33kV"],[-70,-40]),
+    8: new Text("STCR3-",["STEVENSCROFT"],[-70,-60]),
+
     },
 
     tx:{

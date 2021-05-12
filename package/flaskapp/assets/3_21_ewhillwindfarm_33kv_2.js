@@ -208,7 +208,7 @@ networks_undrawn["ewehillwindfarm2"]={
 
     breakers:{
 //        "761 CHAP": new Breaker("761 CHAP A",1),
-    "WG2": new Breaker("EWEH3-_GRID1A-_WG2" ,1,"      WG2"),
+    "WG2": new Breaker("EWEH3-_GRID1A-_WG2" ,1,"CUSTOMER"),
      "GRID 1A": new Breaker("EWEH3-_GRID1A-_WG2",0),
      "CB01": new Breaker("EWEH0G_2#0",1),
      "CB02": new Breaker("EWEH0G_2#2",1),
@@ -218,6 +218,8 @@ networks_undrawn["ewehillwindfarm2"]={
 
     labels:{
         1: new Text("MINSCA BUSBAR",["Ewehill WF 2"],[0,-190], 25),
+                2: new Text("MINSCA BUSBAR",["EWEHILL 2"],[0,-20]),
+
     },
 
     tx:{
@@ -280,6 +282,6 @@ networks_undrawn["ewehillwindfarm2"]={
 
     },
     availablePower:{
-        "EWHC0G_2" : new AvailablePower([500,150]),
+        "EWEH0G_2" : new AvailablePower([500,150]),
     }
 }

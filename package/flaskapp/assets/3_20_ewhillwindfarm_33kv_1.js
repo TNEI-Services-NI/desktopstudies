@@ -99,9 +99,9 @@ networks_undrawn["ewehillwindfarm1"]={
     },
 
     breakers:{
-    "781 11": new Breaker("EWEH3-#1",1),
-    "781 12": new Breaker("EWEH3-#0",1),
-    "781 CUSTOMER": new Breaker("EWEH3-_EWEH0G_1",1),
+    "781 11": new Breaker("EWEH3-#1",1, "11"),
+    "781 12": new Breaker("EWEH3-#0",1, "12"),
+    "781 CUSTOMER": new Breaker("EWEH3-_EWEH0G_1",1,"CUSTOMER"),
     "CB01": new Breaker("EWEH0G#1",1),
     "CB02": new Breaker("EWEH0G#2",1),
     "CB04": new Breaker("EWEH0G#3",1),
@@ -110,6 +110,11 @@ networks_undrawn["ewehillwindfarm1"]={
 
     labels:{
         1: new Text("EWEH3-",["Ewehill WF 1"],[150,-40], 25),
+        16: new Text("EWEH0G",["EWEHILL 1"],[0,-20]),
+
+        9: new Text("EWEH3-", ["EWEHILL"],[0,-40]),
+        10: new Text("EWEH3-", ["WINDFARM"],[0,-25]),
+        11: new Text("EWEH3-", ["781"],[0,-10]),
     },
 
     tx:{

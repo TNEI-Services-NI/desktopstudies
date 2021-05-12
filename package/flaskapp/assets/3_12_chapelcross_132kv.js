@@ -185,11 +185,12 @@ networks_undrawn["chapelcross132kv"]={
     14: new Text("DUMF-1",["DUMF-1"],[0,0-100]),
 
     15: new Text("CHAP1-_R1-_1",["CHAPELCROSS 132kV"],[0,-325], 25),
+
     },
 //
     generationInfo:{
         "MINS0G_1": new GenerationInfo([120,780],"Minsca Windfarm (MINSW-1)"),
-        "WYSB0G_1": new GenerationInfo([120,680],"Solway Bank Windfarm (SWBKW-1)"),
+        "EWEH0G_1": new GenerationInfo([120,680],"Ewehill Windfarm (EWEH-1)"),
         "STCR5-_1": new GenerationInfo([820,620],"Stevens Croft Biomass (STCR-1)"),
     }
 }
