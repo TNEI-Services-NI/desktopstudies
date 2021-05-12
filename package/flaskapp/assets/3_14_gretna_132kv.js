@@ -48,14 +48,14 @@ networks_undrawn["gretna132kv"]={
     1: new Text("GRNA1-", ["132kV"], [-18,-70]),
     2: new Text("GRNA1-", ["GRETNA 132kV"], [-18,-400], 25),
 
-    3: new Text("GRNA1-_SGT1", ["SGT1"], [0,-200]),
-    4: new Text("CHAP1-_GRNA1", ["CHAP-1"], [0,-200]),
-    5: new Text("CHAP1-_GRNA2", ["CHAP-2"], [0,-200]),
-    6: new Text("GRNA1-_SGT2", ["SGT2"], [0,-200]),
+    3: new Text("GRNA1-_SGT1", ["SGT1"], [0,-125]),
+    4: new Text("CHAP1-_GRNA1", ["CHAP-1"], [0,-125]),
+    5: new Text("CHAP1-_GRNA2", ["CHAP-2"], [0,-125]),
+    6: new Text("GRNA1-_SGT2", ["SGT2"], [0,-125]),
 
-    7: new Text("HARK", ["HARK/HAWI"], [0,200]),
-    8: new Text("HAWI", ["HAWI"], [0,200]),
-    9: new Text("GRNA1-_EWEH", ["EWEH"], [0,200]),
+    7: new Text("HARK", ["HARK/HAWI"], [0,125]),
+    8: new Text("HAWI", ["HAWI"], [0,125]),
+    9: new Text("GRNA1-_EWEH", ["EWEH"], [0,125]),
     },
 
     tx:{
