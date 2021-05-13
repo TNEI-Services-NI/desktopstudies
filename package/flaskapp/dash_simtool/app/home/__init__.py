@@ -42,8 +42,8 @@ def init_dashboard(server=""):
 
     with open(dash_simtool.TEMPLATES_DIR + '/dash_sim_tool.html', "r") as dash_app_html_file:
         dash_app_html = dash_app_html_file.read()
-        # dash_app_html = dash_app_html.replace('{% marginLeft %}', styling.CONTENT_STYLE['marginLeft'])
-        # dash_app_html = dash_app_html.replace('{% marginTop %}', "0px")
+    #     dash_app_html = dash_app_html.replace('{% marginLeft %}', styling.CONTENT_STYLE['marginLeft'])
+    #     # dash_app_html = dash_app_html.replace('{% marginTop %}', "0px")
         dash_app.index_string = dash_app_html
 
     content = [dcc.Location(id="home"),
@@ -65,6 +65,6 @@ def init_dashboard(server=""):
     # compile overall layout
     dash_app.layout = html.Center(content)
 
-    dash_app = callbacks.init_callbacks(dash_app)
+    dash_app = callbacks.init_callbacks(dash_app, URL_PAGE)
 
     return dash_app if server == "" else dash_app.server

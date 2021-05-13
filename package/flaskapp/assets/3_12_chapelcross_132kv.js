@@ -6,6 +6,7 @@ networks_undrawn["chapelcross132kv"]={
     "CHAP3A1#0": StraightLine([280,865],"up",50, "33kV"),
     "CHAP1-_CHAP3-_1#0": StraightLine([280,815],"up",125, "33kV"),
     "CHAP1-_CHAP3-_1#1": StraightLine([280,750],"left",40, "33kV"),
+    "CHAP1-_CHAP3-_1#2": StraightLine([240,750],"left",0, "0V"),
 
     "CHAP3A2#0": StraightLine([665,865],"up",50, "33kV"),
     "CHAP1-_CHAP3-_2#0": StraightLine([665,815],"up",125,"33kV"),
@@ -100,10 +101,10 @@ networks_undrawn["chapelcross132kv"]={
 
     },
 
-    tx:{1: new Tx("CHAP1-_CHAP3-_1#1",1,"","", "0V"),
+    tx:{"CHAP3-AUX-_1": new Tx("CHAP1-_CHAP3-_1#2",0,"","", "33kV"),
         "CHAP1-_CHAP3-_1": new Tx("CHAP1-_CHAP3-_1#0",1,"GRID T1","90MVA","132kV"),
 
-        3: new Tx("CHAP1-_CHAP3-_2#3",1,"","", "0V"),
+        "CHAP3-AUX-_2": new Tx("CHAP1-_CHAP3-_2#3",1,"","", "0V"),
         "CHAP1-_CHAP3-_2": new Tx("CHAP1-_CHAP3-_2#0",1,"GRID T2","90MVA","132kV"),
         },
 
@@ -149,8 +150,10 @@ networks_undrawn["chapelcross132kv"]={
         "334": new Isolator("CHAP1-_M1-_1#12", 0.45, "closed"),
 
     },
-//    dataViews:{
-//        "ECCF-1": new DataView(250,190,"",["MVA", "MW","MVAR","kV","Amps"]),
+    dataViews:{
+        "CHAP1-_CHAP3-_1": new DataView("CHAP1-_CHAP3-_1#0",[80,40],['lines_loading',"lines_active_power","lines_reactive_power","lines_current"]),
+        "CHAP1-_CHAP3-_2": new DataView("CHAP1-_CHAP3-_2#0",[80,40],['lines_loading',"lines_active_power","lines_reactive_power","lines_current"]),
+
 //        "GRNA-1": new DataView(80,190,"", ["MVA", "MW","MVAR","kV","Amps"]),
 //        "DUMF-1": new DataView(420,190,"",["MVA", "MW","MVAR","kV","Amps"]),
 //        "GRNA-2": new DataView(560,190,"",["MVA", "MW","MVAR","kV","Amps"]),
@@ -165,7 +168,7 @@ networks_undrawn["chapelcross132kv"]={
 //
 //        "R1-_1 2": new DataView(945,350,"", ["kV"]),
 //        "M1 2": new DataView(945,590, "",["kV"]),
-//    },
+    },
     labels:{
     1: new Text("CHAP3A1", ["CHAPELCROSS GSP"], [185,-70]),
     2: new Text("CHAP3A1", ["SPD"], [185,-180]),
@@ -184,11 +187,12 @@ networks_undrawn["chapelcross132kv"]={
     14: new Text("DUMF-1",["DUMF-1"],[0,0-100]),
 
     15: new Text("CHAP1-_R1-_1",["CHAPELCROSS 132kV"],[0,-325], 25),
+
     },
 //
     generationInfo:{
         "MINS0G_1": new GenerationInfo([120,780],"Minsca Windfarm (MINSW-1)"),
-        "WYSB0G_1": new GenerationInfo([120,680],"Solway Bank Windfarm (SWBKW-1)"),
+        "EWEH0G_1": new GenerationInfo([120,680],"Ewehill Windfarm (EWEH-1)"),
         "STCR5-_1": new GenerationInfo([820,620],"Stevens Croft Biomass (STCR-1)"),
     }
 }

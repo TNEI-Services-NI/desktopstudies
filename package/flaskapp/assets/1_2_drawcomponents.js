@@ -797,8 +797,6 @@ function add_static_text(list_text, x=100, y=100, colour="#d3d3d3", callback){
     callback(text1)
 }
 
-
-
 function draw_SGT(dict_line,callback){
     var rad = 18 * Math.min(x_scaling,y_scaling)
     var overlapFactor = 0.25
@@ -852,7 +850,6 @@ function draw_SGT(dict_line,callback){
 
 }
 
-
 function draw_action_button(){
   var group = draw.group();
 
@@ -878,7 +875,6 @@ function draw_action_button(){
 
 
 }
-
 
 function draw_admin_buttons(){
   var group = draw.group();
@@ -907,7 +903,6 @@ function draw_admin_buttons(){
     }
 
 }
-
 
 function draw_line(line,id_line, type="busbar"){
         bNodes = false

@@ -108,9 +108,9 @@ def _configure_database(app):
         user.register_admin(dbs)
         user.register_required_users(dbs)
 
-        data_process.migrate_csvs("package/data/simtool/breakerstates/Opt5")
-        data_process.migrate_csvs("package/data/simtool/networkviews/Opt5")
-        data_process.migrate_csvs("package/data/simtool/restorationsteps/Opt5/chapelcross")
+        # data_process.migrate_csvs("package/data/simtool/breakerstates/Opt5")
+        # data_process.migrate_csvs("package/data/simtool/networkviews/Opt5")
+        # data_process.migrate_csvs("package/data/simtool/restorationsteps/Opt5/chapelcross")
 
     @app.teardown_request
     def shutdown_session(exception=None):

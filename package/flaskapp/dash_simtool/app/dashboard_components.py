@@ -364,7 +364,7 @@ def navbar_controls(url_page):
 
 def navbar(url_page):
     # nav bar
-    _nav_bar = dbc.NavbarSimple(brand='Desktop Studies Communications Tool',
+    _nav_bar = dbc.NavbarSimple(brand='Distributed Restart - Desktop Exercise Simulation',
                                 color='#c35d09',
                                 dark=True,
                                 id='nav_bar',
@@ -382,19 +382,19 @@ def sidebar(url_page, styling):
     ]
     _dropdown = [
         dbc.DropdownMenu(
-            label="Chapelcross 33kv",
+            label="Select network",
             children=[
-                dbc.DropdownMenuItem("Chapelcross 33kv", id="chapelcross33kv"),
-                dbc.DropdownMenuItem("Chapelcross 132kv", id="chapelcross132kv"),
-                dbc.DropdownMenuItem("Gretna 132kv", id="gretna132kv"),
-                dbc.DropdownMenuItem("Gretna 400kv", id="gretna400kv"),
-                dbc.DropdownMenuItem("chapelcrossgretna1", id="chapelcrossgretna1"),
-                dbc.DropdownMenuItem("chapelcrossgretna2", id="chapelcrossgretna2"),
-                dbc.DropdownMenuItem("ewehillgretna", id="ewehillgretna"),
-                dbc.DropdownMenuItem("stevenscroft33kv", id="stevenscroft33kv"),
-                dbc.DropdownMenuItem("minsca33kv", id="minsca33kv"),
-                dbc.DropdownMenuItem("ewehillwindfarm1", id="ewehillwindfarm1"),
-                dbc.DropdownMenuItem("ewehillwindfarm2", id="ewehillwindfarm2"),
+                dbc.DropdownMenuItem("Chapelcross 33kV", id="chapelcross33kv",),
+                dbc.DropdownMenuItem("Chapelcross 132kV", id="chapelcross132kv"),
+                dbc.DropdownMenuItem("Gretna 132kV", id="gretna132kv"),
+                dbc.DropdownMenuItem("Gretna 400kV", id="gretna400kv"),
+                dbc.DropdownMenuItem("Chapelcross - Gretna 1", id="chapelcrossgretna1"),
+                dbc.DropdownMenuItem("Chapelcross - Gretna 2", id="chapelcrossgretna2"),
+                dbc.DropdownMenuItem("Ewe Hill 2 WF - Gretna", id="ewehillgretna"),
+                dbc.DropdownMenuItem("Steven's Croft", id="stevenscroft33kv"),
+                dbc.DropdownMenuItem("Minsca WF", id="minsca33kv"),
+                dbc.DropdownMenuItem("Ewe Hill 1 WF", id="ewehillwindfarm1"),
+                dbc.DropdownMenuItem("Ewe Hill 2 WF", id="ewehillwindfarm2"),
             ],
             id='network_menu'
         ),

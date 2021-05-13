@@ -4,8 +4,10 @@ networks_undrawn["ewehillwindfarm2"]={
     lines:{
     "EWEH3#1": StraightLine([345,50],"down",40,"33kV"),
     "EWEH3": StraightLine([305,100],"right",40,"33kV"),
+    "EWEH3#3": StraightLine([315,100],"right",0,"0V"),
 
     "EWEH3#2": StraightLine([345,90],"down",30,"33kV"),
+
     "1L3A": StraightLine([345,120],"down",85,"33kV"),
     "EWEH3-_GRID1A-_WG2": StraightLine([345,120],"down",100,"33kV"),
     "EWEH0G_2#100": StraightLine([345,220],"down",40,"33kV"),
@@ -22,6 +24,7 @@ networks_undrawn["ewehillwindfarm2"]={
 
     "EWEH0G_2#4": StraightLine([730,260],"down",30,"33kV"),
     "EWEH0G_2#5": StraightLine([730,290],"down",85,"33kV"),
+    "EWEH0G_2#102": StraightLine([730,375],"down",10,"0V"),
 
     "EWEH0G_2#6": StraightLine([480,370],"right",45,"33kV"),
     "EWEH0G_2#7": StraightLine([505,405],"right",20,"33kV"),
@@ -205,7 +208,7 @@ networks_undrawn["ewehillwindfarm2"]={
 
     breakers:{
 //        "761 CHAP": new Breaker("761 CHAP A",1),
-    "WG2": new Breaker("EWEH3-_GRID1A-_WG2" ,1,"      WG2"),
+    "WG2": new Breaker("EWEH3-_GRID1A-_WG2" ,1,"CUSTOMER"),
      "GRID 1A": new Breaker("EWEH3-_GRID1A-_WG2",0),
      "CB01": new Breaker("EWEH0G_2#0",1),
      "CB02": new Breaker("EWEH0G_2#2",1),
@@ -215,30 +218,32 @@ networks_undrawn["ewehillwindfarm2"]={
 
     labels:{
         1: new Text("MINSCA BUSBAR",["Ewehill WF 2"],[0,-190], 25),
+                2: new Text("MINSCA BUSBAR",["EWEHILL 2"],[0,-20]),
+
     },
 
     tx:{
-        "GT1" : new Tx("EWEH3#1",0,["GT1 90MVA","TAP 12"],"","33kV","132kV"),
-        "EWEH3": new Tx("EWEH3", 0, "","","33kV","LV"),
-        "Minsca Auxiliary": new Tx("EWEH0G_2#5",1,["AUXILIARY","TRANSFORMER"],"","LV","33kV"),
+        "trf_EWEH3-_EWEH0G_1" : new Tx("EWEH3#1",0,["GT1 90MVA","TAP 12"],"","132kV"),
+        "EWEH3-AUX-_1": new Tx("EWEH3#3", 0, "","","33kV"),
+        "EWEH0G-AUX-_2": new Tx("EWEH0G_2#102",1,["AUXILIARY","TRANSFORMER"],"","33kV"),
 
-        "WTG 09 Tx": new Tx("EWEH0G_2#9",1,["WTG 09"],"","33kV"),
-        "WTG 10 Tx": new Tx("EWEH0G_2#18",1,["WTG 10"],"","33kV"),
-        "WTG 11 Tx": new Tx("EWEH0G_2#14",1,["WTG 11"],"","33kV"),
-        "WTG 12 Tx": new Tx("EWEH0G_2#23",1,["WTG 12"],"","33kV"),
-        "WTG 13 Tx": new Tx("EWEH0G_2#27",1,["WTG 13"],"","33kV"),
-        "WTG 14 Tx": new Tx("EWEH0G_2#32",1,["WTG 14"],"","33kV"),
-        "WTG 15 Tx": new Tx("EWEH0G_2#37",1,["WTG 15"],"","33kV"),
-        "WTG 16 Tx": new Tx("EWEH0G_2#42",1,["WTG 16"],"","33kV"),
+        "EWEH-_WTG-_2#0": new Tx("EWEH0G_2#9",1,["WTG 09"],"","LV"),
+        "EWEH-_WTG-_2#1": new Tx("EWEH0G_2#18",1,["WTG 10"],"","LV"),
+        "EWEH-_WTG-_2#2": new Tx("EWEH0G_2#14",1,["WTG 11"],"","LV"),
+        "EWEH-_WTG-_2#3": new Tx("EWEH0G_2#23",1,["WTG 12"],"","LV"),
+        "EWEH-_WTG-_2#4": new Tx("EWEH0G_2#27",1,["WTG 13"],"","LV"),
+        "EWEH-_WTG-_2#5": new Tx("EWEH0G_2#32",1,["WTG 14"],"","LV"),
+        "EWEH-_WTG-_2#6": new Tx("EWEH0G_2#37",1,["WTG 15"],"","LV"),
+        "EWEH-_WTG-_2#7": new Tx("EWEH0G_2#42",1,["WTG 16"],"","LV"),
 
-        "WTG 01 Tx": new Tx("EWEH0G_2#46",1,["WTG 01"],"","LV"),
-        "WTG 02 Tx": new Tx("EWEH0G_2#51",1,["WTG 02"],"","LV"),
-        "WTG 03 Tx": new Tx("EWEH0G_2#56",1,["WTG 03"],"","LV"),
-        "WTG 04 Tx": new Tx("EWEH0G_2#60",1,["WTG 04"],"","LV"),
-        "WTG 05 Tx": new Tx("EWEH0G_2#65",1,["WTG 05"],"","LV"),
-        "WTG 06 Tx": new Tx("EWEH0G_2#70",1,["WTG 06"],"","LV"),
-        "WTG 07 Tx": new Tx("EWEH0G_2#75",1,["WTG 07"],"","LV"),
-        "WTG 08 Tx": new Tx("EWEH0G_2#79",1,["WTG 08"],"","LV"),
+        "EWEH-_WTG-_2#8": new Tx("EWEH0G_2#47",0,["WTG 01"],"","33kV"),
+        "EWEH-_WTG-_2#9": new Tx("EWEH0G_2#52",0,["WTG 02"],"","33kV"),
+        "EWEH-_WTG-_2#10": new Tx("EWEH0G_2#57",0,["WTG 03"],"","33kV"),
+        "EWEH-_WTG-_2#11": new Tx("EWEH0G_2#61",0,["WTG 04"],"","33kV"),
+        "EWEH-_WTG-_2#12": new Tx("EWEH0G_2#66",0,["WTG 05"],"","33kV"),
+        "EWEH-_WTG-_2#13": new Tx("EWEH0G_2#71",0,["WTG 06"],"","33kV"),
+        "EWEH-_WTG-_2#14": new Tx("EWEH0G_2#76",0,["WTG 07"],"","33kV"),
+        "EWEH-_WTG-_2#15": new Tx("EWEH0G_2#80",0,["WTG 08"],"","33kV"),
 
 
     },
@@ -257,26 +262,29 @@ networks_undrawn["ewehillwindfarm2"]={
     },
 
     generators:{
-        "WTG 09": new Generator("EWEH0G_2#10",1),
-        "WTG 10": new Generator("EWEH0G_2#19",1),
-        "WTG 11": new Generator("EWEH0G_2#15",1),
-        "WTG 12": new Generator("EWEH0G_2#24",1),
-        "WTG 13": new Generator("EWEH0G_2#28",1),
-        "WTG 14": new Generator("EWEH0G_2#33",1),
-        "WTG 15": new Generator("EWEH0G_2#38",1),
-        "WTG 16": new Generator("EWEH0G_2#43",1),
+        "WTG_EWEH0G_2#0": new Generator("EWEH0G_2#10",1),
+        "WTG_EWEH0G_2#1": new Generator("EWEH0G_2#19",1),
+        "WTG_EWEH0G_2#2": new Generator("EWEH0G_2#15",1),
+        "WTG_EWEH0G_2#3": new Generator("EWEH0G_2#24",1),
+        "WTG_EWEH0G_2#4": new Generator("EWEH0G_2#28",1),
+        "WTG_EWEH0G_2#5": new Generator("EWEH0G_2#33",1),
+        "WTG_EWEH0G_2#6": new Generator("EWEH0G_2#38",1),
+        "WTG_EWEH0G_2#7": new Generator("EWEH0G_2#43",1),
 
-        "WTG 01": new Generator("EWEH0G_2#47",1),
-        "WTG 02": new Generator("EWEH0G_2#52",1),
-        "WTG 03": new Generator("EWEH0G_2#57",1),
-        "WTG 04": new Generator("EWEH0G_2#61",1),
-        "WTG 05": new Generator("EWEH0G_2#66",1),
-        "WTG 06": new Generator("EWEH0G_2#71",1),
-        "WTG 07": new Generator("EWEH0G_2#76",1),
-        "WTG 08": new Generator("EWEH0G_2#80",1),
+        "WTG_EWEH0G_2#8": new Generator("EWEH0G_2#47",1),
+        "WTG_EWEH0G_2#9": new Generator("EWEH0G_2#52",1),
+        "WTG_EWEH0G_2#10": new Generator("EWEH0G_2#57",1),
+        "WTG_EWEH0G_2#11": new Generator("EWEH0G_2#61",1),
+        "WTG_EWEH0G_2#12": new Generator("EWEH0G_2#66",1),
+        "WTG_EWEH0G_2#13": new Generator("EWEH0G_2#71",1),
+        "WTG_EWEH0G_2#14": new Generator("EWEH0G_2#76",1),
+        "WTG_EWEH0G_2#15": new Generator("EWEH0G_2#80",1),
 
     },
     availablePower:{
-        "EWHC0G_2" : new AvailablePower([500,150]),
-    }
+        "EWEH0G_2" : new AvailablePower([500,150]),
+    },
+    generatorControls:{
+        "EWEH0G_2": new GeneratorControl([750,100])
+    },
 }

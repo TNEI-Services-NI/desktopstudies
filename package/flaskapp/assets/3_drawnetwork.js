@@ -61,14 +61,13 @@ function update_generation_info(step_data) {
     for (let gen_ in components.generationInfo) {
         generation_info_instance = components.generationInfo[gen_]
         if (gen_ in step_data["generators_active_power"]) {
-            generation_info_instance.setMW(step_data["generators_active_power"][gen_])
+            generation_info_instance.setMW(step_data["generators_active_power"][gen_].toFixed(2))
         }
         if (gen_ in step_data["generators_reactive_power"]) {
-            generation_info_instance.setMVAR(step_data["generators_reactive_power"][gen_])
+            generation_info_instance.setMVAR(step_data["generators_reactive_power"][gen_].toFixed(2))
         }
     }
 }
-
 
 function update_transformer_modals(step_data) {
     for (let tx_ in components.transformers) {
@@ -84,9 +83,10 @@ function update_transformer_modals(step_data) {
 
 function update_transformers(step_data) {
     for (let tx_ in components.transformers) {
+        tx_id_LF = tx_.split("#")[0]
         tx_instance = components.transformers[tx_]
-        if (tx_ in step_data["transformers_loading"]) {
-            loading = step_data["transformers_loading"][tx_]
+        if (tx_id_LF in step_data["transformers_loading"]) {
+            loading = step_data["transformers_loading"][tx_id_LF]
             if (Number(loading) > 0) {
                 tx_instance.setLive()
             }
@@ -147,8 +147,8 @@ function update_dataviews(step_data) {
                     scale = 1000
                 }
 
-                let value = scale * Math.round(step_data[component_parameter][id_dv] * 1000) / 1000
-
+//                let value = scale * Math.round(step_data[component_parameter][id_dv] * 1000) / 1000
+                let value = step_data[component_parameter][id_dv].toFixed(2)
                 text_list = text_list.concat(
                     [String(value) + units]
                 );
@@ -229,10 +229,11 @@ function update_breaker_colours(step_data_) {
 function update_generator_colours(step_data_) {
     for (let idg in components.generators) {
         let gen_instance = components.generators[idg]
+
         let idl = gen_instance.info.lineID
         let line_instance = components.lines[idl]
-        let line_id_LF = idl.split("#")[0]
-        if ((step_data_["generators_active_power"][idg] !== 0) && (step_data_["generators_active_power"][idg] !== undefined)) {
+        let gen_id_LF = idg.split("#")[0]
+        if ((step_data_["generators_active_power"][gen_id_LF] !== 0) && (step_data_["generators_active_power"][gen_id_LF] !== undefined)) {
             gen_instance.UIElement.find('.circle-class').attr({
                 'stroke': line_instance.info.dict_styling.stroke.live_color
             })
@@ -264,7 +265,7 @@ function update_state(case_network_) {
             $("body").css("cursor", "default");
         }
 
-    }, 1000)
+    }, 200)
 }
 
 
@@ -324,6 +325,8 @@ function draw_network(dict_components, network_, step, callback) {
 
     construct_generation_info(dict_components)
 
+    construct_generator_controls(dict_components)
+
     if (page === 'home') {
         construct_action()
     }
@@ -331,6 +334,8 @@ function draw_network(dict_components, network_, step, callback) {
     construct_breakers(dict_components, network_, step, function (data_con_break){
         callback(data_con_break)
     });
+
+//    alert("DRAW NETWORK WAS CALLED")
 
 }
 
@@ -351,7 +356,6 @@ function update_sim_data(stage_, step_data) {
 
 function master_draw() {
     prepare_canvas(x_max, y_max);
-    // alert("master_draw")
     dict_components = networks_undrawn[network]
     draw_network(dict_components, network, current_step, function(data_draw_net){
         fetch_sim_data(case_network, network, current_step, option, scenario, function (stage_, component_values){
@@ -385,68 +389,6 @@ var svg = document.querySelector("#drawing");
 
 // Create an SVGPoint for future math
 var pt = svg.createSVGPoint();
-
-var socket = io();
-
-dict_components = undefined
-
-var room = undefined
-var username = undefined
-var entity = undefined
-
-var action = undefined
-
-var page = undefined
-
-socket.on('check_join_draw', function(data_join_draw) {
-    if (username === undefined) {
-        username = data_join_draw['username']
-    }
-    if (entity === undefined) {
-        entity = data_join_draw['entity']
-    }
-    page = data_join_draw['page']
-    if (username === data_join_draw['username']) {
-        socket.emit('check_join_draw', data_join_draw, function(data_check_rooms) {});
-    }
-});
-
-socket.on('join_draw', function(data_join_draw) {
-    if (room === undefined) {
-        socket.emit('join_room', data_join_draw, function(data_join_room) {
-            room = data_join_room['room']
-            event_draw(data_join_room);
-        })
-    }
-})
-
-socket.on('list_rooms', function(data) {
-    socket.emit('list_rooms', data);
-});
-
-socket.on('debug', function(data) {
-
-});
-
-
-socket.on('draw', function(data) {
-
-    event_draw(data);
-});
-
-socket.on('check_redraw', function(check_redraw_data) {
-    check_redraw_data['entity'] = entity
-    socket.emit('check_redraw', check_redraw_data);
-});
-
-socket.on('redraw', function(data) {
-    current_step = data['sim_step'];
-    if ('network' in data) {
-        network = data['network'];
-    }
-    master_draw();
-
-});
 
 
 // Get point in global SVG space

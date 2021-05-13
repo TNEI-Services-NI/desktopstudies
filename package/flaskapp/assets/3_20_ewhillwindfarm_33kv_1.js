@@ -10,7 +10,6 @@ networks_undrawn["ewehillwindfarm1"]={
     "EWEH3-#1": StraightLine([345,90],"down",30,"33kV"),
     "EWEH3-_EWEH0G_1": StraightLine([345,120],"down",85,"33kV"),
     "EWEH0G#0": StraightLine([345,205],"down",55,"33kV"),
-
         "POC": StraightLine([320,160],"right",50,"0V",true),
 
     "EWEH0G": StraightLine([325,260],"right",425,"33kV"),
@@ -24,6 +23,7 @@ networks_undrawn["ewehillwindfarm1"]={
     "EWEH0G#3": StraightLine([730,260],"down",30,"33kV"),
 //    "EWHC0G-_AUXT": StraightLine([730,290],"down",85,"33kV"),
     "EWEH0G#50": StraightLine([730,290],"down",85,"33kV"),
+    "EWEH0G#101": StraightLine([730,375],"down",10,"0V"),
 
     "EWEH0G#6": StraightLine([480,370],"right",45,"33kV"),
     "EWEH0G#7": StraightLine([505,405],"right",20,"33kV"),
@@ -99,9 +99,9 @@ networks_undrawn["ewehillwindfarm1"]={
     },
 
     breakers:{
-    "781 11": new Breaker("EWEH3-#1",1),
-    "781 12": new Breaker("EWEH3-#0",1),
-    "781 CUSTOMER": new Breaker("EWEH3-_EWEH0G_1",1),
+    "781 11": new Breaker("EWEH3-#1",1, "11"),
+    "781 12": new Breaker("EWEH3-#0",1, "12"),
+    "781 CUSTOMER": new Breaker("EWEH3-_EWEH0G_1",1,"CUSTOMER"),
     "CB01": new Breaker("EWEH0G#1",1),
     "CB02": new Breaker("EWEH0G#2",1),
     "CB04": new Breaker("EWEH0G#3",1),
@@ -110,18 +110,23 @@ networks_undrawn["ewehillwindfarm1"]={
 
     labels:{
         1: new Text("EWEH3-",["Ewehill WF 1"],[150,-40], 25),
+        16: new Text("EWEH0G",["EWEHILL 1"],[0,-20]),
+
+        9: new Text("EWEH3-", ["EWEHILL"],[0,-40]),
+        10: new Text("EWEH3-", ["WINDFARM"],[0,-25]),
+        11: new Text("EWEH3-", ["781"],[0,-10]),
     },
 
     tx:{
-        "EWEHILL 1 Auxiliary": new Tx("EWEH0G#50",1,["AUXILIARY","TRANSFORMER"],"","33kV"),
+        "EWEH0G-AUX-_1": new Tx("EWEH0G#101",1,["AUXILIARY","TRANSFORMER"],"","33kV"),
 
-        "WTG 04 Tx": new Tx("EWEH0G#9",1,["WTG 04"],"","33kV"),
-        "WTG 05 Tx": new Tx("EWEH0G#14",1,["WTG 05"],"","33kV"),
-        "WTG 06 Tx": new Tx("EWEH0G#18",1,["WTG 06"],"","33kV"),
+        "EWEH-_WTG-_1#0": new Tx("EWEH0G#9",1,["WTG 04"],"","LV"),
+        "EWEH-_WTG-_1#1": new Tx("EWEH0G#14",1,["WTG 05"],"","LV"),
+        "EWEH-_WTG-_1#2": new Tx("EWEH0G#18",1,["WTG 06"],"","LV"),
 
-        "WTG 01 Tx": new Tx("EWEH0G#23",1,["WTG 01"],"","LV"),
-        "WTG 02 Tx": new Tx("EWEH0G#28",1,["WTG 02"],"","LV"),
-        "WTG 03 Tx": new Tx("EWEH0G#32",1,["WTG 03"],"","LV"),
+        "EWEH-_WTG-_1#3": new Tx("EWEH0G#24",0,["WTG 01"],"","33kV"),
+        "EWEH-_WTG-_1#4": new Tx("EWEH0G#29",0,["WTG 02"],"","33kV"),
+        "EWEH-_WTG-_1#5": new Tx("EWEH0G#33",0,["WTG 03"],"","33kV"),
     },
 
     isolators:{
@@ -136,18 +141,21 @@ networks_undrawn["ewehillwindfarm1"]={
     },
 
     generators:{
-        "WTG 04": new Generator("EWEH0G#10",1),
-        "WTG 05": new Generator("EWEH0G#15",1),
-        "WTG 06": new Generator("EWEH0G#19",1),
+        "WTG_EWEH0G_1#0": new Generator("EWEH0G#10",1),
+        "WTG_EWEH0G_1#1": new Generator("EWEH0G#15",1),
+        "WTG_EWEH0G_1#2": new Generator("EWEH0G#19",1),
 
-        "WTG 01": new Generator("EWEH0G#24",1),
-        "WTG 02": new Generator("EWEH0G#29",1),
-        "WTG 03": new Generator("EWEH0G#33",1),
+        "WTG_EWEH0G_1#3": new Generator("EWEH0G#24",1),
+        "WTG_EWEH0G_1#4": new Generator("EWEH0G#29",1),
+        "WTG_EWEH0G_1#5": new Generator("EWEH0G#33",1),
 
     },
 
     availablePower:{
         "EWEH0G_1" : new AvailablePower([500,150]),
-    }
+    },
 
+    generatorControls:{
+        "EWEH0G_1": new GeneratorControl([750,100])
+    },
 }

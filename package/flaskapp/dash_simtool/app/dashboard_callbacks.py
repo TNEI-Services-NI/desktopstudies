@@ -7,9 +7,16 @@ from flask import session
 import package.flaskapp.dash_simtool._config as cf
 import package.flaskapp.dash_simtool.app.dashboard_styling as styling
 import package.flaskapp.dash_simtool.db as simtool_db
-import package.flaskapp.dash_simtool.requests as requests
-from package.flaskapp.extensions import dbs
 from package.flaskapp import socketio
+from package.flaskapp.auth.routes import login_required
+from package.flaskapp.extensions import dbs
+import package.flaskapp.dash_simtool as dashboard
+
+
+def login_required_(dash_app, app_prefix):
+    for view_func in dash_app.server.view_functions:
+        if view_func.startswith(app_prefix):
+            dash_app.server.view_functions[view_func] = login_required(dash_app.server.view_functions[view_func])
 
 
 def add_legend_button(dash_app):

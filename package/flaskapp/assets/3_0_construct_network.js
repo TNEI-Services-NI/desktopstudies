@@ -1,3 +1,4 @@
+  //--------------------------------------------------------------------------------------------------------------------
 
   function prepare_canvas(x, y){
     //Create canvas
@@ -20,53 +21,48 @@
                 }
   }
 
+  function scale_two_point_objects(networks_undrawn, component){
+    for(let id_dict in networks_undrawn){
+    let temp_dict_components = networks_undrawn[id_dict]
+    for (let idx_line in temp_dict_components[component]){
+        let temp_dict = temp_dict_components[component][idx_line]
+        temp_dict.x1 = temp_dict.x1 * x_scaling
+        temp_dict.x2 = temp_dict.x2 * x_scaling
+        temp_dict.y1 = temp_dict.y1 * y_scaling
+        temp_dict.y2 = temp_dict.y2 * y_scaling
+    }
+  }
+  }
+
+  function scale_text(networks_undrawn, component){
+   for(let id_dict in networks_undrawn) {
+     let temp_dict_components = networks_undrawn[id_dict]
+     for (let idx in temp_dict_components[component]) {
+       temp_dict = temp_dict_components[component][idx]
+       temp_dict.offset[0] = temp_dict.offset[0] * x_scaling
+       temp_dict.offset[1] = temp_dict.offset[1] * y_scaling
+     }
+   }
+  }
+
   function scale_lines(networks_undrawn){
-  for(let id_dict in networks_undrawn){
-    let temp_dict_components = networks_undrawn[id_dict]
-    for (let idx_line in temp_dict_components.lines){
-        let temp_dict = temp_dict_components.lines[idx_line]
-        temp_dict.x1 = temp_dict.x1 * x_scaling
-        temp_dict.x2 = temp_dict.x2 * x_scaling
-        temp_dict.y1 = temp_dict.y1 * y_scaling
-        temp_dict.y2 = temp_dict.y2 * y_scaling
-    }
+    scale_two_point_objects(networks_undrawn, 'lines')
   }
-  }
+
   function scale_busbars(networks_undrawn){
-  for(let id_dict in networks_undrawn){
-    let temp_dict_components = networks_undrawn[id_dict]
-    for (let idx_line in temp_dict_components.busbars){
-        let temp_dict = temp_dict_components.busbars[idx_line]
-        temp_dict.x1 = temp_dict.x1 * x_scaling
-        temp_dict.x2 = temp_dict.x2 * x_scaling
-        temp_dict.y1 = temp_dict.y1 * y_scaling
-        temp_dict.y2 = temp_dict.y2 * y_scaling
-    }
+    scale_two_point_objects(networks_undrawn, 'busbars')
   }
+
+  function scale_loads(networks_undrawn){
+    scale_two_point_objects(networks_undrawn, 'loads')
   }
 
   function scale_labels(networks_undrawn){
-   for(let id_dict in networks_undrawn) {
-     let temp_dict_components = networks_undrawn[id_dict]
-     //scale text
-     for (let idx in temp_dict_components.labels) {
-       temp_dict = temp_dict_components.labels[idx]
-       temp_dict.offset[0] = temp_dict.offset[0] * x_scaling
-       temp_dict.offset[1] = temp_dict.offset[1] * y_scaling
-     }
-   }
+    scale_text(networks_undrawn, 'labels')
   }
 
   function scale_dataviews(networks_undrawn){
-   for(let id_dict in networks_undrawn) {
-     let temp_dict_components = networks_undrawn[id_dict]
-     //scale text
-     for (let idx in temp_dict_components.dataViews) {
-       temp_dict = temp_dict_components.dataViews[idx]
-       temp_dict.offset[0] = temp_dict.offset[0] * x_scaling
-       temp_dict.offset[1] = temp_dict.offset[1] * y_scaling
-     }
-   }
+   scale_text(networks_undrawn, 'dataViews')
   }
 
   function scale_availablePower(networks_undrawn){
@@ -74,7 +70,7 @@
         let temp_dict_components = networks_undrawn[id_dict]
 
         for (let idx in temp_dict_components.availablePower) {
-           temp_dict = temp_dict_components.availablePower[idx]
+           let temp_dict = temp_dict_components.availablePower[idx]
            temp_dict.pos[0] = temp_dict.pos[0] * x_scaling
            temp_dict.pos[1] = temp_dict.pos[1] * y_scaling
            temp_dict_components.availablePower[idx] = temp_dict
@@ -82,91 +78,7 @@
      }
   }
 
-  function scale_loads(networks_undrawn){
-  for(let id_dict in networks_undrawn){
-    let temp_dict_components = networks_undrawn[id_dict]
-    for (let idx_line in temp_dict_components.loads){
-        let temp_dict = temp_dict_components.loads[idx_line]
-        temp_dict.x1 = temp_dict.x1 * x_scaling
-        temp_dict.x2 = temp_dict.x2 * x_scaling
-        temp_dict.y1 = temp_dict.y1 * y_scaling
-        temp_dict.y2 = temp_dict.y2 * y_scaling
-    }
-  }
-  }
-
-  function style_line(line){
-    line.dict_styling = {fill: { width: line_palette_style["width"]/1.5 * Math.min(x_scaling,y_scaling)},
-                         stroke: { width: line_palette_style["width"]/1.5 *  Math.min(x_scaling,y_scaling)}}
-    if (line.dash){
-              line.dict_styling = {fill: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)},
-                         stroke: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)}}
-      line.dict_styling.stroke.dasharray = (5, 5)
-
-    }
-    let colour = undefined
-    if (line.live){
-      colour = palette[line.voltage]
-
-    } else {
-      colour = palette["0V"]
-    }
-    line.dict_styling.stroke.color = colour
-    line.dict_styling.stroke.live_color = palette[line.voltage]
-    line.dict_styling.fill.color = colour
-    line.dict_styling.fill.live_color = palette[line.voltage]
-    // line.dict_styling.stroke.color = palette[line.voltage]
-    return line
-  }
-
-  function style_busbar(line){
-    line.dict_styling = {fill: { width: line_palette_style["width"] * Math.min(x_scaling,y_scaling)},
-                         stroke: { width: line_palette_style["width"] * Math.min(x_scaling,y_scaling)}}
-    if (line.dash){
-              line.dict_styling = {fill: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)},
-                         stroke: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)}}
-      line.dict_styling.stroke.dasharray = (5, 5)
-
-    }
-    let colour = undefined
-    if (line.live){
-      colour = palette[line.voltage]
-
-    } else {
-      colour = palette["0V"]
-    }
-    line.dict_styling.stroke.color = colour
-    line.dict_styling.stroke.live_color = palette[line.voltage]
-    line.dict_styling.fill.color = colour
-    line.dict_styling.fill.live_color = palette[line.voltage]
-    // line.dict_styling.stroke.color = palette[line.voltage]
-    return line
-  }
-
-  function style_diagram_line(line){
-    line.dict_styling = {fill: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)},
-                         stroke: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)}}
-    if (line.dash){
-              line.dict_styling = {fill: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)},
-                         stroke: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)} }
-      line.dict_styling.stroke.dasharray = (5, 5)
-
-    }
-    let colour = undefined
-    if (line.live){
-      colour = palette[line.voltage]
-
-    } else {
-      colour = palette["0V"]
-    }
-    line.dict_styling.stroke.color = colour
-    line.dict_styling.stroke.live_color = palette[line.voltage]
-    line.dict_styling.fill.color = colour
-    line.dict_styling.fill.live_color = palette[line.voltage]
-    // line.dict_styling.stroke.color = palette[line.voltage]
-    return line
-  }
-
+  //--------------------------------------------------------------------------------------------------------------------
 
   function construct_coord_display(){
     const text1 = draw.text("coordinate dislay")
@@ -204,7 +116,7 @@
     }
   }
 
-    function construct_loads(dict_components){
+  function construct_loads(dict_components){
     var bNodes = false
     for (let id_load in dict_components.loads){
         let load = dict_components.loads[id_load]
@@ -213,8 +125,14 @@
         let id = id_load
 
         let line_object = load.graphic[0]
-        //todo load needs to take colour of line through dict_style
-        draw_load(load,1,true)
+
+        if(load.y2 > load.y1 ){
+                draw_load(load,1,true)
+        }
+        if(load.y2 < load.y1 ){
+                draw_load(load,1,false)
+        }
+
 
         let l = {
             info: load,
@@ -256,10 +174,6 @@
 
         component_modal(l)
     }
-  }
-
-  function destroy_lines(){
-
   }
 
   function construct_breakers(dict_components, network_, step, callback){
@@ -643,5 +557,100 @@
         let s = {info:sgt, UIElement: sgt.graphic[0], id : id}
         components.lines[id] = s
         component_modal(s)
+        }
+  }
+
+  let GeneratorControlManager = class{
+    buttons = [];
+    state = 0;
+    constructor(buttons) {
+        this.buttons=buttons;
+        this.state=0;
+        let setState = this.setState;
+        let percentage=0
+        for(let button_id in buttons){
+            let button = buttons[button_id];
+            button.click(this.buttonClick(this,percentage));
+            percentage+=5;
+        }
+        this.setState(this.state)
+    }
+    getState(){
+        return this.state;
+    }
+    setState(percentage){
+        this.state=percentage;
+
+        let b_percentage = 0;
+        for(let button_id in buttons){
+            let button = this.buttons[button_id]
+            if(percentage>=b_percentage){
+                button.fill("green")
+            }
+            else{
+                button.fill("#d3d3d3")
+            }
+            b_percentage+=5
+        }
+
+    }
+    buttonClick(host, percentage){
+        return function(){
+            host.setState(percentage)
+        }
+
+    }
+
+
+
+  }
+
+  function construct_generator_controls(dict_components){
+        for(let i in dict_components.generatorControls){
+        gen_control = dict_components.generatorControls[i]
+        let pos = gen_control.pos
+        let id = i
+        let callback = gen_control.callback
+
+        let title_string = "generator control for "+ id
+        add_static_text([title_string], x=pos[0]*x_scaling, y=pos[1]*y_scaling, colour="#d3d3d3", callback)
+
+        let b_y_offset = (pos[1] + 30)*y_scaling
+        let b_x_offset = (pos[0] + 0 - (font_size*title_string.length)/3)*x_scaling
+
+        let percentage = 0
+
+        button_height = 20 * y_scaling
+        button_width = 30 * x_scaling
+        buttons = []
+
+        while(percentage <= 45){
+            if(percentage == 50){
+            b_y_offset = b_y_offset+(30*y_scaling)
+            b_x_offset = (pos[0] + 0 - (font_size*title_string.length)/3)*x_scaling
+            }
+            let group = draw.group()
+            var rect = draw.rect(button_width, button_height).fill("#d3d3d3")
+
+
+            var text = draw.text(percentage +'%');
+            text.font({anchor: 'middle',color:"blue", size: font_size, family: 'Helvetica'});
+            text.center(0.75*button_width, 0.4*button_height);
+
+            group.add(rect)
+            group.add(text);
+
+            group.move(b_x_offset, b_y_offset)
+            percentage+=5
+            b_x_offset += button_width + 3*x_scaling
+
+            buttons.push(rect)
+        }
+
+        let generator_control_manager = new GeneratorControlManager(buttons)
+
+//        var slider = $("<input>", {type: "range", id: "foo", "class": "a"});
+
+
         }
   }
