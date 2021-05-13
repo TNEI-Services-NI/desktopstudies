@@ -23,7 +23,7 @@ networks_undrawn["gretna132kv"]={
     loads:{
         "GRNA1-_SGT1": StraightLine([190,535-165],"up",200,"132kV"),
         "CHAP1-_GRNA1": StraightLine([340,535-165],"up",200,"132kV"),
-        "CHAP1-_GRNA2": StraightLine([625,535-165],"up",200,"132kV"),
+        "CHAP2-_GRNA1": StraightLine([625,535-165],"up",200,"132kV"),
         "GRNA1-_SGT2": StraightLine([775,535-165],"up",200,"132kV"),
         "HARK": StraightLine([270,535+165],"down",165,"132kV"),
         "HAWI": StraightLine([695,535+165],"down",165,"132kV"),
@@ -54,7 +54,7 @@ networks_undrawn["gretna132kv"]={
 
     3: new Text("GRNA1-_SGT1", ["SGT1"], [0,-125]),
     4: new Text("CHAP1-_GRNA1", ["CHAP-1"], [0,-125]),
-    5: new Text("CHAP1-_GRNA2", ["CHAP-2"], [0,-125]),
+    5: new Text("CHAP2-_GRNA1", ["CHAP-2"], [0,-125]),
     6: new Text("GRNA1-_SGT2", ["SGT2"], [0,-125]),
 
     7: new Text("HARK", ["HARK/HAWI"], [0,125]),
@@ -76,7 +76,7 @@ networks_undrawn["gretna132kv"]={
     "383": new Isolator("CHAP1-_GRNA1",0.65,"closed"),
 
     "204": new Isolator("GRNA1-#2",0.5,"closed"),
-    "203": new Isolator("CHAP1-_GRNA2",0.65,"closed"),
+    "203": new Isolator("CHAP2-_GRNA1",0.65,"closed"),
 
     "684": new Isolator("GRNA1-#3",0.5,"closed"),
     "683": new Isolator("GRNA1-_SGT2",0.65,"closed"),
@@ -93,14 +93,15 @@ networks_undrawn["gretna132kv"]={
     },
 
     dataViews:{
-//    1: new DataView(230,215,["MVA","MW","MVAR","kV","Amps"]),
-//    2: new DataView(380,215,["MVA","MW","MVAR","kV","Amps"]),
-//    3: new DataView(665,215,["MVA","MW","MVAR","kV","Amps"]),
-//    4: new DataView(810,215,["MVA","MW","MVAR","kV","Amps"]),
+    "GRNA1-_SGT1": new DataView("GRNA1-_SGT1", [-40,-40],['lines_loading',"lines_active_power","lines_reactive_power","lines_current"]),
+    "CHAP1-_GRNA1": new DataView("CHAP1-_GRNA1", [-40,-40],['lines_loading',"lines_active_power","lines_reactive_power","lines_current"]),
+    "CHAP2-_GRNA1": new DataView("CHAP2-_GRNA1", [-40,-40],['lines_loading',"lines_active_power","lines_reactive_power","lines_current"]),
+    "GRNA1-_SGT2": new DataView("GRNA1-_SGT2", [-40,-40],['lines_loading',"lines_active_power","lines_reactive_power","lines_current"]),
+
 //
-//    5: new DataView(300,815,["MVA","MW","MVAR","kV","Amps"]),
-//    6: new DataView(730,815,["MVA","MW","MVAR","kV","Amps"]),
-//    7: new DataView(895,815,["MVA","MW","MVAR","kV","Amps"]),
+    "HARK": new DataView("HARK", [-40,40],['lines_loading',"lines_active_power","lines_reactive_power","lines_current"]),
+    "HAWI": new DataView("HAWI", [-40,40],['lines_loading',"lines_active_power","lines_reactive_power","lines_current"]),
+    "GRNA1-_EWEH": new DataView("GRNA1-_EWEH", [-40,40],['lines_loading',"lines_active_power","lines_reactive_power","lines_current"]),
 //
 //    8: new DataView(75,525,["kV"]),
 //    9: new DataView(940,525,["kV"]),

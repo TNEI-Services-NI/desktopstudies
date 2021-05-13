@@ -119,13 +119,12 @@ networks_undrawn["gretna400kv"]={
 
     dataViews:{
 
-//        "ELVA": new DataView(420,100, ["MVA","MW","MVAR","kV","Amps"]),
-//        "HARK": new DataView(90,850, ["MVA","MW","MVAR","kV","Amps"]),
-//        "GRNA 780": new DataView(260,850, ["MVA","MW","MVAR","kV","Amps"]),
-//        "GRNA 680": new DataView(740,850, ["MVA","MW","MVAR","kV","Amps"]),
-//
-//        "R1": new DataView(70,410, ["kV"]),
-//        "M1": new DataView(70,640, ["kV"]),
+        "ELVA": new DataView("ELVA", [-50,-200], ["lines_loading","lines_active_power","lines_reactive_power","lines_current"]),
+        "HARK4": new DataView("HARK4",[-50,100], ["lines_loading","lines_active_power","lines_reactive_power","lines_current"]),
+        "GRNA1-_SGT1": new DataView("GRNA1-_SGT1#1",[60,60], ["lines_loading","lines_active_power","lines_reactive_power","lines_current"]),
+        "GRNA1-_SGT2": new DataView("GRNA1-_SGT2#0",[60,60], ["lines_loading","lines_active_power","lines_reactive_power","lines_current"]),
+        "R1": new DataView("GRNA4-_R1",[-400,-40], ["busbars_voltage"]),
+        "M1": new DataView("GRNA4-_M1",[-400,40], ["busbars_voltage"]),
 
     },
 
