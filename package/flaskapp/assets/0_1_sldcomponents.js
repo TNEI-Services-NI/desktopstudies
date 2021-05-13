@@ -409,3 +409,11 @@ function SGT(line_id,name){
     this.graphic=[],
     this.name = name,
     this.callback = Breaker_Callback(this.graphic,name)}
+
+
+function GeneratorControl(pos){
+    this.component = "GeneratorControl"
+    this.pos = pos
+    this.graphic=[],
+    this.callback = Text_Callback(this.graphic)
+}

@@ -147,8 +147,8 @@ function update_dataviews(step_data) {
                     scale = 1000
                 }
 
-                let value = scale * Math.round(step_data[component_parameter][id_dv] * 1000) / 1000
-
+//                let value = scale * Math.round(step_data[component_parameter][id_dv] * 1000) / 1000
+                let value = step_data[component_parameter][id_dv].toFixed(2)
                 text_list = text_list.concat(
                     [String(value) + units]
                 );
@@ -324,6 +324,8 @@ function draw_network(dict_components, network_, step, callback) {
     construct_available_power(dict_components)
 
     construct_generation_info(dict_components)
+
+    construct_generator_controls(dict_components)
 
     if (page === 'home') {
         construct_action()

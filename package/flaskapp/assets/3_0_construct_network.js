@@ -559,3 +559,98 @@
         component_modal(s)
         }
   }
+
+  let GeneratorControlManager = class{
+    buttons = [];
+    state = 0;
+    constructor(buttons) {
+        this.buttons=buttons;
+        this.state=0;
+        let setState = this.setState;
+        let percentage=0
+        for(let button_id in buttons){
+            let button = buttons[button_id];
+            button.click(this.buttonClick(this,percentage));
+            percentage+=5;
+        }
+        this.setState(this.state)
+    }
+    getState(){
+        return this.state;
+    }
+    setState(percentage){
+        this.state=percentage;
+
+        let b_percentage = 0;
+        for(let button_id in buttons){
+            let button = this.buttons[button_id]
+            if(percentage>=b_percentage){
+                button.fill("green")
+            }
+            else{
+                button.fill("#d3d3d3")
+            }
+            b_percentage+=5
+        }
+
+    }
+    buttonClick(host, percentage){
+        return function(){
+            host.setState(percentage)
+        }
+
+    }
+
+
+
+  }
+
+  function construct_generator_controls(dict_components){
+        for(let i in dict_components.generatorControls){
+        gen_control = dict_components.generatorControls[i]
+        let pos = gen_control.pos
+        let id = i
+        let callback = gen_control.callback
+
+        let title_string = "generator control for "+ id
+        add_static_text([title_string], x=pos[0]*x_scaling, y=pos[1]*y_scaling, colour="#d3d3d3", callback)
+
+        let b_y_offset = (pos[1] + 30)*y_scaling
+        let b_x_offset = (pos[0] + 0 - (font_size*title_string.length)/3)*x_scaling
+
+        let percentage = 0
+
+        button_height = 20 * y_scaling
+        button_width = 30 * x_scaling
+        buttons = []
+
+        while(percentage <= 45){
+            if(percentage == 50){
+            b_y_offset = b_y_offset+(30*y_scaling)
+            b_x_offset = (pos[0] + 0 - (font_size*title_string.length)/3)*x_scaling
+            }
+            let group = draw.group()
+            var rect = draw.rect(button_width, button_height).fill("#d3d3d3")
+
+
+            var text = draw.text(percentage +'%');
+            text.font({anchor: 'middle',color:"blue", size: font_size, family: 'Helvetica'});
+            text.center(0.75*button_width, 0.4*button_height);
+
+            group.add(rect)
+            group.add(text);
+
+            group.move(b_x_offset, b_y_offset)
+            percentage+=5
+            b_x_offset += button_width + 3*x_scaling
+
+            buttons.push(rect)
+        }
+
+        let generator_control_manager = new GeneratorControlManager(buttons)
+
+//        var slider = $("<input>", {type: "range", id: "foo", "class": "a"});
+
+
+        }
+  }
