@@ -555,7 +555,7 @@
 
         let id = i
         let s = {info:sgt, UIElement: sgt.graphic[0], id : id}
-        components.lines[id] = s
+        components.SGTs[id] = s
         component_modal(s)
         }
   }

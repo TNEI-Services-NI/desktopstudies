@@ -113,7 +113,8 @@ networks_undrawn["gretna400kv"]={
 
         "X405": new Isolator("ELVA",0.37),
         "X447": new Isolator("X447",0.3),
-        "X449": new Isolator("X449",0.3,"closed"),
+        "X449": new Isolator("X449",0.3),
+        " ": new Isolator("X449",0.3)
     },
 
     dataViews:{
@@ -129,7 +130,7 @@ networks_undrawn["gretna400kv"]={
     },
 
     SGTs:{
-        "tr3_GRNA4-_GRNA1-_1": new SGT("GRNA1-_SGT1#1","SGT1"),
-        "tr3_GRNA4-_GRNA1-_2": new SGT("GRNA4-_M1-_SGT2","SGT2"),
+        "GRNA4-_GRNA1-_1": new SGT("GRNA1-_SGT1#1","SGT1"),
+        "GRNA4-_GRNA1-_2": new SGT("GRNA4-_M1-_SGT2","SGT2"),
     },
 }
