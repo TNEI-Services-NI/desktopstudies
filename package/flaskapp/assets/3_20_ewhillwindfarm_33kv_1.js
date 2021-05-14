@@ -133,7 +133,7 @@ networks_undrawn["ewehillwindfarm1"]={
     },
 
     dataViews:{
-//        1: new DataView(400,105, ["MW","MVAR","kV","Amps","Hz"]),
+        "EWEH3-": new DataView("EWEH3-", [-50,90], ["lines_loading","lines_active_power","lines_reactive_power","busbars_voltage","lines_current"]),
     },
 
     SGTs:{

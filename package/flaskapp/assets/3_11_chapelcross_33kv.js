@@ -543,8 +543,6 @@ networks_undrawn["chapelcross33kv"] = {
 
 
 
-
-
     },
     availablePower:{
         "EWEH0G_1" : new AvailablePower([115,970]),

@@ -17,7 +17,8 @@
                     transformers:[],
                     SGTs:[],
                     availablePowers:[],
-                    generationInfo:[]
+                    generationInfo:[],
+                    generatorControls:[],
                 }
   }
 
@@ -555,7 +556,7 @@
 
         let id = i
         let s = {info:sgt, UIElement: sgt.graphic[0], id : id}
-        components.lines[id] = s
+        components.SGTs[id] = s
         component_modal(s)
         }
   }
@@ -648,6 +649,8 @@
         }
 
         let generator_control_manager = new GeneratorControlManager(buttons)
+
+        components.generatorControls.push(generator_control_manager)
 
 //        var slider = $("<input>", {type: "range", id: "foo", "class": "a"});
 

@@ -2,34 +2,45 @@
 //scale of 1000 x 1000, readjust with math...
 networks_undrawn["gretna400kv"]={
     lines:{
+    "GRNA4-_M1#6": StraightLine([160,430],"down",190,"400kV"),
+    "GRNA4-_R1#0": StraightLine([160,430],"down",38,"400kV"),
 
-    "X606 X604": StraightLine([160,430],"down",190,"400kV"),
-        "HARK A": StraightLine([120,525],"right",40,"400kV"),
-        "HARK": StraightLine([120,525],"down",420,"400kV"),
+        "GRNA4-_M1#0": StraightLine([120,525],"right",40,"400kV"),
+        "GRNA4-_M1#1": StraightLine([120,525],"down",140,"400kV"),
+        "HARK4": StraightLine([120,665],"down",280,"400kV"),
 
-    "X516 X514": StraightLine([325,430],"down",190,"400kV"),
-        "GRNA 780 A": StraightLine([285,525],"right",40,"400kV"),
-        "X510": StraightLine([285,525],"down",215,"400kV"),
+    "GRNA4-_M1#9": StraightLine([325,430],"down",190,"400kV"),
+    "GRNA4-_R1#3": StraightLine([325,430],"down",38,"400kV"),
+
+        "GRNA4-_M1#3": StraightLine([285,525],"right",40,"400kV"),
+        "GRNA4-_M1#2": StraightLine([285,525],"down",215,"400kV"),
 
         "GRNA4-_M1-_SGT1": StraightLine([285,740],"up",75,"400kV"),
         "GRNA1-_SGT1#1": StraightLine([285,930],"up",190,"132kV"),
         "GRNA1-_SGT1#0": StraightLine([285,800],"left",40,"132kV"),
 
-
-    "X406 X404": StraightLine([485,430],"down",190,"400kV"),
-        "ELVA A": StraightLine([445,525],"right",40, "400kV"),
+    "GRNA4-_M1#7": StraightLine([485,430],"down",190,"400kV"),
+    "GRNA4-_R1#1": StraightLine([485,430],"down",38,"400kV"),
+        "GRNA4-_M1#11": StraightLine([445,525],"right",40, "400kV"),
         "ELVA": StraightLine([445,525],"up",440, "400kV"),
+        "GRNA4-_M1#12": StraightLine([445,525],"up",120, "400kV"),
+
         "X447": StraightLine([445,275],"right",135,"400kV"),
         "X447 X449": StraightLine([530,275],"up",55,"400kV"),
         "X449": StraightLine([445,220],"right",135,"400kV"),
         "SC1" : StraightLine([530,275],"up",55,"400kV"),
         "X448": StraightLine([580,220],"down",55,"400kV"),
 
-    "X236 X230 X234": StraightLine([620,430],"down",190,"400kV"),
+    "GRNA4-_R1#4": StraightLine([620,430],"down",95,"400kV"),
+    "GRNA4-_M1#10": StraightLine([620,525],"down",95,"400kV"),
 
-    "X116 X114": StraightLine([805,430],"down",190,"400kV"),
-        "GRNA 680 A": StraightLine([765,525],"right",40,"400kV"),
-        "X110": StraightLine([765,525],"down",215,"400kV"),
+    "GRNA4-_M1#8": StraightLine([805,430],"down",190,"400kV"),
+    "GRNA4-_R1#2": StraightLine([805,430],"down",38,"400kV"),
+
+        "GRNA4-_M1#4": StraightLine([765,525],"right",40,"400kV"),
+        "GRNA4-_M1#5": StraightLine([765,525],"down",140,"400kV"),
+        "GRNA4-_M1-_SGT2": StraightLine([765,670],"down",75,"400kV"),
+
         "GRNA1-_SGT2#0": StraightLine([765,740],"down",190,"132kV"),
         "GRNA1-_SGT2#1": StraightLine([765,800],"left",40,"132kV"),
 
@@ -55,18 +66,18 @@ networks_undrawn["gretna400kv"]={
     breakers:{
         "X442": new Breaker("ELVA",0.63),
         "X448": new Breaker("X448",0.5),
-        "X405": new Breaker("ELVA", 0.3),
-        "X230": new Breaker("X236 X230 X234", 0.5),
-        "X110": new Breaker("X110",0.65),
+        "X405": new Breaker("GRNA4-_M1#12", 1),
+        "X230": new Breaker("GRNA4-_M1#10", 0),
+        "X110": new Breaker("GRNA4-_M1#5",1),
         "X510": new Breaker("GRNA4-_M1-_SGT1",1),
-        "X605": new Breaker("HARK",0.332),
+        "X605": new Breaker("HARK4",0),
 
     },
 
     labels:{
     1: new Text("GRNA4-_M1",["M1"],[-465,0]),
     2: new Text("GRNA4-_R1",["R1"],[-465,0]),
-    3: new Text("HARK",["HARK"],[0,225]),
+    3: new Text("HARK4",["HARK"],[0,160]),
     4: new Text("GRNA1-_SGT2#0",["GRNA 680"],[0,110]),
     5: new Text("GRNA1-_SGT1#1",["GRNA 780"],[0,110]),
     6: new Text("ELVA",["ELVA"],[0,-240]),
@@ -83,42 +94,42 @@ networks_undrawn["gretna400kv"]={
     },
 
     isolators:{
-        "X603": new Isolator("HARK",0.5),
+        "X603": new Isolator("HARK4",0.3),
 
-        "X604": new Isolator("X606 X604",0.75),
-        "X606": new Isolator("X606 X604",0.25,"open"),
+        "X604": new Isolator("GRNA4-_M1#6",0.75),
+        "X606": new Isolator("GRNA4-_M1#6",0.25,"open"),
 
-        "X514": new Isolator("X516 X514",0.75),
-        "X516": new Isolator("X516 X514",0.25,"open"),
+        "X514": new Isolator("GRNA4-_M1#9",0.75),
+        "X516": new Isolator("GRNA4-_M1#9",0.25,"open"),
 
-        "X404": new Isolator("X406 X404",0.75),
-        "X406": new Isolator("X406 X404",0.25,"open"),
+        "X404": new Isolator("GRNA4-_M1#7",0.75),
+        "X406": new Isolator("GRNA4-_M1#7",0.25,"open"),
 
-        "X234": new Isolator("X236 X230 X234",0.75),
-        "X236": new Isolator("X236 X230 X234",0.25,),
+        "X234": new Isolator("GRNA4-_M1#10",0.5),
+        "X236": new Isolator("GRNA4-_R1#4",0.5,),
 
-        "X114": new Isolator("X116 X114",0.75),
-        "X116": new Isolator("X116 X114",0.25,"open"),
+        "X114": new Isolator("GRNA4-_M1#8",0.75),
+        "X116": new Isolator("GRNA4-_M1#8",0.25,"open"),
 
         "X405": new Isolator("ELVA",0.37),
         "X447": new Isolator("X447",0.3),
-        "X449": new Isolator("X449",0.3,"closed"),
+        "X449": new Isolator("X449",0.3),
+        " ": new Isolator("X449",0.3)
     },
 
     dataViews:{
 
-//        "ELVA": new DataView(420,100, ["MVA","MW","MVAR","kV","Amps"]),
-//        "HARK": new DataView(90,850, ["MVA","MW","MVAR","kV","Amps"]),
-//        "GRNA 780": new DataView(260,850, ["MVA","MW","MVAR","kV","Amps"]),
-//        "GRNA 680": new DataView(740,850, ["MVA","MW","MVAR","kV","Amps"]),
-//
-//        "R1": new DataView(70,410, ["kV"]),
-//        "M1": new DataView(70,640, ["kV"]),
+        "ELVA": new DataView("ELVA", [-50,-200], ["lines_loading","lines_active_power","lines_reactive_power","lines_current"]),
+        "HARK4": new DataView("HARK4",[-50,100], ["lines_loading","lines_active_power","lines_reactive_power","lines_current"]),
+        "GRNA1-_SGT1": new DataView("GRNA1-_SGT1#1",[60,60], ["lines_loading","lines_active_power","lines_reactive_power","lines_current"]),
+        "GRNA1-_SGT2": new DataView("GRNA1-_SGT2#0",[60,60], ["lines_loading","lines_active_power","lines_reactive_power","lines_current"]),
+        "R1": new DataView("GRNA4-_R1",[-400,-40], ["busbars_voltage"]),
+        "M1": new DataView("GRNA4-_M1",[-400,40], ["busbars_voltage"]),
 
     },
 
     SGTs:{
-        "tr3_GRNA4-_GRNA1-_1": new SGT("GRNA1-_SGT1#1","SGT1"),
-        "tr3_GRNA4-_GRNA1-_2": new SGT("X110","SGT2"),
+        "GRNA4-_GRNA1-_1": new SGT("GRNA1-_SGT1#1","SGT1"),
+        "GRNA4-_GRNA1-_2": new SGT("GRNA4-_M1-_SGT2","SGT2"),
     },
 }

@@ -154,20 +154,16 @@ networks_undrawn["chapelcross132kv"]={
         "CHAP1-_CHAP3-_1": new DataView("CHAP1-_CHAP3-_1#0",[80,40],['lines_loading',"lines_active_power","lines_reactive_power","lines_current"]),
         "CHAP1-_CHAP3-_2": new DataView("CHAP1-_CHAP3-_2#0",[80,40],['lines_loading',"lines_active_power","lines_reactive_power","lines_current"]),
 
-//        "GRNA-1": new DataView(80,190,"", ["MVA", "MW","MVAR","kV","Amps"]),
-//        "DUMF-1": new DataView(420,190,"",["MVA", "MW","MVAR","kV","Amps"]),
-//        "GRNA-2": new DataView(560,190,"",["MVA", "MW","MVAR","kV","Amps"]),
-//        "ECCF-2": new DataView(700,190,"",["MVA", "MW","MVAR","kV","Amps"]),
-//        "DUMF-2": new DataView(870,190,"",["MVA", "MW","MVAR","kV","Amps"]),
-//        "HARK": new DataView(950,190, "", ["MVA", "MW","MVAR","kV","Amps"]),
-//        "CHAP1-_CHAP3-_1#0": new DataView(350,770,"",["MVA", "MW","MVAR","kV","Amps"]),
-//        "CHAP1-_CHAP3-_2#0": new DataView(750,770,"",["MVA", "MW","MVAR","kV","Amps"]),
-//
-//        "R1-_1 1": new DataView(45,350, "",["kV"]),
-//        "M1 1": new DataView(45,590, "",["kV"]),
-//
-//        "R1-_1 2": new DataView(945,350,"", ["kV"]),
-//        "M1 2": new DataView(945,590, "",["kV"]),
+        "GRNA-1": new DataView("GRNA-1",[-40,-25],['lines_loading',"lines_active_power","lines_reactive_power","lines_current"]),
+        "DUMF-1": new DataView("DUMF-1",[40,-25],['lines_loading',"lines_active_power","lines_reactive_power","lines_current"]),
+        "GRNA-2": new DataView("GRNA-2",[-40,-25],['lines_loading',"lines_active_power","lines_reactive_power","lines_current"]),
+        "ECCF-2": new DataView("ECCF-2",[-40,-25],['lines_loading',"lines_active_power","lines_reactive_power","lines_current"]),
+        "ECCF-1": new DataView("ECCF-1",[40,-25],['lines_loading',"lines_active_power","lines_reactive_power","lines_current"]),
+        "DUMF-2": new DataView("DUMF-2",[40,-25],['lines_loading',"lines_active_power","lines_reactive_power","lines_current"]),
+        "HARK": new DataView("HARK",[40,-25], ['lines_loading',"lines_active_power","lines_reactive_power","lines_current"]),
+
+        "CHAP1-_M1-_1": new DataView("CHAP1-_M1-_1",[-400,40],["busbars_voltage"]),
+        "CHAP1-_R1-_1": new DataView("CHAP1-_R1-_1",[-400,-40],["busbars_voltage"]),
     },
     labels:{
     1: new Text("CHAP3A1", ["CHAPELCROSS GSP"], [185,-70]),
