@@ -881,7 +881,7 @@ function draw_admin_buttons(){
 
     if(entity === 'admin'){
       let rect0 = draw.rect(x_max*0.07,y_max*0.05).fill("yellow").center(x_max*0.5,y_max*0.9);
-      add_text(rect0, false, ["Admin action:", "reset"], 0, 0, "#000000", font_size, function(){})
+      add_text(rect0, false, ["Admin action:", "reset"], 0, 0, "#000000", 12, function(){})
       let rect1 = draw.rect(x_max*0.07,y_max*0.05).fill("yellow").center(x_max*0.6,y_max*0.9);
       add_text(rect1, false, ["Admin action:", "back"], 0, 0, "#000000", 12, function(){})
       let rect2 = draw.rect(x_max*0.07,y_max*0.05).fill("yellow").center(x_max*0.7,y_max*0.9);
