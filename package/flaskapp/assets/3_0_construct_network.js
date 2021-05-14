@@ -672,7 +672,11 @@
         let bar = this.bars[id]
         bar.setPercentage(percentage)
       }
-
+      animatePercentage(id, percentage){
+        console.log(this.bars)
+        let bar = this.bars[id]
+        bar.animatePercentage(percentage)
+      }
 
   }
 
@@ -716,15 +720,22 @@
             acc_offset += bar_offset
             let base_pos = acc_offset
             var rect = draw.rect(bar_offset, 50*y_scaling).fill("#d3d3d3")
-            rect.setPercentage = function(percentage){
+            rect.animatePercentage = function(percentage){
                 bar_height = 0
                 if(percentage > 0){
                     bar_height = graph_height*(percentage/100)
                 }
                 this.animate(2000).move(x_base+base_pos, y_base-(bar_height*y_scaling)).size(bar_offset, bar_height*y_scaling)
-
-
             }
+
+            rect.setPercentage = function(percentage){
+                bar_height = 0
+                if(percentage > 0){
+                    bar_height = graph_height*(percentage/100)
+                }
+                this.move(x_base+base_pos, y_base-(bar_height*y_scaling)).size(bar_offset, bar_height*y_scaling)
+            }
+
             rect.move(x_base+base_pos, y_base)
             rect.size(bar_offset, 0*y_scaling)
 
@@ -739,7 +750,7 @@
         graphManager = new GeneratorGraphManager(graph_bars)
         graphManager.setPercentage(generator_ids[0],10)
         graphManager.setPercentage(generator_ids[1],50)
-        graphManager.setPercentage(generator_ids[2],90)
+        graphManager.animatePercentage(generator_ids[2],90)
 
         }
   }
