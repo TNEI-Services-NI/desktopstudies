@@ -1,5 +1,7 @@
   //--------------------------------------------------------------------------------------------------------------------
 
+//N.B. I'm defining the graph manager as a component as well as the bars individually...
+//both have set and animatePercentage methods so just pick your preferred method.
   function prepare_canvas(x, y){
     //Create canvas
     $('#drawing').empty();
@@ -19,7 +21,8 @@
                     availablePowers:[],
                     generationInfo:[],
                     generatorControls:[],
-                    generatorGraphs:[],
+                    generatorGraphManagers:[],
+                    generatorGraphComponents:[],
 
                 }
   }
@@ -667,15 +670,16 @@
       this.bars = graph_bars
 
       }
+      getState(){return bars}
+      //sets the graphic of the bar relating to this
       setPercentage(id, percentage){
-        console.log(this.bars)
         let bar = this.bars[id]
         bar.setPercentage(percentage)
       }
-      animatePercentage(id, percentage){
-        console.log(this.bars)
+      animatePercentage(id, percentage, callback){
         let bar = this.bars[id]
-        bar.animatePercentage(percentage)
+        bar.animatePercentage(percentage, callback)
+
       }
 
   }
@@ -720,12 +724,15 @@
             acc_offset += bar_offset
             let base_pos = acc_offset
             var rect = draw.rect(bar_offset, 50*y_scaling).fill("#d3d3d3")
-            rect.animatePercentage = function(percentage){
+            rect.animatePercentage = function(percentage, callback){
                 bar_height = 0
                 if(percentage > 0){
                     bar_height = graph_height*(percentage/100)
                 }
-                this.animate(2000).move(x_base+base_pos, y_base-(bar_height*y_scaling)).size(bar_offset, bar_height*y_scaling)
+                let runner = this.animate(2000).move(x_base+base_pos, y_base-(bar_height*y_scaling)).size(bar_offset, bar_height*y_scaling)
+                if(callback != undefined){
+                    runner.after(callback)
+                }
             }
 
             rect.setPercentage = function(percentage){
@@ -734,6 +741,7 @@
                     bar_height = graph_height*(percentage/100)
                 }
                 this.move(x_base+base_pos, y_base-(bar_height*y_scaling)).size(bar_offset, bar_height*y_scaling)
+                this.percentage = percentage
             }
 
             rect.move(x_base+base_pos, y_base)
@@ -745,12 +753,15 @@
 
             acc_offset += bar_offset
             graph_bars[gen_id]=rect
+            components.generatorGraphComponents[gen_id] = rect
+
         }
 
         graphManager = new GeneratorGraphManager(graph_bars)
+
         graphManager.setPercentage(generator_ids[0],10)
         graphManager.setPercentage(generator_ids[1],50)
-        graphManager.animatePercentage(generator_ids[2],90)
-
+        graphManager.animatePercentage(generator_ids[2],90, function(){console.log("ANIMATION COMPLETE")})
+        components.generatorGraphManagers[0] = graphManager
         }
   }
