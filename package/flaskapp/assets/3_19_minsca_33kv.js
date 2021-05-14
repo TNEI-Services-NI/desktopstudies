@@ -279,7 +279,7 @@ networks_undrawn["minsca33kv"]={
         "MINS0G_1" : new AvailablePower([500,150]),
     },
 
-    generatorControls:{
-        "MINS0G_1": new GeneratorControl([750,100])
-    },
+//    generatorControls:{
+//        "MINS0G_1": new GeneratorControl([750,100])
+//    },
 }

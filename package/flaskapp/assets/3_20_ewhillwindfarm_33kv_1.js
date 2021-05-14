@@ -155,7 +155,7 @@ networks_undrawn["ewehillwindfarm1"]={
         "EWEH0G_1" : new AvailablePower([500,150]),
     },
 
-    generatorControls:{
-        "EWEH0G_1": new GeneratorControl([750,100])
-    },
+//    generatorControls:{
+//        "EWEH0G_1": new GeneratorControl([750,100])
+//    },
 }

@@ -557,7 +557,7 @@ networks_undrawn["chapelcross33kv"] = {
 //    },
 
     generator_graphs:{
-        "gen_graph_1": new GeneratorGraph([750,850],["MINS0G_1","EWEH0G_1","STCR5-_1"])
+        "gen_graph_1": new GeneratorGraph([750,770],["MINS0G_1","EWEH0G_1","STCR5-_1"])
     }
 
 
