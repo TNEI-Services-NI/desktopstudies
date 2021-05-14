@@ -5,7 +5,6 @@
  * @param  {string} colour of flash.
  * @return {None}
  */
-
 function flashColour(object, colour){
   var i;
   var time = 175
@@ -39,3 +38,5 @@ function flashColour(object, colour){
 
   }
 }
+
+

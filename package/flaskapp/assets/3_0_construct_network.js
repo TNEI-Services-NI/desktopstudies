@@ -693,7 +693,7 @@
         let graph_height = 150*y_scaling
         let graph_width = 150*x_scaling
         let y_base =  y_pos + graph_height*y_scaling
-        let x_base = x_pos - 15*font_size /2
+        let x_base = x_pos - graph_width /2
 
         let line_up = StraightLine([x_base,y_base], "up", graph_height)
         draw_line(line_up, line_base_id+i++, "diagram")
@@ -721,11 +721,12 @@
                 if(percentage > 0){
                     bar_height = graph_height*(percentage/100)
                 }
-                this.move(x_base+base_pos, y_base-(bar_height*y_scaling))
-                this.size(bar_offset, bar_height*y_scaling)
+                this.animate(2000).move(x_base+base_pos, y_base-(bar_height*y_scaling)).size(bar_offset, bar_height*y_scaling)
+
 
             }
-            rect.setPercentage(0)
+            rect.move(x_base+base_pos, y_base)
+            rect.size(bar_offset, 0*y_scaling)
 
             let text_obj = []
             add_static_text([gen_id], x=x_base+base_pos+bar_offset/1.5, y=y_base+(20*y_scaling), colour="#d3d3d3", function(callback_obj){text_obj = callback_obj})
