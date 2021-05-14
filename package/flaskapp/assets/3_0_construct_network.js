@@ -682,18 +682,18 @@
 
         let gen_graph = dict_components.generator_graphs[graph_id]
         let pos = gen_graph.pos
-        pos[0] = pos[0]*x_scaling
-        pos[1] = pos[1]*y_scaling
+        x_pos = pos[0]*x_scaling
+        y_pos = pos[1]*y_scaling
         let id = graph_id
         let callback = gen_graph.callback
         let generator_ids = gen_graph.generators
         let title_string = "Generator Outputs"
-        add_static_text([title_string], x=pos[0], y=pos[1]-40*y_scaling, colour="#d3d3d3", function(obj){})
+        add_static_text([title_string], x=x_pos, y=y_pos-40*y_scaling, colour="#d3d3d3", function(obj){})
 
         let graph_height = 150*y_scaling
         let graph_width = 150*x_scaling
-        let y_base =  pos[1] + graph_height*y_scaling
-        let x_base = pos[0] - 15*font_size /2
+        let y_base =  y_pos + graph_height*y_scaling
+        let x_base = x_pos - 15*font_size /2
 
         let line_up = StraightLine([x_base,y_base], "up", graph_height)
         draw_line(line_up, line_base_id+i++, "diagram")
