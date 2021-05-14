@@ -764,7 +764,6 @@ function add_text(object, bool_dict_obj, list_text, x_from_center=0, y_from_cent
  * @param  {function( SVG Object )} callback after drawing is complete
  * @return {None}
 */
-//todo refactor this
 function add_dataview(observer, text, offset, callback) {
   let colour = "#e5b815"
   add_text(observer, false, text, offset[0], offset[1], colour, font_size, callback)

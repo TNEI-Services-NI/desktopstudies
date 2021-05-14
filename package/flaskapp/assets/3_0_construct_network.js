@@ -19,6 +19,8 @@
                     availablePowers:[],
                     generationInfo:[],
                     generatorControls:[],
+                    generatorGraphs:[],
+
                 }
   }
 
@@ -685,18 +687,25 @@
         let id = graph_id
         let callback = gen_graph.callback
         let generator_ids = gen_graph.generators
-        let title_string = "generator graphs"
-        add_static_text([title_string], x=pos[0]*x_scaling, y=pos[1]*y_scaling, colour="#d3d3d3", callback)
+        let title_string = "Generator Outputs"
+        add_static_text([title_string], x=pos[0], y=pos[1]-40*y_scaling, colour="#d3d3d3", function(obj){})
 
         let graph_height = 150*y_scaling
         let graph_width = 150*x_scaling
-        let y_base =  pos[1] + 120*y_scaling
+        let y_base =  pos[1] + graph_height*y_scaling
         let x_base = pos[0] - 15*font_size /2
 
         let line_up = StraightLine([x_base,y_base], "up", graph_height)
         draw_line(line_up, line_base_id+i++, "diagram")
         line_right = StraightLine([x_base,y_base], "right", graph_width)
         draw_line(line_right, line_base_id+i++, "diagram")
+
+        for(let percentage = 0; percentage <= 100; percentage += 10){
+            var text = draw.text(percentage +'%').fill('#d3d3d3');
+            text.font({anchor: 'middle',color:"#d3d3d3", size: font_size/1.5, family: 'Helvetica'});
+
+            text.center(x_base - 10*x_scaling, y_base - ((graph_height*percentage/100))*y_scaling);
+        }
 
         let bar_offset = graph_width/7
 
@@ -717,6 +726,11 @@
 
             }
             rect.setPercentage(0)
+
+            let text_obj = []
+            add_static_text([gen_id], x=x_base+base_pos+bar_offset/1.5, y=y_base+(20*y_scaling), colour="#d3d3d3", function(callback_obj){text_obj = callback_obj})
+            text_obj.font({size: font_size/1.5})
+
             acc_offset += bar_offset
             graph_bars[gen_id]=rect
         }
@@ -726,5 +740,5 @@
         graphManager.setPercentage(generator_ids[1],50)
         graphManager.setPercentage(generator_ids[2],90)
 
-  }
+        }
   }
