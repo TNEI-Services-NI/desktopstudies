@@ -417,3 +417,11 @@ function GeneratorControl(pos){
     this.graphic=[],
     this.callback = Text_Callback(this.graphic)
 }
+
+function GeneratorGraph(pos,generators){
+    this.component = "GeneratorGraph"
+    this.generators = generators
+    this.pos = pos
+    this.graphic=[],
+    this.callback = Text_Callback(this.graphic)
+}
