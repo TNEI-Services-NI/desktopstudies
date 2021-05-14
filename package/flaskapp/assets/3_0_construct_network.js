@@ -657,3 +657,74 @@
 
         }
   }
+
+  class GeneratorGraphManager{
+      max_height = 0
+      bars = []
+      constructor(graph_bars, max_height=100) {
+      this.bars = graph_bars
+
+      }
+      setPercentage(id, percentage){
+        console.log(this.bars)
+        let bar = this.bars[id]
+        bar.setPercentage(percentage)
+      }
+
+
+  }
+
+  function construct_generator_graph(dict_components){
+        for(let graph_id in dict_components.generator_graphs){
+        let line_base_id = graph_id
+
+        let gen_graph = dict_components.generator_graphs[graph_id]
+        let pos = gen_graph.pos
+        pos[0] = pos[0]*x_scaling
+        pos[1] = pos[1]*y_scaling
+        let id = graph_id
+        let callback = gen_graph.callback
+        let generator_ids = gen_graph.generators
+        let title_string = "generator graphs"
+        add_static_text([title_string], x=pos[0]*x_scaling, y=pos[1]*y_scaling, colour="#d3d3d3", callback)
+
+        let graph_height = 150*y_scaling
+        let graph_width = 150*x_scaling
+        let y_base =  pos[1] + 120*y_scaling
+        let x_base = pos[0] - 15*font_size /2
+
+        let line_up = StraightLine([x_base,y_base], "up", graph_height)
+        draw_line(line_up, line_base_id+i++, "diagram")
+        line_right = StraightLine([x_base,y_base], "right", graph_width)
+        draw_line(line_right, line_base_id+i++, "diagram")
+
+        let bar_offset = graph_width/7
+
+        let acc_offset = 0
+        graph_bars = []
+        for(gen_id_i in generator_ids){
+            let gen_id = generator_ids[gen_id_i]
+            acc_offset += bar_offset
+            let base_pos = acc_offset
+            var rect = draw.rect(bar_offset, 50*y_scaling).fill("#d3d3d3")
+            rect.setPercentage = function(percentage){
+                bar_height = 0
+                if(percentage > 0){
+                    bar_height = graph_height*(percentage/100)
+                }
+                this.move(x_base+base_pos, y_base-(bar_height*y_scaling))
+                this.size(bar_offset, bar_height*y_scaling)
+
+            }
+            rect.setPercentage(0)
+            acc_offset += bar_offset
+            graph_bars[gen_id]=rect
+        }
+
+        graphManager = new GeneratorGraphManager(graph_bars)
+        graphManager.setPercentage(generator_ids[0],10)
+        graphManager.setPercentage(generator_ids[1],50)
+        graphManager.setPercentage(generator_ids[2],90)
+
+  }
+  }

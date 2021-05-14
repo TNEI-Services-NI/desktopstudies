@@ -329,6 +329,8 @@ function draw_network(dict_components, network_, step, callback) {
 
     construct_generator_controls(dict_components)
 
+    construct_generator_graph(dict_components)
+
     if (page === 'home') {
         construct_action()
     }
