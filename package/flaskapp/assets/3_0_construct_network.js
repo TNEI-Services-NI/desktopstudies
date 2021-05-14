@@ -700,7 +700,7 @@
 
         let graph_height = 150*y_scaling
         let graph_width = 150*x_scaling
-        let y_base =  y_pos + graph_height*y_scaling
+        let y_base =  y_pos + graph_height
         let x_base = x_pos - graph_width /2
 
         let line_up = StraightLine([x_base,y_base], "up", graph_height)
@@ -712,7 +712,7 @@
             var text = draw.text(percentage +'%').fill('#d3d3d3');
             text.font({anchor: 'middle',color:"#d3d3d3", size: font_size/1.5, family: 'Helvetica'});
 
-            text.center(x_base - 10*x_scaling, y_base - ((graph_height*percentage/100))*y_scaling);
+            text.center(x_base - 10*x_scaling, y_base - ((graph_height*percentage/100)));
         }
 
         let bar_offset = graph_width/7
@@ -729,7 +729,7 @@
                 if(percentage > 0){
                     bar_height = graph_height*(percentage/100)
                 }
-                let runner = this.animate(2000).move(x_base+base_pos, y_base-(bar_height*y_scaling)).size(bar_offset, bar_height*y_scaling)
+                let runner = this.animate(2000).move(x_base+base_pos, y_base-(bar_height)).size(bar_offset, bar_height)
                 if(callback != undefined){
                     runner.after(callback)
                 }
@@ -740,7 +740,7 @@
                 if(percentage > 0){
                     bar_height = graph_height*(percentage/100)
                 }
-                this.move(x_base+base_pos, y_base-(bar_height*y_scaling)).size(bar_offset, bar_height*y_scaling)
+                this.move(x_base+base_pos, y_base-(bar_height)).size(bar_offset, bar_height)
                 this.percentage = percentage
             }
 
