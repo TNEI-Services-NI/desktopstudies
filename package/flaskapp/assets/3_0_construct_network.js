@@ -759,9 +759,11 @@
 
         graphManager = new GeneratorGraphManager(graph_bars)
 
-        graphManager.setPercentage(generator_ids[0],10)
-        graphManager.setPercentage(generator_ids[1],50)
-        graphManager.animatePercentage(generator_ids[2],90, function(){console.log("ANIMATION COMPLETE")})
+        graphManager.setPercentage(generator_ids[0],0)
+        graphManager.setPercentage(generator_ids[1],0)
+        graphManager.setPercentage(generator_ids[2],0)
+        // graphManager.setPercentage(generator_ids[1],50)
+        // graphManager.animatePercentage(generator_ids[2],90, function(){console.log("ANIMATION COMPLETE")})
         components.generatorGraphManagers[0] = graphManager
         }
   }
