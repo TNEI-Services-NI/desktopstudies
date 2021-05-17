@@ -3,20 +3,30 @@ function update_line_modals(step_data) {
         line_id_LF = line_.split("#")[0]
         line_instance = components.lines[line_]
         line_instance.modal_data = []
+        var val = undefined
         if (line_id_LF in step_data["lines_active_power"]) {
-            line_instance.modal_data = line_instance.modal_data.concat(
-                ["Active power: " + Math.round(step_data["lines_active_power"][line_id_LF] * (10 ** dataview_round)) / (10 ** dataview_round) + " MW"]
-            )
+            val = Math.round(step_data["lines_active_power"][line_id_LF] * (10 ** dataview_round)) / (10 ** dataview_round)
+            if(val != 999){
+                line_instance.modal_data = line_instance.modal_data.concat(
+                    ["Active power: " + val + " MW"]
+                )
+            }
         }
         if (line_id_LF in step_data["lines_reactive_power"]) {
-            line_instance.modal_data = line_instance.modal_data.concat(
-                ["Reactive power: " + Math.round(step_data["lines_reactive_power"][line_id_LF] * (10 ** dataview_round)) / (10 ** dataview_round) + " MVAr"]
-            )
+            val = Math.round(step_data["lines_reactive_power"][line_id_LF] * (10 ** dataview_round)) / (10 ** dataview_round)
+            if(val != 999){
+                line_instance.modal_data = line_instance.modal_data.concat(
+                    ["Reactive power: " + val + " MVAr"]
+                )                
+            }
         }
         if (line_id_LF in step_data["busbars_voltage"]) {
-            line_instance.modal_data = line_instance.modal_data.concat(
-                ["Voltage: " + Math.round(step_data["busbars_voltage"][line_id_LF] * (10 ** dataview_round)) / (10 ** dataview_round) + " V"]
-            )
+            val = Math.round(step_data["busbars_voltage"][line_id_LF] * (10 ** dataview_round)) / (10 ** dataview_round)
+            if(val != 999){
+                line_instance.modal_data = line_instance.modal_data.concat(
+                    ["Voltage: " + val + " V"]
+                )
+            }
         }
         components.lines[line_] = line_instance
         if (line_instance.data_changed_callback !== undefined) {
@@ -87,6 +97,7 @@ function update_transformers(step_data) {
         tx_instance = components.transformers[tx_]
         if (tx_id_LF in step_data["transformers_loading"]) {
             loading = step_data["transformers_loading"][tx_id_LF]
+            console.log(tx_id_LF)
             if (Number(loading) > 0) {
                 tx_instance.setLive()
             }
@@ -152,7 +163,7 @@ function update_dataviews(step_data) {
                 }
 
                let value = (scale * Math.round(step_data[component_parameter][id_dv] * 1000) / 1000).toFixed(acc)
-                if(1){
+                if(value != 999){
                     // let value = step_data[component_parameter][id_dv].toFixed(2)
                     text_list = text_list.concat(
                         [String(value) + units]
@@ -166,7 +177,6 @@ function update_dataviews(step_data) {
 }
 
 function update_line_colours(step_data_) {
-    console.log(Object.keys(step_data_))
     for (let idl in components.lines) {
 
 
@@ -176,17 +186,19 @@ function update_line_colours(step_data_) {
             //        ((step_data_["lines_active_power"][line_id_LF] !== 0)&&(step_data_["lines_active_power"][line_id_LF] > 997))||
             //        ((step_data_["lines_reactive_power"][line_id_LF] !== 0)&&(step_data_["lines_reactive_power"][line_id_LF] > 997))
             ((step_data_["busbars_voltage"][line_id_LF] !== 0) && (step_data_["busbars_voltage"][line_id_LF] > 997)) ||
+            ((step_data_["generators_active_power"][line_id_LF] !== 0) && (step_data_["generators_active_power"][line_id_LF] > 997)) ||
             ((step_data_["transformers_loading"][line_id_LF] !== 0) && (step_data_["transformers_loading"][line_id_LF] > 997))
         ) {
 
-            //        line_instance.info.o_line.attr({stroke: "orange"});
-            //        line_instance.UIElement.attr({stroke: "orange"});
+                   line_instance.info.o_line.attr({stroke: "orange"});
+                   line_instance.UIElement.attr({stroke: "orange"});
 
         }
         if (((step_data_["lines_loading"][line_id_LF] !== 0) && (step_data_["lines_loading"][line_id_LF] !== undefined)) ||
             //        ((step_data_["lines_active_power"][line_id_LF] !== 0)&&(step_data_["lines_active_power"][line_id_LF] !== undefined))||
             //        ((step_data_["lines_reactive_power"][line_id_LF] !== 0)&&(step_data_["lines_reactive_power"][line_id_LF] !== undefined))
             ((step_data_["busbars_voltage"][line_id_LF] !== 0) && (step_data_["busbars_voltage"][line_id_LF] !== undefined)) ||
+            ((step_data_["generators_active_power"][line_id_LF] !== 0) && (step_data_["generators_active_power"][line_id_LF] !== undefined)) ||
             ((step_data_["transformers_loading"][line_id_LF] !== 0) && (step_data_["transformers_loading"][line_id_LF] !== undefined))
         ) {
             if(line_instance.info.o_line != undefined){
@@ -206,10 +218,11 @@ function update_line_colours(step_data_) {
 
         } else if (((step_data_["lines_loading"][line_id_LF] === undefined)) &&
             ((step_data_["busbars_voltage"][line_id_LF] === undefined)) &&
+            ((step_data_["generators_active_power"][line_id_LF] === undefined)) &&
             ((step_data_["transformers_loading"][line_id_LF] === undefined))) {
             if (highlight_undefined) {
                 line_instance.UIElement.attr({
-                    stroke: "#d3d3d3"
+                    stroke: "#ff0000"
                 });
                 // line_instance.info.o_line.attr({stroke: "grey"});
             }
@@ -256,9 +269,11 @@ function update_isolators(step_data_) {
 }
 
 function update_generator_graphs(step_data_) {
-    let graphmanager = components.generatorGraphManagers[0]
-    for(let gen_id in graphmanager.bars){
-        graphManager.animatePercentage(gen_id,step_data_["generators_active_power"][gen_id], function(){})
+    if(components.generatorGraphManagers.length > 0){
+        let graphmanager = components.generatorGraphManagers[0]
+        for(let gen_id in graphmanager.bars){
+            graphManager.animatePercentage(gen_id,step_data_["generators_active_power"][gen_id], function(){})
+        }
     }
 }
 

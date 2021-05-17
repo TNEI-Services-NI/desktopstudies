@@ -200,26 +200,30 @@ def _filter_format_data(comp_data_):
     from_col = comp_data_.columns[(comp_data_ == 'Name').any() == True].values
     from_row = comp_data_.index[(comp_data_ == 'Name').any(axis=1) == True].values
 
-    from_col = from_col[0] if len(from_col) == 1 else None
+    from_col = from_col[0] if len(from_col) == 1 else print("Name found more than once in {}".format(comp_data_.columns[0]))
     from_row = from_row[0] if len(from_row) == 1 else None
 
     from_col = comp_data_.columns.tolist().index(from_col)
-    from_row = comp_data_.index.tolist().index(from_row)
 
+    from_row = comp_data_.index.tolist().index(from_row)
 
     comp_data_ = comp_data_.iloc[:, from_col:]
     comp_data_.columns = comp_data_.iloc[from_row, :]
 
+    to_row = comp_data_['Name'].tolist().index('Vlookup')
+
     last_step = [x for x in comp_data_.columns if 'Step' in str(x)][-1]
     to_col = comp_data_.columns.tolist().index(last_step)
 
-    comp_data_ = comp_data_.iloc[:, :to_col+1]
+    comp_data_ = comp_data_.iloc[from_row+1:to_row, :to_col+1]
 
-    comp_data_ = comp_data_.iloc[from_row+1:, :]
     comp_data_ = comp_data_.loc[~comp_data_.loc[:, 'Name'].isna(), :]
 
     comp_data_columns = list(filter(lambda x: type(x) == str, comp_data_.columns))
     comp_data_ = comp_data_.loc[:, comp_data_columns]
+
+    if (comp_data_['Name'].value_counts() > 1).any():
+        print()
 
     comp_data_ = comp_data_.rename(columns={
         'Stage - Post Blackout': "Step -2",
