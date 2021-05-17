@@ -19,7 +19,6 @@ def index():
 
 @auth_bp.route('/signup')
 def signup():
-    print("signup")
     return render_template('signup.html')
 
 
@@ -130,7 +129,7 @@ def trigger_checks(trig_data=None):
     socketio.emit('update_logged_users', logged_in_users)
     socketio.emit('update_waiting_on', required.loc[~required['status'], 'name'].values.tolist())
 
-    if len(required_entities-entities_active) == 0:
-        socketio.emit('users_complete', logged_in['user'].values.tolist())
-        time.sleep(2)
-        socketio.emit('redirect', 'simtool_bp.index') # This url is dummy data for now - not used in front end
+    # if len(required_entities-entities_active) == 0:
+    #     socketio.emit('users_complete', logged_in['user'].values.tolist())
+    #     time.sleep(2)
+    #     socketio.emit('redirect', 'simtool_bp.index') # This url is dummy data for now - not used in front end

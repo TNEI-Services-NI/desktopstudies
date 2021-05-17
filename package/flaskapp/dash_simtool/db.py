@@ -65,7 +65,6 @@ def delete_simstatus(dbs):
         for simstatus_ in simstatus:
             dbs.session.delete(simstatus_)
             dbs.session.commit()
-        print("all records deleted")
 
 
 def delete_room_simstatus(dbs, entity):
@@ -75,7 +74,6 @@ def delete_room_simstatus(dbs, entity):
         for simstatus_ in simstatus:
             dbs.session.delete(simstatus_)
             dbs.session.commit()
-        print("all room records deleted")
 
 
 def add_simstatus(dbs, simstatus_value, entity='all'):
