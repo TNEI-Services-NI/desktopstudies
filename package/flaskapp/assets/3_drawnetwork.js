@@ -128,16 +128,20 @@ function update_dataviews(step_data) {
         let text_list = [];
         var units = "";
         var scale = 1;
+        var acc = 0;
         let labels = components.dataviews[id_dv].labels
         for (let id_component_parameter in labels) {
             let component_parameter = labels[id_component_parameter]
             if (id_dv in step_data[component_parameter]) {
                 if (component_parameter.includes('reactive')) {
                     units = " MVAr"
+                    acc = 2
                 } else if (component_parameter.includes('active')) {
                     units = " MW"
+                    acc = 2
                 } else if (component_parameter.includes('loading')) {
                     units = " MVA"
+                    acc = 2
                 } else if (component_parameter.includes('voltage')) {
                     units = " V p.u."
                 } else if (component_parameter.includes('taps')) {
@@ -147,8 +151,8 @@ function update_dataviews(step_data) {
                     scale = 1000
                 }
 
-//                let value = scale * Math.round(step_data[component_parameter][id_dv] * 1000) / 1000
-                let value = step_data[component_parameter][id_dv].toFixed(2)
+               let value = (scale * Math.round(step_data[component_parameter][id_dv] * 1000) / 1000).toFixed(acc)
+                // let value = step_data[component_parameter][id_dv].toFixed(2)
                 text_list = text_list.concat(
                     [String(value) + units]
                 );
