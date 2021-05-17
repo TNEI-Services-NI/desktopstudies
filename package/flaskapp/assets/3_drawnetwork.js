@@ -165,7 +165,6 @@ function update_line_colours(step_data_) {
 
 
         let line_instance = components.lines[idl]
-        console.log(line_instance)
         let line_id_LF = idl.split("#")[0]
         if (((step_data_["lines_loading"][line_id_LF] !== 0) && (step_data_["lines_loading"][line_id_LF] > 997)) ||
             //        ((step_data_["lines_active_power"][line_id_LF] !== 0)&&(step_data_["lines_active_power"][line_id_LF] > 997))||
@@ -247,6 +246,13 @@ function update_isolators(step_data_) {
     for (let ido in components.isolators) {
         let iso_instance = components.isolators[ido]
         iso_instance.redraw()
+    }
+}
+
+function update_generator_graphs(step_data_) {
+    let graphmanager = components.generatorGraphManagers[0]
+    for(let gen_id in graphmanager.bars){
+        graphManager.animatePercentage(gen_id,step_data_["generators_active_power"][gen_id], function(){})
     }
 }
 
@@ -356,6 +362,7 @@ function update_sim_data(stage_, step_data) {
     update_available_power(step_data);
     update_generation_info(step_data);
     update_isolators(step_data);
+    update_generator_graphs(step_data);
 }
 
 function master_draw() {

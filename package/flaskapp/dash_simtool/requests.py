@@ -82,7 +82,6 @@ def get_restoration_step():
 @simtool_bp.route("/init_network/", methods=['POST'])
 @login_required
 def init_network():
-    print("init_network")
     data = request.form
     df_activesim = simtool_data.read_active_network()
     # df_activesim = simtool_data.read_active_network_db()
@@ -131,7 +130,6 @@ def on_join(data):
 @socketio.on('check_redraw')
 def redraw(data):
     network = server_get_network_view(data['entity'], data['sim_step'], option="5")
-    print(network)
     socketio.emit('redraw', {
         'sim_step': data['sim_step'],
         'network': network,
