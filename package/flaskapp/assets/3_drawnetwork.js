@@ -97,7 +97,6 @@ function update_transformers(step_data) {
         tx_instance = components.transformers[tx_]
         if (tx_id_LF in step_data["transformers_loading"]) {
             loading = step_data["transformers_loading"][tx_id_LF]
-            console.log(tx_id_LF)
             if (Number(loading) > 0) {
                 tx_instance.setLive()
             }

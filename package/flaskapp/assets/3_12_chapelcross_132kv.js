@@ -6,7 +6,7 @@ networks_undrawn["chapelcross132kv"]={
     "CHAP3A1#0": StraightLine([280,865],"up",50, "33kV"),
     "CHAP1-_CHAP3-_1#0": StraightLine([280,815],"up",125, "33kV"),
     "CHAP1-_CHAP3-_1#1": StraightLine([280,750],"left",40, "33kV"),
-    "CHAP1-_CHAP3-_1#2": StraightLine([240,750],"left",0, "0V"),
+    "CHAP1-_CHAP3-_1#2": StraightLine([240,750],"left",0, "LV"),
 
     "CHAP3A2#0": StraightLine([665,865],"up",50, "33kV"),
     "CHAP1-_CHAP3-_2#0": StraightLine([665,815],"up",125,"33kV"),

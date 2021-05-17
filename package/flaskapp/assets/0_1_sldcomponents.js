@@ -84,7 +84,7 @@ function Tx_Callback(graphic_objects, name = false, mva = false){
                 add_text(group, false, name, 0 * x_scaling, -20 *y_scaling, "#d3d3d3", font_size, function(group){})
             }
             else{
-                add_text(group, false, name, 30 * x_scaling,-10 *y_scaling, "#d3d3d3", font_size, function(group){})}
+                add_text(group, false, name, 40 * x_scaling,-10 *y_scaling, "#d3d3d3", font_size, function(group){})}
             }
 
             if(mva != false){

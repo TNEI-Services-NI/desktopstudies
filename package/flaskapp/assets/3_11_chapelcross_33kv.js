@@ -40,7 +40,7 @@ networks_undrawn["chapelcross33kv"] = {
         "CHAP3A1#1": StraightLine([330,175],"up",20),
         "CHAP1-_CHAP3-_1#0": StraightLine([330,155],"up",95),
          "CHAP1-_CHAP3-_1#1":StraightLine([290,110],"right",40),
-         "CHAP1-_CHAP3-_1#3":StraightLine([290,110],"right",0,"0V"),
+         "CHAP1-_CHAP3-_1#3":StraightLine([290,110],"right",0,"LV"),
 
         "CHAP3-_MIBI3-_1#0": StraightLine([415,195],"down",55),
         "CHAP3A1#5": StraightLine([415,175],"down",20),
@@ -369,7 +369,7 @@ networks_undrawn["chapelcross33kv"] = {
         "LAHOT2_LAHO20_T2": new Tx("CHAPX3_LAHO3B_1#4",1.2,"T2","12 MVA","33kV"),
         "ANANT1_ANAN10_T1": new Tx("ANANT1_CHAP3-_1#2",1,"T1","12 MVA","11kV"),
         "ANANT2_ANAN20_T2": new Tx("ANANT2_CHAP3-_1#3",1,"T2","12 MVA","33kV"),
-        "KIBAT1_KIBA10_T1": new Tx("CHAPX4_KIBAT1_1#0",1,"","5VA","11kV"),
+        "KIBAT1_KIBA10_T1": new Tx("CHAPX4_KIBAT1_1#0",1,"","5MVA","11kV"),
         "MOFTT1_MOFT10_T1": new Tx("CHAPX4_MOFTT1_1#1",1,"T1","7.5 MVA","11kV"),
         "MOFTT2_MOFT20_T2": new Tx("LOBI3B_MOFTT2_1#3",1,"T2","7.5 MVA","33kV"),
 
