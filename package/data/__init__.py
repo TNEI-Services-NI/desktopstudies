@@ -23,10 +23,10 @@ def _fetch_files(directory: str, file_type: str = '.csv'):
     return dict_files
 
 
-def read_LF_file(network="chapelcross", voltage="33kv", option="Opt5"):
+def read_LF_file(network="chapelcross", voltage="33kv", option="Opt5", rev='4'):
     raw_data_files = _fetch_files(dir_raw_simtool_data, file_type='.xlsx')
     # filename = raw_data_files[network + voltage + option]
-    filename = raw_data_files[network + option]
+    filename = raw_data_files[network + option + '_R{}'.format(rev)]
 
     dict_data = {'generators': {}, 'busbars': {}, 'lines': {}, 'transformers': {}}
 
@@ -34,6 +34,8 @@ def read_LF_file(network="chapelcross", voltage="33kv", option="Opt5"):
                                                             , sheet_name='Generators - Active Power')
     dict_data['generators']['reactive_power'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
                                                               , sheet_name='Generators - Reactive Power')
+    dict_data['generators']['rating'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
+                                                              , sheet_name='Generators - Rating')
     dict_data['busbars']['voltage'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
                                                     , sheet_name='Busbars - Voltage(pu)')
     dict_data['transformers']['loading'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
@@ -195,22 +197,35 @@ def read_active_network_db():
 
 def _filter_format_data(comp_data_):
     comp_data_ = comp_data_.copy()
-    comp_data_ = comp_data_.iloc[:, 3:]
-    comp_data_.columns = comp_data_.iloc[6, :]
-    comp_data_ = comp_data_.iloc[7:, :]
+    from_col = comp_data_.columns[(comp_data_ == 'Name').any() == True].values
+    from_row = comp_data_.index[(comp_data_ == 'Name').any(axis=1) == True].values
+
+    from_col = from_col[0] if len(from_col) == 1 else None
+    from_row = from_row[0] if len(from_row) == 1 else None
+
+    from_col = comp_data_.columns.tolist().index(from_col)
+    from_row = comp_data_.index.tolist().index(from_row)
+
+
+    comp_data_ = comp_data_.iloc[:, from_col:]
+    comp_data_.columns = comp_data_.iloc[from_row, :]
+
+    last_step = [x for x in comp_data_.columns if 'Step' in str(x)][-1]
+    to_col = comp_data_.columns.tolist().index(last_step)
+
+    comp_data_ = comp_data_.iloc[:, :to_col+1]
+
+    comp_data_ = comp_data_.iloc[from_row+1:, :]
     comp_data_ = comp_data_.loc[~comp_data_.loc[:, 'Name'].isna(), :]
 
     comp_data_columns = list(filter(lambda x: type(x) == str, comp_data_.columns))
     comp_data_ = comp_data_.loc[:, comp_data_columns]
 
     comp_data_ = comp_data_.rename(columns={
-        'Stage - Post Blackout': "-2",
-        "Stage - Pre Restoration": "-1",
+        'Stage - Post Blackout': "Step -2",
+        "Stage - Pre Restoration": "Step -1",
     })
 
-    map = {k: k.replace('step', '').replace('Step ', '') for k in comp_data_.columns}
-
-    comp_data_ = comp_data_.rename(columns=map)
 
     return comp_data_
 
