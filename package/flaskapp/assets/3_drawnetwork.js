@@ -152,10 +152,12 @@ function update_dataviews(step_data) {
                 }
 
                let value = (scale * Math.round(step_data[component_parameter][id_dv] * 1000) / 1000).toFixed(acc)
-                // let value = step_data[component_parameter][id_dv].toFixed(2)
-                text_list = text_list.concat(
-                    [String(value) + units]
-                );
+                if(1){
+                    // let value = step_data[component_parameter][id_dv].toFixed(2)
+                    text_list = text_list.concat(
+                        [String(value) + units]
+                    );
+                }
             }
         }
 
@@ -422,7 +424,7 @@ function update_scaling() {
 
     x_scaling = (x_max - 250) / 1000
     y_scaling = (y_max - 100) / 1000
-    font_size = 14 * Math.min(x_scaling, y_scaling)
+    font_size = 16 * Math.min(x_scaling, y_scaling)
     network_scaled = networks_undrawn
     scale_lines(network_scaled);
     scale_busbars(network_scaled)

@@ -62,8 +62,8 @@ var y_max = window.innerHeight;
 
 let draw = SVG('#drawing').size(x_max, y_max)
 
-var x_scaling = x_max/1150
-var y_scaling = y_max/1050
+var x_scaling = undefined
+var y_scaling = undefined
 //
-var font_size = 14 *  Math.min(x_scaling, y_scaling)
+var font_size = undefined
 
