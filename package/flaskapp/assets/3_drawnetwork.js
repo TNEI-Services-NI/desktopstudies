@@ -17,7 +17,7 @@ function update_line_modals(step_data) {
             if(val != 999){
                 line_instance.modal_data = line_instance.modal_data.concat(
                     ["Reactive power: " + val + " MVAr"]
-                )                
+                )
             }
         }
         if (line_id_LF in step_data["busbars_voltage"]) {
