@@ -735,9 +735,9 @@
             rect.animatePercentage = function(start_percentage, percentage, callback){
                 bar_height = 0
                 if(percentage > 0){
-                    bar_height = graph_height*((percentage)/100)
+                    bar_height = Math.max(graph_height*((percentage)/100))
                 }
-                bar_start_height = graph_height*((start_percentage)/100)
+                bar_start_height = Math.max(graph_height*((start_percentage)/100),0)
                 this.move(x_base+base_pos, y_base-1-(bar_start_height)).size(bar_offset, bar_start_height)
                 let runner = this.animate(2000).move(x_base+base_pos, y_base-1-(bar_height)).size(bar_offset, bar_height)
                 if(callback != undefined){

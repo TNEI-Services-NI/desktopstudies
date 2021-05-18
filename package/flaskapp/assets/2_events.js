@@ -278,3 +278,23 @@ function component_modal(component){
       }
     });
   }
+
+
+function debounce_click_function(object, callback){
+  object.click(function(){
+    object.off('click')
+    callback(case_network)
+  })
+}
+
+function mouseenterleave_pointer(object){
+  object.mouseenter(function(){
+    $("body").css("cursor", "pointer");
+  })
+  object.mouseleave(function(){
+    $("body").css("cursor", "default");
+  })
+  object.mouseover(function(){
+    $("body").css("cursor", "default");
+  })
+}
