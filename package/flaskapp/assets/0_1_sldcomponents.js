@@ -19,7 +19,11 @@ function Breaker_Callback(graphic_objects, name = ''){
             else{
                 add_text(object, false, [name], 3 + name.length*4 * x_scaling, 0,"#d3d3d3", font_size, function(object){})}
         }
-        mouseenterleave_pointer(object)
+        if(entity=='Observer'){
+            deactivate_click(object)
+        } else {
+            mouseenterleave_pointer(object)
+        }
     }
 }
 

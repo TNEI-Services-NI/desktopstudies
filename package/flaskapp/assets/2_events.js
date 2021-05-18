@@ -287,6 +287,11 @@ function debounce_click_function(object, callback){
   })
 }
 
+
+function deactivate_click(object){
+  object.off('click')
+}
+
 function mouseenterleave_pointer(object){
   object.mouseenter(function(){
     $("body").css("cursor", "pointer");
