@@ -6,7 +6,8 @@
     //Create canvas
     $('#drawing').empty();
     background = draw.rect(x, y).fill(palette["background-color"])
-    components = {
+
+    let components_update = {
                     breakers: [],
                     lines: [],
                     loads:[],
@@ -21,10 +22,12 @@
                     availablePowers:[],
                     generationInfo:[],
                     generatorControls:[],
-                    generatorGraphManagers:[],
                     generatorGraphComponents:[],
 
                 }
+    for(let component_ in components_update){
+      components[component_] = []
+    }
   }
 
   function scale_two_point_objects(networks_undrawn, component){
@@ -667,18 +670,23 @@
       max_height = 0
       bars = []
       constructor(graph_bars, max_height=100) {
-      this.bars = graph_bars
+        this.bars = graph_bars
 
       }
       getState(){return bars}
       //sets the graphic of the bar relating to this
       setPercentage(id, percentage){
-        let bar = this.bars[id]
+        let bar_data = this.bars[id]
+        let bar = bar_data["bar"]
+        this.bars[id]["percentage"] = percentage
         bar.setPercentage(percentage)
       }
       animatePercentage(id, percentage, callback){
-        let bar = this.bars[id]
-        bar.animatePercentage(percentage, callback)
+        let bar_data = this.bars[id]
+        let start_percentage = bar_data.percentage
+        this.bars[id].percentage = percentage
+        // console.log(start_percentage)
+        bar_data.bar.animatePercentage(start_percentage, percentage, callback)
 
       }
 
@@ -718,18 +726,23 @@
         let bar_offset = graph_width/7
 
         let acc_offset = 0
-        graph_bars = []
+        graph_bars = {}
         for(gen_id_i in generator_ids){
             let gen_id = generator_ids[gen_id_i]
             acc_offset += bar_offset
             let base_pos = acc_offset
-            var rect = draw.rect(bar_offset, 50*y_scaling).fill("#d3d3d3")
-            rect.animatePercentage = function(percentage, callback){
+            var rect = draw.rect(bar_offset, 50*y_scaling).fill("#3078b7")
+            rect.animatePercentage = function(start_percentage, percentage, callback){
                 bar_height = 0
                 if(percentage > 0){
-                    bar_height = graph_height*(percentage/100)
+                    bar_height = graph_height*((percentage)/100)
                 }
-                let runner = this.animate(2000).move(x_base+base_pos, y_base-(bar_height)).size(bar_offset, bar_height)
+                bar_start_height = graph_height*((start_percentage)/100)
+                console.log(start_percentage)
+                console.log(percentage)
+                console.log(bar_height)
+                this.move(x_base+base_pos, y_base-1-(bar_start_height)).size(bar_offset, bar_start_height)
+                let runner = this.animate(2000).move(x_base+base_pos, y_base-1-(bar_height)).size(bar_offset, bar_height)
                 if(callback != undefined){
                     runner.after(callback)
                 }
@@ -741,7 +754,6 @@
                     bar_height = graph_height*(percentage/100)
                 }
                 this.move(x_base+base_pos, y_base-(bar_height)).size(bar_offset, bar_height)
-                this.percentage = percentage
             }
 
             rect.move(x_base+base_pos, y_base)
@@ -752,16 +764,27 @@
             text_obj.font({size: font_size/1.5})
 
             acc_offset += bar_offset
-            graph_bars[gen_id]=rect
+            graph_bars[gen_id]={"bar": rect, "percentage":undefined}
             components.generatorGraphComponents[gen_id] = rect
 
         }
 
-        graphManager = new GeneratorGraphManager(graph_bars)
+        let graphManager = undefined
+        if(components["generatorGraphManagers"] === undefined){
+          graphManager = new GeneratorGraphManager(graph_bars)
+          graphManager.setPercentage(generator_ids[0],0)
+          graphManager.setPercentage(generator_ids[1],0)
+          graphManager.setPercentage(generator_ids[2],0)
+          components["generatorGraphManagers"] = [graphManager]
+        } else {
+          graphManager = components["generatorGraphManagers"][0]
+          graphManager_new = new GeneratorGraphManager(graph_bars)
+          graphManager_new.setPercentage(generator_ids[0],graphManager.bars[generator_ids[0]].percentage)
+          graphManager_new.setPercentage(generator_ids[1],graphManager.bars[generator_ids[1]].percentage)
+          graphManager_new.setPercentage(generator_ids[2],graphManager.bars[generator_ids[2]].percentage)
+          graphManager = graphManager_new
+        }
 
-        graphManager.setPercentage(generator_ids[0],0)
-        graphManager.setPercentage(generator_ids[1],0)
-        graphManager.setPercentage(generator_ids[2],0)
         // graphManager.setPercentage(generator_ids[1],50)
         // graphManager.animatePercentage(generator_ids[2],90, function(){console.log("ANIMATION COMPLETE")})
         components.generatorGraphManagers[0] = graphManager

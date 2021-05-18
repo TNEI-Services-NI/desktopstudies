@@ -162,7 +162,7 @@ function update_dataviews(step_data) {
                 }
 
                let value = (scale * Math.round(step_data[component_parameter][id_dv] * 1000) / 1000).toFixed(acc)
-                if(value != 999){
+                if(highlight_undefined||(value < 999 && value > -999)){
                     // let value = step_data[component_parameter][id_dv].toFixed(2)
                     text_list = text_list.concat(
                         [String(value) + units]
@@ -181,19 +181,50 @@ function update_line_colours(step_data_) {
 
         let line_instance = components.lines[idl]
         let line_id_LF = idl.split("#")[0]
-        if (((step_data_["lines_loading"][line_id_LF] !== 0) && (step_data_["lines_loading"][line_id_LF] > 997)) ||
+        if (((step_data_["lines_loading"][line_id_LF] == -999)) ||
+            ((step_data_["busbars_voltage"][line_id_LF] == -999)) ||
+            ((step_data_["generators_active_power"][line_id_LF] == -999) ) ||
+            ((step_data_["transformers_loading"][line_id_LF] == -999))
+        ) {
+            if(highlight_undefined){
+                console.log(line_id_LF)
+                line_instance.UIElement.attr({
+                    stroke: "#ff0000"
+                });
+            } else {
+                line_instance.info.o_line.attr({stroke: palette['0V']});
+                line_instance.UIElement.attr({stroke: palette['0V']});
+            }
+
+        }
+        else if (((step_data_["lines_loading"][line_id_LF] !== 0) && (step_data_["lines_loading"][line_id_LF] > 997)) ||
             //        ((step_data_["lines_active_power"][line_id_LF] !== 0)&&(step_data_["lines_active_power"][line_id_LF] > 997))||
             //        ((step_data_["lines_reactive_power"][line_id_LF] !== 0)&&(step_data_["lines_reactive_power"][line_id_LF] > 997))
             ((step_data_["busbars_voltage"][line_id_LF] !== 0) && (step_data_["busbars_voltage"][line_id_LF] > 997)) ||
             ((step_data_["generators_active_power"][line_id_LF] !== 0) && (step_data_["generators_active_power"][line_id_LF] > 997)) ||
             ((step_data_["transformers_loading"][line_id_LF] !== 0) && (step_data_["transformers_loading"][line_id_LF] > 997))
         ) {
+            if(highlight_undefined){
+               line_instance.info.o_line.attr({stroke: "orange"});
+               line_instance.UIElement.attr({stroke: "orange"});
+            } else {
+                if(line_instance.info.o_line != undefined){
+                    line_instance.info.o_line.attr({
+                        stroke: line_instance.info.dict_styling.stroke.live_color
+                    });
+                }
+                    line_instance.UIElement.attr({
+                        stroke: line_instance.info.dict_styling.stroke.live_color
+                    });
 
-                   line_instance.info.o_line.attr({stroke: "orange"});
-                   line_instance.UIElement.attr({stroke: "orange"});
+                //method for notifying the line to handle it's children which it alone handles
+                if (line_instance.setEnergised != null) {
+                    line_instance.setEnergised()
+                }
+            }
 
         }
-        if (((step_data_["lines_loading"][line_id_LF] !== 0) && (step_data_["lines_loading"][line_id_LF] !== undefined)) ||
+        else if (((step_data_["lines_loading"][line_id_LF] !== 0) && (step_data_["lines_loading"][line_id_LF] !== undefined)) ||
             //        ((step_data_["lines_active_power"][line_id_LF] !== 0)&&(step_data_["lines_active_power"][line_id_LF] !== undefined))||
             //        ((step_data_["lines_reactive_power"][line_id_LF] !== 0)&&(step_data_["lines_reactive_power"][line_id_LF] !== undefined))
             ((step_data_["busbars_voltage"][line_id_LF] !== 0) && (step_data_["busbars_voltage"][line_id_LF] !== undefined)) ||
@@ -220,6 +251,7 @@ function update_line_colours(step_data_) {
             ((step_data_["generators_active_power"][line_id_LF] === undefined)) &&
             ((step_data_["transformers_loading"][line_id_LF] === undefined))) {
             if (highlight_undefined) {
+                console.log(line_id_LF)
                 line_instance.UIElement.attr({
                     stroke: "#ff0000"
                 });
@@ -235,8 +267,16 @@ function update_breaker_colours(step_data_) {
         let breaker_instance = components.breakers[idb]
         let idl = breaker_instance.line.line_idx
         let line_id_LF = idl.split("#")[0]
+        if (((step_data_["lines_loading"][line_id_LF] == -999)) ||
+            ((step_data_["busbars_voltage"][line_id_LF] == -999)) ||
+            ((step_data_["generators_active_power"][line_id_LF] == -999) ) ||
+            ((step_data_["transformers_loading"][line_id_LF] == -999))
+        ) {
 
-        if (((step_data_["lines_loading"][line_id_LF] !== 0) && (step_data_["lines_loading"][line_id_LF] !== undefined)) ||
+
+
+        }
+        else if (((step_data_["lines_loading"][line_id_LF] !== 0) && (step_data_["lines_loading"][line_id_LF] !== undefined)) ||
             ((step_data_["busbars_voltage"][line_id_LF] !== 0) && (step_data_["busbars_voltage"][line_id_LF] !== undefined)) ||
             ((step_data_["transformers_loading"][line_id_LF] !== 0) && (step_data_["transformers_loading"][line_id_LF] !== undefined))) {
             breaker_instance.setEnergised();
@@ -268,10 +308,10 @@ function update_isolators(step_data_) {
 }
 
 function update_generator_graphs(step_data_) {
-    if(components.generatorGraphManagers.length > 0){
+    if(components.generatorGraphManagers !== undefined){
         let graphmanager = components.generatorGraphManagers[0]
         for(let gen_id in graphmanager.bars){
-            graphManager.animatePercentage(gen_id,step_data_["generators_active_power"][gen_id], function(){})
+            graphmanager.animatePercentage(gen_id, step_data_["generators_active_power"][gen_id], function(){})
         }
     }
 }

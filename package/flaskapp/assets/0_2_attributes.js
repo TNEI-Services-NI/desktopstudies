@@ -12,9 +12,11 @@ let scenario = "1"
 let line_palette_style = {'width': 4}
 
 let live_dead = false
-let highlight_undefined = true
+let highlight_undefined = false
 
 let coord_display = true
+
+let components = {}
 
 let modal_x_offset = 20
 let modal_y_offset = 20
