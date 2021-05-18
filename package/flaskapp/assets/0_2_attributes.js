@@ -12,9 +12,11 @@ let scenario = "1"
 let line_palette_style = {'width': 4}
 
 let live_dead = false
-let highlight_undefined = true
+let highlight_undefined = false
 
 let coord_display = false
+
+let components = {}
 
 let modal_x_offset = 20
 let modal_y_offset = 20
@@ -22,28 +24,20 @@ let modal_timeout = 5
 
 let dataview_round = 3
 
-let background = undefined
 let case_network = "chapelcross"
+
+let background = undefined
 let network = undefined
 let dict_components = undefined
 let steps = []
 
-//let components = {
-//                    breakers: [],
-//                    lines: [],
-//                    loads:[],
-//                    busbars:[],
-//                    diagram:[],
-//                    labels:[],
-//                    generators: [],
-//                    isolators:[],
-//                    text:[],
-//                    dataviews:[],
-//                    transformers:[],
-//                    SGTs:[],
-//                    availablePowers:[],
-//                    generationInfo:[]
-//                };
+var room = undefined
+var username = undefined
+var entity = undefined
+
+var action = undefined
+
+var page = undefined
 
 const networks_undrawn = {
     "chapelcross33kv": undefined,
@@ -59,9 +53,6 @@ const networks_undrawn = {
     "ewehillwindfarm2": undefined,
 }
 
-Abbreviations = {"lines_active_power": "MW",
-                 "lines_reactive_power": "MVAR"}
-
 var socket = io();
 let current_step = 0  // initial simulation status
 
@@ -73,8 +64,8 @@ var y_max = window.innerHeight;
 
 let draw = SVG('#drawing').size(x_max, y_max)
 
-var x_scaling = x_max/1150
-var y_scaling = y_max/1050
+var x_scaling = undefined
+var y_scaling = undefined
 //
-var font_size = 14 *  Math.min(x_scaling, y_scaling)
+var font_size = undefined
 

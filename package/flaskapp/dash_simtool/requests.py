@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
-from . import simtool_bp
 from flask import request, jsonify, session
-from flask_socketio import join_room, rooms
 from flask_login import login_required
+from flask_socketio import join_room, rooms
+
 import package.data as simtool_data
-from package.flaskapp import socketio
-from flask_socketio import send, emit
-from package.flaskapp.extensions import dbs
 import package.flaskapp.dash_simtool.db as simtool_db
+from package.flaskapp import socketio
+from package.flaskapp.extensions import dbs
+from . import simtool_bp
 
 
 @simtool_bp.route("/receive_breaker/", methods=['POST'])
@@ -26,17 +26,20 @@ def init_breakers():
     network = data['network']
     option = data['option']
     df_breakerstates = simtool_data.read_breaker_states(network, option)
+    # df_breakerstates = simtool_data.read_breaker_states_db(network, option)
     return jsonify(df_breakerstates.to_dict())
 
 
 def server_get_network_view(entity, sim_step, option="5"):
     df_network_view = simtool_data.read_network_views(option)
+    # df_network_view = simtool_data.read_network_views_db(option)
     network = df_network_view.loc[entity, sim_step]
     return network
 
 
 def server_get_actions(entity, sim_step, option="5"):
     df_actions = simtool_data.read_actions(option)
+    # df_actions = simtool_data.read_actions_db(option)
     action = df_actions.loc[entity, sim_step]
     return action
 
@@ -47,6 +50,7 @@ def get_network_view():
     data = request.form
     option = data['option']
     df_network_view = simtool_data.read_network_views(option)
+    # df_network_view = simtool_data.read_network_views_db(option)
     return jsonify(df_network_view.to_dict())
 
 
@@ -56,6 +60,7 @@ def get_action():
     data = request.form
     option = data['option']
     df_action = simtool_data.read_actions(option)
+    # df_action = simtool_data.read_actions_db(option)
     return jsonify(df_action.to_dict())
 
 
@@ -70,15 +75,16 @@ def get_restoration_step():
     option = data["option"]
 
     stateDictionary = simtool_data.read_restoration_step(case_network, network, option, scenario, stage)
+    # stateDictionary = simtool_data.read_restoration_step_db(case_network, network, option, scenario, stage)
     return jsonify(stateDictionary)
 
 
 @simtool_bp.route("/init_network/", methods=['POST'])
 @login_required
 def init_network():
-    print("init_network")
     data = request.form
     df_activesim = simtool_data.read_active_network()
+    # df_activesim = simtool_data.read_active_network_db()
     # print(df_activesim)
     df_activesim = df_activesim.fillna("Unknown")
     return jsonify(df_activesim.to_dict())
@@ -123,9 +129,10 @@ def on_join(data):
 
 @socketio.on('check_redraw')
 def redraw(data):
+    network = server_get_network_view(data['entity'], data['sim_step'], option="5")
     socketio.emit('redraw', {
         'sim_step': data['sim_step'],
-        'network': server_get_network_view(data['entity'], data['sim_step'], option="5"),
+        'network': network,
     }, room=session['room'])
 
 

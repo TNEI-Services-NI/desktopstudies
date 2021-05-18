@@ -1,9 +1,13 @@
+  //--------------------------------------------------------------------------------------------------------------------
 
+//N.B. I'm defining the graph manager as a component as well as the bars individually...
+//both have set and animatePercentage methods so just pick your preferred method.
   function prepare_canvas(x, y){
     //Create canvas
     $('#drawing').empty();
     background = draw.rect(x, y).fill(palette["background-color"])
-    components = {
+
+    let components_update = {
                     breakers: [],
                     lines: [],
                     loads:[],
@@ -16,57 +20,58 @@
                     transformers:[],
                     SGTs:[],
                     availablePowers:[],
-                    generationInfo:[]
+                    generationInfo:[],
+                    generatorControls:[],
+                    generatorGraphComponents:[],
+
                 }
+    for(let component_ in components_update){
+      components[component_] = []
+    }
+  }
+
+  function scale_two_point_objects(networks_undrawn, component){
+    for(let id_dict in networks_undrawn){
+    let temp_dict_components = networks_undrawn[id_dict]
+    for (let idx_line in temp_dict_components[component]){
+        let temp_dict = temp_dict_components[component][idx_line]
+        temp_dict.x1 = temp_dict.x1 * x_scaling
+        temp_dict.x2 = temp_dict.x2 * x_scaling
+        temp_dict.y1 = temp_dict.y1 * y_scaling
+        temp_dict.y2 = temp_dict.y2 * y_scaling
+    }
+  }
+  }
+
+  function scale_text(networks_undrawn, component){
+   for(let id_dict in networks_undrawn) {
+     let temp_dict_components = networks_undrawn[id_dict]
+     for (let idx in temp_dict_components[component]) {
+       temp_dict = temp_dict_components[component][idx]
+       temp_dict.offset[0] = temp_dict.offset[0] * x_scaling
+       temp_dict.offset[1] = temp_dict.offset[1] * y_scaling
+     }
+   }
   }
 
   function scale_lines(networks_undrawn){
-  for(let id_dict in networks_undrawn){
-    let temp_dict_components = networks_undrawn[id_dict]
-    for (let idx_line in temp_dict_components.lines){
-        let temp_dict = temp_dict_components.lines[idx_line]
-        temp_dict.x1 = temp_dict.x1 * x_scaling
-        temp_dict.x2 = temp_dict.x2 * x_scaling
-        temp_dict.y1 = temp_dict.y1 * y_scaling
-        temp_dict.y2 = temp_dict.y2 * y_scaling
-    }
+    scale_two_point_objects(networks_undrawn, 'lines')
   }
-  }
+
   function scale_busbars(networks_undrawn){
-  for(let id_dict in networks_undrawn){
-    let temp_dict_components = networks_undrawn[id_dict]
-    for (let idx_line in temp_dict_components.busbars){
-        let temp_dict = temp_dict_components.busbars[idx_line]
-        temp_dict.x1 = temp_dict.x1 * x_scaling
-        temp_dict.x2 = temp_dict.x2 * x_scaling
-        temp_dict.y1 = temp_dict.y1 * y_scaling
-        temp_dict.y2 = temp_dict.y2 * y_scaling
-    }
+    scale_two_point_objects(networks_undrawn, 'busbars')
   }
+
+  function scale_loads(networks_undrawn){
+    scale_two_point_objects(networks_undrawn, 'loads')
   }
 
   function scale_labels(networks_undrawn){
-   for(let id_dict in networks_undrawn) {
-     let temp_dict_components = networks_undrawn[id_dict]
-     //scale text
-     for (let idx in temp_dict_components.labels) {
-       temp_dict = temp_dict_components.labels[idx]
-       temp_dict.offset[0] = temp_dict.offset[0] * x_scaling
-       temp_dict.offset[1] = temp_dict.offset[1] * y_scaling
-     }
-   }
+    scale_text(networks_undrawn, 'labels')
   }
 
   function scale_dataviews(networks_undrawn){
-   for(let id_dict in networks_undrawn) {
-     let temp_dict_components = networks_undrawn[id_dict]
-     //scale text
-     for (let idx in temp_dict_components.dataViews) {
-       temp_dict = temp_dict_components.dataViews[idx]
-       temp_dict.offset[0] = temp_dict.offset[0] * x_scaling
-       temp_dict.offset[1] = temp_dict.offset[1] * y_scaling
-     }
-   }
+   scale_text(networks_undrawn, 'dataViews')
   }
 
   function scale_availablePower(networks_undrawn){
@@ -74,7 +79,7 @@
         let temp_dict_components = networks_undrawn[id_dict]
 
         for (let idx in temp_dict_components.availablePower) {
-           temp_dict = temp_dict_components.availablePower[idx]
+           let temp_dict = temp_dict_components.availablePower[idx]
            temp_dict.pos[0] = temp_dict.pos[0] * x_scaling
            temp_dict.pos[1] = temp_dict.pos[1] * y_scaling
            temp_dict_components.availablePower[idx] = temp_dict
@@ -82,91 +87,7 @@
      }
   }
 
-  function scale_loads(networks_undrawn){
-  for(let id_dict in networks_undrawn){
-    let temp_dict_components = networks_undrawn[id_dict]
-    for (let idx_line in temp_dict_components.loads){
-        let temp_dict = temp_dict_components.loads[idx_line]
-        temp_dict.x1 = temp_dict.x1 * x_scaling
-        temp_dict.x2 = temp_dict.x2 * x_scaling
-        temp_dict.y1 = temp_dict.y1 * y_scaling
-        temp_dict.y2 = temp_dict.y2 * y_scaling
-    }
-  }
-  }
-
-  function style_line(line){
-    line.dict_styling = {fill: { width: line_palette_style["width"]/1.5 * Math.min(x_scaling,y_scaling)},
-                         stroke: { width: line_palette_style["width"]/1.5 *  Math.min(x_scaling,y_scaling)}}
-    if (line.dash){
-              line.dict_styling = {fill: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)},
-                         stroke: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)}}
-      line.dict_styling.stroke.dasharray = (5, 5)
-
-    }
-    let colour = undefined
-    if (line.live){
-      colour = palette[line.voltage]
-
-    } else {
-      colour = palette["0V"]
-    }
-    line.dict_styling.stroke.color = colour
-    line.dict_styling.stroke.live_color = palette[line.voltage]
-    line.dict_styling.fill.color = colour
-    line.dict_styling.fill.live_color = palette[line.voltage]
-    // line.dict_styling.stroke.color = palette[line.voltage]
-    return line
-  }
-
-  function style_busbar(line){
-    line.dict_styling = {fill: { width: line_palette_style["width"] * Math.min(x_scaling,y_scaling)},
-                         stroke: { width: line_palette_style["width"] * Math.min(x_scaling,y_scaling)}}
-    if (line.dash){
-              line.dict_styling = {fill: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)},
-                         stroke: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)}}
-      line.dict_styling.stroke.dasharray = (5, 5)
-
-    }
-    let colour = undefined
-    if (line.live){
-      colour = palette[line.voltage]
-
-    } else {
-      colour = palette["0V"]
-    }
-    line.dict_styling.stroke.color = colour
-    line.dict_styling.stroke.live_color = palette[line.voltage]
-    line.dict_styling.fill.color = colour
-    line.dict_styling.fill.live_color = palette[line.voltage]
-    // line.dict_styling.stroke.color = palette[line.voltage]
-    return line
-  }
-
-  function style_diagram_line(line){
-    line.dict_styling = {fill: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)},
-                         stroke: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)}}
-    if (line.dash){
-              line.dict_styling = {fill: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)},
-                         stroke: { width: line_palette_style["width"]/2 * Math.min(x_scaling,y_scaling)} }
-      line.dict_styling.stroke.dasharray = (5, 5)
-
-    }
-    let colour = undefined
-    if (line.live){
-      colour = palette[line.voltage]
-
-    } else {
-      colour = palette["0V"]
-    }
-    line.dict_styling.stroke.color = colour
-    line.dict_styling.stroke.live_color = palette[line.voltage]
-    line.dict_styling.fill.color = colour
-    line.dict_styling.fill.live_color = palette[line.voltage]
-    // line.dict_styling.stroke.color = palette[line.voltage]
-    return line
-  }
-
+  //--------------------------------------------------------------------------------------------------------------------
 
   function construct_coord_display(){
     const text1 = draw.text("coordinate dislay")
@@ -204,7 +125,7 @@
     }
   }
 
-    function construct_loads(dict_components){
+  function construct_loads(dict_components){
     var bNodes = false
     for (let id_load in dict_components.loads){
         let load = dict_components.loads[id_load]
@@ -213,8 +134,14 @@
         let id = id_load
 
         let line_object = load.graphic[0]
-        //todo load needs to take colour of line through dict_style
-        draw_load(load,1,true)
+
+        if(load.y2 > load.y1 ){
+                draw_load(load,1,true)
+        }
+        if(load.y2 < load.y1 ){
+                draw_load(load,1,false)
+        }
+
 
         let l = {
             info: load,
@@ -258,11 +185,7 @@
     }
   }
 
-  function destroy_lines(){
-
-  }
-
-  function construct_breakers(dict_components, network_, step){
+  function construct_breakers(dict_components, network_, step, callback){
         init_breakers(network_, option, dict_components.breakers, step, function(breakers){
         for(let id in breakers){
             //doing this means the inital data, and the SVG elements they make remain unchanged at all times.
@@ -303,18 +226,22 @@
             }
 
             b.setEnergised = function(){
-
-            if(this.closed){
+              if(this.closed){
                  this.UIElement.attr({
                 'stroke': this.line.dict_styling.stroke.live_color,
                 'fill': this.line.dict_styling.stroke.live_color
-            })}
-            else{
-            this.UIElement.attr({
-                'stroke': this.line.dict_styling.stroke.live_color,
-//                'fill': this.line.dict_styling.stroke.live_color})
-            })
-            }
+                })
+              }
+              else{
+                this.UIElement.attr({
+                    'stroke': this.line.dict_styling.stroke.live_color,
+    //                'fill': this.line.dict_styling.stroke.live_color})
+                })
+              }
+    //            this.UIElement.attr({
+    //             'stroke': this.line.dict_styling.stroke.live_color,
+    //             'fill': this.line.dict_styling.stroke.live_color
+    //             })
             }
 
             b.UIElement.on("breaker_clicked",function(event){
@@ -332,6 +259,7 @@
             components.breakers[id] = b
             component_modal(b)
         }
+        callback({});
     });
   }
 
@@ -477,9 +405,9 @@
           observer = tx.UIElement
         }
 
-        add_dataview(observer, "", offset, function (text_object) {
+        add_dataview(observer, [""], offset, function (text_object) {
           components.dataviews[id_dv] = {
-            text: "",
+            text: [""],
             observer: observer,
             text_object: text_object,
             offset: offset,
@@ -492,7 +420,7 @@
 
   function redraw_dataview(id_dv, text_list){
     let dataview_ = components.dataviews[id_dv];
-    dataview_.text_object.remove()
+    // dataview_.text_object.remove()
     add_dataview(dataview_.observer, text_list, dataview_.offset, function (text_object) {
     components.dataviews[id_dv] = {
         text: text_list,
@@ -636,7 +564,226 @@
 
         let id = i
         let s = {info:sgt, UIElement: sgt.graphic[0], id : id}
-        components.lines[id] = s
+        components.SGTs[id] = s
         component_modal(s)
+        }
+  }
+
+  let GeneratorControlManager = class{
+    buttons = [];
+    state = 0;
+    constructor(buttons) {
+        this.buttons=buttons;
+        this.state=0;
+        let setState = this.setState;
+        let percentage=0
+        for(let button_id in buttons){
+            let button = buttons[button_id];
+            button.click(this.buttonClick(this,percentage));
+            percentage+=5;
+        }
+        this.setState(this.state)
+    }
+    getState(){
+        return this.state;
+    }
+    setState(percentage){
+        this.state=percentage;
+
+        let b_percentage = 0;
+        for(let button_id in buttons){
+            let button = this.buttons[button_id]
+            if(percentage>=b_percentage){
+                button.fill("green")
+            }
+            else{
+                button.fill("#d3d3d3")
+            }
+            b_percentage+=5
+        }
+
+    }
+    buttonClick(host, percentage){
+        return function(){
+            host.setState(percentage)
+        }
+
+    }
+
+
+
+  }
+
+  function construct_generator_controls(dict_components){
+        for(let i in dict_components.generatorControls){
+        gen_control = dict_components.generatorControls[i]
+        let pos = gen_control.pos
+        let id = i
+        let callback = gen_control.callback
+
+        let title_string = "generator control for "+ id
+        add_static_text([title_string], x=pos[0]*x_scaling, y=pos[1]*y_scaling, colour="#d3d3d3", callback)
+
+        let b_y_offset = (pos[1] + 30)*y_scaling
+        let b_x_offset = (pos[0] + 0 - (font_size*title_string.length)/3)*x_scaling
+
+        let percentage = 0
+
+        button_height = 20 * y_scaling
+        button_width = 30 * x_scaling
+        buttons = []
+
+        while(percentage <= 45){
+            if(percentage == 50){
+            b_y_offset = b_y_offset+(30*y_scaling)
+            b_x_offset = (pos[0] + 0 - (font_size*title_string.length)/3)*x_scaling
+            }
+            let group = draw.group()
+            var rect = draw.rect(button_width, button_height).fill("#d3d3d3")
+
+
+            var text = draw.text(percentage +'%');
+            text.font({anchor: 'middle',color:"blue", size: font_size, family: 'Helvetica'});
+            text.center(0.75*button_width, 0.4*button_height);
+
+            group.add(rect)
+            group.add(text);
+
+            group.move(b_x_offset, b_y_offset)
+            percentage+=5
+            b_x_offset += button_width + 3*x_scaling
+
+            buttons.push(rect)
+        }
+
+        let generator_control_manager = new GeneratorControlManager(buttons)
+
+        components.generatorControls.push(generator_control_manager)
+
+//        var slider = $("<input>", {type: "range", id: "foo", "class": "a"});
+
+
+        }
+  }
+
+  class GeneratorGraphManager{
+      max_height = 0
+      bars = []
+      constructor(graph_bars, max_height=100) {
+        this.bars = graph_bars
+
+      }
+      getState(){return bars}
+      //sets the graphic of the bar relating to this
+      setPercentage(id, percentage){
+        let bar_data = this.bars[id]
+        let bar = bar_data["bar"]
+        this.bars[id]["percentage"] = percentage
+        bar.setPercentage(percentage)
+      }
+      animatePercentage(id, percentage, callback){
+        let bar_data = this.bars[id]
+        let start_percentage = bar_data.percentage
+        this.bars[id].percentage = percentage
+        // console.log(start_percentage)
+        bar_data.bar.animatePercentage(start_percentage, percentage, callback)
+
+      }
+
+  }
+
+  function construct_generator_graph(dict_components){
+        for(let graph_id in dict_components.generator_graphs){
+        let line_base_id = graph_id
+
+        let gen_graph = dict_components.generator_graphs[graph_id]
+        let pos = gen_graph.pos
+        x_pos = pos[0]*x_scaling
+        y_pos = pos[1]*y_scaling
+        let id = graph_id
+        let callback = gen_graph.callback
+        let generator_ids = gen_graph.generators
+        let title_string = "Generator Outputs"
+        add_static_text([title_string], x=x_pos, y=y_pos-15*y_scaling, colour="#d3d3d3", function(obj){})
+
+        let graph_height = 150*y_scaling
+        let graph_width = 150*x_scaling
+        let y_base =  y_pos + graph_height
+        let x_base = x_pos - graph_width /2
+
+        let line_up = StraightLine([x_base,y_base], "up", graph_height)
+        draw_line(line_up, line_base_id+i++, "diagram")
+        line_right = StraightLine([x_base,y_base], "right", graph_width)
+        draw_line(line_right, line_base_id+i++, "diagram")
+
+        for(let percentage = 0; percentage <= 100; percentage += 10){
+            var text = draw.text(percentage +'%').fill('#d3d3d3');
+            text.font({anchor: 'middle',color:"#d3d3d3", size: font_size/1.5, family: 'Helvetica'});
+
+            text.center(x_base - 10*x_scaling, y_base - ((graph_height*percentage/100)));
+        }
+
+        let bar_offset = graph_width/7
+
+        let acc_offset = 0
+        graph_bars = {}
+        for(gen_id_i in generator_ids){
+            let gen_id = generator_ids[gen_id_i]
+            acc_offset += bar_offset
+            let base_pos = acc_offset
+            var rect = draw.rect(bar_offset, 50*y_scaling).fill("#3078b7")
+            rect.animatePercentage = function(start_percentage, percentage, callback){
+                bar_height = 0
+                if(percentage > 0){
+                    bar_height = Math.max(graph_height*((percentage)/100))
+                }
+                bar_start_height = Math.max(graph_height*((start_percentage)/100),0)
+                this.move(x_base+base_pos, y_base-1-(bar_start_height)).size(bar_offset, bar_start_height)
+                let runner = this.animate(2000).move(x_base+base_pos, y_base-1-(bar_height)).size(bar_offset, bar_height)
+                if(callback != undefined){
+                    runner.after(callback)
+                }
+            }
+
+            rect.setPercentage = function(percentage){
+                bar_height = 0
+                if(percentage > 0){
+                    bar_height = graph_height*(percentage/100)
+                }
+                this.move(x_base+base_pos, y_base-1-(bar_height)).size(bar_offset, bar_height)
+            }
+
+            rect.move(x_base+base_pos, y_base)
+            rect.size(bar_offset, 0*y_scaling)
+
+            let text_obj = []
+            add_static_text([gen_id], x=x_base+base_pos+bar_offset/1.5, y=y_base+(20*y_scaling), colour="#d3d3d3", function(callback_obj){text_obj = callback_obj})
+            text_obj.font({size: font_size/1.5})
+
+            acc_offset += bar_offset
+            graph_bars[gen_id]={"bar": rect, "percentage":undefined}
+            components.generatorGraphComponents[gen_id] = rect
+
+        }
+
+        let graphManager = undefined
+        if(components["generatorGraphManagers"] === undefined){
+          graphManager = new GeneratorGraphManager(graph_bars)
+          graphManager.setPercentage(generator_ids[0],0)
+          graphManager.setPercentage(generator_ids[1],0)
+          graphManager.setPercentage(generator_ids[2],0)
+          components["generatorGraphManagers"] = [graphManager]
+        } else {
+          graphManager = components["generatorGraphManagers"][0]
+          graphManager_new = new GeneratorGraphManager(graph_bars)
+          graphManager_new.setPercentage(generator_ids[0],graphManager.bars[generator_ids[0]].percentage)
+          graphManager_new.setPercentage(generator_ids[1],graphManager.bars[generator_ids[1]].percentage)
+          graphManager_new.setPercentage(generator_ids[2],graphManager.bars[generator_ids[2]].percentage)
+          graphManager = graphManager_new
+        }
+
+        // graphManager.setPercentage(generator_ids[1],50)
+        // graphManager.animatePercentage(generator_ids[2],90, function(){console.log("ANIMATION COMPLETE")})
+        components.generatorGraphManagers[0] = graphManager
         }
   }

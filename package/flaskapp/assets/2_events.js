@@ -78,7 +78,7 @@ function check_breakers(network_, option_, breakers, step, callback){
           }
         }
         if(breaker_matches_current){
-          alert("Reset to original state")
+          // alert("Reset to original state")
         }
 
         callback(breaker_matches_next);
@@ -220,7 +220,6 @@ function component_modal(component){
       // $('<p>Data:</p>').appendTo('#dataPopup');
 
       $.ajax({
-        url:"data/scenario1.csv",
         dataType:"text",
         success:function(data)
         {
@@ -279,3 +278,23 @@ function component_modal(component){
       }
     });
   }
+
+
+function debounce_click_function(object, callback){
+  object.click(function(){
+    object.off('click')
+    callback(case_network)
+  })
+}
+
+function mouseenterleave_pointer(object){
+  object.mouseenter(function(){
+    $("body").css("cursor", "pointer");
+  })
+  object.mouseleave(function(){
+    $("body").css("cursor", "default");
+  })
+  object.mouseover(function(){
+    $("body").css("cursor", "default");
+  })
+}

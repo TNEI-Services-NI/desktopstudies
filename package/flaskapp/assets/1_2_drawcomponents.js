@@ -280,17 +280,16 @@ function draw_breaker(dict_line, breaker){
   if(live_colour === undefined){
     live_colour = palette[dict_line.voltage]
   }
-
   if(live === true){
     colour = live_colour
   } else {
     colour = palette["0V"]
   }
-
   if (state === 'open'){
     rect1 = draw.rect(size, size).center(center[0], center[1]).fill(palette["background-color"]).stroke(colour).stroke({width: 1})
   }
   else if (state === 'closed'){
+    // alert(colour)
     rect1 = draw.rect(size, size).center(center[0], center[1]).fill(colour).stroke(colour).stroke({width: 1})
   }
   else{
@@ -765,7 +764,6 @@ function add_text(object, bool_dict_obj, list_text, x_from_center=0, y_from_cent
  * @param  {function( SVG Object )} callback after drawing is complete
  * @return {None}
 */
-//todo refactor this
 function add_dataview(observer, text, offset, callback) {
   let colour = "#e5b815"
   add_text(observer, false, text, offset[0], offset[1], colour, font_size, callback)
@@ -797,8 +795,6 @@ function add_static_text(list_text, x=100, y=100, colour="#d3d3d3", callback){
     text1.center(text1.x_coord, text1.y_coord);
     callback(text1)
 }
-
-
 
 function draw_SGT(dict_line,callback){
     var rad = 18 * Math.min(x_scaling,y_scaling)
@@ -853,7 +849,6 @@ function draw_SGT(dict_line,callback){
 
 }
 
-
 function draw_action_button(){
   var group = draw.group();
 
@@ -864,13 +859,16 @@ function draw_action_button(){
     }).done(function( action_values ) {
       action = action_values[current_step][entity]
       if(action !== ''){
-        let rect1 = draw.rect(x_max*0.1,y_max*0.07).fill("yellow").center(x_max*0.8,y_max*0.82);
-        add_text(rect1, false, ["Take action: ", action], 0, 0, "#000000", 12, function(){})
-        rect1.click(function() {
-          rect1.off('click')
-          action = undefined
-          inc_state(case_network)
+        let rect1 = draw.rect(x_max*0.1,y_max*0.07).fill('#ffd3aa').center(x_max*0.8,y_max*0.88);
+        add_text(rect1, false, ["Take action: ", action], 0, 0, "#000000", 12, function(text1){
+          debounce_click_function(text1, inc_state);
+          mouseenterleave_pointer(text1);
         })
+        debounce_click_function(rect1, function(case_network_){
+          action = undefined
+          inc_state(case_network_);
+        });
+        mouseenterleave_pointer(rect1);
       }
 
     })
@@ -881,34 +879,37 @@ function draw_action_button(){
 }
 
 
+
 function draw_admin_buttons(){
   var group = draw.group();
 
 
     if(entity === 'admin'){
-      let rect0 = draw.rect(x_max*0.07,y_max*0.05).fill("yellow").center(x_max*0.5,y_max*0.82);
-      add_text(rect0, false, ["Admin action: reset"], 0, 0, "#000000", 12, function(){})
-      let rect1 = draw.rect(x_max*0.07,y_max*0.05).fill("yellow").center(x_max*0.6,y_max*0.82);
-      add_text(rect1, false, ["Admin action: back"], 0, 0, "#000000", 12, function(){})
-      let rect2 = draw.rect(x_max*0.07,y_max*0.05).fill("yellow").center(x_max*0.7,y_max*0.82);
-      add_text(rect1, false, ["Admin action: back"], 0, 0, "#000000", 12, function(){})
-      add_text(rect2, false, ["Admin action: next"], 0, 0, "#000000", 12, function(){})
-      rect0.click(function() {
-        rect0.off('click')
-        reset_state(case_network)
+      let rect0 = draw.rect(x_max*0.07,y_max*0.05).fill("#ffd3aa").center(x_max*0.5,y_max*0.88);
+      add_text(rect0, false, ["Admin action:", "reset"], 0, 0, "#000000", 12, function(text1){
+        debounce_click_function(text1, reset_state);
+        mouseenterleave_pointer(text1);
       })
-      rect1.click(function() {
-        rect1.off('click')
-        dec_state(case_network)
+      let rect1 = draw.rect(x_max*0.07,y_max*0.05).fill("#ffd3aa").center(x_max*0.6,y_max*0.88);
+      add_text(rect1, false, ["Admin action:", "back"], 0, 0, "#000000", 12, function(text1){
+        debounce_click_function(text1, dec_state);
+        mouseenterleave_pointer(text1);
       })
-      rect2.click(function() {
-        rect2.off('click')
-        inc_state(case_network)
+      let rect2 = draw.rect(x_max*0.07,y_max*0.05).fill("#ffd3aa").center(x_max*0.7,y_max*0.88);
+      add_text(rect2, false, ["Admin action:", "next"], 0, 0, "#000000", 12, function(text1){
+        debounce_click_function(text1, inc_state);
+        mouseenterleave_pointer(text1);
       })
+
+      debounce_click_function(rect0, reset_state);
+      debounce_click_function(rect1, dec_state);
+      debounce_click_function(rect2, inc_state);
+      mouseenterleave_pointer(rect0);
+      mouseenterleave_pointer(rect1);
+      mouseenterleave_pointer(rect2);
     }
 
 }
-
 
 function draw_line(line,id_line, type="busbar"){
         bNodes = false

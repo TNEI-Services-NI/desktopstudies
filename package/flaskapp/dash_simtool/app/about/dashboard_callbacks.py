@@ -125,7 +125,7 @@ def _add_sidebar_buttons(dash_app):
     return dash_app
 
 
-def init_callbacks(dash_app):
+def init_callbacks(dash_app, app_prefix):
     dash_app = _add_network_redraw(dash_app)
     dash_app = _add_sidebar_buttons(dash_app)
 

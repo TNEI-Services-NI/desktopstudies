@@ -59,13 +59,13 @@ def _add_network_redraw(dash_app):
             'room': session.get('room'),
             'entity': session['entity']
         })
-
-        return [network]
+        return ["Select network"]
 
     return dash_app
 
 
-def init_callbacks(dash_app):
+def init_callbacks(dash_app, app_prefix):
+    shared_clbks.login_required_(dash_app, app_prefix)
     dash_app = _add_network_redraw(dash_app)
     dash_app = shared_clbks.add_sim_progress_buttons(dash_app, URL_SLDS)
     dash_app = shared_clbks.add_legend_button(dash_app)

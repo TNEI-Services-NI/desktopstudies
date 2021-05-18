@@ -19,6 +19,7 @@ function Breaker_Callback(graphic_objects, name = ''){
             else{
                 add_text(object, false, [name], 3 + name.length*4 * x_scaling, 0,"#d3d3d3", font_size, function(object){})}
         }
+        mouseenterleave_pointer(object)
     }
 }
 
@@ -84,7 +85,7 @@ function Tx_Callback(graphic_objects, name = false, mva = false){
                 add_text(group, false, name, 0 * x_scaling, -20 *y_scaling, "#d3d3d3", font_size, function(group){})
             }
             else{
-                add_text(group, false, name, 30 * x_scaling,-10 *y_scaling, "#d3d3d3", font_size, function(group){})}
+                add_text(group, false, name, 40 * x_scaling,-10 *y_scaling, "#d3d3d3", font_size, function(group){})}
             }
 
             if(mva != false){
@@ -109,17 +110,20 @@ function Gen_Callback(graphic_objects, name=""){
             if(graphic_objects != undefined){
                 graphic_objects[0] = group
             }
-            var type = undefined
+            var label = []
             if(name==="MOTOR"){
-                type = ""
-            } else {
-                type = "GENERATOR"
-            }
-            if(group.horizontal === true){
-                add_text(group, false, [type, name], 0, -0* y_scaling, "#d3d3d3",font_size, function(group){})
+                label = ["MOTOR"]
+            } else if(name === "EMERGENCY"){
+                label = ["EMERGENCY","GENERATOR"]
             }
             else{
-                add_text(group, false, [type, name], 0,30 * y_scaling,"#d3d3d3",font_size, function(group){})}
+                label = ["GENERATOR"]
+            }
+            if(group.horizontal === true){
+                add_text(group, false, label, 0, -0* y_scaling, "#d3d3d3",font_size, function(group){})
+            }
+            else{
+                add_text(group, false, label, 0,30 * y_scaling,"#d3d3d3",font_size, function(group){})}
             }
         }
 
@@ -196,6 +200,39 @@ function StraightLine(origin, direction, length, voltage="33kV", dash = false, c
     if(direction =="down"){
     return new Line(x1,y1,x1,y1+length,voltage,dash,colour)
     }
+    if(direction =="NEE"){
+    return new Line(x1,y1,x1+length,y1-length*0.7,voltage,dash,colour)
+    }
+    if(direction =="NWW"){
+    return new Line(x1,y1,x1-length,y1-length*0.7,voltage,dash,colour)
+    }
+    if(direction =="SEE"){
+    return new Line(x1,y1,x1+length,y1+length*0.7,voltage,dash,colour)
+    }
+    if(direction =="SWW"){
+    return new Line(x1,y1,x1-length,y1+length*0.7,voltage,dash,colour)
+    }
+}
+
+function LoadBank(x1,y1, line_id){
+    let component = {
+    }
+    component[line_id+"#2"] = StraightLine([x1,y1], "down",30)
+    component[line_id+"#2.1"] = StraightLine([x1-5,y1+30], "right",10)
+    component[line_id+"#2.2"] = StraightLine([x1+5,y1+30], "down",40)
+    component[line_id+"#2.3"] = StraightLine([x1+5,y1+70], "left",10)
+    component[line_id+"#2.4"] = StraightLine([x1-5,y1+70], "up",40)
+    component[line_id+"#2.LE1"] = StraightLine([x1-2.5,y1+37], "NEE",2.5)
+    component[line_id+"#2.L0"] = StraightLine([x1-2.5,y1+37], "SEE",5)
+    component[line_id+"#2.L1"] = StraightLine([x1-2.5+5,y1+37+5*0.75], "SWW",5)
+    component[line_id+"#2.L2"] = StraightLine([x1-2.5,y1+37+10*0.75], "SEE",5)
+    component[line_id+"#2.L3"] = StraightLine([x1-2.5+5,y1+37+15*0.75], "SWW",5)
+    component[line_id+"#2.L4"] = StraightLine([x1-2.5,y1+37+20*0.75], "SEE",5)
+    component[line_id+"#2.L5"] = StraightLine([x1-2.5+5,y1+37+25*0.75], "SWW",5)
+    component[line_id+"#2.L6"] = StraightLine([x1-2.5,y1+37+30*0.75], "SEE",5)
+    component[line_id+"#2.LE2"] = StraightLine([x1-2.5+5,y1+37+35*0.75], "SWW",2.5)
+    return component
+
 }
 
 /**
@@ -373,3 +410,19 @@ function SGT(line_id,name){
     this.graphic=[],
     this.name = name,
     this.callback = Breaker_Callback(this.graphic,name)}
+
+
+function GeneratorControl(pos){
+    this.component = "GeneratorControl"
+    this.pos = pos
+    this.graphic=[],
+    this.callback = Text_Callback(this.graphic)
+}
+
+function GeneratorGraph(pos,generators){
+    this.component = "GeneratorGraph"
+    this.generators = generators
+    this.pos = pos
+    this.graphic=[],
+    this.callback = Text_Callback(this.graphic)
+}

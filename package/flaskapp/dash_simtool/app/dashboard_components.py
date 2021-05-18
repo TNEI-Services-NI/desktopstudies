@@ -341,13 +341,16 @@ def navbar_controls(url_page):
                                 href=dash_app.URL_SLDS,
                                 active=True if dash_app.URL_SLDS == url_page else False,
                                 external_link=True),
-                    dbc.NavLink("Scripts",
-                                href=dash_app.URL_SLDS if cf.demo else dash_app.URL_SCRIPTS,
-                                active=True if dash_app.URL_SCRIPTS == url_page else False,
-                                external_link=True),
+                    # dbc.NavLink("Scripts",
+                    #             href=dash_app.URL_SLDS if cf.demo else dash_app.URL_SCRIPTS,
+                    #             active=True if dash_app.URL_SCRIPTS == url_page else False,
+                    #             external_link=True),
                     dbc.NavLink("About",
                                 href=dash_app.URL_SLDS if cf.demo else dash_app.URL_ABOUT,
                                 active=True if dash_app.URL_ABOUT == url_page else False,
+                                external_link=True),
+                    dbc.NavLink("Lobby",
+                                href='/wait_room',
                                 external_link=True),
                     dbc.NavLink("Log out",
                                 href='/logout',
@@ -364,7 +367,7 @@ def navbar_controls(url_page):
 
 def navbar(url_page):
     # nav bar
-    _nav_bar = dbc.NavbarSimple(brand='Desktop Studies Communications Tool',
+    _nav_bar = dbc.NavbarSimple(brand='Distributed Restart - Desktop Exercise Simulation',
                                 color='#c35d09',
                                 dark=True,
                                 id='nav_bar',
@@ -375,26 +378,26 @@ def navbar(url_page):
     return _nav_bar
 
 
-def sidebar(URL_PAGE):
+def sidebar(url_page, styling):
     _heading = [
         html.H3("Options"),
         html.Hr(),
     ]
     _dropdown = [
         dbc.DropdownMenu(
-            label="Chapelcross 33kv",
+            label="Select network",
             children=[
-                dbc.DropdownMenuItem("Chapelcross 33kv", id="chapelcross33kv"),
-                dbc.DropdownMenuItem("Chapelcross 132kv", id="chapelcross132kv"),
-                dbc.DropdownMenuItem("Gretna 132kv", id="gretna132kv"),
-                dbc.DropdownMenuItem("Gretna 400kv", id="gretna400kv"),
-                dbc.DropdownMenuItem("chapelcrossgretna1", id="chapelcrossgretna1"),
-                dbc.DropdownMenuItem("chapelcrossgretna2", id="chapelcrossgretna2"),
-                dbc.DropdownMenuItem("ewehillgretna", id="ewehillgretna"),
-                dbc.DropdownMenuItem("stevenscroft33kv", id="stevenscroft33kv"),
-                dbc.DropdownMenuItem("minsca33kv", id="minsca33kv"),
-                dbc.DropdownMenuItem("ewehillwindfarm1", id="ewehillwindfarm1"),
-                dbc.DropdownMenuItem("ewehillwindfarm2", id="ewehillwindfarm2"),
+                dbc.DropdownMenuItem("Chapelcross 33kV", id="chapelcross33kv",),
+                dbc.DropdownMenuItem("Chapelcross 132kV", id="chapelcross132kv"),
+                dbc.DropdownMenuItem("Gretna 132kV", id="gretna132kv"),
+                dbc.DropdownMenuItem("Gretna 400kV", id="gretna400kv"),
+                dbc.DropdownMenuItem("Chapelcross - Gretna 1", id="chapelcrossgretna1"),
+                dbc.DropdownMenuItem("Chapelcross - Gretna 2", id="chapelcrossgretna2"),
+                dbc.DropdownMenuItem("Ewe Hill 2 WF - Gretna", id="ewehillgretna"),
+                dbc.DropdownMenuItem("Steven's Croft", id="stevenscroft33kv"),
+                dbc.DropdownMenuItem("Minsca WF", id="minsca33kv"),
+                dbc.DropdownMenuItem("Ewe Hill 1 WF", id="ewehillwindfarm1"),
+                dbc.DropdownMenuItem("Ewe Hill 2 WF", id="ewehillwindfarm2"),
             ],
             id='network_menu'
         ),
@@ -422,14 +425,14 @@ def sidebar(URL_PAGE):
     ]
 
     _sidebar_widgets = []
-    if 'SLDs' in URL_PAGE:
+    if 'SLDs' in url_page:
         _sidebar_widgets += _heading
         _sidebar_widgets += _dropdown
         _sidebar_widgets += _sim_buttons
         _sidebar_widgets += _sim_status
         _sidebar_widgets += _entity_view
         _sidebar_widgets += _debug
-    elif 'home' in URL_PAGE:
+    elif 'home' in url_page:
         _sidebar_widgets += _heading
         _sidebar_widgets += _sim_buttons
         _sidebar_widgets += _sim_status
@@ -438,7 +441,7 @@ def sidebar(URL_PAGE):
 
     sidebar = html.Div(
         _sidebar_widgets,
-        style=styling.SIDEBAR_STYLE,
+        style=styling,
         id='sidebar'
     )
     return sidebar

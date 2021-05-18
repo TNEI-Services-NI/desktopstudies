@@ -35,7 +35,7 @@ def init_dashboard(server=""):
     _nav_bar = components.navbar(URL_PAGE)
     #
     # add sidebar
-    _sidebar = components.sidebar(URL_PAGE)
+    _sidebar = components.sidebar(URL_PAGE, styling.SIDEBAR_STYLE)
 
     #legend
     _legend = components.legend()
@@ -66,6 +66,6 @@ def init_dashboard(server=""):
                                    ],
                                   )
 
-    dash_app = callbacks.init_callbacks(dash_app)
+    dash_app = callbacks.init_callbacks(dash_app, URL_PAGE)
 
     return dash_app if server == "" else dash_app.server
