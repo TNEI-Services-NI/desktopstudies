@@ -859,7 +859,7 @@ function draw_action_button(){
     }).done(function( action_values ) {
       action = action_values[current_step][entity]
       if(action !== ''){
-        let rect1 = draw.rect(x_max*0.1,y_max*0.07).fill("yellow").center(x_max*0.8,y_max*0.9);
+        let rect1 = draw.rect(x_max*0.1,y_max*0.07).fill('#ffd3aa').center(x_max*0.8,y_max*0.88);
         add_text(rect1, false, ["Take action: ", action], 0, 0, "#000000", 12, function(){})
         rect1.click(function() {
           rect1.off('click')
@@ -875,30 +875,35 @@ function draw_action_button(){
 
 }
 
+
+
 function draw_admin_buttons(){
   var group = draw.group();
 
 
     if(entity === 'admin'){
-      let rect0 = draw.rect(x_max*0.07,y_max*0.05).fill("yellow").center(x_max*0.5,y_max*0.9);
-      add_text(rect0, false, ["Admin action:", "reset"], 0, 0, "#000000", 12, function(){})
-      let rect1 = draw.rect(x_max*0.07,y_max*0.05).fill("yellow").center(x_max*0.6,y_max*0.9);
-      add_text(rect1, false, ["Admin action:", "back"], 0, 0, "#000000", 12, function(){})
-      let rect2 = draw.rect(x_max*0.07,y_max*0.05).fill("yellow").center(x_max*0.7,y_max*0.9);
-      add_text(rect1, false, ["Admin action:", "back"], 0, 0, "#000000", 12, function(){})
-      add_text(rect2, false, ["Admin action:", "next"], 0, 0, "#000000", 12, function(){})
-      rect0.click(function() {
-        rect0.off('click')
-        reset_state(case_network)
+      let rect0 = draw.rect(x_max*0.07,y_max*0.05).fill("#ffd3aa").center(x_max*0.5,y_max*0.88);
+      add_text(rect0, false, ["Admin action:", "reset"], 0, 0, "#000000", 12, function(text1){
+        debounce_click_function(text1, reset_state);
+        mouseenterleave_pointer(text1);
       })
-      rect1.click(function() {
-        rect1.off('click')
-        dec_state(case_network)
+      let rect1 = draw.rect(x_max*0.07,y_max*0.05).fill("#ffd3aa").center(x_max*0.6,y_max*0.88);
+      add_text(rect1, false, ["Admin action:", "back"], 0, 0, "#000000", 12, function(text1){
+        debounce_click_function(text1, dec_state);
+        mouseenterleave_pointer(text1);
       })
-      rect2.click(function() {
-        rect2.off('click')
-        inc_state(case_network)
+      let rect2 = draw.rect(x_max*0.07,y_max*0.05).fill("#ffd3aa").center(x_max*0.7,y_max*0.88);
+      add_text(rect2, false, ["Admin action:", "next"], 0, 0, "#000000", 12, function(text1){
+        debounce_click_function(text1, inc_state);
+        mouseenterleave_pointer(text1);
       })
+
+      debounce_click_function(rect0, reset_state);
+      debounce_click_function(rect1, dec_state);
+      debounce_click_function(rect2, inc_state);
+      mouseenterleave_pointer(rect0);
+      mouseenterleave_pointer(rect1);
+      mouseenterleave_pointer(rect2);
     }
 
 }

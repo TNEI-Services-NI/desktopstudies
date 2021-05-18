@@ -32,7 +32,7 @@ networks_undrawn["stevenscroft33kv"]={
     "STCR_AUX#13": StraightLine([395,770],"right",300,"LV"),
     "STCR_AUX#15": StraightLine([430,770],"down",65,"LV"),
     "STCR_AUX#16": StraightLine([500,770],"down",50,"LV"),
-    "STCR_D1#0": StraightLine([500,820],"down",45,"LV"),
+    "STCR_DIESEL#0": StraightLine([500,820],"down",45,"LV"),
     "STCR_AUX#17": StraightLine([580,770],"down",65,"LV"),
     "STCR_AUX#18": StraightLine([680,770],"down",65,"LV"),
 
@@ -42,9 +42,8 @@ networks_undrawn["stevenscroft33kv"]={
     busbars:{
        "STCR3-": StraightLine([170,255],"right",250,"33kV"),
        "STCR_AUX#2": StraightLine([350,540],"right",360,"LV"),
-    "STCR_AUX#13": StraightLine([395,770],"right",300,"LV"),
-
-},
+        "STCR_AUX#13": StraightLine([395,770],"right",300,"LV"),
+    },
 
     breakers:{
         "699 CHAP": new Breaker("STCR3-#0",1, "CHAP"),
@@ -124,7 +123,7 @@ networks_undrawn["stevenscroft33kv"]={
     generators:{
 
         "STCR5-_1": new Generator("STCR0G-_1",1),
-        "STCR_D1": new Generator("STCR_D1#0",1, "EMERGENCY"),
+        "STCR_DIESEL": new Generator("STCR_DIESEL#0",1, "EMERGENCY"),
         "STCR_MOTOR": new Generator("STCR_AUX#3",1, "MOTOR")
     }
 }
