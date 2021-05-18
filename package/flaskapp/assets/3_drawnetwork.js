@@ -312,7 +312,9 @@ function update_generator_graphs(step_data_) {
     if(components.generatorGraphManagers !== undefined){
         let graphmanager = components.generatorGraphManagers[0]
         for(let gen_id in graphmanager.bars){
-            graphmanager.animatePercentage(gen_id, step_data_["generators_active_power"][gen_id], function(){})
+            graphmanager.animatePercentage(gen_id,
+              100*step_data_["generators_active_power"][gen_id]/step_data_["generators_rating"][gen_id],
+              function(){})
         }
     }
 }

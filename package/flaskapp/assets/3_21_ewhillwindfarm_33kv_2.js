@@ -223,7 +223,7 @@ networks_undrawn["ewehillwindfarm2"]={
     },
 
     tx:{
-        "trf_EWEH3-_EWEH0G_1" : new Tx("EWEH3#1",0,["GT1 90MVA","TAP 12"],"","132kV"),
+        "trf_EWEH1Q_EWEH3-_1" : new Tx("EWEH3#1",0,["GT1 90MVA","TAP 12"],"","132kV"),
         "EWEH3-AUX-_1": new Tx("EWEH3#3", 0, "","","33kV"),
         "EWEH0G-AUX-_2": new Tx("EWEH0G_2#102",1,["AUXILIARY","TRANSFORMER"],"","33kV"),
 
