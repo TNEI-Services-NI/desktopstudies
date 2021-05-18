@@ -96,7 +96,7 @@ def combine_LF_data(network="chapelcross", voltage="33kv", option="Opt5"):
 
 
 if __name__ == '__main__':
-    process_LF_data()
+    process_LF_data(rev=9)
     process_breakers_data()
     # migrate_csvs("package/data/simtool/breakerstates/Opt5")
     # migrate_csvs("package/data/simtool/networkviews/Opt5")

@@ -363,7 +363,7 @@ networks_undrawn["chapelcross33kv"] = {
         "CHAP3-AUX-_2": new Tx("CHAP1-_CHAP3-_2#1",1,"","","0V"),
         "CHAP1-_CHAP3-_2": new Tx("CHAP1-_CHAP3-_2#0",1,"GRID T2","90 MVA","132kV"),
         "CHAP1-_CHAP3-_1": new Tx("CHAP1-_CHAP3-_1#0",1,"GRID T1", "90 MVA","132kV"),
-        "CHAP3-AUX-_1": new Tx("CHAP1-_CHAP3-_1#3",0,"","","33kV"),
+        "CHAP3_AUX-_1": new Tx("CHAP1-_CHAP3-_1#3",0,"","","33kV"),
         "MIBIT1_MIBI10_T1": new Tx("MIBI3-_MIBIT1_1#1",1,"","10 MVA","11kV"),
         "LAHOT1_LAHO10_T1": new Tx("MIBI3-_LAHO3A_1#3",1,"T1","12 MVA","11kV"),
         "LAHOT2_LAHO20_T2": new Tx("CHAPX3_LAHO3B_1#4",1.2,"T2","12 MVA","33kV"),
