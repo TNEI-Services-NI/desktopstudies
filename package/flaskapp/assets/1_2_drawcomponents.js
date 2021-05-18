@@ -860,12 +860,15 @@ function draw_action_button(){
       action = action_values[current_step][entity]
       if(action !== ''){
         let rect1 = draw.rect(x_max*0.1,y_max*0.07).fill('#ffd3aa').center(x_max*0.8,y_max*0.88);
-        add_text(rect1, false, ["Take action: ", action], 0, 0, "#000000", 12, function(){})
-        rect1.click(function() {
-          rect1.off('click')
-          action = undefined
-          inc_state(case_network)
+        add_text(rect1, false, ["Take action: ", action], 0, 0, "#000000", 12, function(text1){
+          debounce_click_function(text1, inc_state);
+          mouseenterleave_pointer(text1);
         })
+        debounce_click_function(rect1, function(case_network_){
+          action = undefined
+          inc_state(case_network_);
+        });
+        mouseenterleave_pointer(rect1);
       }
 
     })

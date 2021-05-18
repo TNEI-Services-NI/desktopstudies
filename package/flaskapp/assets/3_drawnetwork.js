@@ -352,6 +352,7 @@ function dec_state(case_network_) {
 
 function reset_state(case_network_) {
     current_step = -2;
+    components.generatorGraphManagers = undefined;
     update_state(case_network_);
 }
 
