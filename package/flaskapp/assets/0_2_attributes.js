@@ -14,7 +14,7 @@ let line_palette_style = {'width': 4}
 let live_dead = false
 let highlight_undefined = false
 
-let coord_display = true
+let coord_display = false
 
 let components = {}
 

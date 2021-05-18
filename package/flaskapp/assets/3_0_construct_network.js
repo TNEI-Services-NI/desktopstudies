@@ -738,9 +738,6 @@
                     bar_height = graph_height*((percentage)/100)
                 }
                 bar_start_height = graph_height*((start_percentage)/100)
-                console.log(start_percentage)
-                console.log(percentage)
-                console.log(bar_height)
                 this.move(x_base+base_pos, y_base-1-(bar_start_height)).size(bar_offset, bar_start_height)
                 let runner = this.animate(2000).move(x_base+base_pos, y_base-1-(bar_height)).size(bar_offset, bar_height)
                 if(callback != undefined){
@@ -753,7 +750,7 @@
                 if(percentage > 0){
                     bar_height = graph_height*(percentage/100)
                 }
-                this.move(x_base+base_pos, y_base-(bar_height)).size(bar_offset, bar_height)
+                this.move(x_base+base_pos, y_base-1-(bar_height)).size(bar_offset, bar_height)
             }
 
             rect.move(x_base+base_pos, y_base)
