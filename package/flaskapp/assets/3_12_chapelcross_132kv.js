@@ -101,7 +101,7 @@ networks_undrawn["chapelcross132kv"]={
 
     },
 
-    tx:{"CHAP3-AUX-_1": new Tx("CHAP1-_CHAP3-_1#2",0,"","", "33kV"),
+    tx:{"CHAP3_AUX-_1": new Tx("CHAP1-_CHAP3-_1#2",0,"","", "33kV"),
         "CHAP1-_CHAP3-_1": new Tx("CHAP1-_CHAP3-_1#0",1,"GRID T1","90MVA","132kV"),
 
         "CHAP3-AUX-_2": new Tx("CHAP1-_CHAP3-_2#3",1,"","", "0V"),
