@@ -65,7 +65,7 @@ networks_undrawn["ewehillgretna"]={
         },
 
     tx:{
-        "trf_EWEH3-_EWEH0G_1" : new Tx("EWEH3#5",0,"","","132kV"),
+        "trf_EWEH1Q_EWEH3-_1" : new Tx("EWEH3#5",0,"","","132kV"),
         "EWEH3-AUX-_1" : new Tx("EWEH3#7",1,"","","33kV"),
 
     },
