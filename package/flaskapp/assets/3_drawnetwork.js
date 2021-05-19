@@ -472,7 +472,9 @@ function event_draw(draw_data) {
 
 
 // Document Initialisation
-$(document).ready(function() {});
+$(document).ready(function() {
+
+});
 
 x_max = undefined;
 y_max = undefined;

@@ -1,10 +1,18 @@
 name,entity,email,required,status
-Daniel Auty,TO,daniel.auty@nationalgrideso.com,TRUE,FALSE
-Dozie Nnabuife,Observer,dozie.nnabuife@nationalgrideso.com,TRUE,FALSE
-Deepak Lala,ESO,deepak.lala@nationalgrideso.com,TRUE,FALSE
-Christopher Salter,DNO,christopher.salter2@nationalgrideso.com,TRUE,FALSE
-Joe Hunter,DNO,joe.hunter@spenergynetworks.co.uk,TRUE,FALSE
-Colin Foote,DNO,cfoote@spenergynetworks.co.uk,TRUE,FALSE
-Michael Kenny,DER,michael.kenny@nationalgrideso.com,TRUE,FALSE
-Dieter Gutschow,DER,dieter.gutschow@tneigroup.com,TRUE,FALSE
-Max McFarlane,admin,max.mcfarlane@tneigroup.com,TRUE,FALSE
+ESO_Admin User,ESO,ESO_Admin@ESO_Admin.com,TRUE,FALSE
+ESO_1 User,ESO,ESO_1@ESO_1.com,FALSE,FALSE
+ESO_2 User,ESO,ESO_2@ESO_2.com,FALSE,FALSE
+DER_Admin User,DER,DER_Admin@DER_Admin.com,TRUE,FALSE
+DER_1 User,DER,DER_1@DER_1.com,FALSE,FALSE
+DER_2 User,DER,DER_2@DER_2.com,FALSE,FALSE
+DNO_Admin User,DNO,DNO_Admin@DNO_Admin.com,TRUE,FALSE
+DNO_1 User,DNO,DNO_1@DNO_1.com,FALSE,FALSE
+DNO_2 User,DNO,DNO_2@DNO_2.com,FALSE,FALSE
+TO_Admin User,TO,TO_Admin@TO_Admin.com,TRUE,FALSE
+TO_1 User,TO,TO_1@TO_1.com,FALSE,FALSE
+TO_2 User,TO,TO_2@TO_2.com,FALSE,FALSE
+Observer_1 User,Observer,Observer_1@Observer_1.com,FALSE,FALSE
+Observer_2 User,Observer,Observer_2@Observer_2.com,FALSE,FALSE
+Observer_3 User,Observer,Observer_3@Observer_3.com,FALSE,FALSE
+Observer_4 User,Observer,Observer_4@Observer_4.com,FALSE,FALSE
+Demo User,admin,demo.user@example.com,TRUE,FALSE

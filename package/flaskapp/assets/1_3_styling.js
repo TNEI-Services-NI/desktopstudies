@@ -77,8 +77,3 @@ function style_diagram_line(line){
   return line
 }
 
-$("#legend_button").hover(function(){
-  $(this).css("background-color", "#e70707");
-  }, function(){
-  $(this).css("background-color", "yellow");
-});

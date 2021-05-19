@@ -4,6 +4,14 @@
 //both have set and animatePercentage methods so just pick your preferred method.
   function prepare_canvas(x, y){
     //Create canvas
+    $("#legend_button").hover(function(){
+    // $(this).css("background-color", "#e70707");
+    $("body").css("cursor", "pointer");
+    $(this).css("background-color", "#caac00");
+    }, function(){
+    $("body").css("cursor", "default");
+    $(this).css("background-color", "#ebc700");
+    });
     let drawing = $('#drawing')
     let body = $('#body')
     drawing.empty();
@@ -263,7 +271,7 @@
 
 
             components.breakers[id] = b
-            component_modal(b)
+            component_modal(b, true)
         }
         callback({});
     });
@@ -366,7 +374,7 @@
         if(isolator.name === false){
             isolator.name = i
         }
-        isolator.callback = Breaker_Callback(isolator.graphic,isolator.name)
+        isolator.callback = Isolator_Callback(isolator.graphic,isolator.name)
         draw_isolator(line, isolator)
         let id = i
         let closed = state == 'closed'

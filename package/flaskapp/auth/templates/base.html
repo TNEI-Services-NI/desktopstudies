@@ -26,12 +26,12 @@
                         </a>
                         {% endif %}
                         {% if not current_user.is_authenticated %}
-                        <a href="{{ url_for('auth.login') }}" class="navbar-item">
-                        Login
-                        </a>
-                        <a href="{{ url_for('auth.signup') }}" class="navbar-item">
-                        Sign Up
-                        </a>
+                        {#<a href="{{ url_for('auth.login') }}" class="navbar-item">#}
+                        {#Login#}
+                        {#</a>#}
+                        {#<a href="{{ url_for('auth.signup') }}" class="navbar-item">#}
+                        {#Sign Up#}
+                        {#</a>#}
                         {% endif %}
                         {% if current_user.is_authenticated %}
                         <a href="{{ url_for('auth.logout') }}" class="navbar-item">
@@ -43,7 +43,7 @@
                </div>
             </nav>
             <div class="hero-body">
-              <div class="container has-text-centered">
+              <div class="container has-text-centered" style="padding-top: 30vh">
                 {% block content %}
                 {% endblock %}
               </div>
