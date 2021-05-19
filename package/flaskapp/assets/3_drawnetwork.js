@@ -85,9 +85,15 @@ function update_transformer_modals(step_data) {
         tx_instance.modal_data = []
         if (tx_ in step_data["transformers_loading"]) {
             tx_instance.modal_data = tx_instance.modal_data.concat(
-                ["Utilisation: " + step_data["transformers_loading"][tx_] + " [MVA]"]
+                ["Utilisation: " + step_data["transformers_loading"][tx_] + " [%]"]
             )
         }
+        if (tx_ in step_data["transformer_apparent_power"]) {
+            tx_instance.modal_data = tx_instance.modal_data.concat(
+                ["Utilisation: " + step_data["transformer_apparent_power"][tx_] + " [MVA]"]
+            )
+        }
+
     }
 }
 
@@ -96,7 +102,6 @@ function update_transformers(step_data) {
         tx_id_LF = tx_.split("#")[0]
         tx_instance = components.transformers[tx_]
         if (tx_id_LF in step_data["transformers_loading"]) {
-            console.log(tx_id_LF)
             loading = step_data["transformers_loading"][tx_id_LF]
             if (Number(loading) > 0) {
                 tx_instance.setLive()
@@ -151,15 +156,17 @@ function update_dataviews(step_data) {
                     units = " MW"
                     acc = 2
                 } else if (component_parameter.includes('loading')) {
-                    units = " MVA"
+                    units = " %"
                     acc = 2
                 } else if (component_parameter.includes('voltage')) {
-                    units = " V p.u."
+                    units = " p.u."
                 } else if (component_parameter.includes('taps')) {
                     units = " ."
                 } else if (component_parameter.includes('current')) {
                     units = " AMPS"
                     scale = 1000
+                } else if (component_parameter.includes('apparent')) {
+                    units = " MVA"
                 }
 
                let value = (scale * Math.round(step_data[component_parameter][id_dv] * 1000) / 1000).toFixed(acc)
@@ -325,6 +332,7 @@ function update_state(case_network_) {
         'sim_step': current_step,
         'entity': entity,
         'network': network,
+        'page': page,
         'progress': true,
         'broadcast': true
     }

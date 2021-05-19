@@ -471,11 +471,11 @@ networks_undrawn["chapelcross33kv"] = {
 
         //transformers
         "CHAP1-_CHAP3-_1": new DataView("CHAP1-_CHAP3-_1#0",[-30,-40],[
-            "transformers_loading",
+            "transformer_apparent_power",
             "lines_reactive_power"
         ]),
         "CHAP1-_CHAP3-_2": new DataView("CHAP1-_CHAP3-_2#0",[-30,-40],[
-            "transformers_loading",
+            "transformer_apparent_power",
             "lines_reactive_power"
         ]),
 
@@ -501,43 +501,43 @@ networks_undrawn["chapelcross33kv"] = {
 
         //transformers for loads
         "ANANT2_ANAN20_T2": new DataView("ANANT2_CHAP3-_1#4",[35,0],[
-            "transformers_loading",
+            "transformer_apparent_power",
         ]),
         "ANANT1_ANAN10_T1":new DataView("ANANT1_CHAP3-_1#4",[-35,0],[
-            "transformers_loading",
+            "transformer_apparent_power",
         ]),
         "LOBIT1_LOBI10_T1": new DataView("LOBI5-1#0",[-35,0],[
-            "transformers_loading",
+            "transformer_apparent_power",
         ]),
         "LOBIT2_LOBI20_T2": new DataView("LOBI5-2#0",[35,0],[
-            "transformers_loading",
+            "transformer_apparent_power",
         ]),
         "LAHOT1_LAHO10_T1":new DataView("LAHO5-1#0",[-35,0],[
-            "transformers_loading",
+            "transformer_apparent_power",
         ]),
         "LAHOT2_LAHO20_T2": new DataView("LAHO5-2#0",[35,0],[
-            "transformers_loading",
+            "transformer_apparent_power",
         ]),
         "MOFTT1_MOFT10_T1": new DataView("MOFT5-1#0",[25,10],[
-            "transformers_loading",
+            "transformer_apparent_power",
         ]),
         "MOFTT2_MOFT20_T2": new DataView("MOFT5-2#0",[35,10],[
-            "transformers_loading",
+            "transformer_apparent_power",
         ]),
         "NEWCT1_NEWC10_T1":new DataView("NEWC5-#0",[35,0],[
-            "transformers_loading",
+            "transformer_apparent_power",
         ]),
         "GRNAT1_GRNA10_T1": new DataView("GRNA5-1#0",[0,30],[
-            "transformers_loading",
+            "transformer_apparent_power",
         ]),
         "GRNAT2_GRNA20_T2": new DataView("GRNA5-2#0",[0,30],[
-            "transformers_loading",
+            "transformer_apparent_power",
         ]),
         "KIBAT1_KIBA10_T1": new DataView("KIBA5-#0",[35,0],[
-            "transformers_loading",
+            "transformer_apparent_power",
         ]),
         "MIBIT1_MIBI10_T1":new DataView("MIBI5-#0",[-25,5],[
-            "transformers_loading",
+            "transformer_apparent_power",
         ]),
 
 
