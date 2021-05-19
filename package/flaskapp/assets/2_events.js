@@ -320,7 +320,6 @@ function mouseenterleave_pointer(object){
     if(object[0]===object[1]){
       object[0].attr({"fill": "#"+String(LightenColor(String(object[0].fill()).split('#')[1], -20))});
     } else {
-      object[0].attr({"fill": "#"+String(LightenColor(String(object[0].fill()).split('#')[1], -20))});
       object[1].attr({"fill": "#"+String(LightenColor(String(object[1].fill()).split('#')[1], -20))});
     }
   })
@@ -329,7 +328,6 @@ function mouseenterleave_pointer(object){
     if(object[0]===object[1]){
       object[0].attr({"fill": "#"+String(LightenColor(String(object[0].fill()).split('#')[1], 20))});
     } else {
-      object[0].attr({"fill": "#"+String(LightenColor(String(object[0].fill()).split('#')[1], 20))});
       object[1].attr({"fill": "#"+String(LightenColor(String(object[1].fill()).split('#')[1], 20))});
     }
   })
