@@ -8,7 +8,7 @@
     let body = $('#body')
     drawing.empty();
     if(page=='home'){
-      drawing.css({'margin-left': '10vw'})
+      drawing.css({'margin-left': '9vw'})
     }
     body.css({'background-color': palette["background-color"]})
     // background = draw.rect(x, y).fill(palette["background-color"])
