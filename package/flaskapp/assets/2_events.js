@@ -198,10 +198,12 @@ function component_modal(component, interactive_component=false){
       $("#dataPopup").css('visibility', 'visible');
       $('#dataPopup').text(' ');
       $('<p></p>').appendTo('#dataPopup');
-      $('<p>'+type+':'+'</p>').appendTo('#dataPopup');
+      $('<H5><b>'+type+':'+'</b></H5>').appendTo('#dataPopup');
+      $('<hr style="border: none; height: 6px; background-color: #222222;">').appendTo('#dataPopup');
 
       // $('<p>'+component.id+'</p>').appendTo('#dataPopup');
-      $('<p>'+component.id.split("#")[0]+'</p>').appendTo('#dataPopup');
+      $('<p>Name: '+component.id.split("#")[0]+'</p>').appendTo('#dataPopup');
+      $('<hr style="border: none; height: 2px; background-color: #222222;">').appendTo('#dataPopup');
 
       if(type ==="Breaker" || type === "Isolator"){
             // $('<p> closed = '+component.closed+'</p>').appendTo('#dataPopup');
@@ -226,6 +228,7 @@ function component_modal(component, interactive_component=false){
 
       }
       // $('<p>Data:</p>').appendTo('#dataPopup');
+      // $('<hr style="border: none; height: 2px; background-color: #222222;">').appendTo('#dataPopup');
 
       $.ajax({
         dataType:"text",

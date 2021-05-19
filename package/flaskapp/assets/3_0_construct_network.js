@@ -180,6 +180,7 @@
     for (let id_busbar in dict_components.busbars){
 
         let busbar = dict_components.busbars[id_busbar]
+        busbar.component = "Busbar"
 //        load = style_line(load)
         draw_line(busbar,id_busbar,"busbar")
 
