@@ -4,8 +4,14 @@
 //both have set and animatePercentage methods so just pick your preferred method.
   function prepare_canvas(x, y){
     //Create canvas
-    $('#drawing').empty();
-    background = draw.rect(x, y).fill(palette["background-color"])
+    let drawing = $('#drawing')
+    let body = $('#body')
+    drawing.empty();
+    if(page=='home'){
+      drawing.css({'margin-left': '10vw'})
+    }
+    body.css({'background-color': palette["background-color"]})
+    // background = draw.rect(x, y).fill(palette["background-color"])
 
     let components_update = {
                     breakers: [],
@@ -30,57 +36,57 @@
     }
   }
 
-  function scale_two_point_objects(networks_undrawn, component){
+  function scale_two_point_objects(x_offset, networks_undrawn, component){
     for(let id_dict in networks_undrawn){
     let temp_dict_components = networks_undrawn[id_dict]
     for (let idx_line in temp_dict_components[component]){
         let temp_dict = temp_dict_components[component][idx_line]
-        temp_dict.x1 = temp_dict.x1 * x_scaling
-        temp_dict.x2 = temp_dict.x2 * x_scaling
+        temp_dict.x1 = (temp_dict.x1 + x_offset) * x_scaling
+        temp_dict.x2 = (temp_dict.x2 + x_offset) * x_scaling
         temp_dict.y1 = temp_dict.y1 * y_scaling
         temp_dict.y2 = temp_dict.y2 * y_scaling
     }
   }
   }
 
-  function scale_text(networks_undrawn, component){
+  function scale_text(x_offset, networks_undrawn, component){
    for(let id_dict in networks_undrawn) {
      let temp_dict_components = networks_undrawn[id_dict]
      for (let idx in temp_dict_components[component]) {
        temp_dict = temp_dict_components[component][idx]
-       temp_dict.offset[0] = temp_dict.offset[0] * x_scaling
+       temp_dict.offset[0] = (temp_dict.offset[0] + x_offset) * x_scaling
        temp_dict.offset[1] = temp_dict.offset[1] * y_scaling
      }
    }
   }
 
-  function scale_lines(networks_undrawn){
-    scale_two_point_objects(networks_undrawn, 'lines')
+  function scale_lines(x_offset, networks_undrawn){
+    scale_two_point_objects(x_offset, networks_undrawn, 'lines')
   }
 
-  function scale_busbars(networks_undrawn){
-    scale_two_point_objects(networks_undrawn, 'busbars')
+  function scale_busbars(x_offset, networks_undrawn){
+    scale_two_point_objects(x_offset, networks_undrawn, 'busbars')
   }
 
-  function scale_loads(networks_undrawn){
-    scale_two_point_objects(networks_undrawn, 'loads')
+  function scale_loads(x_offset, networks_undrawn){
+    scale_two_point_objects(x_offset, networks_undrawn, 'loads')
   }
 
-  function scale_labels(networks_undrawn){
-    scale_text(networks_undrawn, 'labels')
+  function scale_labels(x_offset, networks_undrawn){
+    scale_text(x_offset, networks_undrawn, 'labels')
   }
 
-  function scale_dataviews(networks_undrawn){
-   scale_text(networks_undrawn, 'dataViews')
+  function scale_dataviews(x_offset, networks_undrawn){
+   scale_text(x_offset, networks_undrawn, 'dataViews')
   }
 
-  function scale_availablePower(networks_undrawn){
+  function scale_availablePower(x_offset, networks_undrawn){
      for(let id_dict in networks_undrawn) {
         let temp_dict_components = networks_undrawn[id_dict]
 
         for (let idx in temp_dict_components.availablePower) {
            let temp_dict = temp_dict_components.availablePower[idx]
-           temp_dict.pos[0] = temp_dict.pos[0] * x_scaling
+           temp_dict.pos[0] = (temp_dict.pos[0] + x_offset) * x_scaling
            temp_dict.pos[1] = temp_dict.pos[1] * y_scaling
            temp_dict_components.availablePower[idx] = temp_dict
         }

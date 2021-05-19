@@ -505,14 +505,22 @@ function update_scaling() {
 
     x_scaling = (x_max - 250) / 1000
     y_scaling = (y_max - 100) / 1000
+
+    let x_offset = undefined
+    if(page='home'){
+        x_offset = 0
+    } else {
+        x_offset = 0
+    }
+
     font_size = 16 * Math.min(x_scaling, y_scaling)
     network_scaled = networks_undrawn
-    scale_lines(network_scaled);
-    scale_busbars(network_scaled)
-    scale_labels(network_scaled);
-    scale_dataviews(network_scaled);
-    scale_loads(network_scaled);
-    scale_availablePower(network_scaled);
+    scale_lines(x_offset, network_scaled);
+    scale_busbars(x_offset, network_scaled)
+    scale_labels(x_offset, network_scaled);
+    scale_dataviews(x_offset, network_scaled);
+    scale_loads(x_offset, network_scaled);
+    scale_availablePower(x_offset, network_scaled);
 }
 
 update_scaling();
