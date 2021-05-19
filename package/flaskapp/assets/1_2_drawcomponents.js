@@ -861,7 +861,7 @@ function draw_action_button(){
         let rect1 = draw.rect(x_max*0.1,y_max*0.07).fill('#ffd3aa').center(x_max*0.8,y_max*0.88);
         add_text(rect1, false, ["Take action: ", action], 0, 0, "#000000", 12, function(text1){
           debounce_click_function(text1, inc_state);
-          mouseenterleave_pointer(text1);
+          mouseenterleave_pointer([text1, rect1]);
         })
         debounce_click_function(rect1, function(case_network_){
           action = undefined
