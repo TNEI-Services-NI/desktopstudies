@@ -568,7 +568,6 @@
         s.setLive = function(){
           UIElements = this.UIElement.children()
 
-          console.log((UIElements["2"]))
           ellipse = UIElements[0]
           ellipse.attr({stroke: palette[liveCoils[1]]})
 
