@@ -332,6 +332,7 @@ function update_state(case_network_) {
         'sim_step': current_step,
         'entity': entity,
         'network': network,
+        'page': page,
         'progress': true,
         'broadcast': true
     }
