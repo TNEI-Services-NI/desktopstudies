@@ -310,8 +310,12 @@ function update_generator_colours(step_data_) {
 
         let idl = gen_instance.info.lineID
         let line_instance = components.lines[idl]
+        let idl_LF = idl.split("#")[0]
         let gen_id_LF = idg.split("#")[0]
-        if ((step_data_["generators_active_power"][gen_id_LF] !== 0) && (step_data_["generators_active_power"][gen_id_LF] !== undefined)) {
+        if (
+          (step_data_["generators_active_power"][gen_id_LF] !== 0) && (step_data_["generators_active_power"][gen_id_LF] !== undefined) ||
+          (step_data_["busbars_voltage"][idl_LF] !== 0) && (step_data_["busbars_voltage"][idl_LF] !== undefined)
+        ) {
             gen_instance.UIElement.find('.circle-class').attr({
                 'stroke': line_instance.info.dict_styling.stroke.live_color
             })
