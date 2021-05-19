@@ -40,7 +40,7 @@ networks_undrawn["chapelcross33kv"] = {
         "CHAP3A1#1": StraightLine([330,175],"up",20),
         "CHAP1-_CHAP3-_1#0": StraightLine([330,155],"up",95),
          "CHAP1-_CHAP3-_1#1":StraightLine([290,110],"right",40),
-         "CHAP1-_CHAP3-_1#3":StraightLine([290,110],"right",0,"LV"),
+         "CHAP1-_CHAP3-_1#3":StraightLine([290,110],"right",0,"0V"),
 
         "CHAP3-_MIBI3-_1#0": StraightLine([415,195],"down",55),
         "CHAP3A1#5": StraightLine([415,175],"down",20),

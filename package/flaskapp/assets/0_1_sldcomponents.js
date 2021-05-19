@@ -408,9 +408,10 @@ function GenerationInfo(position, name){
  * @param  {double} pos of SGT on line (between 0 and 1)
  * @usage instantiate as object i.e. new SGT(...)
  */
-function SGT(line_id,name){
+function SGT(line_id,name, liveCoils=["0V", "0V"]){
     this.component = "SGT"
     this.lineID = line_id,
+    this.liveCoils = liveCoils,
     this.graphic=[],
     this.name = name,
     this.callback = Breaker_Callback(this.graphic,name)}

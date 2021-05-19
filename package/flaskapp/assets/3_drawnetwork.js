@@ -108,6 +108,17 @@ function update_transformers(step_data) {
             }
         }
     }
+    for(let sgtx_ in components.SGTs){
+        let sgtx_instance = components.SGTs[sgtx_]
+        let line_ = sgtx_instance.line
+        line_id_LF = line_.split("#")[0]
+        if (line_id_LF in step_data["lines_active_power"]) {
+            let line_power = step_data["lines_active_power"][line_id_LF]
+            if (Number(line_power) > 0) {
+                sgtx_instance.setLive()
+            }
+        }
+    }
 }
 
 function update_line_data_views(step_data) {
