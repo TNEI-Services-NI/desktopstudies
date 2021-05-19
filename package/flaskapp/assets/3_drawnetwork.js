@@ -108,6 +108,17 @@ function update_transformers(step_data) {
             }
         }
     }
+    for(let sgtx_ in components.SGTs){
+        let sgtx_instance = components.SGTs[sgtx_]
+        let line_ = sgtx_instance.line
+        line_id_LF = line_.split("#")[0]
+        if (line_id_LF in step_data["lines_active_power"]) {
+            let line_power = step_data["lines_active_power"][line_id_LF]
+            if (Number(line_power) > 0) {
+                sgtx_instance.setLive()
+            }
+        }
+    }
 }
 
 function update_line_data_views(step_data) {
@@ -299,8 +310,12 @@ function update_generator_colours(step_data_) {
 
         let idl = gen_instance.info.lineID
         let line_instance = components.lines[idl]
+        let idl_LF = idl.split("#")[0]
         let gen_id_LF = idg.split("#")[0]
-        if ((step_data_["generators_active_power"][gen_id_LF] !== 0) && (step_data_["generators_active_power"][gen_id_LF] !== undefined)) {
+        if (
+          (step_data_["generators_active_power"][gen_id_LF] !== 0) && (step_data_["generators_active_power"][gen_id_LF] !== undefined) ||
+          (step_data_["busbars_voltage"][idl_LF] !== 0) && (step_data_["busbars_voltage"][idl_LF] !== undefined)
+        ) {
             gen_instance.UIElement.find('.circle-class').attr({
                 'stroke': line_instance.info.dict_styling.stroke.live_color
             })

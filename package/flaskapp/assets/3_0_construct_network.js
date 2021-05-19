@@ -292,7 +292,6 @@
         let type = tx.type
         let coil1 = tx.coil1
         let coil2 = tx.coil2
-        let callback = tx.callback
         draw_tx(line, tx)
 
         let liveCoils = [line.voltage,coil2]
@@ -559,11 +558,26 @@
         let line_id = sgt.lineID
         let line = dict_components.lines[line_id]
         let name = sgt.name
+        let liveCoils = sgt.liveCoils
         let callback = sgt.callback
         draw_SGT(line, callback)
 
         let id = i
-        let s = {info:sgt, UIElement: sgt.graphic[0], id : id}
+        let s = {info:sgt, line: line_id, UIElement: sgt.graphic[0], id : id}
+
+        s.setLive = function(){
+          UIElements = this.UIElement.children()
+
+          ellipse = UIElements[0]
+          ellipse.attr({stroke: palette[liveCoils[1]]})
+
+          // rect1 = UIElements[1]
+          // rect1.attr({stroke: palette[liveCoils[0]]})
+
+          circle2 = UIElements[2]
+          circle2.attr({stroke: palette[liveCoils[0]]})
+        }
+
         components.SGTs[id] = s
         component_modal(s)
         }

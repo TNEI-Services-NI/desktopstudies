@@ -842,7 +842,6 @@ function draw_SGT(dict_line,callback){
     group.add(rect1)
     group.add(circle2)
 
-    circle1.center(center[0],center[1])
 
     group.horizontal = bHorizontal
     callback(group);

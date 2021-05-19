@@ -40,7 +40,7 @@ networks_undrawn["chapelcross33kv"] = {
         "CHAP3A1#1": StraightLine([330,175],"up",20),
         "CHAP1-_CHAP3-_1#0": StraightLine([330,155],"up",95),
          "CHAP1-_CHAP3-_1#1":StraightLine([290,110],"right",40),
-         "CHAP1-_CHAP3-_1#3":StraightLine([290,110],"right",0,"LV"),
+         "CHAP1-_CHAP3-_1#3":StraightLine([290,110],"right",0,"0V"),
 
         "CHAP3-_MIBI3-_1#0": StraightLine([415,195],"down",55),
         "CHAP3A1#5": StraightLine([415,175],"down",20),
@@ -384,7 +384,7 @@ networks_undrawn["chapelcross33kv"] = {
         },
     generators:{
         "STCR5-_1": new Generator("STCR3-_STCR0G",1),
-        "WTG_EWEH0G_1": new Generator("EWEH0G",1),
+        "EWHC0G_1": new Generator("EWEH0G",1),
         // CRAIG II WINDFARM 11KV
         // "CRAG0B_1": new Generator("CRAG5B_LAHO5-_1",1),
         "MINS0G_1": new Generator("MINS0G", 1),
@@ -485,7 +485,7 @@ networks_undrawn["chapelcross33kv"] = {
             'generators_active_power',
             'generators_reactive_power',
           ]),
-        "WTG_EWEH0G_1": new DataView("WTG_EWEH0G_1", [35, 0],
+        "EWHC0G_1": new DataView("EWHC0G_1", [35, 0],
           [
             'generators_active_power',
             'generators_reactive_power',
@@ -545,7 +545,7 @@ networks_undrawn["chapelcross33kv"] = {
 
     },
     availablePower:{
-        "WTG_EWEH0G_1" : new AvailablePower([115,970]),
+        "EWHC0G_1" : new AvailablePower([115,970]),
         "MINS0G_1": new AvailablePower([940,820]),
         "STCR5-_1": new AvailablePower([800,50]),
 
@@ -553,11 +553,11 @@ networks_undrawn["chapelcross33kv"] = {
 
 //    generatorControls:{
 //        "MINS0G_1": new GeneratorControl([800,900]),
-//        "WTG_EWEH0G_1": new GeneratorControl([350,940]),
+//        "EWHC0G_1": new GeneratorControl([350,940]),
 //    },
 
     generator_graphs:{
-        "gen_graph_1": new GeneratorGraph([750,770],["MINS0G_1","WTG_EWEH0G_1","STCR5-_1"])
+        "gen_graph_1": new GeneratorGraph([750,770],["MINS0G_1","EWHC0G_1","STCR5-_1"])
     }
 
 

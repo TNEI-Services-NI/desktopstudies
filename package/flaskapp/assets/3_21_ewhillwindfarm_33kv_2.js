@@ -263,7 +263,7 @@ networks_undrawn["ewehillwindfarm2"]={
     },
 
     generators:{
-        "WTG_EWEH0G_2#0": new Generator("EWEH0G_2#10",1),
+        "WTG_EWEHOG_2#0": new Generator("EWEH0G_2#10",1),
         "WTG_EWEH0G_2#1": new Generator("EWEH0G_2#19",1),
         "WTG_EWEH0G_2#2": new Generator("EWEH0G_2#15",1),
         "WTG_EWEH0G_2#3": new Generator("EWEH0G_2#24",1),
