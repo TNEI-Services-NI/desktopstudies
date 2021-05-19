@@ -41,6 +41,8 @@ def read_LF_file(network="chapelcross", voltage="33kv", option="Opt5", rev='4'):
                                                     , sheet_name='Busbars - Voltage(pu)')
     dict_data['transformers']['loading'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
                                                          , sheet_name='Transformers - Loading')
+    dict_data['transformers']['rating'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
+                                                         , sheet_name='Transformers - Rating')
     dict_data['transformers']['taps'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
                                                       , sheet_name='Transformers - Taps')
     dict_data['lines']['loading'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
@@ -122,7 +124,12 @@ def read_restoration_step(case_network: str, network: str, option: str, scenario
 
     dict_data = {k: df_data.loc[df_data['component']==k, :] for k in df_data['component'].unique()}
 
-    dict_data = {k: v.loc[:, 'Step {}'.format(stage)].to_json()
+    dict_data = {k: v.loc[:, 'Step {}'.format(stage)]
+                 for k, v in dict_data.items()}
+
+    dict_data['transformer_apparent_power'] = dict_data['transformers_loading'] * dict_data['transformers_rating'].replace(999,0).replace(-999,0)
+
+    dict_data = {k: v.to_json()
                  for k, v in dict_data.items()}
 
     return dict_data
