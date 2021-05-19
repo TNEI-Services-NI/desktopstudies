@@ -6,7 +6,11 @@ socket.on('check_join_draw', function(data_join_draw) {
     if (entity === undefined) {
         entity = data_join_draw['entity']
     }
-    page = data_join_draw['page']
+    if(0 in $('#sim_status_div')){
+        page = "SLDs"
+    } else {
+        page = "home"
+    }
     if (username === data_join_draw['username']) {
         socket.emit('check_join_draw', data_join_draw, function(data_check_rooms) {});
     }
@@ -37,7 +41,9 @@ socket.on('draw', function(data) {
 
 socket.on('check_redraw', function(check_redraw_data) {
     check_redraw_data['entity'] = entity
-    socket.emit('check_redraw', check_redraw_data);
+    if(check_redraw_data['page']==page){
+        socket.emit('check_redraw', check_redraw_data);
+    }
 });
 
 socket.on('redraw', function(data) {

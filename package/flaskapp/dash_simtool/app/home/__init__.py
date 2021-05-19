@@ -54,13 +54,11 @@ def init_dashboard(server=""):
                                    html.Div(id='hidden_div00'),
                                    _nav_bar,
                                    _legend,
-                                    _sidebar,
                                    _legendButton,
                                    _body,
                                    ]
 
     content.append(_sidebar) if cf.debug else None
-
 
     # compile overall layout
     dash_app.layout = html.Center(content)
