@@ -183,41 +183,52 @@ const component_data_changed_event = new CustomEvent('component_data_changed')
  * @param  {string} component
  * @return {None}
  */
-function component_modal(component){
+function component_modal(component, interactive_component=false){
   let type = component.info.component
   let loc = [0, 0]
   let group = component.UIElement
     group.mouseenter(function(e){
 
+      if(!interactive_component){
+        $("body").css("cursor", "help");
+      } else {
+        $("body").css("cursor", "pointer");
+      }
 
       $("#dataPopup").css('visibility', 'visible');
-      $('#dataPopup').text(type+':');
-      $('<p>'+component.id+'</p>').appendTo('#dataPopup');
-      $('<p>'+component.id.split("#")[0]+'</p>').appendTo('#dataPopup');
+      $('#dataPopup').text(' ');
+      $('<p></p>').appendTo('#dataPopup');
+      $('<H5><b>'+type+':'+'</b></H5>').appendTo('#dataPopup');
+      $('<hr style="border: none; height: 6px; background-color: #222222;">').appendTo('#dataPopup');
+
+      // $('<p>'+component.id+'</p>').appendTo('#dataPopup');
+      $('<p>Name: '+component.id.split("#")[0]+'</p>').appendTo('#dataPopup');
+      $('<hr style="border: none; height: 2px; background-color: #222222;">').appendTo('#dataPopup');
 
       if(type ==="Breaker" || type === "Isolator"){
-            $('<p> closed = '+component.closed+'</p>').appendTo('#dataPopup');
+            // $('<p> closed = '+component.closed+'</p>').appendTo('#dataPopup');
       }
 
       if(type ==="Generator"){
-            $('<p> method = '+component.info.type+'</p>').appendTo('#dataPopup');
+            // $('<p> method = '+component.info.type+'</p>').appendTo('#dataPopup');
       }
 
       if(type ==="Line"){
       }
 
       if(type ==="Transformer"){
-            $('<p> type = '+component.info.type+'</p>').appendTo('#dataPopup');
+            // $('<p> type = '+component.info.type+'</p>').appendTo('#dataPopup');
       }
 
       if(component.modal_data !== undefined){
-          $('<p>restoration step based data:</p>').appendTo('#dataPopup');
+          // $('<p>Component :</p>').appendTo('#dataPopup');
           for(let data_row in component.modal_data){
             $('<p>'+component.modal_data[data_row]+'</p>').appendTo('#dataPopup');
           }
 
       }
       // $('<p>Data:</p>').appendTo('#dataPopup');
+      // $('<hr style="border: none; height: 2px; background-color: #222222;">').appendTo('#dataPopup');
 
       $.ajax({
         dataType:"text",
@@ -261,6 +272,7 @@ function component_modal(component){
     group.mouseleave(function(e){
       // setTimeout(function(){
         $("#dataPopup").css('visibility', 'hidden');
+        $("body").css("cursor", "default");
       // }, modal_timeout*1000)
     });
     group.mousemove(function(e){
@@ -292,14 +304,37 @@ function deactivate_click(object){
   object.off('click')
 }
 
+var LightenColor = function(color, percent) {
+  	var num = parseInt(color,16),
+		amt = Math.round(2.55 * percent),
+		R = (num >> 16) + amt,
+		B = (num >> 8 & 0x00FF) + amt,
+		G = (num & 0x0000FF) + amt;
+
+		return (0x1000000 + (R<255?R<1?0:R:255)*0x10000 + (B<255?B<1?0:B:255)*0x100 + (G<255?G<1?0:G:255)).toString(16).slice(1);
+};
+
 function mouseenterleave_pointer(object){
-  object.mouseenter(function(){
+  if(!Array.isArray(object)){
+    object = [object, object]
+  }
+  object[0].mouseenter(function(){
     $("body").css("cursor", "pointer");
+    if(object[0]===object[1]){
+      object[0].attr({"fill": "#"+String(LightenColor(String(object[0].fill()).split('#')[1], -20))});
+    } else {
+      object[1].attr({"fill": "#"+String(LightenColor(String(object[1].fill()).split('#')[1], -20))});
+    }
   })
-  object.mouseleave(function(){
+  object[0].mouseleave(function(){
     $("body").css("cursor", "default");
+    if(object[0]===object[1]){
+      object[0].attr({"fill": "#"+String(LightenColor(String(object[0].fill()).split('#')[1], 20))});
+    } else {
+      object[1].attr({"fill": "#"+String(LightenColor(String(object[1].fill()).split('#')[1], 20))});
+    }
   })
-  object.mouseover(function(){
+  object[0].mouseover(function(){
     $("body").css("cursor", "default");
   })
 }

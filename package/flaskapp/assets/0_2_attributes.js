@@ -4,6 +4,7 @@ let palette = {"400kV":"#0000e6",
   "11kV":"#996633",
   "LV":"#ff3ae8",
   "0V":"#d3d3d3",
+  "controls":'#bebebe',
   "background-color": "#000000"}
 
 let option = "5"

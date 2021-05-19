@@ -108,6 +108,17 @@ function update_transformers(step_data) {
             }
         }
     }
+    for(let sgtx_ in components.SGTs){
+        let sgtx_instance = components.SGTs[sgtx_]
+        let line_ = sgtx_instance.line
+        line_id_LF = line_.split("#")[0]
+        if (line_id_LF in step_data["lines_active_power"]) {
+            let line_power = step_data["lines_active_power"][line_id_LF]
+            if (Number(line_power) > 0) {
+                sgtx_instance.setLive()
+            }
+        }
+    }
 }
 
 function update_line_data_views(step_data) {
@@ -299,8 +310,12 @@ function update_generator_colours(step_data_) {
 
         let idl = gen_instance.info.lineID
         let line_instance = components.lines[idl]
+        let idl_LF = idl.split("#")[0]
         let gen_id_LF = idg.split("#")[0]
-        if ((step_data_["generators_active_power"][gen_id_LF] !== 0) && (step_data_["generators_active_power"][gen_id_LF] !== undefined)) {
+        if (
+          (step_data_["generators_active_power"][gen_id_LF] !== 0) && (step_data_["generators_active_power"][gen_id_LF] !== undefined) ||
+          (step_data_["busbars_voltage"][idl_LF] !== 0) && (step_data_["busbars_voltage"][idl_LF] !== undefined)
+        ) {
             gen_instance.UIElement.find('.circle-class').attr({
                 'stroke': line_instance.info.dict_styling.stroke.live_color
             })
@@ -457,7 +472,9 @@ function event_draw(draw_data) {
 
 
 // Document Initialisation
-$(document).ready(function() {});
+$(document).ready(function() {
+
+});
 
 x_max = undefined;
 y_max = undefined;
@@ -490,14 +507,22 @@ function update_scaling() {
 
     x_scaling = (x_max - 250) / 1000
     y_scaling = (y_max - 100) / 1000
+
+    let x_offset = undefined
+    if(page='home'){
+        x_offset = 0
+    } else {
+        x_offset = 0
+    }
+
     font_size = 16 * Math.min(x_scaling, y_scaling)
     network_scaled = networks_undrawn
-    scale_lines(network_scaled);
-    scale_busbars(network_scaled)
-    scale_labels(network_scaled);
-    scale_dataviews(network_scaled);
-    scale_loads(network_scaled);
-    scale_availablePower(network_scaled);
+    scale_lines(x_offset, network_scaled);
+    scale_busbars(x_offset, network_scaled)
+    scale_labels(x_offset, network_scaled);
+    scale_dataviews(x_offset, network_scaled);
+    scale_loads(x_offset, network_scaled);
+    scale_availablePower(x_offset, network_scaled);
 }
 
 update_scaling();

@@ -26,6 +26,28 @@ function Breaker_Callback(graphic_objects, name = ''){
         }
     }
 }
+/**
+ * Callback function for breaker object instances. Adds object to list of child objects associated with
+ * the breaker.
+ * @param  {list} graphic_objects List of child objects associated with each breaker object.
+ * @param  {string} name String object containing name/contents of child object
+ * @return {function} None Returns a function that adds passed object to breaker child objects, and adds text label.
+ */
+function Isolator_Callback(graphic_objects, name = ''){
+    return function(object){
+        // Add object defined in
+        if(graphic_objects !== undefined){
+            graphic_objects[0] = object
+        }
+        if(name !== ''){
+            if(object.horizontal === true){
+                add_text(object, false, [name], 0, -15*y_scaling,"#d3d3d3", font_size, function(object){})
+            }
+            else{
+                add_text(object, false, [name], 3 + name.length*4 * x_scaling, 0,"#d3d3d3", font_size, function(object){})}
+        }
+    }
+}
 
 /**
  * Callback function for breaker object instances. Adds object to list of child objects associated with
@@ -408,9 +430,10 @@ function GenerationInfo(position, name){
  * @param  {double} pos of SGT on line (between 0 and 1)
  * @usage instantiate as object i.e. new SGT(...)
  */
-function SGT(line_id,name){
+function SGT(line_id,name, liveCoils=["0V", "0V"]){
     this.component = "SGT"
     this.lineID = line_id,
+    this.liveCoils = liveCoils,
     this.graphic=[],
     this.name = name,
     this.callback = Breaker_Callback(this.graphic,name)}
