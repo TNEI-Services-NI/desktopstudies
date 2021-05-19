@@ -127,7 +127,7 @@ def trigger_checks(trig_data=None):
     users_active = logged_in["user"].values.tolist()
     logged_in_users = list(zip(users_active,entities_active_list))
     socketio.emit('update_logged_users', logged_in_users)
-    socketio.emit('update_waiting_on', required.loc[~required['status'], 'name'].values.tolist())
+    socketio.emit('update_waiting_on', required.loc[(~required['status'])&(required['required']), 'name'].values.tolist())
 
     # if len(required_entities-entities_active) == 0:
     #     socketio.emit('users_complete', logged_in['user'].values.tolist())

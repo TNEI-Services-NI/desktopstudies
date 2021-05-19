@@ -48,12 +48,12 @@ TOGGLE_BUTTON = {
 LEGEND_BUTTON = {
     "position": "absolute",
     "margin": "auto",
-    "right": "0vw",
-    "Top": "10vh",
+    "right": "1vw",
+    "top": "5.5vh",
     "width": "2rem",
     "height": "2rem",
     "border-radius": "15px",
-    "backgroundColor": "#ffe600",
+    "backgroundColor": "#ebc700",
 }
 LEGEND = {
     "position": "absolute",
