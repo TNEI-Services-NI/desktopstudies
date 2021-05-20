@@ -138,7 +138,7 @@ def init_dashboard(server=""):
         dbc.Row([
             dbc.Col([intro_card]),
             dbc.Col([desktop_studies]),
-            dbc.Col([how_to_card]),
+            # dbc.Col([how_to_card]),
         ])
     ], style={'width': '95%'})
 
