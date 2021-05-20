@@ -368,11 +368,11 @@ def navbar_controls(url_page):
 def navbar(url_page):
     # nav bar
     _nav_bar = dbc.NavbarSimple(brand='Distributed Restart - Desktop Exercise Simulation',
-                                color='#c35d09',
+                                color=styling.NAVBAR_STYLE['color'],
                                 dark=True,
                                 id='nav_bar',
                                 children=navbar_controls(url_page),
-                                fixed="top",
+                                fixed=styling.NAVBAR_STYLE['fixed'],
                                 style=styling.NAVBAR_STYLE
                                 )
     return _nav_bar
