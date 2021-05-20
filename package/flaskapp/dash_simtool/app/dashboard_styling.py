@@ -9,11 +9,12 @@ NAVBAR_STYLE = {
     'height': '7vh',
     'background-image': "url('/static/imgs/header.png')",
     'background-repeat': "no-repeat",
-    'background-size': "100vw 95vh",
     "background-position": "right top",
     'color': '#4f4f4f',
     'fixed': 'top',
 }
+
+NAVBAR_STYLE['background-size'] = "100vw " + NAVBAR_STYLE['height']
 
 CONTENT_STYLE_SIDEBAR_HIDDEN = {
     "marginLeft": "5rem",
