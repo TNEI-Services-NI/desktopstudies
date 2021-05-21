@@ -143,7 +143,7 @@ def init_dashboard(server=""):
     ], style={'width': '95%'})
 
     # background_image = html.Div(, children=[html.Div(style={
-    #         'background-size': "100vw 100vh",
+    #         'background-size': "100vw 100vh",sign
     # })])
     # compile overall layout
     dash_app.layout = html.Center([dcc.Location(id="home"),
