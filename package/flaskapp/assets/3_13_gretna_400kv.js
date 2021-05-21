@@ -124,8 +124,12 @@ networks_undrawn["gretna400kv"]={
         "HARK4": new DataView("HARK4",[-50,100], ["lines_loading","lines_active_power","lines_reactive_power","lines_current"]),
         "GRNA1-_SGT1": new DataView("GRNA1-_SGT1#1",[60,60], ["lines_loading","lines_active_power","lines_reactive_power","lines_current"]),
         "GRNA1-_SGT2": new DataView("GRNA1-_SGT2#0",[60,60], ["lines_loading","lines_active_power","lines_reactive_power","lines_current"]),
-        "R1": new DataView("GRNA4-_R1",[-400,-40], ["busbars_voltage"]),
-        "M1": new DataView("GRNA4-_M1",[-400,40], ["busbars_voltage"]),
+
+        "GRNA4-_GRNA1-_1": new DataView("GRNA1-_SGT1#0",[0,0], ["transformers_loading","lines_active_power","lines_reactive_power"]),
+        "GRNA4-_GRNA1-_2": new DataView("GRNA1-_SGT2#0",[0,0], ["transformers_loading","lines_active_power","lines_reactive_power"]),
+
+        "GRNA4-_R1": new DataView("GRNA4-_R1",[-400,-40], ["busbars_voltage"]),
+        "GRNA4-_M1": new DataView("GRNA4-_M1",[-400,40], ["busbars_voltage"]),
 
     },
 

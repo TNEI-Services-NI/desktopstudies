@@ -469,6 +469,10 @@ networks_undrawn["chapelcross33kv"] = {
         "CHAP3-_GRNA3B_1": new DataView("CHAP3-_GRNA3B_1#0", [-25, 0], ['lines_current']),
         "CHAP3-_CHAPX3_1": new DataView("CHAP3-_CHAPX3_1#0", [-25, -60], ['lines_current']),
 
+        "CHAP3-_LOBI3B_1": new DataView("CHAP3-_LOBI3B_1#0", [25, -25], ['lines_current']),
+        "ANANT2_CHAP3-_1": new DataView("ANANT2_CHAP3-_1#0", [25, -10], ['lines_current']),
+        "CHAP3-_MINS3-_1": new DataView("CHAP3-_MINS3-_1#0", [25, -10], ['lines_current']),
+
         //transformers
         "CHAP1-_CHAP3-_1": new DataView("CHAP1-_CHAP3-_1#0",[-30,-40],[
             "transformer_apparent_power",
@@ -497,7 +501,7 @@ networks_undrawn["chapelcross33kv"] = {
           ]),
 
         //BUSBARS
-        "CHAP3A1": new DataView("CHAP3A1", [-15, -20], ['busbars_voltage']),
+        "CHAP3A1": new DataView("CHAP3A1", [-250, -20], ['busbars_voltage']),
 
         //transformers for loads
         "ANANT2_ANAN20_T2": new DataView("ANANT2_CHAP3-_1#4",[35,0],[

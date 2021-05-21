@@ -150,6 +150,7 @@ function update_line_data_views(step_data) {
 
 }
 
+//probably a good idea to add zeros when data isn't present rather than not drawing
 function update_dataviews(step_data) {
     for (let id_dv in components.dataviews) {
         let id_root = id_dv.split("#")[0]
