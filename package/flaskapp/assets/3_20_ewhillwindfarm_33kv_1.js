@@ -23,7 +23,7 @@ networks_undrawn["ewehillwindfarm1"]={
     "EWEH0G#3": StraightLine([730,260],"down",30,"33kV"),
 //    "EWHC0G-_AUXT": StraightLine([730,290],"down",85,"33kV"),
     "EWEH0G#50": StraightLine([730,290],"down",85,"33kV"),
-    "EWEH0G#101": StraightLine([730,375],"down",10,"0V"),
+    "EWEH0G#101": StraightLine([730,375],"down",10,"LV"),
 
     "EWEH0G#6": StraightLine([480,370],"right",45,"33kV"),
     "EWEH0G#7": StraightLine([505,405],"right",20,"33kV"),
@@ -118,7 +118,7 @@ networks_undrawn["ewehillwindfarm1"]={
     },
 
     tx:{
-        "EWEH0G-AUX-_1": new Tx("EWEH0G#101",1,["AUXILIARY","TRANSFORMER"],"","33kV"),
+        "EWEHOG-AUX-_1": new Tx("EWEH0G#101",1,["AUXILIARY","TRANSFORMER"],"","33kV"),
 
         "EWEH-_WTG-_1#0": new Tx("EWEH0G#9",1,["WTG 04"],"","LV"),
         "EWEH-_WTG-_1#1": new Tx("EWEH0G#14",1,["WTG 05"],"","LV"),

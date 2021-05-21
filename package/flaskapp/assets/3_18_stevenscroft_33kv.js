@@ -78,7 +78,8 @@ networks_undrawn["stevenscroft33kv"]={
     },
 
     labels:{
-    1: new Text("STCR3-",["STEVENS CROFT 33kV"],[270,-170], 25),
+    0: new Text("STCR3-", ["LOAD BANK"], [105, 90]),
+    1: new Text("STCR3-",["STEVEN'S CROFT 33kV"],[270,-170], 25),
     3: new Text("STCR_AUX#2", ["UNIT AUXILIARY BOARD"],[100,-15]),
     4: new Text("STCR_AUX#12", ["ACC SWITCHBOARD"],[60,15]),
     5: new Text("STCR_AUX#13", ["STATION ESSENTIAL SERVICES BOARD"],[0,-25]),
@@ -86,7 +87,7 @@ networks_undrawn["stevenscroft33kv"]={
 
     2: new Text("STCR3-",["699"],[-70,-20]),
     7: new Text("STCR3-",["33kV"],[-70,-40]),
-    8: new Text("STCR3-",["STEVENSCROFT"],[-70,-60]),
+    8: new Text("STCR3-",["STEVEN'S CROFT"],[-70,-60]),
 
     },
 

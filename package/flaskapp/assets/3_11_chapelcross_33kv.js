@@ -40,7 +40,7 @@ networks_undrawn["chapelcross33kv"] = {
         "CHAP3A1#1": StraightLine([330,175],"up",20),
         "CHAP1-_CHAP3-_1#0": StraightLine([330,155],"up",95),
          "CHAP1-_CHAP3-_1#1":StraightLine([290,110],"right",40),
-         "CHAP1-_CHAP3-_1#3":StraightLine([290,110],"right",0,"0V"),
+         "CHAP1-_CHAP3-_1#3":StraightLine([290,110],"right",0,"LV"),
 
         "CHAP3-_MIBI3-_1#0": StraightLine([415,195],"down",55),
         "CHAP3A1#5": StraightLine([415,175],"down",20),
@@ -428,7 +428,7 @@ networks_undrawn["chapelcross33kv"] = {
     29: new Text("LAHO5-1", ["LANGHOLM"],[27,-65]),
     30: new Text("LAHO5-1", ["692"],[27,-45]),
 
-    31: new Text("STCR3-", ["STEVENS CROFT"],[-45,-45]),
+    31: new Text("STCR3-", ["STEVEN'S CROFT"],[-45,-45]),
     32:new Text("STCR3-", ["33KV"],[-45,-30]),
     33:new Text("STCR3-", ["699"],[-45,-15]),
 
@@ -547,7 +547,7 @@ networks_undrawn["chapelcross33kv"] = {
     availablePower:{
         "EWHC0G_1" : new AvailablePower([115,970]),
         "MINS0G_1": new AvailablePower([940,820]),
-        "STCR5-_1": new AvailablePower([800,50]),
+        "STCR5-_1": new AvailablePower([100,100]),
 
     },
 
@@ -557,7 +557,7 @@ networks_undrawn["chapelcross33kv"] = {
 //    },
 
     generator_graphs:{
-        "gen_graph_1": new GeneratorGraph([750,770],["MINS0G_1","EWHC0G_1","STCR5-_1"])
+        "gen_graph_1": new GeneratorGraph([750,770],["MINS0G_1","EWHC0G_1","EWHC0G_2","STCR5-_1"])
     }
 
 

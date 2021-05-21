@@ -18,7 +18,7 @@ networks_undrawn["gretna400kv"]={
         "GRNA4-_M1-_SGT1": StraightLine([285,740],"up",75,"400kV"),
         "GRNA1-_SGT1#1": StraightLine([285,930],"up",190,"132kV"),
         "GRNA1-_SGT1#0": StraightLine([285,800],"left",40,"132kV"),
-        "GRNA1-_SGT1#2": StraightLine([245,800],"left",0,"0V"),
+        "GRNA1-_SGT1#2": StraightLine([245,800],"left",0,"LV"),
 
     "GRNA4-_M1#7": StraightLine([485,430],"down",190,"400kV"),
     "GRNA4-_R1#1": StraightLine([485,430],"down",38,"400kV"),

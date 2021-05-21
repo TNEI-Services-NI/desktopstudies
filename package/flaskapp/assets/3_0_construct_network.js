@@ -752,7 +752,7 @@
             text.center(x_base - 10*x_scaling, y_base - ((graph_height*percentage/100)));
         }
 
-        let bar_offset = graph_width/7
+        let bar_offset = graph_width/9
 
         let acc_offset = 0
         graph_bars = {}
@@ -801,6 +801,7 @@
           graphManager.setPercentage(generator_ids[0],0)
           graphManager.setPercentage(generator_ids[1],0)
           graphManager.setPercentage(generator_ids[2],0)
+          graphManager.setPercentage(generator_ids[3],0)
           components["generatorGraphManagers"] = [graphManager]
         } else {
           graphManager = components["generatorGraphManagers"][0]
@@ -808,6 +809,7 @@
           graphManager_new.setPercentage(generator_ids[0],graphManager.bars[generator_ids[0]].percentage)
           graphManager_new.setPercentage(generator_ids[1],graphManager.bars[generator_ids[1]].percentage)
           graphManager_new.setPercentage(generator_ids[2],graphManager.bars[generator_ids[2]].percentage)
+          graphManager_new.setPercentage(generator_ids[3],graphManager.bars[generator_ids[3]].percentage)
           graphManager = graphManager_new
         }
 

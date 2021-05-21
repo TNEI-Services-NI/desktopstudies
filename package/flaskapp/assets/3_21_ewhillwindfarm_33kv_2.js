@@ -3,8 +3,8 @@
 networks_undrawn["ewehillwindfarm2"]={
     lines:{
     "EWEH3#1": StraightLine([345,50],"down",40,"33kV"),
-    "EWEH3": StraightLine([305,100],"right",40,"33kV"),
-    "EWEH3#3": StraightLine([315,100],"right",0,"0V"),
+    "EWEH3": StraightLine([315,100],"right",30,"33kV"),
+    "EWEH3#3": StraightLine([315,100],"right",0,"LV"),
 
     "EWEH3#2": StraightLine([345,90],"down",30,"33kV"),
 
@@ -24,7 +24,7 @@ networks_undrawn["ewehillwindfarm2"]={
 
     "EWEH0G_2#4": StraightLine([730,260],"down",30,"33kV"),
     "EWEH0G_2#5": StraightLine([730,290],"down",85,"33kV"),
-    "EWEH0G_2#102": StraightLine([730,375],"down",10,"0V"),
+    "EWEH0G_2#102": StraightLine([730,375],"down",10,"LV"),
 
     "EWEH0G_2#6": StraightLine([480,370],"right",45,"33kV"),
     "EWEH0G_2#7": StraightLine([505,405],"right",20,"33kV"),
@@ -66,7 +66,7 @@ networks_undrawn["ewehillwindfarm2"]={
     "WTG12 OUTLINE D": new Line(515,589,515,659,"0V",true),
 
     "EWEH0G_2#29": StraightLine([505,681],"right",20,"33kV"),
-    "EWEH0G_2#30": StraightLine([505,716],"right",20,"33kV"),
+//    "EWEH0G_2#30": StraightLine([505,716],"right",20,"33kV"),
     "EWEH0G_2#31": StraightLine([525,671],"down",60,"33kV"),
     "EWEH0G_2#32": StraightLine([525,701],"right",40,"33kV"),
     "EWEH0G_2#33": StraightLine([565,701],"right",65,"LV"),
@@ -225,7 +225,7 @@ networks_undrawn["ewehillwindfarm2"]={
     tx:{
         "trf_EWEH1Q_EWEH3-_1" : new Tx("EWEH3#1",0,["GT1 90MVA","TAP 12"],"","132kV"),
         "EWEH3-AUX-_1": new Tx("EWEH3#3", 0, "","","33kV"),
-        "EWEH0G-AUX-_2": new Tx("EWEH0G_2#102",1,["AUXILIARY","TRANSFORMER"],"","33kV"),
+        "EWEHOG-AUX-_2": new Tx("EWEH0G_2#102",1,["AUXILIARY","TRANSFORMER"],"","33kV"),
 
         "EWEH-_WTG-_2#0": new Tx("EWEH0G_2#9",1,["WTG 09"],"","LV"),
         "EWEH-_WTG-_2#1": new Tx("EWEH0G_2#18",1,["WTG 10"],"","LV"),

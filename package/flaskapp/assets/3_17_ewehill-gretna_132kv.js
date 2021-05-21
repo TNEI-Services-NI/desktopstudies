@@ -16,7 +16,7 @@ networks_undrawn["ewehillgretna"]={
     "EWEH0G_2": StraightLine([270,755],"down",50,"33kV"),
 
     "EWEH3#6": StraightLine([270,565],"left",40,"33kV"),
-    "EWEH3#7": StraightLine([230,565],"left",0,"0V"),
+    "EWEH3#7": StraightLine([230,565],"left",0,"LV"),
 
     "EWEH3": StraightLine([635,550],"left",365,"33kV"),
     "EWEH3#1": StraightLine([635,550],"down",155,"33kV"),
