@@ -250,7 +250,15 @@ networks_undrawn["minsca33kv"]={
     },
 
     dataViews:{
-        "MINS3-": new DataView("MINS3-", [-30,110], ["lines_loading","lines_active_power","lines_reactive_power","busbars_voltage","lines_current"]),
+        "MINS3-#0": new DataView("MINS3-", [-30,110], [
+        "lines_loading",
+        "lines_active_power",
+        "lines_reactive_power",
+        "lines_current"
+        ]),
+        "MINS3-#1": new DataView("MINS3-", [70,0], [
+        "busbars_voltage",
+        ]),
     },
 
     SGTs:{

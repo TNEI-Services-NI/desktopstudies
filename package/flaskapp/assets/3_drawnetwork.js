@@ -152,6 +152,7 @@ function update_line_data_views(step_data) {
 
 function update_dataviews(step_data) {
     for (let id_dv in components.dataviews) {
+        let id_root = id_dv.split("#")[0]
         let text_list = [];
         var units = "";
         var scale = 1;
@@ -159,7 +160,7 @@ function update_dataviews(step_data) {
         let labels = components.dataviews[id_dv].labels
         for (let id_component_parameter in labels) {
             let component_parameter = labels[id_component_parameter]
-            if (id_dv in step_data[component_parameter]) {
+            if (id_root in step_data[component_parameter]) {
                 if (component_parameter.includes('reactive')) {
                     units = " MVAr"
                     acc = 2
@@ -180,7 +181,7 @@ function update_dataviews(step_data) {
                     units = " MVA"
                 }
 
-               let value = (scale * Math.round(step_data[component_parameter][id_dv] * 1000) / 1000).toFixed(acc)
+               let value = (scale * Math.round(step_data[component_parameter][id_root] * 1000) / 1000).toFixed(acc)
                 if(highlight_undefined||(value < 999 && value > -999)){
                     // let value = step_data[component_parameter][id_dv].toFixed(2)
                     text_list = text_list.concat(

@@ -106,14 +106,21 @@ networks_undrawn["stevenscroft33kv"]={
           [
             'generators_active_power',
             'generators_reactive_power',
+
           ]),
 
-        "STCR3-": new DataView("STCR5-_1", [200, -200],
+        "STCR3-": new DataView("STCR3-", [80, -20],
           [
-            "lines_active_power",
-            "lines_reactive_power",
             "busbars_voltage",
-            'lines_current',
+          ]),
+
+          "STCR0G-_1": new DataView("STCR5-_1", [-35, 30],
+          [
+             'lines_current',
+          ]),
+          "STCR3-#0": new DataView("STCR3-#0", [0, 0],
+          [
+            'lines_active_power',
           ]),
     },
 

@@ -222,7 +222,7 @@ networks_undrawn["chapelcross33kv"] = {
         "LAHO3B_NEWCT1_1#3":StraightLine([710,645],"left",50, "11kV"),
         "LAHO3B_NEWCT1_1#4": StraightLine([635,645],"right",30),
         "LAHO3B_NEWCT1_1#5": StraightLine([710,645],"down",35, "11kV"),
-        "LAHO3B_NEWCT1_1#6": StraightLine([745,680],"down",55, "11kV"),
+        "LAHO3B_NEWCT1_1#6": StraightLine([745,680],"down",35, "11kV"),
 
         "NEWC5-": StraightLine([695,680],"right",85, "11kV"),
 
@@ -346,7 +346,7 @@ networks_undrawn["chapelcross33kv"] = {
         "761 CUSTOMER": new Breaker("MINS3-_MINSC",0,"CUSTOMER"),
 
         "123 10": new Breaker("LAHO3B_NEWCT1_1#3",0.25,"10"),
-        "123 12": new Breaker("LAHO3B_NEWCT1_1#6",0.7,"12"),
+        "123 12": new Breaker("LAHO3B_NEWCT1_1#6",0.6,"12"),
 
         // CRAIG II WINDFARM 11KV
         // "785 21": new Breaker("785 21",0.86,"21"),
