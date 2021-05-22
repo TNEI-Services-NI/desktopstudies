@@ -461,8 +461,8 @@ networks_undrawn["chapelcross33kv"] = {
     },
     dataViews:{
         //lines
-        "CHAP3-_STCR3-_1": new DataView("CHAP3-_STCR3-_1#0", [-25, -35], ['lines_current']),
-        "ANANT1_CHAP3-_1": new DataView("ANANT1_CHAP3-_1#1", [-25, -5], ['lines_current']),
+        "CHAP3-_STCR3-_1": new DataView("CHAP3-_STCR3-_1#0", [-30, -47], ['lines_current']),
+        "ANANT1_CHAP3-_1": new DataView("ANANT1_CHAP3-_1#1", [-30, -15], ['lines_current']),
         "CHAP3-_MINS3-_1": new DataView("CHAP3-_MINS3-_1#2", [25, 0], ['lines_current']),
         "CHAPX1_LOBI3A_1": new DataView("CHAPX1_LOBI3A_1#0", [-25, -75], ['lines_current']),
         "CHAP3-_MIBI3-_1": new DataView("CHAP3-_MIBI3-_1#0", [-25, 0], ['lines_current']),
@@ -473,14 +473,21 @@ networks_undrawn["chapelcross33kv"] = {
         "ANANT2_CHAP3-_1": new DataView("ANANT2_CHAP3-_1#0", [25, -10], ['lines_current']),
         "CHAP3-_MINS3-_1": new DataView("CHAP3-_MINS3-_1#0", [25, -10], ['lines_current']),
 
+        "CHAP3-_SOLWAY": new DataView("CHAP3-_SOLWAY#3", [-25, 10], ['lines_current']),
+        "CHAP3-_SOLWAY#1": new DataView("CHAP3-_SOLWAY#0", [-85, 50], ['lines_active_power',"lines_reactive_power","lines_current"]),
+
+
+
         //transformers
-        "CHAP1-_CHAP3-_1": new DataView("CHAP1-_CHAP3-_1#0",[-30,-40],[
-            "transformer_apparent_power",
-            "lines_reactive_power"
+        "CHAP1-_CHAP3-_1": new DataView("CHAP1-_CHAP3-_1#0",[70,4],[
+            "transformer_active_power",
+            "transformers_reactive_power",
+            "transformers_current",
         ]),
-        "CHAP1-_CHAP3-_2": new DataView("CHAP1-_CHAP3-_2#0",[-30,-40],[
-            "transformer_apparent_power",
-            "lines_reactive_power"
+        "CHAP1-_CHAP3-_2": new DataView("CHAP1-_CHAP3-_2#0",[70,4],[
+            "transformer_active_power",
+            "transformers_reactive_power",
+            "transformers_current",
         ]),
 
         //generator
@@ -502,46 +509,47 @@ networks_undrawn["chapelcross33kv"] = {
 
         //BUSBARS
         "CHAP3A1": new DataView("CHAP3A1", [-250, -20], ['busbars_voltage']),
+        "CHAP3A1#1": new DataView("CHAP3A2", [130, -20], ['busbars_voltage']),
 
         //transformers for loads
         "ANANT2_ANAN20_T2": new DataView("ANANT2_CHAP3-_1#4",[35,0],[
-            "transformer_apparent_power",
+            "transformer_active_power",
         ]),
         "ANANT1_ANAN10_T1":new DataView("ANANT1_CHAP3-_1#4",[-35,0],[
-            "transformer_apparent_power",
+            "transformer_active_power",
         ]),
         "LOBIT1_LOBI10_T1": new DataView("LOBI5-1#0",[-35,0],[
-            "transformer_apparent_power",
+            "transformer_active_power",
         ]),
         "LOBIT2_LOBI20_T2": new DataView("LOBI5-2#0",[35,0],[
-            "transformer_apparent_power",
+            "transformer_active_power",
         ]),
         "LAHOT1_LAHO10_T1":new DataView("LAHO5-1#0",[-35,0],[
-            "transformer_apparent_power",
+            "transformer_active_power",
         ]),
         "LAHOT2_LAHO20_T2": new DataView("LAHO5-2#0",[35,0],[
-            "transformer_apparent_power",
+            "transformer_active_power",
         ]),
         "MOFTT1_MOFT10_T1": new DataView("MOFT5-1#0",[25,10],[
-            "transformer_apparent_power",
+            "transformer_active_power",
         ]),
         "MOFTT2_MOFT20_T2": new DataView("MOFT5-2#0",[35,10],[
-            "transformer_apparent_power",
+            "transformer_active_power",
         ]),
         "NEWCT1_NEWC10_T1":new DataView("NEWC5-#0",[35,0],[
-            "transformer_apparent_power",
+            "transformer_active_power",
         ]),
         "GRNAT1_GRNA10_T1": new DataView("GRNA5-1#0",[0,30],[
-            "transformer_apparent_power",
+            "transformer_active_power",
         ]),
         "GRNAT2_GRNA20_T2": new DataView("GRNA5-2#0",[0,30],[
-            "transformer_apparent_power",
+            "transformer_active_power",
         ]),
         "KIBAT1_KIBA10_T1": new DataView("KIBA5-#0",[35,0],[
-            "transformer_apparent_power",
+            "transformer_active_power",
         ]),
         "MIBIT1_MIBI10_T1":new DataView("MIBI5-#0",[-25,5],[
-            "transformer_apparent_power",
+            "transformer_active_power",
         ]),
 
 

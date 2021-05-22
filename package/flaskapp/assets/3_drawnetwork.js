@@ -159,28 +159,31 @@ function update_dataviews(step_data) {
         var scale = 1;
         var acc = 0;
         let labels = components.dataviews[id_dv].labels
+
         for (let id_component_parameter in labels) {
             let component_parameter = labels[id_component_parameter]
-            if (id_root in step_data[component_parameter]) {
-                if (component_parameter.includes('reactive')) {
+            if (component_parameter.includes('reactive')) {
                     units = " MVAr"
                     acc = 2
-                } else if (component_parameter.includes('active')) {
+            } else if (component_parameter.includes('active')) {
                     units = " MW"
                     acc = 2
-                } else if (component_parameter.includes('loading')) {
+            } else if (component_parameter.includes('loading')) {
                     units = " %"
                     acc = 2
-                } else if (component_parameter.includes('voltage')) {
+            } else if (component_parameter.includes('voltage')) {
                     units = " p.u."
-                } else if (component_parameter.includes('taps')) {
+            } else if (component_parameter.includes('taps')) {
                     units = " ."
-                } else if (component_parameter.includes('current')) {
+            } else if (component_parameter.includes('current')) {
                     units = " AMPS"
                     scale = 1000
-                } else if (component_parameter.includes('apparent')) {
+            } else if (component_parameter.includes('apparent')) {
                     units = " MVA"
-                }
+            }
+
+            if(step_data[component_parameter] != undefined){
+            if (id_root in step_data[component_parameter]) {
 
                let value = (scale * Math.round(step_data[component_parameter][id_root] * 1000) / 1000).toFixed(acc)
                 if(highlight_undefined||(value < 999 && value > -999)){
@@ -189,9 +192,22 @@ function update_dataviews(step_data) {
                         [String(value) + units]
                     );
                 }
+                else{
+                    text_list = text_list.concat(
+                        [String("TBC") + units]
+                    );
+                }
+
+            }
+            else{
+                       text_list = text_list.concat(["ID" + units]);
+            }
+            }
+            else{
+            text_list = text_list.concat(["PARAM" + units]);
+
             }
         }
-
         redraw_dataview(id_dv, text_list);
     }
 }

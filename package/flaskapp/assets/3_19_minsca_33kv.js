@@ -250,13 +250,12 @@ networks_undrawn["minsca33kv"]={
     },
 
     dataViews:{
-        "MINS3-#0": new DataView("MINS3-", [-30,110], [
-        "lines_loading",
+        "CHAP3-_MINS3-_1#0": new DataView("MINS3-", [-100,30], [
         "lines_active_power",
         "lines_reactive_power",
         "lines_current"
         ]),
-        "MINS3-#1": new DataView("MINS3-", [70,0], [
+        "MINS0G": new DataView("MINS0G", [140,-20], [
         "busbars_voltage",
         ]),
     },
@@ -288,7 +287,9 @@ networks_undrawn["minsca33kv"]={
     availablePower:{
         "MINS0G_1" : new AvailablePower([500,150]),
     },
-
+    generationInfo:{
+        "WTG_MINS0G": new GenerationInfo([150,250],"Minsca Windfarm (MINSW-1)"),
+    },
 //    generatorControls:{
 //        "MINS0G_1": new GeneratorControl([750,100])
 //    },

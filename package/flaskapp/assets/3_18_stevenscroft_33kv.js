@@ -102,25 +102,29 @@ networks_undrawn["stevenscroft33kv"]={
 
     dataViews:{
 
-        "STCR5-_1": new DataView("STCR5-_1", [-35, 0],
-          [
-            'generators_active_power',
-            'generators_reactive_power',
+//        "STCR5-_1": new DataView("STCR5-_1", [-35, 0],
+//          [
+//            'generators_active_power',
+//            'generators_reactive_power',
+//
+//          ]),
 
-          ]),
-
-        "STCR3-": new DataView("STCR3-", [80, -20],
+        "STCR3-": new DataView("STCR3-", [-140, 0],
           [
             "busbars_voltage",
           ]),
 
-          "STCR0G-_1": new DataView("STCR5-_1", [-35, 30],
-          [
-             'lines_current',
-          ]),
-          "STCR3-#0": new DataView("STCR3-#0", [0, 0],
+//          "STCR0G-_1": new DataView("STCR5-_1", [-35, 30],
+//          [
+//             'lines_current',
+//          ]),
+
+          "CHAP3-_STCR3-_1#0": new DataView("STCR3-#0", [80, -40],
           [
             'lines_active_power',
+            'lines_reactive_power',
+            'lines_current',
+
           ]),
     },
 
@@ -129,9 +133,13 @@ networks_undrawn["stevenscroft33kv"]={
     },
 
     generators:{
-
         "STCR5-_1": new Generator("STCR0G-_1",1),
         "STCR_DIESEL": new Generator("STCR_DIESEL#0",1, "EMERGENCY"),
         "STCR_MOTOR": new Generator("STCR_AUX#3",1, "MOTOR")
-    }
+    },
+    generationInfo:{
+        "STCR5-_1": new GenerationInfo([230,500],"Stevens Croft Biomass (STCR0G-1)"),
+    },
+
+
 }

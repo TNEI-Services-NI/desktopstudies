@@ -133,8 +133,8 @@ networks_undrawn["ewehillwindfarm1"]={
     },
 
     dataViews:{
-        "EWEH3-": new DataView("EWEH3-", [-50,90], ["lines_loading","lines_active_power","lines_reactive_power","lines_current"]),
-         "EWEH3-#": new DataView("EWEH3-", [50,-20], ["busbars_voltage"]),
+        "EWEH3-_MIBI3-_1": new DataView("EWEH3-", [-100,40], ["lines_active_power","lines_reactive_power","lines_current"]),
+        "EWEH0G": new DataView("EWEH0G", [140,-20], ["busbars_voltage"]),
 
     },
 
@@ -160,4 +160,7 @@ networks_undrawn["ewehillwindfarm1"]={
 //    generatorControls:{
 //        "EWEH0G_1": new GeneratorControl([750,100])
 //    },
+    generationInfo:{
+        "EWEHILL_1": new GenerationInfo([425,600],"Ewe Hill 1 Windfarm (EWEH-1)"),
+    },
 }
