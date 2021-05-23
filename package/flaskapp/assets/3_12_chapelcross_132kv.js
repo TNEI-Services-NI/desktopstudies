@@ -162,9 +162,9 @@ networks_undrawn["chapelcross132kv"]={
         "DUMF-2": new DataView("DUMF-2",[40,-25],["lines_active_power","lines_reactive_power","lines_current"]),
         "HARK": new DataView("HARK",[40,-25], ["lines_active_power","lines_reactive_power","lines_current"]),
 
-        "CHAP1-_M1-_1": new DataView("CHAP1-_M1-_1",[-210,20],["busbars_voltage"]),
+        "CHAP1-": new DataView("CHAP1-_M1-_1",[-210,20],["busbars_voltage"]),
         "CHAP1-_R1-_1": new DataView("CHAP1-_R1-_1",[-440,-20],["busbars_voltage"]),
-    "CHAP1-_M1-_2": new DataView("CHAP1-_M1-_2",[245,0],["busbars_voltage"]),
+    "CHAP1-#": new DataView("CHAP1-_M1-_2",[245,0],["busbars_voltage"]),
         "CHAP1-_R1-_1#1": new DataView("CHAP1-_R1-_1",[470,0],["busbars_voltage"]),
 
      "CHAP3A1#0": new DataView("CHAP3A1",[-210,-0],["busbars_voltage"]),

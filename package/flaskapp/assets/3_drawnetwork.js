@@ -159,7 +159,7 @@ function update_dataviews(step_data) {
         var scale = 1;
         var acc = 0;
         let labels = components.dataviews[id_dv].labels
-
+        console.log(step_data)
         for (let id_component_parameter in labels) {
             let component_parameter = labels[id_component_parameter]
             if (component_parameter.includes('reactive')) {

@@ -126,7 +126,7 @@ networks_undrawn["gretna400kv"]={
         "GRNA1-_SGT2": new DataView("GRNA1-_SGT2#0",[-40,40], ["transformers_apparent_power","transformers_active_power","transformers_reactive_power","transformers_current"]),
 
         "GRNA4-_R1": new DataView("GRNA4-_R1",[-420,-20], ["busbars_voltage"]),
-        "GRNA4-_M1": new DataView("GRNA4-_M1",[-420,20], ["busbars_voltage"]),
+        "GRTNA4-": new DataView("GRNA4-_M1",[-420,20], ["busbars_voltage"]),
 
     },
 

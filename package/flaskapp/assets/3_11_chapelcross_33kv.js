@@ -480,12 +480,12 @@ networks_undrawn["chapelcross33kv"] = {
 
         //transformers
         "CHAP1-_CHAP3-_1": new DataView("CHAP1-_CHAP3-_1#0",[70,4],[
-            "transformer_active_power",
+            "transformers_active_power",
             "transformers_reactive_power",
             "transformers_current",
         ]),
         "CHAP1-_CHAP3-_2": new DataView("CHAP1-_CHAP3-_2#0",[70,4],[
-            "transformer_active_power",
+            "transformers_active_power",
             "transformers_reactive_power",
             "transformers_current",
         ]),
@@ -496,7 +496,7 @@ networks_undrawn["chapelcross33kv"] = {
             'generators_active_power',
             'generators_reactive_power',
           ]),
-        "EWHC0G_1": new DataView("EWHC0G_1", [35, 0],
+        "EWEHILL_1": new DataView("EWHC0G_1", [35, 0],
           [
             'generators_active_power',
             'generators_reactive_power',
@@ -513,43 +513,43 @@ networks_undrawn["chapelcross33kv"] = {
 
         //transformers for loads
         "ANANT2_ANAN20_T2": new DataView("ANANT2_CHAP3-_1#4",[35,0],[
-            "transformer_active_power",
+            "transformers_active_power",
         ]),
         "ANANT1_ANAN10_T1":new DataView("ANANT1_CHAP3-_1#4",[-35,0],[
-            "transformer_active_power",
+            "transformers_active_power",
         ]),
         "LOBIT1_LOBI10_T1": new DataView("LOBI5-1#0",[-35,0],[
-            "transformer_active_power",
+            "transformers_active_power",
         ]),
         "LOBIT2_LOBI20_T2": new DataView("LOBI5-2#0",[35,0],[
-            "transformer_active_power",
+            "transformers_active_power",
         ]),
         "LAHOT1_LAHO10_T1":new DataView("LAHO5-1#0",[-35,0],[
-            "transformer_active_power",
+            "transformers_active_power",
         ]),
         "LAHOT2_LAHO20_T2": new DataView("LAHO5-2#0",[35,0],[
-            "transformer_active_power",
+            "transformers_active_power",
         ]),
         "MOFTT1_MOFT10_T1": new DataView("MOFT5-1#0",[25,10],[
-            "transformer_active_power",
+            "transformers_active_power",
         ]),
         "MOFTT2_MOFT20_T2": new DataView("MOFT5-2#0",[35,10],[
-            "transformer_active_power",
+            "transformers_active_power",
         ]),
         "NEWCT1_NEWC10_T1":new DataView("NEWC5-#0",[35,0],[
-            "transformer_active_power",
+            "transformers_active_power",
         ]),
         "GRNAT1_GRNA10_T1": new DataView("GRNA5-1#0",[0,30],[
-            "transformer_active_power",
+            "transformers_active_power",
         ]),
         "GRNAT2_GRNA20_T2": new DataView("GRNA5-2#0",[0,30],[
-            "transformer_active_power",
+            "transformers_active_power",
         ]),
         "KIBAT1_KIBA10_T1": new DataView("KIBA5-#0",[35,0],[
-            "transformer_active_power",
+            "transformers_active_power",
         ]),
         "MIBIT1_MIBI10_T1":new DataView("MIBI5-#0",[-25,5],[
-            "transformer_active_power",
+            "transformers_active_power",
         ]),
 
 
@@ -569,7 +569,7 @@ networks_undrawn["chapelcross33kv"] = {
 //    },
 
     generator_graphs:{
-        "gen_graph_1": new GeneratorGraph([750,770],["MINS0G_1","EWHC0G_1","EWHC0G_2","STCR5-_1"])
+        "gen_graph_1": new GeneratorGraph([750,770],["MINS0G_1","EWEHILL_1","EWEHILL_2","STCR5-_1"])
     }
 
 
