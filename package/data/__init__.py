@@ -24,7 +24,7 @@ def _fetch_files(directory: str, file_type: str = '.csv'):
     return dict_files
 
 
-def read_LF_file(network="chapelcross", voltage="33kv", option="Opt5", rev='14'):
+def read_LF_file(network="chapelcross", voltage="33kv", option="Opt5", rev='15'):
     raw_data_files = _fetch_files(dir_raw_simtool_data, file_type='.xlsx')
     # filename = raw_data_files[network + voltage + option]
     print(raw_data_files)

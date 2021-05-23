@@ -161,6 +161,9 @@ function Gen_Callback(graphic_objects, name=""){
             } else if(name === "EMERGENCY"){
                 label = ["EMERGENCY","GENERATOR"]
             }
+            else if (name === "" || name ==="NONE"){
+            label = [""]
+            }
             else{
                 label = ["GENERATOR"]
             }

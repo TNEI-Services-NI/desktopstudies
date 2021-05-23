@@ -143,18 +143,18 @@ networks_undrawn["ewehillwindfarm1"]={
     },
 
     generators:{
-        "WTG_EWEH0G_1#0": new Generator("EWEH0G#10",1),
-        "WTG_EWEH0G_1#1": new Generator("EWEH0G#15",1),
-        "WTG_EWEH0G_1#2": new Generator("EWEH0G#19",1),
+        "EWEHILL_1#0": new Generator("EWEH0G#10",1,""),
+        "EWEHILL_1#1": new Generator("EWEH0G#15",1,""),
+        "EWEHILL_1#2": new Generator("EWEH0G#19",1, ""),
 
-        "WTG_EWEH0G_1#3": new Generator("EWEH0G#24",1),
-        "WTG_EWEH0G_1#4": new Generator("EWEH0G#29",1),
-        "WTG_EWEH0G_1#5": new Generator("EWEH0G#33",1),
+        "EWEHILL_1#3": new Generator("EWEH0G#24",1,""),
+        "EWEHILL_1#4": new Generator("EWEH0G#29",1,""),
+        "EWEHILL_1#5": new Generator("EWEH0G#33",1,""),
 
     },
 
     availablePower:{
-        "EWEH0G_1" : new AvailablePower([500,150]),
+        "EWEHILL_1" : new AvailablePower([500,150]),
     },
 
 //    generatorControls:{

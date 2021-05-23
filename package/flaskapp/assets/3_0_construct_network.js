@@ -736,7 +736,7 @@
         add_static_text([title_string], x=x_pos, y=y_pos-15*y_scaling, colour="#d3d3d3", function(obj){})
 
         let graph_height = 150*y_scaling
-        let graph_width = 150*x_scaling
+        let graph_width = 180*x_scaling
         let y_base =  y_pos + graph_height
         let x_base = x_pos - graph_width /2
 

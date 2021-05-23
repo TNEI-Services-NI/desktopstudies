@@ -557,7 +557,7 @@ networks_undrawn["chapelcross33kv"] = {
 
     },
     availablePower:{
-        "EWHC0G_1" : new AvailablePower([115,970]),
+        "EWEHILL_1" : new AvailablePower([115,970]),
         "MINS0G_1": new AvailablePower([940,820]),
         "STCR5-_1": new AvailablePower([100,100]),
 
@@ -569,7 +569,7 @@ networks_undrawn["chapelcross33kv"] = {
 //    },
 
     generator_graphs:{
-        "gen_graph_1": new GeneratorGraph([750,770],["MINS0G_1","EWEHILL_1","EWEHILL_2","STCR5-_1"])
+        "gen_graph_1": new GeneratorGraph([760,770],["MINS0G_1","EWEHILL_1","EWEHILL_2","STCR5-_1"])
     }
 
 
