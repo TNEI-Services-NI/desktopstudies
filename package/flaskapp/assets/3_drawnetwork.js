@@ -188,9 +188,30 @@ function update_dataviews(step_data) {
                let value = (scale * Math.round(step_data[component_parameter][id_root] * 1000) / 1000).toFixed(acc)
                 if(highlight_undefined||(value < 999 && value > -999)){
                     // let value = step_data[component_parameter][id_dv].toFixed(2)
-                    text_list = text_list.concat(
-                        [String(value) + units]
-                    );
+
+                    //get negative or positive (or zero?)
+                    let value_polarity = value>0
+                    if(value==0){
+                    text_list = text_list.concat(["     "+String(value) + units] );
+                    continue
+                    }
+
+                    //get polarity of datatype
+                    let type_polarity = data_polarity[units]
+                    if(type_polarity === null){
+                    text_list = text_list.concat(["     "+String(value) + units] );
+                    continue
+                    }
+
+                    //get polarity of dataview
+
+                    //draw triangle depending on polarities,
+
+                    if(value_polarity == type_polarity ){direction = "up"}
+
+                    if(direction == "down"){text_list = text_list.concat(["▼    "+String(value) + units]);}
+                    else{text_list = text_list.concat(["▲    "+String(value) + units]);}
+
                 }
                 else{
                     text_list = text_list.concat(
@@ -205,9 +226,10 @@ function update_dataviews(step_data) {
             }
             else{
             text_list = text_list.concat(["PARAM" + units]);
-
             }
+
         }
+
         redraw_dataview(id_dv, text_list);
     }
 }

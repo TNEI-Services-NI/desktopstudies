@@ -410,11 +410,12 @@ function Isolator(line_id,pos, state = "closed",name=false){
  * @return {None}
  * @usage instantiate as object i.e. new DataView(...)
  */
-function DataView(componentID = "", offset, labels){
+function DataView(componentID = "", offset, labels,polarity=true){
     // this.x = x
     // this.y = y
     this.data = {}
     this.graphic = []
+    this.polarity = polarity
     this.componentID = componentID
     this.offset = offset
     this.labels = labels

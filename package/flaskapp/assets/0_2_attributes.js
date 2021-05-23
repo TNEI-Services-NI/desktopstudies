@@ -7,6 +7,8 @@ let palette = {"400kV":"#0000e6",
   "controls":'#bebebe',
   "background-color": "#000000"}
 
+let data_polarity = {" MVA": false," AMPS":null," .":null, " p.u.":null," %":null," MW":true," MVAr":false}
+
 let option = "5"
 let scenario = "1"
 
