@@ -160,7 +160,6 @@ function update_dataviews(step_data) {
         var acc = 0;
         let labels = components.dataviews[id_dv].labels
         let flow_direction = components.dataviews[id_dv].drawInfo.towards_busbar
-        console.log(flow_direction)
         for (let id_component_parameter in labels) {
             let component_parameter = labels[id_component_parameter]
             if (component_parameter.includes('reactive')) {
