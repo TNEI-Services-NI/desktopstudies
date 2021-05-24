@@ -254,7 +254,7 @@ networks_undrawn["minsca33kv"]={
         "lines_active_power",
         "lines_reactive_power",
         "lines_current"
-        ]),
+        ],false),
         "MINS0G": new DataView("MINS0G", [140,-20], [
         "busbars_voltage",
         ]),

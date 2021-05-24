@@ -126,7 +126,8 @@ networks_undrawn["stevenscroft33kv"]={
             'lines_reactive_power',
             'lines_current',
 
-          ]),
+          ],
+          false),
     },
 
     SGTs:{
