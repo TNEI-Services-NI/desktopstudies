@@ -48,7 +48,7 @@ networks_undrawn["stevenscroft33kv"]={
     breakers:{
         "699 CHAP": new Breaker("STCR3-#0",1, "CHAP"),
         "699 CUSTOMER": new Breaker("STCR3-_STCR0G",0, "CUSTOMER"),
-        "699 A": new Breaker("STCR0G-_2",1,""),
+        "699 A": new Breaker("STCR0G-_1",0,""),
         "699 B": new Breaker("STCR_AUX#19",1,""),
 
         "STCR Loadbank":new Breaker("STCR3-#2",0.5,""),
@@ -108,7 +108,7 @@ networks_undrawn["stevenscroft33kv"]={
 //            'generators_reactive_power',
 //
 //          ]),
-        "STCR3-#LOAD": new DataView("STCR3-",[100,50], ["lines_active_power"],false),
+        "STRC_LOADBANK#LOAD": new DataView("STCR3-",[100,50], ["lines_active_power"],false),
 
         "STCR3-": new DataView("STCR3-", [-180, 0],
           [
