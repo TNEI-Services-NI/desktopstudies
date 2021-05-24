@@ -494,17 +494,17 @@ networks_undrawn["chapelcross33kv"] = {
         ]),
 
         //generator
-        "STCR5-_1": new DataView("STCR5-_1", [-35, 0],
+        "STCR5-_1": new DataView("STCR5-_1", [-45, 0],
           [
             'generators_active_power',
             'generators_reactive_power',
           ]),
-        "EWEHILL_1": new DataView("EWHC0G_1", [35, 0],
+        "EWEHILL_1": new DataView("EWHC0G_1", [45, 0],
           [
             'generators_active_power',
             'generators_reactive_power',
           ]),
-        "MINS0G_1": new DataView("MINS0G_1", [35, 0],
+        "MINS0G_1": new DataView("MINS0G_1", [45, 0],
           [
             'generators_active_power',
             'generators_reactive_power',
