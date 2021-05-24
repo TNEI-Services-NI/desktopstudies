@@ -762,12 +762,37 @@ function add_text(object, bool_dict_obj, list_text, x_from_center=0, y_from_cent
  * @param  {SVG object} object which the dataview is watching to
  * @param  {string} list of data labels relevant to dataview
  * @param  {[double]} offset is position of dataview
+ * @param  {string} instructions for drawing arrow, , "up" = up, "down" = down
+
  * @param  {function( SVG Object )} callback after drawing is complete
  * @return {None}
 */
-function add_dataview(observer, text, offset, callback) {
+function add_dataview(observer, text_list,flow_list, offset, callback) {
   let colour = "#e5b815"
-  add_text(observer, false, text, offset[0], offset[1], colour, font_size, callback)
+  let y_offset = 0
+  let draw_flow_list = []
+  let draw_flow = false
+  for(text_ in flow_list){
+      let flow =flow_list[text_]
+      if(flow == "up"){
+        draw_flow_list.push("▲")
+        draw_flow = true
+      }
+      else if (flow=="down"){
+            draw_flow_list.push("▼")
+            draw_flow = true
+      }
+      else{
+            draw_flow_list.push(" ")
+      }
+  }
+//  let x_offset = 0
+//  if(draw_flow){x_offset = 40*x_scaling}
+let x_offset = 40*x_scaling
+        add_text(observer, false, draw_flow_list, offset[0], offset[1], colour, font_size, callback)
+
+        add_text(observer, false, text_list, offset[0]+x_offset, offset[1], colour, font_size, callback)
+
 }
 
 function add_available_power(observer, text, offset, callback) {

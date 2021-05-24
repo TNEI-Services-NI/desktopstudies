@@ -420,7 +420,7 @@
           observer = tx.UIElement
         }
 
-        add_dataview(observer, [""], offset, function (text_object) {
+        add_dataview(observer, [""], [""], offset, function (text_object) {
           components.dataviews[id_dv] = {
             text: [""],
             observer: observer,
@@ -435,10 +435,10 @@
     }
   }
 
-  function redraw_dataview(id_dv, text_list){
+  function redraw_dataview(id_dv, text_list, flow_list){
     let dataview_ = components.dataviews[id_dv];
     // dataview_.text_object.remove()
-    add_dataview(dataview_.observer, text_list, dataview_.offset, function (text_object) {
+    add_dataview(dataview_.observer, text_list,flow_list, dataview_.offset,function (text_object) {
     components.dataviews[id_dv] = {
         text: text_list,
         observer: dataview_.observer,

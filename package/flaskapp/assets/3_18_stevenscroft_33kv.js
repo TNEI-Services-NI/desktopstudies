@@ -108,9 +108,9 @@ networks_undrawn["stevenscroft33kv"]={
 //            'generators_reactive_power',
 //
 //          ]),
-        "STCR3-#LOAD": new DataView("STCR3-",[140,50], ["lines_active_power"]),
+        "STCR3-#LOAD": new DataView("STCR3-",[100,50], ["lines_active_power"],false),
 
-        "STCR3-": new DataView("STCR3-", [-140, 0],
+        "STCR3-": new DataView("STCR3-", [-180, 0],
           [
             "busbars_voltage",
           ]),
@@ -120,14 +120,14 @@ networks_undrawn["stevenscroft33kv"]={
 //             'lines_current',
 //          ]),
 
-          "CHAP3-_STCR3-_1#0": new DataView("STCR3-#0", [80, -40],
+          "CHAP3-_STCR3-_1#0": new DataView("STCR3-#0", [40, -40],
           [
             'lines_active_power',
             'lines_reactive_power',
             'lines_current',
 
           ],
-          false),
+          true),
     },
 
     SGTs:{

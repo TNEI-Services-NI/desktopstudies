@@ -155,6 +155,7 @@ function update_dataviews(step_data) {
     for (let id_dv in components.dataviews) {
         let id_root = id_dv.split("#")[0]
         let text_list = [];
+        let flow_list = [];
         var units = "";
         var scale = 1;
         var acc = 0;
@@ -193,14 +194,17 @@ function update_dataviews(step_data) {
                     //get negative or positive (or zero?)
                     let value_polarity = value>0
                     if(value==0){
-                    text_list = text_list.concat(["\t    "+String(value) + units] );
+                    text_list = text_list.concat([String(value) + units] );
+                    flow_list = flow_list.concat([""] );
                     continue
                     }
 
                     //get polarity of datatype
                     let type_polarity = data_polarity[units]
                     if(type_polarity === null){
-                    text_list = text_list.concat(["\t    "+String(value) + units] );
+                    text_list = text_list.concat(["\t\t\t"+String(value) + units] );
+                    flow_list = flow_list.concat([""] );
+
                     continue
                     }
 
@@ -210,33 +214,50 @@ function update_dataviews(step_data) {
 
                     if(!type_polarity){arrow_up= !arrow_up}
                     if(!value_polarity){arrow_up= !arrow_up}
+
+                    if(flow_direction == null){
+                    text_list = text_list.concat(["\t\t\t"+String(value) + units] );
+                    flow_list = flow_list.concat([""] );
+                    continue
+                    }
                     if(flow_direction){arrow_up= !arrow_up}
 
                     if(arrow_up){direction="up"}
                     else{direction="down"}
 
-                    if(direction == "down"){text_list = text_list.concat(["▼    "+String(value) + units]);}
-                    else{text_list = text_list.concat(["▲    "+String(value) + units]);}
+                    if(direction == "down"){
+                        text_list = text_list.concat([String(Math.abs(value)) + units]);
+                        flow_list = flow_list.concat(["down"] );
+                        }
+                    else{
+                        text_list = text_list.concat([String(Math.abs(value)) + units]);
+                        flow_list = flow_list.concat(["up"] );
+                        }
 
                 }
                 else{
                     text_list = text_list.concat(
                         [String("TBC") + units]
                     );
+                    flow_list = flow_list.concat([""] );
+
                 }
 
             }
             else{
                        text_list = text_list.concat(["ID" + units]);
+                       flow_list = flow_list.concat([""] );
+
             }
             }
             else{
             text_list = text_list.concat(["PARAM" + units]);
+            flow_list = flow_list.concat([""] );
             }
 
         }
 
-        redraw_dataview(id_dv, text_list);
+        redraw_dataview(id_dv, text_list, flow_list);
     }
 }
 

@@ -254,7 +254,7 @@ networks_undrawn["ewehillwindfarm2"]={
     },
 
     dataViews:{
-        "trf_EWEH1Q_EWEH3-_1": new DataView("EWEH3-_GRID1A-_WG2", [-50,-10], [
+        "trf_EWEH1Q_EWEH3-_1": new DataView("EWEH3-_GRID1A-_WG2", [-90,-10], [
         "transformers_active_power","transformers_reactive_power","transformers_current"
         ]),
         "EWEH0G_2": new DataView("EWEH0G_2", [150,-20], [
