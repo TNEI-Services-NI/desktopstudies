@@ -267,7 +267,7 @@ function update_line_colours(step_data_) {
 
         let line_instance = components.lines[idl]
         let line_id_LF = idl.split("#")[0]
-        if (((step_data_["lines_loading"][line_id_LF] == -999)) ||
+        if (((step_data_["lines_current"][line_id_LF] == -999)) ||
             ((step_data_["busbars_voltage"][line_id_LF] == -999)) ||
             ((step_data_["generators_active_power"][line_id_LF] == -999) ) ||
             ((step_data_["transformers_loading"][line_id_LF] == -999))
@@ -283,7 +283,7 @@ function update_line_colours(step_data_) {
             }
 
         }
-        else if (((step_data_["lines_loading"][line_id_LF] !== 0) && (step_data_["lines_loading"][line_id_LF] > 997)) ||
+        else if (((step_data_["lines_current"][line_id_LF] !== 0) && (step_data_["lines_loading"][line_id_LF] > 997)) ||
             //        ((step_data_["lines_active_power"][line_id_LF] !== 0)&&(step_data_["lines_active_power"][line_id_LF] > 997))||
             //        ((step_data_["lines_reactive_power"][line_id_LF] !== 0)&&(step_data_["lines_reactive_power"][line_id_LF] > 997))
             ((step_data_["busbars_voltage"][line_id_LF] !== 0) && (step_data_["busbars_voltage"][line_id_LF] > 997)) ||
@@ -310,7 +310,7 @@ function update_line_colours(step_data_) {
             }
 
         }
-        else if (((step_data_["lines_loading"][line_id_LF] !== 0) && (step_data_["lines_loading"][line_id_LF] !== undefined)) ||
+        else if (((step_data_["lines_current"][line_id_LF] !== 0) && (step_data_["lines_loading"][line_id_LF] !== undefined)) ||
             //        ((step_data_["lines_active_power"][line_id_LF] !== 0)&&(step_data_["lines_active_power"][line_id_LF] !== undefined))||
             //        ((step_data_["lines_reactive_power"][line_id_LF] !== 0)&&(step_data_["lines_reactive_power"][line_id_LF] !== undefined))
             ((step_data_["busbars_voltage"][line_id_LF] !== 0) && (step_data_["busbars_voltage"][line_id_LF] !== undefined)) ||
@@ -353,7 +353,7 @@ function update_breaker_colours(step_data_) {
         let breaker_instance = components.breakers[idb]
         let idl = breaker_instance.line.line_idx
         let line_id_LF = idl.split("#")[0]
-        if (((step_data_["lines_loading"][line_id_LF] == -999)) ||
+        if (((step_data_["lines_current"][line_id_LF] == -999)) ||
             ((step_data_["busbars_voltage"][line_id_LF] == -999)) ||
             ((step_data_["generators_active_power"][line_id_LF] == -999) ) ||
             ((step_data_["transformers_loading"][line_id_LF] == -999))
@@ -362,7 +362,7 @@ function update_breaker_colours(step_data_) {
 
 
         }
-        else if (((step_data_["lines_loading"][line_id_LF] !== 0) && (step_data_["lines_loading"][line_id_LF] !== undefined)) ||
+        else if (((step_data_["lines_current"][line_id_LF] !== 0) && (step_data_["lines_current"][line_id_LF] !== undefined)) ||
             ((step_data_["busbars_voltage"][line_id_LF] !== 0) && (step_data_["busbars_voltage"][line_id_LF] !== undefined)) ||
             ((step_data_["transformers_loading"][line_id_LF] !== 0) && (step_data_["transformers_loading"][line_id_LF] !== undefined))) {
             breaker_instance.setEnergised();
