@@ -16,7 +16,7 @@ networks_undrawn["ewehillgretna"]={
     "EWEH0G_2": StraightLine([270,755],"down",50,"33kV"),
 
     "EWEH3#6": StraightLine([270,565],"left",40,"33kV"),
-    "EWEH3#7": StraightLine([230,565],"left",0,"0V"),
+    "EWEH3#7": StraightLine([230,565],"left",0,"LV"),
 
     "EWEH3": StraightLine([635,550],"left",365,"33kV"),
     "EWEH3#1": StraightLine([635,550],"down",155,"33kV"),
@@ -50,7 +50,7 @@ networks_undrawn["ewehillgretna"]={
         1: new Text("EWEH3#2", ["CROSSDYKES 1"], [0,70]),
         2: new Text("EWEH3#3", ["CROSSDYKES 2"], [0,70]),
         3: new Text("GRNA1-_EWEH#2", ["EWEHILL","132kV"], [60,-10]),
-        4: new Text("EWEH3#5", ["EWEHILL","33kV"], [60,20]),
+        4: new Text("EWEH3#5", ["EWEHILL","33kV"], [80,140]),
 
         5: new Text("GRNA1-",["GRNA1"], [100,30]),
         6: new Text("GRNA1-_EWEH#1",["EWE HILL - GRETNA"], [0,-300], 25),
@@ -81,9 +81,15 @@ networks_undrawn["ewehillgretna"]={
     },
 
     dataViews:{
-          "GRNA1-": new DataView("GRNA1-",[-40,40], ['lines_loading',"lines_active_power","lines_reactive_power","busbars_voltage","lines_current"]),
+          "GRNA1-_EWEH": new DataView("GRNA1-",[-40,50], ["lines_active_power","lines_reactive_power","lines_current"]),
+          "GRNA1-#0": new DataView("GRNA1-",[-50,-20], ["busbars_voltage"]),
 
-          "EWEH3": new DataView("EWEH3",[0,60], ['lines_loading',"lines_active_power","lines_reactive_power","busbars_voltage","lines_current"]),
+          "EWEH0G#": new DataView("EWEH3",[-100,-20], ['busbars_voltage']),
+
+          "EWEH3": new DataView("EWEH3",[-60,60], ["lines_active_power","lines_reactive_power","lines_current"]),
+//ILA3
+//          "EWEH3-_GRID1A-_WG2": new DataView("EWEH3-_GRID1A-_WG2",[-30,-35], ["lines_active_power","lines_reactive_power","lines_current"]),
+
 //        2 : new DataView(340,585, ["MVA","MW","MVAR","kV","Amps"]),
 //        3 : new DataView(580,585, ["MVA","MW","MVAR","kV","Amps"]),
 //
@@ -91,7 +97,9 @@ networks_undrawn["ewehillgretna"]={
 //        5: new DataView(695,765,["Amps"]),
 
     },
-
+    availablePower:{
+        "EWHC0G_1" : new AvailablePower([115,600]),
+    },
     SGTs:{
 
     },

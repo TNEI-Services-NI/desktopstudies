@@ -93,15 +93,17 @@ networks_undrawn["gretna132kv"]={
     },
 
     dataViews:{
-    "GRNA1-_SGT1": new DataView("GRNA1-_SGT1", [-40,-40],['lines_loading',"lines_active_power","lines_reactive_power","lines_current"]),
-    "CHAP1-_GRNA1": new DataView("CHAP1-_GRNA1", [-40,-40],['lines_loading',"lines_active_power","lines_reactive_power","lines_current"]),
-    "CHAP2-_GRNA1": new DataView("CHAP2-_GRNA1", [-40,-40],['lines_loading',"lines_active_power","lines_reactive_power","lines_current"]),
-    "GRNA1-_SGT2": new DataView("GRNA1-_SGT2", [-40,-40],['lines_loading',"lines_active_power","lines_reactive_power","lines_current"]),
+    "GRNA1-_SGT1": new DataView("GRNA1-_SGT1", [-40,-40],["lines_active_power","lines_reactive_power","lines_current"]),
+    "CHAP1-_GRNA1": new DataView("CHAP1-_GRNA1", [-40,-40],["lines_active_power","lines_reactive_power","lines_current"]),
+    "CHAP2-_GRNA1": new DataView("CHAP2-_GRNA1", [-40,-40],["lines_active_power","lines_reactive_power","lines_current"]),
+    "GRNA1-_SGT2": new DataView("GRNA1-_SGT2", [-40,-40],["lines_active_power","lines_reactive_power","lines_current"]),
 
-//
-    "HARK": new DataView("HARK", [-40,40],['lines_loading',"lines_active_power","lines_reactive_power","lines_current"]),
-    "HAWI": new DataView("HAWI", [-40,40],['lines_loading',"lines_active_power","lines_reactive_power","lines_current"]),
-    "GRNA1-_EWEH": new DataView("GRNA1-_EWEH", [-40,40],['lines_loading',"lines_active_power","lines_reactive_power","lines_current"]),
+    "GRNA1-": new DataView("GRNA1-", [410,-20],['busbars_voltage']),
+    "GRNA1-#": new DataView("GRNA1-", [-410,-20],['busbars_voltage']),
+
+    "HARK": new DataView("HARK", [-40,40],["lines_active_power","lines_reactive_power","lines_current"]),
+    "HAWI": new DataView("HAWI", [-40,40],["lines_active_power","lines_reactive_power","lines_current"]),
+    "GRNA1-_EWEH": new DataView("GRNA1-_EWEH", [-40,40],["lines_active_power","lines_reactive_power","lines_current"]),
 //
 //    8: new DataView(75,525,["kV"]),
 //    9: new DataView(940,525,["kV"]),

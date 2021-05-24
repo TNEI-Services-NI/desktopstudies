@@ -150,44 +150,90 @@ function update_line_data_views(step_data) {
 
 }
 
+//probably a good idea to add zeros when data isn't present rather than not drawing
 function update_dataviews(step_data) {
     for (let id_dv in components.dataviews) {
+        let id_root = id_dv.split("#")[0]
         let text_list = [];
         var units = "";
         var scale = 1;
         var acc = 0;
         let labels = components.dataviews[id_dv].labels
+        let flow_direction = components.dataviews[id_dv].drawInfo.towards_busbar
         for (let id_component_parameter in labels) {
             let component_parameter = labels[id_component_parameter]
-            if (id_dv in step_data[component_parameter]) {
-                if (component_parameter.includes('reactive')) {
+            if (component_parameter.includes('reactive')) {
                     units = " MVAr"
                     acc = 2
-                } else if (component_parameter.includes('active')) {
+            } else if (component_parameter.includes('active')) {
                     units = " MW"
                     acc = 2
-                } else if (component_parameter.includes('loading')) {
+            } else if (component_parameter.includes('loading')) {
                     units = " %"
                     acc = 2
-                } else if (component_parameter.includes('voltage')) {
+            } else if (component_parameter.includes('voltage')) {
                     units = " p.u."
-                } else if (component_parameter.includes('taps')) {
+            } else if (component_parameter.includes('taps')) {
                     units = " ."
-                } else if (component_parameter.includes('current')) {
+            } else if (component_parameter.includes('current')) {
                     units = " AMPS"
                     scale = 1000
-                } else if (component_parameter.includes('apparent')) {
+            } else if (component_parameter.includes('apparent')) {
                     units = " MVA"
-                }
+            }
 
-               let value = (scale * Math.round(step_data[component_parameter][id_dv] * 1000) / 1000).toFixed(acc)
+            if(step_data[component_parameter] != undefined){
+            if (id_root in step_data[component_parameter]) {
+
+               let value = (scale * Math.round(step_data[component_parameter][id_root] * 1000) / 1000).toFixed(acc)
                 if(highlight_undefined||(value < 999 && value > -999)){
                     // let value = step_data[component_parameter][id_dv].toFixed(2)
+                    let direction= "down"
+                    let arrow_up = true
+                    //get negative or positive (or zero?)
+                    let value_polarity = value>0
+                    if(value==0){
+                    text_list = text_list.concat(["\t    "+String(value) + units] );
+                    continue
+                    }
+
+                    //get polarity of datatype
+                    let type_polarity = data_polarity[units]
+                    if(type_polarity === null){
+                    text_list = text_list.concat(["\t    "+String(value) + units] );
+                    continue
+                    }
+
+                    //type polarity, false means flip
+                    //value polarity, false means flip
+                    //flow_direction, is relative, lets figure it out
+
+                    if(!type_polarity){arrow_up= !arrow_up}
+                    if(!value_polarity){arrow_up= !arrow_up}
+                    if(flow_direction){arrow_up= !arrow_up}
+
+                    if(arrow_up){direction="up"}
+                    else{direction="down"}
+
+                    if(direction == "down"){text_list = text_list.concat(["▼    "+String(value) + units]);}
+                    else{text_list = text_list.concat(["▲    "+String(value) + units]);}
+
+                }
+                else{
                     text_list = text_list.concat(
-                        [String(value) + units]
+                        [String("TBC") + units]
                     );
                 }
+
             }
+            else{
+                       text_list = text_list.concat(["ID" + units]);
+            }
+            }
+            else{
+            text_list = text_list.concat(["PARAM" + units]);
+            }
+
         }
 
         redraw_dataview(id_dv, text_list);

@@ -602,6 +602,7 @@ deltaCenterX = center[0]
 deltaCenterY = center[1]
 deltaLength = rad*0.6
 
+//upon being set live I redraw and don't flip
 if (flipped === false){
   delta1X = deltaCenterX
   delta1Y = deltaCenterY-deltaLength

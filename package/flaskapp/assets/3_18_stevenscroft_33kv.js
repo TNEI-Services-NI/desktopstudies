@@ -18,8 +18,8 @@ networks_undrawn["stevenscroft33kv"]={
     "STCR0G-_1": StraightLine([270,390],"down",40,"11kV"),
     "STCR0G-_1#0": StraightLine([270,410],"right",40,"11kV"),
 
-    "STCR0G-_1#1": StraightLine([385,410],"left",75,"11kV"),
-    "STCR0G-_1#2": StraightLine([385,410],"down",50,"11kV"),
+    "STCR_AUX#19": StraightLine([385,410],"left",75,"11kV"),
+    "STCR_AUX#20": StraightLine([385,410],"down",50,"11kV"),
 
     "STCR_AUX#1": StraightLine([385,455],"down",85,"LV"),
     "STCR_AUX#2": StraightLine([350,540],"right",360,"LV"),
@@ -49,7 +49,7 @@ networks_undrawn["stevenscroft33kv"]={
         "699 CHAP": new Breaker("STCR3-#0",1, "CHAP"),
         "699 CUSTOMER": new Breaker("STCR3-_STCR0G",0, "CUSTOMER"),
         "699 A": new Breaker("STCR0G-_2",1,""),
-        "699 B": new Breaker("STCR0G-_1#0",1,""),
+        "699 B": new Breaker("STCR_AUX#19",1,""),
 
         "STCR Loadbank":new Breaker("STCR3-#2",0.5,""),
 
@@ -78,7 +78,8 @@ networks_undrawn["stevenscroft33kv"]={
     },
 
     labels:{
-    1: new Text("STCR3-",["STEVENS CROFT 33kV"],[270,-170], 25),
+    0: new Text("STCR3-", ["LOAD BANK"], [105, 90]),
+    1: new Text("STCR3-",["STEVEN'S CROFT 33kV"],[270,-170], 25),
     3: new Text("STCR_AUX#2", ["UNIT AUXILIARY BOARD"],[100,-15]),
     4: new Text("STCR_AUX#12", ["ACC SWITCHBOARD"],[60,15]),
     5: new Text("STCR_AUX#13", ["STATION ESSENTIAL SERVICES BOARD"],[0,-25]),
@@ -86,7 +87,7 @@ networks_undrawn["stevenscroft33kv"]={
 
     2: new Text("STCR3-",["699"],[-70,-20]),
     7: new Text("STCR3-",["33kV"],[-70,-40]),
-    8: new Text("STCR3-",["STEVENSCROFT"],[-70,-60]),
+    8: new Text("STCR3-",["STEVEN'S CROFT"],[-70,-60]),
 
     },
 
@@ -101,19 +102,32 @@ networks_undrawn["stevenscroft33kv"]={
 
     dataViews:{
 
-        "STCR5-_1": new DataView("STCR5-_1", [-35, 0],
+//        "STCR5-_1": new DataView("STCR5-_1", [-35, 0],
+//          [
+//            'generators_active_power',
+//            'generators_reactive_power',
+//
+//          ]),
+        "STCR3-#LOAD": new DataView("STCR3-",[140,50], ["lines_active_power"]),
+
+        "STCR3-": new DataView("STCR3-", [-140, 0],
           [
-            'generators_active_power',
-            'generators_reactive_power',
+            "busbars_voltage",
           ]),
 
-        "STCR3-": new DataView("STCR5-_1", [200, -200],
+//          "STCR0G-_1": new DataView("STCR5-_1", [-35, 30],
+//          [
+//             'lines_current',
+//          ]),
+
+          "CHAP3-_STCR3-_1#0": new DataView("STCR3-#0", [80, -40],
           [
-            "lines_active_power",
-            "lines_reactive_power",
-            "busbars_voltage",
+            'lines_active_power',
+            'lines_reactive_power',
             'lines_current',
-          ]),
+
+          ],
+          false),
     },
 
     SGTs:{
@@ -121,9 +135,13 @@ networks_undrawn["stevenscroft33kv"]={
     },
 
     generators:{
-
         "STCR5-_1": new Generator("STCR0G-_1",1),
         "STCR_DIESEL": new Generator("STCR_DIESEL#0",1, "EMERGENCY"),
         "STCR_MOTOR": new Generator("STCR_AUX#3",1, "MOTOR")
-    }
+    },
+    generationInfo:{
+        "STCR5-_1": new GenerationInfo([230,500],"Stevens Croft Biomass (STCR0G-1)"),
+    },
+
+
 }

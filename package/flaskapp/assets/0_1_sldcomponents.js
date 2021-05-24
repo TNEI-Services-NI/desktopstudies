@@ -17,7 +17,20 @@ function Breaker_Callback(graphic_objects, name = ''){
                 add_text(object, false, [name], 0, -15*y_scaling,"#d3d3d3", font_size, function(object){})
             }
             else{
-                add_text(object, false, [name], 3 + name.length*4 * x_scaling, 0,"#d3d3d3", font_size, function(object){})}
+                if(name.length>8){
+                offset = (name.length)/2.8*font_size
+                }
+                if(name.length < 9){
+                offset = (name.length)/2.3*font_size
+                }
+                if(name.length < 6){
+                offset = (name.length)/2*font_size
+                }
+                if(name.length < 4){
+                offset = (name.length)/1.7*font_size
+                }
+
+                add_text(object, false, [name],offset, 0,"#d3d3d3", font_size, function(object){})}
         }
         if(entity=='Observer'){
             deactivate_click(object)
@@ -44,7 +57,13 @@ function Isolator_Callback(graphic_objects, name = ''){
                 add_text(object, false, [name], 0, -15*y_scaling,"#d3d3d3", font_size, function(object){})
             }
             else{
-                add_text(object, false, [name], 3 + name.length*4 * x_scaling, 0,"#d3d3d3", font_size, function(object){})}
+                if(name.length < 3){
+                offset = (name.length)/1.7*font_size
+                }
+                else{
+                offset = (name.length)/2.2*font_size
+                }
+                add_text(object, false, [name],offset, 0,"#d3d3d3", font_size, function(object){})}
         }
     }
 }
@@ -142,6 +161,9 @@ function Gen_Callback(graphic_objects, name=""){
             } else if(name === "EMERGENCY"){
                 label = ["EMERGENCY","GENERATOR"]
             }
+            else if (name === "" || name ==="NONE"){
+            label = [""]
+            }
             else{
                 label = ["GENERATOR"]
             }
@@ -149,7 +171,7 @@ function Gen_Callback(graphic_objects, name=""){
                 add_text(group, false, label, 0, -0* y_scaling, "#d3d3d3",font_size, function(group){})
             }
             else{
-                add_text(group, false, label, 0,30 * y_scaling,"#d3d3d3",font_size, function(group){})}
+                add_text(group, false, label, 0,15 + 15*label.length * y_scaling,"#d3d3d3",font_size, function(group){})}
             }
         }
 
@@ -388,11 +410,12 @@ function Isolator(line_id,pos, state = "closed",name=false){
  * @return {None}
  * @usage instantiate as object i.e. new DataView(...)
  */
-function DataView(componentID = "", offset, labels){
+function DataView(componentID = "", offset, labels,towards_busbar=false){
     // this.x = x
     // this.y = y
     this.data = {}
     this.graphic = []
+    this.towards_busbar = towards_busbar
     this.componentID = componentID
     this.offset = offset
     this.labels = labels

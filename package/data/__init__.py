@@ -24,9 +24,10 @@ def _fetch_files(directory: str, file_type: str = '.csv'):
     return dict_files
 
 
-def read_LF_file(network="chapelcross", voltage="33kv", option="Opt5", rev='4'):
+def read_LF_file(network="chapelcross", voltage="33kv", option="Opt5", rev='16'):
     raw_data_files = _fetch_files(dir_raw_simtool_data, file_type='.xlsx')
     # filename = raw_data_files[network + voltage + option]
+    print(raw_data_files)
     filename = raw_data_files[network + option + '_R{}'.format(rev)]
 
     dict_data = {'generators': {}, 'busbars': {}, 'lines': {}, 'transformers': {}}
@@ -37,14 +38,29 @@ def read_LF_file(network="chapelcross", voltage="33kv", option="Opt5", rev='4'):
                                                               , sheet_name='Generators - Reactive Power')
     dict_data['generators']['rating'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
                                                               , sheet_name='Generators - Rating')
+
+
     dict_data['busbars']['voltage'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
                                                     , sheet_name='Busbars - Voltage(pu)')
+
+
     dict_data['transformers']['loading'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
                                                          , sheet_name='Transformers - Loading')
     dict_data['transformers']['rating'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
                                                          , sheet_name='Transformers - Rating')
     dict_data['transformers']['taps'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
                                                       , sheet_name='Transformers - Taps')
+    dict_data['transformers']['current'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
+                                                      , sheet_name='Transformers - Amps')
+    dict_data['transformers']['active_power'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
+                                                      , sheet_name='Transformers - MW')
+    dict_data['transformers']['apparent_power'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
+                                                      , sheet_name='Transformers - MVA')
+    dict_data['transformers']['reactive_power'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
+                                                      , sheet_name='Transformers - MVar')
+
+
+
     dict_data['lines']['loading'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
                                                   , sheet_name='Lines - Loading')
     dict_data['lines']['active_power'] = pd.read_excel('/'.join([dir_raw_simtool_data, filename])
@@ -265,5 +281,5 @@ def get_data_cols(comp_data_):
 
 
 if __name__ == '__main__':
-    # dict_data = read_LF_file("chapelcross33kv", "Opt5")
-    read_breaker_states_db("chapelcross33kv", "Opt5")
+    dict_data = read_LF_file("chapelcross", "Opt5")
+    # read_breaker_states_db("chapelcross33kv", "Opt5")

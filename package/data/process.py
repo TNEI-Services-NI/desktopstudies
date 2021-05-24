@@ -21,7 +21,7 @@ def process_LF_data(network="chapelcross", voltage="33kv", option="Opt5", rev=8)
     combine_LF_data()
 
 
-def process_breakers_data(network="chapelcross", voltage="33kv", option="Opt5", rev=2):
+def process_breakers_data(network="chapelcross", voltage="33kv", option="Opt5", rev=14):
     net_breaker_dir = '\\'.join([data.dir_breaker_states, option])
 
     filename = 'AllBreakers_R{}.xlsx'.format(rev)
@@ -96,7 +96,7 @@ def combine_LF_data(network="chapelcross", voltage="33kv", option="Opt5"):
 
 
 if __name__ == '__main__':
-    process_LF_data(rev=12)
+    process_LF_data(rev=16)
     process_breakers_data(rev=3)
     # migrate_csvs("package/data/simtool/breakerstates/Opt5")
     # migrate_csvs("package/data/simtool/networkviews/Opt5")

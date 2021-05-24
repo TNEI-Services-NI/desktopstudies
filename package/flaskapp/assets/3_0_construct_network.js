@@ -403,6 +403,7 @@
       for(let id_dv in dict_components.dataViews){
         let dataview_ = dict_components.dataViews[id_dv]
         let componentID = dataview_.componentID
+        let direction = dataview_.towards_busbar
         let line = components.lines[componentID]
         let gen = components.generators[componentID]
         let tx = components.transformers[componentID]
@@ -426,7 +427,9 @@
             text_object: text_object,
             offset: offset,
             labels: labels,
-            colour: colour
+            colour: colour,
+            direction: direction,
+            drawInfo:dataview_,
           }
         })
     }
@@ -441,7 +444,8 @@
         observer: dataview_.observer,
         text_object: text_object,
         offset: dataview_.offset,
-        colour: dataview_.colour
+        colour: dataview_.colour,
+        drawInfo:dataview_.drawInfo,
     }
     })
   }
@@ -736,7 +740,7 @@
         add_static_text([title_string], x=x_pos, y=y_pos-15*y_scaling, colour="#d3d3d3", function(obj){})
 
         let graph_height = 150*y_scaling
-        let graph_width = 150*x_scaling
+        let graph_width = 180*x_scaling
         let y_base =  y_pos + graph_height
         let x_base = x_pos - graph_width /2
 
@@ -752,7 +756,7 @@
             text.center(x_base - 10*x_scaling, y_base - ((graph_height*percentage/100)));
         }
 
-        let bar_offset = graph_width/7
+        let bar_offset = graph_width/9
 
         let acc_offset = 0
         graph_bars = {}
@@ -801,6 +805,7 @@
           graphManager.setPercentage(generator_ids[0],0)
           graphManager.setPercentage(generator_ids[1],0)
           graphManager.setPercentage(generator_ids[2],0)
+          graphManager.setPercentage(generator_ids[3],0)
           components["generatorGraphManagers"] = [graphManager]
         } else {
           graphManager = components["generatorGraphManagers"][0]
@@ -808,6 +813,7 @@
           graphManager_new.setPercentage(generator_ids[0],graphManager.bars[generator_ids[0]].percentage)
           graphManager_new.setPercentage(generator_ids[1],graphManager.bars[generator_ids[1]].percentage)
           graphManager_new.setPercentage(generator_ids[2],graphManager.bars[generator_ids[2]].percentage)
+          graphManager_new.setPercentage(generator_ids[3],graphManager.bars[generator_ids[3]].percentage)
           graphManager = graphManager_new
         }
 
