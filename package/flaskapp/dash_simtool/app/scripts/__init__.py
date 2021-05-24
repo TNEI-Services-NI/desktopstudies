@@ -29,6 +29,9 @@ def init_dashboard(server=""):
 
     # nav bar
     _nav_bar = components.navbar(URL_PAGE)
+
+
+
     #
     # add sidebar
     _sidebar = html.Div(

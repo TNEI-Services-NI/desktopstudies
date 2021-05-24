@@ -5,7 +5,7 @@ import package as root
 import pandas as pd
 
 
-def process_LF_data(network="chapelcross", voltage="33kv", option="Opt5", rev=8):
+def process_LF_data(rev=8, network="chapelcross", voltage="33kv", option="Opt5"):
     # net_opt_dir = '\\'.join([data.dir_restoration_steps, option, network+voltage])
     net_opt_dir = '\\'.join([data.dir_restoration_steps, option, network])
 
