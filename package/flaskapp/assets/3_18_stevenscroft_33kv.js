@@ -18,8 +18,8 @@ networks_undrawn["stevenscroft33kv"]={
     "STCR0G-_1": StraightLine([270,390],"down",40,"11kV"),
     "STCR0G-_1#0": StraightLine([270,410],"right",40,"11kV"),
 
-    "STCR0G-_1#1": StraightLine([385,410],"left",75,"11kV"),
-    "STCR0G-_1#2": StraightLine([385,410],"down",50,"11kV"),
+    "STCR_AUX#19": StraightLine([385,410],"left",75,"11kV"),
+    "STCR_AUX#20": StraightLine([385,410],"down",50,"11kV"),
 
     "STCR_AUX#1": StraightLine([385,455],"down",85,"LV"),
     "STCR_AUX#2": StraightLine([350,540],"right",360,"LV"),
@@ -49,7 +49,7 @@ networks_undrawn["stevenscroft33kv"]={
         "699 CHAP": new Breaker("STCR3-#0",1, "CHAP"),
         "699 CUSTOMER": new Breaker("STCR3-_STCR0G",0, "CUSTOMER"),
         "699 A": new Breaker("STCR0G-_2",1,""),
-        "699 B": new Breaker("STCR0G-_1#0",1,""),
+        "699 B": new Breaker("STCR_AUX#19",1,""),
 
         "STCR Loadbank":new Breaker("STCR3-#2",0.5,""),
 
@@ -108,6 +108,7 @@ networks_undrawn["stevenscroft33kv"]={
 //            'generators_reactive_power',
 //
 //          ]),
+        "STCR3-#LOAD": new DataView("STCR3-",[140,50], ["lines_active_power"]),
 
         "STCR3-": new DataView("STCR3-", [-140, 0],
           [

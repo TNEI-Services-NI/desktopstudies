@@ -476,7 +476,10 @@ networks_undrawn["chapelcross33kv"] = {
         "CHAP3-_SOLWAY": new DataView("CHAP3-_SOLWAY#3", [-25, 10], ['lines_current']),
         "CHAP3-_SOLWAY#1": new DataView("CHAP3-_SOLWAY#0", [-85, 50], ['lines_active_power',"lines_reactive_power","lines_current"]),
 
+        "CHAP3-_SOLWAY#1": new DataView("CHAP3-_SOLWAY#0", [-85, 50], ['lines_active_power',"lines_reactive_power","lines_current"]),
 
+//        loadbank
+        "STCR3-#LOAD": new DataView("STCR3-",[80,50], ["lines_active_power"]),
 
         //transformers
         "CHAP1-_CHAP3-_1": new DataView("CHAP1-_CHAP3-_1#0",[70,4],[

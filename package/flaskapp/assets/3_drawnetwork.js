@@ -188,7 +188,7 @@ function update_dataviews(step_data) {
                let value = (scale * Math.round(step_data[component_parameter][id_root] * 1000) / 1000).toFixed(acc)
                 if(highlight_undefined||(value < 999 && value > -999)){
                     // let value = step_data[component_parameter][id_dv].toFixed(2)
-
+                    let direction= "down"
                     //get negative or positive (or zero?)
                     let value_polarity = value>0
                     if(value==0){
