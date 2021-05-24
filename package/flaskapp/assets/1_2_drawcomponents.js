@@ -786,9 +786,9 @@ function add_dataview(observer, text_list,flow_list, offset, callback) {
             draw_flow_list.push(" ")
       }
   }
-  let x_offset = 0
-  if(draw_flow){x_offset = 40*x_scaling}
-
+//  let x_offset = 0
+//  if(draw_flow){x_offset = 40*x_scaling}
+let x_offset = 40*x_scaling
         add_text(observer, false, draw_flow_list, offset[0], offset[1], colour, font_size, callback)
 
         add_text(observer, false, text_list, offset[0]+x_offset, offset[1], colour, font_size, callback)

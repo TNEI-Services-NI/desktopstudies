@@ -214,6 +214,12 @@ function update_dataviews(step_data) {
 
                     if(!type_polarity){arrow_up= !arrow_up}
                     if(!value_polarity){arrow_up= !arrow_up}
+
+                    if(flow_direction == null){
+                    text_list = text_list.concat(["\t\t\t"+String(value) + units] );
+                    flow_list = flow_list.concat([""] );
+                    continue
+                    }
                     if(flow_direction){arrow_up= !arrow_up}
 
                     if(arrow_up){direction="up"}

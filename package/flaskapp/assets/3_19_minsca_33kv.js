@@ -250,7 +250,7 @@ networks_undrawn["minsca33kv"]={
     },
 
     dataViews:{
-        "CHAP3-_MINS3-_1#0": new DataView("MINS3-", [-100,30], [
+        "CHAP3-_MINS3-_1#0": new DataView("MINS3-", [-140,30], [
         "lines_active_power",
         "lines_reactive_power",
         "lines_current"
