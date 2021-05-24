@@ -440,7 +440,7 @@ def sidebar(url_page, styling):
         _sidebar_widgets += _sim_status
         _sidebar_widgets += _entity_view
         _sidebar_widgets += _debug
-        _sidebar_widgets += _upload_restoration_steps
+        # _sidebar_widgets += _upload_restoration_steps
     elif 'home' in url_page:
         _sidebar_widgets += _heading
         _sidebar_widgets += _sim_buttons
