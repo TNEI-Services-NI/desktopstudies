@@ -347,7 +347,7 @@ def navbar_controls(url_page):
                     #             href=dash_app.URL_SLDS if cf.demo else dash_app.URL_SCRIPTS,
                     #             active=True if dash_app.URL_SCRIPTS == url_page else False,
                     #             external_link=True),
-                    dbc.NavLink("Graph",
+                    dbc.NavLink("Data",
                                 href=dash_app.URL_SLDS if cf.demo else dash_app.URL_GRAPH,
                                 active=True if dash_app.URL_GRAPH == url_page else False,
                                 external_link=True),
