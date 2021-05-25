@@ -150,47 +150,144 @@ function update_line_data_views(step_data) {
 
 }
 
+//probably a good idea to add zeros when data isn't present rather than not drawing
 function update_dataviews(step_data) {
     for (let id_dv in components.dataviews) {
+    console.log(step_data)
+        let id_root = id_dv.split("#")[0]
         let text_list = [];
+        let flow_list = [];
         var units = "";
         var scale = 1;
         var acc = 0;
         let labels = components.dataviews[id_dv].labels
+        let flow_direction = components.dataviews[id_dv].drawInfo.flow_direction
+
+        argument = ""
+
+
         for (let id_component_parameter in labels) {
+
             let component_parameter = labels[id_component_parameter]
-            if (id_dv in step_data[component_parameter]) {
-                if (component_parameter.includes('reactive')) {
+             //catching LV parameter quick fix
+            if(component_parameter.includes("-LV")){
+            component_parameter = component_parameter.replace("-LV","");
+            argument = "LV"
+            }
+
+            if (component_parameter.includes('reactive')) {
                     units = " MVAr"
                     acc = 2
-                } else if (component_parameter.includes('active')) {
+            } else if (component_parameter.includes('active')) {
                     units = " MW"
                     acc = 2
-                } else if (component_parameter.includes('loading')) {
+            } else if (component_parameter.includes('loading')) {
                     units = " %"
                     acc = 2
-                } else if (component_parameter.includes('voltage')) {
+            } else if (component_parameter.includes('voltage')) {
                     units = " p.u."
-                } else if (component_parameter.includes('taps')) {
+            } else if (component_parameter.includes('taps')) {
                     units = " ."
-                } else if (component_parameter.includes('current')) {
-                    units = " AMPS"
+            } else if (component_parameter.includes('current')) {
+                    if(component_parameter.includes("transformers")){
+                        if(argument == "LV"){
+                            units = " AMPS (LV)"
+                        }
+                        else{units = " AMPS (HV)"}
+                    }
+                    else{
+                        units = " AMPS"
+                    }
                     scale = 1000
-                } else if (component_parameter.includes('apparent')) {
+            } else if (component_parameter.includes('apparent')) {
                     units = " MVA"
-                }
+            }
 
-               let value = (scale * Math.round(step_data[component_parameter][id_dv] * 1000) / 1000).toFixed(acc)
+
+
+            if(step_data[component_parameter] != undefined){
+            if (id_root in step_data[component_parameter]) {
+                let value = step_data[component_parameter][id_root]
+               if(argument == "LV"){
+               //quickest fix in the west
+                value = value * 132/33
+               }
+
+               value = (scale * Math.round(value * 1000) / 1000).toFixed(acc)
+
+
                 if(highlight_undefined||(value < 999 && value > -999)){
                     // let value = step_data[component_parameter][id_dv].toFixed(2)
-                    text_list = text_list.concat(
-                        [String(value) + units]
-                    );
+                    let direction= "down"
+                    let arrow_up = true
+                    //get negative or positive (or zero?)
+                    let value_polarity = value>0
+                    if(value==0){
+                    text_list = text_list.concat([String(Math.abs(value)) + units] );
+                    flow_list = flow_list.concat([""] );
+                    continue
+                    }
+
+                    //get polarity of datatype
+                    let type_polarity = data_polarity[units]
+                    if(type_polarity === null){
+                    text_list = text_list.concat([String(Math.abs(value)) + units] );
+                    flow_list = flow_list.concat([""] );
+
+                    continue
+                    }
+
+                    //type polarity, false means flip
+                    //value polarity, false means flip
+                    //flow_direction, true means positive values go up
+                    if(!type_polarity){arrow_up= !arrow_up}
+                    if(!value_polarity){arrow_up= !arrow_up}
+
+                    if(flow_direction == null){
+                    text_list = text_list.concat([String(Math.abs(value)) + units] );
+                    flow_list = flow_list.concat([""] );
+                    continue
+                    }
+                    if(flow_direction){arrow_up= !arrow_up}
+
+                    if(arrow_up){direction="up"}
+                    else{direction="down"}
+
+                    if(direction == "down"){
+                        text_list = text_list.concat([String((Math.abs(value))) + units]);
+                        flow_list = flow_list.concat(["down"] );
+                        }
+                    else{
+                        text_list = text_list.concat([String(Math.abs(value)) + units]);
+                        flow_list = flow_list.concat(["up"] );
+                        }
+
                 }
+                else{
+                    text_list = text_list.concat(
+                        [String("TBC") + units]
+                    );
+                    flow_list = flow_list.concat([""] );
+
+                }
+
             }
+            else{
+//                       text_list = text_list.concat(["ID" + units]);
+                       text_list = text_list.concat(["ID"+units]);
+                       flow_list = flow_list.concat([""] );
+
+            }
+            }
+            else{
+//            text_list = text_list.concat(["PARAM" + units]);
+            text_list = text_list.concat(["PARAM"+units]);
+            flow_list = flow_list.concat([""] );
+            }
+
         }
 
-        redraw_dataview(id_dv, text_list);
+        redraw_dataview(id_dv, text_list, flow_list);
     }
 }
 
@@ -200,7 +297,7 @@ function update_line_colours(step_data_) {
 
         let line_instance = components.lines[idl]
         let line_id_LF = idl.split("#")[0]
-        if (((step_data_["lines_loading"][line_id_LF] == -999)) ||
+        if (((step_data_["lines_current"][line_id_LF] == -999)) ||
             ((step_data_["busbars_voltage"][line_id_LF] == -999)) ||
             ((step_data_["generators_active_power"][line_id_LF] == -999) ) ||
             ((step_data_["transformers_loading"][line_id_LF] == -999))
@@ -216,7 +313,7 @@ function update_line_colours(step_data_) {
             }
 
         }
-        else if (((step_data_["lines_loading"][line_id_LF] !== 0) && (step_data_["lines_loading"][line_id_LF] > 997)) ||
+        else if (((step_data_["lines_current"][line_id_LF] !== 0) && (step_data_["lines_current"][line_id_LF] > 997)) ||
             //        ((step_data_["lines_active_power"][line_id_LF] !== 0)&&(step_data_["lines_active_power"][line_id_LF] > 997))||
             //        ((step_data_["lines_reactive_power"][line_id_LF] !== 0)&&(step_data_["lines_reactive_power"][line_id_LF] > 997))
             ((step_data_["busbars_voltage"][line_id_LF] !== 0) && (step_data_["busbars_voltage"][line_id_LF] > 997)) ||
@@ -243,7 +340,7 @@ function update_line_colours(step_data_) {
             }
 
         }
-        else if (((step_data_["lines_loading"][line_id_LF] !== 0) && (step_data_["lines_loading"][line_id_LF] !== undefined)) ||
+        else if (((step_data_["lines_current"][line_id_LF] !== 0) && (step_data_["lines_current"][line_id_LF] !== undefined)) ||
             //        ((step_data_["lines_active_power"][line_id_LF] !== 0)&&(step_data_["lines_active_power"][line_id_LF] !== undefined))||
             //        ((step_data_["lines_reactive_power"][line_id_LF] !== 0)&&(step_data_["lines_reactive_power"][line_id_LF] !== undefined))
             ((step_data_["busbars_voltage"][line_id_LF] !== 0) && (step_data_["busbars_voltage"][line_id_LF] !== undefined)) ||
@@ -265,7 +362,7 @@ function update_line_colours(step_data_) {
             }
 
 
-        } else if (((step_data_["lines_loading"][line_id_LF] === undefined)) &&
+        } else if (((step_data_["lines_current"][line_id_LF] === undefined)) &&
             ((step_data_["busbars_voltage"][line_id_LF] === undefined)) &&
             ((step_data_["generators_active_power"][line_id_LF] === undefined)) &&
             ((step_data_["transformers_loading"][line_id_LF] === undefined))) {
@@ -286,7 +383,7 @@ function update_breaker_colours(step_data_) {
         let breaker_instance = components.breakers[idb]
         let idl = breaker_instance.line.line_idx
         let line_id_LF = idl.split("#")[0]
-        if (((step_data_["lines_loading"][line_id_LF] == -999)) ||
+        if (((step_data_["lines_current"][line_id_LF] == -999)) ||
             ((step_data_["busbars_voltage"][line_id_LF] == -999)) ||
             ((step_data_["generators_active_power"][line_id_LF] == -999) ) ||
             ((step_data_["transformers_loading"][line_id_LF] == -999))
@@ -295,8 +392,8 @@ function update_breaker_colours(step_data_) {
 
 
         }
-        else if (((step_data_["lines_loading"][line_id_LF] !== 0) && (step_data_["lines_loading"][line_id_LF] !== undefined)) ||
-            ((step_data_["busbars_voltage"][line_id_LF] !== 0) && (step_data_["busbars_voltage"][line_id_LF] !== undefined)) ||
+        else if (((step_data_["lines_current"][line_id_LF] !== 0) && (step_data_["lines_current"][line_id_LF] !== undefined)) ||
+          ((step_data_["busbars_voltage"][line_id_LF] !== 0) && (step_data_["busbars_voltage"][line_id_LF] !== undefined)) ||
             ((step_data_["transformers_loading"][line_id_LF] !== 0) && (step_data_["transformers_loading"][line_id_LF] !== undefined))) {
             breaker_instance.setEnergised();
         }
@@ -341,15 +438,16 @@ function update_generator_graphs(step_data_) {
     }
 }
 
-function update_state(case_network_) {
+function update_state(case_network_, progress=false) {
     $("body").css("cursor", "progress");
     let data = {
         'sim_step': current_step,
         'entity': entity,
+        'room': room,
         'network': network,
         'page': page,
         'progress': true,
-        'broadcast': true
+        'broadcast': !(local)
     }
 
     setTimeout(function() {
@@ -363,22 +461,23 @@ function update_state(case_network_) {
 }
 
 
-function inc_state(case_network_) {
+function inc_state(case_network_, progress=false) {
     current_step += 1;
-    update_state(case_network_);
+    update_state(case_network_, progress);
 }
 
 
-function dec_state(case_network_) {
+function dec_state(case_network_, progress=false) {
     current_step -= 1;
-    update_state(case_network_);
+    update_state(case_network_, progress);
 }
 
 
-function reset_state(case_network_) {
+function reset_state(case_network_, progress=false) {
     current_step = -2;
+    next_network = undefined
     components.generatorGraphManagers = undefined;
-    update_state(case_network_);
+    update_state(case_network_, progress);
 }
 
 /**

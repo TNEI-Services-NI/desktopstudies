@@ -7,8 +7,9 @@ import dash_html_components as html
 import numpy as np
 import plotly.graph_objs as go
 
-import package.flaskapp.dash_simtool.app as dash_app
+import package.data as simtool_data
 import package.flaskapp.dash_simtool._config as cf
+import package.flaskapp.dash_simtool.app as dash_app
 import package.flaskapp.dash_simtool.app.dashboard_styling as styling
 from package.flaskapp.dash_simtool.app.micromethods import hex_to_rgb
 
@@ -194,13 +195,14 @@ def init_calendar(_d1=date(2020, 1, 1), _d2=date(2020, 12, 31), _z=[]):
     return div, dict_fig
 
 
-def _init_upload_card(id):
+def init_upload_card(id):
+    children = html.Div([
+            'Drag and Drop'
+        ], id=id+'_child')
+
     return dcc.Upload(
         id=id,
-        children=html.Div([
-            'Drag and Drop or ',
-            html.A('Select Files')
-        ]),
+        children=children,
         style={
             # 'width': '90%',
             'height': '60px',
@@ -209,10 +211,10 @@ def _init_upload_card(id):
             'borderStyle': 'dashed',
             'borderRadius': '5px',
             'textAlign': 'center',
-            'margin': '10px'
+            'margin': '0px'
         },
         # Allow multiple files to be uploaded
-        multiple=True
+        multiple=False
     )
 
 
@@ -266,12 +268,12 @@ def _init_control_module():
 
     # datetime upload widget
     _upload_datetimes_card = dbc.Card([html.H5('Upload Date Times Input'),
-                                       _init_upload_card('upload-datetime-data')
+                                       init_upload_card('upload-datetime-data')
                                        ], body=True)
 
     # data upload widget
     _upload_input_card = dbc.Card([html.H5('Upload Input'),
-                                   _init_upload_card('upload-data'),
+                                   init_upload_card('upload-data'),
                                    ], body=True)
 
     # control module
@@ -345,6 +347,10 @@ def navbar_controls(url_page):
                     #             href=dash_app.URL_SLDS if cf.demo else dash_app.URL_SCRIPTS,
                     #             active=True if dash_app.URL_SCRIPTS == url_page else False,
                     #             external_link=True),
+                    dbc.NavLink("Data",
+                                href=dash_app.URL_SLDS if cf.demo else dash_app.URL_GRAPH,
+                                active=True if dash_app.URL_GRAPH == url_page else False,
+                                external_link=True),
                     dbc.NavLink("About",
                                 href=dash_app.URL_SLDS if cf.demo else dash_app.URL_ABOUT,
                                 active=True if dash_app.URL_ABOUT == url_page else False,
@@ -424,6 +430,13 @@ def sidebar(url_page, styling):
         html.Hr(),
     ]
 
+    # datetime upload widget
+    _upload_restoration_steps = [
+        dbc.Card([html.H6('Upload restoration steps'),
+                  init_upload_card('upload-restoration-steps')
+                  ], body=True)
+    ]
+
     _sidebar_widgets = []
     if 'SLDs' in url_page:
         _sidebar_widgets += _heading
@@ -432,6 +445,7 @@ def sidebar(url_page, styling):
         _sidebar_widgets += _sim_status
         _sidebar_widgets += _entity_view
         _sidebar_widgets += _debug
+        # _sidebar_widgets += _upload_restoration_steps
     elif 'home' in url_page:
         _sidebar_widgets += _heading
         _sidebar_widgets += _sim_buttons
@@ -465,3 +479,26 @@ def legend():
         id='legend'
     )
     return _legend
+
+
+def graph_display():
+    bar_chart = html.Div([
+        dbc.Row([
+            dbc.Col([
+                dcc.Graph(id="bar-chart-1",
+                          style={
+                              'visibility': 'hidden'
+                          }),
+                dcc.Graph(id="bar-chart-2",
+                          style={
+                              'visibility': 'hidden'
+                          }),
+            ])
+        ])
+    ], id="bar-chart-div",
+    style={
+        'height': '100%',
+        'width': '100%',
+        'padding': '3rem'
+    })
+    return bar_chart

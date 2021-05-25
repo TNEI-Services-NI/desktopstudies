@@ -3,6 +3,7 @@ from dash.dependencies import Output, Input
 from flask import session
 
 # INT IMPORTS
+import package.flaskapp.dash_simtool._config as cf
 import package.flaskapp.dash_simtool.app.dashboard_callbacks as shared_clbks
 import package.flaskapp.dash_simtool.db as simtool_db
 from package.flaskapp import socketio
@@ -46,7 +47,6 @@ def _add_network_redraw(dash_app):
 
         # store network, sim_step
         session['network_explore'] = network
-        print(session['entity'])
 
         session['sim_step'] = sim_step
 
@@ -67,6 +67,7 @@ def _add_network_redraw(dash_app):
 def init_callbacks(dash_app, app_prefix):
     shared_clbks.login_required_(dash_app, app_prefix)
     dash_app = _add_network_redraw(dash_app)
+    dash_app = shared_clbks.add_upload_steps(dash_app, URL_SLDS)
     dash_app = shared_clbks.add_sim_progress_buttons(dash_app, URL_SLDS)
     dash_app = shared_clbks.add_legend_button(dash_app)
 

@@ -22,7 +22,7 @@ networks_undrawn["minsca33kv"]={
 
     "MINS0G#3": StraightLine([730,260],"down",30,"33kV"),
     "MINS0G#110": StraightLine([730,290],"down",85,"33kV"),
-    "MINS0G#120": StraightLine([730,375],"down",10,"0V"),
+    "MINS0G#120": StraightLine([730,375],"down",10,"LV"),
 
     "MINS0G#4": StraightLine([480,370],"right",45,"33kV"),
     "MINS0G#5": StraightLine([505,405],"right",20,"33kV"),
@@ -206,9 +206,9 @@ networks_undrawn["minsca33kv"]={
     },
     breakers:{
 //        "761 CHAP": new Breaker("761 CHAP A",1),
-    "761 MINS WF": new Breaker("MINS3-#1",1),
-    "761 CHAP": new Breaker("CHAP3-_MINS3-_1#6",1),
-    "761 CUSTOMER": new Breaker("MINS3-_MINSC",1),
+    "761 MINS WF": new Breaker("MINS3-#1",1, "MINS WF"),
+    "761 CHAP": new Breaker("CHAP3-_MINS3-_1#6",1, "CHAP"),
+    "761 CUSTOMER": new Breaker("MINS3-_MINSC",1,"CUSTOMER"),
 
     "CB01": new Breaker("MINS0G#1",1),
     "CB02": new Breaker("MINS0G#2",1),
@@ -218,6 +218,8 @@ networks_undrawn["minsca33kv"]={
 
     labels:{
         1: new Text("MINS3-",["Minsca 33kv"],[150,-40], 25),
+        2: new Text("MINS3-",["761"],[0,-20]),
+
     },
 
     tx:{
@@ -248,7 +250,14 @@ networks_undrawn["minsca33kv"]={
     },
 
     dataViews:{
-        "MINS3-": new DataView("MINS3-", [-30,110], ["lines_loading","lines_active_power","lines_reactive_power","busbars_voltage","lines_current"]),
+        "CHAP3-_MINS3-_1#0": new DataView("MINS3-", [-140,30], [
+        "lines_active_power",
+        "lines_reactive_power",
+        "lines_current"
+        ]),
+        "MINS0G": new DataView("MINS0G", [140,-20], [
+        "busbars_voltage",
+        ]),
     },
 
     SGTs:{
@@ -256,29 +265,31 @@ networks_undrawn["minsca33kv"]={
     },
 
     generators:{
-        "WTG_MINS0G#0": new Generator("MINS0G#8",1),
-        "WTG_MINS0G#1": new Generator("MINS0G#17",1),
-        "WTG_MINS0G#2": new Generator("MINS0G#13",1),
-        "WTG_MINS0G#3": new Generator("MINS0G#22",1),
-        "WTG_MINS0G#4": new Generator("MINS0G#26",1),
-        "WTG_MINS0G#5": new Generator("MINS0G#31",1),
-        "WTG_MINS0G#6": new Generator("MINS0G#41",1),
-        "WTG_MINS0G#7": new Generator("MINS0G#36",1),
+        "WTG_MINS0G#0": new Generator("MINS0G#8",1,""),
+        "WTG_MINS0G#1": new Generator("MINS0G#17",1,""),
+        "WTG_MINS0G#2": new Generator("MINS0G#13",1,""),
+        "WTG_MINS0G#3": new Generator("MINS0G#22",1,""),
+        "WTG_MINS0G#4": new Generator("MINS0G#26",1,""),
+        "WTG_MINS0G#5": new Generator("MINS0G#31",1,""),
+        "WTG_MINS0G#6": new Generator("MINS0G#41",1,""),
+        "WTG_MINS0G#7": new Generator("MINS0G#36",1,""),
 
-        "WTG_MINS0G#8": new Generator("MINS0G#45",1),
-        "WTG_MINS0G#9": new Generator("MINS0G#50",1),
-        "WTG_MINS0G#10": new Generator("MINS0G#62",1),
-        "WTG_MINS0G#11": new Generator("MINS0G#66",1),
-        "WTG_MINS0G#12": new Generator("MINS0G#71",1),
-        "WTG_MINS0G#13": new Generator("MINS0G#76",1),
-        "WTG_MINS0G#14": new Generator("MINS0G#81",1),
-        "WTG_MINS0G#15": new Generator("MINS0G#85",1),
+        "WTG_MINS0G#8": new Generator("MINS0G#45",1,""),
+        "WTG_MINS0G#9": new Generator("MINS0G#50",1,""),
+        "WTG_MINS0G#10": new Generator("MINS0G#62",1,""),
+        "WTG_MINS0G#11": new Generator("MINS0G#66",1,""),
+        "WTG_MINS0G#12": new Generator("MINS0G#71",1,""),
+        "WTG_MINS0G#13": new Generator("MINS0G#76",1,""),
+        "WTG_MINS0G#14": new Generator("MINS0G#81",1,""),
+        "WTG_MINS0G#15": new Generator("MINS0G#85",1,""),
 
     },
     availablePower:{
         "MINS0G_1" : new AvailablePower([500,150]),
     },
-
+    generationInfo:{
+        "MINS0G_1": new GenerationInfo([150,250],"Minsca Windfarm (MINSW-1)"),
+    },
 //    generatorControls:{
 //        "MINS0G_1": new GeneratorControl([750,100])
 //    },

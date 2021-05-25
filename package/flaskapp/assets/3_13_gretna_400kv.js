@@ -18,7 +18,7 @@ networks_undrawn["gretna400kv"]={
         "GRNA4-_M1-_SGT1": StraightLine([285,740],"up",75,"400kV"),
         "GRNA1-_SGT1#1": StraightLine([285,930],"up",190,"132kV"),
         "GRNA1-_SGT1#0": StraightLine([285,800],"left",40,"132kV"),
-        "GRNA1-_SGT1#2": StraightLine([245,800],"left",0,"0V"),
+        "GRNA1-_SGT1#2": StraightLine([245,800],"left",0,"LV"),
 
     "GRNA4-_M1#7": StraightLine([485,430],"down",190,"400kV"),
     "GRNA4-_R1#1": StraightLine([485,430],"down",38,"400kV"),
@@ -120,17 +120,18 @@ networks_undrawn["gretna400kv"]={
 
     dataViews:{
 
-        "ELVA": new DataView("ELVA", [-50,-200], ["lines_loading","lines_active_power","lines_reactive_power","lines_current"]),
-        "HARK4": new DataView("HARK4",[-50,100], ["lines_loading","lines_active_power","lines_reactive_power","lines_current"]),
-        "GRNA1-_SGT1": new DataView("GRNA1-_SGT1#1",[60,60], ["lines_loading","lines_active_power","lines_reactive_power","lines_current"]),
-        "GRNA1-_SGT2": new DataView("GRNA1-_SGT2#0",[60,60], ["lines_loading","lines_active_power","lines_reactive_power","lines_current"]),
-        "R1": new DataView("GRNA4-_R1",[-400,-40], ["busbars_voltage"]),
-        "M1": new DataView("GRNA4-_M1",[-400,40], ["busbars_voltage"]),
+        "ELVA": new DataView("ELVA", [-90,-200], ["lines_active_power","lines_reactive_power","lines_current"]),
+        "HARK4": new DataView("HARK4",[-90,100], ["lines_active_power","lines_reactive_power","lines_current"]),
+        "tr3_GRNA4-_GRNA1-_1": new DataView("GRNA1-_SGT1#1",[-80,40], ["transformers_apparent_power","transformers_active_power","transformers_reactive_power","transformers_current"]),
+        "tr3_GRNA4-_GRNA1-_2": new DataView("GRNA1-_SGT2#0",[-80,40], ["transformers_apparent_power","transformers_active_power","transformers_reactive_power","transformers_current"]),
+
+        "GRNA4-_R1": new DataView("GRNA4-_R1",[-460,-20], ["busbars_voltage"]),
+        "GRTNA4-": new DataView("GRNA4-_M1",[-460,20], ["busbars_voltage"]),
 
     },
 
     SGTs:{
-        "GRNA4-_GRNA1-_1": new SGT("GRNA1-_SGT1#1","SGT1", ["132kV", "400kV"]),
-        "GRNA4-_GRNA1-_2": new SGT("GRNA4-_M1-_SGT2","SGT2"),
+        "tr3_GRNA4-_GRNA1-_1": new SGT("GRNA1-_SGT1#1","SGT1", ["132kV", "400kV"]),
+        "tr3_GRNA4-_GRNA1-_2": new SGT("GRNA4-_M1-_SGT2","SGT2"),
     },
 }

@@ -7,6 +7,8 @@ let palette = {"400kV":"#0000e6",
   "controls":'#bebebe',
   "background-color": "#000000"}
 
+let data_polarity = {" MVA": null," AMPS":null," AMPS (HV)":null," AMPS (LV)":null," .":null, " p.u.":null," %":null," MW":true," MVAr":true}
+
 let option = "5"
 let scenario = "1"
 
@@ -38,7 +40,11 @@ var entity = undefined
 
 var action = undefined
 
+var next_network = undefined
+
 var page = undefined
+
+var local = undefined
 
 const networks_undrawn = {
     "chapelcross33kv": undefined,

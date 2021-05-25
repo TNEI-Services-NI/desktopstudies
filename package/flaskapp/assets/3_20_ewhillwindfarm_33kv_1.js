@@ -23,7 +23,7 @@ networks_undrawn["ewehillwindfarm1"]={
     "EWEH0G#3": StraightLine([730,260],"down",30,"33kV"),
 //    "EWHC0G-_AUXT": StraightLine([730,290],"down",85,"33kV"),
     "EWEH0G#50": StraightLine([730,290],"down",85,"33kV"),
-    "EWEH0G#101": StraightLine([730,375],"down",10,"0V"),
+    "EWEH0G#101": StraightLine([730,375],"down",10,"LV"),
 
     "EWEH0G#6": StraightLine([480,370],"right",45,"33kV"),
     "EWEH0G#7": StraightLine([505,405],"right",20,"33kV"),
@@ -118,7 +118,7 @@ networks_undrawn["ewehillwindfarm1"]={
     },
 
     tx:{
-        "EWEH0G-AUX-_1": new Tx("EWEH0G#101",1,["AUXILIARY","TRANSFORMER"],"","33kV"),
+        "EWEHOG-AUX-_1": new Tx("EWEH0G#101",1,["AUXILIARY","TRANSFORMER"],"","33kV"),
 
         "EWEH-_WTG-_1#0": new Tx("EWEH0G#9",1,["WTG 04"],"","LV"),
         "EWEH-_WTG-_1#1": new Tx("EWEH0G#14",1,["WTG 05"],"","LV"),
@@ -133,7 +133,9 @@ networks_undrawn["ewehillwindfarm1"]={
     },
 
     dataViews:{
-        "EWEH3-": new DataView("EWEH3-", [-50,90], ["lines_loading","lines_active_power","lines_reactive_power","busbars_voltage","lines_current"]),
+        "EWEH3-_MIBI3-_1": new DataView("EWEH3-", [-140,40], ["lines_active_power","lines_reactive_power","lines_current"],true),
+        "EWEH0G": new DataView("EWEH0G", [140,-20], ["busbars_voltage"]),
+
     },
 
     SGTs:{
@@ -141,21 +143,24 @@ networks_undrawn["ewehillwindfarm1"]={
     },
 
     generators:{
-        "WTG_EWEH0G_1#0": new Generator("EWEH0G#10",1),
-        "WTG_EWEH0G_1#1": new Generator("EWEH0G#15",1),
-        "WTG_EWEH0G_1#2": new Generator("EWEH0G#19",1),
+        "EWEHILL_1#0": new Generator("EWEH0G#10",1,""),
+        "EWEHILL_1#1": new Generator("EWEH0G#15",1,""),
+        "EWEHILL_1#2": new Generator("EWEH0G#19",1, ""),
 
-        "WTG_EWEH0G_1#3": new Generator("EWEH0G#24",1),
-        "WTG_EWEH0G_1#4": new Generator("EWEH0G#29",1),
-        "WTG_EWEH0G_1#5": new Generator("EWEH0G#33",1),
+        "EWEHILL_1#3": new Generator("EWEH0G#24",1,""),
+        "EWEHILL_1#4": new Generator("EWEH0G#29",1,""),
+        "EWEHILL_1#5": new Generator("EWEH0G#33",1,""),
 
     },
 
     availablePower:{
-        "EWEH0G_1" : new AvailablePower([500,150]),
+        "EWEHILL_1" : new AvailablePower([500,150]),
     },
 
 //    generatorControls:{
 //        "EWEH0G_1": new GeneratorControl([750,100])
 //    },
+    generationInfo:{
+        "EWEHILL_1": new GenerationInfo([425,600],"Ewe Hill 1 Windfarm (EWEH-1)"),
+    },
 }

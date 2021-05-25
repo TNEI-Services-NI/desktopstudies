@@ -6,7 +6,7 @@ networks_undrawn["chapelcross132kv"]={
     "CHAP3A1#0": StraightLine([280,865],"up",50, "33kV"),
     "CHAP1-_CHAP3-_1#0": StraightLine([280,815],"up",125, "33kV"),
     "CHAP1-_CHAP3-_1#1": StraightLine([280,750],"left",40, "33kV"),
-    "CHAP1-_CHAP3-_1#2": StraightLine([240,750],"left",0, "0V"),
+    "CHAP1-_CHAP3-_1#2": StraightLine([240,750],"left",0, "LV"),
 
     "CHAP3A2#0": StraightLine([665,865],"up",50, "33kV"),
     "CHAP1-_CHAP3-_2#0": StraightLine([665,815],"up",125,"33kV"),
@@ -151,19 +151,24 @@ networks_undrawn["chapelcross132kv"]={
 
     },
     dataViews:{
-        "CHAP1-_CHAP3-_1": new DataView("CHAP1-_CHAP3-_1#0",[80,40],['lines_loading',"lines_active_power","lines_reactive_power","lines_current"]),
-        "CHAP1-_CHAP3-_2": new DataView("CHAP1-_CHAP3-_2#0",[80,40],['lines_loading',"lines_active_power","lines_reactive_power","lines_current"]),
+        "CHAP1-_CHAP3-_1": new DataView("CHAP1-_CHAP3-_1#0",[60,40],['transformers_apparent_power',"transformers_active_power","transformers_reactive_power","transformers_current"]),
+        "CHAP1-_CHAP3-_2": new DataView("CHAP1-_CHAP3-_2#0",[60,40],['transformers_apparent_power',"transformers_active_power","transformers_reactive_power","transformers_current"]),
 
-        "GRNA-1": new DataView("GRNA-1",[-40,-25],['lines_loading',"lines_active_power","lines_reactive_power","lines_current"]),
-        "DUMF-1": new DataView("DUMF-1",[40,-25],['lines_loading',"lines_active_power","lines_reactive_power","lines_current"]),
-        "GRNA-2": new DataView("GRNA-2",[-40,-25],['lines_loading',"lines_active_power","lines_reactive_power","lines_current"]),
-        "ECCF-2": new DataView("ECCF-2",[-40,-25],['lines_loading',"lines_active_power","lines_reactive_power","lines_current"]),
-        "ECCF-1": new DataView("ECCF-1",[40,-25],['lines_loading',"lines_active_power","lines_reactive_power","lines_current"]),
-        "DUMF-2": new DataView("DUMF-2",[40,-25],['lines_loading',"lines_active_power","lines_reactive_power","lines_current"]),
-        "HARK": new DataView("HARK",[40,-25], ['lines_loading',"lines_active_power","lines_reactive_power","lines_current"]),
+        "GRNA-1": new DataView("GRNA-1",[-80,-25],["lines_active_power","lines_reactive_power","lines_current"]),
+        "DUMF-1": new DataView("DUMF-1",[0,-25],["lines_active_power","lines_reactive_power","lines_current"]),
+        "GRNA-2": new DataView("GRNA-2",[-80,-25],["lines_active_power","lines_reactive_power","lines_current"]),
+        "ECCF-2": new DataView("ECCF-2",[-80,-25],["lines_active_power","lines_reactive_power","lines_current"]),
+        "ECCF-1": new DataView("ECCF-1",[0,-25],["lines_active_power","lines_reactive_power","lines_current"]),
+        "DUMF-2": new DataView("DUMF-2",[0,-25],["lines_active_power","lines_reactive_power","lines_current"]),
+        "HARK": new DataView("HARK",[0,-25], ["lines_active_power","lines_reactive_power","lines_current"]),
 
-        "CHAP1-_M1-_1": new DataView("CHAP1-_M1-_1",[-400,40],["busbars_voltage"]),
-        "CHAP1-_R1-_1": new DataView("CHAP1-_R1-_1",[-400,-40],["busbars_voltage"]),
+        "CHAP1-": new DataView("CHAP1-_M1-_1",[-250,20],["busbars_voltage"]),
+        "CHAP1-_R1-_1": new DataView("CHAP1-_R1-_1",[-490,-20],["busbars_voltage"]),
+    "CHAP1-#": new DataView("CHAP1-_M1-_2",[205,0],["busbars_voltage"]),
+        "CHAP1-_R1-_1#1": new DataView("CHAP1-_R1-_1",[430,0],["busbars_voltage"]),
+
+     "CHAP3A1#0": new DataView("CHAP3A1",[-250,-0],["busbars_voltage"]),
+     "CHAP3A2#1": new DataView("CHAP3A2",[170,-0],["busbars_voltage"]),
     },
     labels:{
     1: new Text("CHAP3A1", ["CHAPELCROSS GSP"], [185,-70]),
@@ -187,8 +192,8 @@ networks_undrawn["chapelcross132kv"]={
     },
 //
     generationInfo:{
-        "MINS0G_1": new GenerationInfo([120,780],"Minsca Windfarm (MINSW-1)"),
-        "EWEH0G_1": new GenerationInfo([120,680],"Ewehill Windfarm (EWEH-1)"),
-        "STCR5-_1": new GenerationInfo([820,620],"Stevens Croft Biomass (STCR-1)"),
+        "MINS0G_1": new GenerationInfo([120,720],"Minsca Windfarm (MINSW-1)"),
+        "EWEHILL_1": new GenerationInfo([120,620],"Ewehill Windfarm (EWEH-1)"),
+        "STCR5-_1": new GenerationInfo([820,620],"Steven's Croft Biomass (STCR-1)"),
     }
 }

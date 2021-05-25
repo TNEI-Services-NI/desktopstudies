@@ -602,6 +602,7 @@ deltaCenterX = center[0]
 deltaCenterY = center[1]
 deltaLength = rad*0.6
 
+//upon being set live I redraw and don't flip
 if (flipped === false){
   delta1X = deltaCenterX
   delta1Y = deltaCenterY-deltaLength
@@ -761,12 +762,37 @@ function add_text(object, bool_dict_obj, list_text, x_from_center=0, y_from_cent
  * @param  {SVG object} object which the dataview is watching to
  * @param  {string} list of data labels relevant to dataview
  * @param  {[double]} offset is position of dataview
+ * @param  {string} instructions for drawing arrow, , "up" = up, "down" = down
+
  * @param  {function( SVG Object )} callback after drawing is complete
  * @return {None}
 */
-function add_dataview(observer, text, offset, callback) {
+function add_dataview(observer, text_list,flow_list, offset, callback) {
   let colour = "#e5b815"
-  add_text(observer, false, text, offset[0], offset[1], colour, font_size, callback)
+  let y_offset = 0
+  let draw_flow_list = []
+  let draw_flow = false
+  for(text_ in flow_list){
+      let flow =flow_list[text_]
+      if(flow == "up"){
+        draw_flow_list.push("▲")
+        draw_flow = true
+      }
+      else if (flow=="down"){
+            draw_flow_list.push("▼")
+            draw_flow = true
+      }
+      else{
+            draw_flow_list.push(" ")
+      }
+  }
+//  let x_offset = 0
+//  if(draw_flow){x_offset = 40*x_scaling}
+let x_offset = 40*x_scaling
+        add_text(observer, false, draw_flow_list, offset[0], offset[1], colour, font_size, callback)
+
+        add_text(observer, false, text_list, offset[0]+x_offset, offset[1], colour, font_size, callback)
+
 }
 
 function add_available_power(observer, text, offset, callback) {
@@ -856,11 +882,14 @@ function draw_action_button(){
     url: "/simtool_bp/get_action/",
     data: {"option": option},
     }).done(function( action_values ) {
-      action = action_values[current_step][entity]
+      action = action_values[current_step][entity.split("_")[0]]
       if(action !== ''){
         let rect1 = draw.rect(x_max*0.1,y_max*0.07).fill(palette["controls"]).center(x_max*0.8,y_max*0.88);
         add_text(rect1, false, ["Take action: ", action], 0, 0, "#000000", 12, function(text1){
-          debounce_click_function(text1, inc_state);
+          debounce_click_function(text1, function(case_network_){
+          action = undefined
+          inc_state(case_network_);
+        });
           mouseenterleave_pointer([text1, rect1]);
         })
         debounce_click_function(rect1, function(case_network_){
@@ -869,21 +898,33 @@ function draw_action_button(){
         });
         mouseenterleave_pointer(rect1);
       }
-
     })
-
-
-
-
 }
 
+function draw_next_network_button(){
+  var group = draw.group();
+    if(next_network === true){
+      let rect1 = draw.rect(x_max*0.1,y_max*0.07).fill(palette["controls"]).center(x_max*0.9,y_max*0.88);
+      add_text(rect1, false, ["Next network"], 0, 0, "#000000", 12, function(text1){
+        debounce_click_function(text1, function (case_network_){
+          next_network = undefined
+          inc_state(case_network_, true)
+        });
+        mouseenterleave_pointer([text1, rect1]);
+      })
+      debounce_click_function(rect1, function(case_network_){
+        next_network = undefined
+        inc_state(case_network_, true);
+      });
+      mouseenterleave_pointer(rect1);
+    }
+}
 
 
 function draw_admin_buttons(){
   var group = draw.group();
 
-
-    if(entity === 'admin'){
+    if(!(entity.search('admin')==-1)){
       let rect0 = draw.rect(x_max*0.07,y_max*0.05).fill(palette["controls"]).center(x_max*0.5,y_max*0.88);
       add_text(rect0, false, ["Admin action:", "reset"], 0, 0, "#000000", 12, function(text1){
         debounce_click_function(text1, reset_state);
@@ -907,7 +948,6 @@ function draw_admin_buttons(){
       mouseenterleave_pointer(rect1);
       mouseenterleave_pointer(rect2);
     }
-
 }
 
 function draw_line(line,id_line, type="busbar"){

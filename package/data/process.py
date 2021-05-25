@@ -5,7 +5,7 @@ import package as root
 import pandas as pd
 
 
-def process_LF_data(network="chapelcross", voltage="33kv", option="Opt5", rev=8):
+def process_LF_data(rev=8, network="chapelcross", voltage="33kv", option="Opt5"):
     # net_opt_dir = '\\'.join([data.dir_restoration_steps, option, network+voltage])
     net_opt_dir = '\\'.join([data.dir_restoration_steps, option, network])
 
@@ -21,7 +21,7 @@ def process_LF_data(network="chapelcross", voltage="33kv", option="Opt5", rev=8)
     combine_LF_data()
 
 
-def process_breakers_data(network="chapelcross", voltage="33kv", option="Opt5", rev=2):
+def process_breakers_data(network="chapelcross", voltage="33kv", option="Opt5", rev=14):
     net_breaker_dir = '\\'.join([data.dir_breaker_states, option])
 
     filename = 'AllBreakers_R{}.xlsx'.format(rev)
@@ -96,8 +96,8 @@ def combine_LF_data(network="chapelcross", voltage="33kv", option="Opt5"):
 
 
 if __name__ == '__main__':
-    process_LF_data(rev=12)
-    process_breakers_data(rev=3)
+    process_LF_data(rev=20)
+    process_breakers_data(rev=5)
     # migrate_csvs("package/data/simtool/breakerstates/Opt5")
     # migrate_csvs("package/data/simtool/networkviews/Opt5")
     # migrate_csvs("package/data/simtool/restorationsteps/Opt5/chapelcross")

@@ -264,7 +264,7 @@
                 breaker.setState(!breaker.closed)
                 // post_breakers(components.breakers)
                 check_breakers(network_, option, components.breakers, step, function(breaker_matches_next){
-                  if(breaker_matches_next && page === "home"){ // IF correct breaker is clicked
+                  if(breaker_matches_next){ // IF correct breaker is clicked
                     inc_state(case_network)
                   }
                 })
@@ -403,6 +403,7 @@
       for(let id_dv in dict_components.dataViews){
         let dataview_ = dict_components.dataViews[id_dv]
         let componentID = dataview_.componentID
+        let direction = dataview_.flow_direction
         let line = components.lines[componentID]
         let gen = components.generators[componentID]
         let tx = components.transformers[componentID]
@@ -419,29 +420,32 @@
           observer = tx.UIElement
         }
 
-        add_dataview(observer, [""], offset, function (text_object) {
+        add_dataview(observer, [""], [""], offset, function (text_object) {
           components.dataviews[id_dv] = {
             text: [""],
             observer: observer,
             text_object: text_object,
             offset: offset,
             labels: labels,
-            colour: colour
+            colour: colour,
+            direction: direction,
+            drawInfo:dataview_,
           }
         })
     }
   }
 
-  function redraw_dataview(id_dv, text_list){
+  function redraw_dataview(id_dv, text_list, flow_list){
     let dataview_ = components.dataviews[id_dv];
     // dataview_.text_object.remove()
-    add_dataview(dataview_.observer, text_list, dataview_.offset, function (text_object) {
+    add_dataview(dataview_.observer, text_list,flow_list, dataview_.offset,function (text_object) {
     components.dataviews[id_dv] = {
         text: text_list,
         observer: dataview_.observer,
         text_object: text_object,
         offset: dataview_.offset,
-        colour: dataview_.colour
+        colour: dataview_.colour,
+        drawInfo:dataview_.drawInfo,
     }
     })
   }
@@ -507,7 +511,7 @@
           add_static_text([name], center[0], center[1], colour=colour, callback)
 
           add_static_text(["MW"], center[0]-width/4, center[1]+font_size*2, colour=colour, callback)
-          add_static_text(["MVAR"], center[0]-width/4, center[1]+font_size*4, colour=colour, callback)
+          add_static_text(["MVar"], center[0]-width/4, center[1]+font_size*4, colour=colour, callback)
 
           //draw MW & MVAR
           MW_graphic = []
@@ -563,8 +567,9 @@
   }
 
   function construct_action(){
-    draw_action_button();
-    draw_admin_buttons();
+  // draw_next_network_button()
+  draw_action_button();
+  draw_admin_buttons();
   }
 
   function construct_SGTs(dict_components){
@@ -697,18 +702,18 @@
 
   class GeneratorGraphManager{
       max_height = 0
-      bars = []
+      bars = {}
       constructor(graph_bars, max_height=100) {
         this.bars = graph_bars
-
       }
       getState(){return bars}
       //sets the graphic of the bar relating to this
       setPercentage(id, percentage){
+      console.log(this.bars)
         let bar_data = this.bars[id]
-        let bar = bar_data["bar"]
+        console.log(bar_data)
         this.bars[id]["percentage"] = percentage
-        bar.setPercentage(percentage)
+        bar_data.bar.setPercentage(percentage)
       }
       animatePercentage(id, percentage, callback){
         let bar_data = this.bars[id]
@@ -736,7 +741,7 @@
         add_static_text([title_string], x=x_pos, y=y_pos-15*y_scaling, colour="#d3d3d3", function(obj){})
 
         let graph_height = 150*y_scaling
-        let graph_width = 150*x_scaling
+        let graph_width = 180*x_scaling
         let y_base =  y_pos + graph_height
         let x_base = x_pos - graph_width /2
 
@@ -752,12 +757,12 @@
             text.center(x_base - 10*x_scaling, y_base - ((graph_height*percentage/100)));
         }
 
-        let bar_offset = graph_width/7
+        let bar_offset = graph_width/9
 
         let acc_offset = 0
         graph_bars = {}
-        for(gen_id_i in generator_ids){
-            let gen_id = generator_ids[gen_id_i]
+        for(gen_id in generator_ids){
+            let gen_name = generator_ids[gen_id]
             acc_offset += bar_offset
             let base_pos = acc_offset
             var rect = draw.rect(bar_offset, 50*y_scaling).fill("#3078b7")
@@ -766,6 +771,7 @@
                 if(percentage > 0){
                     bar_height = Math.max(graph_height*((percentage)/100))
                 }
+
                 bar_start_height = Math.max(graph_height*((start_percentage)/100),0)
                 this.move(x_base+base_pos, y_base-1-(bar_start_height)).size(bar_offset, bar_start_height)
                 let runner = this.animate(2000).move(x_base+base_pos, y_base-1-(bar_height)).size(bar_offset, bar_height)
@@ -781,33 +787,32 @@
                 }
                 this.move(x_base+base_pos, y_base-1-(bar_height)).size(bar_offset, bar_height)
             }
-
             rect.move(x_base+base_pos, y_base)
             rect.size(bar_offset, 0*y_scaling)
 
             let text_obj = []
-            add_static_text([gen_id], x=x_base+base_pos+bar_offset/1.5, y=y_base+(20*y_scaling), colour="#d3d3d3", function(callback_obj){text_obj = callback_obj})
+            add_static_text(gen_name, x=x_base+base_pos+bar_offset-5, y=y_base+(12*gen_name.length*y_scaling), colour="#d3d3d3", function(callback_obj){text_obj = callback_obj})
             text_obj.font({size: font_size/1.5})
 
             acc_offset += bar_offset
             graph_bars[gen_id]={"bar": rect, "percentage":undefined}
+            console.log(graph_bars)
             components.generatorGraphComponents[gen_id] = rect
-
         }
 
         let graphManager = undefined
         if(components["generatorGraphManagers"] === undefined){
           graphManager = new GeneratorGraphManager(graph_bars)
-          graphManager.setPercentage(generator_ids[0],0)
-          graphManager.setPercentage(generator_ids[1],0)
-          graphManager.setPercentage(generator_ids[2],0)
+          for(gen_id in generator_ids){
+              graphManager.setPercentage(gen_id,0)
+          }
           components["generatorGraphManagers"] = [graphManager]
         } else {
           graphManager = components["generatorGraphManagers"][0]
           graphManager_new = new GeneratorGraphManager(graph_bars)
-          graphManager_new.setPercentage(generator_ids[0],graphManager.bars[generator_ids[0]].percentage)
-          graphManager_new.setPercentage(generator_ids[1],graphManager.bars[generator_ids[1]].percentage)
-          graphManager_new.setPercentage(generator_ids[2],graphManager.bars[generator_ids[2]].percentage)
+          for(gen_id in generator_ids){
+              graphManager_new.setPercentage(gen_id,graphManager.bars[gen_id].percentage)
+          }
           graphManager = graphManager_new
         }
 
