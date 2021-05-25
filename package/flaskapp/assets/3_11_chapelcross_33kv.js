@@ -495,17 +495,17 @@ networks_undrawn["chapelcross33kv"] = {
           [
             'generators_active_power',
             'generators_reactive_power',
-          ]),
+          ],false),
         "EWEHILL_1": new DataView("EWHC0G_1", [25, 5],
           [
             'generators_active_power',
             'generators_reactive_power',
-          ]),
+          ],false),
         "MINS0G_1": new DataView("MINS0G_1", [20, 0],
           [
             'generators_active_power',
             'generators_reactive_power',
-          ]),
+          ],false),
 
         //BUSBARS
         "CHAP3A1": new DataView("CHAP3A1", [-250, -20], ['busbars_voltage']),
@@ -571,7 +571,7 @@ networks_undrawn["chapelcross33kv"] = {
 
     generator_graphs:{
 //        "gen_graph_1": new GeneratorGraph([760,770],{"MINS0G_1":["MINSCA WF"],"EWEHILL_1": ["EWEHILL 1"],"EWEHILL_2": ["EWEHILL 2"],"STCR5-_1": ["STEVENS CROFT", "WF"]})
-        "gen_graph_1": new GeneratorGraph([760,770],["MINS0G_1","EWEHILL_1","EWEHILL_2","STCR5-_1"])
+        "gen_graph_1": new GeneratorGraph([760,770],{"MINS0G_1":["Minsca","WF"],"EWEHILL_1":["Ewehill 2","WF"],"EWEHILL_2":["Ewehill 2","WF"],"STCR5-_1":["Steven's"," Croft", "Bio Mass"]})
 
     }
 
