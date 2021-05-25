@@ -511,7 +511,7 @@
           add_static_text([name], center[0], center[1], colour=colour, callback)
 
           add_static_text(["MW"], center[0]-width/4, center[1]+font_size*2, colour=colour, callback)
-          add_static_text(["MVAR"], center[0]-width/4, center[1]+font_size*4, colour=colour, callback)
+          add_static_text(["MVar"], center[0]-width/4, center[1]+font_size*4, colour=colour, callback)
 
           //draw MW & MVAR
           MW_graphic = []
