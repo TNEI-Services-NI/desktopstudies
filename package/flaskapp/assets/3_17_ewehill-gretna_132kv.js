@@ -104,6 +104,6 @@ networks_undrawn["ewehillgretna"]={
 
     },
     generationInfo:{
-        "WTG_EWEH0G_2": new GenerationInfo([120,780],"EWE HILL WINDFARM (EWHLW-1)"),
+        "WTG_EWEH0G_2": new GenerationInfo([120,780],"EWE HILL 2 WINDFARM (EWHLW-2)"),
     }
 }
