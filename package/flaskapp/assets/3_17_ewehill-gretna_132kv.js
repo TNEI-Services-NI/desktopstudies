@@ -40,7 +40,7 @@ networks_undrawn["ewehillgretna"]={
     breakers:{
         "805": new Breaker("GRNA1-#0",0),
         "GRID 1A": new Breaker("EWEH3#5",1),
-        "WG2": new Breaker("EWEH3-_GRID1A-_WG2",0.75, " CUSTOMER"),
+        "WG2": new Breaker("EWEH3-_GRID1A-_WG2",0.75, "  CUSTOMER"),
         "GRID 1B": new Breaker("EWEH3#1",0.5),
         "3L5": new Breaker("EWEH3#3",0.5),
         "2L5": new Breaker("EWEH3#2",0.5),
@@ -86,7 +86,7 @@ networks_undrawn["ewehillgretna"]={
 
           "EWEH0G#": new DataView("EWEH3",[-140,-20], ['busbars_voltage']),
 
-          "EWEH3": new DataView("EWEH3",[-100,60], ["lines_active_power","lines_reactive_power","lines_current"]),
+          "trf_EWEH1Q_EWEH3-_1": new DataView("EWEH3",[-120,90], ["transformers_active_power","transformers_reactive_power","transformers_current"]),
 //ILA3
 //          "EWEH3-_GRID1A-_WG2": new DataView("EWEH3-_GRID1A-_WG2",[-30,-35], ["lines_active_power","lines_reactive_power","lines_current"]),
 

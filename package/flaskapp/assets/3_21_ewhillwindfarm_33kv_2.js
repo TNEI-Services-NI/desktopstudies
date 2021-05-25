@@ -3,7 +3,7 @@
 networks_undrawn["ewehillwindfarm2"]={
     lines:{
     "EWEH3#1": StraightLine([345,50],"down",40,"33kV"),
-    "EWEH3": StraightLine([315,100],"right",30,"33kV"),
+    "EWEH3": StraightLine([325,100],"right",20,"33kV"),
     "EWEH3#3": StraightLine([315,100],"right",0,"LV"),
 
     "EWEH3#2": StraightLine([345,90],"down",30,"33kV"),
