@@ -383,12 +383,12 @@ networks_undrawn["chapelcross33kv"] = {
 
         },
     generators:{
-        "STCR5-_1": new Generator("STCR3-_STCR0G",1),
-        "EWHC0G_1": new Generator("EWEH0G",1),
+        "STCR5-_1": new Generator("STCR3-_STCR0G",1,"GENERATOR"),
+        "EWHC0G_1": new Generator("EWEH0G",1,"GENERATOR"),
         // CRAIG II WINDFARM 11KV
         // "CRAG0B_1": new Generator("CRAG5B_LAHO5-_1",1),
-        "MINS0G_1": new Generator("MINS0G", 1),
-        5: new Generator("CHAP3-_SOLWAY#6",1),
+        "MINS0G_1": new Generator("MINS0G", 1,"GENERATOR"),
+        5: new Generator("CHAP3-_SOLWAY#6",1,"GENERATOR"),
         },
     labels:{
     0: new Text("STCR3-#2.4", ["LOAD BANK"], [5, 34]),
@@ -491,12 +491,12 @@ networks_undrawn["chapelcross33kv"] = {
         ]),
 
         //generator
-        "STCR5-_1": new DataView("STCR5-_1", [-70, 40],
+        "STCR5-_1": new DataView("STCR5-_1", [-77, 0],
           [
             'generators_active_power',
             'generators_reactive_power',
           ]),
-        "EWEHILL_1": new DataView("EWHC0G_1", [25, 10],
+        "EWEHILL_1": new DataView("EWHC0G_1", [25, 5],
           [
             'generators_active_power',
             'generators_reactive_power',

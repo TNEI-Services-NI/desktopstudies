@@ -61,7 +61,7 @@ networks_undrawn["ewehillgretna"]={
     },
 
     generators:{
-        "EWE HILL 2": new Generator("EWEH0G_2",1),
+        "EWE HILL 2": new Generator("EWEH0G_2",1,"GENERATOR"),
         },
 
     tx:{
