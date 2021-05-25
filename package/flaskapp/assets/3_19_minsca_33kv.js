@@ -288,7 +288,7 @@ networks_undrawn["minsca33kv"]={
         "MINS0G_1" : new AvailablePower([500,150]),
     },
     generationInfo:{
-        "STCR5-_1": new GenerationInfo([150,250],"Minsca Windfarm (MINSW-1)"),
+        "MINS0G_1": new GenerationInfo([150,250],"Minsca Windfarm (MINSW-1)"),
     },
 //    generatorControls:{
 //        "MINS0G_1": new GeneratorControl([750,100])
