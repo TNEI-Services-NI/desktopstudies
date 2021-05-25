@@ -86,7 +86,7 @@ networks_undrawn["ewehillgretna"]={
 
           "EWEH0G#": new DataView("EWEH3",[-140,-20], ['busbars_voltage']),
 
-          "trf_EWEH1Q_EWEH3-_1": new DataView("EWEH3",[-120,90], ["transformers_active_power","transformers_reactive_power","transformers_current"]),
+          "trf_EWEH1Q_EWEH3-_1": new DataView("EWEH3",[-120,90], ["transformers_active_power","transformers_reactive_power","transformers_current-LV"]),
 //ILA3
 //          "EWEH3-_GRID1A-_WG2": new DataView("EWEH3-_GRID1A-_WG2",[-30,-35], ["lines_active_power","lines_reactive_power","lines_current"]),
 
