@@ -149,7 +149,6 @@ def connection(data):
         next_network = data['network']
 
     session['sim_step'] = data['sim_step']
-    simtool_db.replace_simstatus(dbs, data['sim_step'])
 
     broadcast = data['broadcast'] if 'broadcast' in data else False
 
@@ -159,6 +158,7 @@ def connection(data):
     data['broadcast'] = broadcast
 
     if broadcast:
+        simtool_db.replace_simstatus(dbs, data['sim_step'])
         data['network'] = next_network
         socketio.emit('check_redraw', data)
     else:
