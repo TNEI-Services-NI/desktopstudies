@@ -443,10 +443,11 @@ function update_state(case_network_) {
     let data = {
         'sim_step': current_step,
         'entity': entity,
+        'room': room,
         'network': network,
         'page': page,
         'progress': true,
-        'broadcast': true
+        'broadcast': !(local)
     }
 
     setTimeout(function() {

@@ -33,6 +33,7 @@ def init_breakers():
 def server_get_network_view(entity, sim_step, option="5"):
     df_network_view = simtool_data.read_network_views(option)
     # df_network_view = simtool_data.read_network_views_db(option)
+    entity = entity.split("_")[0]
     network = df_network_view.loc[entity, sim_step]
     return network
 
@@ -160,5 +161,8 @@ def connection(data):
     if broadcast:
         data['network'] = next_network
         socketio.emit('check_redraw', data)
+    else:
+        data['network'] = next_network
+        socketio.emit('check_redraw', data, room=data['room'])
 
     return data

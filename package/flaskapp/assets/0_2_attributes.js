@@ -42,6 +42,8 @@ var action = undefined
 
 var page = undefined
 
+var local = undefined
+
 const networks_undrawn = {
     "chapelcross33kv": undefined,
     "chapelcross132kv": undefined,

@@ -882,7 +882,7 @@ function draw_action_button(){
     url: "/simtool_bp/get_action/",
     data: {"option": option},
     }).done(function( action_values ) {
-      action = action_values[current_step][entity]
+      action = action_values[current_step][entity.split("_")[0]]
       if(action !== ''){
         let rect1 = draw.rect(x_max*0.1,y_max*0.07).fill(palette["controls"]).center(x_max*0.8,y_max*0.88);
         add_text(rect1, false, ["Take action: ", action], 0, 0, "#000000", 12, function(text1){
@@ -909,7 +909,7 @@ function draw_admin_buttons(){
   var group = draw.group();
 
 
-    if(entity === 'admin'){
+    if(!(entity.search('admin')==-1)){
       let rect0 = draw.rect(x_max*0.07,y_max*0.05).fill(palette["controls"]).center(x_max*0.5,y_max*0.88);
       add_text(rect0, false, ["Admin action:", "reset"], 0, 0, "#000000", 12, function(text1){
         debounce_click_function(text1, reset_state);

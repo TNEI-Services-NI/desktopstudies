@@ -29,6 +29,16 @@ def register_admin(dbs):
         dbs.session.add(new_user)
         dbs.session.commit()
 
+    user = User.query.filter_by(
+        email='admin.local@admin.local').first()  # if this returns a user, then the email already exists in database
+    if not user:  # if a user is found, we want to redirect back to signup page so user can try again
+        new_user = User(email='admin.local@admin.local', name='admin.local', password=generate_password_hash('admin.local', method='sha256'),
+                        entity='admin_local')
+
+        # add the new user to the database
+        dbs.session.add(new_user)
+        dbs.session.commit()
+
 
 def _register_user(email, name, entity, dbs):
     user = User.query.filter_by(
