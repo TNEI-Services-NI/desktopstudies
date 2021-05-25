@@ -465,7 +465,7 @@ networks_undrawn["chapelcross33kv"] = {
         "ANANT1_CHAP3-_1": new DataView("ANANT1_CHAP3-_1#1", [-10, -15], ['lines_current']),
         "CHAPX1_LOBI3A_1": new DataView("CHAPX1_LOBI3A_1#0", [-10, -75], ['lines_current']),
         "CHAP3-_MIBI3-_1": new DataView("CHAP3-_MIBI3-_1#0", [-70, 0], ['lines_current']),
-        "CHAP3-_GRNA3B_1": new DataView("CHAP3-_GRNA3B_1#0", [-70, 0], ['lines_current']),
+        "CHAP3-_GRNA3B_1": new DataView("CHAP3-_GRNA3B_1#0", [-65, 0], ['lines_current']),
         "CHAP3-_CHAPX3_1": new DataView("CHAP3-_CHAPX3_1#0", [-70, -60], ['lines_current']),
 
         "CHAP3-_LOBI3B_1": new DataView("CHAP3-_LOBI3B_1#0", [-10, -25], ['lines_current']),
@@ -476,7 +476,7 @@ networks_undrawn["chapelcross33kv"] = {
         "CHAP3-_SOLWAY#1": new DataView("CHAP3-_SOLWAY#0", [-130, 50], ['lines_active_power',"lines_reactive_power","lines_current"]),
 
 //        loadbank
-        "STCR3-#LOAD": new DataView("STCR3-",[40,50], ["lines_active_power"]),
+        "STCR_LOADBANK": new DataView("STCR3-",[40,50], ["generators_active_power"],null),
 
         //transformers
         "CHAP1-_CHAP3-_1": new DataView("CHAP1-_CHAP3-_1#0",[35,4],[
