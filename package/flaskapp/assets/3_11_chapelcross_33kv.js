@@ -404,9 +404,9 @@ networks_undrawn["chapelcross33kv"] = {
     10: new Text("EWEH3-", ["WINDFARM"],[0,-25]),
     11: new Text("EWEH3-", ["781"],[0,-10]),
 
-    12: new Text("MIBI5-", ["MIDDLEBIE "],[5,-40]),
-    13: new Text("MIBI5-", ["PRIMARY"],[5,-25]),
-    14: new Text("MIBI5-", ["682"],[5,-10]),
+    12: new Text("MIBI5-", ["MIDDLEBIE "],[7,-30]),
+    13: new Text("MIBI5-", ["PRIMARY"],[7,-15]),
+    14: new Text("MIBI5-", ["682"],[5,10]),
 
     15: new Text("LOBI3A", ["LOCKERBIE 33KV"],[85,-40]),
 
@@ -525,31 +525,31 @@ networks_undrawn["chapelcross33kv"] = {
         "LOBIT2_LOBI20_T2": new DataView("LOBI5-2#0",[0,0],[
             "transformers_active_power",
         ],null),
-        "LAHOT1_LAHO10_T1":new DataView("LAHO5-1#0",[-75,0],[
+        "LAHOT1_LAHO10_T1":new DataView("LAHO5-1#0",[-70,0],[
             "transformers_active_power",
         ],null),
-        "LAHOT2_LAHO20_T2": new DataView("LAHO5-2#0",[0,0],[
+        "LAHOT2_LAHO20_T2": new DataView("LAHO5-2#0",[-15,0],[
             "transformers_active_power",
         ],null),
-        "MOFTT1_MOFT10_T1": new DataView("MOFT5-1#0",[-15,10],[
+        "MOFTT1_MOFT10_T1": new DataView("MOFT5-1#0",[-70,-10],[
             "transformers_active_power",
         ],null),
-        "MOFTT2_MOFT20_T2": new DataView("MOFT5-2#0",[-10,10],[
+        "MOFTT2_MOFT20_T2": new DataView("MOFT5-2#0",[-0,-5],[
             "transformers_active_power",
         ],null),
-        "NEWCT1_NEWC10_T1":new DataView("NEWC5-#0",[-5,0],[
+        "NEWCT1_NEWC10_T1":new DataView("NEWC5-#0",[-145,0],[
             "transformers_active_power",
         ],null),
-        "GRNAT1_GRNA10_T1": new DataView("GRNA5-1#0",[-40,30],[
+        "GRNAT1_GRNA10_T1": new DataView("GRNA5-1#0",[-70,-10],[
             "transformers_active_power",
         ],null),
-        "GRNAT2_GRNA20_T2": new DataView("GRNA5-2#0",[-40,30],[
+        "GRNAT2_GRNA20_T2": new DataView("GRNA5-2#0",[-10,-10],[
             "transformers_active_power",
         ],null),
-        "KIBAT1_KIBA10_T1": new DataView("KIBA5-#0",[-5,-10],[
+        "KIBAT1_KIBA10_T1": new DataView("KIBA5-#0",[-140,-5],[
             "transformers_active_power",
         ],null),
-        "MIBIT1_MIBI10_T1":new DataView("MIBI5-#0",[-65,5],[
+        "MIBIT1_MIBI10_T1":new DataView("MIBI5-#0",[-145,-5],[
             "transformers_active_power",
         ],null),
 
@@ -570,7 +570,9 @@ networks_undrawn["chapelcross33kv"] = {
 //    },
 
     generator_graphs:{
+//        "gen_graph_1": new GeneratorGraph([760,770],{"MINS0G_1":["MINSCA WF"],"EWEHILL_1": ["EWEHILL 1"],"EWEHILL_2": ["EWEHILL 2"],"STCR5-_1": ["STEVENS CROFT", "WF"]})
         "gen_graph_1": new GeneratorGraph([760,770],["MINS0G_1","EWEHILL_1","EWEHILL_2","STCR5-_1"])
+
     }
 
 

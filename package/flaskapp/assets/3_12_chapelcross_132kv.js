@@ -194,6 +194,6 @@ networks_undrawn["chapelcross132kv"]={
     generationInfo:{
         "MINS0G_1": new GenerationInfo([120,720],"Minsca Windfarm (MINSW-1)"),
         "EWEHILL_1": new GenerationInfo([120,620],"Ewehill Windfarm (EWEH-1)"),
-        "STCR5-_1": new GenerationInfo([820,620],"Stevens Croft Biomass (STCR-1)"),
+        "STCR5-_1": new GenerationInfo([820,620],"Steven's Croft Biomass (STCR-1)"),
     }
 }

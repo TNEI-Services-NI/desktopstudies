@@ -153,6 +153,7 @@ function update_line_data_views(step_data) {
 //probably a good idea to add zeros when data isn't present rather than not drawing
 function update_dataviews(step_data) {
     for (let id_dv in components.dataviews) {
+    console.log(step_data)
         let id_root = id_dv.split("#")[0]
         let text_list = [];
         let flow_list = [];
@@ -161,8 +162,19 @@ function update_dataviews(step_data) {
         var acc = 0;
         let labels = components.dataviews[id_dv].labels
         let flow_direction = components.dataviews[id_dv].drawInfo.flow_direction
+
+        argument = ""
+
+
         for (let id_component_parameter in labels) {
+
             let component_parameter = labels[id_component_parameter]
+             //catching LV parameter quick fix
+            if(component_parameter.includes("-LV")){
+            component_parameter = component_parameter.replace("-LV","");
+            argument = "LV"
+            }
+
             if (component_parameter.includes('reactive')) {
                     units = " MVAr"
                     acc = 2
@@ -177,16 +189,33 @@ function update_dataviews(step_data) {
             } else if (component_parameter.includes('taps')) {
                     units = " ."
             } else if (component_parameter.includes('current')) {
-                    units = " AMPS"
+                    if(component_parameter.includes("transformers")){
+                        if(argument == "LV"){
+                            units = " AMPS (LV)"
+                        }
+                        else{units = " AMPS (HV)"}
+                    }
+                    else{
+                        units = " AMPS"
+                    }
                     scale = 1000
             } else if (component_parameter.includes('apparent')) {
                     units = " MVA"
             }
 
+
+
             if(step_data[component_parameter] != undefined){
             if (id_root in step_data[component_parameter]) {
+                let value = step_data[component_parameter][id_root]
+               if(argument == "LV"){
+               //quickest fix in the west
+                value = value * 132/33
+               }
 
-               let value = (scale * Math.round(step_data[component_parameter][id_root] * 1000) / 1000).toFixed(acc)
+               value = (scale * Math.round(value * 1000) / 1000).toFixed(acc)
+
+
                 if(highlight_undefined||(value < 999 && value > -999)){
                     // let value = step_data[component_parameter][id_dv].toFixed(2)
                     let direction= "down"
@@ -245,14 +274,14 @@ function update_dataviews(step_data) {
             }
             else{
 //                       text_list = text_list.concat(["ID" + units]);
-                       text_list = text_list.concat(["0"+units]);
+                       text_list = text_list.concat(["ID"+units]);
                        flow_list = flow_list.concat([""] );
 
             }
             }
             else{
 //            text_list = text_list.concat(["PARAM" + units]);
-            text_list = text_list.concat(["0"+units]);
+            text_list = text_list.concat(["PARAM"+units]);
             flow_list = flow_list.concat([""] );
             }
 

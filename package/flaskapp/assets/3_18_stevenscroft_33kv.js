@@ -140,7 +140,7 @@ networks_undrawn["stevenscroft33kv"]={
         "STCR_MOTOR": new Generator("STCR_AUX#3",1, "MOTOR")
     },
     generationInfo:{
-        "STCR5-_1": new GenerationInfo([230,500],"Stevens Croft Biomass (STCR0G-1)"),
+        "STCR5-_1": new GenerationInfo([230,500],"Steven's Croft Biomass (STCR0G-1)"),
     },
 
 

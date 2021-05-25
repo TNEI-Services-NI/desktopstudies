@@ -57,11 +57,17 @@ function Isolator_Callback(graphic_objects, name = ''){
                 add_text(object, false, [name], 0, -15*y_scaling,"#d3d3d3", font_size, function(object){})
             }
             else{
-                if(name.length < 3){
-                offset = (name.length)/1.7*font_size
+                if(name.length>8){
+                offset = (name.length)/2.8*font_size
                 }
-                else{
-                offset = (name.length)/2.2*font_size
+                if(name.length < 9){
+                offset = (name.length)/2.3*font_size
+                }
+                if(name.length < 6){
+                offset = (name.length)/2*font_size
+                }
+                if(name.length < 4){
+                offset = (name.length)/1.7*font_size
                 }
                 add_text(object, false, [name],offset, 0,"#d3d3d3", font_size, function(object){})}
         }
