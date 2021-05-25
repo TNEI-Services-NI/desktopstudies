@@ -1,18 +1,18 @@
 name,entity,email,required,status
-Dieter Gutschow,DNO,dieter.gutschow@tneigroup.com,FALSE,FALSE
-Max McFarlane,admin,max.mcfarlane@tneigroup.com,FALSE,FALSE
-Christopher Salter,Observer,christopher.salter2@natoinalgrideso.com,FALSE,FALSE
-"Foote, Colin",TO,cfoote@spenergynetworks.co.uk,FALSE,FALSE
-"Auty (ESO), Daniel",ESO,daniel.auty@nationalgrideso.com,FALSE,FALSE
-"Chandler (ESO), Peter",ESO,peter.chandler@nationalgrideso.com,FALSE,FALSE
-Neil Miller,DNO,neil.miller@spenergynetworks.co.uk,FALSE,FALSE
-Neil Hutcheon,DNO,nhutcheon@spenergynetworks.co.uk,FALSE,FALSE
-"Rochford1 (ESO), Hannah",DER,hannah.rochford1@nationalgrideso.com,FALSE,FALSE
-"Nnabuife (ESO), Dozie",TO,dozie.nnabuife@nationalgrideso.com,FALSE,FALSE
-"Kenny, Michael",DER,michael.kenny@nationalgrideso.com,FALSE,FALSE
-Howard Downey,DNO,howard.downey@spenergynetworks.co.uk,FALSE,FALSE
-Dieter Gutschow,DNO,dieter.gutschow@tneigroup.com,FALSE,FALSE
-"Penhaligon (ESO), Emma",Observer,emma.penhaligon@nationalgrideso.com,FALSE,FALSE
-"Singh (ESO), Bikramjit",TO,bikramjit.singh@nationalgrideso.com,FALSE,FALSE
-"Phull (ESO), Roopkamal",DER,roopkamal.phull@nationalgrideso.com,FALSE,FALSE
-"MCNICOL, FINLAY",DER,fmcnicol@spenergynetworks.co.uk,FALSE,FALSE
+Dieter Gutschow,DNO,dieter.gutschow@tneigroup.com,TRUE,FALSE
+Max McFarlane,admin,max.mcfarlane@tneigroup.com,TRUE,FALSE
+Christopher Salter,Observer,christopher.salter2@natoinalgrideso.com,TRUE,FALSE
+"Foote, Colin",TO,cfoote@spenergynetworks.co.uk,TRUE,FALSE
+"Auty (ESO), Daniel",ESO,daniel.auty@nationalgrideso.com,TRUE,FALSE
+"Chandler (ESO), Peter",ESO,peter.chandler@nationalgrideso.com,TRUE,FALSE
+Neil Miller,DNO,neil.miller@spenergynetworks.co.uk,TRUE,FALSE
+Neil Hutcheon,DNO,nhutcheon@spenergynetworks.co.uk,TRUE,FALSE
+"Rochford1 (ESO), Hannah",DER,hannah.rochford1@nationalgrideso.com,TRUE,FALSE
+"Nnabuife (ESO), Dozie",TO,dozie.nnabuife@nationalgrideso.com,TRUE,FALSE
+"Kenny, Michael",DER,michael.kenny@nationalgrideso.com,TRUE,FALSE
+Howard Downey,DNO,howard.downey@spenergynetworks.co.uk,TRUE,FALSE
+Dieter Gutschow,DNO,dieter.gutschow@tneigroup.com,TRUE,FALSE
+"Penhaligon (ESO), Emma",Observer,emma.penhaligon@nationalgrideso.com,TRUE,FALSE
+"Singh (ESO), Bikramjit",TO,bikramjit.singh@nationalgrideso.com,TRUE,FALSE
+"Phull (ESO), Roopkamal",DER,roopkamal.phull@nationalgrideso.com,TRUE,FALSE
+"MCNICOL, FINLAY",DER,fmcnicol@spenergynetworks.co.uk,TRUE,FALSE
