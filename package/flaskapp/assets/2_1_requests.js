@@ -6,6 +6,13 @@ socket.on('check_join_draw', function(data_join_draw) {
     if (entity === undefined) {
         entity = data_join_draw['entity']
     }
+    if (local === undefined) {
+        local = data_join_draw['local']
+    }
+    if (!(entity.search('local')===-1)){
+        local = true
+        data_join_draw['local'] = local
+    }
     if(0 in $('#sim_status_div')){
         page = "SLDs"
     } else {

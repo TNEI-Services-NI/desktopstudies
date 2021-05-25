@@ -264,7 +264,7 @@
                 breaker.setState(!breaker.closed)
                 // post_breakers(components.breakers)
                 check_breakers(network_, option, components.breakers, step, function(breaker_matches_next){
-                  if(breaker_matches_next && page === "home"){ // IF correct breaker is clicked
+                  if(breaker_matches_next){ // IF correct breaker is clicked
                     inc_state(case_network)
                   }
                 })
@@ -567,8 +567,9 @@
   }
 
   function construct_action(){
-    draw_action_button();
-    draw_admin_buttons();
+  // draw_next_network_button()
+  draw_action_button();
+  draw_admin_buttons();
   }
 
   function construct_SGTs(dict_components){

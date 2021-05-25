@@ -172,7 +172,7 @@ def add_sim_progress_buttons(dash_app, URL_PAGE):
         session['sim_step'] = redraw_data['sim_step']
 
         return [
-            "Simulation status: {}".format(redraw_data['sim_step']),
+            "Simulation status: {}\n Instruction: {}".format(redraw_data['sim_step'], cf.steps[int(redraw_data['sim_step'])+3]),
             "View: {}".format(session.get('entity')),
         ]
 

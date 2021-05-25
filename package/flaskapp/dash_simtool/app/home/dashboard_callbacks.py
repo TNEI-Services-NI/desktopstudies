@@ -21,14 +21,18 @@ def _add_network_redraw(dash_app):
 
         network = requests.server_get_network_view(session['entity'], sim_step)
 
-        session['room'] = session['entity']
+        if cf.local:
+            session['room'] = session['entity'] + session.get('username')
+        else:
+            session['room'] = session['entity']
+
         session['network_main'] = network
         session['sim_step'] = sim_step
 
         socketio.emit('check_join_draw', {
             'network': network,
             'sim_step': sim_step,
-            'local': True,
+            'local': cf.local,
             'page': "home",
             'username': session.get('username'),
             'room': session.get('room'),
