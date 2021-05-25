@@ -1,18 +1,18 @@
 name,entity,email,required,status
 Dieter Gutschow,DNO,dieter.gutschow@tneigroup.com,FALSE,FALSE
 Max McFarlane,admin,max.mcfarlane@tneigroup.com,FALSE,FALSE
-Christopher Salter,Observer,Christopher.salter2@natoinalgrideso.com,FALSE,FALSE
+Christopher Salter,Observer,christopher.salter2@natoinalgrideso.com,FALSE,FALSE
 "Foote, Colin",TO,cfoote@spenergynetworks.co.uk,FALSE,FALSE
-"Auty (ESO), Daniel",ESO,Daniel.Auty@nationalgrideso.com,FALSE,FALSE
-"Chandler (ESO), Peter",ESO,Peter.Chandler@nationalgrideso.com,FALSE,FALSE
+"Auty (ESO), Daniel",ESO,daniel.auty@nationalgrideso.com,FALSE,FALSE
+"Chandler (ESO), Peter",ESO,peter.chandler@nationalgrideso.com,FALSE,FALSE
 Neil Miller,DNO,neil.miller@spenergynetworks.co.uk,FALSE,FALSE
 Neil Hutcheon,DNO,nhutcheon@spenergynetworks.co.uk,FALSE,FALSE
-"Rochford1 (ESO), Hannah",DER,Hannah.Rochford1@nationalgrideso.com,FALSE,FALSE
-"Nnabuife (ESO), Dozie",TO,Dozie.Nnabuife@nationalgrideso.com,FALSE,FALSE
-"Kenny, Michael",DER,Michael.Kenny@nationalgrideso.com,FALSE,FALSE
-Howard Downey,DNO,Howard.Downey@spenergynetworks.co.uk,FALSE,FALSE
+"Rochford1 (ESO), Hannah",DER,hannah.rochford1@nationalgrideso.com,FALSE,FALSE
+"Nnabuife (ESO), Dozie",TO,dozie.nnabuife@nationalgrideso.com,FALSE,FALSE
+"Kenny, Michael",DER,michael.kenny@nationalgrideso.com,FALSE,FALSE
+Howard Downey,DNO,howard.downey@spenergynetworks.co.uk,FALSE,FALSE
 Dieter Gutschow,DNO,dieter.gutschow@tneigroup.com,FALSE,FALSE
-"Penhaligon (ESO), Emma",Observer,Emma.Penhaligon@nationalgrideso.com,FALSE,FALSE
-"Singh (ESO), Bikramjit",TO,Bikramjit.Singh@nationalgrideso.com,FALSE,FALSE
-"Phull (ESO), Roopkamal",DER,Roopkamal.Phull@nationalgrideso.com,FALSE,FALSE
+"Penhaligon (ESO), Emma",Observer,emma.penhaligon@nationalgrideso.com,FALSE,FALSE
+"Singh (ESO), Bikramjit",TO,bikramjit.singh@nationalgrideso.com,FALSE,FALSE
+"Phull (ESO), Roopkamal",DER,roopkamal.phull@nationalgrideso.com,FALSE,FALSE
 "MCNICOL, FINLAY",DER,fmcnicol@spenergynetworks.co.uk,FALSE,FALSE
