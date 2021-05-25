@@ -160,7 +160,7 @@ function update_dataviews(step_data) {
         var scale = 1;
         var acc = 0;
         let labels = components.dataviews[id_dv].labels
-        let flow_direction = components.dataviews[id_dv].drawInfo.towards_busbar
+        let flow_direction = components.dataviews[id_dv].drawInfo.flow_direction
         for (let id_component_parameter in labels) {
             let component_parameter = labels[id_component_parameter]
             if (component_parameter.includes('reactive')) {
@@ -194,7 +194,7 @@ function update_dataviews(step_data) {
                     //get negative or positive (or zero?)
                     let value_polarity = value>0
                     if(value==0){
-                    text_list = text_list.concat([String(value) + units] );
+                    text_list = text_list.concat([String(Math.abs(value)) + units] );
                     flow_list = flow_list.concat([""] );
                     continue
                     }
@@ -202,7 +202,7 @@ function update_dataviews(step_data) {
                     //get polarity of datatype
                     let type_polarity = data_polarity[units]
                     if(type_polarity === null){
-                    text_list = text_list.concat(["\t\t\t"+String(value) + units] );
+                    text_list = text_list.concat([String(Math.abs(value)) + units] );
                     flow_list = flow_list.concat([""] );
 
                     continue
@@ -210,13 +210,12 @@ function update_dataviews(step_data) {
 
                     //type polarity, false means flip
                     //value polarity, false means flip
-                    //flow_direction, is relative, lets figure it out
-
+                    //flow_direction, true means positive values go up
                     if(!type_polarity){arrow_up= !arrow_up}
                     if(!value_polarity){arrow_up= !arrow_up}
 
                     if(flow_direction == null){
-                    text_list = text_list.concat(["\t\t\t"+String(value) + units] );
+                    text_list = text_list.concat([String(Math.abs(value)) + units] );
                     flow_list = flow_list.concat([""] );
                     continue
                     }
@@ -226,7 +225,7 @@ function update_dataviews(step_data) {
                     else{direction="down"}
 
                     if(direction == "down"){
-                        text_list = text_list.concat([String(Math.abs(value)) + units]);
+                        text_list = text_list.concat([String((Math.abs(value))) + units]);
                         flow_list = flow_list.concat(["down"] );
                         }
                     else{
@@ -245,13 +244,15 @@ function update_dataviews(step_data) {
 
             }
             else{
-                       text_list = text_list.concat(["ID" + units]);
+//                       text_list = text_list.concat(["ID" + units]);
+                       text_list = text_list.concat(["0"+units]);
                        flow_list = flow_list.concat([""] );
 
             }
             }
             else{
-            text_list = text_list.concat(["PARAM" + units]);
+//            text_list = text_list.concat(["PARAM" + units]);
+            text_list = text_list.concat(["0"+units]);
             flow_list = flow_list.concat([""] );
             }
 
@@ -283,7 +284,7 @@ function update_line_colours(step_data_) {
             }
 
         }
-        else if (((step_data_["lines_current"][line_id_LF] !== 0) && (step_data_["lines_loading"][line_id_LF] > 997)) ||
+        else if (((step_data_["lines_loading"][line_id_LF] !== 0) && (step_data_["lines_loading"][line_id_LF] > 997)) ||
             //        ((step_data_["lines_active_power"][line_id_LF] !== 0)&&(step_data_["lines_active_power"][line_id_LF] > 997))||
             //        ((step_data_["lines_reactive_power"][line_id_LF] !== 0)&&(step_data_["lines_reactive_power"][line_id_LF] > 997))
             ((step_data_["busbars_voltage"][line_id_LF] !== 0) && (step_data_["busbars_voltage"][line_id_LF] > 997)) ||
@@ -310,7 +311,7 @@ function update_line_colours(step_data_) {
             }
 
         }
-        else if (((step_data_["lines_current"][line_id_LF] !== 0) && (step_data_["lines_loading"][line_id_LF] !== undefined)) ||
+        else if (((step_data_["lines_loading"][line_id_LF] !== 0) && (step_data_["lines_loading"][line_id_LF] !== undefined)) ||
             //        ((step_data_["lines_active_power"][line_id_LF] !== 0)&&(step_data_["lines_active_power"][line_id_LF] !== undefined))||
             //        ((step_data_["lines_reactive_power"][line_id_LF] !== 0)&&(step_data_["lines_reactive_power"][line_id_LF] !== undefined))
             ((step_data_["busbars_voltage"][line_id_LF] !== 0) && (step_data_["busbars_voltage"][line_id_LF] !== undefined)) ||

@@ -61,7 +61,7 @@ networks_undrawn["chapelcrossgretna1"]={
     dataViews:{
        "GRNA-1#": new DataView("CHAP1-_GRNA1#0",[-90,-20], ["lines_active_power","lines_reactive_power","lines_current"]),
 
-              "GRNA-1": new DataView("GRNA1-",[40,-80], ["lines_active_power","lines_reactive_power","lines_current"]),
+              "CHAP1-_GRNA1": new DataView("GRNA1-",[40,-80], ["lines_active_power","lines_reactive_power","lines_current"]),
 
               "GRNA1-#0": new DataView("GRNA1-",[40,0], ['busbars_voltage']),
               "CHAP1-_R1-_1": new DataView("CHAP1-_R1-_1", [-90,-20], ["busbars_voltage"]),

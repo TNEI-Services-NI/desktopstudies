@@ -103,7 +103,7 @@ networks_undrawn["gretna132kv"]={
 
     "HARK": new DataView("HARK", [-80,40],["lines_active_power","lines_reactive_power","lines_current"]),
     "HAWI": new DataView("HAWI", [-80,40],["lines_active_power","lines_reactive_power","lines_current"]),
-    "GRNA1-_EWEH": new DataView("GRNA1-_EWEH", [-80,40],["lines_active_power","lines_reactive_power","lines_current"]),
+    "GRNA1-_EWEH": new DataView("GRNA1-_EWEH", [-80,40],["lines_active_power","lines_reactive_power","lines_current"],false),
 //
 //    8: new DataView(75,525,["kV"]),
 //    9: new DataView(940,525,["kV"]),

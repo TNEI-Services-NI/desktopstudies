@@ -403,7 +403,7 @@
       for(let id_dv in dict_components.dataViews){
         let dataview_ = dict_components.dataViews[id_dv]
         let componentID = dataview_.componentID
-        let direction = dataview_.towards_busbar
+        let direction = dataview_.flow_direction
         let line = components.lines[componentID]
         let gen = components.generators[componentID]
         let tx = components.transformers[componentID]

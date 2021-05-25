@@ -407,15 +407,16 @@ function Isolator(line_id,pos, state = "closed",name=false){
  * @param  {double} x location
  * @param  {double} y location
  * @param  {list} labels of data desired ["kV", "AMPS", "Hz","MVAR","MVA","MW"]
+ * @ param {boolean} flow direction, true means positive values go down, false means they go up
  * @return {None}
  * @usage instantiate as object i.e. new DataView(...)
  */
-function DataView(componentID = "", offset, labels,towards_busbar=false){
+function DataView(componentID = "", offset, labels,flow_direction=true){
     // this.x = x
     // this.y = y
     this.data = {}
     this.graphic = []
-    this.towards_busbar = towards_busbar
+    this.flow_direction = flow_direction
     this.componentID = componentID
     this.offset = offset
     this.labels = labels
