@@ -153,6 +153,7 @@ function update_line_data_views(step_data) {
 //probably a good idea to add zeros when data isn't present rather than not drawing
 function update_dataviews(step_data) {
     for (let id_dv in components.dataviews) {
+    console.log(step_data)
         let id_root = id_dv.split("#")[0]
         let text_list = [];
         let flow_list = [];
@@ -188,7 +189,15 @@ function update_dataviews(step_data) {
             } else if (component_parameter.includes('taps')) {
                     units = " ."
             } else if (component_parameter.includes('current')) {
-                    units = " AMPS"
+                    if(component_parameter.includes("transformers")){
+                        if(argument == "LV"){
+                            units = " AMPS (LV)"
+                        }
+                        else{units = " AMPS (HV)"}
+                    }
+                    else{
+                        units = " AMPS"
+                    }
                     scale = 1000
             } else if (component_parameter.includes('apparent')) {
                     units = " MVA"
