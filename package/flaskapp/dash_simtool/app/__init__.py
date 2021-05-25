@@ -5,6 +5,7 @@ URL_BASE = '/simulator/'
 URL_HOME = URL_BASE + 'home/'
 URL_SLDS = URL_BASE + 'SLDs/'
 URL_SCRIPTS = URL_BASE + 'Scripts/'
+URL_GRAPH = URL_BASE + 'Graph/'
 URL_ABOUT = URL_BASE + 'About/'
 
 external_scripts = [

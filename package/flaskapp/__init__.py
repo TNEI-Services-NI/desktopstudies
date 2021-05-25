@@ -126,6 +126,8 @@ def __load_dash_sim_tool(app):
     app = init_scripts(app)
     from .dash_simtool.app.about import init_dashboard as init_about
     app = init_about(app)
+    from .dash_simtool.app.graph import init_dashboard as init_graph
+    app = init_graph(app)
     return app
 
 

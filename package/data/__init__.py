@@ -140,13 +140,14 @@ def read_restoration_step(case_network: str, network: str, option: str, scenario
 
     dict_data = {k: df_data.loc[df_data['component']==k, :] for k in df_data['component'].unique()}
 
-    dict_data = {k: v.loc[:, 'Step {}'.format(stage)]
-                 for k, v in dict_data.items()}
+    if stage is not None:
+        dict_data = {k: v.loc[:, 'Step {}'.format(stage)]
+                     for k, v in dict_data.items()}
 
-    dict_data['transformer_apparent_power'] = dict_data['transformers_loading'] * dict_data['transformers_rating'].replace(999,0).replace(-999,0)
+        dict_data['transformer_apparent_power'] = dict_data['transformers_loading'] * dict_data['transformers_rating'].replace(999,0).replace(-999,0)
 
-    dict_data = {k: v.to_json()
-                 for k, v in dict_data.items()}
+        dict_data = {k: v.to_json()
+                     for k, v in dict_data.items()}
 
     return dict_data
 

@@ -7,8 +7,9 @@ import dash_html_components as html
 import numpy as np
 import plotly.graph_objs as go
 
-import package.flaskapp.dash_simtool.app as dash_app
+import package.data as simtool_data
 import package.flaskapp.dash_simtool._config as cf
+import package.flaskapp.dash_simtool.app as dash_app
 import package.flaskapp.dash_simtool.app.dashboard_styling as styling
 from package.flaskapp.dash_simtool.app.micromethods import hex_to_rgb
 
@@ -346,6 +347,10 @@ def navbar_controls(url_page):
                     #             href=dash_app.URL_SLDS if cf.demo else dash_app.URL_SCRIPTS,
                     #             active=True if dash_app.URL_SCRIPTS == url_page else False,
                     #             external_link=True),
+                    dbc.NavLink("Graph",
+                                href=dash_app.URL_SLDS if cf.demo else dash_app.URL_GRAPH,
+                                active=True if dash_app.URL_GRAPH == url_page else False,
+                                external_link=True),
                     dbc.NavLink("About",
                                 href=dash_app.URL_SLDS if cf.demo else dash_app.URL_ABOUT,
                                 active=True if dash_app.URL_ABOUT == url_page else False,
@@ -475,3 +480,25 @@ def legend():
     )
     return _legend
 
+
+def graph_display():
+    bar_chart = html.Div([
+        dbc.Row([
+            dbc.Col([
+                dcc.Graph(id="bar-chart-1",
+                          style={
+                              'visibility': 'hidden'
+                          }),
+                dcc.Graph(id="bar-chart-2",
+                          style={
+                              'visibility': 'hidden'
+                          }),
+            ])
+        ])
+    ], id="bar-chart-div",
+    style={
+        'height': '100%',
+        'width': '100%',
+        'padding': '3rem'
+    })
+    return bar_chart
