@@ -886,7 +886,10 @@ function draw_action_button(){
       if(action !== ''){
         let rect1 = draw.rect(x_max*0.1,y_max*0.07).fill(palette["controls"]).center(x_max*0.8,y_max*0.88);
         add_text(rect1, false, ["Take action: ", action], 0, 0, "#000000", 12, function(text1){
-          debounce_click_function(text1, inc_state);
+          debounce_click_function(text1, function(case_network_){
+          action = undefined
+          inc_state(case_network_);
+        });
           mouseenterleave_pointer([text1, rect1]);
         })
         debounce_click_function(rect1, function(case_network_){
@@ -895,19 +898,31 @@ function draw_action_button(){
         });
         mouseenterleave_pointer(rect1);
       }
-
     })
-
-
-
-
 }
 
+function draw_next_network_button(){
+  var group = draw.group();
+    if(next_network === true){
+      let rect1 = draw.rect(x_max*0.1,y_max*0.07).fill(palette["controls"]).center(x_max*0.9,y_max*0.88);
+      add_text(rect1, false, ["Next network"], 0, 0, "#000000", 12, function(text1){
+        debounce_click_function(text1, function (case_network_){
+          next_network = undefined
+          inc_state(case_network_, true)
+        });
+        mouseenterleave_pointer([text1, rect1]);
+      })
+      debounce_click_function(rect1, function(case_network_){
+        next_network = undefined
+        inc_state(case_network_, true);
+      });
+      mouseenterleave_pointer(rect1);
+    }
+}
 
 
 function draw_admin_buttons(){
   var group = draw.group();
-
 
     if(!(entity.search('admin')==-1)){
       let rect0 = draw.rect(x_max*0.07,y_max*0.05).fill(palette["controls"]).center(x_max*0.5,y_max*0.88);
@@ -933,7 +948,6 @@ function draw_admin_buttons(){
       mouseenterleave_pointer(rect1);
       mouseenterleave_pointer(rect2);
     }
-
 }
 
 function draw_line(line,id_line, type="busbar"){

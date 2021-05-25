@@ -438,45 +438,61 @@ function update_generator_graphs(step_data_) {
     }
 }
 
-function update_state(case_network_) {
+function update_state(case_network_, progress=false) {
+    if(!(progress)){
+        next_network = true
+    }
     $("body").css("cursor", "progress");
-    let data = {
+    let data_sync = {
         'sim_step': current_step,
         'entity': entity,
         'room': room,
         'network': network,
         'page': page,
-        'progress': true,
-        'broadcast': !(local)
+        'progress': false,
+        'broadcast': false
     }
 
     setTimeout(function() {
-        socket.emit('sync_sim_step', data, function(data) {});
-        $("#sim_status_div").html("Simulation status: " + current_step)
-        if (!data['broadcast']) {
-            $("body").css("cursor", "default");
-        }
+        socket.emit('sync_sim_step', data_sync, function(data_) {
+            data_sync = {
+                'sim_step': current_step,
+                'entity': entity,
+                'room': room,
+                'network': network,
+                'page': page,
+                'progress': true,
+                'broadcast': !(local)
+            }
+            setTimeout(function() {
+                socket.emit('sync_sim_step', data_sync, function(data__) {});
+                if (!data_['broadcast']) {
+                    $("body").css("cursor", "default");
+                }
+            }, 10000)
+        });
 
     }, 200)
 }
 
 
-function inc_state(case_network_) {
+function inc_state(case_network_, progress=false) {
     current_step += 1;
-    update_state(case_network_);
+    update_state(case_network_, progress);
 }
 
 
-function dec_state(case_network_) {
+function dec_state(case_network_, progress=false) {
     current_step -= 1;
-    update_state(case_network_);
+    update_state(case_network_, progress);
 }
 
 
-function reset_state(case_network_) {
+function reset_state(case_network_, progress=false) {
     current_step = -2;
+    next_network = undefined
     components.generatorGraphManagers = undefined;
-    update_state(case_network_);
+    update_state(case_network_, progress);
 }
 
 /**

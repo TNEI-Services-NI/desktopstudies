@@ -567,8 +567,9 @@
   }
 
   function construct_action(){
-    draw_action_button();
-    draw_admin_buttons();
+  // draw_next_network_button()
+  draw_action_button();
+  draw_admin_buttons();
   }
 
   function construct_SGTs(dict_components){

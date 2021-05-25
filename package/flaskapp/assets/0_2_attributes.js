@@ -40,6 +40,8 @@ var entity = undefined
 
 var action = undefined
 
+var next_network = undefined
+
 var page = undefined
 
 var local = undefined
