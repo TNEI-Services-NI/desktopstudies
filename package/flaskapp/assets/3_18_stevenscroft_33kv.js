@@ -108,7 +108,7 @@ networks_undrawn["stevenscroft33kv"]={
 //            'generators_reactive_power',
 //
 //          ]),
-        "STRC_LOADBANK#LOAD": new DataView("STCR3-",[100,50], ["lines_active_power"],false),
+        "STCR_LOADBANK#LOAD": new DataView("STCR3-",[100,50], ["generators_active_power"],null),
 
         "STCR3-": new DataView("STCR3-", [-180, 0],
           [

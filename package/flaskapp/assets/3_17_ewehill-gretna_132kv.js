@@ -81,7 +81,7 @@ networks_undrawn["ewehillgretna"]={
     },
 
     dataViews:{
-          "GRNA1-_EWEH": new DataView("GRNA1-",[-80,50], ["lines_active_power","lines_reactive_power","lines_current"]),
+          "GRNA1-_EWEH": new DataView("GRNA1-",[-80,50], ["lines_active_power","lines_reactive_power","lines_current"],false),
           "GRNA1-#0": new DataView("GRNA1-",[-90,-20], ["busbars_voltage"]),
 
           "EWEH0G#": new DataView("EWEH3",[-140,-20], ['busbars_voltage']),
