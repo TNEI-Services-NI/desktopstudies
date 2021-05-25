@@ -109,10 +109,10 @@ networks_undrawn["ewehillwindfarm1"]={
     },
 
     labels:{
-        1: new Text("EWEH3-",["Ewehill WF 1"],[150,-40], 25),
-        16: new Text("EWEH0G",["EWEHILL 1"],[0,-20]),
+        1: new Text("EWEH3-",["Ewe Hill WF 1"],[150,-40], 25),
+        16: new Text("EWEH0G",["EWE HILL 1"],[0,-20]),
 
-        9: new Text("EWEH3-", ["EWEHILL"],[0,-40]),
+        9: new Text("EWEH3-", ["EWE HILL"],[0,-40]),
         10: new Text("EWEH3-", ["WINDFARM"],[0,-25]),
         11: new Text("EWEH3-", ["781"],[0,-10]),
     },
