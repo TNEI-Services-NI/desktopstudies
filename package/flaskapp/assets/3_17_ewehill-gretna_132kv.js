@@ -98,7 +98,7 @@ networks_undrawn["ewehillgretna"]={
 
     },
     availablePower:{
-        "EWHC0G_1" : new AvailablePower([115,600]),
+        "EWEHILL_2" : new AvailablePower([115,600]),
     },
     SGTs:{
 
