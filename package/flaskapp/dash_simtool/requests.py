@@ -90,6 +90,7 @@ def get_restoration_steps():
     scenario = data["scenario"]
     option = data["option"]
 
+    #restoration steps
     # #todo where is the number of stages saved/how to get it?
     steps = {}
     i=-2
@@ -98,7 +99,41 @@ def get_restoration_steps():
         steps[str(i)] = stateDictionary
         i+=1
     # stateDictionary = simtool_data.read_all_restoration_steps(case_network, network, option, scenario)
+
     return jsonify(steps)
+
+@simtool_bp.route("/get_all_data/", methods=['POST'])
+@login_required
+def get_all_data():
+    data = request.form
+    case_network = data["case_network"]
+    network = data["network"]
+    scenario = data["scenario"]
+    option = data["option"]
+
+    #restoration steps
+    # #todo where is the number of stages saved/how to get it?
+    steps = {}
+    i=-2
+    while i < 34:
+        stateDictionary = simtool_data.read_restoration_step(case_network, network, option, scenario, i)
+        steps[str(i)] = stateDictionary
+        i+=1
+    # stateDictionary = simtool_data.read_all_restoration_steps(case_network, network, option, scenario)
+
+    #views
+    views = simtool_data.read_network_views(option).to_dict()
+
+    #breakers
+    breakers = simtool_data.read_breaker_states(network, option).to_dict()
+
+    all_data = {}
+
+    all_data["steps"] = steps
+    all_data["views"] = views
+    all_data["breakers"] = breakers
+
+    return jsonify(all_data)
 
 
 @simtool_bp.route("/init_network/", methods=['POST'])

@@ -552,7 +552,7 @@ function update_sim_data(stage_, step_data) {
 }
 
 function update_draw() {
-            update_sim_data(current_step, all_sim_data[current_step]);
+            update_sim_data(current_step, restoration_data[current_step]);
             $("body").css("cursor", "default");
 }
 
@@ -560,7 +560,7 @@ function master_draw() {
     prepare_canvas(x_max, y_max);
     dict_components = networks_undrawn[network]
     draw_network(dict_components, network, current_step, function(data_draw_net){
-        if(all_sim_data == null){
+        if(restoration_data == null){
            fetch_all_sim_data(case_network, network, option, scenario, update_draw)
         }
         else{
@@ -571,16 +571,15 @@ function master_draw() {
 }
 
 function event_draw(draw_data) {
-    new_network = draw_data['network']
+    old_network = network
+    old_step = current_step
+    network = draw_data['network']
     current_step = draw_data['sim_step'];
+        master_draw()
 
-    if(new_network == network){
-        update_draw();
-    }
-    else{
-        network = new_network
-        master_draw();
-    }
+//    master_draw();
+
+
 }
 
 

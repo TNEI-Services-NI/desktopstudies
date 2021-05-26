@@ -796,7 +796,6 @@
 
             acc_offset += bar_offset
             graph_bars[gen_id]={"bar": rect, "percentage":undefined}
-            console.log(graph_bars)
             components.generatorGraphComponents[gen_id] = rect
         }
 

@@ -52,12 +52,11 @@ socket.on('check_redraw', function(check_redraw_data) {
 });
 
 socket.on('redraw', function(data) {
-
+    let old_network = network
+    let old_step = current_step
     current_step = data['sim_step'];
     if ('network' in data) {
         network = data['network'];
     }
-    update_draw();
-//    master_draw();
-
+    master_draw()
 });

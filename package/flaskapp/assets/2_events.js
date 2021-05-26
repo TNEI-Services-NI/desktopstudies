@@ -157,7 +157,7 @@ function fetch_sim_data(case_network_, network, stage_, option_, scenario_, call
   }
 
 
-function fetch_all_sim_data(case_network_,network, option_, scenario_, callbacks){
+function fetch_all_restoration_data(case_network_,network, option_, scenario_, callbacks){
       console.log("fetching all data")
       $.ajax({
       type: "POST",
@@ -172,11 +172,34 @@ function fetch_all_sim_data(case_network_,network, option_, scenario_, callbacks
             }
         }
         console.log(component_values)
-        all_sim_data = component_values
+        restoration_data = component_values
         callbacks(component_values);
       })
   }
 
+function fetch_all_sim_data(case_network_,network, option_, scenario_, callbacks){
+      $.ajax({
+      type: "POST",
+      url: "/simtool_bp/get_all_data/",
+      data: {"case_network": case_network_, "network":network, "option": option_, "scenario": scenario_},
+//      dataType: 'application/json'
+      }).done(function( component_values ) {
+        console.log(component_values)
+
+        restoration_data = component_values["steps"]
+        for(let component_stage in restoration_data){
+            component_stage_parameters = restoration_data[component_stage]
+            for(let component_parameter in component_stage_parameters){
+            restoration_data[component_stage][component_parameter] = JSON.parse(component_stage_parameters[component_parameter])
+            }
+        }
+//        restoration_data = component_values
+
+        breaker_data = component_values["breakers"]
+        view_data = restoration_data["views"]
+
+      })
+  }
 
 /**
  * retrieves network/simulation
