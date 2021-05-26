@@ -557,16 +557,22 @@ function update_draw() {
 }
 
 function master_draw() {
-    prepare_canvas(x_max, y_max);
-    dict_components = networks_undrawn[network]
-    draw_network(dict_components, network, current_step, function(data_draw_net){
-        if(restoration_data == null){
-           fetch_all_sim_data(case_network, network, option, scenario, update_draw)
+
+    function draw(){
+        prepare_canvas(x_max, y_max);
+        dict_components = networks_undrawn[network]
+        draw_network(dict_components, network, current_step, function(data_draw_net){
+                update_draw()
+        });
+    }
+
+    if(restoration_data == null){
+           fetch_all_sim_data(case_network, network, option, scenario, draw)
+    }
+    else{
+            draw()
         }
-        else{
-            update_draw()
-        }
-    });
+
 
 }
 

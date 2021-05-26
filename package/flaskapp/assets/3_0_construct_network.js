@@ -269,8 +269,6 @@
                   }
                 })
             });
-
-
             components.breakers[id] = b
             component_modal(b, true)
         }

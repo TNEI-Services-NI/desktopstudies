@@ -63,6 +63,8 @@ const networks_undrawn = {
 var socket = io();
 let current_step = 0  // initial simulation status
 let restoration_data = null//object which contains all restoration steps
+let breaker_data = null//object which contains all breaker data
+let view_data = null//object which contains all view data
 
 //  var x = document.getElementById('myDiv').clientWidth;
 var x_max = window.innerWidth;

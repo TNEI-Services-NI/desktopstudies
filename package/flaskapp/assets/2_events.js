@@ -98,11 +98,8 @@ function check_breakers(network_, option_, breakers, step, callback){
  */
 function init_breakers(network_, option_, breakers, step, callback){
     var breakers_new = breakers
-    $.ajax({
-      type: "POST",
-      url: "/simtool_bp/check_breakers/",
-      data: {"network": network_, "option": option_},
-      success: function(restoration_breaker_states){
+    restoration_breaker_states = breaker_data
+
         for (let breaker in breakers){
           if (restoration_breaker_states[step][breaker] === undefined){
             breakers_new[breaker].state = "undefined";
@@ -111,8 +108,7 @@ function init_breakers(network_, option_, breakers, step, callback){
           }
         }
         callback(breakers_new);
-      }
-    });
+
 
 }
 
@@ -142,7 +138,7 @@ function init_breaker(breakerID){
  * @param callbacks
  * @return {None}
  */
-function fetch_sim_data(case_network_, network, stage_, option_, scenario_, callbacks){
+function fetch_step_restoration_data(case_network_, network, stage_, option_, scenario_, callbacks){
       $.ajax({
       type: "POST",
       url: "/simtool_bp/get_state/",
@@ -158,7 +154,6 @@ function fetch_sim_data(case_network_, network, stage_, option_, scenario_, call
 
 
 function fetch_all_restoration_data(case_network_,network, option_, scenario_, callbacks){
-      console.log("fetching all data")
       $.ajax({
       type: "POST",
       url: "/simtool_bp/get_states/",
@@ -197,7 +192,7 @@ function fetch_all_sim_data(case_network_,network, option_, scenario_, callbacks
 
         breaker_data = component_values["breakers"]
         view_data = restoration_data["views"]
-
+        callbacks()
       })
   }
 
