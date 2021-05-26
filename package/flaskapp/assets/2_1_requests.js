@@ -57,6 +57,7 @@ socket.on('redraw', function(data) {
     if ('network' in data) {
         network = data['network'];
     }
-    master_draw();
+    update_draw();
+//    master_draw();
 
 });
