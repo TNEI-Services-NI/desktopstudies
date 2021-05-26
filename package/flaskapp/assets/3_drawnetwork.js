@@ -555,17 +555,15 @@ function master_draw() {
     prepare_canvas(x_max, y_max);
     dict_components = networks_undrawn[network]
     draw_network(dict_components, network, current_step, function(data_draw_net){
-
-        if(all_sim_data == null){
-           fetch_all_sim_data(case_network, network, option, scenario, function (component_values){
-                       update_sim_data(current_step, all_sim_data[current_step]);
-                       $("body").css("cursor", "default");
-
-            })
-        }
-        else{
+        function draw_next_step(){
             update_sim_data(current_step, all_sim_data[current_step]);
             $("body").css("cursor", "default");
+        }
+        if(all_sim_data == null){
+           fetch_all_sim_data(case_network, network, option, scenario, draw_next_step)
+        }
+        else{
+            draw_next_step
         }
     });
 
