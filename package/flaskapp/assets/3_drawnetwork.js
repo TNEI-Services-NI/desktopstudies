@@ -560,6 +560,7 @@ function master_draw() {
 
     function draw(){
         prepare_canvas(x_max, y_max);
+
         dict_components = networks_undrawn[network]
         draw_network(dict_components, network, current_step, function(data_draw_net){
                 update_draw()
@@ -567,7 +568,10 @@ function master_draw() {
     }
 
     if(restoration_data == null){
+           prepare_canvas(x_max, y_max);
            fetch_all_sim_data(case_network, network, option, scenario, draw)
+           add_static_text(["loading..."], x=500*x_scaling, y=500*y_scaling, colour="#d3d3d3", function(){})
+
     }
     else{
             draw()
