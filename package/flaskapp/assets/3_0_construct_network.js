@@ -707,9 +707,7 @@
       getState(){return bars}
       //sets the graphic of the bar relating to this
       setPercentage(id, percentage){
-      console.log(this.bars)
         let bar_data = this.bars[id]
-        console.log(bar_data)
         this.bars[id]["percentage"] = percentage
         bar_data.bar.setPercentage(percentage)
       }

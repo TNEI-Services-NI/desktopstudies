@@ -166,7 +166,6 @@ function fetch_all_restoration_data(case_network_,network, option_, scenario_, c
             component_values[component_stage][component_parameter] = JSON.parse(component_stage_parameters[component_parameter])
             }
         }
-        console.log(component_values)
         restoration_data = component_values
         callbacks(component_values);
       })
@@ -179,7 +178,6 @@ function fetch_all_sim_data(case_network_,network, option_, scenario_, callbacks
       data: {"case_network": case_network_, "network":network, "option": option_, "scenario": scenario_},
 //      dataType: 'application/json'
       }).done(function( component_values ) {
-        console.log(component_values)
 
         restoration_data = component_values["steps"]
         for(let component_stage in restoration_data){
@@ -191,7 +189,8 @@ function fetch_all_sim_data(case_network_,network, option_, scenario_, callbacks
 //        restoration_data = component_values
 
         breaker_data = component_values["breakers"]
-        view_data = restoration_data["views"]
+        view_data = component_values["views"]
+        action_data = component_values["actions"]
         callbacks()
       })
   }
@@ -270,44 +269,44 @@ function component_modal(component, interactive_component=false){
       // $('<p>Data:</p>').appendTo('#dataPopup');
       // $('<hr style="border: none; height: 2px; background-color: #222222;">').appendTo('#dataPopup');
 
-      $.ajax({
-        dataType:"text",
-        success:function(data)
-        {
-          var csv = data.split(/\r?\n|\r/);
-          for(var count = 0; count<csv.length; count++)
-          {
-          var cell_data = csv[count].split(",");
-
-          if(type === "Generator"){
-            if(cell_data[0] === name && cell_data[2] === 'Active Power'){
-              $('<p>P: '+cell_data[4+parseInt($('#buttonA').attr('stage'))]+' MW</p>').appendTo('#dataPopup');
-            }
-            if(cell_data[0] === name && cell_data[2] === 'Reactive Power'){
-              $('<p>Q: '+cell_data[4+parseInt($('#buttonA').attr('stage'))]+' MVAr</p>').appendTo('#dataPopup');
-            }
-          } else if(type==="Transformer"){
-            if(cell_data[0] === name && cell_data[2] === 'Loading'){
-              $('<p>Loading: '+cell_data[4+parseInt($('#buttonA').attr('stage'))]+' %</p>').appendTo('#dataPopup');
-            }
-            if(cell_data[0] === name && cell_data[2] === 'Tap'){
-              $('<p>Tap: '+cell_data[4+parseInt($('#buttonA').attr('stage'))]+' %</p>').appendTo('#dataPopup');
-            }
-
-          } else if(type==="Line"){
-            if(cell_data[0] === name && cell_data[2] === 'Loading'){
-              $('<p>Loading: '+cell_data[4+parseInt($('#buttonA').attr('stage'))]+' %</p>').appendTo('#dataPopup');
-            }
-            if(cell_data[0] === name && cell_data[2] === 'Active Power'){
-              $('<p>P: '+cell_data[4+parseInt($('#buttonA').attr('stage'))]+' MW</p>').appendTo('#dataPopup');
-            }
-            if(cell_data[0] === name && cell_data[2] === 'Reactive Power'){
-              $('<p>Q: '+cell_data[4+parseInt($('#buttonA').attr('stage'))]+' MVAr</p>').appendTo('#dataPopup');
-            }
-          }
-          }
-        }
-        });
+//      $.ajax({
+//        dataType:"text",
+//        success:function(data)
+//        {
+//          var csv = data.split(/\r?\n|\r/);
+//          for(var count = 0; count<csv.length; count++)
+//          {
+//          var cell_data = csv[count].split(",");
+//
+//          if(type === "Generator"){
+//            if(cell_data[0] === name && cell_data[2] === 'Active Power'){
+//              $('<p>P: '+cell_data[4+parseInt($('#buttonA').attr('stage'))]+' MW</p>').appendTo('#dataPopup');
+//            }
+//            if(cell_data[0] === name && cell_data[2] === 'Reactive Power'){
+//              $('<p>Q: '+cell_data[4+parseInt($('#buttonA').attr('stage'))]+' MVAr</p>').appendTo('#dataPopup');
+//            }
+//          } else if(type==="Transformer"){
+//            if(cell_data[0] === name && cell_data[2] === 'Loading'){
+//              $('<p>Loading: '+cell_data[4+parseInt($('#buttonA').attr('stage'))]+' %</p>').appendTo('#dataPopup');
+//            }
+//            if(cell_data[0] === name && cell_data[2] === 'Tap'){
+//              $('<p>Tap: '+cell_data[4+parseInt($('#buttonA').attr('stage'))]+' %</p>').appendTo('#dataPopup');
+//            }
+//
+//          } else if(type==="Line"){
+//            if(cell_data[0] === name && cell_data[2] === 'Loading'){
+//              $('<p>Loading: '+cell_data[4+parseInt($('#buttonA').attr('stage'))]+' %</p>').appendTo('#dataPopup');
+//            }
+//            if(cell_data[0] === name && cell_data[2] === 'Active Power'){
+//              $('<p>P: '+cell_data[4+parseInt($('#buttonA').attr('stage'))]+' MW</p>').appendTo('#dataPopup');
+//            }
+//            if(cell_data[0] === name && cell_data[2] === 'Reactive Power'){
+//              $('<p>Q: '+cell_data[4+parseInt($('#buttonA').attr('stage'))]+' MVAr</p>').appendTo('#dataPopup');
+//            }
+//          }
+//          }
+//        }
+//        });
     });
     group.mouseleave(function(e){
       // setTimeout(function(){

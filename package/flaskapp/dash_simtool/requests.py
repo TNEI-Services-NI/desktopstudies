@@ -111,27 +111,30 @@ def get_all_data():
     scenario = data["scenario"]
     option = data["option"]
 
-    #restoration steps
-    # #todo where is the number of stages saved/how to get it?
-    steps = {}
-    i=-2
-    while i < 34:
-        stateDictionary = simtool_data.read_restoration_step(case_network, network, option, scenario, i)
-        steps[str(i)] = stateDictionary
-        i+=1
-    # stateDictionary = simtool_data.read_all_restoration_steps(case_network, network, option, scenario)
 
     #views
     views = simtool_data.read_network_views(option).to_dict()
 
+    #restoration steps
+    steps = {}
+    i=-2
+    while i < len(views)-3:
+        stateDictionary = simtool_data.read_restoration_step(case_network, network, option, scenario, i)
+        steps[str(i)] = stateDictionary
+        i+=1
+
     #breakers
     breakers = simtool_data.read_breaker_states(network, option).to_dict()
+
+    #actions
+    actions = simtool_data.read_actions(option).to_dict()
 
     all_data = {}
 
     all_data["steps"] = steps
     all_data["views"] = views
     all_data["breakers"] = breakers
+    all_data["actions"] = actions
 
     return jsonify(all_data)
 

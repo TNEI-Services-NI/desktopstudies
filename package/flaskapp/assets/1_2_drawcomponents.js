@@ -876,13 +876,7 @@ function draw_SGT(dict_line,callback){
 
 function draw_action_button(){
   var group = draw.group();
-
-    $.ajax({
-    type: "POST",
-    url: "/simtool_bp/get_action/",
-    data: {"option": option},
-    }).done(function( action_values ) {
-      action = action_values[current_step][entity.split("_")[0]]
+    action = action_data[current_step][entity.split("_")[0]]
       if(action !== ''){
         let rect1 = draw.rect(x_max*0.1,y_max*0.07).fill(palette["controls"]).center(x_max*0.8,y_max*0.88);
         add_text(rect1, false, ["Take action: ", action], 0, 0, "#000000", 12, function(text1){
@@ -898,7 +892,6 @@ function draw_action_button(){
         });
         mouseenterleave_pointer(rect1);
       }
-    })
 }
 
 function draw_next_network_button(){
