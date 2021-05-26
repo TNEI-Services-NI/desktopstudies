@@ -157,11 +157,12 @@ function fetch_sim_data(case_network_, network, stage_, option_, scenario_, call
   }
 
 
-function fetch_all_sim_data(case_network_, network, option_, scenario_, callbacks){
+function fetch_all_sim_data(case_network_,network, option_, scenario_, callbacks){
+      console.log("fetching all data")
       $.ajax({
       type: "POST",
       url: "/simtool_bp/get_states/",
-      data: {"case_network": case_network_, "network":network,  "option": option_, "scenario": scenario_},
+      data: {"case_network": case_network_, "network":network, "option": option_, "scenario": scenario_},
 //      dataType: 'application/json'
       }).done(function( component_values ) {
         for(let component_stage in component_values){
@@ -171,7 +172,8 @@ function fetch_all_sim_data(case_network_, network, option_, scenario_, callback
             }
         }
         console.log(component_values)
-//        callbacks(stage_, component_values);
+        all_sim_data = component_values
+        callbacks(component_values);
       })
   }
 

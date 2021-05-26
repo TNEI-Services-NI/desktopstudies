@@ -37,12 +37,10 @@ socket.on('list_rooms', function(data) {
 });
 
 socket.on('debug', function(data) {
-
 });
 
 
 socket.on('draw', function(data) {
-
     event_draw(data);
 });
 
@@ -54,6 +52,7 @@ socket.on('check_redraw', function(check_redraw_data) {
 });
 
 socket.on('redraw', function(data) {
+
     current_step = data['sim_step'];
     if ('network' in data) {
         network = data['network'];
