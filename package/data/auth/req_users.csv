@@ -1,18 +1,18 @@
 name,entity,email,required,status
 Dieter Gutschow,DNO,dieter.gutschow@tneigroup.com,TRUE,FALSE
 Max McFarlane,admin,max.mcfarlane@tneigroup.com,TRUE,FALSE
-Christopher Salter,Observer,christopher.salter2@natoinalgrideso.com,TRUE,FALSE
-"Foote, Colin",TO,cfoote@spenergynetworks.co.uk,TRUE,FALSE
-"Auty (ESO), Daniel",ESO,daniel.auty@nationalgrideso.com,TRUE,FALSE
-"Chandler (ESO), Peter",ESO,peter.chandler@nationalgrideso.com,TRUE,FALSE
-Neil Miller,DNO,neil.miller@spenergynetworks.co.uk,TRUE,FALSE
-Neil Hutcheon,DNO,nhutcheon@spenergynetworks.co.uk,TRUE,FALSE
-"Rochford1 (ESO), Hannah",DER,hannah.rochford1@nationalgrideso.com,TRUE,FALSE
-"Nnabuife (ESO), Dozie",TO,dozie.nnabuife@nationalgrideso.com,TRUE,FALSE
-"Kenny, Michael",DER,michael.kenny@nationalgrideso.com,TRUE,FALSE
-Howard Downey,DNO,howard.downey@spenergynetworks.co.uk,TRUE,FALSE
-Dieter Gutschow,DNO,dieter.gutschow@tneigroup.com,TRUE,FALSE
-"Penhaligon (ESO), Emma",Observer,emma.penhaligon@nationalgrideso.com,TRUE,FALSE
-"Singh (ESO), Bikramjit",TO,bikramjit.singh@nationalgrideso.com,TRUE,FALSE
-"Phull (ESO), Roopkamal",DER,roopkamal.phull@nationalgrideso.com,TRUE,FALSE
-"MCNICOL, FINLAY",DER,fmcnicol@spenergynetworks.co.uk,TRUE,FALSE
+Christopher Salter,admin,christopher.salter2@natoinalgrideso.com,TRUE,FALSE
+"Foote, Colin",admin,cfoote@spenergynetworks.co.uk,TRUE,FALSE
+"Auty (ESO), Daniel",admin,daniel.auty@nationalgrideso.com,TRUE,FALSE
+"Chandler (ESO), Peter",admin,peter.chandler@nationalgrideso.com,TRUE,FALSE
+Neil Miller,admin,neil.miller@spenergynetworks.co.uk,TRUE,FALSE
+Neil Hutcheon,admin,nhutcheon@spenergynetworks.co.uk,TRUE,FALSE
+"Rochford1 (ESO), Hannah",admin,hannah.rochford1@nationalgrideso.com,TRUE,FALSE
+"Nnabuife (ESO), Dozie",admin,dozie.nnabuife@nationalgrideso.com,TRUE,FALSE
+"Kenny, Michael",admin,michael.kenny@nationalgrideso.com,TRUE,FALSE
+Howard Downey,admin,howard.downey@spenergynetworks.co.uk,TRUE,FALSE
+Dieter Gutschow,admin,dieter.gutschow@tneigroup.com,TRUE,FALSE
+"Penhaligon (ESO), Emma",admin,emma.penhaligon@nationalgrideso.com,TRUE,FALSE
+"Singh (ESO), Bikramjit",admin,bikramjit.singh@nationalgrideso.com,TRUE,FALSE
+"Phull (ESO), Roopkamal",admin,roopkamal.phull@nationalgrideso.com,TRUE,FALSE
+"MCNICOL, FINLAY",admin,fmcnicol@spenergynetworks.co.uk,TRUE,FALSE
