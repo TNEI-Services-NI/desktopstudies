@@ -551,28 +551,36 @@ function update_sim_data(stage_, step_data) {
     update_generator_graphs(step_data);
 }
 
+function update_draw() {
+            update_sim_data(current_step, all_sim_data[current_step]);
+            $("body").css("cursor", "default");
+}
+
 function master_draw() {
     prepare_canvas(x_max, y_max);
     dict_components = networks_undrawn[network]
     draw_network(dict_components, network, current_step, function(data_draw_net){
-        function draw_next_step(){
-            update_sim_data(current_step, all_sim_data[current_step]);
-            $("body").css("cursor", "default");
-        }
         if(all_sim_data == null){
-           fetch_all_sim_data(case_network, network, option, scenario, draw_next_step)
+           fetch_all_sim_data(case_network, network, option, scenario, update_draw)
         }
         else{
-            draw_next_step()
+            update_draw()
         }
     });
 
 }
 
 function event_draw(draw_data) {
-    network = draw_data['network']
+    new_network = draw_data['network']
     current_step = draw_data['sim_step'];
-    master_draw();
+
+    if(new_network == network){
+        update_draw();
+    }
+    else{
+        network = new_network
+        master_draw();
+    }
 }
 
 

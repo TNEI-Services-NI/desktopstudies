@@ -177,6 +177,7 @@ function fetch_all_sim_data(case_network_,network, option_, scenario_, callbacks
       })
   }
 
+
 /**
  * retrieves network/simulation
  * url parameter of ajax request must reference blueprint specific route to function
