@@ -151,7 +151,6 @@ def read_restoration_step(case_network: str, network: str, option: str, scenario
 
     return dict_data
 
-
 def read_active_network():
     active_sims = _fetch_files(dir_active_simulation)
     filename = active_sims['activesimulation']
@@ -199,7 +198,6 @@ def read_actions_db(option: str):
 
 
 def read_restoration_step_db(case_network: str, network: str, option: str, scenario: str, stage: int):
-
     dir_opt_scen = '/'.join([dir_restoration_steps, 'Opt' + option, case_network])
     dict_filenames = _fetch_files(dir_opt_scen)
     dict_data = {k: pd.read_csv('/'.join([dir_opt_scen, v]),
@@ -209,8 +207,8 @@ def read_restoration_step_db(case_network: str, network: str, option: str, scena
 
     dict_data = {k: v.loc[:, 'Step {}'.format(stage)].to_json()
                  for k, v in dict_data.items()}
-
     return dict_data
+
 
 
 def read_active_network_db():

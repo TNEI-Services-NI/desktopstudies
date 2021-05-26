@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import json
+
 from flask import request, jsonify, session
 from flask_login import login_required
 from flask_socketio import join_room, rooms
@@ -78,6 +80,25 @@ def get_restoration_step():
     stateDictionary = simtool_data.read_restoration_step(case_network, network, option, scenario, stage)
     # stateDictionary = simtool_data.read_restoration_step_db(case_network, network, option, scenario, stage)
     return jsonify(stateDictionary)
+
+@simtool_bp.route("/get_states/", methods=['POST'])
+@login_required
+def get_restoration_steps():
+    data = request.form
+    case_network = data["case_network"]
+    network = data["network"]
+    scenario = data["scenario"]
+    option = data["option"]
+
+    # #todo where is the number of stages saved/how to get it?
+    steps = {}
+    i=-2
+    while i < 34:
+        stateDictionary = simtool_data.read_restoration_step(case_network, network, option, scenario, i)
+        steps[str(i)] = stateDictionary
+        i+=1
+    # stateDictionary = simtool_data.read_all_restoration_steps(case_network, network, option, scenario)
+    return jsonify(steps)
 
 
 @simtool_bp.route("/init_network/", methods=['POST'])

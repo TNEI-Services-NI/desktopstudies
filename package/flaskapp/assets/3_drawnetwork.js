@@ -153,7 +153,6 @@ function update_line_data_views(step_data) {
 //probably a good idea to add zeros when data isn't present rather than not drawing
 function update_dataviews(step_data) {
     for (let id_dv in components.dataviews) {
-    console.log(step_data)
         let id_root = id_dv.split("#")[0]
         let text_list = [];
         let flow_list = [];
@@ -214,6 +213,7 @@ function update_dataviews(step_data) {
                }
 
                value = (scale * Math.round(value * 1000) / 1000).toFixed(acc)
+               let output_value = value
 
 
                 if(highlight_undefined||(value < 999 && value > -999)){
@@ -222,10 +222,12 @@ function update_dataviews(step_data) {
                     let arrow_up = true
                     //get negative or positive (or zero?)
                     let value_polarity = value>0
+
                     if(value==0){
-                    text_list = text_list.concat([String(Math.abs(value)) + units] );
-                    flow_list = flow_list.concat([""] );
-                    continue
+
+                        text_list = text_list.concat([String(Math.abs(value)) + units] );
+                        flow_list = flow_list.concat([""] );
+                     continue
                     }
 
                     //get polarity of datatype
@@ -244,8 +246,9 @@ function update_dataviews(step_data) {
                     if(!value_polarity){arrow_up= !arrow_up}
 
                     if(flow_direction == null){
+
                     text_list = text_list.concat([String(Math.abs(value)) + units] );
-                    flow_list = flow_list.concat([""] );
+                    flow_list = flow_list.concat([""]);
                     continue
                     }
                     if(flow_direction){arrow_up= !arrow_up}
@@ -274,14 +277,14 @@ function update_dataviews(step_data) {
             }
             else{
 //                       text_list = text_list.concat(["ID" + units]);
-                       text_list = text_list.concat(["ID"+units]);
+                       text_list = text_list.concat(["0.00"+units]);
                        flow_list = flow_list.concat([""] );
 
             }
             }
             else{
 //            text_list = text_list.concat(["PARAM" + units]);
-            text_list = text_list.concat(["PARAM"+units]);
+            text_list = text_list.concat(["0.00"+units]);
             flow_list = flow_list.concat([""] );
             }
 
@@ -303,7 +306,6 @@ function update_line_colours(step_data_) {
             ((step_data_["transformers_loading"][line_id_LF] == -999))
         ) {
             if(highlight_undefined){
-                console.log(line_id_LF)
                 line_instance.UIElement.attr({
                     stroke: "#ff0000"
                 });
@@ -367,7 +369,6 @@ function update_line_colours(step_data_) {
             ((step_data_["generators_active_power"][line_id_LF] === undefined)) &&
             ((step_data_["transformers_loading"][line_id_LF] === undefined))) {
             if (highlight_undefined) {
-                console.log(line_id_LF)
                 line_instance.UIElement.attr({
                     stroke: "#ff0000"
                 });
@@ -531,7 +532,6 @@ function draw_network(dict_components, network_, step, callback) {
         callback(data_con_break)
     });
 
-//    alert("DRAW NETWORK WAS CALLED")
 
 }
 
@@ -554,7 +554,12 @@ function update_sim_data(stage_, step_data) {
 function master_draw() {
     prepare_canvas(x_max, y_max);
     dict_components = networks_undrawn[network]
+
+
     draw_network(dict_components, network, current_step, function(data_draw_net){
+
+        fetch_all_sim_data(case_network, network, option, scenario, function(){})
+
         fetch_sim_data(case_network, network, current_step, option, scenario, function (stage_, component_values){
             update_sim_data(stage_, component_values);
             $("body").css("cursor", "default");
@@ -625,4 +630,6 @@ function update_scaling() {
 }
 
 update_scaling();
+
+
 //$( window ).resize(function(){update_scaling(), master_draw()})

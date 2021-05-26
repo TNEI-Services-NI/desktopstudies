@@ -738,7 +738,7 @@
         let callback = gen_graph.callback
         let generator_ids = gen_graph.generators
         let title_string = "Generator Outputs"
-        add_static_text([title_string], x=x_pos, y=y_pos-15*y_scaling, colour="#d3d3d3", function(obj){})
+        add_static_text([title_string], x=x_pos, y=y_pos-10*y_scaling, colour="#d3d3d3", function(obj){})
 
         let graph_height = 150*y_scaling
         let graph_width = 180*x_scaling
