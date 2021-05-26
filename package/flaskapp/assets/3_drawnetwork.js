@@ -563,7 +563,7 @@ function master_draw() {
            fetch_all_sim_data(case_network, network, option, scenario, draw_next_step)
         }
         else{
-            draw_next_step
+            draw_next_step()
         }
     });
 
