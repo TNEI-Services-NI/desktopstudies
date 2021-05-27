@@ -1,8 +1,8 @@
 name,entity,email,required,status
 Max McFarlane,admin,max.mcfarlane@tneigroup.com,TRUE,FALSE
-James Collis,DER,jcollis@viridor.co.uk,TRUE,FALSE
-Steven Sepp,DER,ssepp@viridor.co.uk,TRUE,FALSE
-John Barker,DER,jbarker@viridor.co.uk,TRUE,FALSE
+James Collis,Observer,jcollis@viridor.co.uk,TRUE,FALSE
+Steven Sepp,Observer,ssepp@viridor.co.uk,TRUE,FALSE
+John Barker,Observer,jbarker@viridor.co.uk,TRUE,FALSE
 "Campbell, Douglas",DER,douglas.campbell@scottishpower.com,TRUE,FALSE
 Richard Thwaites,DER,richard.thwaites@pensopower.com,TRUE,FALSE
 David Hinchliffe,DER,david.hinchliffe@rwe.com,TRUE,FALSE
