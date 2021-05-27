@@ -62,7 +62,7 @@ const networks_undrawn = {
 
 var socket = io();
 let current_step = 0  // initial simulation status
-let final_step = 34  // initial simulation status
+let final_step = 33  // initial simulation status
 
 let restoration_data = null//object which contains all restoration steps
 let breaker_data = null//object which contains all breaker data

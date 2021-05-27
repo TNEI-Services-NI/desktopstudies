@@ -466,7 +466,7 @@ function inc_state(case_network_, progress=false) {
     current_step += 1;
     if(current_step > 34){
         current_step = 34
-        
+
     } else {
         update_state(case_network_, progress);
     }
@@ -590,7 +590,7 @@ function event_draw(draw_data) {
     old_step = current_step
     network = draw_data['network']
     current_step = draw_data['sim_step'];
-        master_draw()
+    master_draw()
 
 //    master_draw();
 

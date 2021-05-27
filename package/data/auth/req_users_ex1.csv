@@ -3,6 +3,7 @@ Max McFarlane,admin,max.mcfarlane@tneigroup.com,TRUE,FALSE
 Dieter Gutschow,Observer,dieter.gutschow@tneigroup.com,FALSE,FALSE
 Diptargha Chakravorty,Observer,diptargha.chakravorty@tneigroup.com,FALSE,FALSE
 Owen Patrick,Observer,owen.patrick@tneigroup.com,FALSE,FALSE
+"Nnabuife (ESO), Dozie",Observer,Dozie.Nnabuife@nationalgrideso.com,FALSE,FALSE
 "Salter2 (ESO), Christopher",Observer,christopher.salter2@nationalgrideso.com,FALSE,FALSE
 "Kenny, Michael",Observer,michael.kenny@nationalgrideso.com,FALSE,FALSE
 "Singh (ESO), Bikramjit",Observer,bikramjit.singh@nationalgrideso.com,FALSE,FALSE
@@ -13,9 +14,9 @@ Grant McBeath,TO,grant.mcbeath@spenergynetworks.co.uk,TRUE,FALSE
 "Clark, Anthony",DNO,aclark@spenergynetworks.co.uk,TRUE,FALSE
 "Knott, John",DNO,john.knott@spenergynetworks.co.uk,TRUE,FALSE
 "Green, Tim C",Observer,t.green@imperial.ac.uk,FALSE,FALSE
-James Collis,Observer,jcollis@viridor.co.uk,TRUE,FALSE
-Steven Sepp,Observer,ssepp@viridor.co.uk,TRUE,FALSE
-John Barker,Observer,jbarker@viridor.co.uk,TRUE,FALSE
+James Collis,DER,jcollis@viridor.co.uk,TRUE,FALSE
+Steven Sepp,DER,ssepp@viridor.co.uk,TRUE,FALSE
+John Barker,DER,jbarker@viridor.co.uk,TRUE,FALSE
 "Wilson, Douglas (GE Digital)",Observer,douglas.wilson1@ge.com,FALSE,FALSE
 "Miyir, Hamda (GE Digital)",Observer,hamda.miyir@ge.com,FALSE,FALSE
 "Pintado, Monica (GE Digital)",Observer,monica.pintado@ge.com,FALSE,FALSE
