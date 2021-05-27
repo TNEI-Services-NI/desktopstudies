@@ -1,5 +1,4 @@
 name,entity,email,required,status
-Dieter Gutschow,DNO,dieter.gutschow@tneigroup.com,TRUE,FALSE
 Max McFarlane,admin,max.mcfarlane@tneigroup.com,TRUE,FALSE
 Dieter Gutschow,Observer,dieter.gutschow@tneigroup.com,FALSE,FALSE
 Diptargha Chakravorty,Observer,diptargha.chakravorty@tneigroup.com,FALSE,FALSE
@@ -14,9 +13,9 @@ Grant McBeath,TO,grant.mcbeath@spenergynetworks.co.uk,TRUE,FALSE
 "Clark, Anthony",DNO,aclark@spenergynetworks.co.uk,TRUE,FALSE
 "Knott, John",DNO,john.knott@spenergynetworks.co.uk,TRUE,FALSE
 "Green, Tim C",Observer,t.green@imperial.ac.uk,FALSE,FALSE
-James Collis,DER,jcollis@viridor.co.uk,TRUE,FALSE
-Steven Sepp,DER,ssepp@viridor.co.uk,TRUE,FALSE
-John Barker,DER,jbarker@viridor.co.uk,TRUE,FALSE
+James Collis,Observer,jcollis@viridor.co.uk,TRUE,FALSE
+Steven Sepp,Observer,ssepp@viridor.co.uk,TRUE,FALSE
+John Barker,Observer,jbarker@viridor.co.uk,TRUE,FALSE
 "Wilson, Douglas (GE Digital)",Observer,douglas.wilson1@ge.com,FALSE,FALSE
 "Miyir, Hamda (GE Digital)",Observer,hamda.miyir@ge.com,FALSE,FALSE
 "Pintado, Monica (GE Digital)",Observer,monica.pintado@ge.com,FALSE,FALSE
