@@ -217,8 +217,8 @@ networks_undrawn["ewehillwindfarm2"]={
     },
 
     labels:{
-        1: new Text("MINSCA BUSBAR",["Ewehill WF 2"],[0,-190], 25),
-                2: new Text("MINSCA BUSBAR",["EWEHILL 2"],[0,-20]),
+        1: new Text("MINSCA BUSBAR",["Ewe Hill WF 2"],[0,-190], 25),
+                2: new Text("MINSCA BUSBAR",["EWE HILL 2"],[0,-20]),
 
     },
 
