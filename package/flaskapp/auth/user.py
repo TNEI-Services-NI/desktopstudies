@@ -58,5 +58,5 @@ def register_required_users(dbs):
         email = req_user[1]['email']
         name = req_user[1]['name']
         entity = req_user[1]['entity']
-        _register_user(email, name, entity,dbs)
+        _register_user(email, name, entity, dbs)
 
