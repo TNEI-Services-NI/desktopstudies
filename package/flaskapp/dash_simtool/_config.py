@@ -61,4 +61,4 @@ demo = False
 
 debug = False
 
-local = True
+local = False
