@@ -8,7 +8,7 @@ Owen Patrick,admin,owen.patrick@tneigroup.com,FALSE,FALSE
 "Kenny, Michael",admin,michael.kenny@nationalgrideso.com,FALSE,FALSE
 "Singh (ESO), Bikramjit",admin,bikramjit.singh@nationalgrideso.com,FALSE,FALSE
 "Phull (ESO), Roopkamal",admin,roopkamal.phull@nationalgrideso.com,FALSE,FALSE
-Grant.McBeath@spenergynetworks.co.uk,admin,grant.mcbeath@spenergynetworks.co.uk,TRUE,FALSE
+Grant McBeath,admin,grant.mcbeath@spenergynetworks.co.uk,TRUE,FALSE
 "Hunter, Joe",admin,joe.hunter@spenergynetworks.co.uk,TRUE,FALSE
 "Koutsokeras, Ioannis",admin,ikoutsokeras@spenergynetworks.co.uk,TRUE,FALSE
 "Clark, Anthony",admin,aclark@spenergynetworks.co.uk,TRUE,FALSE
@@ -30,8 +30,8 @@ Peter Couch,admin,peter.couch@jrc.co.uk,FALSE,FALSE
 Richard Thwaites,admin,richard.thwaites@pensopower.com,TRUE,FALSE
 David Bowen,admin,david.bowen@nationalgrid.com,TRUE,FALSE
 "Li (ESO), Han",admin,han.li@nationalgrideso.com,TRUE,FALSE
-David.Hinchliffe@rwe.com,admin,david.hinchliffe@rwe.com,TRUE,FALSE
-AlghamdiT1@cardiff.ac.uk,admin,alghamdit1@cardiff.ac.uk,FALSE,FALSE
+David Hinchliffe,admin,david.hinchliffe@rwe.com,TRUE,FALSE
+AlghamdiT1,admin,alghamdit1@cardiff.ac.uk,FALSE,FALSE
 "Penhaligon (ESO), Emma",admin,emma.penhaligon@nationalgrideso.com,FALSE,FALSE
 "Chandler (ESO), Peter",admin,peter.chandler@nationalgrideso.com,FALSE,FALSE
 "Auty (ESO), Daniel",admin,daniel.auty@nationalgrideso.com,TRUE,FALSE
@@ -40,3 +40,5 @@ AlghamdiT1@cardiff.ac.uk,admin,alghamdit1@cardiff.ac.uk,FALSE,FALSE
 "Foote, Colin",admin,cfoote@spenergynetworks.co.uk,TRUE,FALSE
 "Miller, Neil (Network Investment)",admin,neil.miller@spenergynetworks.co.uk,FALSE,FALSE
 "Burroughs, Hannah",admin,burroughs5@llnl.gov,FALSE,FALSE
+Nicholas Jenkins,admin,jenkinsn6@cardiff.ac.uk,FALSE,FALSE
+"Laterza, Marta (GE Digital)",admin,marta.laterza@ge.com,FALSE,FALSE
