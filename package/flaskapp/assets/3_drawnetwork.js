@@ -464,7 +464,11 @@ function update_state(case_network_, progress=false) {
 
 function inc_state(case_network_, progress=false) {
     current_step += 1;
-    update_state(case_network_, progress);
+    if(current_step > 34){
+        current_step = 34
+    } else {
+        update_state(case_network_, progress);
+    }
 }
 
 
