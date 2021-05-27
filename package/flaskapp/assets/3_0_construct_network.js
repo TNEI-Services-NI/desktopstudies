@@ -263,11 +263,13 @@
                 let breaker = components.breakers[id]
                 breaker.setState(!breaker.closed)
                 // post_breakers(components.breakers)
+              if(step + 1 <= final_step){
                 check_breakers_local(network_, option, components.breakers, step, function(breaker_matches_next){
                   if(breaker_matches_next){ // IF correct breaker is clicked
                     inc_state(case_network)
                   }
                 })
+              }
             });
             components.breakers[id] = b
             component_modal(b, true)
