@@ -55,6 +55,40 @@ function post_breakers(breakers){
  * @param  {function} callback which interprets/draws a list of breakers.
  * @return {None}
  */
+function check_breakers_local(network_, option_, breakers, step, callback){
+      let int_step = parseInt(step)
+      let int_next_step = int_step + 1
+      let breaker_matches_current = true
+      let breaker_matches_next = true
+      for(let breaker_id in breakers){
+        let breaker_matches_current_ = (breaker_data[step][breaker_id]=="closed")==breakers[breaker_id].closed
+        if(!breaker_matches_current_){
+          breaker_matches_current = false
+        }
+
+        let breaker_matches_next_ = (breaker_data[int_next_step][breaker_id]=="closed")==breakers[breaker_id].closed
+        if(!breaker_matches_next_){
+          breaker_matches_next = false
+        }
+      }
+      if(breaker_matches_current){
+        // alert("Reset to original state")
+      }
+
+      callback(breaker_matches_next);
+
+
+}
+
+/**
+ * receives initial states of all breakers through ajax request
+ * url parameter of ajax request must reference blueprint specific route to function
+ * @param network_
+ * @param option_
+ * @param breakers
+ * @param  {function} callback which interprets/draws a list of breakers.
+ * @return {None}
+ */
 function check_breakers(network_, option_, breakers, step, callback){
     var breakers_new = breakers
     $.ajax({
