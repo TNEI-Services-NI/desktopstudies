@@ -357,20 +357,25 @@ function mouseenterleave_pointer(object){
   if(!Array.isArray(object)){
     object = [object, object]
   }
+  let black = String(object[0].fill()) === "#000000"
+  let change = 20
+  if(black){
+    change = -change
+  }
   object[0].mouseenter(function(){
     $("body").css("cursor", "pointer");
     if(object[0]===object[1]){
-      object[0].attr({"fill": "#"+String(LightenColor(String(object[0].fill()).split('#')[1], -20))});
+      object[0].attr({"fill": "#"+String(LightenColor(String(object[0].fill()).split('#')[1], -change))});
     } else {
-      object[1].attr({"fill": "#"+String(LightenColor(String(object[1].fill()).split('#')[1], -20))});
+      object[1].attr({"fill": "#"+String(LightenColor(String(object[1].fill()).split('#')[1], -change))});
     }
   })
   object[0].mouseleave(function(){
     $("body").css("cursor", "default");
     if(object[0]===object[1]){
-      object[0].attr({"fill": "#"+String(LightenColor(String(object[0].fill()).split('#')[1], 20))});
+      object[0].attr({"fill": "#"+String(LightenColor(String(object[0].fill()).split('#')[1], change))});
     } else {
-      object[1].attr({"fill": "#"+String(LightenColor(String(object[1].fill()).split('#')[1], 20))});
+      object[1].attr({"fill": "#"+String(LightenColor(String(object[1].fill()).split('#')[1], change))});
     }
   })
   object[0].mouseover(function(){
