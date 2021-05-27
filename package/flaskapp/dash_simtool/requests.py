@@ -94,7 +94,7 @@ def get_restoration_steps():
     # #todo where is the number of stages saved/how to get it?
     steps = {}
     i=-2
-    while i < 34:
+    while i < 35:
         stateDictionary = simtool_data.read_restoration_step(case_network, network, option, scenario, i)
         steps[str(i)] = stateDictionary
         i+=1
