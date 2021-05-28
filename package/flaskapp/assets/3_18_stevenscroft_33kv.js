@@ -9,9 +9,9 @@ networks_undrawn["stevenscroft33kv"]={
     "CHAP3-_STCR3-_1": StraightLine([285,220],"up",50,"33kV"),
     "STCR3-#0": StraightLine([285,255],"up",35,"33kV"),
 
-    "STCR3-#1": StraightLine([270,255],"down",50,"33kV"),
-    "STCR3-_STCR0G": StraightLine([270,305],"down",50,"33kV"),
-    "POC": StraightLine([230,280],"right",80,"0V",true),
+    "STCR3-#1": StraightLine([270,255],"down",25,"33kV"),
+    "STCR3-_STCR0G": StraightLine([270,280],"down",75,"33kV"),
+    "POC": StraightLine([230,310],"right",80,"0V",true),
 
 
     "STCR0G-_2": StraightLine([270,350],"down",40,"11kV"),
@@ -47,8 +47,8 @@ networks_undrawn["stevenscroft33kv"]={
 
     breakers:{
         "699 CHAP": new Breaker("STCR3-#0",1, "CHAP"),
-        "699 CUSTOMER": new Breaker("STCR3-_STCR0G",0, "CUSTOMER"),
-        "699 A": new Breaker("STCR0G-_1",0,""),
+        "699 SPD CONNECTION": new Breaker("STCR3-_STCR0G",0, " SPD CONNECTION"),
+        "699 CUSTOMER": new Breaker("STCR0G-_1",0,"CUSTOMER"),
         "699 B": new Breaker("STCR_AUX#19",1,""),
 
         "STCR Loadbank":new Breaker("STCR3-#2",0.5,""),
@@ -139,6 +139,7 @@ networks_undrawn["stevenscroft33kv"]={
         "STCR_DIESEL": new Generator("STCR_DIESEL#0",1, "EMERGENCY"),
         "STCR_MOTOR": new Generator("STCR_AUX#3",1, "MOTOR")
     },
+
     generationInfo:{
         "STCR5-_1": new GenerationInfo([230,500],"Steven's Croft Biomass (STCR0G-1)"),
     },
