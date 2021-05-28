@@ -1,22 +1,28 @@
 name,entity,email,required,status
 Max McFarlane,admin,max.mcfarlane@tneigroup.com,TRUE,FALSE
+James Collis,admin,jcollis@viridor.co.uk,TRUE,FALSE
+Steven Sepp,admin,ssepp@viridor.co.uk,TRUE,FALSE
+John Barker,admin,jbarker@viridor.co.uk,TRUE,FALSE
+"Campbell, Douglas",admin,douglas.campbell@scottishpower.com,TRUE,FALSE
+Richard Thwaites,admin,richard.thwaites@pensopower.com,TRUE,FALSE
+David Hinchliffe,admin,david.hinchliffe@rwe.com,TRUE,FALSE
+"Koutsokeras, Ioannis",admin,ikoutsokeras@spenergynetworks.co.uk,TRUE,FALSE
+"Clark, Anthony",admin,aclark@spenergynetworks.co.uk,TRUE,FALSE
+"Knott, John",admin,john.knott@spenergynetworks.co.uk,TRUE,FALSE
+"Foote, Colin",admin,cfoote@spenergynetworks.co.uk,TRUE,FALSE
+"Anderson, Stuart J",admin,astuart@spenergynetworks.co.uk,FALSE,FALSE
+David Bowen,admin,david.bowen@nationalgrid.com,TRUE,FALSE
+"Li (ESO), Han",admin,han.li@nationalgrideso.com,TRUE,FALSE
+"Auty (ESO), Daniel",admin,daniel.auty@nationalgrideso.com,TRUE,FALSE
 Dieter Gutschow,admin,dieter.gutschow@tneigroup.com,FALSE,FALSE
 Diptargha Chakravorty,admin,diptargha.chakravorty@tneigroup.com,FALSE,FALSE
 Owen Patrick,admin,owen.patrick@tneigroup.com,FALSE,FALSE
-"Nnabuife (ESO), Dozie",admin,Dozie.Nnabuife@nationalgrideso.com,FALSE,FALSE
+"Nnabuife (ESO), Dozie",admin,dozie.nnabuife@nationalgrideso.com,FALSE,FALSE
 "Salter2 (ESO), Christopher",admin,christopher.salter2@nationalgrideso.com,FALSE,FALSE
 "Kenny, Michael",admin,michael.kenny@nationalgrideso.com,FALSE,FALSE
 "Singh (ESO), Bikramjit",admin,bikramjit.singh@nationalgrideso.com,FALSE,FALSE
 "Phull (ESO), Roopkamal",admin,roopkamal.phull@nationalgrideso.com,FALSE,FALSE
-Grant McBeath,admin,grant.mcbeath@spenergynetworks.co.uk,TRUE,FALSE
-"Hunter, Joe",admin,joe.hunter@spenergynetworks.co.uk,TRUE,FALSE
-"Koutsokeras, Ioannis",admin,ikoutsokeras@spenergynetworks.co.uk,TRUE,FALSE
-"Clark, Anthony",admin,aclark@spenergynetworks.co.uk,TRUE,FALSE
-"Knott, John",admin,john.knott@spenergynetworks.co.uk,TRUE,FALSE
 "Green, Tim C",admin,t.green@imperial.ac.uk,FALSE,FALSE
-James Collis,admin,jcollis@viridor.co.uk,TRUE,FALSE
-Steven Sepp,admin,ssepp@viridor.co.uk,TRUE,FALSE
-John Barker,admin,jbarker@viridor.co.uk,TRUE,FALSE
 "Wilson, Douglas (GE Digital)",admin,douglas.wilson1@ge.com,FALSE,FALSE
 "Miyir, Hamda (GE Digital)",admin,hamda.miyir@ge.com,FALSE,FALSE
 "Pintado, Monica (GE Digital)",admin,monica.pintado@ge.com,FALSE,FALSE
@@ -24,22 +30,16 @@ John Barker,admin,jbarker@viridor.co.uk,TRUE,FALSE
 Peter Couch,admin,peter.couch@jrc.co.uk,FALSE,FALSE
 "Wilson, Alan (GE Digital)",admin,alan1.wilson@ge.com,FALSE,FALSE
 "Malone, Conan (GE Digital)",admin,conan.malone@ge.com,FALSE,FALSE
-"Campbell, Douglas",admin,douglas.campbell@scottishpower.com,TRUE,FALSE
 "Brown (ESO), Gavin",admin,gavin.brown@nationalgrideso.com,FALSE,FALSE
 "Haigh (ESO), Isabelle",admin,isabelle.haigh@nationalgrideso.com,FALSE,FALSE
-Richard Thwaites,admin,richard.thwaites@pensopower.com,TRUE,FALSE
-David Bowen,admin,david.bowen@nationalgrid.com,TRUE,FALSE
-"Li (ESO), Han",admin,han.li@nationalgrideso.com,TRUE,FALSE
-David Hinchliffe,admin,david.hinchliffe@rwe.com,TRUE,FALSE
 AlghamdiT1,admin,alghamdit1@cardiff.ac.uk,FALSE,FALSE
 "Penhaligon (ESO), Emma",admin,emma.penhaligon@nationalgrideso.com,FALSE,FALSE
 "Chandler (ESO), Peter",admin,peter.chandler@nationalgrideso.com,FALSE,FALSE
-"Auty (ESO), Daniel",admin,daniel.auty@nationalgrideso.com,TRUE,FALSE
 "Rochford1 (ESO), Hannah",admin,hannah.rochford1@nationalgrideso.com,FALSE,FALSE
 "Hutcheon, Neil",admin,nhutcheon@spenergynetworks.co.uk,FALSE,FALSE
-"Foote, Colin",admin,cfoote@spenergynetworks.co.uk,TRUE,FALSE
 "Miller, Neil (Network Investment)",admin,neil.miller@spenergynetworks.co.uk,FALSE,FALSE
 "Burroughs, Hannah",admin,burroughs5@llnl.gov,FALSE,FALSE
 Nicholas Jenkins,admin,jenkinsn6@cardiff.ac.uk,FALSE,FALSE
 "Laterza, Marta (GE Digital)",admin,marta.laterza@ge.com,FALSE,FALSE
-"Anderson, Stuart J",admin,astuart@spenergynetworks.co.uk,FALSE,FALSE
+Grant McBeath,admin,grant.mcbeath@spenergynetworks.co.uk,TRUE,FALSE
+"Hunter, Joe",admin,joe.hunter@spenergynetworks.co.uk,TRUE,FALSE
