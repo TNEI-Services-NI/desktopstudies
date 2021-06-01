@@ -22,17 +22,9 @@ def _configure_app(test_config):
                 template_folder='templates',
                 instance_relative_config=True)
 
-    app.config.from_mapping(
-        SECRET_KEY='dev',  # used by Flask and extensions to keep data safe.
-        # It’s set to 'dev' to provide a convenient value during development,
-        # but it should be overridden with a random value when deploying
-        DATABASE=root.DB_DIR,
-    )
 
-    app.config['SECRET_KEY'] = 'dev'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + root.DB_DIR
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///' + root.DB_DIR)
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
 
     if test_config is None:
         # load the instance config, if it exists, when not testing

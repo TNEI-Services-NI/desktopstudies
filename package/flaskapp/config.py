@@ -13,7 +13,7 @@ class Config:
     # General Config
     FLASK_APP = environ.get('FLASK_APP')
     FLASK_ENV = environ.get('FLASK_ENV')
-    SECRET_KEY = environ.get('SECRET_KEY')
+    SECRET_KEY = environ.get('SECRET_KEY', 'dev')
 
     # Assets
     LESS_BIN = environ.get('LESS_BIN')
