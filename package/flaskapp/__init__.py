@@ -16,7 +16,7 @@ import package.flaskapp.dash_simtool._config as cf
 eventlet.monkey_patch()
 
 
-def _configure_app(test_config):
+def _configure_app(config):
     # create and configure the app
     app = Flask(__name__,
                 template_folder='templates',
@@ -33,13 +33,15 @@ def _configure_app(test_config):
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + root.DB_DIR
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-
-    if test_config is None:
+    if config is None:
         # load the instance config, if it exists, when not testing
         app.config.from_pyfile('config.py', silent=True)
     else:
         # load the test config if passed in
-        app.config.from_mapping(test_config)
+        app.config.from_object(config)
+
+    secret_key = app.config.get("SECRET_KEY")
+    print(f"The configured secret key is {secret_key}.")
 
     return app
 
@@ -143,15 +145,15 @@ def _compile_assets(_assets):
     compile_static_assets(_assets)  # Execute logic
 
 
-def create_app(test_config=None):
+def create_app(config=None):
     """Wrapper function - creates Flask application with embedded Dash app
 
-    :param test_config:
+    :param config:
     :return:
     """
 
     # configure root app
-    app = _configure_app(test_config)
+    app = _configure_app(config)
 
     # initialise assets
     app, _assets = _init_assets(app)
