@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, redirect, url_for, request, flash,
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, login_required, current_user
 from package.flaskapp.auth.user import User
-from package.flaskapp import dbs as db
+from package.flaskapp import dbs
 from package.flaskapp import socketio
 import time
 import pandas as pd
@@ -47,8 +47,8 @@ def signup_post():
                     entity=entity)
 
     # add the new user to the database
-    db.session.add(new_user)
-    db.session.commit()
+    dbs.session.add(new_user)
+    dbs.session.commit()
 
     return redirect(url_for('auth.login'))
 
@@ -73,7 +73,7 @@ def login_post():
     session['entity'] = user.entity
     session['username'] = user.name
     user.logged_in = 1
-    db.session.commit()
+    dbs.session.commit()
 
     return redirect(url_for('auth.wait_room'))
 
@@ -82,7 +82,7 @@ def login_post():
 @login_required
 def logout():
     current_user.logged_in = 0
-    db.session.commit()
+    dbs.session.commit()
     session.clear()
     logout_user()
     trigger_checks()
