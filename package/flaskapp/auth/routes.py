@@ -1,3 +1,4 @@
+import string
 from flask import Blueprint, render_template, redirect, url_for, request, flash, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, login_required, current_user
@@ -19,7 +20,6 @@ def index():
 
 @auth_bp.route('/signup')
 def signup():
-    print("signup")
     return render_template('signup.html')
 
 
@@ -56,6 +56,7 @@ def signup_post():
 @auth_bp.route('/login', methods=['POST'])
 def login_post():
     email = request.form.get('email')
+    email = email.lower()
     password = request.form.get('password')
     remember = True if request.form.get('remember') else False
 
@@ -128,9 +129,9 @@ def trigger_checks(trig_data=None):
     users_active = logged_in["user"].values.tolist()
     logged_in_users = list(zip(users_active,entities_active_list))
     socketio.emit('update_logged_users', logged_in_users)
-    socketio.emit('update_waiting_on', required.loc[~required['status'], 'name'].values.tolist())
+    socketio.emit('update_waiting_on', required.loc[(~required['status'])&(required['required']), 'name'].values.tolist())
 
-    if len(required_entities-entities_active) == 0:
-        socketio.emit('users_complete', logged_in['user'].values.tolist())
-        time.sleep(2)
-        socketio.emit('redirect', 'simtool_bp.index') # This url is dummy data for now - not used in front end
+    # if len(required_entities-entities_active) == 0:
+    #     socketio.emit('users_complete', logged_in['user'].values.tolist())
+    #     time.sleep(2)
+    #     socketio.emit('redirect', 'simtool_bp.index') # This url is dummy data for now - not used in front end

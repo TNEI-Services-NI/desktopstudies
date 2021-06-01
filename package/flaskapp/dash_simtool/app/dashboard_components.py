@@ -7,8 +7,9 @@ import dash_html_components as html
 import numpy as np
 import plotly.graph_objs as go
 
-import package.flaskapp.dash_simtool.app as dash_app
+import package.data as simtool_data
 import package.flaskapp.dash_simtool._config as cf
+import package.flaskapp.dash_simtool.app as dash_app
 import package.flaskapp.dash_simtool.app.dashboard_styling as styling
 from package.flaskapp.dash_simtool.app.micromethods import hex_to_rgb
 
@@ -194,13 +195,14 @@ def init_calendar(_d1=date(2020, 1, 1), _d2=date(2020, 12, 31), _z=[]):
     return div, dict_fig
 
 
-def _init_upload_card(id):
+def init_upload_card(id):
+    children = html.Div([
+            'Drag and Drop'
+        ], id=id+'_child')
+
     return dcc.Upload(
         id=id,
-        children=html.Div([
-            'Drag and Drop or ',
-            html.A('Select Files')
-        ]),
+        children=children,
         style={
             # 'width': '90%',
             'height': '60px',
@@ -209,10 +211,10 @@ def _init_upload_card(id):
             'borderStyle': 'dashed',
             'borderRadius': '5px',
             'textAlign': 'center',
-            'margin': '10px'
+            'margin': '0px'
         },
         # Allow multiple files to be uploaded
-        multiple=True
+        multiple=False
     )
 
 
@@ -266,12 +268,12 @@ def _init_control_module():
 
     # datetime upload widget
     _upload_datetimes_card = dbc.Card([html.H5('Upload Date Times Input'),
-                                       _init_upload_card('upload-datetime-data')
+                                       init_upload_card('upload-datetime-data')
                                        ], body=True)
 
     # data upload widget
     _upload_input_card = dbc.Card([html.H5('Upload Input'),
-                                   _init_upload_card('upload-data'),
+                                   init_upload_card('upload-data'),
                                    ], body=True)
 
     # control module
@@ -341,13 +343,20 @@ def navbar_controls(url_page):
                                 href=dash_app.URL_SLDS,
                                 active=True if dash_app.URL_SLDS == url_page else False,
                                 external_link=True),
-                    dbc.NavLink("Scripts",
-                                href=dash_app.URL_SLDS if cf.demo else dash_app.URL_SCRIPTS,
-                                active=True if dash_app.URL_SCRIPTS == url_page else False,
+                    # dbc.NavLink("Scripts",
+                    #             href=dash_app.URL_SLDS if cf.demo else dash_app.URL_SCRIPTS,
+                    #             active=True if dash_app.URL_SCRIPTS == url_page else False,
+                    #             external_link=True),
+                    dbc.NavLink("Data",
+                                href=dash_app.URL_SLDS if cf.demo else dash_app.URL_GRAPH,
+                                active=True if dash_app.URL_GRAPH == url_page else False,
                                 external_link=True),
                     dbc.NavLink("About",
                                 href=dash_app.URL_SLDS if cf.demo else dash_app.URL_ABOUT,
                                 active=True if dash_app.URL_ABOUT == url_page else False,
+                                external_link=True),
+                    dbc.NavLink("Lobby",
+                                href='/wait_room',
                                 external_link=True),
                     dbc.NavLink("Log out",
                                 href='/logout',
@@ -364,37 +373,37 @@ def navbar_controls(url_page):
 
 def navbar(url_page):
     # nav bar
-    _nav_bar = dbc.NavbarSimple(brand='Desktop Studies Communications Tool',
-                                color='#c35d09',
+    _nav_bar = dbc.NavbarSimple(brand='Distributed Restart - Desktop Exercise Simulation',
+                                color=styling.NAVBAR_STYLE['color'],
                                 dark=True,
                                 id='nav_bar',
                                 children=navbar_controls(url_page),
-                                fixed="top",
+                                fixed=styling.NAVBAR_STYLE['fixed'],
                                 style=styling.NAVBAR_STYLE
                                 )
     return _nav_bar
 
 
-def sidebar(URL_PAGE):
+def sidebar(url_page, styling):
     _heading = [
         html.H3("Options"),
         html.Hr(),
     ]
     _dropdown = [
         dbc.DropdownMenu(
-            label="Chapelcross 33kv",
+            label="Select network",
             children=[
-                dbc.DropdownMenuItem("Chapelcross 33kv", id="chapelcross33kv"),
-                dbc.DropdownMenuItem("Chapelcross 132kv", id="chapelcross132kv"),
-                dbc.DropdownMenuItem("Gretna 132kv", id="gretna132kv"),
-                dbc.DropdownMenuItem("Gretna 400kv", id="gretna400kv"),
-                dbc.DropdownMenuItem("chapelcrossgretna1", id="chapelcrossgretna1"),
-                dbc.DropdownMenuItem("chapelcrossgretna2", id="chapelcrossgretna2"),
-                dbc.DropdownMenuItem("ewehillgretna", id="ewehillgretna"),
-                dbc.DropdownMenuItem("stevenscroft33kv", id="stevenscroft33kv"),
-                dbc.DropdownMenuItem("minsca33kv", id="minsca33kv"),
-                dbc.DropdownMenuItem("ewehillwindfarm1", id="ewehillwindfarm1"),
-                dbc.DropdownMenuItem("ewehillwindfarm2", id="ewehillwindfarm2"),
+                dbc.DropdownMenuItem("Chapelcross 33kV", id="chapelcross33kv",),
+                dbc.DropdownMenuItem("Chapelcross 132kV", id="chapelcross132kv"),
+                dbc.DropdownMenuItem("Gretna 132kV", id="gretna132kv"),
+                dbc.DropdownMenuItem("Gretna 400kV", id="gretna400kv"),
+                dbc.DropdownMenuItem("Chapelcross - Gretna 1", id="chapelcrossgretna1"),
+                dbc.DropdownMenuItem("Chapelcross - Gretna 2", id="chapelcrossgretna2"),
+                dbc.DropdownMenuItem("Ewe Hill 2 WF - Gretna", id="ewehillgretna"),
+                dbc.DropdownMenuItem("Steven's Croft", id="stevenscroft33kv"),
+                dbc.DropdownMenuItem("Minsca WF", id="minsca33kv"),
+                dbc.DropdownMenuItem("Ewe Hill 1 WF", id="ewehillwindfarm1"),
+                dbc.DropdownMenuItem("Ewe Hill 2 WF", id="ewehillwindfarm2"),
             ],
             id='network_menu'
         ),
@@ -421,15 +430,23 @@ def sidebar(URL_PAGE):
         html.Hr(),
     ]
 
+    # datetime upload widget
+    _upload_restoration_steps = [
+        dbc.Card([html.H6('Upload restoration steps'),
+                  init_upload_card('upload-restoration-steps')
+                  ], body=True)
+    ]
+
     _sidebar_widgets = []
-    if 'SLDs' in URL_PAGE:
+    if 'SLDs' in url_page:
         _sidebar_widgets += _heading
         _sidebar_widgets += _dropdown
         _sidebar_widgets += _sim_buttons
         _sidebar_widgets += _sim_status
         _sidebar_widgets += _entity_view
         _sidebar_widgets += _debug
-    elif 'home' in URL_PAGE:
+        # _sidebar_widgets += _upload_restoration_steps
+    elif 'home' in url_page:
         _sidebar_widgets += _heading
         _sidebar_widgets += _sim_buttons
         _sidebar_widgets += _sim_status
@@ -438,7 +455,7 @@ def sidebar(URL_PAGE):
 
     sidebar = html.Div(
         _sidebar_widgets,
-        style=styling.SIDEBAR_STYLE,
+        style=styling,
         id='sidebar'
     )
     return sidebar
@@ -462,3 +479,26 @@ def legend():
         id='legend'
     )
     return _legend
+
+
+def graph_display():
+    bar_chart = html.Div([
+        dbc.Row([
+            dbc.Col([
+                dcc.Graph(id="bar-chart-1",
+                          style={
+                              'visibility': 'hidden'
+                          }),
+                dcc.Graph(id="bar-chart-2",
+                          style={
+                              'visibility': 'hidden'
+                          }),
+            ])
+        ])
+    ], id="bar-chart-div",
+    style={
+        'height': '100%',
+        'width': '100%',
+        'padding': '3rem'
+    })
+    return bar_chart

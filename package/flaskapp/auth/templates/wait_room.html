@@ -1,17 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="hero-body">
-   <div class="container has-text-centered">
-      <div class="box has-text-centered">
-         <h2> Welcome, {{ name }}. </h2>
-         <h3>Logged-in users:</h3>
-         <table id="logged-in-users"></table>
-         <h4>
-            <ul id="demo"></ul>
-         </h4>
-         <br>
-         <ul id="complete">
-         </ul>
+<div >
+   <div class="container has-text-centered" style="width: 50vw">
+      <div class="box has-text-centered" style="width: 50vw">
+        <div class="row">
+          <h2> Welcome, {{ name }} </h2>
+          <div class="column">
+            <h4>Active Users:</h4>
+            <table id="logged-in-users"></table>
+          </div>
+           <div class="column">
+              <h4>Awaiting:</h4>
+             <table id="complete_table"></table>
+          </div>
+        </div>
+        <a href="{{ url_for('simtool_bp.index') }}">
+           <button class="btn btn-primary">Enter simulation</button>
+        </a>
       </div>
    </div>
 </div>
@@ -33,6 +38,34 @@
    #logged-in-users .row-name{
         text-align: left;
    }
+   #complete_table{
+     margin-left: auto;
+     margin-right: auto;
+     min-width : 15%;
+     text-align: center;
+     column-gap: 20px;
+   }
+
+   #complete_table .row-entity{
+        text-align: center;
+        padding:0 0px;
+   }
+
+   #complete_table .row-name{
+        text-align: left;
+   }
+   /* Create four equal columns that floats next to each other */
+    .column {
+      float: left;
+      width: 50%;
+    }
+
+    /* Clear floats */
+    .row:after {
+      content: "";
+      display: table;
+       clear: both;
+    }
 </style>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.8/socket.io.min.js"></script>
@@ -58,16 +91,14 @@
 
        var user = data;
        n = (user.length);
-       var kk="";
 
        table = $("#logged-in-users");
        table.empty();
        for(i = 0; i <= (n-1); i++){
            var list = user[i];
-           table.append("<tr><td class='row-name'><h4>" + list[0] + "</h4></td><td class='row-entity'><h4>"+list[1]+"</h4></td></tr>")
+           table.append("<tr><td class='row-name'><h5>" + list[0] + "</h5></td><td class='row-entity'><h5>"+list[1]+"</h5></td></tr>")
 
        }
-       document.getElementById("demo").innerHTML = kk;
       })
 
 
@@ -76,14 +107,14 @@
 
        var user = data;
        n = (user.length);
-       var kk="<h3>Waiting for:</h3>";
 
+        table = $("#complete_table");
+       table.empty();
        for(i = 0; i <= (n-1); i++){
            var list = user[i];
-           kk += "<li>"+list+"</li>"
+           table.append("<tr><td class='row-name'><h5>" + list + "</h5></td></tr>")
 
        }
-       document.getElementById("complete").innerHTML = kk;
       })
 
    });

@@ -17,7 +17,59 @@ function Breaker_Callback(graphic_objects, name = ''){
                 add_text(object, false, [name], 0, -15*y_scaling,"#d3d3d3", font_size, function(object){})
             }
             else{
-                add_text(object, false, [name], 3 + name.length*4 * x_scaling, 0,"#d3d3d3", font_size, function(object){})}
+                if(name.length>8){
+                offset = (name.length)/2.8*font_size
+                }
+                if(name.length < 9){
+                offset = (name.length)/2.3*font_size
+                }
+                if(name.length < 6){
+                offset = (name.length)/2*font_size
+                }
+                if(name.length < 4){
+                offset = (name.length)/1.7*font_size
+                }
+
+                add_text(object, false, [name],offset, 0,"#d3d3d3", font_size, function(object){})}
+        }
+        if(entity=='Observer'){
+            deactivate_click(object)
+        } else {
+            mouseenterleave_pointer(object)
+        }
+    }
+}
+/**
+ * Callback function for breaker object instances. Adds object to list of child objects associated with
+ * the breaker.
+ * @param  {list} graphic_objects List of child objects associated with each breaker object.
+ * @param  {string} name String object containing name/contents of child object
+ * @return {function} None Returns a function that adds passed object to breaker child objects, and adds text label.
+ */
+function Isolator_Callback(graphic_objects, name = ''){
+    return function(object){
+        // Add object defined in
+        if(graphic_objects !== undefined){
+            graphic_objects[0] = object
+        }
+        if(name !== ''){
+            if(object.horizontal === true){
+                add_text(object, false, [name], 0, -15*y_scaling,"#d3d3d3", font_size, function(object){})
+            }
+            else{
+                if(name.length>8){
+                offset = (name.length)/2.8*font_size
+                }
+                if(name.length < 9){
+                offset = (name.length)/2.3*font_size
+                }
+                if(name.length < 6){
+                offset = (name.length)/2*font_size
+                }
+                if(name.length < 4){
+                offset = (name.length)/1.7*font_size
+                }
+                add_text(object, false, [name],offset, 0,"#d3d3d3", font_size, function(object){})}
         }
     }
 }
@@ -84,7 +136,7 @@ function Tx_Callback(graphic_objects, name = false, mva = false){
                 add_text(group, false, name, 0 * x_scaling, -20 *y_scaling, "#d3d3d3", font_size, function(group){})
             }
             else{
-                add_text(group, false, name, 30 * x_scaling,-10 *y_scaling, "#d3d3d3", font_size, function(group){})}
+                add_text(group, false, name, 40 * x_scaling,-10 *y_scaling, "#d3d3d3", font_size, function(group){})}
             }
 
             if(mva != false){
@@ -109,17 +161,23 @@ function Gen_Callback(graphic_objects, name=""){
             if(graphic_objects != undefined){
                 graphic_objects[0] = group
             }
-            var type = undefined
+            var label = []
             if(name==="MOTOR"){
-                type = ""
-            } else {
-                type = "GENERATOR"
+                label = ["MOTOR"]
+            } else if(name === "EMERGENCY"){
+                label = ["EMERGENCY","GENERATOR"]
             }
-            if(group.horizontal === true){
-                add_text(group, false, [type, name], 0, -0* y_scaling, "#d3d3d3",font_size, function(group){})
+            else if (name === "" || name ==="NONE"){
+            label = [""]
             }
             else{
-                add_text(group, false, [type, name], 0,30 * y_scaling,"#d3d3d3",font_size, function(group){})}
+                label = ["GENERATOR"]
+            }
+            if(group.horizontal === true){
+                add_text(group, false, label, 0, -0* y_scaling, "#d3d3d3",font_size, function(group){})
+            }
+            else{
+                add_text(group, false, label, 0,15 + 15*label.length * y_scaling,"#d3d3d3",font_size, function(group){})}
             }
         }
 
@@ -196,6 +254,39 @@ function StraightLine(origin, direction, length, voltage="33kV", dash = false, c
     if(direction =="down"){
     return new Line(x1,y1,x1,y1+length,voltage,dash,colour)
     }
+    if(direction =="NEE"){
+    return new Line(x1,y1,x1+length,y1-length*0.7,voltage,dash,colour)
+    }
+    if(direction =="NWW"){
+    return new Line(x1,y1,x1-length,y1-length*0.7,voltage,dash,colour)
+    }
+    if(direction =="SEE"){
+    return new Line(x1,y1,x1+length,y1+length*0.7,voltage,dash,colour)
+    }
+    if(direction =="SWW"){
+    return new Line(x1,y1,x1-length,y1+length*0.7,voltage,dash,colour)
+    }
+}
+
+function LoadBank(x1,y1, line_id){
+    let component = {
+    }
+    component[line_id+"#2"] = StraightLine([x1,y1], "down",30)
+    component[line_id+"#2.1"] = StraightLine([x1-5,y1+30], "right",10)
+    component[line_id+"#2.2"] = StraightLine([x1+5,y1+30], "down",40)
+    component[line_id+"#2.3"] = StraightLine([x1+5,y1+70], "left",10)
+    component[line_id+"#2.4"] = StraightLine([x1-5,y1+70], "up",40)
+    component[line_id+"#2.LE1"] = StraightLine([x1-2.5,y1+37], "NEE",2.5)
+    component[line_id+"#2.L0"] = StraightLine([x1-2.5,y1+37], "SEE",5)
+    component[line_id+"#2.L1"] = StraightLine([x1-2.5+5,y1+37+5*0.75], "SWW",5)
+    component[line_id+"#2.L2"] = StraightLine([x1-2.5,y1+37+10*0.75], "SEE",5)
+    component[line_id+"#2.L3"] = StraightLine([x1-2.5+5,y1+37+15*0.75], "SWW",5)
+    component[line_id+"#2.L4"] = StraightLine([x1-2.5,y1+37+20*0.75], "SEE",5)
+    component[line_id+"#2.L5"] = StraightLine([x1-2.5+5,y1+37+25*0.75], "SWW",5)
+    component[line_id+"#2.L6"] = StraightLine([x1-2.5,y1+37+30*0.75], "SEE",5)
+    component[line_id+"#2.LE2"] = StraightLine([x1-2.5+5,y1+37+35*0.75], "SWW",2.5)
+    return component
+
 }
 
 /**
@@ -322,14 +413,16 @@ function Isolator(line_id,pos, state = "closed",name=false){
  * @param  {double} x location
  * @param  {double} y location
  * @param  {list} labels of data desired ["kV", "AMPS", "Hz","MVAR","MVA","MW"]
+ * @ param {boolean} flow direction, true means positive values go down, false means they go up
  * @return {None}
  * @usage instantiate as object i.e. new DataView(...)
  */
-function DataView(componentID = "", offset, labels){
+function DataView(componentID = "", offset, labels,flow_direction=true){
     // this.x = x
     // this.y = y
     this.data = {}
     this.graphic = []
+    this.flow_direction = flow_direction
     this.componentID = componentID
     this.offset = offset
     this.labels = labels
@@ -367,9 +460,26 @@ function GenerationInfo(position, name){
  * @param  {double} pos of SGT on line (between 0 and 1)
  * @usage instantiate as object i.e. new SGT(...)
  */
-function SGT(line_id,name){
+function SGT(line_id,name, liveCoils=["0V", "0V"]){
     this.component = "SGT"
     this.lineID = line_id,
+    this.liveCoils = liveCoils,
     this.graphic=[],
     this.name = name,
     this.callback = Breaker_Callback(this.graphic,name)}
+
+
+function GeneratorControl(pos){
+    this.component = "GeneratorControl"
+    this.pos = pos
+    this.graphic=[],
+    this.callback = Text_Callback(this.graphic)
+}
+
+function GeneratorGraph(pos,generators){
+    this.component = "GeneratorGraph"
+    this.generators = generators
+    this.pos = pos
+    this.graphic=[],
+    this.callback = Text_Callback(this.graphic)
+}

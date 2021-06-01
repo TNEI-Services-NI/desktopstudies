@@ -36,19 +36,59 @@ def init_dashboard(server=""):
 
     intro_card = dbc.Card([
         dbc.CardHeader(
-            html.H4("What is the Desktop communications tool?")),
+            html.H4("Distributed ReStart")),
         dbc.CardBody([
-            html.P('This tool simulates the process of re-energising a power network through a blackstart process'
-                   ' with each user in a session taking the role of the ESO, DNO, TO, or DER. Observers may also join but cannot interact with the simulation'),
-            html.P("The simulation data at each step is pre-calculated by use of the IPSA software"),
-            html.P("Any changes made by the a user in the current lobby are synchronised between all users and "
-                   "immediately viewable"),
+            html.P('The project is exploring how distributed energy resources (DER) can be used to restore power in '
+                   'the highly unlikely '
+                   'event of a total or partial shutdown of the National Electricity Transmission System as part of '
+                   'a Black Start procedure. '
+                   'Past and current approaches rely on large power stations but as the UK moves to cleaner, '
+                   'greener and more '
+                   'decentralised energy, new options must be developed. The enormous growth in DERs presents an '
+                   'opportunity to '
+                   'develop a radically different approach to system restoration. Greater diversity in Black Start '
+                   'provision will improve '
+                   'resilience and increase competition leading to reductions in both cost and carbon emissions. '
+                   'However, there are '
+                   'significant technical, organisational and commercial challenges to address.'
+                   ),
+            html.P('The project seeks to tackle these challenges throughout a three-year programme '
+                   '(Jan 2019 – Mar 2022) that aims to develop and demonstrate new approaches, with initial '
+                   'implementations of Black Start service from DERs from mid-2022 if deemed '
+                   'feasible and cost effective. Case studies on the SP Distribution (SPD) and SP Manweb (SPM) '
+                   'networks have been used '
+                   'to explore options then design and test solutions through a combination of desktop studies, '
+                   'detailed off-line analysis, stakeholder engagement and industry consultation and real-life trials'
+                   ' of the re-energisation process.'
+                   ),
 
-            html.P("The currently implemented simulation is the restoration process for the Chapelcross GSP network")
-
-        ])
+        ], style={"text-align": "left"})
     ],
-        style={"width": "75%", "margin-top": "5%"},
+        style={"width": "95%", "margin-top": "30%"},
+    )
+
+    desktop_studies = dbc.Card([
+        dbc.CardHeader(
+            html.H4("Desktop Studies")),
+        dbc.CardBody([
+            # html.P('Through communication between the DNO, ESO, TO, and DER, The process of re-energising the network by '
+            #        'closing breakers in the prescribed order will be organised'),
+            html.P('The desktop exercises aim to test Distributed ReStart processes in terms of the roles for each'
+                    'Black Start participant, and the timing of the process.'),
+            html.P('These will also allow us to increase stakeholder participation in Distributed ReStart to gain valuable feedback'
+                    'for process refinement, work through a range of scenarios, and gain information for development of high-level'
+                    'training plans.'),
+            html.P('We will test the process maps through use of desktop exercises and potential simulation of an event. This coupled'
+                    'with the learnings from live power engineering trials will provide confidence in the efficacy of Distributed ReStart'
+                    'should a Black Start event occur and provide the model for training and assurance of the ongoing service.'),
+            html.P('We anticipate that significant value will be unlocked from exercises with cross industry participation that focus on'
+                    'communication and decision-making processes. These exercises may be repeated multiple times and will look to'
+                    'test the various scenarios that may lead to a Black Start procedure being enacted to ensure fit for purpose processes'
+                    'that can adapt to different possible needs cases.')
+
+        ], style={"text-align": "left"})
+    ],
+        style={"width": "95%", "margin-top": "30%"},
     )
 
     how_to_card = dbc.Card([
@@ -81,7 +121,7 @@ def init_dashboard(server=""):
 
         ])
     ],
-        style={"width": "75%", "margin-top": "3%"},
+        style={"width": "95%", "margin-top": "30%"},
     )
 
     legend = dbc.Card(
@@ -91,23 +131,33 @@ def init_dashboard(server=""):
 
             dbc.CardImg(src="/static/imgs/legend1.jpg", top=True),
         ],
-        style={"width": "75%", "margin-top": "3%"},
+        style={"width": "95%", "margin-top": "3%", "margin-bottom": "3%"},
     )
 
+    about_cards = html.Div([
+        dbc.Row([
+            dbc.Col([intro_card]),
+            dbc.Col([desktop_studies]),
+            # dbc.Col([how_to_card]),
+        ])
+    ], style={'width': '95%'})
+
+    # background_image = html.Div(, children=[html.Div(style={
+    #         'background-size': "100vw 100vh",sign
+    # })])
     # compile overall layout
     dash_app.layout = html.Center([dcc.Location(id="home"),
                                    dcc.Store(id='network_select'),
                                    dcc.Store(id='side_click'),
                                    dcc.Store(id='reset_click'),
                                    dcc.Store(id='sim_state'),
+                                   # background_image,
                                    _nav_bar,
                                    _body,
-                                   intro_card,
-                                   how_to_card,
-                                   legend,
+                                   about_cards,
                                    ],
                                   )
 
-    dash_app = callbacks.init_callbacks(dash_app)
+    # dash_app = callbacks.init_callbacks(dash_app, URL_PAGE)
 
     return dash_app if server == "" else dash_app.server

@@ -1,7 +1,3 @@
-data link
-- fix breaker names stevens croft 
-- Breakers in stevens croft all closed apart from south generator 
-
 views
 - DNO view ewehill-gretna step 13
 

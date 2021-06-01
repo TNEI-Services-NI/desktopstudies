@@ -1,7 +1,10 @@
 //1550 x 1160 in mm
 //scale of 1000 x 1000, readjust with math...
 networks_undrawn["chapelcross33kv"] = {
-    lines:{
+    lines:
+    Object.assign(
+      LoadBank(130,370, "STCR3-"),
+      {
         "CHAP3-_SOLWAY#0": StraightLine([875,40],"right",130),
         "CHAP3-_SOLWAY#4": StraightLine([885,155],"right",75),
         "CHAP3-_SOLWAY#2": StraightLine([900,250],"right",60),
@@ -14,17 +17,12 @@ networks_undrawn["chapelcross33kv"] = {
 
         "CHAP3A2": StraightLine([25+496,175], "right",399),
 
-//        "CHAP3A1#0": StraightLine([33,175],"down",20),
-//
-//        "698 16": StraightLine([33,195], "down",65),
-//            //fix the dash here
-//            "chapelcross dash": StraightLine([15,240],"right",35, "0V", dash=true),
-
         "CHAP3A1#0": StraightLine([85,175], "down",20),
         "CHAP3-_STCR3-_1#0": StraightLine([85,195], "down",150),
 
-        "STCR3-#1": StraightLine([85,375], "up",30),
         "STCR3-#0": StraightLine([85,375], "down",40),
+        "STCR3-#1": StraightLine([85,375], "up",30),
+
 
         "STCR3-_STCR0G": StraightLine([85,415], "down",60),
 
@@ -41,7 +39,8 @@ networks_undrawn["chapelcross33kv"] = {
 
         "CHAP3A1#1": StraightLine([330,175],"up",20),
         "CHAP1-_CHAP3-_1#0": StraightLine([330,155],"up",95),
-         "CHAP1-_CHAP3-_1#1":StraightLine([330,110],"left",40),
+         "CHAP1-_CHAP3-_1#1":StraightLine([290,110],"right",40),
+         "CHAP1-_CHAP3-_1#3":StraightLine([290,110],"right",0,"LV"),
 
         "CHAP3-_MIBI3-_1#0": StraightLine([415,195],"down",55),
         "CHAP3A1#5": StraightLine([415,175],"down",20),
@@ -84,6 +83,8 @@ networks_undrawn["chapelcross33kv"] = {
         "LOBI3B": StraightLine([230+175,400],"right",175),
 
         "CHAPX4_LOBI3A_1":StraightLine([265,400],"down",550-400),
+        "LOBI3A#0":StraightLine([265,400],"down",20),
+
         "CHAPX4_MOFTT1_1#0":StraightLine([265,550],"down",90),
 
         //Middlebie
@@ -91,16 +92,27 @@ networks_undrawn["chapelcross33kv"] = {
         "CHAP3-_MIBI3-_1": StraightLine([95,525],"down",50),
 
         "MIBI3-": StraightLine([65,575],"right",175),
-        "EWHC3-_MIBI3-_1#0": StraightLine([80,575],"down",160),
+        "EWEH3-_MIBI3-_1#0": StraightLine([80,575],"down",160),
         "MIBI3-_LAHO3A_1#0": StraightLine([160,575],"down",190),
-        "MIBI3-_MIBIT1_1#0": StraightLine([205,575],"down",120),
+        "MIBI3-#0": StraightLine([160,575],"down",17),
 
-        "EWHC3-_MIBI3-_1#1": StraightLine([80,735],"left",50),
-        "EWHC3-_MIBI3-_1#2": StraightLine([30,735],"down",150),
-        "EWHC3-_MIBI3-_1#3": StraightLine([30,885],"right",30),
-        "EWHC3-_MIBI3-_1#4": StraightLine([60,885],"up",80),
-        "EWHC3-": StraightLine([45,805],"right",85),
-        "EWHC3-_EWHC0G_1": StraightLine([115,805],"down",90),
+        "MIBI3-_MIBIT1_1#0": StraightLine([205,575],"down",120),
+        "MIBI3-#1": StraightLine([205,575],"down",17),
+
+        "EWEH3-_MIBI3-_1#1": StraightLine([80,735],"left",50),
+        "EWEH3-_MIBI3-_1#2": StraightLine([30,735],"down",150),
+        "EWEH3-_MIBI3-_1#3": StraightLine([30,885],"right",30),
+        "EWEH3-_MIBI3-_1#4": StraightLine([60,885],"up",80),
+        "EWEH3-": StraightLine([45,805],"right",85),
+
+        "EWEH3-#0": StraightLine([115,805],"down",27),
+
+        "EWEH3-_EWEH0G_1": StraightLine([115,832],"down",40),
+
+        "EWEH_POC": StraightLine([100,852],"right",30,"0V", true ),
+
+        "EWEH0G": StraightLine([115,872],"down",30),
+
 
         "MIBI3-_MIBIT1_1#1": StraightLine([205,695],"right",25),
         "MIBI3-_MIBIT1_1#2": StraightLine([230,695],"right",50,"11kV"),
@@ -116,8 +128,10 @@ networks_undrawn["chapelcross33kv"] = {
         "MIBI3-_LAHO3A_1#5": StraightLine([395,855],"down",35,"11kV"),
         "LAHO5-1": StraightLine([365,890],"right",55,"11kV"),
         "LAHO5-2": StraightLine([365+55,890],"right",55,"11kV"),
-        "CHAPX3_LAHO3B_1#5": StraightLine([445,855],"down",35,"11kV"),
+        "LAHO5-2#1": StraightLine([445,855],"down",35,"11kV"),
         "CHAPX3_LAHO3B_1#4": StraightLine([445,855],"right",35,"11kV"),
+        "LAHO5-2#2": StraightLine([445,855],"right",15,"11kV"),
+
         "CHAPX3_LAHO3B_1#3": StraightLine([525,855],"left",35),
 
         "CHAPX3_LAHO3B_1#1": StraightLine([525,855],"up",175),
@@ -145,6 +159,8 @@ networks_undrawn["chapelcross33kv"] = {
         "CHAPX4_MOFTT1_1#3": StraightLine([390,640],"down",35, "11kV"),
 
         "LOBI3B_MOFTT2_1#0": StraightLine([565,640],"up",240),
+        "LOBI3B#1":StraightLine([565,400],"down",20),
+
         "LOBI3B_MOFTT2_1#1": StraightLine([565,640],"left",80),
         "LOBI3B_MOFTT2_1#2": StraightLine([440,640],"down",35,"11kV"),
         "LOBI3B_MOFTT2_1#3": StraightLine([440,640],"right",50,"11kV"),
@@ -165,7 +181,9 @@ networks_undrawn["chapelcross33kv"] = {
 
         //GRETNA 11kV
         "GRNAT1_GRNA10_T1#0": StraightLine([735,460],"left",50, "11kV"),
-        "GRNAT1_GRNA10_T1#1": StraightLine([735,460],"down",35,"11kV"),
+        "GRNA5-1#2": StraightLine([735,460],"left",15, "11kV"),
+
+        "GRNA5-1#1": StraightLine([735,460],"down",35,"11kV"),
         "GRNA5-1": StraightLine([710,496],"right",50,"11kV"),
         "GRNA5-2": StraightLine([760,496],"right",50,"11kV"),
         "GRNA3B_GRNAT2_1#3": StraightLine([785,460],"down",35,"11kV"),
@@ -204,24 +222,19 @@ networks_undrawn["chapelcross33kv"] = {
         "LAHO3B_NEWCT1_1#3":StraightLine([710,645],"left",50, "11kV"),
         "LAHO3B_NEWCT1_1#4": StraightLine([635,645],"right",30),
         "LAHO3B_NEWCT1_1#5": StraightLine([710,645],"down",35, "11kV"),
-        "LAHO3B_NEWCT1_1#6": StraightLine([745,680],"down",55, "11kV"),
+        "LAHO3B_NEWCT1_1#6": StraightLine([745,680],"down",35, "11kV"),
 
         "NEWC5-": StraightLine([695,680],"right",85, "11kV"),
 
-        // CRAIG II WINDFARM 11KV
-        // "CRAG5B_LAHO5-_1": StraightLine([740,780],"down",145,"11kV"),
-        // "785 A": StraightLine([680,940],"left",155,"11kV"),
-        // "785 B": StraightLine([670,780],"right",90,"11kV"),
-        // "785 21": StraightLine([680,940],"up",160, "11kV"),
-        // "785 DASH": StraightLine([720,835],"right",45,dash=true),
-
      },
+    ),
+
     busbars:{
         "CHAP3-_SOLWAY#7": StraightLine([875,40],"right",130),
         "CHAP3A1": StraightLine([25,175], "right",496),
         "CHAP3A2": StraightLine([25+496,175], "right",399),
-        "STCR3-": StraightLine([25,370],"right",90),
-        "EWHC3-": StraightLine([45,805],"right",85),
+        "STCR3-": StraightLine([25,370],"right",120),
+        "EWEH3-": StraightLine([45,805],"right",85),
         "MIBI5-": StraightLine([260,730],"right",85,"11kV"),
         "MIBI3-": StraightLine([65,575],"right",175),
         "ANAN5-1": StraightLine([310,315],"right",52, "11kV"),
@@ -239,6 +252,8 @@ networks_undrawn["chapelcross33kv"] = {
         "MINS3-": StraightLine([870,610],"right",105),
         "NEWC5-": StraightLine([695,680],"right",85, "11kV"),
      },
+     //possible approach to assigning a transformer load
+     //  "ANANT2_CHAP3-_1#4": Object.assign(StraightLine([405,315],"down",20,"11kV"),{transformer:"ANANT2_ANAN20_T2"}),
     loads:{
         "ANANT2_CHAP3-_1#4": StraightLine([405,315],"down",20,"11kV"),
         "ANANT1_CHAP3-_1#4": StraightLine([321,315],"down",20,"11kV"),
@@ -254,6 +269,7 @@ networks_undrawn["chapelcross33kv"] = {
         "MIBI5-#0": StraightLine([335,730],"down",20,"11kV"),
         "NEWC5-#0": StraightLine([770,680],"down",20,"11kV"),
         "GRNA5-2#0": StraightLine([800,495],"down",20,"11kV"),
+        "GRNA5-1#0": StraightLine([720,495],"down",20,"11kV"),
 
         },
     diagram:{},
@@ -261,6 +277,7 @@ networks_undrawn["chapelcross33kv"] = {
 //        "698 16": new Breaker("CHAP3A1#0",1),
         "698 15": new Breaker("CHAP3-_STCR3-_1#0",0),
         "699 CHAP": new Breaker("STCR3-#1",1, "CHAP"),
+        "STCR Loadbank": new Breaker("STCR3-#2",0.5, ""),
         "699 CUSTOMER": new Breaker("STCR3-_STCR0G",0,""),
         "698 14": new Breaker("CHAP3A1#3",1),
         "698 13": new Breaker("CHAP3A1#4",1),
@@ -274,8 +291,8 @@ networks_undrawn["chapelcross33kv"] = {
         "698 24": new Breaker("CHAP3A2#4",1),
 //        "698 25": new Breaker("698 25",0.31),
         "698 26": new Breaker("CHAP3A2#5",1),
-        "678 11": new Breaker("CHAP3-_SOLWAY#5",0.18),
-        "678 12": new Breaker("CHAP3-_SOLWAY#6",0.3),
+        "378 11": new Breaker("CHAP3-_SOLWAY#5",0.18),
+        "378 12": new Breaker("CHAP3-_SOLWAY#6",0.3),
         "GRID 2": new Breaker("CHAP3A2#0",1),
 
         "694": new Breaker("LOBI3A",1),
@@ -283,12 +300,14 @@ networks_undrawn["chapelcross33kv"] = {
         //some of these below are arc breakers
 
         "780 12": new Breaker("CHAP3-_MIBI3-_1",0.5,"12"),
-        "780 13": new Breaker("EWHC3-_MIBI3-_1#0",0.1,"13"),
-        "780 14": new Breaker("MIBI3-_LAHO3A_1#0",0.08,"14"),
-        "780 11": new Breaker("MIBI3-_MIBIT1_1#0",0.12,"11"),
+        "780 13": new Breaker("EWEH3-_MIBI3-_1#0",0.1,"13"),
+        "780 14": new Breaker("MIBI3-#0",1,"14"),
+        "780 11": new Breaker("MIBI3-#1",1,"11"),
 
-        "781 12": new Breaker("EWHC3-_MIBI3-_1#4",0.65,"12"),
-        "781 11": new Breaker("EWHC3-_EWHC0G_1",0.3,"11"),
+        "781 12": new Breaker("EWEH3-_MIBI3-_1#4",0.65,"12"),
+        "781 11": new Breaker("EWEH3-#0",1,"11"),
+
+        "781 CUSTOMER": new Breaker("EWEH3-_EWEH0G_1",1,"CUSTOMER"),
 
         "682 10": new Breaker("MIBI3-_MIBIT1_1#2",0.6,"10"),
 
@@ -296,13 +315,13 @@ networks_undrawn["chapelcross33kv"] = {
 
         "676 10": new Breaker("MIBI3-_LAHO3A_1#4",0.3,"10"),
         "676 01": new Breaker("LAHO5-1",1,"01"),
-        "676 20": new Breaker("CHAPX3_LAHO3B_1#4",0.4,"20"),
+        "676 20": new Breaker("LAHO5-2#2",1,"20"),
 
         "662 10": new Breaker("ANANT1_CHAP3-_1#0",0.3,"10"),
         "662 01": new Breaker("ANAN5-1",1,"01"),
         "662 20": new Breaker("ANANT2_CHAP3-_1#3",0.3,"20"),
 
-        "694 13": new Breaker("CHAPX4_LOBI3A_1",0.1,"13"),
+        "694 13": new Breaker("LOBI3A#0",1,"13"),
 
         "675 10": new Breaker("CHAPX4_KIBAT1_1#1",0.3,"10"),
 
@@ -312,13 +331,13 @@ networks_undrawn["chapelcross33kv"] = {
 
         "694 12": new Breaker("LOBI3A_LOBIT1_1#0", 0.5,"12"),
         "694 22": new Breaker("LOBI3B_LOBIT2_1#0", 0.5,"22"),
-        "694 23": new Breaker("LOBI3B_MOFTT2_1#0", 0.89,"13"),
+        "694 23": new Breaker("LOBI3B#1", 1,"23"),
 
         "679 10": new Breaker("LOBI3A_LOBIT1_1#2", 0.7,"10"),
         "679 01": new Breaker("LOBI5-1",1,"01"),
         "679 20": new Breaker("LOBI3B_LOBIT2_1#3",0.3,"20"),
 
-        "673 10": new Breaker("GRNAT1_GRNA10_T1#0",0.25,"10"),
+        "673 10": new Breaker("GRNA5-1#2",1,"10"),
         "673 01": new Breaker("GRNA5-1",1,"01"),
         "673 20": new Breaker("GRNA3B_GRNAT2_1#2",0.25,"20"),
 
@@ -327,30 +346,30 @@ networks_undrawn["chapelcross33kv"] = {
         "761 CUSTOMER": new Breaker("MINS3-_MINSC",0,"CUSTOMER"),
 
         "123 10": new Breaker("LAHO3B_NEWCT1_1#3",0.25,"10"),
-        "123 12": new Breaker("LAHO3B_NEWCT1_1#6",0.7,"12"),
+        "123 12": new Breaker("LAHO3B_NEWCT1_1#6",0.6,"12"),
 
         // CRAIG II WINDFARM 11KV
         // "785 21": new Breaker("785 21",0.86,"21"),
         // "785 22": new Breaker("CRAG5B_LAHO5-_1",0.15,"22"),
         // "785 CUSTOMER": new Breaker("CRAG5B_LAHO5-_1",0.5,"open","CUSTOMER BREAKER"),
 
-        "691 01": new Breaker("GRNA3A",1,"01"),
+        "691 01": new Breaker("GRNA3B",0,"01"),
         },
     isolators:{
         // CRAIG II WINDFARM 11KV
         // "785 CUSTOMER": new Breaker("CRAG5B_LAHO5-_1",0.7,"CUSTOMER ISOLATOR"),
     },
     tx:{
-        0: new Tx("CHAP1-_CHAP3-_2#1",1,"","","0V"),
+        "CHAP3-AUX-_2": new Tx("CHAP1-_CHAP3-_2#1",1,"","","0V"),
         "CHAP1-_CHAP3-_2": new Tx("CHAP1-_CHAP3-_2#0",1,"GRID T2","90 MVA","132kV"),
         "CHAP1-_CHAP3-_1": new Tx("CHAP1-_CHAP3-_1#0",1,"GRID T1", "90 MVA","132kV"),
-        3: new Tx("CHAP1-_CHAP3-_1#1",1,"","","0V"),
+        "CHAP3_AUX-_1": new Tx("CHAP1-_CHAP3-_1#3",0,"","","33kV"),
         "MIBIT1_MIBI10_T1": new Tx("MIBI3-_MIBIT1_1#1",1,"","10 MVA","11kV"),
         "LAHOT1_LAHO10_T1": new Tx("MIBI3-_LAHO3A_1#3",1,"T1","12 MVA","11kV"),
         "LAHOT2_LAHO20_T2": new Tx("CHAPX3_LAHO3B_1#4",1.2,"T2","12 MVA","33kV"),
         "ANANT1_ANAN10_T1": new Tx("ANANT1_CHAP3-_1#2",1,"T1","12 MVA","11kV"),
         "ANANT2_ANAN20_T2": new Tx("ANANT2_CHAP3-_1#3",1,"T2","12 MVA","33kV"),
-        "KIBAT1_KIBA10_T1": new Tx("CHAPX4_KIBAT1_1#0",1,"","5VA","11kV"),
+        "KIBAT1_KIBA10_T1": new Tx("CHAPX4_KIBAT1_1#0",1,"","5MVA","11kV"),
         "MOFTT1_MOFT10_T1": new Tx("CHAPX4_MOFTT1_1#1",1,"T1","7.5 MVA","11kV"),
         "MOFTT2_MOFT20_T2": new Tx("LOBI3B_MOFTT2_1#3",1,"T2","7.5 MVA","33kV"),
 
@@ -364,32 +383,30 @@ networks_undrawn["chapelcross33kv"] = {
 
         },
     generators:{
-        "STCR5-_1": new Generator("STCR3-_STCR0G",1),
-        "EWHC0G_1": new Generator("EWHC3-_EWHC0G_1",1),
+        "STCR5-_1": new Generator("STCR3-_STCR0G",1,"GENERATOR"),
+        "EWHC0G_1": new Generator("EWEH0G",1,"GENERATOR"),
         // CRAIG II WINDFARM 11KV
         // "CRAG0B_1": new Generator("CRAG5B_LAHO5-_1",1),
-        "MINS0G_1": new Generator("MINS0G", 1),
-        5: new Generator("CHAP3-_SOLWAY#6",1),
+        "MINS0G_1": new Generator("MINS0G", 1,"GENERATOR"),
+        5: new Generator("CHAP3-_SOLWAY#6",1,"GENERATOR"),
         },
     labels:{
+    0: new Text("STCR3-#2.4", ["LOAD BANK"], [5, 34]),
     1: new Text("CHAP3A1", ["CHAPELCROSS GSP"], [220,-70]),
     2: new Text("CHAP3A1", ["698"], [220,-50]),
     3: new Text("CHAP3A1",["CHAPELCROSS GSP 33kV"],[240,-145], 25),
-
-//    4: new Text("698 16", ["CHAPELCROSS"],[0,50]),
-//    5: new Text("698 16", ["NO1"],[0,65]),
 
     6: new Text("MIBI3-", ["MIDDLEBIE"],[20,-40]),
     7: new Text("MIBI3-", ["33KV SW/STN"],[20,-25]),
     8: new Text("MIBI3-", ["780"],[20,-10]),
 
-    9: new Text("EWHC3-", ["EWE HILL"],[0,-40]),
-    10: new Text("EWHC3-", ["WINDFARM"],[0,-25]),
-    11: new Text("EWHC3-", ["781"],[0,-10]),
+    9: new Text("EWEH3-", ["EWE HILL"],[0,-40]),
+    10: new Text("EWEH3-", ["WINDFARM"],[0,-25]),
+    11: new Text("EWEH3-", ["781"],[0,-10]),
 
-    12: new Text("MIBI5-", ["MIDDLEBIE "],[5,-40]),
-    13: new Text("MIBI5-", ["PRIMARY"],[5,-25]),
-    14: new Text("MIBI5-", ["682"],[5,-10]),
+    12: new Text("MIBI5-", ["MIDDLEBIE "],[7,-30]),
+    13: new Text("MIBI5-", ["PRIMARY"],[7,-15]),
+    14: new Text("MIBI5-", ["682"],[5,10]),
 
     15: new Text("LOBI3A", ["LOCKERBIE 33KV"],[85,-40]),
 
@@ -411,9 +428,9 @@ networks_undrawn["chapelcross33kv"] = {
     29: new Text("LAHO5-1", ["LANGHOLM"],[27,-65]),
     30: new Text("LAHO5-1", ["692"],[27,-45]),
 
-    31: new Text("STCR3-", ["STEVENS CROFT"],[-25,-45]),
-    32:new Text("STCR3-", ["33KV"],[-25,-30]),
-    33:new Text("STCR3-", ["699"],[-25,-15]),
+    31: new Text("STCR3-", ["STEVEN'S CROFT"],[-45,-45]),
+    32:new Text("STCR3-", ["33KV"],[-45,-30]),
+    33:new Text("STCR3-", ["699"],[-45,-15]),
 
     34:new Text("CHAPX1_LOBI3A_1#1", ["CARRUTHERSTOWN"],[-55,-15]),
     35:new Text("CHAPX1_LOBI3A_1#1", ["33 kV"],[-59,0]),
@@ -444,72 +461,119 @@ networks_undrawn["chapelcross33kv"] = {
     },
     dataViews:{
         //lines
-        "CHAP3-_STCR3-_1": new DataView("CHAP3-_STCR3-_1#0", [-25, -125], ['lines_current']),
-        "ANANT1_CHAP3-_1": new DataView("ANANT1_CHAP3-_1#1", [-25, -5], ['lines_current']),
-        // CRAIG II WINDFARM 11KV
-        // "CRAG5B_LAHO5-_1": new DataView("CRAG5B_LAHO5-_1", [65, -60]),
-        "CHAP3-_MINS3-_1": new DataView("CHAP3-_MINS3-_1#2", [25, 0], ['lines_current']),
-        "CHAPX1_LOBI3A_1": new DataView("CHAPX1_LOBI3A_1#0", [-25, -75], ['lines_current']),
-        "CHAP3-_MIBI3-_1": new DataView("CHAP3-_MIBI3-_1#0", [-25, 0], ['lines_current']),
-        "CHAP3-_GRNA3B_1": new DataView("CHAP3-_GRNA3B_1#0", [-25, 0], ['lines_current']),
-        "CHAP3-_CHAPX3_1": new DataView("CHAP3-_CHAPX3_1#0", [-25, -60], ['lines_current']),
-        // "ANANT1_CHAP3-_1": new DataView("ANANT1_CHAP3-_1#1", [-25, 10]),
-        // "ANANT1_CHAP3-_1": new DataView("ANANT1_CHAP3-_1#1", [-25, 10]),
-        // "ANANT1_CHAP3-_1": new DataView("ANANT1_CHAP3-_1#1", [-25, 10]),
-        // "ANANT1_CHAP3-_1": new DataView("ANANT1_CHAP3-_1#1", [-25, 10]),
-        //generator
-        "STCR5-_1": new DataView("STCR5-_1", [-35, 0],
-          [
-            'generators_active_power',
-            'generators_reactive_power',
-          ]),
-        "EWHC0G_1": new DataView("EWHC0G_1", [35, 0],
-          [
-            'generators_active_power',
-            'generators_reactive_power',
-          ]),
-        "MINS0G_1": new DataView("MINS0G_1", [35, 0],
-          [
-            'generators_active_power',
-            'generators_reactive_power',
-          ]),
-        // CRAIG II WINDFARM 11KV
-        // "CRAG0B_1": new DataView("CRAG0B_1", [-35, 0]),
+        "CHAP3-_STCR3-_1": new DataView("CHAP3-_STCR3-_1#0", [-70, -47], ['lines_current']),
+        "ANANT1_CHAP3-_1": new DataView("ANANT1_CHAP3-_1#1", [-10, -15], ['lines_current']),
+        "CHAPX1_LOBI3A_1": new DataView("CHAPX1_LOBI3A_1#0", [-10, -75], ['lines_current']),
+        "CHAP3-_MIBI3-_1": new DataView("CHAP3-_MIBI3-_1#0", [-70, 0], ['lines_current']),
+        "CHAP3-_GRNA3B_1": new DataView("CHAP3-_GRNA3B_1#0", [-65, 0], ['lines_current']),
+        "CHAP3-_CHAPX3_1": new DataView("CHAP3-_CHAPX3_1#0", [-70, -60], ['lines_current']),
 
-//        //        //generator
-////        "SOLWAYBANK": new DataView(850,100, "378",["MW","MVAR","kV","AMPS"]),
-////        "GRID 2": new DataView(740,100, "GRID 2", ["MW","MVAR","kV","AMPS"]),
-////        "GRID 1": new DataView(400,100 ,"GRID 1", ["MW","MVAR","kV","AMPS"]),
-////        //generator
-//        "STEVENSCROFT": new DataView(50,400,"STCR5-_1", ["MW","MVAR","kV","AMPS"]),
-////        "MINSCA": new DataView(950,450,"GRID 1", ["MW","MVAR","kV","AMPS"]),
-////
-////        "CRAIG II": new DataView(800,770,"GRID 1", ["MW","MVAR","kV","AMPS","Hz"]),
-////
-////        "MINSCA Hz": new DataView(970,600,"GRID 1", ["Hz"]),
-////        "SOLWAYBANK Hz": new DataView(990,30,"GRID 1", ["Hz"]),
-//
-////        "398 26": new DataView(880,230, "398 26",["Amps"]),
-////        "398 25": new DataView(820,230, "398 25",["Amps"]),
-////        "398 24": new DataView(760,230,"398 24", ["Amps"]),
-////        "398 23": new DataView(680,230,"GRID 1", ["Amps"]),
-////        "398 22": new DataView(605,230, "GRID 1",["Amps"]),
-////        "398 21": new DataView(550,230,"GRID 1", ["Amps"]),
-////
-////        "398 11": new DataView(455,230, "GRID 1",["Amps"]),
-////        "398 12": new DataView(390,230,"GRID 1", ["Amps"]),
-////        "398 13": new DataView(230,230,"GRID 1", ["Amps"]),
-//        "398 14": new DataView(125,230,"ANANT1_CHAP3-_1#1", ["Amps"]),
-////        "398 15": new DataView(65,230,"GRID 1", ["Amps"]),
-////        "398 16": new DataView(15,230,"GRID 1", ["Amps"]),
+        "CHAP3-_LOBI3B_1": new DataView("CHAP3-_LOBI3B_1#0", [-10, -25], ['lines_current']),
+        "ANANT2_CHAP3-_1": new DataView("ANANT2_CHAP3-_1#0", [-10, -10], ['lines_current']),
+        "CHAP3-_MINS3-_1": new DataView("CHAP3-_MINS3-_1#0", [-10, -10], ['lines_current']),
+
+        "CHAP3-_SOLWAY": new DataView("CHAP3-_SOLWAY#3", [-70, 10], ['lines_current']),
+        "CHAP3-_SOLWAY#1": new DataView("CHAP3-_SOLWAY#0", [-130, 50], ['lines_active_power',"lines_reactive_power","lines_current"]),
+
+//        loadbank
+        "STCR_LOADBANK": new DataView("STCR3-",[40,50], ["generators_active_power"],null),
+
+        //transformers
+        "CHAP1-_CHAP3-_1": new DataView("CHAP1-_CHAP3-_1#0",[35,4],[
+            "transformers_active_power",
+            "transformers_reactive_power",
+            "transformers_current",
+        ]),
+        "CHAP1-_CHAP3-_2": new DataView("CHAP1-_CHAP3-_2#0",[35,4],[
+            "transformers_active_power",
+            "transformers_reactive_power",
+            "transformers_current",
+        ]),
+
+        //generator
+        "STCR5-_1": new DataView("STCR5-_1", [-77, 0],
+          [
+            'generators_active_power',
+            'generators_reactive_power',
+          ],false),
+        "EWEHILL_1": new DataView("EWHC0G_1", [25, 5],
+          [
+            'generators_active_power',
+            'generators_reactive_power',
+          ],false),
+        "MINS0G_1": new DataView("MINS0G_1", [20, 0],
+          [
+            'generators_active_power',
+            'generators_reactive_power',
+          ],false),
+
+        //BUSBARS
+        "CHAP3A1": new DataView("CHAP3A1", [-250, -20], ['busbars_voltage']),
+        "CHAP3A1#1": new DataView("CHAP3A2", [100, -20], ['busbars_voltage']),
+
+        //transformers for loads
+        "ANANT2_ANAN20_T2": new DataView("ANANT2_CHAP3-_1#4",[0,0],
+        [
+            "transformers_active_power",
+        ],null),
+        "ANANT1_ANAN10_T1":new DataView("ANANT1_CHAP3-_1#4",[-75,0],[
+            "transformers_active_power",
+        ],null),
+        "LOBIT1_LOBI10_T1": new DataView("LOBI5-1#0",[-75,0],[
+            "transformers_active_power",
+        ],null),
+        "LOBIT2_LOBI20_T2": new DataView("LOBI5-2#0",[0,0],[
+            "transformers_active_power",
+        ],null),
+        "LAHOT1_LAHO10_T1":new DataView("LAHO5-1#0",[-70,0],[
+            "transformers_active_power",
+        ],null),
+        "LAHOT2_LAHO20_T2": new DataView("LAHO5-2#0",[-15,0],[
+            "transformers_active_power",
+        ],null),
+        "MOFTT1_MOFT10_T1": new DataView("MOFT5-1#0",[-70,-10],[
+            "transformers_active_power",
+        ],null),
+        "MOFTT2_MOFT20_T2": new DataView("MOFT5-2#0",[-0,-5],[
+            "transformers_active_power",
+        ],null),
+        "NEWCT1_NEWC10_T1":new DataView("NEWC5-#0",[-145,0],[
+            "transformers_active_power",
+        ],null),
+        "GRNAT1_GRNA10_T1": new DataView("GRNA5-1#0",[-70,-10],[
+            "transformers_active_power",
+        ],null),
+        "GRNAT2_GRNA20_T2": new DataView("GRNA5-2#0",[-10,-10],[
+            "transformers_active_power",
+        ],null),
+        "KIBAT1_KIBA10_T1": new DataView("KIBA5-#0",[-140,-5],[
+            "transformers_active_power",
+        ],null),
+        "MIBIT1_MIBI10_T1":new DataView("MIBI5-#0",[-145,-5],[
+            "transformers_active_power",
+        ],null),
+
+
+
 
     },
     availablePower:{
-        "EWHC0G_1" : new AvailablePower([115,970]),
+        "EWEHILL_1" : new AvailablePower([115,970]),
         "MINS0G_1": new AvailablePower([940,820]),
-        "STCR5-_1": new AvailablePower([800,50]),
+        "STCR5-_1": new AvailablePower([100,100]),
 
     },
+
+//    generatorControls:{
+//        "MINS0G_1": new GeneratorControl([800,900]),
+//        "EWHC0G_1": new GeneratorControl([350,940]),
+//    },
+
+    generator_graphs:{
+//        "gen_graph_1": new GeneratorGraph([760,770],{"MINS0G_1":["MINSCA WF"],"EWEHILL_1": ["EWEHILL 1"],"EWEHILL_2": ["EWEHILL 2"],"STCR5-_1": ["STEVENS CROFT", "WF"]})
+        "gen_graph_1": new GeneratorGraph([760,750],{"MINS0G_1":["Minsca","WF"],"EWEHILL_1":["Ewe Hill 2","WF"],"EWEHILL_2":["Ewe Hill 2","WF"],"STCR5-_1":["Steven's"," Croft", "Bio Mass"]})
+
+    }
 
 
 }

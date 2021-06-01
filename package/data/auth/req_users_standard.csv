@@ -1,0 +1,6 @@
+name,entity,email,required,status
+Demo User,admin,demo.user@example.com,FALSE,FALSE
+Chris Salter,admin,christopher.salter2@nationalgrideso.com,FALSE,FALSE
+Gordon McFadzean,admin_local,gordon.mcfadzean@tneigroup.com,FALSE,FALSE
+Dieter Gutschow,admin,dieter.gutschow@tneigroup.com,FALSE,FALSE
+Max McFarlane,admin,max.mcfarlane@tneigroup.com,FALSE,FALSE

@@ -6,8 +6,15 @@ import numpy as np
 SIDEBAR_HIDE_OVERLAP = 0
 
 NAVBAR_STYLE = {
-    'height': '3rem'
+    'height': '7vh',
+    'background-image': "url('/static/imgs/header.png')",
+    'background-repeat': "no-repeat",
+    "background-position": "right top",
+    'color': '#4f4f4f',
+    'fixed': 'top',
 }
+
+NAVBAR_STYLE['background-size'] = "100vw " + NAVBAR_STYLE['height']
 
 CONTENT_STYLE_SIDEBAR_HIDDEN = {
     "marginLeft": "5rem",
@@ -38,6 +45,7 @@ CONTENT_STYLE = {
     "marginLeft": str(int(SIDEBAR_STYLE['width'].split('rem')[0])+SIDEBAR_HIDE_OVERLAP)+'rem',
     "marginRight": "2rem",
     "marginTop": NAVBAR_STYLE['height'],
+    "background-color": "#000000"
 }
 
 TOGGLE_BUTTON = {
@@ -48,12 +56,12 @@ TOGGLE_BUTTON = {
 LEGEND_BUTTON = {
     "position": "absolute",
     "margin": "auto",
-    "right": "0vw",
-    "Top": "10vh",
+    "right": "1vw",
+    "top": str(int(NAVBAR_STYLE['height'].split('vh')[0])+0.5)+'vh',
     "width": "2rem",
     "height": "2rem",
     "border-radius": "15px",
-    "backgroundColor": "#ffe600",
+    "backgroundColor": "#ebc700",
 }
 LEGEND = {
     "position": "absolute",

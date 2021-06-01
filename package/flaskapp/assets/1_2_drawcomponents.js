@@ -280,17 +280,16 @@ function draw_breaker(dict_line, breaker){
   if(live_colour === undefined){
     live_colour = palette[dict_line.voltage]
   }
-
   if(live === true){
     colour = live_colour
   } else {
     colour = palette["0V"]
   }
-
   if (state === 'open'){
     rect1 = draw.rect(size, size).center(center[0], center[1]).fill(palette["background-color"]).stroke(colour).stroke({width: 1})
   }
   else if (state === 'closed'){
+    // alert(colour)
     rect1 = draw.rect(size, size).center(center[0], center[1]).fill(colour).stroke(colour).stroke({width: 1})
   }
   else{
@@ -603,6 +602,7 @@ deltaCenterX = center[0]
 deltaCenterY = center[1]
 deltaLength = rad*0.6
 
+//upon being set live I redraw and don't flip
 if (flipped === false){
   delta1X = deltaCenterX
   delta1Y = deltaCenterY-deltaLength
@@ -762,13 +762,37 @@ function add_text(object, bool_dict_obj, list_text, x_from_center=0, y_from_cent
  * @param  {SVG object} object which the dataview is watching to
  * @param  {string} list of data labels relevant to dataview
  * @param  {[double]} offset is position of dataview
+ * @param  {string} instructions for drawing arrow, , "up" = up, "down" = down
+
  * @param  {function( SVG Object )} callback after drawing is complete
  * @return {None}
 */
-//todo refactor this
-function add_dataview(observer, text, offset, callback) {
+function add_dataview(observer, text_list,flow_list, offset, callback) {
   let colour = "#e5b815"
-  add_text(observer, false, text, offset[0], offset[1], colour, font_size, callback)
+  let y_offset = 0
+  let draw_flow_list = []
+  let draw_flow = false
+  for(text_ in flow_list){
+      let flow =flow_list[text_]
+      if(flow == "up"){
+        draw_flow_list.push("▲")
+        draw_flow = true
+      }
+      else if (flow=="down"){
+            draw_flow_list.push("▼")
+            draw_flow = true
+      }
+      else{
+            draw_flow_list.push(" ")
+      }
+  }
+//  let x_offset = 0
+//  if(draw_flow){x_offset = 40*x_scaling}
+let x_offset = 40*x_scaling
+        add_text(observer, false, draw_flow_list, offset[0], offset[1], colour, font_size, callback)
+
+        add_text(observer, false, text_list, offset[0]+x_offset, offset[1], colour, font_size, callback)
+
 }
 
 function add_available_power(observer, text, offset, callback) {
@@ -797,8 +821,6 @@ function add_static_text(list_text, x=100, y=100, colour="#d3d3d3", callback){
     text1.center(text1.x_coord, text1.y_coord);
     callback(text1)
 }
-
-
 
 function draw_SGT(dict_line,callback){
     var rad = 18 * Math.min(x_scaling,y_scaling)
@@ -846,69 +868,80 @@ function draw_SGT(dict_line,callback){
     group.add(rect1)
     group.add(circle2)
 
-    circle1.center(center[0],center[1])
 
     group.horizontal = bHorizontal
     callback(group);
 
 }
 
-
 function draw_action_button(){
   var group = draw.group();
-
-    $.ajax({
-    type: "POST",
-    url: "/simtool_bp/get_action/",
-    data: {"option": option},
-    }).done(function( action_values ) {
-      action = action_values[current_step][entity]
+    action = action_data[current_step][entity.split("_")[0]]
       if(action !== ''){
-        let rect1 = draw.rect(x_max*0.1,y_max*0.07).fill("yellow").center(x_max*0.8,y_max*0.82);
-        add_text(rect1, false, ["Take action: ", action], 0, 0, "#000000", 12, function(){})
-        rect1.click(function() {
-          rect1.off('click')
+        let rect1 = draw.rect(x_max*0.1,y_max*0.07).fill(palette["controls"]).center(x_max*0.8,y_max*0.88);
+        add_text(rect1, false, ["Take action: ", action], 0, 0, "#000000", 12, function(text1){
+          debounce_click_function(text1, function(case_network_){
           action = undefined
-          inc_state(case_network)
+          inc_state(case_network_);
+        });
+          mouseenterleave_pointer([text1, rect1]);
         })
+        debounce_click_function(rect1, function(case_network_){
+          action = undefined
+          inc_state(case_network_);
+        });
+        mouseenterleave_pointer(rect1);
       }
+}
 
-    })
-
-
-
-
+function draw_next_network_button(){
+  var group = draw.group();
+    if(next_network === true){
+      let rect1 = draw.rect(x_max*0.1,y_max*0.07).fill(palette["controls"]).center(x_max*0.9,y_max*0.88);
+      add_text(rect1, false, ["Next network"], 0, 0, "#000000", 12, function(text1){
+        debounce_click_function(text1, function (case_network_){
+          next_network = undefined
+          inc_state(case_network_, true)
+        });
+        mouseenterleave_pointer([text1, rect1]);
+      })
+      debounce_click_function(rect1, function(case_network_){
+        next_network = undefined
+        inc_state(case_network_, true);
+      });
+      mouseenterleave_pointer(rect1);
+    }
 }
 
 
 function draw_admin_buttons(){
   var group = draw.group();
 
+    if(!(entity.search('admin')==-1)){
+      let rect0 = draw.rect(x_max*0.07,y_max*0.05).fill(palette["controls"]).center(x_max*0.5,y_max*0.88);
+      add_text(rect0, false, ["Admin action:", "reset"], 0, 0, "#000000", 12, function(text1){
+        debounce_click_function(text1, reset_state);
+        mouseenterleave_pointer([text1, rect0]);
+      })
+      let rect1 = draw.rect(x_max*0.07,y_max*0.05).fill(palette["controls"]).center(x_max*0.6,y_max*0.88);
+      add_text(rect1, false, ["Admin action:", "back"], 0, 0, "#000000", 12, function(text1){
+        debounce_click_function(text1, dec_state);
+        mouseenterleave_pointer([text1, rect1]);
+      })
+      let rect2 = draw.rect(x_max*0.07,y_max*0.05).fill(palette["controls"]).center(x_max*0.7,y_max*0.88);
+      add_text(rect2, false, ["Admin action:", "next"], 0, 0, "#000000", 12, function(text1){
+        debounce_click_function(text1, inc_state);
+        mouseenterleave_pointer([text1, rect2]);
+      })
 
-    if(entity === 'admin'){
-      let rect0 = draw.rect(x_max*0.07,y_max*0.05).fill("yellow").center(x_max*0.5,y_max*0.82);
-      add_text(rect0, false, ["Admin action: reset"], 0, 0, "#000000", 12, function(){})
-      let rect1 = draw.rect(x_max*0.07,y_max*0.05).fill("yellow").center(x_max*0.6,y_max*0.82);
-      add_text(rect1, false, ["Admin action: back"], 0, 0, "#000000", 12, function(){})
-      let rect2 = draw.rect(x_max*0.07,y_max*0.05).fill("yellow").center(x_max*0.7,y_max*0.82);
-      add_text(rect1, false, ["Admin action: back"], 0, 0, "#000000", 12, function(){})
-      add_text(rect2, false, ["Admin action: next"], 0, 0, "#000000", 12, function(){})
-      rect0.click(function() {
-        rect0.off('click')
-        reset_state(case_network)
-      })
-      rect1.click(function() {
-        rect1.off('click')
-        dec_state(case_network)
-      })
-      rect2.click(function() {
-        rect2.off('click')
-        inc_state(case_network)
-      })
+      debounce_click_function(rect0, reset_state);
+      debounce_click_function(rect1, dec_state);
+      debounce_click_function(rect2, inc_state);
+      mouseenterleave_pointer(rect0);
+      mouseenterleave_pointer(rect1);
+      mouseenterleave_pointer(rect2);
     }
-
 }
-
 
 function draw_line(line,id_line, type="busbar"){
         bNodes = false

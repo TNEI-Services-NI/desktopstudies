@@ -1,15 +1,26 @@
 # -*- coding: utf-8 -*-
 import dash
-from dash.dependencies import Output, Input
+from dash.dependencies import Output, Input, State
 from flask import session
 
 # INT IMPORTS
 import package.flaskapp.dash_simtool._config as cf
 import package.flaskapp.dash_simtool.app.dashboard_styling as styling
 import package.flaskapp.dash_simtool.db as simtool_db
-import package.flaskapp.dash_simtool.requests as requests
-from package.flaskapp.extensions import dbs
+import package.data.process as process_data
+import package.data as data
 from package.flaskapp import socketio
+from package.flaskapp.auth.routes import login_required
+from package.flaskapp.extensions import dbs
+import package.flaskapp.dash_simtool.app._util as util
+import dash_html_components as html
+import package.flaskapp.dash_simtool as dashboard
+
+
+def login_required_(dash_app, app_prefix):
+    for view_func in dash_app.server.view_functions:
+        if view_func.startswith(app_prefix):
+            dash_app.server.view_functions[view_func] = login_required(dash_app.server.view_functions[view_func])
 
 
 def add_legend_button(dash_app):
@@ -71,6 +82,40 @@ def _add_toggle_sidebar(dash_app):
     return dash_app
 
 
+def add_upload_steps(dash_app, URL_PAGE):
+    @dash_app.callback([
+        Output('upload-restoration-steps', 'children'),
+    ],
+                       [
+                           Input('upload-restoration-steps', 'contents'),
+                       ],
+        [
+            State('upload-restoration-steps', 'filename'),
+         ]
+
+                       )
+    def _upload_steps(list_restoration_steps, filename_steps):
+
+        triggered = dash.callback_context.triggered[0]['prop_id']
+
+        drag_available = ['Drag and Drop or ', html.A('Select Files')]
+        drag_successful = ['File uploaded successfully']
+        drag_children = {i: drag_available for i in range(1)}
+
+        if list_restoration_steps is not None:
+            drag_children[0] = drag_successful
+
+            for contents, filename in zip([list_restoration_steps], [filename_steps]):
+                net_opt = '\\'.join([data.dir_raw_simtool_data])
+                util.save_file(filename, contents, net_opt)
+                rev = filename.split('_R')[1].split('.xlsx')[0]
+                process_data.process_LF_data(rev=int(rev))
+            return ["Upload successful"]
+        return dash.no_update
+    return dash_app
+
+
+
 def add_sim_progress_buttons(dash_app, URL_PAGE):
     @dash_app.callback([
         Output("sim_status_div", "children"),
@@ -127,7 +172,7 @@ def add_sim_progress_buttons(dash_app, URL_PAGE):
         session['sim_step'] = redraw_data['sim_step']
 
         return [
-            "Simulation status: {}".format(redraw_data['sim_step']),
+            "Simulation status: {}\n Instruction: {}".format(redraw_data['sim_step'], cf.steps[int(redraw_data['sim_step'])+3]),
             "View: {}".format(session.get('entity')),
         ]
 

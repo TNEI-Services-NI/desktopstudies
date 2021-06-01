@@ -9,6 +9,7 @@ import package as root
 import package.flaskapp.auth.user as user
 import package.flaskapp.dash_simtool.db as simtool_db
 from .auth.login_manager import init_manager
+import package.data.process as data_process
 from .extensions import login_manager, dbs, socketio, jsglue
 import package.flaskapp.dash_simtool._config as cf
 
@@ -21,17 +22,15 @@ def _configure_app(test_config):
                 template_folder='templates',
                 instance_relative_config=True)
 
-    db_dir = os.path.join(root.BASE_DIR, 'instance', 'db.sqlite')
-
     app.config.from_mapping(
         SECRET_KEY='dev',  # used by Flask and extensions to keep data safe.
         # It’s set to 'dev' to provide a convenient value during development,
         # but it should be overridden with a random value when deploying
-        DATABASE=db_dir,
+        DATABASE=root.DB_DIR,
     )
 
     app.config['SECRET_KEY'] = 'dev'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + db_dir
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + root.DB_DIR
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
@@ -102,10 +101,16 @@ def _configure_database(app):
     @app.before_first_request
     def initialize_database():
         dbs.create_all()
+
         simtool_db.replace_simstatus(dbs, cf.start_sim_step)
         simtool_db.replace_room_simstatus_all(dbs, cf.start_sim_step)
+
         user.register_admin(dbs)
         user.register_required_users(dbs)
+
+        # data_process.migrate_csvs("package/data/simtool/breakerstates/Opt5")
+        # data_process.migrate_csvs("package/data/simtool/networkviews/Opt5")
+        # data_process.migrate_csvs("package/data/simtool/restorationsteps/Opt5/chapelcross")
 
     @app.teardown_request
     def shutdown_session(exception=None):
@@ -121,6 +126,8 @@ def __load_dash_sim_tool(app):
     app = init_scripts(app)
     from .dash_simtool.app.about import init_dashboard as init_about
     app = init_about(app)
+    from .dash_simtool.app.graph import init_dashboard as init_graph
+    app = init_graph(app)
     return app
 
 

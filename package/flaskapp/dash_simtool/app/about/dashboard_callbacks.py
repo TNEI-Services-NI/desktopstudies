@@ -18,42 +18,6 @@ import package.flaskapp.dash_simtool._config as cf
 import package.flaskapp.dash_simtool.app.dashboard_styling as styling
 import package.flaskapp.dash_simtool.db as simtool_db
 
-def _add_toggle_sidebar(dash_app):
-    @dash_app.callback(
-        [
-            Output("toggle_button", "children"),
-            Output("sidebar", "style"),
-            Output("page_content", "style"),
-            Output("side_click", "data"),
-        ],
-
-        [Input("toggle_button", "n_clicks")],
-        [
-            State("side_click", "data"),
-        ]
-    )
-    def toggle_sidebar(n, nclick):
-        if n:
-            if nclick == "SHOW":
-                toggle_arrow = '>'
-                sidebar_style = styling.SIDEBAR_STYLE_HIDDEN
-                content_style = styling.CONTENT_STYLE_SIDEBAR_HIDDEN
-                cur_nclick = "HIDDEN"
-            else:
-                toggle_arrow = '<'
-                sidebar_style = styling.SIDEBAR_STYLE
-                content_style = styling.CONTENT_STYLE
-                cur_nclick = "SHOW"
-        else:
-            toggle_arrow = '<'
-            sidebar_style = styling.SIDEBAR_STYLE
-            content_style = styling.CONTENT_STYLE
-            cur_nclick = 'SHOW'
-
-        return toggle_arrow, sidebar_style, content_style, cur_nclick
-
-    return dash_app
-
 
 def _add_network_redraw(dash_app):
     @dash_app.callback([Output("network_menu", "label")],
@@ -125,7 +89,7 @@ def _add_sidebar_buttons(dash_app):
     return dash_app
 
 
-def init_callbacks(dash_app):
+def init_callbacks(dash_app, app_prefix):
     dash_app = _add_network_redraw(dash_app)
     dash_app = _add_sidebar_buttons(dash_app)
 

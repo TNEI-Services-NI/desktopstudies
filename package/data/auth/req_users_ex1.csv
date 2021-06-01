@@ -1,0 +1,45 @@
+name,entity,email,required,status
+Max McFarlane,admin,max.mcfarlane@tneigroup.com,TRUE,FALSE
+Dieter Gutschow,Observer,dieter.gutschow@tneigroup.com,FALSE,FALSE
+Diptargha Chakravorty,Observer,diptargha.chakravorty@tneigroup.com,FALSE,FALSE
+Owen Patrick,Observer,owen.patrick@tneigroup.com,FALSE,FALSE
+"Nnabuife (ESO), Dozie",Observer,Dozie.Nnabuife@nationalgrideso.com,FALSE,FALSE
+"Salter2 (ESO), Christopher",Observer,christopher.salter2@nationalgrideso.com,FALSE,FALSE
+"Kenny, Michael",Observer,michael.kenny@nationalgrideso.com,FALSE,FALSE
+"Singh (ESO), Bikramjit",Observer,bikramjit.singh@nationalgrideso.com,FALSE,FALSE
+"Phull (ESO), Roopkamal",Observer,roopkamal.phull@nationalgrideso.com,FALSE,FALSE
+Grant McBeath,TO,grant.mcbeath@spenergynetworks.co.uk,TRUE,FALSE
+"Hunter, Joe",TO,joe.hunter@spenergynetworks.co.uk,TRUE,FALSE
+"Koutsokeras, Ioannis",DNO,ikoutsokeras@spenergynetworks.co.uk,TRUE,FALSE
+"Clark, Anthony",DNO,aclark@spenergynetworks.co.uk,TRUE,FALSE
+"Knott, John",DNO,john.knott@spenergynetworks.co.uk,TRUE,FALSE
+"Green, Tim C",Observer,t.green@imperial.ac.uk,FALSE,FALSE
+James Collis,DER,jcollis@viridor.co.uk,TRUE,FALSE
+Steven Sepp,DER,ssepp@viridor.co.uk,TRUE,FALSE
+John Barker,DER,jbarker@viridor.co.uk,TRUE,FALSE
+"Wilson, Douglas (GE Digital)",Observer,douglas.wilson1@ge.com,FALSE,FALSE
+"Miyir, Hamda (GE Digital)",Observer,hamda.miyir@ge.com,FALSE,FALSE
+"Pintado, Monica (GE Digital)",Observer,monica.pintado@ge.com,FALSE,FALSE
+"Norris, Sean (GE Digital)",Observer,sean.norris@ge.com,FALSE,FALSE
+Peter Couch,Observer,peter.couch@jrc.co.uk,FALSE,FALSE
+"Wilson, Alan (GE Digital)",Observer,alan1.wilson@ge.com,FALSE,FALSE
+"Malone, Conan (GE Digital)",Observer,conan.malone@ge.com,FALSE,FALSE
+"Campbell, Douglas",DER,douglas.campbell@scottishpower.com,TRUE,FALSE
+"Brown (ESO), Gavin",Observer,gavin.brown@nationalgrideso.com,FALSE,FALSE
+"Haigh (ESO), Isabelle",Observer,isabelle.haigh@nationalgrideso.com,FALSE,FALSE
+Richard Thwaites,DER,richard.thwaites@pensopower.com,TRUE,FALSE
+David Bowen,ESO,david.bowen@nationalgrid.com,TRUE,FALSE
+"Li (ESO), Han",ESO,han.li@nationalgrideso.com,TRUE,FALSE
+David Hinchliffe,DER,david.hinchliffe@rwe.com,TRUE,FALSE
+AlghamdiT1,Observer,alghamdit1@cardiff.ac.uk,FALSE,FALSE
+"Penhaligon (ESO), Emma",Observer,emma.penhaligon@nationalgrideso.com,FALSE,FALSE
+"Chandler (ESO), Peter",Observer,peter.chandler@nationalgrideso.com,FALSE,FALSE
+"Auty (ESO), Daniel",ESO,daniel.auty@nationalgrideso.com,TRUE,FALSE
+"Rochford1 (ESO), Hannah",Observer,hannah.rochford1@nationalgrideso.com,FALSE,FALSE
+"Hutcheon, Neil",Observer,nhutcheon@spenergynetworks.co.uk,FALSE,FALSE
+"Foote, Colin",DNO,cfoote@spenergynetworks.co.uk,TRUE,FALSE
+"Miller, Neil (Network Investment)",Observer,neil.miller@spenergynetworks.co.uk,FALSE,FALSE
+"Burroughs, Hannah",Observer,burroughs5@llnl.gov,FALSE,FALSE
+Nicholas Jenkins,Observer,jenkinsn6@cardiff.ac.uk,FALSE,FALSE
+"Laterza, Marta (GE Digital)",Observer,marta.laterza@ge.com,FALSE,FALSE
+"Anderson, Stuart J",DNO,astuart@spenergynetworks.co.uk,FALSE,FALSE
