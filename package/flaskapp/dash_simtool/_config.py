@@ -12,7 +12,7 @@ step_map = {
 steps = ["Post black-out",
 "Switch to pre-restoration",
 "0 Energise Steven's Croft generator",
-"1.1 Energise Steven's croft BB(CUSTOMER)",
+"1.1 Energise Steven's croft BB(SPD CONNECTION)",
 "1.2 Energise Steven's Croft cable to Chapelcross(CHAP)",
 "2.1 Energise Minsca PoC (MINSCA WF)",
 "2.2 Energise Minsca WF (CUSTOMER)",
