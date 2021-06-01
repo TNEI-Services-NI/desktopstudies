@@ -29,7 +29,8 @@ class Config:
 
 
 class ProductionConfig(Config):
-    pass
+    DEBUG = False
+    DEVELOPMENT = False
 
 
 class StagingConfig(Config):
