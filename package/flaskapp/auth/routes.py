@@ -111,7 +111,7 @@ def trigger_checks(trig_data=None):
 
     required = pd.read_csv(data.dir_auth_data+'/req_users.csv')
 
-    active_users = User.query.filter_by(logged_in=1).all()
+    active_users = User.query.filter_by(logged_in=True).all()
     logged_in = pd.DataFrame({'user': [user.name for user in active_users],
                               'email': [user.email for user in active_users],
                               'entity': [user.entity for user in active_users],
