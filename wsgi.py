@@ -5,7 +5,7 @@ from package.flaskapp import create_app, socketio, dbs
 from package.flaskapp.extensions import migrate
 
 
-env_config = os.getenv("APP_SETTINGS", "package.flaskapp.config.PostgresDevelopment")
+env_config = os.getenv("APP_SETTINGS", "package.flaskapp.config.PostgresDevelopmentConfig")
 
 app = create_app(env_config)
 migrate.init_app(app, dbs)
