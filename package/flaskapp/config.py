@@ -29,6 +29,8 @@ class Config:
 
 
 class ProductionConfig(Config):
+    DEBUG = False
+    DEVELOPMENT = False
     pass
 
 
