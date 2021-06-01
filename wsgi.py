@@ -12,7 +12,6 @@ app = create_app(env_config)
 migrate.init_app(app, dbs)
 
 if __name__ == '__main__':
-
     if DEBUG:
         app.run()
     else:
