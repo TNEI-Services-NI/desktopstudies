@@ -63,7 +63,7 @@ def generate_engine(local=True, echo=False):
     if local:
         e = create_engine("sqlite:///"+os.path.join(root.BASE_DIR, 'instance', 'test_db.sqlite'), echo=echo)
     else:
-        e = create_engine(cf.POSTGRES_URI, echo=echo)
+        e = create_engine(os.environ.get('DATABASE_URL', cf.POSTGRES_URI), echo=echo)
     return e
 
 
@@ -114,6 +114,7 @@ def read_data(table_name, e):
     print(df_data)
     conn.commit()
     conn.close()
+    return df_data
 
 
 def delete_data(table_name, e):
@@ -143,6 +144,8 @@ def prepare_restoration_data(option, case_network):
     df_data.columns = list(map(lambda x: "step_"+str(int(x.split('Step ')[1])+2) if 'Step' in x else x, df_data.columns))
     df_data = df_data.reset_index()
     df_data = df_data.rename(columns={'Name': 'name'})
+    df_data.loc[:, 'option'] = option
+    df_data.loc[:, 'case_network'] = case_network
     return df_data
 
 
@@ -151,6 +154,8 @@ def prepare_networkviews_data(option, case_network):
     df_data = df_data.set_index('entity')
     df_data.columns = list(map(lambda x: "step_"+str(int(x)+2), df_data.columns))
     df_data = df_data.reset_index()
+    df_data.loc[:, 'option'] = option
+    df_data.loc[:, 'case_network'] = case_network
     return df_data
 
 
@@ -159,6 +164,8 @@ def prepare_breakerstates_data(option, case_network):
     df_data = df_data.set_index('breaker')
     df_data.columns = list(map(lambda x: "step_"+str(int(x)+2), df_data.columns))
     df_data = df_data.reset_index()
+    df_data.loc[:, 'option'] = option
+    df_data.loc[:, 'case_network'] = case_network
     return df_data
 
 
@@ -167,6 +174,8 @@ def prepare_actions_data(option, case_network):
     df_data = df_data.set_index('entity')
     df_data.columns = list(map(lambda x: "step_"+str(int(x)+2), df_data.columns))
     df_data = df_data.reset_index()
+    df_data.loc[:, 'option'] = option
+    df_data.loc[:, 'case_network'] = case_network
     return df_data
 
 

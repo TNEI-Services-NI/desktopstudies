@@ -3,6 +3,9 @@ import os
 import warnings
 import pandas as pd
 
+import package.flaskapp.config as flask_cf
+import package.data.simtool.migrate as db_access
+
 dir_data = os.path.dirname(__file__)
 
 dir_simtool_data = '/'.join([dir_data, 'simtool'])
@@ -91,9 +94,32 @@ def read_breaker_states(network: str, option: str):
     # df_breakerstates = pd.read_csv('/'.join([dir_option, filename]))
     df_breakerstates = pd.read_csv('/'.join([dir_option, "allbreakers.csv"]))
 
+    # df_breakerstates = db_access.read_data("breakerstates",
+    #                                        os.environ.get('DATABASE_URL', flask_cf.Config.SQLALCHEMY_DATABASE_URI))
+
     # format data
     df_breakerstates = df_breakerstates.convert_dtypes(convert_string=True)
     df_breakerstates = df_breakerstates.set_index('breaker')
+    return df_breakerstates
+
+
+def read_breaker_states_db(network: str, option: str):
+    states_by_option = _fetch_files(dir_breaker_states)
+    option_folder = states_by_option['Opt' + option]
+    dir_option = '/'.join([dir_breaker_states, option_folder])
+    breaker_state_files = _fetch_files(dir_option)
+    # filename = breaker_state_files[network]
+
+    # df_breakerstates = pd.read_csv('/'.join([dir_option, filename]))
+    # df_breakerstates = pd.read_csv('/'.join([dir_option, "allbreakers.csv"]))
+    e = db_access.generate_engine(local=False)
+    df_breakerstates = db_access.read_data("breakerstates", e)
+
+    # format data
+    df_breakerstates = df_breakerstates.applymap(str)
+    df_breakerstates = df_breakerstates.set_index('breaker')
+    df_breakerstates = df_breakerstates.loc[df_breakerstates['option']==option]
+    print(df_breakerstates.head())
     return df_breakerstates
 
 
@@ -112,7 +138,40 @@ def read_network_views(option: str):
     return df_views
 
 
+def read_network_views_db(option: str):
+    networks_by_option = _fetch_files(dir_network_views)
+    option_folder = networks_by_option['Opt' + option]
+    dir_option = '/'.join([dir_network_views, option_folder])
+    network_views = _fetch_files(dir_option)
+
+    # df_views = pd.read_csv('/'.join([dir_option, "views.csv"]))
+    e = db_access.generate_engine(local=False)
+    df_views = db_access.read_data("networkviews", e)
+    df_views = df_views.loc[df_views['option']==option]
+    # format data
+    df_views = df_views.applymap(str)
+    df_views = df_views.set_index('entity')
+    df_views.columns = list(map(int, df_views.columns))
+    return df_views
+
+
 def read_actions(option: str):
+    actions_by_option = _fetch_files(dir_actions)
+    option_folder = actions_by_option['Opt' + option]
+    dir_option = '/'.join([dir_actions, option_folder])
+    actions = _fetch_files(dir_option)
+
+    df_actions = pd.read_csv('/'.join([dir_option, "actions.csv"]))
+
+    # format data
+    df_actions = df_actions.fillna('')
+    df_actions = df_actions.convert_dtypes(convert_string=True)
+    df_actions = df_actions.set_index('entity')
+    df_actions.columns = list(map(int, df_actions.columns))
+    return df_actions
+
+
+def read_actions_db(option: str):
     actions_by_option = _fetch_files(dir_actions)
     option_folder = actions_by_option['Opt' + option]
     dir_option = '/'.join([dir_actions, option_folder])
@@ -153,64 +212,39 @@ def read_restoration_step(case_network: str, network: str, option: str, scenario
 
     return dict_data
 
+
+def read_restoration_step_db(case_network: str, network: str, option: str, scenario: str, stage: int):
+
+    dir_opt_scen = '/'.join([dir_restoration_steps, 'Opt' + option, case_network])
+    # dict_filenames = _fetch_files(dir_opt_scen)
+    # dict_data = {k: pd.read_csv('/'.join([dir_opt_scen, v]),
+    #                              dtype={'Name': str})
+    #                     .set_index("Name")
+    #              for k, v in dict_filenames.items()}
+    # df_data = pd.read_csv('/'.join([dir_opt_scen, 'alldata.csv']), index_col=0)
+    e = db_access.generate_engine(local=False)
+    df_data = db_access.read_data("restorationsteps", e)
+
+    dict_data = {k: df_data.loc[df_data['component']==k, :] for k in df_data['component'].unique()}
+
+    del df_data
+
+    if stage is not None:
+        dict_data = {k: v.loc[:, 'Step {}'.format(stage)]
+                     for k, v in dict_data.items()}
+
+        dict_data['transformer_apparent_power'] = dict_data['transformers_loading'] * dict_data['transformers_rating'].replace(999,0).replace(-999,0)
+
+        dict_data = {k: v.to_json()
+                     for k, v in dict_data.items()}
+
+    return dict_data
+
 def read_active_network():
     active_sims = _fetch_files(dir_active_simulation)
     filename = active_sims['activesimulation']
     df_activesim = pd.read_csv('/'.join([dir_active_simulation, filename]))
     return df_activesim
-
-
-def read_breaker_states_db(network: str, option: str):
-
-    # format data
-    df_breakerstates = df_breakerstates.convert_dtypes(convert_string=True)
-    df_breakerstates = df_breakerstates.set_index('breaker')
-    return df_breakerstates
-
-
-def read_network_views_db(option: str):
-    networks_by_option = _fetch_files(dir_network_views)
-    option_folder = networks_by_option['Opt' + option]
-    dir_option = '/'.join([dir_network_views, option_folder])
-    network_views = _fetch_files(dir_option)
-
-    df_views = pd.read_csv('/'.join([dir_option, "views.csv"]))
-
-    # format data
-    df_views = df_views.convert_dtypes(convert_string=True)
-    df_views = df_views.set_index('entity')
-    df_views.columns = list(map(int, df_views.columns))
-    return df_views
-
-
-def read_actions_db(option: str):
-    actions_by_option = _fetch_files(dir_actions)
-    option_folder = actions_by_option['Opt' + option]
-    dir_option = '/'.join([dir_actions, option_folder])
-    actions = _fetch_files(dir_option)
-
-    df_actions = pd.read_csv('/'.join([dir_option, "actions.csv"]))
-
-    # format data
-    df_actions = df_actions.fillna('')
-    df_actions = df_actions.convert_dtypes(convert_string=True)
-    df_actions = df_actions.set_index('entity')
-    df_actions.columns = list(map(int, df_actions.columns))
-    return df_actions
-
-
-def read_restoration_step_db(case_network: str, network: str, option: str, scenario: str, stage: int):
-    dir_opt_scen = '/'.join([dir_restoration_steps, 'Opt' + option, case_network])
-    dict_filenames = _fetch_files(dir_opt_scen)
-    dict_data = {k: pd.read_csv('/'.join([dir_opt_scen, v]),
-                                 dtype={'Name': str})
-                        .set_index("Name")
-                 for k, v in dict_filenames.items()}
-
-    dict_data = {k: v.loc[:, 'Step {}'.format(stage)].to_json()
-                 for k, v in dict_data.items()}
-    return dict_data
-
 
 
 def read_active_network_db():

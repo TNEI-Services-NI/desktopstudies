@@ -28,7 +28,16 @@ def init_breakers():
     network = data['network']
     option = data['option']
     df_breakerstates = simtool_data.read_breaker_states(network, option)
-    # df_breakerstates = simtool_data.read_breaker_states_db(network, option)
+    return jsonify(df_breakerstates.to_dict())
+
+
+@simtool_bp.route("/check_breakers_db/", methods=['POST'])
+# @login_required
+def init_breakers_db():
+    data = request.form
+    network = data['network']
+    option = data['option']
+    df_breakerstates = simtool_data.read_breaker_states_db(network, option)
     return jsonify(df_breakerstates.to_dict())
 
 
@@ -132,6 +141,42 @@ def get_all_data():
 
     #actions
     actions = simtool_data.read_actions(option).to_dict()
+
+    all_data = {}
+
+    all_data["steps"] = steps
+    all_data["views"] = views
+    all_data["breakers"] = breakers
+    all_data["actions"] = actions
+
+    return jsonify(all_data)
+
+@simtool_bp.route("/get_all_data_db/", methods=['POST'])
+# @login_required
+def get_all_data_db():
+    data = request.form
+    case_network = data["case_network"]
+    network = data["network"]
+    scenario = data["scenario"]
+    option = data["option"]
+
+
+    #views
+    views = simtool_data.read_network_views_db(option).to_dict()
+
+    #restoration steps
+    steps = {}
+    i=-2
+    while i < len(views)-3:
+        stateDictionary = simtool_data.read_restoration_step_db(case_network, network, option, scenario, i)
+        steps[str(i)] = stateDictionary
+        i+=1
+
+    #breakers
+    breakers = simtool_data.read_breaker_states_db(network, option).to_dict()
+
+    #actions
+    actions = simtool_data.read_actions_db(option).to_dict()
 
     all_data = {}
 

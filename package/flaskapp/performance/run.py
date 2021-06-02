@@ -12,7 +12,7 @@ def test(api_test_call, pool):
     start = time.time()
     end = start
     for call in range(50):
-        print("\tPool {} call {}...".format(pool, call))
+        # print("\tPool {} call {}...".format(pool, call))
         requests.post('http://127.0.0.1:5000/simtool_bp/{}/'.format(api_test_call),
                       data={
                           "case_network": "chapelcross",
@@ -21,7 +21,7 @@ def test(api_test_call, pool):
                           "option": "5"
                       })
         end_ = time.time()
-        print("\t\tPool {} call {} completed ({})".format(pool, call, round(end_-end,2)))
+        # print("\t\tPool {} call {} completed ({})".format(pool, call, round(end_-end,2)))
         end = end_
     end = time.time()
     print("Test pool {} completed ({})".format(pool, round(end-start,2)))
@@ -39,7 +39,11 @@ if __name__ == '__main__':
     # Take first memory usage snapshot
     resp = requests.get('http://127.0.0.1:5000/snapshot')
 
-    workers = [mp.Process(target=test, args=('get_all_data', pool, )) for pool in range(os.cpu_count())]
+    # for _ in range(50):
+    #     test("check_breakers", 0)
+
+    # workers = [mp.Process(target=test, args=('get_all_data', pool, )) for pool in range(4)]
+    workers = [mp.Process(target=test, args=('get_all_data', pool, )) for pool in range(4)]
 
     # Execute workers
     for p in workers:

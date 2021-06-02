@@ -49,3 +49,8 @@ class DevelopmentConfig(Config):
 class PostgresDevelopmentConfig(DevelopmentConfig):
     SQLALCHEMY_DATABASE_URI = POSTGRES_URI
     SQLALCHEMY_POOL_SIZE = 30
+
+
+class PostgresProductionConfig(ProductionConfig):
+    SQLALCHEMY_DATABASE_URI = POSTGRES_URI
+    SQLALCHEMY_POOL_SIZE = 30
