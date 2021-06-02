@@ -115,7 +115,7 @@ def get_restoration_steps():
 
     return jsonify(steps)
 
-@simtool_bp.route("/get_all_data_db/", methods=['POST'])
+@simtool_bp.route("/get_all_data/", methods=['POST'])
 # @login_required
 def get_all_data():
     data = request.form
@@ -151,7 +151,7 @@ def get_all_data():
 
     return jsonify(all_data)
 
-@simtool_bp.route("/get_all_data/", methods=['POST'])
+@simtool_bp.route("/get_all_data_db/", methods=['POST'])
 # @login_required
 def get_all_data_db():
     data = request.form
