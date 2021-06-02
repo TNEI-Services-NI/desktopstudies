@@ -191,6 +191,7 @@ def read_actions_db(option: str):
 
     # format data
     df_actions = df_actions.fillna('')
+    df_actions = df_actions.replace('NaN', '')
     df_actions = df_actions.convert_dtypes(convert_string=True)
     df_actions = df_actions.set_index('entity')
     df_actions = df_actions.drop(columns=['id', 'option', 'case_network'])
@@ -202,7 +203,7 @@ def read_restoration_step(case_network: str, network: str, option: str, scenario
 
     dir_opt_scen = '/'.join([dir_restoration_steps, 'Opt' + option, case_network])
     df_data = pd.read_csv('/'.join([dir_opt_scen, 'alldata.csv']), index_col=0)
-
+    print(df_data)
     dict_data = {k: df_data.loc[df_data['component']==k, :] for k in df_data['component'].unique()}
 
     del df_data
@@ -230,13 +231,17 @@ def read_restoration_step_db(case_network: str, network: str, option: str, scena
     # df_data = pd.read_csv('/'.join([dir_opt_scen, 'alldata.csv']), index_col=0)
     e = db_access.generate_engine(local=False)
     df_data = db_access.read_data("restorationsteps", e)
+    df_data = df_data.set_index('name')
+    df_data = df_data.loc[(df_data['option']==option)&(df_data['case_network']==case_network)]
+
 
     steps = len(list(filter(lambda x: 'step' in x, df_data.columns)))
     df_data = df_data.rename(columns={'step_{}'.format(col): "Step {}".format(col-2) for col in range(0, steps)})
 
-    dict_data = {k: df_data.loc[df_data['component']==k, :] for k in df_data['component'].unique()}
+    dict_data = {
+        k: df_data.loc[df_data['component'] == k, :].filter(like='Step').applymap(float) for k
+        in df_data['component'].unique()}
 
-    del df_data
 
     if stage is not None:
         dict_data = {k: v.loc[:, 'Step {}'.format(stage)]

@@ -230,7 +230,7 @@ function fetch_all_sim_data(case_network_,network, option_, scenario_, callbacks
     $.when(
       $.ajax({
         type: "POST",
-        url: "/simtool_bp/get_steps/",
+        url: "/simtool_bp/get_steps"+db+"/",
         data: {"case_network": case_network_, "network":network, "option": option_, "scenario": scenario_},
   //      dataType: 'application/json'
         }).done(function( component_values ) {
@@ -245,7 +245,7 @@ function fetch_all_sim_data(case_network_,network, option_, scenario_, callbacks
 
       $.ajax({
         type: "POST",
-        url: "/simtool_bp/get_breakers/",
+        url: "/simtool_bp/get_breakers"+db+"/",
         data: {"case_network": case_network_, "network":network, "option": option_, "scenario": scenario_},
   //      dataType: 'application/json'
         }).done(function( component_values ) {
@@ -255,7 +255,7 @@ function fetch_all_sim_data(case_network_,network, option_, scenario_, callbacks
 
       $.ajax({
         type: "POST",
-        url: "/simtool_bp/get_network_view/",
+        url: "/simtool_bp/get_network_view"+db+"/",
         data: {"case_network": case_network_, "network":network, "option": option_, "scenario": scenario_},
   //      dataType: 'application/json'
         }).done(function( component_values ) {
@@ -264,7 +264,7 @@ function fetch_all_sim_data(case_network_,network, option_, scenario_, callbacks
 
       $.ajax({
         type: "POST",
-        url: "/simtool_bp/get_actions/",
+        url: "/simtool_bp/get_actions"+db+"/",
         data: {"case_network": case_network_, "network":network, "option": option_, "scenario": scenario_},
   //      dataType: 'application/json'
         }).done(function( component_values ) {
