@@ -140,6 +140,8 @@ def read_restoration_step(case_network: str, network: str, option: str, scenario
 
     dict_data = {k: df_data.loc[df_data['component']==k, :] for k in df_data['component'].unique()}
 
+    del df_data
+
     if stage is not None:
         dict_data = {k: v.loc[:, 'Step {}'.format(stage)]
                      for k, v in dict_data.items()}

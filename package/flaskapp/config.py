@@ -5,6 +5,7 @@ from os import environ, path
 
 BASE_DIR = path.abspath(path.dirname(__file__))
 # load_dotenv(path.join(BASE_DIR, '.env'))
+POSTGRES_URI = "postgres://plidaxhaouhzjx:eaa0c97f9d13a0b31b5e8e62d97ba69ec5869c769dbd944a691c6aa5762ce045@ec2-35-171-250-21.compute-1.amazonaws.com:5432/df0g003ot0biid"
 
 
 class Config:
@@ -46,5 +47,5 @@ class DevelopmentConfig(Config):
 
 
 class PostgresDevelopmentConfig(DevelopmentConfig):
-    SQLALCHEMY_DATABASE_URI = "postgres://lejasbqocafhqr:bc9a7665ac1c579d1296b4a28d0ca7b2bb3b16e8d350b9a38a79203711891693@ec2-23-23-128-222.compute-1.amazonaws.com:5432/df5qrdnkgl04nb"
+    SQLALCHEMY_DATABASE_URI = POSTGRES_URI
     SQLALCHEMY_POOL_SIZE = 30

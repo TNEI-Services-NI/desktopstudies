@@ -8,6 +8,6 @@ from flask_socketio import join_room, rooms
 
 # These routes are prefixed by the blueprint URL prefix
 @simtool_bp.route('/')
-@login_required
+# @login_required
 def index():
     return redirect(url_for(dash_app.URL_HOME))

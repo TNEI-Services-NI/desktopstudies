@@ -3,6 +3,7 @@ import package.data as data
 import sqlite3
 import package as root
 import pandas as pd
+import package.data.simtool.migrate as migrate
 
 
 def process_LF_data(rev=8, network="chapelcross", voltage="33kv", option="Opt5"):
@@ -22,11 +23,9 @@ def process_LF_data(rev=8, network="chapelcross", voltage="33kv", option="Opt5")
 
 
 def process_breakers_data(network="chapelcross", voltage="33kv", option="Opt5", rev=14):
-    net_breaker_dir = '\\'.join([data.dir_breaker_states, option])
-
     filename = 'AllBreakers_R{}.xlsx'.format(rev)
 
-    df_data = pd.read_excel('/'.join([net_breaker_dir, filename]),
+    df_data = pd.read_excel('/'.join([data.dir_raw_simtool_data, filename]),
                             sheet_name='allbreakers')
 
     from_col = df_data.columns[(df_data=='breaker').any()]
@@ -98,8 +97,4 @@ def combine_LF_data(network="chapelcross", voltage="33kv", option="Opt5"):
 if __name__ == '__main__':
     process_LF_data(rev=22)
     process_breakers_data(rev=6)
-    # migrate_csvs("package/data/simtool/breakerstates/Opt5")
-    # migrate_csvs("package/data/simtool/networkviews/Opt5")
-    # migrate_csvs("package/data/simtool/restorationsteps/Opt5/chapelcross")
-    # get_tables()
-    pass
+    migrate.migrate_data()

@@ -13,7 +13,7 @@ from . import simtool_bp
 
 
 @simtool_bp.route("/receive_breaker/", methods=['POST'])
-@login_required
+# @login_required
 def receive_breaker():
     data = request.form
     print("breaker ID: " + data["breaker"])
@@ -22,7 +22,7 @@ def receive_breaker():
 
 
 @simtool_bp.route("/check_breakers/", methods=['POST'])
-@login_required
+# @login_required
 def init_breakers():
     data = request.form
     network = data['network']
@@ -48,7 +48,7 @@ def server_get_actions(entity, sim_step, option="5"):
 
 
 @simtool_bp.route("/get_network_view/", methods=['POST'])
-@login_required
+# @login_required
 def get_network_view():
     data = request.form
     option = data['option']
@@ -58,7 +58,7 @@ def get_network_view():
 
 
 @simtool_bp.route("/get_action/", methods=['POST'])
-@login_required
+# @login_required
 def get_action():
     data = request.form
     option = data['option']
@@ -68,7 +68,7 @@ def get_action():
 
 
 @simtool_bp.route("/get_state/", methods=['POST'])
-@login_required
+# @login_required
 def get_restoration_step():
     data = request.form
     case_network = data["case_network"]
@@ -79,12 +79,16 @@ def get_restoration_step():
 
     stateDictionary = simtool_data.read_restoration_step(case_network, network, option, scenario, stage)
     # stateDictionary = simtool_data.read_restoration_step_db(case_network, network, option, scenario, stage)
-    return jsonify(stateDictionary)
+    json_state_dict = jsonify(stateDictionary)
+    del stateDictionary
+
+    return json_state_dict
 
 @simtool_bp.route("/get_states/", methods=['POST'])
-@login_required
+# @login_required
 def get_restoration_steps():
     data = request.form
+    print(data)
     case_network = data["case_network"]
     network = data["network"]
     scenario = data["scenario"]
@@ -103,7 +107,7 @@ def get_restoration_steps():
     return jsonify(steps)
 
 @simtool_bp.route("/get_all_data/", methods=['POST'])
-@login_required
+# @login_required
 def get_all_data():
     data = request.form
     case_network = data["case_network"]
@@ -140,7 +144,7 @@ def get_all_data():
 
 
 @simtool_bp.route("/init_network/", methods=['POST'])
-@login_required
+# @login_required
 def init_network():
     data = request.form
     df_activesim = simtool_data.read_active_network()

@@ -79,7 +79,7 @@ def login_post():
 
 
 @auth_bp.route('/logout')
-@login_required
+# @login_required
 def logout():
     current_user.logged_in = 0
     dbs.session.commit()
@@ -90,13 +90,13 @@ def logout():
 
 
 @auth_bp.route('/profile')
-@login_required
+# @login_required
 def profile():
     return redirect(request.url)
 
 
 @auth_bp.route('/wait_room')
-@login_required
+# @login_required
 def wait_room():
     return render_template('wait_room.html', name=current_user.name)
 

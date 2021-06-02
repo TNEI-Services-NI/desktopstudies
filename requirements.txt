@@ -29,3 +29,4 @@ Werkzeug==1.0.1
 sphinx
 openpyxl
 psycopg2
+psutil
