@@ -12,48 +12,29 @@ from package.flaskapp.extensions import dbs
 from . import simtool_bp
 
 
-@simtool_bp.route("/receive_breaker/", methods=['POST'])
+@simtool_bp.route("/get_breakers/", methods=['POST'])
 # @login_required
-def receive_breaker():
-    data = request.form
-    print("breaker ID: " + data["breaker"])
-    print("state: " + data["state"])
-    return jsonify("message received securely")
-
-
-@simtool_bp.route("/check_breakers/", methods=['POST'])
-# @login_required
-def init_breakers():
+def get_breakers():
     data = request.form
     network = data['network']
     option = data['option']
-    df_breakerstates = simtool_data.read_breaker_states(network, option)
-    return jsonify(df_breakerstates.to_dict())
+    all_data = {}
+    df_breakerstates = simtool_data.read_breaker_states(network, option).to_dict()
+    all_data["breakers"] = df_breakerstates
+    return jsonify(all_data)
 
 
-@simtool_bp.route("/check_breakers_db/", methods=['POST'])
+@simtool_bp.route("/get_breakers_db/", methods=['POST'])
 # @login_required
-def init_breakers_db():
+def get_breakers_db():
     data = request.form
     network = data['network']
     option = data['option']
-    df_breakerstates = simtool_data.read_breaker_states_db(network, option)
-    return jsonify(df_breakerstates.to_dict())
-
-
-def server_get_network_view(entity, sim_step, option="5"):
-    df_network_view = simtool_data.read_network_views(option)
-    # df_network_view = simtool_data.read_network_views_db(option)
-    entity = entity.split("_")[0]
-    network = df_network_view.loc[entity, sim_step]
-    return network
-
-
-def server_get_actions(entity, sim_step, option="5"):
-    df_actions = simtool_data.read_actions(option)
-    # df_actions = simtool_data.read_actions_db(option)
-    action = df_actions.loc[entity, sim_step]
-    return action
+    all_data = {}
+    #breakers
+    breakers = simtool_data.read_breaker_states_db(network, option).to_dict()
+    all_data["breakers"] = breakers
+    return jsonify(all_data)
 
 
 @simtool_bp.route("/get_network_view/", methods=['POST'])
@@ -61,59 +42,105 @@ def server_get_actions(entity, sim_step, option="5"):
 def get_network_view():
     data = request.form
     option = data['option']
-    df_network_view = simtool_data.read_network_views(option)
+    all_data = {}
+    df_network_view = simtool_data.read_network_views(option).to_dict()
     # df_network_view = simtool_data.read_network_views_db(option)
-    return jsonify(df_network_view.to_dict())
+    all_data["views"] = df_network_view
+    return jsonify(all_data)
 
 
-@simtool_bp.route("/get_action/", methods=['POST'])
+@simtool_bp.route("/get_network_view_db/", methods=['POST'])
 # @login_required
-def get_action():
+def get_network_view_db():
     data = request.form
     option = data['option']
-    df_action = simtool_data.read_actions(option)
-    # df_action = simtool_data.read_actions_db(option)
-    return jsonify(df_action.to_dict())
+    #views
+    all_data = {}
+    views = simtool_data.read_network_views_db(option).to_dict()
+    all_data["views"] = views
+    return jsonify(all_data)
 
 
-@simtool_bp.route("/get_state/", methods=['POST'])
+@simtool_bp.route("/get_actions/", methods=['POST'])
 # @login_required
-def get_restoration_step():
+def get_actions():
+    data = request.form
+    option = data['option']
+    all_data = {}
+    df_action = simtool_data.read_actions(option).to_dict()
+    all_data["actions"] = df_action
+    return jsonify(all_data)
+
+
+@simtool_bp.route("/get_actions_db/", methods=['POST'])
+# @login_required
+def get_actions_db():
+    data = request.form
+    option = data['option']
+    all_data = {}
+    #actions
+    actions = simtool_data.read_actions_db(option).to_dict()
+    all_data["actions"] = actions
+    return jsonify(all_data)
+
+
+@simtool_bp.route("/get_steps/", methods=['POST'])
+# @login_required
+def get_steps():
     data = request.form
     case_network = data["case_network"]
     network = data["network"]
-    stage = data["stage"]
     scenario = data["scenario"]
     option = data["option"]
+    all_data = {}
 
-    stateDictionary = simtool_data.read_restoration_step(case_network, network, option, scenario, stage)
-    # stateDictionary = simtool_data.read_restoration_step_db(case_network, network, option, scenario, stage)
-    json_state_dict = jsonify(stateDictionary)
+    # restoration steps
+    steps = {}
+    stateDictionary = simtool_data.read_restoration_step(case_network, network, option, scenario, None)
+    for i in range(-2, 35):
+        dict_data = {k: v.loc[:, 'Step {}'.format(i)]
+                     for k, v in stateDictionary.items()}
+
+        dict_data['transformer_apparent_power'] = dict_data['transformers_loading'] * dict_data[
+            'transformers_rating'].replace(999, 0).replace(-999, 0)
+
+        dict_data = {k: v.to_json()
+                     for k, v in dict_data.items()}
+        steps[str(i)] = dict_data
+    all_data["steps"] = steps
     del stateDictionary
 
-    return json_state_dict
+    return jsonify(all_data)
 
-@simtool_bp.route("/get_states/", methods=['POST'])
+
+@simtool_bp.route("/get_steps_db/", methods=['POST'])
 # @login_required
-def get_restoration_steps():
+def get_steps_db():
     data = request.form
-    print(data)
     case_network = data["case_network"]
     network = data["network"]
     scenario = data["scenario"]
     option = data["option"]
 
-    #restoration steps
-    # #todo where is the number of stages saved/how to get it?
-    steps = {}
-    i=-2
-    while i < 35:
-        stateDictionary = simtool_data.read_restoration_step(case_network, network, option, scenario, i)
-        steps[str(i)] = stateDictionary
-        i+=1
-    # stateDictionary = simtool_data.read_all_restoration_steps(case_network, network, option, scenario)
+    all_data = {}
 
-    return jsonify(steps)
+    # restoration steps
+    steps = {}
+    stateDictionary = simtool_data.read_restoration_step_db(case_network, network, option, scenario, None)
+    for i in range(-2, 35):
+        dict_data = {k: v.loc[:, 'Step {}'.format(i)]
+                     for k, v in stateDictionary.items()}
+
+        dict_data['transformer_apparent_power'] = dict_data['transformers_loading'] * dict_data[
+            'transformers_rating'].replace(999, 0).replace(-999, 0)
+
+        dict_data = {k: v.to_json()
+                     for k, v in dict_data.items()}
+        steps[str(i)] = dict_data
+    all_data["steps"] = steps
+
+    return jsonify(all_data)
+
 
 @simtool_bp.route("/get_all_data/", methods=['POST'])
 # @login_required
@@ -124,30 +151,31 @@ def get_all_data():
     scenario = data["scenario"]
     option = data["option"]
 
-
-    #views
-    views = simtool_data.read_network_views(option).to_dict()
-
-    #restoration steps
-    steps = {}
-    i=-2
-    while i < len(views)-3:
-        stateDictionary = simtool_data.read_restoration_step(case_network, network, option, scenario, i)
-        steps[str(i)] = stateDictionary
-        i+=1
-
-    #breakers
-    breakers = simtool_data.read_breaker_states(network, option).to_dict()
-
-    #actions
-    actions = simtool_data.read_actions(option).to_dict()
-
     all_data = {}
 
+    df_network_view = simtool_data.read_network_views(option).to_dict()
+    # df_network_view = simtool_data.read_network_views_db(option)
+    all_data["views"] = df_network_view
+
+    steps = {}
+    stateDictionary = simtool_data.read_restoration_step(case_network, network, option, scenario, None)
+    for i in range(-2, 35):
+        dict_data = {k: v.loc[:, 'Step {}'.format(i)]
+                     for k, v in stateDictionary.items()}
+
+        dict_data['transformer_apparent_power'] = dict_data['transformers_loading'] * dict_data[
+            'transformers_rating'].replace(999, 0).replace(-999, 0)
+
+        dict_data = {k: v.to_json()
+                     for k, v in dict_data.items()}
+        steps[str(i)] = dict_data
     all_data["steps"] = steps
-    all_data["views"] = views
-    all_data["breakers"] = breakers
-    all_data["actions"] = actions
+
+    df_action = simtool_data.read_actions(option).to_dict()
+    all_data["actions"] = df_action
+
+    df_breakerstates = simtool_data.read_breaker_states(network, option).to_dict()
+    all_data["breakers"] = df_breakerstates
 
     return jsonify(all_data)
 
@@ -160,29 +188,32 @@ def get_all_data_db():
     scenario = data["scenario"]
     option = data["option"]
 
+    all_data = {}
 
     #views
     views = simtool_data.read_network_views_db(option).to_dict()
+    all_data["views"] = views
 
     #restoration steps
     steps = {}
-    i=-2
-    while i < len(views)-3:
-        stateDictionary = simtool_data.read_restoration_step_db(case_network, network, option, scenario, i)
-        steps[str(i)] = stateDictionary
-        i+=1
+    stateDictionary = simtool_data.read_restoration_step_db(case_network, network, option, scenario, None)
+    for i in range(-2, 35):
+        dict_data = {k: v.loc[:, 'Step {}'.format(i)]
+                     for k, v in stateDictionary.items()}
+
+        dict_data['transformer_apparent_power'] = dict_data['transformers_loading'] * dict_data['transformers_rating'].replace(999,0).replace(-999,0)
+
+        dict_data = {k: v.to_json()
+                     for k, v in dict_data.items()}
+        steps[str(i)] = dict_data
+    all_data["steps"] = steps
 
     #breakers
     breakers = simtool_data.read_breaker_states_db(network, option).to_dict()
+    all_data["breakers"] = breakers
 
     #actions
     actions = simtool_data.read_actions_db(option).to_dict()
-
-    all_data = {}
-
-    all_data["steps"] = steps
-    all_data["views"] = views
-    all_data["breakers"] = breakers
     all_data["actions"] = actions
 
     return jsonify(all_data)
@@ -193,11 +224,8 @@ def get_all_data_db():
 def init_network():
     data = request.form
     df_activesim = simtool_data.read_active_network()
-    # df_activesim = simtool_data.read_active_network_db()
-    # print(df_activesim)
     df_activesim = df_activesim.fillna("Unknown")
     return jsonify(df_activesim.to_dict())
-    # return df_activesim.to_json()
 
 
 @socketio.on('connect')
@@ -274,3 +302,11 @@ def connection(data):
         socketio.emit('check_redraw', data, room=data['room'])
 
     return data
+
+
+def server_get_network_view(entity, sim_step, option="5"):
+    df_network_view = simtool_data.read_network_views(option)
+    # df_network_view = simtool_data.read_network_views_db(option)
+    entity = entity.split("_")[0]
+    network = df_network_view.loc[entity, sim_step]
+    return network

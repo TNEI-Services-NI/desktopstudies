@@ -6,8 +6,6 @@ import tracemalloc
 
 import psutil
 
-from package.flaskapp.dash_simtool.requests import get_restoration_steps
-
 global_var = []
 process = psutil.Process(os.getpid())
 tracemalloc.start()

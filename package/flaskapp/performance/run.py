@@ -11,7 +11,7 @@ def test(api_test_call, pool):
     # Start some API Calls
     start = time.time()
     end = start
-    for call in range(50):
+    for call in range(10):
         # print("\tPool {} call {}...".format(pool, call))
         requests.post('http://127.0.0.1:5000/simtool_bp/{}/'.format(api_test_call),
                       data={

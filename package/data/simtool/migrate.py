@@ -8,7 +8,7 @@ from sqlalchemy.orm import create_session
 
 import package.data as data
 import package.flaskapp.config as cf
-from package.flaskapp import root
+import package as root
 from sqlalchemy.orm import mapper
 
 

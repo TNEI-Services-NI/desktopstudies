@@ -23,11 +23,9 @@ def _configure_app(config):
                 template_folder='templates',
                 instance_relative_config=True)
 
-    app.config['SQLALCHEMY_DATABASE_URI'] = flask_cf.Config.SQLALCHEMY_DATABASE_URI if \
-        flask_cf.Config.SQLALCHEMY_DATABASE_URI is not None else \
-        'sqlite:///' + root.DB_DIR
+    app.config['SQLALCHEMY_DATABASE_URI'] = flask_cf.Config.SQLALCHEMY_DATABASE_URI
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
+    print(app.config['SQLALCHEMY_DATABASE_URI'])
     if config is None:
         # load the instance config, if it exists, when not testing
         app.config.from_pyfile('config.py', silent=True)

@@ -2,6 +2,7 @@
 """Flask config."""
 from os import environ, path
 # from dotenv import load_dotenv
+import package as root
 
 BASE_DIR = path.abspath(path.dirname(__file__))
 # load_dotenv(path.join(BASE_DIR, '.env'))
@@ -24,7 +25,7 @@ class Config:
     LESS_RUN_IN_DEBUG = environ.get('LESS_RUN_IN_DEBUG')
 
     # Database
-    SQLALCHEMY_DATABASE_URI = environ.get('DATABASE_URL')
+    SQLALCHEMY_DATABASE_URI = environ.get('DATABASE_URL', 'sqlite:///' + root.DB_DIR)
 
     # Static Assets
     STATIC_FOLDER = 'static'
