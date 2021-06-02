@@ -10,6 +10,7 @@ import package.flaskapp.dash_simtool.db as simtool_db
 from package.flaskapp import socketio
 from package.flaskapp.extensions import dbs
 from . import simtool_bp
+import gc
 
 
 @simtool_bp.route("/get_breakers/", methods=['POST'])
@@ -21,6 +22,9 @@ def get_breakers():
     all_data = {}
     df_breakerstates = simtool_data.read_breaker_states(network, option).to_dict()
     all_data["breakers"] = df_breakerstates
+    df_breakerstates = None
+    del df_breakerstates
+    gc.collect()
     return jsonify(all_data)
 
 
@@ -34,6 +38,9 @@ def get_breakers_db():
     #breakers
     breakers = simtool_data.read_breaker_states_db(network, option).to_dict()
     all_data["breakers"] = breakers
+    breakers = None
+    del breakers
+    gc.collect()
     return jsonify(all_data)
 
 
@@ -46,6 +53,9 @@ def get_network_view():
     df_network_view = simtool_data.read_network_views(option).to_dict()
     # df_network_view = simtool_data.read_network_views_db(option)
     all_data["views"] = df_network_view
+    df_network_view = None
+    del df_network_view
+    gc.collect()
     return jsonify(all_data)
 
 
@@ -58,6 +68,9 @@ def get_network_view_db():
     all_data = {}
     views = simtool_data.read_network_views_db(option).to_dict()
     all_data["views"] = views
+    views = None
+    del views
+    gc.collect()
     return jsonify(all_data)
 
 
@@ -69,6 +82,9 @@ def get_actions():
     all_data = {}
     df_action = simtool_data.read_actions(option).to_dict()
     all_data["actions"] = df_action
+    df_action = None
+    del df_action
+    gc.collect()
     return jsonify(all_data)
 
 
@@ -81,6 +97,10 @@ def get_actions_db():
     #actions
     actions = simtool_data.read_actions_db(option).to_dict()
     all_data["actions"] = actions
+
+    actions = None
+    del actions
+    gc.collect()
     return jsonify(all_data)
 
 
@@ -108,8 +128,22 @@ def get_steps():
                      for k, v in dict_data.items()}
         steps[str(i)] = dict_data
     all_data["steps"] = steps
+
+    stateDictionary = None
     del stateDictionary
 
+    df_network_view = None
+    del df_network_view
+    steps = None
+    del steps
+    dict_data = None
+    del dict_data
+    df_action = None
+    del df_action
+    df_breakerstates = None
+    del df_breakerstates
+
+    gc.collect()
     return jsonify(all_data)
 
 
@@ -137,7 +171,21 @@ def get_steps_db():
         dict_data = {k: v.to_json()
                      for k, v in dict_data.items()}
         steps[str(i)] = dict_data
+
     all_data["steps"] = steps
+
+    df_network_view = None
+    del df_network_view
+    steps = None
+    del steps
+    dict_data = None
+    del dict_data
+    df_action = None
+    del df_action
+    df_breakerstates = None
+    del df_breakerstates
+
+    gc.collect()
 
     return jsonify(all_data)
 
@@ -176,6 +224,19 @@ def get_all_data():
 
     df_breakerstates = simtool_data.read_breaker_states(network, option).to_dict()
     all_data["breakers"] = df_breakerstates
+
+    df_network_view = None
+    del df_network_view
+    steps = None
+    del steps
+    dict_data = None
+    del dict_data
+    df_action = None
+    del df_action
+    df_breakerstates = None
+    del df_breakerstates
+
+    gc.collect()
 
     return jsonify(all_data)
 
@@ -216,16 +277,25 @@ def get_all_data_db():
     actions = simtool_data.read_actions_db(option).to_dict()
     all_data["actions"] = actions
 
+    del views
+    del stateDictionary
+    del steps
+    del dict_data
+    del breakers
+    del actions
+
+    gc.collect()
+
     return jsonify(all_data)
 
 
-@simtool_bp.route("/init_network/", methods=['POST'])
-# @login_required
-def init_network():
-    data = request.form
-    df_activesim = simtool_data.read_active_network()
-    df_activesim = df_activesim.fillna("Unknown")
-    return jsonify(df_activesim.to_dict())
+# @simtool_bp.route("/init_network/", methods=['POST'])
+# # @login_required
+# def init_network():
+#     data = request.form
+#     df_activesim = simtool_data.read_active_network()
+#     df_activesim = df_activesim.fillna("Unknown")
+#     return jsonify(df_activesim.to_dict())
 
 
 @socketio.on('connect')

@@ -203,7 +203,6 @@ def read_restoration_step(case_network: str, network: str, option: str, scenario
 
     dir_opt_scen = '/'.join([dir_restoration_steps, 'Opt' + option, case_network])
     df_data = pd.read_csv('/'.join([dir_opt_scen, 'alldata.csv']), index_col=0)
-    print(df_data)
     dict_data = {k: df_data.loc[df_data['component']==k, :] for k in df_data['component'].unique()}
 
     del df_data
