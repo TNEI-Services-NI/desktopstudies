@@ -115,6 +115,9 @@ def read_breaker_states_db(network: str, option: str):
     e = db_access.generate_engine(local=False)
     df_breakerstates = db_access.read_data("breakerstates", e)
 
+    steps = len(list(filter(lambda x: 'step' in x, df_breakerstates.columns)))
+    df_breakerstates = df_breakerstates.rename(columns={'step_{}'.format(col): "{}".format(col-2) for col in range(0, steps)})
+
     # format data
     df_breakerstates = df_breakerstates.applymap(str)
     df_breakerstates = df_breakerstates.set_index('breaker')
@@ -151,7 +154,10 @@ def read_network_views_db(option: str):
     # format data
     df_views = df_views.applymap(str)
     df_views = df_views.set_index('entity')
-    df_views.columns = list(map(int, df_views.columns))
+
+    df_views = df_views.loc[:, list(filter(lambda x: 'step' in x, df_views.columns))]
+    df_views.columns = list(map(lambda x: int(x.split("_")[1])-2, df_views.columns))
+
     return df_views
 
 
@@ -177,7 +183,12 @@ def read_actions_db(option: str):
     dir_option = '/'.join([dir_actions, option_folder])
     actions = _fetch_files(dir_option)
 
-    df_actions = pd.read_csv('/'.join([dir_option, "actions.csv"]))
+    e = db_access.generate_engine(local=False)
+    df_actions = db_access.read_data("actions", e)
+
+    steps = len(list(filter(lambda x: 'step' in x, df_actions.columns)))
+    df_actions = df_actions.rename(
+        columns={'step_{}'.format(col): "{}".format(col - 2) for col in range(0, steps)})
 
     # format data
     df_actions = df_actions.fillna('')
@@ -224,6 +235,9 @@ def read_restoration_step_db(case_network: str, network: str, option: str, scena
     # df_data = pd.read_csv('/'.join([dir_opt_scen, 'alldata.csv']), index_col=0)
     e = db_access.generate_engine(local=False)
     df_data = db_access.read_data("restorationsteps", e)
+
+    steps = len(list(filter(lambda x: 'step' in x, df_data.columns)))
+    df_data = df_data.rename(columns={'step_{}'.format(col): "Step {}".format(col-2) for col in range(0, steps)})
 
     dict_data = {k: df_data.loc[df_data['component']==k, :] for k in df_data['component'].unique()}
 
