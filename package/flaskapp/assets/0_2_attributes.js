@@ -29,6 +29,8 @@ let dataview_round = 3
 
 let case_network = "chapelcross"
 
+let db = "_db"
+
 let background = undefined
 let network = undefined
 let dict_components = undefined

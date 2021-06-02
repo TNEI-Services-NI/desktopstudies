@@ -109,11 +109,7 @@ def add_data(table_name, df_data : pd.DataFrame, e):
 
 
 def read_data(table_name, e):
-    conn = e.pool._creator()
     df_data = pd.read_sql("SELECT * from {}".format(table_name), con=e)
-    print(df_data)
-    conn.commit()
-    conn.close()
     return df_data
 
 
