@@ -122,7 +122,6 @@ def read_breaker_states_db(network: str, option: str):
     df_breakerstates = df_breakerstates.applymap(str)
     df_breakerstates = df_breakerstates.set_index('breaker')
     df_breakerstates = df_breakerstates.loc[df_breakerstates['option']==option]
-    print(df_breakerstates.head())
     return df_breakerstates
 
 
@@ -194,6 +193,7 @@ def read_actions_db(option: str):
     df_actions = df_actions.fillna('')
     df_actions = df_actions.convert_dtypes(convert_string=True)
     df_actions = df_actions.set_index('entity')
+    df_actions = df_actions.drop(columns=['id', 'option', 'case_network'])
     df_actions.columns = list(map(int, df_actions.columns))
     return df_actions
 
@@ -201,11 +201,6 @@ def read_actions_db(option: str):
 def read_restoration_step(case_network: str, network: str, option: str, scenario: str, stage: int):
 
     dir_opt_scen = '/'.join([dir_restoration_steps, 'Opt' + option, case_network])
-    # dict_filenames = _fetch_files(dir_opt_scen)
-    # dict_data = {k: pd.read_csv('/'.join([dir_opt_scen, v]),
-    #                              dtype={'Name': str})
-    #                     .set_index("Name")
-    #              for k, v in dict_filenames.items()}
     df_data = pd.read_csv('/'.join([dir_opt_scen, 'alldata.csv']), index_col=0)
 
     dict_data = {k: df_data.loc[df_data['component']==k, :] for k in df_data['component'].unique()}
