@@ -101,11 +101,13 @@ def _load_performance_requests(app):
 def _configure_database(app):
     @app.before_first_request
     def initialize_database():
+        dbs.session.remove()
         dbs.create_all()
 
         simtool_db.replace_simstatus(dbs, cf.start_sim_step)
         simtool_db.replace_room_simstatus_all(dbs, cf.start_sim_step)
 
+        user.clear(dbs)
         user.register_admin(dbs)
         user.register_required_users(dbs)
 

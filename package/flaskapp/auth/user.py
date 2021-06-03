@@ -18,6 +18,10 @@ class User(dbs.Model, UserMixin):
         return str(self.name)
 
 
+def clear(dbs):
+    User.query.delete()
+    dbs.session.commit()
+
 def register_admin(dbs):
     user = User.query.filter_by(
         email='admin@admin').first()  # if this returns a user, then the email already exists in database
