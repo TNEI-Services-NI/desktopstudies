@@ -7,6 +7,7 @@ from flask_assets import Environment
 
 import package as root
 import package.flaskapp.auth.user as user
+import package.flaskapp.config as flask_cf
 import package.flaskapp.dash_simtool.db as simtool_db
 from .auth.login_manager import init_manager
 import package.data.process as data_process
@@ -22,17 +23,8 @@ def _configure_app(config):
                 template_folder='templates',
                 instance_relative_config=True)
 
-    app.config.from_mapping(
-        SECRET_KEY='dev',  # used by Flask and extensions to keep data safe.
-        # It’s set to 'dev' to provide a convenient value during development,
-        # but it should be overridden with a random value when deploying
-        DATABASE=root.DB_DIR,
-    )
-
-    app.config['SECRET_KEY'] = 'dev'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + root.DB_DIR
+    app.config['SQLALCHEMY_DATABASE_URI'] = flask_cf.Config.SQLALCHEMY_DATABASE_URI
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
     if config is None:
         # load the instance config, if it exists, when not testing
         app.config.from_pyfile('config.py', silent=True)
@@ -87,7 +79,6 @@ def __load_dash_requests(app):
     from .dash_simtool import requests as dash_requests
     app.register_blueprint(dash_requests.simtool_bp)
 
-
 def _load_blueprints(app):
     # load auth views
     __load_auth_views(app)
@@ -99,14 +90,24 @@ def _load_blueprints(app):
     __load_dash_requests(app)
 
 
+def _load_performance_requests(app):
+    # load dash requests
+    from .performance import requests as performance_requests
+    app = performance_requests(app)
+    return app
+
+
+
 def _configure_database(app):
     @app.before_first_request
     def initialize_database():
+        dbs.session.remove()
         dbs.create_all()
 
         simtool_db.replace_simstatus(dbs, cf.start_sim_step)
         simtool_db.replace_room_simstatus_all(dbs, cf.start_sim_step)
 
+        user.clear(dbs)
         user.register_admin(dbs)
         user.register_required_users(dbs)
 
@@ -167,6 +168,8 @@ def create_app(config=None):
         # from . import routes
 
         _load_blueprints(app)
+
+        app = _load_performance_requests(app)
 
         _configure_database(app)
 

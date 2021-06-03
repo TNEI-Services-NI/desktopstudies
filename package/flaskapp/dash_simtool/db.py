@@ -3,19 +3,19 @@ from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 
 import package as root
-from package.flaskapp.extensions import dbs as db
+from package.flaskapp.extensions import dbs
 
 
-class Simstatus(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    status = db.Column(db.Integer)
-    entity = db.Column(db.String)
+class Simstatus(dbs.Model):
+    id = dbs.Column(dbs.Integer, primary_key=True)
+    status = dbs.Column(dbs.Integer)
+    entity = dbs.Column(dbs.String)
 
     def __repr__(self):
         return str(self.name)
 
 
-# class Simdata(db.Model):
+# class Simdata(dbs.Model):
 #     def __init__(self):
 #         self.Base = automap_base()
 #

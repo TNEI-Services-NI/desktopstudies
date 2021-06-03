@@ -1,22 +1,26 @@
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash
 
-from package.flaskapp.extensions import dbs as db
+from package.flaskapp.extensions import dbs
 import package.data as data
 import pandas as pd
 
 
-class User(db.Model, UserMixin):
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(100), unique=True)
-    password = db.Column(db.String(100))
-    name = db.Column(db.String(1000))
-    entity = db.Column(db.String(10))
-    logged_in = db.Column(db.Boolean(), default=False, nullable=False)
+class User(dbs.Model, UserMixin):
+    id = dbs.Column(dbs.Integer, primary_key=True)
+    email = dbs.Column(dbs.String(100), unique=True)
+    password = dbs.Column(dbs.String(100))
+    name = dbs.Column(dbs.String(1000))
+    entity = dbs.Column(dbs.String(20))
+    logged_in = dbs.Column(dbs.Boolean(), default=False, nullable=False)
 
     def __repr__(self):
         return str(self.name)
 
+
+def clear(dbs):
+    User.query.delete()
+    dbs.session.commit()
 
 def register_admin(dbs):
     user = User.query.filter_by(

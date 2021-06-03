@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, redirect, url_for, request, flash,
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, login_required, current_user
 from package.flaskapp.auth.user import User
-from package.flaskapp import dbs as db
+from package.flaskapp import dbs
 from package.flaskapp import socketio
 import time
 import pandas as pd
@@ -47,8 +47,8 @@ def signup_post():
                     entity=entity)
 
     # add the new user to the database
-    db.session.add(new_user)
-    db.session.commit()
+    dbs.session.add(new_user)
+    dbs.session.commit()
 
     return redirect(url_for('auth.login'))
 
@@ -73,16 +73,16 @@ def login_post():
     session['entity'] = user.entity
     session['username'] = user.name
     user.logged_in = 1
-    db.session.commit()
+    dbs.session.commit()
 
     return redirect(url_for('auth.wait_room'))
 
 
 @auth_bp.route('/logout')
-@login_required
+# @login_required
 def logout():
     current_user.logged_in = 0
-    db.session.commit()
+    dbs.session.commit()
     session.clear()
     logout_user()
     trigger_checks()
@@ -90,13 +90,13 @@ def logout():
 
 
 @auth_bp.route('/profile')
-@login_required
+# @login_required
 def profile():
     return redirect(request.url)
 
 
 @auth_bp.route('/wait_room')
-@login_required
+# @login_required
 def wait_room():
     return render_template('wait_room.html', name=current_user.name)
 
@@ -111,7 +111,7 @@ def trigger_checks(trig_data=None):
 
     required = pd.read_csv(data.dir_auth_data+'/req_users.csv')
 
-    active_users = User.query.filter_by(logged_in=1).all()
+    active_users = User.query.filter_by(logged_in=True).all()
     logged_in = pd.DataFrame({'user': [user.name for user in active_users],
                               'email': [user.email for user in active_users],
                               'entity': [user.entity for user in active_users],

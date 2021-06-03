@@ -187,46 +187,94 @@ function fetch_step_restoration_data(case_network_, network, stage_, option_, sc
   }
 
 
-function fetch_all_restoration_data(case_network_,network, option_, scenario_, callbacks){
-      $.ajax({
-      type: "POST",
-      url: "/simtool_bp/get_states/",
-      data: {"case_network": case_network_, "network":network, "option": option_, "scenario": scenario_},
-//      dataType: 'application/json'
-      }).done(function( component_values ) {
-        for(let component_stage in component_values){
-            component_stage_parameters = component_values[component_stage]
-            for(let component_parameter in component_stage_parameters){
-            component_values[component_stage][component_parameter] = JSON.parse(component_stage_parameters[component_parameter])
-            }
-        }
-        restoration_data = component_values
-        callbacks(component_values);
-      })
-  }
+// function fetch_all_restoration_data(case_network_,network, option_, scenario_, callbacks){
+//       $.ajax({
+//       type: "POST",
+//       url: "/simtool_bp/get_states/",
+//       data: {"case_network": case_network_, "network":network, "option": option_, "scenario": scenario_},
+// //      dataType: 'application/json'
+//       }).done(function( component_values ) {
+//         for(let component_stage in component_values){
+//             component_stage_parameters = component_values[component_stage]
+//             for(let component_parameter in component_stage_parameters){
+//             component_values[component_stage][component_parameter] = JSON.parse(component_stage_parameters[component_parameter])
+//             }
+//         }
+//         restoration_data = component_values
+//         callbacks(component_values);
+//       })
+//   }
 
 function fetch_all_sim_data(case_network_,network, option_, scenario_, callbacks){
+//       $.ajax({
+//       type: "POST",
+//       url: "/simtool_bp/get_all_data/",
+//       data: {"case_network": case_network_, "network":network, "option": option_, "scenario": scenario_},
+// //      dataType: 'application/json'
+//       }).done(function( component_values ) {
+//
+//         restoration_data = component_values["steps"]
+//         for(let component_stage in restoration_data){
+//             component_stage_parameters = restoration_data[component_stage]
+//             for(let component_parameter in component_stage_parameters){
+//             restoration_data[component_stage][component_parameter] = JSON.parse(component_stage_parameters[component_parameter])
+//             }
+//         }
+// //        restoration_data = component_values
+//
+//         breaker_data = component_values["breakers"]
+//         view_data = component_values["views"]
+//         action_data = component_values["actions"]
+//         callbacks()
+//       })
+    $.when(
       $.ajax({
-      type: "POST",
-      url: "/simtool_bp/get_all_data/",
-      data: {"case_network": case_network_, "network":network, "option": option_, "scenario": scenario_},
-//      dataType: 'application/json'
-      }).done(function( component_values ) {
+        type: "POST",
+        url: "/simtool_bp/get_steps"+db+"/",
+        data: {"case_network": case_network_, "network":network, "option": option_, "scenario": scenario_},
+  //      dataType: 'application/json'
+        }).done(function( component_values ) {
+          restoration_data = component_values["steps"]
+          for(let component_stage in restoration_data){
+              component_stage_parameters = restoration_data[component_stage]
+              for(let component_parameter in component_stage_parameters){
+              restoration_data[component_stage][component_parameter] = JSON.parse(component_stage_parameters[component_parameter])
+              }
+          }
+        }),
 
-        restoration_data = component_values["steps"]
-        for(let component_stage in restoration_data){
-            component_stage_parameters = restoration_data[component_stage]
-            for(let component_parameter in component_stage_parameters){
-            restoration_data[component_stage][component_parameter] = JSON.parse(component_stage_parameters[component_parameter])
-            }
-        }
-//        restoration_data = component_values
+      $.ajax({
+        type: "POST",
+        url: "/simtool_bp/get_breakers"+db+"/",
+        data: {"case_network": case_network_, "network":network, "option": option_, "scenario": scenario_},
+  //      dataType: 'application/json'
+        }).done(function( component_values ) {
+            breaker_data = component_values["breakers"]
 
-        breaker_data = component_values["breakers"]
-        view_data = component_values["views"]
-        action_data = component_values["actions"]
-        callbacks()
-      })
+        }),
+
+      $.ajax({
+        type: "POST",
+        url: "/simtool_bp/get_network_view"+db+"/",
+        data: {"case_network": case_network_, "network":network, "option": option_, "scenario": scenario_},
+  //      dataType: 'application/json'
+        }).done(function( component_values ) {
+          view_data = component_values["views"]
+        }),
+
+      $.ajax({
+        type: "POST",
+        url: "/simtool_bp/get_actions"+db+"/",
+        data: {"case_network": case_network_, "network":network, "option": option_, "scenario": scenario_},
+  //      dataType: 'application/json'
+        }).done(function( component_values ) {
+          action_data = component_values["actions"]
+        })
+    ).done(function(){
+      callbacks();
+    })
+
+
   }
 
 /**
@@ -234,18 +282,18 @@ function fetch_all_sim_data(case_network_,network, option_, scenario_, callbacks
  * url parameter of ajax request must reference blueprint specific route to function
  * @return {None}
  */
-function init_network(callback){
-      $.ajax({
-      type: "POST",
-      url: "/simtool_bp/init_network/",
-      data: {'string': 'none'},
-      success: function(state){
-        let voltage = state["voltage"]["0"]
-        let network_ = state["network"]["0"]
-        callback(network_, voltage)
-      }
-      })
-  }
+// function init_network(callback){
+//       $.ajax({
+//       type: "POST",
+//       url: "/simtool_bp/init_network/",
+//       data: {'string': 'none'},
+//       success: function(state){
+//         let voltage = state["voltage"]["0"]
+//         let network_ = state["network"]["0"]
+//         callback(network_, voltage)
+//       }
+//       })
+//   }
 
 const breaker_clicked_event = new CustomEvent('breaker_clicked')
 const action_clicked_event = new CustomEvent('action_clicked')

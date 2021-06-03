@@ -185,6 +185,8 @@ function update_dataviews(step_data) {
                     acc = 2
             } else if (component_parameter.includes('voltage')) {
                     units = " p.u."
+                    acc = 2
+
             } else if (component_parameter.includes('taps')) {
                     units = " ."
             } else if (component_parameter.includes('current')) {
@@ -207,36 +209,34 @@ function update_dataviews(step_data) {
             if(step_data[component_parameter] != undefined){
             if (id_root in step_data[component_parameter]) {
                 let value = step_data[component_parameter][id_root]
-               if(argument == "LV"){
-               //quickest fix in the west
-                value = value * 132/33
-               }
+                if(argument == "LV"){
+                   //quickest fix in the west
+                    value = value * 132/33
+                }
 
-               value = (scale * Math.round(value * 1000) / 1000).toFixed(acc)
-               let output_value = value
+                output_value = Number(scale * value).toFixed(acc)
+//                let output_value = value
 
+                if(value==0){
+                        text_list = text_list.concat([String(output_value) + units] );
+                        flow_list = flow_list.concat([""] );
+                        continue
+                }
 
                 if(highlight_undefined||(value < 999 && value > -999)){
                     // let value = step_data[component_parameter][id_dv].toFixed(2)
                     let direction= "down"
                     let arrow_up = true
+                    let draw_flow = true
                     //get negative or positive (or zero?)
                     let value_polarity = value>0
 
-                    if(value==0){
 
-                        text_list = text_list.concat([String(Math.abs(value)) + units] );
-                        flow_list = flow_list.concat([""] );
-                     continue
-                    }
 
                     //get polarity of datatype
                     let type_polarity = data_polarity[units]
                     if(type_polarity === null){
-                    text_list = text_list.concat([String(Math.abs(value)) + units] );
-                    flow_list = flow_list.concat([""] );
-
-                    continue
+                        draw_flow=false
                     }
 
                     //type polarity, false means flip
@@ -246,22 +246,26 @@ function update_dataviews(step_data) {
                     if(!value_polarity){arrow_up= !arrow_up}
 
                     if(flow_direction == null){
-
-                    text_list = text_list.concat([String(Math.abs(value)) + units] );
-                    flow_list = flow_list.concat([""]);
-                    continue
+                        draw_flow=false
                     }
+
+                    if(draw_flow == false){
+                        text_list = text_list.concat([output_value + units]);
+                        flow_list = flow_list.concat([""] );
+                        continue
+                    }
+
                     if(flow_direction){arrow_up= !arrow_up}
 
                     if(arrow_up){direction="up"}
                     else{direction="down"}
 
                     if(direction == "down"){
-                        text_list = text_list.concat([String((Math.abs(value))) + units]);
+                        text_list = text_list.concat([output_value + units]);
                         flow_list = flow_list.concat(["down"] );
                         }
                     else{
-                        text_list = text_list.concat([String(Math.abs(value)) + units]);
+                        text_list = text_list.concat([output_value + units]);
                         flow_list = flow_list.concat(["up"] );
                         }
 
@@ -458,7 +462,7 @@ function update_state(case_network_, progress=false) {
             $("body").css("cursor", "default");
         }
 
-    }, 200)
+    }, 1)
 }
 
 
@@ -653,4 +657,20 @@ function update_scaling() {
 }
 
 update_scaling();
+
+var run_ping = function(){
+
+    setTimeout(function(){
+    $.ajax({
+    type: "POST",
+    url: "/simtool_bp/ping/",
+    data: {"message": "ping"},
+    }).done(function( data ) {
+        run_ping();
+    })
+    }, 20*1000)
+}
+
+run_ping();
+
 //$( window ).resize(function(){update_scaling(), master_draw()})
