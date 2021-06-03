@@ -5,7 +5,7 @@ import os
 import multiprocessing as mp
 import time
 
-N_POOLS = 1
+N_POOLS = 4
 K_REQUESTS = 40
 
 LIST_CALLS = [
@@ -14,7 +14,7 @@ LIST_CALLS = [
     'simtool_bp/get_network_view/',
     'simtool_bp/get_actions/',
     'simtool_bp/get_steps/',
-    'simtool_bp/get_all_data/',
+    # 'simtool_bp/get_all_data/',
     'auth/logout',
 ]
 

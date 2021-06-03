@@ -462,7 +462,7 @@ function update_state(case_network_, progress=false) {
             $("body").css("cursor", "default");
         }
 
-    }, 200)
+    }, 1)
 }
 
 

@@ -6,7 +6,9 @@ import package as root
 
 BASE_DIR = path.abspath(path.dirname(__file__))
 # load_dotenv(path.join(BASE_DIR, '.env'))
-POSTGRES_URI = "postgres://plidaxhaouhzjx:eaa0c97f9d13a0b31b5e8e62d97ba69ec5869c769dbd944a691c6aa5762ce045@ec2-35-171-250-21.compute-1.amazonaws.com:5432/df0g003ot0biid"
+POSTGRES_URI_staging = "postgres://bksexxvtguibwo:22869aa0e5ad81d84b9b09cbbe1cd9295b211138e5584e905117a92af233363e@ec2-23-23-128-222.compute-1.amazonaws.com:5432/d5e43ulcbqekps"
+POSTGRES_URI_production = "postgres://plidaxhaouhzjx:eaa0c97f9d13a0b31b5e8e62d97ba69ec5869c769dbd944a691c6aa5762ce045@ec2-35-171-250-21.compute-1.amazonaws.com:5432/df0g003ot0biid"
+POSTGRES_URI = POSTGRES_URI_production
 
 
 class Config:
