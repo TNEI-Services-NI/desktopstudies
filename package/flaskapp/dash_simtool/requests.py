@@ -289,6 +289,10 @@ def get_all_data_db():
     return jsonify(all_data)
 
 
+@simtool_bp.route("/ping/", methods=['POST'])
+def ping():
+    return {'response': 'pong'}
+
 # @simtool_bp.route("/init_network/", methods=['POST'])
 # # @login_required
 # def init_network():

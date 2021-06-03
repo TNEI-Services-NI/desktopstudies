@@ -3,6 +3,8 @@ import os
 import warnings
 import pandas as pd
 
+import gc
+
 import package.flaskapp.config as flask_cf
 import package.data.simtool.migrate as db_access
 
@@ -100,6 +102,8 @@ def read_breaker_states(network: str, option: str):
     # format data
     df_breakerstates = df_breakerstates.convert_dtypes(convert_string=True)
     df_breakerstates = df_breakerstates.set_index('breaker')
+
+    gc.collect()
     return df_breakerstates
 
 
@@ -122,6 +126,10 @@ def read_breaker_states_db(network: str, option: str):
     df_breakerstates = df_breakerstates.applymap(str)
     df_breakerstates = df_breakerstates.set_index('breaker')
     df_breakerstates = df_breakerstates.loc[df_breakerstates['option']==option]
+
+    e = None
+    del e
+    gc.collect()
     return df_breakerstates
 
 
@@ -137,6 +145,7 @@ def read_network_views(option: str):
     df_views = df_views.convert_dtypes(convert_string=True)
     df_views = df_views.set_index('entity')
     df_views.columns = list(map(int, df_views.columns))
+    gc.collect()
     return df_views
 
 
@@ -156,7 +165,9 @@ def read_network_views_db(option: str):
 
     df_views = df_views.loc[:, list(filter(lambda x: 'step' in x, df_views.columns))]
     df_views.columns = list(map(lambda x: int(x.split("_")[1])-2, df_views.columns))
-
+    e = None
+    del e
+    gc.collect()
     return df_views
 
 
@@ -173,6 +184,7 @@ def read_actions(option: str):
     df_actions = df_actions.convert_dtypes(convert_string=True)
     df_actions = df_actions.set_index('entity')
     df_actions.columns = list(map(int, df_actions.columns))
+    gc.collect()
     return df_actions
 
 
@@ -196,6 +208,9 @@ def read_actions_db(option: str):
     df_actions = df_actions.set_index('entity')
     df_actions = df_actions.drop(columns=['id', 'option', 'case_network'])
     df_actions.columns = list(map(int, df_actions.columns))
+    e = None
+    del e
+    gc.collect()
     return df_actions
 
 
@@ -216,6 +231,7 @@ def read_restoration_step(case_network: str, network: str, option: str, scenario
         dict_data = {k: v.to_json()
                      for k, v in dict_data.items()}
 
+    gc.collect()
     return dict_data
 
 
@@ -241,6 +257,8 @@ def read_restoration_step_db(case_network: str, network: str, option: str, scena
         k: df_data.loc[df_data['component'] == k, :].filter(like='Step').applymap(float) for k
         in df_data['component'].unique()}
 
+    df_data = None
+    del df_data
 
     if stage is not None:
         dict_data = {k: v.loc[:, 'Step {}'.format(stage)]
@@ -251,7 +269,11 @@ def read_restoration_step_db(case_network: str, network: str, option: str, scena
         dict_data = {k: v.to_json()
                      for k, v in dict_data.items()}
 
+    e = None
+    del e
+    gc.collect()
     return dict_data
+
 
 def read_active_network():
     active_sims = _fetch_files(dir_active_simulation)

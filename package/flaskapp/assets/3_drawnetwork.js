@@ -657,4 +657,20 @@ function update_scaling() {
 }
 
 update_scaling();
+
+var run_ping = function(){
+
+    setTimeout(function(){
+    $.ajax({
+    type: "POST",
+    url: "/simtool_bp/ping/",
+    data: {"message": "ping"},
+    }).done(function( data ) {
+        run_ping();
+    })
+    }, 20*1000)
+}
+
+run_ping();
+
 //$( window ).resize(function(){update_scaling(), master_draw()})
