@@ -1,18 +1,45 @@
 name,entity,email,required,status
-Dieter Gutschow,DNO,dieter.gutschow@tneigroup.com,TRUE,FALSE
-Max McFarlane,admin,max.mcfarlane@tneigroup.com,TRUE,FALSE
-Christopher Salter,Observer,christopher.salter2@natoinalgrideso.com,TRUE,FALSE
-"Foote, Colin",TO,cfoote@spenergynetworks.co.uk,TRUE,FALSE
-"Auty (ESO), Daniel",ESO,daniel.auty@nationalgrideso.com,TRUE,FALSE
-"Chandler (ESO), Peter",ESO,peter.chandler@nationalgrideso.com,TRUE,FALSE
-Neil Miller,DNO,neil.miller@spenergynetworks.co.uk,TRUE,FALSE
-Neil Hutcheon,DNO,nhutcheon@spenergynetworks.co.uk,TRUE,FALSE
-"Rochford1 (ESO), Hannah",DER,hannah.rochford1@nationalgrideso.com,TRUE,FALSE
-"Nnabuife (ESO), Dozie",TO,dozie.nnabuife@nationalgrideso.com,TRUE,FALSE
-"Kenny, Michael",DER,michael.kenny@nationalgrideso.com,TRUE,FALSE
-Howard Downey,DNO,howard.downey@spenergynetworks.co.uk,TRUE,FALSE
-Dieter Gutschow,DNO,dieter.gutschow@tneigroup.com,TRUE,FALSE
-"Penhaligon (ESO), Emma",Observer,emma.penhaligon@nationalgrideso.com,TRUE,FALSE
-"Singh (ESO), Bikramjit",TO,bikramjit.singh@nationalgrideso.com,TRUE,FALSE
-"Phull (ESO), Roopkamal",DER,roopkamal.phull@nationalgrideso.com,TRUE,FALSE
-"MCNICOL, FINLAY",DER,fmcnicol@spenergynetworks.co.uk,TRUE,FALSE
+1,admin,1@1.com,TRUE,FALSE
+2,admin,2@2.com,TRUE,FALSE
+3,admin,3@3.com,TRUE,FALSE
+4,admin,4@4.com,TRUE,FALSE
+5,admin,5@5.com,TRUE,FALSE
+6,admin,6@6.com,TRUE,FALSE
+7,admin,7@7.com,TRUE,FALSE
+8,admin,8@8.com,TRUE,FALSE
+9,admin,9@9.com,TRUE,FALSE
+10,admin,10@10.com,TRUE,FALSE
+11,admin,11@11.com,TRUE,FALSE
+12,admin,12@12.com,FALSE,FALSE
+13,admin,13@13.com,TRUE,FALSE
+14,admin,14@14.com,TRUE,FALSE
+15,admin,15@15.com,TRUE,FALSE
+16,admin,16@16.com,FALSE,FALSE
+17,admin,17@17.com,FALSE,FALSE
+18,admin,18@18.com,FALSE,FALSE
+19,admin,19@19.com,FALSE,FALSE
+20,admin,20@20.com,FALSE,FALSE
+21,admin,21@21.com,FALSE,FALSE
+22,admin,22@22.com,FALSE,FALSE
+23,admin,23@23.com,FALSE,FALSE
+24,admin,24@24.com,FALSE,FALSE
+25,admin,25@25.com,FALSE,FALSE
+26,admin,26@26.com,FALSE,FALSE
+27,admin,27@27.com,FALSE,FALSE
+28,admin,28@28.com,FALSE,FALSE
+29,admin,29@29.com,FALSE,FALSE
+30,admin,30@30.com,FALSE,FALSE
+31,admin,31@31.com,FALSE,FALSE
+32,admin,32@32.com,FALSE,FALSE
+33,admin,33@33.com,FALSE,FALSE
+34,admin,34@34.com,FALSE,FALSE
+35,admin,35@35.com,FALSE,FALSE
+36,admin,36@36.com,FALSE,FALSE
+37,admin,37@37.com,FALSE,FALSE
+38,admin,38@38.com,FALSE,FALSE
+39,admin,39@39.com,FALSE,FALSE
+40,admin,40@40.com,FALSE,FALSE
+41,admin,41@41.com,FALSE,FALSE
+42,admin,42@42.com,FALSE,FALSE
+43,admin,43@43.com,TRUE,FALSE
+44,admin,44@44.com,TRUE,FALSE
