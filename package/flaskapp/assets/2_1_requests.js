@@ -55,6 +55,7 @@ socket.on('redraw', function(data) {
     let old_network = network
     let old_step = current_step
     current_step = data['sim_step'];
+    view_step = data['view_step']
     if ('network' in data) {
         network = data['network'];
     }

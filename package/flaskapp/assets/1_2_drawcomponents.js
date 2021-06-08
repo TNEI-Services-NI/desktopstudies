@@ -878,17 +878,18 @@ function draw_action_button(){
   var group = draw.group();
     action = action_data[current_step][entity.split("_")[0]]
       if(action !== ''){
-        let rect1 = draw.rect(x_max*0.1,y_max*0.07).fill(palette["controls"]).center(x_max*0.8,y_max*0.88);
-        add_text(rect1, false, ["Take action: ", action], 0, 0, "#000000", 12, function(text1){
+        let rect1 = draw.rect(x_max*0.09,y_max*0.04).fill(palette["controls"]).center(x_max*0.825,y_max*0.88);
+        add_text(rect1, false, ["Take action:"], -45, -30, "#ffffff", 12, function(){});
+        add_text(rect1, false, [action], 0, 0, "#000000", 12, function(text1){
           debounce_click_function(text1, function(case_network_){
           action = undefined
-          inc_state(case_network_);
+          inc_state(case_network_, true);
         });
           mouseenterleave_pointer([text1, rect1]);
         })
         debounce_click_function(rect1, function(case_network_){
           action = undefined
-          inc_state(case_network_);
+          inc_state(case_network_, true);
         });
         mouseenterleave_pointer(rect1);
       }
@@ -897,7 +898,7 @@ function draw_action_button(){
 function draw_next_network_button(){
   var group = draw.group();
     if(next_network === true){
-      let rect1 = draw.rect(x_max*0.1,y_max*0.07).fill(palette["controls"]).center(x_max*0.9,y_max*0.88);
+      let rect1 = draw.rect(x_max*0.1,y_max*0.07).fill(palette["controls"]).center(x_max*0.7,y_max*0.88);
       add_text(rect1, false, ["Next network"], 0, 0, "#000000", 12, function(text1){
         debounce_click_function(text1, function (case_network_){
           next_network = undefined
@@ -918,29 +919,102 @@ function draw_admin_buttons(){
   var group = draw.group();
 
     if(!(entity.search('admin')==-1)){
-      let rect0 = draw.rect(x_max*0.07,y_max*0.05).fill(palette["controls"]).center(x_max*0.5,y_max*0.88);
+      let rect0 = draw.rect(x_max*0.07,y_max*0.05).fill(palette["controls"]).center(x_max*0.4,y_max*0.88);
       add_text(rect0, false, ["Admin action:", "reset"], 0, 0, "#000000", 12, function(text1){
-        debounce_click_function(text1, reset_state);
+        debounce_click_function(text1, function (){
+          reset_state(case_network, true)
+        });
         mouseenterleave_pointer([text1, rect0]);
       })
-      let rect1 = draw.rect(x_max*0.07,y_max*0.05).fill(palette["controls"]).center(x_max*0.6,y_max*0.88);
+      let rect1 = draw.rect(x_max*0.07,y_max*0.05).fill(palette["controls"]).center(x_max*0.5,y_max*0.88);
       add_text(rect1, false, ["Admin action:", "back"], 0, 0, "#000000", 12, function(text1){
-        debounce_click_function(text1, dec_state);
+        debounce_click_function(text1, function (case_network){
+          dec_state(case_network, true)
+        });
         mouseenterleave_pointer([text1, rect1]);
       })
-      let rect2 = draw.rect(x_max*0.07,y_max*0.05).fill(palette["controls"]).center(x_max*0.7,y_max*0.88);
+      let rect2 = draw.rect(x_max*0.07,y_max*0.05).fill(palette["controls"]).center(x_max*0.6,y_max*0.88);
       add_text(rect2, false, ["Admin action:", "next"], 0, 0, "#000000", 12, function(text1){
-        debounce_click_function(text1, inc_state);
+        debounce_click_function(text1, function (case_network){
+          inc_state(case_network, true)
+        });
         mouseenterleave_pointer([text1, rect2]);
       })
 
-      debounce_click_function(rect0, reset_state);
-      debounce_click_function(rect1, dec_state);
-      debounce_click_function(rect2, inc_state);
+      debounce_click_function(rect0, function (){
+          reset_state(case_network, true)
+        });
+      debounce_click_function(rect1, function (){
+          dec_state(case_network, true)
+        });
+      debounce_click_function(rect2, function (){
+          inc_state(case_network, true)
+        });
       mouseenterleave_pointer(rect0);
       mouseenterleave_pointer(rect1);
       mouseenterleave_pointer(rect2);
     }
+}
+
+
+function draw_view_buttons(){
+  var temp_view = undefined
+  var group = draw.group();
+
+  let prev = ["Previous", "network"]
+  let next = ["Next", "network"]
+  if(view_step>current_step){
+    prev = ["Current", "network"]
+    next = []
+  }
+  if(view_step<current_step){
+    prev = []
+    next = ["Current", "network"]
+  }
+
+  if((!(view_step>current_step))&&(view_step<34)){
+    let rect0 = draw.rect(x_max*0.04,y_max*0.05).fill(palette["controls"]).center(x_max*0.85,y_max*0.81);
+    add_text(rect0, false, ["View:"], -20, -30, "#ffffff", 12, function(text1){});
+    add_text(rect0, false, next, 0, 0, "#000000", 12, function(text1){
+      debounce_click_function(text1, function (){
+        // view_step += 1
+        if((view_step+1)<=(current_step+1)){
+          update_state(case_network, true, current_step, view_step+1, true, true)
+        }
+      });
+      mouseenterleave_pointer([text1, rect0]);
+    });
+
+    debounce_click_function(rect0, function (){
+        // view_step += 1
+        if((view_step+1)<=(current_step+1)){
+          update_state(case_network, true, current_step, view_step+1, true, true)
+        }
+      });
+    mouseenterleave_pointer(rect0);
+  }
+
+  if(!(view_step<current_step)&&(view_step>-2)){
+    let rect1 = draw.rect(x_max*0.04,y_max*0.05).fill(palette["controls"]).center(x_max*0.8,y_max*0.81);
+    add_text(rect1, false, ["View:"], -20, -30, "#ffffff", 12, function(text1){});
+    add_text(rect1, false, prev, 0, 0, "#000000", 12, function(text1){
+      debounce_click_function(text1, function (){
+        // view_step -= 1
+        if((view_step-1)>=(current_step-1)){
+          update_state(case_network, true, current_step, view_step-1,true, true)
+        }
+      });
+      mouseenterleave_pointer([text1, rect1]);
+    })
+
+    debounce_click_function(rect1, function (){
+        // view_step -= 1
+        if((view_step-1)>=(current_step-1)){
+          update_state(case_network, true, current_step, view_step-1,true, true)
+        }
+      });
+    mouseenterleave_pointer(rect1);
+  }
 }
 
 function draw_line(line,id_line, type="busbar"){

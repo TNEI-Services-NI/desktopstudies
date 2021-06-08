@@ -340,10 +340,10 @@ def on_join(data):
 
 @socketio.on('check_redraw')
 def redraw(data):
-    network = server_get_network_view(data['entity'], data['sim_step'], option="5")
     socketio.emit('redraw', {
         'sim_step': data['sim_step'],
-        'network': network,
+        'view_step': data['view_step'],
+        'network': data['network'],
     }, room=session['room'])
 
 
@@ -352,28 +352,37 @@ def connection(data):
     """This will emit a message to all users when this is called.
     This would be useful for simulation synchronisation"""
     progress = data['progress']
+    view = data['view']
+    view_step = data['view_step']
 
     if progress:
         next_network = server_get_network_view(data['entity'], data['sim_step'], option="5")
     else:
         next_network = data['network']
 
-    session['sim_step'] = data['sim_step']
+    if not view:
+        session['sim_step'] = data['sim_step']
+    else:
+        next_network = server_get_network_view(data['entity'], view_step, option="5")
 
-    broadcast = data['broadcast'] if 'broadcast' in data else False
+    broadcast = (data['broadcast'] and not view) if 'broadcast' in data else False
 
     switch_network = data['network'] != next_network
 
     data['switch_network'] = switch_network
     data['broadcast'] = broadcast
 
-    if broadcast:
-        simtool_db.replace_simstatus(dbs, data['sim_step'])
-        data['network'] = next_network
-        socketio.emit('check_redraw', data)
+    if (switch_network and view) or (not view):
+        if broadcast:
+            simtool_db.replace_simstatus(dbs, data['sim_step'])
+            data['network'] = next_network
+            socketio.emit('check_redraw', data)
+        else:
+            data['network'] = next_network
+            socketio.emit('check_redraw', data, room=data['room'])
     else:
-        data['network'] = next_network
         socketio.emit('check_redraw', data, room=data['room'])
+
 
     return data
 
