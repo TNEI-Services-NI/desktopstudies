@@ -1,45 +1,52 @@
 name,entity,email,required,status
-1,admin,1@1.com,TRUE,FALSE
-2,admin,2@2.com,TRUE,FALSE
-3,admin,3@3.com,TRUE,FALSE
-4,admin,4@4.com,TRUE,FALSE
-5,admin,5@5.com,TRUE,FALSE
-6,admin,6@6.com,TRUE,FALSE
-7,admin,7@7.com,TRUE,FALSE
-8,admin,8@8.com,TRUE,FALSE
-9,admin,9@9.com,TRUE,FALSE
-10,admin,10@10.com,TRUE,FALSE
-11,admin,11@11.com,TRUE,FALSE
-12,admin,12@12.com,FALSE,FALSE
-13,admin,13@13.com,TRUE,FALSE
-14,admin,14@14.com,TRUE,FALSE
-15,admin,15@15.com,TRUE,FALSE
-16,admin,16@16.com,FALSE,FALSE
-17,admin,17@17.com,FALSE,FALSE
-18,admin,18@18.com,FALSE,FALSE
-19,admin,19@19.com,FALSE,FALSE
-20,admin,20@20.com,FALSE,FALSE
-21,admin,21@21.com,FALSE,FALSE
-22,admin,22@22.com,FALSE,FALSE
-23,admin,23@23.com,FALSE,FALSE
-24,admin,24@24.com,FALSE,FALSE
-25,admin,25@25.com,FALSE,FALSE
-26,admin,26@26.com,FALSE,FALSE
-27,admin,27@27.com,FALSE,FALSE
-28,admin,28@28.com,FALSE,FALSE
-29,admin,29@29.com,FALSE,FALSE
-30,admin,30@30.com,FALSE,FALSE
-31,admin,31@31.com,FALSE,FALSE
-32,admin,32@32.com,FALSE,FALSE
-33,admin,33@33.com,FALSE,FALSE
-34,admin,34@34.com,FALSE,FALSE
-35,admin,35@35.com,FALSE,FALSE
-36,admin,36@36.com,FALSE,FALSE
-37,admin,37@37.com,FALSE,FALSE
-38,admin,38@38.com,FALSE,FALSE
-39,admin,39@39.com,FALSE,FALSE
-40,admin,40@40.com,FALSE,FALSE
-41,admin,41@41.com,FALSE,FALSE
-42,admin,42@42.com,FALSE,FALSE
-43,admin,43@43.com,TRUE,FALSE
-44,admin,44@44.com,TRUE,FALSE
+"Salter, Chris",admin,christopher.salter2@nationalgrideso.com,TRUE,FALSE
+"Kenny, Michael",admin,michael.kenny@nationalgrideso.com,TRUE,FALSE
+"McBeath, Grant ",TO,grant.mcbeath@spenergynetworks.co.uk,TRUE,FALSE
+"Byrne, Kelvin",DNO,kelvin.byrne@enwl.co.uk,TRUE,FALSE
+"Shephard, Alan",DNO,alan.shephard@enwl.co.uk,TRUE,FALSE
+"D'Albertanson, Bill",DNO,bill.dalbertanson@ukpowernetworks.co.uk,TRUE,FALSE
+"Child, David",DNO,david.child@ukpowernetworks.co.uk,TRUE,FALSE
+"Johnstone, Mark",DNO,mark.johnstone@northernpowergrid.com,TRUE,FALSE
+"Mcleod, Andrew",DNO,andrew.mcleod@northernpowergrid.com,TRUE,FALSE
+"Stoettrup, Michael (SGRE OF TE TD LC PPC PAA)",Observer,michael.stoettrup@siemensgamesa.com,TRUE,FALSE
+Jill Cox,DER,jill.cox@flexitricity.com,TRUE,FALSE
+"Morrissey, Brian",DNO,brian.morrissey@sse.com,TRUE,FALSE
+"Murray, Paul",DNO,paul.1.murray@sse.com,TRUE,FALSE
+alastair martin,DER,alastair.martin@flexitricity.com,TRUE,FALSE
+"Gailey, Mark",DER,mark.gailey@scottishpower.com,TRUE,FALSE
+Lewis Starling,DER,lewis.starling@ventientenergy.com,TRUE,FALSE
+"Sansawatt, Thipnatee",TO,tsansawatt@spenergynetworks.co.uk,TRUE,FALSE
+Andrew McAleavey,DER,andrew.mcaleavey@pensopower.com,TRUE,FALSE
+"Dryden (ESO), William",ESO,william.dryden@nationalgrideso.com,TRUE,FALSE
+"Stone (ESO), Edward",ESO,edward.stone@nationalgrideso.com,TRUE,FALSE
+Anthony Price,DER,price@swanbarton.com,TRUE,FALSE
+Rex Roehl,DER,rex.roehl@beaconpower.com,TRUE,FALSE
+"Charlson, Chris",TO,chris.charlson@nationalgrid.com,TRUE,FALSE
+"Davies, Jason",TO,jason.davies@nationalgrid.com,FALSE,FALSE
+"Chandler (ESO), Peter",Observer,peter.chandler@nationalgrideso.com,FALSE,FALSE
+"Penhaligon (ESO), Emma",Observer,emma.penhaligon@nationalgrideso.com,FALSE,FALSE
+"Auty (ESO), Daniel",admin,daniel.auty@nationalgrideso.com,FALSE,FALSE
+Dieter Gutschow,admin,dieter.gutschow@tneigroup.com,FALSE,FALSE
+Neil Hutcheon,Observer,nhutcheon@spenergynetworks.co.uk,FALSE,FALSE
+Colin Foote,admin,cfoote@spenergynetworks.co.uk,FALSE,FALSE
+Neil Miller,Observer,neil.miller@spenergynetworks.co.uk,FALSE,FALSE
+"Lu, Zhen",DNO,zhen.lu@ukpowernetworks.co.uk,FALSE,FALSE
+"Phull (ESO), Roopkamal",Observer,roopkamal.phull@nationalgrideso.com,FALSE,FALSE
+"Nnabuife (ESO), Dozie",admin,dozie.nnabuife@nationalgrideso.com,TRUE,FALSE
+"Liu, Zhaoru",Observer,z.liu19@imperial.ac.uk,TRUE,FALSE
+Max McFarlane,admin,max.mcfarlane@tneigroup.com,TRUE,FALSE
+"Lala (ESO), Deepak",ESO,deepak.lala@nationalgrideso.co,TRUE,FALSE
+Howard Downey,Observer,howard.downey@spenergynetworks.co.uk,TRUE,FALSE
+Alejandro Fernandez de la Reguera Benitez,DER,alejandro.fernandez@ntrplc.com,TRUE,FALSE
+Craig SIDDONS,DER,craig.siddons@wpo.eu,TRUE,FALSE
+Aidan WHITE,DER,aidan.white@wpo.eu,TRUE,FALSE
+Sébastien DOT,DER,sebastien.dot@wpo.eu,TRUE,FALSE
+"Halavin, Alexander",DNO,alexander.halavin@ukpowernetworks.co.uk,TRUE,FALSE
+Konstantinos Pegios,DER,kpegios@vest.energy,TRUE,FALSE
+"Gupta, Raveena",DNO,rgupta@spenergynetworks.co.uk,TRUE,FALSE
+Peter Sanders,Observer,psanders@mmxcomms.com,TRUE,FALSE
+Zhongmei Pan,DER,panz10@cardiff.ac.uk,TRUE,FALSE
+"Hearnden, Richard ",DER,richard.hearnden@sse.com,TRUE,FALSE
+"Kynoch, Stephen",TO,stephen.kynoch@spenergynetworks.co.uk,TRUE,FALSE
+"Telfer, Ken ",DNO,ken.telfer@spenergynetworks.co.uk,TRUE,FALSE
+"Harley, Ricky",TO,ricky.harley@spenergynetworks.co.uk,,
