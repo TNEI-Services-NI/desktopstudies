@@ -40,7 +40,7 @@ Howard Downey,Observer,howard.downey@spenergynetworks.co.uk,TRUE,FALSE
 Alejandro Fernandez de la Reguera Benitez,DER,alejandro.fernandez@ntrplc.com,TRUE,FALSE
 Craig SIDDONS,DER,craig.siddons@wpo.eu,TRUE,FALSE
 Aidan WHITE,DER,aidan.white@wpo.eu,TRUE,FALSE
-Sébastien DOT,DER,sebastien.dot@wpo.eu,TRUE,FALSE
+Sebastien DOT,DER,sebastien.dot@wpo.eu,TRUE,FALSE
 "Halavin, Alexander",DNO,alexander.halavin@ukpowernetworks.co.uk,TRUE,FALSE
 Konstantinos Pegios,DER,kpegios@vest.energy,TRUE,FALSE
 "Gupta, Raveena",DNO,rgupta@spenergynetworks.co.uk,TRUE,FALSE
@@ -49,4 +49,4 @@ Zhongmei Pan,DER,panz10@cardiff.ac.uk,TRUE,FALSE
 "Hearnden, Richard ",DER,richard.hearnden@sse.com,TRUE,FALSE
 "Kynoch, Stephen",TO,stephen.kynoch@spenergynetworks.co.uk,TRUE,FALSE
 "Telfer, Ken ",DNO,ken.telfer@spenergynetworks.co.uk,TRUE,FALSE
-"Harley, Ricky",TO,ricky.harley@spenergynetworks.co.uk,,
+"Harley, Ricky",TO,ricky.harley@spenergynetworks.co.uk,TRUE,FALSE

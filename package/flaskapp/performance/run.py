@@ -17,7 +17,7 @@ LIST_CALLS = [
     'simtool_bp/get_actions/',
     'simtool_bp/get_steps/',
     # 'simtool_bp/get_all_data/',
-    'auth/logout',D
+    'auth/logout',
 ]
 
 URL = "http://127.0.0.1:5000" if local else "https://desktopstudies.herokuapp.com"

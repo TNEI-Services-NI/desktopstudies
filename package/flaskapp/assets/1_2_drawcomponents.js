@@ -975,7 +975,7 @@ function draw_view_buttons(){
 
   if((!(view_step>current_step))&&(view_step<34)){
     let rect0 = draw.rect(x_max*0.04,y_max*0.05).fill(palette["controls"]).center(x_max*0.85,y_max*0.81);
-    add_text(rect0, false, ["View:"], -105, -30, "#ffffff", 12, function(text1){});
+    add_text(rect0, false, ["View:"], -20, -30, "#ffffff", 12, function(text1){});
     add_text(rect0, false, next, 0, 0, "#000000", 12, function(text1){
       debounce_click_function(text1, function (){
         // view_step += 1

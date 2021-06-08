@@ -459,7 +459,7 @@ function update_state(case_network_, progress=false, current_step_, view_step_, 
 
     setTimeout(function() {
         socket.emit('sync_sim_step', data, function(data_) {
-            view_step = data_['view_step']
+
         });
         $("#sim_status_div").html("Simulation status: " + current_step_)
         if (!data['broadcast']) {
