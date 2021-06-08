@@ -6,7 +6,7 @@ import multiprocessing as mp
 import time
 
 N_POOLS = 4
-K_REQUESTS = 40
+K_REQUESTS = 100
 
 local = False
 
@@ -17,7 +17,7 @@ LIST_CALLS = [
     'simtool_bp/get_actions/',
     'simtool_bp/get_steps/',
     # 'simtool_bp/get_all_data/',
-    'auth/logout',
+    'auth/logout',D
 ]
 
 URL = "http://127.0.0.1:5000" if local else "https://desktopstudies.herokuapp.com"
@@ -35,7 +35,7 @@ def test(api_test_calls, pool):
             requests.post('{}/{}'.format(URL, api_test_call),
                           data={
                               "email": "{}@{}.com".format(call+1, call+1),
-                              "password": "Desktop1",
+                              "password": "Desktop2",
                               "case_network": "chapelcross",
                               "network": "chapelcross33kv",
                               "scenario": "",
