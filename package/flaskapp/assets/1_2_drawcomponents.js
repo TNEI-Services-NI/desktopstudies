@@ -963,7 +963,6 @@ function draw_view_buttons(){
 
   let prev = ["Previous", "network"]
   let next = ["Next", "network"]
-
   if(view_step>current_step){
     prev = ["Current", "network"]
     next = []

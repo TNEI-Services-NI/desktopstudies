@@ -342,6 +342,7 @@ def on_join(data):
 def redraw(data):
     socketio.emit('redraw', {
         'sim_step': data['sim_step'],
+        'view_step': data['view_step'],
         'network': data['network'],
     }, room=session['room'])
 
