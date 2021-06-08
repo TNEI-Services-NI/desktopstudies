@@ -8,6 +8,8 @@ import time
 N_POOLS = 4
 K_REQUESTS = 40
 
+local = False
+
 LIST_CALLS = [
     'auth/login',
     'simtool_bp/get_breakers/',
@@ -18,16 +20,19 @@ LIST_CALLS = [
     'auth/logout',
 ]
 
+URL = "http://127.0.0.1:5000" if local else "https://desktopstudies.herokuapp.com"
+
 
 def test(api_test_calls, pool):
     print("Starting pool {}...".format(pool))
     # Start some API Calls
     start = time.time()
     end = start
+    time.sleep(pool * 2)
     for call in range(K_REQUESTS):
         print("\tPool {} call {}...".format(pool, call))
         for api_test_call in api_test_calls:
-            requests.post('http://127.0.0.1:5000/{}'.format(api_test_call),
+            requests.post('{}/{}'.format(URL, api_test_call),
                           data={
                               "email": "{}@{}.com".format(call+1, call+1),
                               "password": "Desktop1",
@@ -36,6 +41,7 @@ def test(api_test_calls, pool):
                               "scenario": "",
                               "option": "5"
                           })
+            time.sleep(1.5)
         end_ = time.time()
         print("\t\tPool {} call {} completed ({})".format(pool, call, round(end_-end,2)))
         end = end_
@@ -49,11 +55,11 @@ if __name__ == '__main__':
     #     requests.get('http://127.0.0.1:5000/foo')
 
     # Memory usage before API calls
-    resp = requests.get('http://127.0.0.1:5000/memory')
+    resp = requests.get(URL+'/memory')
     print(f'Memory before API call {int(resp.json().get("memory"))/(1024**2)}')
 
     # Take first memory usage snapshot
-    resp = requests.get('http://127.0.0.1:5000/snapshot')
+    resp = requests.get(URL+'/snapshot')
 
     # for _ in range(50):
     #     test("check_breakers", 0)
@@ -69,9 +75,9 @@ if __name__ == '__main__':
         p.join()
 
     # Memory usage after
-    resp = requests.get('http://127.0.0.1:5000/memory')
+    resp = requests.get(URL+'/memory')
     print(f'Memory after API call: {int(resp.json().get("memory"))/(1024**2)}')
 
     # Take 2nd snapshot and print result
-    resp = requests.get('http://127.0.0.1:5000/snapshot')
+    resp = requests.get(URL+'/snapshot')
     pprint(resp.text)
