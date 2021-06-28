@@ -43,7 +43,7 @@ def test(api_test_calls, pool):
                           })
             time.sleep(1.5)
         end_ = time.time()
-        print("\t\tPool {} call {} completed ({})".format(pool, call, round(end_-end,2)))
+        print("\t\tPool {} call {} completed ({})".format(pool, call, round(end_-end, 2)))
         end = end_
     end = time.time()
     print("Test pool {} completed ({})".format(pool, round(end-start,2)))
