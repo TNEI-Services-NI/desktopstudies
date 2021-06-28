@@ -35,7 +35,7 @@ def test(api_test_calls, pool):
             requests.post('{}/{}'.format(URL, api_test_call),
                           data={
                               "email": "{}@{}.com".format(call+1, call+1),
-                              "password": "Desktop2",
+                              "password": "Desktop3",
                               "case_network": "chapelcross",
                               "network": "chapelcross33kv",
                               "scenario": "",

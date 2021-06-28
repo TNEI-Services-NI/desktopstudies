@@ -79,6 +79,7 @@ def __load_dash_requests(app):
     from .dash_simtool import requests as dash_requests
     app.register_blueprint(dash_requests.simtool_bp)
 
+
 def _load_blueprints(app):
     # load auth views
     __load_auth_views(app)
@@ -95,7 +96,6 @@ def _load_performance_requests(app):
     from .performance import requests as performance_requests
     app = performance_requests(app)
     return app
-
 
 
 def _configure_database(app):
