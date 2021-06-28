@@ -1,7 +1,7 @@
 name,entity,email,required,status
 Dieter Gutschow,DNO,dieter.gutschow@tneigroup.com,FALSE,FALSE
 Max McFarlane,admin,max.mcfarlane@tneigroup.com,FALSE,FALSE
-Christopher Salter,Observer,christopher.salter2@natoinalgrideso.com,FALSE,FALSE
+Christopher Salter,admin,christopher.salter2@natoinalgrideso.com,FALSE,FALSE
 "Foote, Colin",TO,cfoote@spenergynetworks.co.uk,FALSE,FALSE
 "Auty (ESO), Daniel",ESO,daniel.auty@nationalgrideso.com,FALSE,FALSE
 "Chandler (ESO), Peter",ESO,peter.chandler@nationalgrideso.com,FALSE,FALSE

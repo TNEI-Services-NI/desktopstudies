@@ -48,7 +48,7 @@ def _register_user(email, name, entity, dbs):
     user = User.query.filter_by(
         email=email).first()  # if this returns a user, then the email already exists in database
     if not user:  # if a user is found, we want to redirect back to signup page so user can try again
-        new_user = User(email=email, name=name, password=generate_password_hash("Desktop1", method='sha256'),
+        new_user = User(email=email, name=name, password=generate_password_hash("Desktop3", method='sha256'),
                         entity=entity)
 
         # add the new user to the database
