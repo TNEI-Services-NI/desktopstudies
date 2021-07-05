@@ -29,7 +29,7 @@ let dataview_round = 3
 
 let case_network = "chapelcross"
 
-let db = "_db"
+let db = ""
 
 let background = undefined
 let network = undefined
