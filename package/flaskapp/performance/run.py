@@ -6,7 +6,7 @@ import multiprocessing as mp
 import time
 
 N_POOLS = 4
-K_REQUESTS = 100
+K_REQUESTS = 44
 
 local = False
 
@@ -20,10 +20,10 @@ LIST_CALLS = [
     'auth/logout',
 ]
 
-URL = "http://127.0.0.1:5000" if local else "https://desktopstudies.herokuapp.com"
+URL = "http://127.0.0.1:5000" if local else "https://desktopstudies-staging.herokuapp.com"
 
 
-def test(api_test_calls, pool):
+def performance(api_test_calls, pool):
     print("Starting pool {}...".format(pool))
     # Start some API Calls
     start = time.time()
@@ -49,11 +49,7 @@ def test(api_test_calls, pool):
     print("Test pool {} completed ({})".format(pool, round(end-start,2)))
 
 
-if __name__ == '__main__':
-    # # Warm up, so you don't measure flask internal memory usage
-    # for _ in range(10):
-    #     requests.get('http://127.0.0.1:5000/foo')
-
+def run():
     # Memory usage before API calls
     resp = requests.get(URL+'/memory')
     print(f'Memory before API call {int(resp.json().get("memory"))/(1024**2)}')
@@ -65,7 +61,7 @@ if __name__ == '__main__':
     #     test("check_breakers", 0)
 
     # workers = [mp.Process(target=test, args=('get_all_data', pool, )) for pool in range(4)]
-    workers = [mp.Process(target=test, args=(LIST_CALLS, pool, )) for pool in range(N_POOLS)]
+    workers = [mp.Process(target=performance, args=(LIST_CALLS, pool, )) for pool in range(N_POOLS)]
 
     # Execute workers
     for p in workers:
@@ -81,3 +77,8 @@ if __name__ == '__main__':
     # Take 2nd snapshot and print result
     resp = requests.get(URL+'/snapshot')
     pprint(resp.text)
+
+
+if __name__ == '__main__':
+    run()
+    run()
