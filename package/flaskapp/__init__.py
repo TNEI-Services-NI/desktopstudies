@@ -32,6 +32,11 @@ def _configure_app(config):
         # load the test config if passed in
         app.config.from_object(config)
 
+    @app.after_request
+    def add_header(response):
+        response.cache_control.max_age = 300
+        return response
+
     secret_key = app.config.get("SECRET_KEY")
     print(f"The configured secret key is {secret_key}.")
 
