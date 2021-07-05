@@ -10,4 +10,8 @@ from flask_socketio import join_room, rooms
 @simtool_bp.route('/')
 # @login_required
 def index():
-    return redirect(url_for(dash_app.URL_HOME))
+    entity = session.get('entity', 'admin')
+    if entity == 'Observer':
+        return redirect(url_for(dash_app.URL_SLDS))
+    else:
+        return redirect(url_for(dash_app.URL_HOME))

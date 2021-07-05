@@ -3,7 +3,7 @@ import pandas as pd
 from dash.dependencies import Output, Input, State
 import package.data as simtool_data
 import plotly.express as px
-
+import package.flaskapp.dash_simtool.app.dashboard_callbacks as shared_clbks
 
 def _add_bar_chart(dash_app):
     @dash_app.callback(
@@ -114,5 +114,6 @@ def _add_bar_chart(dash_app):
 
 
 def init_callbacks(dash_app, app_prefix):
+    dash_app = shared_clbks.filter_navlinks(dash_app)
     dash_app = _add_bar_chart(dash_app)
     return dash_app

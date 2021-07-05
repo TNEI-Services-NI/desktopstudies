@@ -12,19 +12,19 @@ from package.flaskapp.extensions import dbs
 
 
 def _add_network_redraw(dash_app):
-    @dash_app.callback([Output("network_menu", "label")],
+    @dash_app.callback([Output('network_menu', 'label')],
                        [
-                           Input("chapelcross33kv", "n_clicks"),
-                           Input("chapelcross132kv", "n_clicks"),
-                           Input("gretna132kv", "n_clicks"),
-                           Input("gretna400kv", "n_clicks"),
-                           Input("chapelcrossgretna1", "n_clicks"),
-                           Input("chapelcrossgretna2", "n_clicks"),
-                           Input("ewehillgretna", "n_clicks"),
-                           Input("stevenscroft33kv", "n_clicks"),
-                           Input("minsca33kv", "n_clicks"),
-                           Input("ewehillwindfarm1", "n_clicks"),
-                           Input("ewehillwindfarm2", "n_clicks"),
+                           Input('chapelcross33kv', 'n_clicks'),
+                           Input('chapelcross132kv', 'n_clicks'),
+                           Input('gretna132kv', 'n_clicks'),
+                           Input('gretna400kv', 'n_clicks'),
+                           Input('chapelcrossgretna1', 'n_clicks'),
+                           Input('chapelcrossgretna2', 'n_clicks'),
+                           Input('ewehillgretna', 'n_clicks'),
+                           Input('stevenscroft33kv', 'n_clicks'),
+                           Input('minsca33kv', 'n_clicks'),
+                           Input('ewehillwindfarm1', 'n_clicks'),
+                           Input('ewehillwindfarm2', 'n_clicks'),
                        ],
                        )
     def _draw_network(chx33, chx132, grt132, grt400, chapgret1, chapgret2, ewehillgretna, stev33kV, minsca33kV, ewe1,
@@ -38,7 +38,7 @@ def _add_network_redraw(dash_app):
             sim_step = simtool_db.get_simstatus()
             simtool_db.replace_room_simstatus(dbs, sim_step, session.get('username', 'super'))
             if 'network_explore' not in session:
-                network = "chapelcross33kv"
+                network = 'chapelcross33kv'
             else:
                 network = session['network_explore']
         else:
@@ -54,12 +54,12 @@ def _add_network_redraw(dash_app):
             'network': network,
             'sim_step': sim_step,
             'local': True,
-            'page': "SLDs",
+            'page': 'SLDs',
             'username': session.get('username'),
             'room': session.get('room'),
             'entity': session.get('entity', 'admin')
         })
-        return ["Select network"]
+        return ['Select network']
 
     return dash_app
 
@@ -67,6 +67,7 @@ def _add_network_redraw(dash_app):
 def init_callbacks(dash_app, app_prefix):
     shared_clbks.login_required_(dash_app, app_prefix)
     dash_app = _add_network_redraw(dash_app)
+    dash_app = shared_clbks.filter_navlinks(dash_app)
     dash_app = shared_clbks.add_upload_steps(dash_app, URL_SLDS)
     dash_app = shared_clbks.add_sim_progress_buttons(dash_app, URL_SLDS)
     dash_app = shared_clbks.add_legend_button(dash_app)

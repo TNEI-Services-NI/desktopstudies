@@ -21,7 +21,13 @@ def _add_network_redraw(dash_app):
 
         network = requests.server_get_network_view(session.get('entity', 'admin'), sim_step)
 
-        if cf.local:
+        username = session.get('username')
+        room = session.get('room')
+        entity = session.get('entity', 'admin')
+
+        local = cf.local
+
+        if local:
             session['room'] = session.get('entity', 'admin') + session.get('username')
         else:
             session['room'] = session.get('entity', 'admin')
@@ -32,11 +38,11 @@ def _add_network_redraw(dash_app):
         socketio.emit('check_join_draw', {
             'network': network,
             'sim_step': sim_step,
-            'local': cf.local,
+            'local': local,
             'page': "home",
-            'username': session.get('username'),
-            'room': session.get('room'),
-            'entity': session.get('entity', 'admin')
+            'username': username,
+            'room': room,
+            'entity': entity
         })
         return [network]
 
@@ -46,6 +52,7 @@ def _add_network_redraw(dash_app):
 def init_callbacks(dash_app, app_prefix):
     shared_clbks.login_required_(dash_app, app_prefix)
     dash_app = _add_network_redraw(dash_app)
+    dash_app = shared_clbks.filter_navlinks(dash_app)
     dash_app = shared_clbks.add_sim_progress_buttons(dash_app, URL_HOME)
     dash_app = shared_clbks.add_legend_button(dash_app)
     return dash_app

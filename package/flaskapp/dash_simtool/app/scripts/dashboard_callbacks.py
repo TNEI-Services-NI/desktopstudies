@@ -16,6 +16,7 @@ import dash_core_components as dcc
 import dash_bootstrap_components as dbc
 import package.flaskapp.dash_simtool._config as cf
 import package.flaskapp.dash_simtool.app.dashboard_styling as styling
+import package.flaskapp.dash_simtool.app.dashboard_callbacks as shared_clbks
 
 
 def _add_toggle_sidebar(dash_app):
@@ -113,6 +114,7 @@ def _add_sidebar_buttons(dash_app):
 
 
 def init_callbacks(dash_app, app_prefix):
+    dash_app = shared_clbks.filter_navlinks(dash_app)
     dash_app = _add_network_redraw(dash_app)
     dash_app = _add_sidebar_buttons(dash_app)
 

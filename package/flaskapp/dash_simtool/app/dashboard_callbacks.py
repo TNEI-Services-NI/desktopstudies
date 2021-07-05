@@ -23,6 +23,24 @@ def login_required_(dash_app, app_prefix):
             dash_app.server.view_functions[view_func] = login_required(dash_app.server.view_functions[view_func])
 
 
+def filter_navlinks(dash_app):
+    @dash_app.callback([
+        Output('home_navlink', 'style')
+    ],
+    [
+        Input('home_navlink', 'style')
+    ])
+    def _filter_navlinks(home_navlink_style):
+        entity = session.get('entity', 'admin')
+        if entity == 'Observer':
+            home_navlink_style.update({'visibility': 'hidden'})
+        else:
+            home_navlink_style.update({'visibility': 'visible'})
+        return [home_navlink_style]
+
+    return dash_app
+
+
 def add_legend_button(dash_app):
     @dash_app.callback(
         [
@@ -113,7 +131,6 @@ def add_upload_steps(dash_app, URL_PAGE):
             return ["Upload successful"]
         return dash.no_update
     return dash_app
-
 
 
 def add_sim_progress_buttons(dash_app, URL_PAGE):

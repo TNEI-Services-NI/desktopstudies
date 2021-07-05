@@ -8,9 +8,8 @@ import json
 # INT IMPORTS
 import package.flaskapp.dash_simtool as dash_simtool
 import package.flaskapp.dash_simtool.app.dashboard_components as components
-import package.flaskapp.dash_simtool.app.home.dashboard_callbacks as callbacks
+import package.flaskapp.dash_simtool.app.about.dashboard_callbacks as callbacks
 import package.flaskapp.dash_simtool.app.dashboard_styling as styling
-import dash_bootstrap_components as dbc
 
 URL_PAGE = dash_simtool.app.URL_ABOUT
 
@@ -158,6 +157,6 @@ def init_dashboard(server=""):
                                    ],
                                   )
 
-    # dash_app = callbacks.init_callbacks(dash_app, URL_PAGE)
+    dash_app = callbacks.init_callbacks(dash_app, URL_PAGE)
 
     return dash_app if server == "" else dash_app.server
