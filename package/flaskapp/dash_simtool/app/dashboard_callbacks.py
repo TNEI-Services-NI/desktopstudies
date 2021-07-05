@@ -136,7 +136,7 @@ def add_sim_progress_buttons(dash_app, URL_PAGE):
 
         ctx = dash.callback_context
         triggered_object = ctx.triggered[0]['prop_id'].split('.')[0]
-        sim_status = simtool_db.get_room_simstatus(session['username'])
+        sim_status = simtool_db.get_room_simstatus(session.get('username', 'super'))
 
         redraw_data = {'sim_step': sim_status,
                               'username': session.get('username')}
@@ -148,13 +148,13 @@ def add_sim_progress_buttons(dash_app, URL_PAGE):
             redraw_data['sim_step'] += 1
             # redraw_data['network'] = requests.server_get_network_view(session['entity'], redraw_data['sim_step'])
             socketio.emit('redraw', redraw_data, room=session['room'])
-            simtool_db.replace_room_simstatus(dbs, redraw_data['sim_step'], session['username'])
+            simtool_db.replace_room_simstatus(dbs, redraw_data['sim_step'], session.get('username', 'super'))
 
         elif triggered_object == 'back_button':  # decrement sim_step
             redraw_data['sim_step'] -= 1 if sim_status > cf.start_sim_step else 0
             # redraw_data['network'] = requests.server_get_network_view(session['entity'], redraw_data['sim_step'])
             socketio.emit('redraw', redraw_data, room=session['room'])
-            simtool_db.replace_room_simstatus(dbs, redraw_data['sim_step'], session['username'])
+            simtool_db.replace_room_simstatus(dbs, redraw_data['sim_step'], session.get('username', 'super'))
 
         elif triggered_object == 'debug_button':
             socketio.emit('debug', {}, room=session['room'])
@@ -164,7 +164,7 @@ def add_sim_progress_buttons(dash_app, URL_PAGE):
             redraw_data['sim_step'] = simtool_db.get_simstatus()
             # redraw_data['network'] = requests.server_get_network_view(session['entity'], redraw_data['sim_step'])
             socketio.emit('redraw', redraw_data, room=session['room'])
-            simtool_db.replace_room_simstatus(dbs, redraw_data['sim_step'], session['username'])
+            simtool_db.replace_room_simstatus(dbs, redraw_data['sim_step'], session.get('username', 'super'))
 
         else:
             redraw_data['sim_step'] = simtool_db.get_simstatus()

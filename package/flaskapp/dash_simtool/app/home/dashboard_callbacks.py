@@ -19,12 +19,12 @@ def _add_network_redraw(dash_app):
 
         sim_step = simtool_db.get_simstatus()
 
-        network = requests.server_get_network_view(session['entity'], sim_step)
+        network = requests.server_get_network_view(session.get('entity', 'admin'), sim_step)
 
         if cf.local:
-            session['room'] = session['entity'] + session.get('username')
+            session['room'] = session.get('entity', 'admin') + session.get('username')
         else:
-            session['room'] = session['entity']
+            session['room'] = session.get('entity', 'admin')
 
         session['network_main'] = network
         session['sim_step'] = sim_step
@@ -36,7 +36,7 @@ def _add_network_redraw(dash_app):
             'page': "home",
             'username': session.get('username'),
             'room': session.get('room'),
-            'entity': session['entity']
+            'entity': session.get('entity', 'admin')
         })
         return [network]
 
@@ -44,7 +44,7 @@ def _add_network_redraw(dash_app):
 
 
 def init_callbacks(dash_app, app_prefix):
-    shared_clbks.login_required_(dash_app, app_prefix)
+    # shared_clbks.login_required_(dash_app, app_prefix)
     dash_app = _add_network_redraw(dash_app)
     dash_app = shared_clbks.add_sim_progress_buttons(dash_app, URL_HOME)
     dash_app = shared_clbks.add_legend_button(dash_app)

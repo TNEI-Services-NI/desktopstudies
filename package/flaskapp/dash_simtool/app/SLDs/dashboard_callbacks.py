@@ -34,16 +34,16 @@ def _add_network_redraw(dash_app):
         ctx = dash.callback_context
         triggered_object = ctx.triggered[0]
         if triggered_object['value'] is None:
-            session['room'] = session['entity']
+            session['room'] = session.get('entity', 'admin')
             sim_step = simtool_db.get_simstatus()
-            simtool_db.replace_room_simstatus(dbs, sim_step, session['username'])
+            simtool_db.replace_room_simstatus(dbs, sim_step, session.get('username', 'super'))
             if 'network_explore' not in session:
                 network = "chapelcross33kv"
             else:
                 network = session['network_explore']
         else:
             network = triggered_object['prop_id'].split('.')[0]
-            sim_step = simtool_db.get_room_simstatus(session['username'])
+            sim_step = simtool_db.get_room_simstatus(session.get('username', 'super'))
 
         # store network, sim_step
         session['network_explore'] = network
@@ -57,7 +57,7 @@ def _add_network_redraw(dash_app):
             'page': "SLDs",
             'username': session.get('username'),
             'room': session.get('room'),
-            'entity': session['entity']
+            'entity': session.get('entity', 'admin')
         })
         return ["Select network"]
 
@@ -65,7 +65,7 @@ def _add_network_redraw(dash_app):
 
 
 def init_callbacks(dash_app, app_prefix):
-    shared_clbks.login_required_(dash_app, app_prefix)
+    # shared_clbks.login_required_(dash_app, app_prefix)
     dash_app = _add_network_redraw(dash_app)
     dash_app = shared_clbks.add_upload_steps(dash_app, URL_SLDS)
     dash_app = shared_clbks.add_sim_progress_buttons(dash_app, URL_SLDS)
