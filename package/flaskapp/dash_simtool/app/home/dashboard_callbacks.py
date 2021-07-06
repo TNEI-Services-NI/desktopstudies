@@ -19,7 +19,7 @@ def _add_network_redraw(dash_app):
 
         sim_step = simtool_db.get_simstatus()
 
-        network = requests.server_get_network_view(sim_step, session.get('entity', 'admin'))
+        network = requests.server_get_network_view(session.get('entity', 'admin'), sim_step)
 
 
         local = cf.local
