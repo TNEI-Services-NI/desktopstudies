@@ -6,14 +6,15 @@ import json
 import pandas as pd
 import multiprocessing as mp
 import time
-import package.data.auth as auth_data
+# import package.data.auth as auth_data
 import cProfile
-
+# import eventlet
+# eventlet.monkey_patch()
 
 N_POOLS = 4
 K_REQUESTS = 4
 
-local = True
+local = False
 
 LIST_CALLS = [
     'auth/login',
@@ -25,7 +26,7 @@ LIST_CALLS = [
     'auth/logout',
 ]
 
-URL = "http://127.0.0.1:5000" if local else "https://desktopstudies-staging.herokuapp.com"
+URL = "http://127.0.0.1:5000" if local else "https://desktopstudies.herokuapp.com"
 
 
 def performance(api_test_calls, pool):
@@ -112,27 +113,20 @@ def test_logins():
                           })
 
 def test_request():
-    df_users = pd.read_csv('/'.join([auth_data.BASE_DIR, 'req_users.csv']))
-    for user in df_users.iterrows():
-        user_data = user[1]
-        r = requests.post('{}/{}'.format(URL, 'simtool_bp/get_breakers/'),
-                      data={
-                          "email": user_data['email'],
-                          "password": "Desktop3",
-                          "remember": True,
-                          "case_network": "chapelcross",
-                          "network": "chapelcross33kv",
-                          "scenario": "",
-                          "option": "5"
-                      })
-        break
+    r = requests.post('{}/{}'.format(URL, 'signup'),
+                  data={
+                      "email": "DNO2@DTE.com",
+                      "password": "Desktop3",
+                      "remember": True,
+                  })
+    print(r)
+    print(r.text)
+    # print(r.json())
 
 def testing():
     test_logins()
     run_performance_test()
 
 
-
-
 if __name__ == '__main__':
-    test_logins()
+    test_request()
