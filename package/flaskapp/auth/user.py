@@ -60,6 +60,7 @@ def register_required_users(dbs):
     required = pd.read_csv(data.dir_auth_data + '/req_users.csv')
     for req_user in required.iterrows():
         email = req_user[1]['email']
+        email = email.lower()
         name = req_user[1]['name']
         entity = req_user[1]['entity']
         _register_user(email, name, entity, dbs)

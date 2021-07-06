@@ -19,11 +19,8 @@ def _add_network_redraw(dash_app):
 
         sim_step = simtool_db.get_simstatus()
 
-        network = requests.server_get_network_view(session.get('entity', 'admin'), sim_step)
+        network = requests.server_get_network_view(sim_step, session.get('entity', 'admin'))
 
-        username = session.get('username')
-        room = session.get('room')
-        entity = session.get('entity', 'admin')
 
         local = cf.local
 
@@ -31,6 +28,10 @@ def _add_network_redraw(dash_app):
             session['room'] = session.get('entity', 'admin') + session.get('username')
         else:
             session['room'] = session.get('entity', 'admin')
+
+        username = session.get('username')
+        room = session.get('room')
+        entity = session.get('entity', 'admin')
 
         session['network_main'] = network
         session['sim_step'] = sim_step

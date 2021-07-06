@@ -609,9 +609,6 @@ function event_draw(draw_data) {
     current_step = draw_data['sim_step'];
     master_draw()
 
-//    master_draw();
-
-
 }
 
 
@@ -681,7 +678,7 @@ var run_ping = function(){
     }).done(function( data ) {
         run_ping();
     })
-    }, 20*1000)
+    }, 60*1000)
 }
 
 run_ping();

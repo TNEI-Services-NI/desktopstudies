@@ -30,3 +30,4 @@ sphinx
 openpyxl
 psycopg2
 psutil
+snakeviz

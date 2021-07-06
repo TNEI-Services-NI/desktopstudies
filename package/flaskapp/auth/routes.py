@@ -53,7 +53,7 @@ def signup_post():
     return redirect(url_for('auth.login'))
 
 
-@auth_bp.route('/login', methods=['POST'])
+@auth_bp.route('/login', methods=['POST', 'GET'])
 def login_post():
     email = request.form.get('email')
     email = email.lower()
@@ -66,6 +66,7 @@ def login_post():
     # take the user-supplied password, hash it, and compare it to the hashed password in the database
     if not user or not check_password_hash(user.password, password):
         flash('Please check your login details and try again.')
+        # print("User not found: {}".format(email))
         return redirect(url_for('auth.login'))  # if the user doesn't exist or password is wrong, reload the page
 
     # if the above check passes, then we know the user has the right credentials
@@ -74,7 +75,7 @@ def login_post():
     session['username'] = user.name
     user.logged_in = 1
     dbs.session.commit()
-
+    # print("User logged in successfully: {}".format(email))
     return redirect(url_for('auth.wait_room'))
 
 

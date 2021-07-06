@@ -17,6 +17,5 @@ if __name__ == '__main__':
     if not app.config['DEBUG']:
         print("Running on http://127.0.0.1:5000/")
     socketio.run(app)
-    resp = requests.get('http://127.0.0.1:5000/memory')
 
 

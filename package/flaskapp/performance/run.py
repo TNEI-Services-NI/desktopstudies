@@ -2,13 +2,18 @@
 import requests
 from pprint import pprint
 import os
+import json
+import pandas as pd
 import multiprocessing as mp
 import time
+import package.data.auth as auth_data
+import cProfile
+
 
 N_POOLS = 4
-K_REQUESTS = 44
+K_REQUESTS = 4
 
-local = False
+local = True
 
 LIST_CALLS = [
     'auth/login',
@@ -41,7 +46,6 @@ def performance(api_test_calls, pool):
                               "scenario": "",
                               "option": "5"
                           })
-            time.sleep(1.5)
         end_ = time.time()
         print("\t\tPool {} call {} completed ({})".format(pool, call, round(end_-end, 2)))
         end = end_
@@ -49,10 +53,11 @@ def performance(api_test_calls, pool):
     print("Test pool {} completed ({})".format(pool, round(end-start,2)))
 
 
-def run():
+def run_performance_test():
     # Memory usage before API calls
     resp = requests.get(URL+'/memory')
-    print(f'Memory before API call {int(resp.json().get("memory"))/(1024**2)}')
+    memory_before = int(resp.json().get("memory")) / (1024 ** 2)
+    print(f'Memory before API call {memory_before}')
 
     # Take first memory usage snapshot
     resp = requests.get(URL+'/snapshot')
@@ -72,13 +77,62 @@ def run():
 
     # Memory usage after
     resp = requests.get(URL+'/memory')
-    print(f'Memory after API call: {int(resp.json().get("memory"))/(1024**2)}')
+    memory_after = int(resp.json().get("memory"))/(1024**2)
+    print(f'Memory after API call: {memory_after}')
+    print(f'Memory leak: {memory_after-memory_before}')
 
     # Take 2nd snapshot and print result
     resp = requests.get(URL+'/snapshot')
     pprint(resp.text)
 
 
+def test_logins():
+    df_users = pd.read_csv('/'.join([auth_data.BASE_DIR, 'req_users.csv']))
+    for user in df_users.iterrows():
+        user_data = user[1]
+        r = requests.post('{}/{}'.format(URL, 'login'),
+                      data={
+                          "email": user_data['email'],
+                          "password": "Desktop3",
+                          "remember": True,
+                          "case_network": "chapelcross",
+                          "network": "chapelcross33kv",
+                          "scenario": "",
+                          "option": "5"
+                      })
+        r = requests.post('{}/{}'.format(URL, 'logout'),
+                          data={
+                              "email": user_data['email'],
+                              "password": "Desktop3",
+                              "remember": True,
+                              "case_network": "chapelcross",
+                              "network": "chapelcross33kv",
+                              "scenario": "",
+                              "option": "5"
+                          })
+
+def test_request():
+    df_users = pd.read_csv('/'.join([auth_data.BASE_DIR, 'req_users.csv']))
+    for user in df_users.iterrows():
+        user_data = user[1]
+        r = requests.post('{}/{}'.format(URL, 'simtool_bp/get_breakers/'),
+                      data={
+                          "email": user_data['email'],
+                          "password": "Desktop3",
+                          "remember": True,
+                          "case_network": "chapelcross",
+                          "network": "chapelcross33kv",
+                          "scenario": "",
+                          "option": "5"
+                      })
+        break
+
+def testing():
+    test_logins()
+    run_performance_test()
+
+
+
+
 if __name__ == '__main__':
-    run()
-    run()
+    test_logins()

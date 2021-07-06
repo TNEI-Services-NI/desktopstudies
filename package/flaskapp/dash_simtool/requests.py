@@ -317,6 +317,8 @@ def on_check_join_draw(data):
             data['room'] = 'room_{}'.format(username)
 
     rooms_ = rooms()
+    print(rooms)
+    print(data['room'])
     sid_client = request.sid
     room = data['room']
 
