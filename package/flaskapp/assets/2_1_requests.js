@@ -46,6 +46,10 @@ socket.on('draw', function(data) {
 
 socket.on('check_redraw', function(check_redraw_data) {
     check_redraw_data['entity'] = entity
+    console.log(check_redraw_data['network'])
+    check_redraw_data['network'] = check_redraw_data['network'][entity]
+    console.log(check_redraw_data['network'])
+
     if(check_redraw_data['page']==page){
         socket.emit('check_redraw', check_redraw_data);
     }
@@ -56,6 +60,7 @@ socket.on('redraw', function(data) {
     let old_step = current_step
     current_step = data['sim_step'];
     view_step = data['view_step']
+    console.log(data['network'])
     if ('network' in data) {
         network = data['network'];
     }

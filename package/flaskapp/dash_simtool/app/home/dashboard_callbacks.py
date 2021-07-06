@@ -20,8 +20,7 @@ def _add_network_redraw(dash_app):
         sim_step = simtool_db.get_simstatus()
 
         network = requests.server_get_network_view(session.get('entity', 'admin'), sim_step)
-
-
+        print(network)
         local = cf.local
 
         if local:
@@ -35,6 +34,8 @@ def _add_network_redraw(dash_app):
 
         session['network_main'] = network
         session['sim_step'] = sim_step
+
+        print()
 
         socketio.emit('check_join_draw', {
             'network': network,

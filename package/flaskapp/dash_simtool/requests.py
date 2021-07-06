@@ -358,14 +358,14 @@ def connection(data):
     view_step = data['view_step']
 
     if progress:
-        next_network = server_get_network_view(data['entity'], data['sim_step'], option="5")
+        next_network = server_get_network_view(None, data['sim_step'], option="5")
     else:
         next_network = data['network']
 
     if not view:
         session['sim_step'] = data['sim_step']
     else:
-        next_network = server_get_network_view(data['entity'], view_step, option="5")
+        next_network = server_get_network_view(None, view_step, option="5")
 
     broadcast = (data['broadcast'] and not view) if 'broadcast' in data else False
 
@@ -383,8 +383,8 @@ def connection(data):
             data['network'] = next_network
             socketio.emit('check_redraw', data, room=data['room'])
     else:
+        data['network'] = next_network
         socketio.emit('check_redraw', data, room=data['room'])
-
 
     return data
 
@@ -392,6 +392,9 @@ def connection(data):
 def server_get_network_view(entity, sim_step, option="5"):
     df_network_view = simtool_data.read_network_views(option)
     # df_network_view = simtool_data.read_network_views_db(option)
-    entity = entity.split("_")[0]
-    network = df_network_view.loc[entity, sim_step]
+    if entity is not None:
+        entity = entity.split("_")[0]
+        network = df_network_view.loc[entity, sim_step]
+    else:
+        network = df_network_view.loc[:, sim_step].to_dict()
     return network

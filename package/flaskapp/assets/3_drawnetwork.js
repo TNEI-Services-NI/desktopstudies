@@ -582,8 +582,13 @@ function master_draw() {
 
     function draw(){
         prepare_canvas(x_max, y_max);
+        console.log(network)
+        if(typeof network === 'string'){
+            dict_components = networks_undrawn[network]
+        } else {
+            dict_components = networks_undrawn[network[entity]]
 
-        dict_components = networks_undrawn[network]
+        }
         draw_network(dict_components, network, current_step, function(data_draw_net){
                 update_draw()
         });
@@ -605,6 +610,7 @@ function master_draw() {
 function event_draw(draw_data) {
     old_network = network
     old_step = current_step
+    console.log(draw_data['network'])
     network = draw_data['network']
     current_step = draw_data['sim_step'];
     master_draw()
