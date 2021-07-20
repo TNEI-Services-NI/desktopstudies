@@ -6,7 +6,7 @@ import json
 import pandas as pd
 import multiprocessing as mp
 import time
-# import package.data.auth as auth_data
+import package.data.auth as auth_data
 import cProfile
 # import eventlet
 # eventlet.monkey_patch()
@@ -14,7 +14,7 @@ import cProfile
 N_POOLS = 4
 K_REQUESTS = 4
 
-local = False
+local = True
 
 LIST_CALLS = [
     'auth/login',
@@ -94,7 +94,7 @@ def test_logins():
         r = requests.post('{}/{}'.format(URL, 'login'),
                       data={
                           "email": user_data['email'],
-                          "password": "Desktop3",
+                          "password": "SimExplore",
                           "remember": True,
                           "case_network": "chapelcross",
                           "network": "chapelcross33kv",
@@ -104,7 +104,7 @@ def test_logins():
         r = requests.post('{}/{}'.format(URL, 'logout'),
                           data={
                               "email": user_data['email'],
-                              "password": "Desktop3",
+                              "password": "SimExplore",
                               "remember": True,
                               "case_network": "chapelcross",
                               "network": "chapelcross33kv",
@@ -129,4 +129,4 @@ def testing():
 
 
 if __name__ == '__main__':
-    test_request()
+    test_logins()

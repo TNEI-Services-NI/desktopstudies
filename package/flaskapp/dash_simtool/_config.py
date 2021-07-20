@@ -62,3 +62,5 @@ demo = False
 debug = False
 
 local = False
+
+password = 'SimExplore'
